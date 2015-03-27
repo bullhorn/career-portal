@@ -1,0 +1,24 @@
+<section class="filters" ng-controller="SideBarCtrl as aside">
+	<header>
+		<label>Filters</label>
+		<button class="icon-view-list" ng-click="aside.switchViewStyle('list');"></button>
+		<button class="icon-view-module" ng-click="aside.switchViewStyle('grid');"></button>
+	</header>
+	
+	<input type="search" name="keyword" value="" placeholder="keyword">
+	<h5>Location</h5>
+	<list>
+		<item>Boston</item>
+		<item>London</item>
+		<item>St. Louis</item>
+		<item>Vancouver</item>
+		<item>Sydney</item>
+	</list>
+	<h5>Category</h5>
+	<list>
+		<item>UX/UI</item>
+		<item>Marketing</item>
+		<item>Sales</item>
+		<item>Professional Services</item>
+	</list>
+</section>

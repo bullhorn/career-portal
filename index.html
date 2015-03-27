@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="careers">
+<head>
+    <meta charset="utf-8">
+    <title>Bullhorn Career Portal</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic|Roboto:400,100,100italic,300,300italic,400italic,500italic,700,500,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="resources/css/font.css">
+    <link rel="stylesheet" href="resources/css/normalize.css">
+	<link rel="stylesheet" href="resources/css/boilerplate.css">
+    <link rel="stylesheet" href="resources/css/styles.css">
+	<link rel="stylesheet" href="resources/css/main.css">
+</head>
+<body class="portal" ng-class="[viewState,gridState]">
+	<hgroup>
+		<aside ng-include="'resources/template/sidebar.html'"></aside>
+		<main>
+			<header>
+				<img src="resources/img/logo.png">
+				<h1>Acme Staffing</h1>
+			</header>
+			<ng-view></ng-view>
+		</main>
+	</hgroup>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+    <script src="resources/js/script.js"></script>
+</body>
+</html>

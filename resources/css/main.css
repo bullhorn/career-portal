@@ -1,0 +1,36 @@
+body {
+	width: 100%;
+	height: 100%;
+}
+
+hgroup {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100%;
+}
+
+main {
+	flex: 1;
+}
+
+aside {
+	width: 240px;
+}
+
+list {
+	display: block;
+	list-style-type: none;
+}
+
+item {
+	display: list-item;
+}
+
+.overview-open aside {
+	 margin-left: -200px;
+}
+
+* {
+	 transition: all 0.5s ease-in-out;
+}

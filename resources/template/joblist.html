@@ -1,0 +1,28 @@
+<table class="table-list">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Company</th>
+            <th>Description</th>
+            <th>
+              Apply
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="job" ng-repeat="job in jobs.data">
+            <td><a ng-click="jobs.openSummary(job.id)">
+                  <h3>{{job.title}}</h3>
+                  <span ng-repeat="cat in job.categories.data">{{cat.name}}<span>
+                </a>
+            </td>
+            <td>{{job.type}}</td>
+            <td>{{job.dateAdded}}</td>
+            <td>Lorem ipsum doler sol derat</td>
+            <td>
+              <input type="checkbox">
+            </td>
+        </tr>
+    </tbody>
+</table>
