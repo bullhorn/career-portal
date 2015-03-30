@@ -39,6 +39,12 @@ html {
       color: $main-color;
       text-decoration: none;
     }
+    input {
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
     button {
       &:focus,
       &:active {
@@ -60,8 +66,14 @@ html {
         width: 240px;
         background: $dark-bg;
         section {
+          & > * {
+            position: fixed;
+            width: 240px;
+            left: 0;
+          }
           &.filters-container {
             header {
+              top: 0;
               padding: 0 10px;
               background: darken($dark-bg, 4%);
               label {
@@ -82,12 +94,56 @@ html {
               box-sizing: border-box;
               display: block;
               padding: 10px;
+              color: lighten($dark-bg, 35%);
+              top: 46px;
+              input[type="search"] {
+                width: 100%;
+                border: none;
+                border-radius: 2em;
+                padding: 5px;
+                box-sizing: border-box;
+                text-indent: 15px;
+                background: lighten($dark-bg, 5%);
+                color: lighten($dark-bg, 75%);
+                margin: 15px 0;
+              }
+              list {
+                item {
+                  margin: 15px 5px;
+                  border-bottom: 1px solid lighten($dark-bg, 5%);
+                  color: lighten($dark-bg, 65%);
+                  input[type="checkbox"] {
+                    margin-right: 10px;
+                    background: lighten($dark-bg, 15%);
+                    border: none;
+                    height: 12px;
+                    width: 12px;
+                    border-radius: 3px;
+                    -webkit-appearance: initial;
+                    display: inline-block;
+                    &:checked {
+                      background: $main-color;
+                      -webkit-transform: scale(.75);
+                      // border-radius: 50%;
+                      & + label {
+                        color: $main-color;
+                      }
+                    }
+                  }
+                  label {
+                    width: 80%;
+                    display: inline-block;
+                    cursor: pointer;
+                  }
+                }
+              }
             }
             credits {
               color: lighten($dark-bg, 15%);
               display: block;
               margin: 50px auto;
               width: 200px;
+              bottom: 0;
               span.powered-by {
                 font-size: 0.8em;
               }
@@ -126,18 +182,18 @@ html {
           display: block;
           padding: 48px 10px 10px 10px;
           section {
+            card {
+              display: block;
+              background: #fff;
+              box-shadow: 0px 1px 3px rgba(0,0,0,.15);
+              padding: 10px;
+              box-sizing: border-box;
+              margin: 4px;
+            }
             &.jobs {
               h1 {
                 color: darken($light-bg, 15%);
                 font-weight: 300;
-              }
-              job {
-                display: block;
-                background: #fff;
-                box-shadow: 0px 1px 3px rgba(0,0,0,.15);
-                padding: 10px;
-                box-sizing: border-box;
-                margin: 4px;
               }
             }
           }
@@ -148,12 +204,22 @@ html {
     &.overview-open {
       aside {
         margin-left: -200px;
+        &:hover {
+          cursor: pointer;
+          background: lighten($dark-bg, 3%);
+          margin-left: -170px;
+          section {
+            &.filters-container {
+              header {
+                background: $dark-bg;
+              }
+            }
+          }
+        }
         section {
           &.filters-container {
-            header {
-              button {
-
-              }
+            & > * {
+              -webkit-transform: translateX(-400px);
             }
           }
         }

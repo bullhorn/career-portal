@@ -27,6 +27,8 @@ html {
     html body a {
       color: #39d;
       text-decoration: none; }
+    html body input:focus, html body input:active {
+      outline: none; }
     html body button:focus, html body button:active {
       outline: none; }
     html body hgroup {
@@ -43,7 +45,12 @@ html {
       html body hgroup aside {
         width: 240px;
         background: #2e2f30; }
+        html body hgroup aside section > * {
+          position: fixed;
+          width: 240px;
+          left: 0; }
         html body hgroup aside section.filters-container header {
+          top: 0;
           padding: 0 10px;
           background: #242526; }
           html body hgroup aside section.filters-container header label {
@@ -60,12 +67,47 @@ html {
         html body hgroup aside section.filters-container filters {
           box-sizing: border-box;
           display: block;
-          padding: 10px; }
+          padding: 10px;
+          color: #86888b;
+          top: 46px; }
+          html body hgroup aside section.filters-container filters input[type="search"] {
+            width: 100%;
+            border: none;
+            border-radius: 2em;
+            padding: 5px;
+            box-sizing: border-box;
+            text-indent: 15px;
+            background: #3a3c3d;
+            color: #eeeeef;
+            margin: 15px 0; }
+          html body hgroup aside section.filters-container filters list item {
+            margin: 15px 5px;
+            border-bottom: 1px solid #3a3c3d;
+            color: #d4d5d6; }
+            html body hgroup aside section.filters-container filters list item input[type="checkbox"] {
+              margin-right: 10px;
+              background: #535557;
+              border: none;
+              height: 12px;
+              width: 12px;
+              border-radius: 3px;
+              -webkit-appearance: initial;
+              display: inline-block; }
+              html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked {
+                background: #39d;
+                -webkit-transform: scale(0.75); }
+                html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked + label {
+                  color: #39d; }
+            html body hgroup aside section.filters-container filters list item label {
+              width: 80%;
+              display: inline-block;
+              cursor: pointer; }
         html body hgroup aside section.filters-container credits {
           color: #535557;
           display: block;
           margin: 50px auto;
-          width: 200px; }
+          width: 200px;
+          bottom: 0; }
           html body hgroup aside section.filters-container credits span.powered-by {
             font-size: 0.8em; }
           html body hgroup aside section.filters-container credits h4.bullhorn {
@@ -93,18 +135,26 @@ html {
         html body hgroup main ng-view {
           display: block;
           padding: 48px 10px 10px 10px; }
-          html body hgroup main ng-view section.jobs h1 {
-            color: #cecece;
-            font-weight: 300; }
-          html body hgroup main ng-view section.jobs job {
+          html body hgroup main ng-view section card {
             display: block;
             background: #fff;
             box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
             padding: 10px;
             box-sizing: border-box;
             margin: 4px; }
+          html body hgroup main ng-view section.jobs h1 {
+            color: #cecece;
+            font-weight: 300; }
     html body.overview-open aside {
       margin-left: -200px; }
+      html body.overview-open aside:hover {
+        cursor: pointer;
+        background: #353738;
+        margin-left: -170px; }
+        html body.overview-open aside:hover section.filters-container header {
+          background: #2e2f30; }
+      html body.overview-open aside section.filters-container > * {
+        -webkit-transform: translateX(-400px); }
     html body.grid-view aside section.filters-container header button {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
