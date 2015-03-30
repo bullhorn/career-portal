@@ -16,7 +16,7 @@ angular.module('careers', ['ngRoute'])
 controller('JobListCtrl', function( $rootScope, $location, $timeout) {
     console.log('INIT');
 	$rootScope.viewState = 'overview-closed';
-	// Form data for the login modal
+	  // Form data for the login modal
     //$scope.view = 'resources/template/jobgrid.html'
 
     this.data = [ {

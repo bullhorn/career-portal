@@ -233,11 +233,17 @@ html {
                 font-weight: 300;
               }
               card {
+                .key-container {
+                  span  {
+                    color: #999;
+                  }
+                }
                 a.joblist-apply {
                   color: $secondary;
                 }
               }
             }
+            /* Job Overview Styles */
            &.job-overview {
              display: flex;
              card {
@@ -329,9 +335,15 @@ html {
               card {
                 width: 32%;
                 max-height: 360px;
-                min-height: 180px;
-                a.joblist-apply {
+                & > * {
                   display: block;
+                }
+                .key-container {
+                  & > * {
+                    display: inline-block;
+                  }
+                }
+                a.joblist-apply {
                   width: 100%;
                   padding: 15px;
                   text-align: center;
@@ -353,6 +365,31 @@ html {
                 /* Change List Button Color */
                 &.icon-view-list {
                   color: $toggle-active;
+
+                }
+              }
+            }
+          }
+        }
+      }
+      main {
+        ng-view {
+          section {
+            &.jobs {
+              card {
+                overflow: auto;
+                & > * {
+                  display: inline-block;
+                }
+                .key-container {
+                  & > * {
+                    display: inline-block;
+                    margin: 0 15px;
+                  }
+                }
+                a.joblist-apply {
+                  padding: 15px;
+                  float: right;
                 }
               }
             }

@@ -3,10 +3,10 @@
   <card ng-repeat="job in jobs.data">
     <div class="key-container">
       <h3 class="item-title"><a href="" ng-click="jobs.openSummary(job.id)">{{job.title}}</a></h3>
-      <span class="item-cat">{{job.categories}}</span>
+      <span class="item-cat" ng-repeat="cat in job.categories.data">{{cat.name}}</span>
       <span class="item-loc">{{job.location}}</span>
       <span class="item-type">{{job.type}}</span>
-      <span class="item-date">Added—{{job.dateAdded}}</span>
+      <span class="item-date">Added—{{job.dateAdded | date : fullDate}}</span>
       <span class="item-description">{{job.description}}</span>
     </div>
     <a href="" class="joblist-apply" onClick="alert('Thanks!!')">APPLY</a>

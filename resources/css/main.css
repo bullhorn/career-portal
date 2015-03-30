@@ -167,42 +167,46 @@ html {
         html body hgroup main ng-view {
           display: block;
           padding: 58px 10px 10px 10px; }
-          html body hgroup main ng-view section card {
-            flex-direction: row;
-            display: block;
-            background: #fff;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
-            padding: 10px;
-            box-sizing: border-box;
-            margin: 4px;
-            vertical-align: top; }
-          html body hgroup main ng-view section.jobs h1 {
-            color: #cecece;
-            font-weight: 300; }
-          html body hgroup main ng-view section.jobs card a.joblist-apply {
-            color: #7abd00; }
-          html body hgroup main ng-view section.job-overview {
-            display: flex; }
-            html body hgroup main ng-view section.job-overview card.description {
-              display: inline-block; }
-            html body hgroup main ng-view section.job-overview card.apply {
-              width: 50%;
-              display: inline-block; }
-              html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
-                width: 100%;
-                border: none;
-                background: #7abd00;
-                color: #fff;
-                padding: 10px;
-                border-radius: 3px;
-                text-transform: uppercase;
-                font-weight: 600; }
-              html body hgroup main ng-view section.job-overview card.apply hr {
-                border: none;
-                height: 1px;
-                background: #E8E8E8; }
-              html body hgroup main ng-view section.job-overview card.apply list item .location {
-                display: block; }
+          html body hgroup main ng-view section {
+            /* Job Overview Styles */ }
+            html body hgroup main ng-view section card {
+              flex-direction: row;
+              display: block;
+              background: #fff;
+              box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+              padding: 10px;
+              box-sizing: border-box;
+              margin: 4px;
+              vertical-align: top; }
+            html body hgroup main ng-view section.jobs h1 {
+              color: #cecece;
+              font-weight: 300; }
+            html body hgroup main ng-view section.jobs card .key-container span {
+              color: #999; }
+            html body hgroup main ng-view section.jobs card a.joblist-apply {
+              color: #7abd00; }
+            html body hgroup main ng-view section.job-overview {
+              display: flex; }
+              html body hgroup main ng-view section.job-overview card.description {
+                display: inline-block; }
+              html body hgroup main ng-view section.job-overview card.apply {
+                width: 50%;
+                display: inline-block; }
+                html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
+                  width: 100%;
+                  border: none;
+                  background: #7abd00;
+                  color: #fff;
+                  padding: 10px;
+                  border-radius: 3px;
+                  text-transform: uppercase;
+                  font-weight: 600; }
+                html body hgroup main ng-view section.job-overview card.apply hr {
+                  border: none;
+                  height: 1px;
+                  background: #E8E8E8; }
+                html body hgroup main ng-view section.job-overview card.apply list item .location {
+                  display: block; }
     html body.overview-open aside {
       width: 46px; }
       html body.overview-open aside:hover {
@@ -222,10 +226,12 @@ html {
         color: #fff; }
     html body.grid-view main ng-view section.jobs card {
       width: 32%;
-      max-height: 360px;
-      min-height: 180px; }
+      max-height: 360px; }
+      html body.grid-view main ng-view section.jobs card > * {
+        display: block; }
+      html body.grid-view main ng-view section.jobs card .key-container > * {
+        display: inline-block; }
       html body.grid-view main ng-view section.jobs card a.joblist-apply {
-        display: block;
         width: 100%;
         padding: 15px;
         text-align: center;
@@ -234,5 +240,15 @@ html {
       /* Change List Button Color */ }
       html body.list-view aside section.filters-container header button.icon-view-list {
         color: #fff; }
+    html body.list-view main ng-view section.jobs card {
+      overflow: auto; }
+      html body.list-view main ng-view section.jobs card > * {
+        display: inline-block; }
+      html body.list-view main ng-view section.jobs card .key-container > * {
+        display: inline-block;
+        margin: 0 15px; }
+      html body.list-view main ng-view section.jobs card a.joblist-apply {
+        padding: 15px;
+        float: right; }
 
 /*# sourceMappingURL=main.css.map */
