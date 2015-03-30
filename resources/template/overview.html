@@ -1,6 +1,14 @@
 <section class="job-overview">
   <card class="description">
-		<h3>Job Description</h3>
+		<h2>Job Description</h2>
+		<button name="print">
+			<span class="icon-print"></span>
+			Print
+		</button>
+		<button name="share">
+			<span class="icon-share"></span>
+			Share
+		</button>
 		<p>
 			About Us
 			<br>We’ve been in business for over 10 years, with hundreds of satisfied clients. Millions of $’s in revenue. Profitable.
@@ -45,9 +53,10 @@
 		</p>
 	</card>
 	<card class="apply">
-		<span>Added—Seconds ago... </span>
-		<h1>Job {{overview.job_id}}: {{overview.job_data.title}}</h1>
-		<h3>UX / UI</h3>
+		<span class="date-added">Added—{{overview.dateAdded | date : fullDate}}</span>
+		<h1 class="title">Job {{overview.job_id}}: {{overview.job_data.title}}</h1>
+		<h3 class="category" ng-repeat="cat in overview.categories">{{cat.data.name}}</h3>
+		<span class="type">{{overview.type}}</span>
 		<button name="apply">Apply</button>
 		<hr>
 		<h5>Related Jobs</h5>

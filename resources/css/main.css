@@ -195,26 +195,54 @@ html {
                 color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
               display: flex; }
-              html body hgroup main ng-view section.job-overview card.description {
-                display: inline-block; }
-              html body hgroup main ng-view section.job-overview card.apply {
-                width: 50%;
-                display: inline-block; }
-                html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
-                  width: 100%;
-                  border: none;
-                  background: #7abd00;
-                  color: #fff;
-                  padding: 10px;
-                  border-radius: 3px;
-                  text-transform: uppercase;
-                  font-weight: 600; }
-                html body hgroup main ng-view section.job-overview card.apply hr {
-                  border: none;
-                  height: 1px;
-                  background: #E8E8E8; }
-                html body hgroup main ng-view section.job-overview card.apply list item .location {
-                  display: block; }
+              html body hgroup main ng-view section.job-overview card {
+                padding: 25px; }
+                html body hgroup main ng-view section.job-overview card.description {
+                  display: inline-block; }
+                  html body hgroup main ng-view section.job-overview card.description h2 {
+                    display: inline-block;
+                    font-weight: 500;
+                    color: #46474A; }
+                  html body hgroup main ng-view section.job-overview card.description button[name="share"],
+                  html body hgroup main ng-view section.job-overview card.description button[name="print"] {
+                    float: right;
+                    display: inline-block;
+                    border: none;
+                    background: transparent;
+                    margin-left: 15px;
+                    font-size: 1.3em;
+                    color: #6C6D6E; }
+                    html body hgroup main ng-view section.job-overview card.description button[name="share"] span,
+                    html body hgroup main ng-view section.job-overview card.description button[name="print"] span {
+                      margin-right: 5px; }
+                  html body hgroup main ng-view section.job-overview card.description p {
+                    font-size: 1.2em;
+                    line-height: 1.4em;
+                    color: #717171; }
+                html body hgroup main ng-view section.job-overview card.apply {
+                  width: 50%;
+                  display: inline-block; }
+                  html body hgroup main ng-view section.job-overview card.apply > * {
+                    display: block; }
+                  html body hgroup main ng-view section.job-overview card.apply span.date-added {
+                    color: #B2B1B0; }
+                  html body hgroup main ng-view section.job-overview card.apply h3.category {
+                    color: #B2B1B0; }
+                  html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
+                    width: 100%;
+                    border: none;
+                    background: #7abd00;
+                    color: #fff;
+                    padding: 10px;
+                    border-radius: 3px;
+                    text-transform: uppercase;
+                    font-weight: 600; }
+                  html body hgroup main ng-view section.job-overview card.apply hr {
+                    border: none;
+                    height: 1px;
+                    background: #E8E8E8; }
+                  html body hgroup main ng-view section.job-overview card.apply list item .location {
+                    display: block; }
     html body.overview-open aside {
       width: 46px; }
       html body.overview-open aside:hover {

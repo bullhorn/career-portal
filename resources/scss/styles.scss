@@ -254,12 +254,48 @@ html {
            &.job-overview {
              display: flex;
              card {
+               padding: 25px;
                &.description {
                  display: inline-block;
+                 h2 {
+                   display: inline-block;
+                   font-weight: 500;
+                   color: #46474A;
+                 }
+                 button[name="share"],
+                 button[name="print"] {
+                   float: right;
+                   display: inline-block;
+                   border: none;
+                   background: transparent;
+                   margin-left: 15px;
+                   font-size: 1.3em;
+                   color: #6C6D6E;
+                   span {
+                     margin-right: 5px;
+                   }
+                 }
+                 p {
+                   font-size: 1.2em;
+                   line-height: 1.4em;
+                   color: #717171;
+                 }
                }
                &.apply {
                  width: 50%;
                  display: inline-block;
+                 & > * {
+                   display: block;
+                 }
+                 span.date-added {
+                   color: #B2B1B0;
+                 }
+                 h1.title {
+
+                 }
+                 h3.category {
+                   color: #B2B1B0;
+                 }
                  button[name="apply"] {
                   width: 100%;
                   border: none;
