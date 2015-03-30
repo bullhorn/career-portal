@@ -13,8 +13,8 @@ angular.module('careers', ['ngRoute'])
         redirectTo: '/jobs'
     });
 }).
-controller('JobListCtrl', function( $rootScope, $location, $timeout) {
-    console.log('INIT');
+controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
+  console.log('INIT');
 	$rootScope.viewState = 'overview-closed';
 	  // Form data for the login modal
     //$scope.view = 'resources/template/jobgrid.html'
@@ -141,19 +141,23 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout) {
         "_score" : 1.0
     }];
 
-	this.openSummary = function(id){
-		$location.path('/jobs/'+id);
-	}
+	this.openSummary = function(id, Data){
+    $rootScope.job_data = Data;
+    $location.path('/jobs/'+id);
+  }
+
 }).
-controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route) {
+controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route, $scope) {
     // Form data for the login modal
 	$rootScope.viewState = 'overview-open';
 	this.job_id = $routeParams.id;
-  this.job_data = $route.current.data;
+  this.job_data = $rootScope.job_data;
 
 	this.goBack = function(){
 		$location.path('/jobs');
 	}
+
+  $scope.job_id = $routeParams.id;
 
 }).
 controller('SideBarCtrl', function($rootScope, $location) {

@@ -1,11 +1,11 @@
 <section class="job-overview">
   <card class="description">
 		<h2>Job Description</h2>
-		<button name="print">
+		<button name="print" onClick="alert('Print Me | PDF');">
 			<span class="icon-print"></span>
 			Print
 		</button>
-		<button name="share">
+		<button name="share" onClick="alert('Share Me | Facebook , Twitter, LinkedIn, Email');">
 			<span class="icon-share"></span>
 			Share
 		</button>
@@ -53,13 +53,13 @@
 		</p>
 	</card>
 	<card class="apply">
-		<span class="date-added">Added—{{overview.dateAdded | date : fullDate}}</span>
-		<h1 class="title">Job {{overview.job_id}}: {{overview.job_data.title}}</h1>
-		<h3 class="category" ng-repeat="cat in overview.categories">{{cat.data.name}}</h3>
-		<span class="type">{{overview.type}}</span>
-		<button name="apply">Apply</button>
+		<span class="date-added">Added—{{overview.job_data.dateAdded | date : fullDate}}</span>
+		<h1 class="title">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
+		<h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>
+		<span class="type">{{overview.job_data.type}}</span>
+		<button name="apply" onClick="alert('Thanks!!!');">Apply</button>
 		<hr>
-		<h5>Related Jobs</h5>
+		<h3>Related Jobs</h3>
 		<list>
 			<item><a href="#">Career Portal Enthusiast | </a><span class="category">UX/UI</span>
 			<span class="location">Boston, MA</span></item>

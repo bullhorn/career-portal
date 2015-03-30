@@ -11,7 +11,8 @@ html {
   font-family: "Roboto";
   font-size: 13px;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  color: #46474A; }
   html body {
     width: 100%;
     height: 100%;
@@ -190,7 +191,7 @@ html {
                 display: block;
                 width: 100%; }
               html body hgroup main ng-view section.jobs card .key-container span {
-                color: #999; }
+                color: #9fa0a4; }
               html body hgroup main ng-view section.jobs card a.joblist-apply {
                 color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
@@ -211,23 +212,25 @@ html {
                     background: transparent;
                     margin-left: 15px;
                     font-size: 1.3em;
-                    color: #6C6D6E; }
+                    color: #6b6d71; }
                     html body hgroup main ng-view section.job-overview card.description button[name="share"] span,
                     html body hgroup main ng-view section.job-overview card.description button[name="print"] span {
                       margin-right: 5px; }
                   html body hgroup main ng-view section.job-overview card.description p {
                     font-size: 1.2em;
                     line-height: 1.4em;
-                    color: #717171; }
+                    color: #6b6d71; }
                 html body hgroup main ng-view section.job-overview card.apply {
                   width: 50%;
                   display: inline-block; }
                   html body hgroup main ng-view section.job-overview card.apply > * {
                     display: block; }
                   html body hgroup main ng-view section.job-overview card.apply span.date-added {
-                    color: #B2B1B0; }
+                    color: #9fa0a4; }
+                  html body hgroup main ng-view section.job-overview card.apply h1.title {
+                    color: #46474A; }
                   html body hgroup main ng-view section.job-overview card.apply h3.category {
-                    color: #B2B1B0; }
+                    color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
                     width: 100%;
                     border: none;
