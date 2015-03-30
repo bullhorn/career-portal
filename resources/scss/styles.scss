@@ -4,11 +4,14 @@
 
 /* Color Schemes */
 
-$main-color: #39d; // Links
-$secondary-color: #7abd00; // Apply Buttons
-$light-bg: #f4f4f4; // Main Background
-$dark-bg: #2e2f30; // Sidebar Background
-$toggle-active: #fff; // Grid-List toggle button 'active' color
+$primary:             #39d;  // Links + Header
+$secondary:        #7abd00;  // Apply Buttons
+$light-bg:         #f4f4f4;  // Main Background
+$dark-bg:          #2e2f30;  // Sidebar Background
+$header-bg:       $primary;  // Header Background
+$toggle-active:       #fff;  // Grid-List toggle button 'active' color
+
+/* Typography */
 
 $font-size: 13px;
 $font-family: 'Roboto';
@@ -28,17 +31,15 @@ html {
     width: 100%;
     height: 100%;
     background: $light-bg;
-    /* init 'list' element */
     list {
       display: block;
       list-style-type: none;
     }
-    /* init 'item' element */
     item {
       display: list-item;
     }
     a {
-      color: $main-color;
+      color: $primary;
       text-decoration: none;
     }
     input {
@@ -78,6 +79,7 @@ html {
           }
           &.filters-container {
             height: 100%;
+            width: 100%;
             position: relative;
             &:before {
               color: #fff;
@@ -129,7 +131,8 @@ html {
               }
               list {
                 item {
-                  margin: 15px 5px;
+                  margin: 10px 5px;
+                  padding-bottom: 5px;
                   border-bottom: 1px solid lighten($dark-bg, 5%);
                   color: lighten($dark-bg, 65%);
                   input[type="checkbox"] {
@@ -141,12 +144,14 @@ html {
                     border-radius: 3px;
                     -webkit-appearance: initial;
                     display: inline-block;
+                    -webkit-transition: all 130ms ease-in-out;
+                    transition: all 130ms ease-in-out;
                     &:checked {
-                      background: $main-color;
+                      background: $primary;
                       -webkit-transform: scale(.75);
                       // border-radius: 50%;
                       & + label {
-                        color: $main-color;
+                        color: $primary;
                       }
                     }
                   }
@@ -197,12 +202,14 @@ html {
         header {
           position: fixed;
           width: 100%;
-          background: #fff;
+          background: $header-bg;
+          color: #fff;
           font-weight: 300;
           padding: 0 10px;
           box-shadow: 0 1px 3px rgba(0,0,0,.25);
           h3 {
             margin: 0;
+            color: lighten($header-bg, 55%);
           }
         }
         /* View Container */
@@ -225,16 +232,43 @@ html {
                 color: darken($light-bg, 15%);
                 font-weight: 300;
               }
+              card {
+                a.joblist-apply {
+                  color: $secondary;
+                }
+              }
             }
            &.job-overview {
+             display: flex;
              card {
                &.description {
-                 width: 70%;
                  display: inline-block;
                }
                &.apply {
-                 width: 25%;
+                 width: 50%;
                  display: inline-block;
+                 button[name="apply"] {
+                  width: 100%;
+                  border: none;
+                  background: $secondary;
+                  color: #fff;
+                  padding: 10px;
+                  border-radius: 3px;
+                  text-transform: uppercase;
+                  font-weight: 600;
+                 }
+                 hr {
+                  border: none;
+                  height: 1px;
+                  background: #E8E8E8;
+                 }
+                 list {
+                   item {
+                     .location {
+                       display: block;
+                     }
+                   }
+                 }
                }
              }
            }
@@ -296,7 +330,13 @@ html {
                 width: 32%;
                 max-height: 360px;
                 min-height: 180px;
-                display: inline-flex;
+                a.joblist-apply {
+                  display: block;
+                  width: 100%;
+                  padding: 15px;
+                  text-align: center;
+                  box-sizing: border-box;
+                }
               }
             }
           }
