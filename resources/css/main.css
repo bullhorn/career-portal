@@ -238,7 +238,7 @@ html {
       html body.grid-view main ng-view section.jobs card > * {
         display: block; }
       html body.grid-view main ng-view section.jobs card .key-container > * {
-        display: inline-block; }
+        display: block; }
       html body.grid-view main ng-view section.jobs card a.joblist-apply {
         width: 100%;
         padding: 15px;

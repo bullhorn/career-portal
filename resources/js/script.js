@@ -156,11 +156,17 @@ controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route
 	}
 
 }).
-controller('SideBarCtrl', function($rootScope) {
-    $rootScope.gridState = 'list-view';
+controller('SideBarCtrl', function($rootScope, $location) {
+  $rootScope.gridState = 'list-view';
 
 	this.switchViewStyle = function(type){
 		$rootScope.gridState = type + '-view';
 	}
+
+  this.goBack = function(state) {
+    if($rootScope.viewState === state) {
+      $location.path('/jobs');
+    }
+  }
 
 });
