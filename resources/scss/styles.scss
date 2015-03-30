@@ -298,6 +298,9 @@ html {
                  h3.category {
                    color: lighten($base-color, 35%);
                  }
+                 span.type {
+                   margin-bottom: 25px;
+                 }
                  button[name="apply"] {
                   width: 100%;
                   border: none;

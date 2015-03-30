@@ -231,6 +231,8 @@ html {
                     color: #46474A; }
                   html body hgroup main ng-view section.job-overview card.apply h3.category {
                     color: #9fa0a4; }
+                  html body hgroup main ng-view section.job-overview card.apply span.type {
+                    margin-bottom: 25px; }
                   html body hgroup main ng-view section.job-overview card.apply button[name="apply"] {
                     width: 100%;
                     border: none;
