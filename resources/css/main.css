@@ -15,10 +15,10 @@ html {
     width: 100%;
     height: 100%;
     background: #f4f4f4;
-    /* create 'list' element */
-    /* create 'item' element */
-    /* ----- Overview Open Styles ----- */
-    /* ----- Grid / List Styles ----- */
+    /* init 'list' element */
+    /* init 'item' element */
+    /* ==== Job Overview Open Styles =====*/
+    /* ==== Grid / List Swap Styles =====*/
     /* Grid View */
     /* List View */ }
     html body list {
@@ -38,8 +38,8 @@ html {
       flex-direction: row;
       width: 100%;
       height: 100%;
-      /* Sidebar Styles */
-      /* Main Content Styles */ }
+      /* ==== Sidebar Styles =====*/
+      /* ==== Main Content Styles =====*/ }
       html body hgroup header {
         height: 48px;
         box-sizing: border-box;
@@ -54,78 +54,90 @@ html {
           position: fixed;
           width: 240px;
           left: 0; }
-        html body hgroup aside section.filters-container > * {
-          transition: transform 200ms ease-in-out; }
-        html body hgroup aside section.filters-container header {
-          top: 0;
-          padding: 0 10px;
-          background: #242526; }
-          html body hgroup aside section.filters-container header label {
-            color: #6c6f71;
-            line-height: 46px; }
-          html body hgroup aside section.filters-container header button {
-            background: transparent;
-            border: none;
-            float: right;
-            color: #a0a2a4;
-            padding: 5px;
-            font-size: 1.2em;
-            line-height: 35px; }
-        html body hgroup aside section.filters-container filters {
-          box-sizing: border-box;
-          display: block;
-          padding: 10px;
-          color: #86888b;
-          top: 46px; }
-          html body hgroup aside section.filters-container filters input[type="search"] {
-            width: 100%;
-            border: none;
-            border-radius: 2em;
-            padding: 5px;
-            box-sizing: border-box;
-            text-indent: 15px;
-            background: #3a3c3d;
-            color: #eeeeef;
-            margin: 15px 0; }
-          html body hgroup aside section.filters-container filters list item {
-            margin: 15px 5px;
-            border-bottom: 1px solid #3a3c3d;
-            color: #d4d5d6; }
-            html body hgroup aside section.filters-container filters list item input[type="checkbox"] {
-              margin-right: 10px;
-              background: #535557;
-              border: none;
-              height: 12px;
-              width: 12px;
-              border-radius: 3px;
-              -webkit-appearance: initial;
-              display: inline-block; }
-              html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked {
-                background: #39d;
-                -webkit-transform: scale(0.75); }
-                html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked + label {
-                  color: #39d; }
-            html body hgroup aside section.filters-container filters list item label {
-              width: 80%;
-              display: inline-block;
-              cursor: pointer; }
-        html body hgroup aside section.filters-container credits {
-          color: #535557;
-          display: block;
-          margin: 50px auto;
-          width: 200px;
-          bottom: 0;
-          padding: 10px; }
-          html body hgroup aside section.filters-container credits span.powered-by {
-            font-size: 0.8em; }
-          html body hgroup aside section.filters-container credits h4.bullhorn {
+        html body hgroup aside section.filters-container {
+          height: 100%;
+          position: relative; }
+          html body hgroup aside section.filters-container:before {
             color: #fff;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 5px; }
-            html body hgroup aside section.filters-container credits h4.bullhorn span {
-              color: red; }
+            z-index: 999;
+            position: absolute;
+            top: 50%;
+            right: 18px;
+            -webkit-transform: translateX(300px);
+            transform: translateX(300px);
+            transition: transform 550ms ease-in-out; }
+          html body hgroup aside section.filters-container > * {
+            transition: transform 200ms ease-in-out; }
+          html body hgroup aside section.filters-container header {
+            top: 0;
+            padding: 0 10px;
+            background: #242526; }
+            html body hgroup aside section.filters-container header label {
+              color: #6c6f71;
+              line-height: 46px; }
+            html body hgroup aside section.filters-container header button {
+              background: transparent;
+              border: none;
+              float: right;
+              color: #a0a2a4;
+              padding: 5px;
+              font-size: 1.2em;
+              line-height: 35px; }
+          html body hgroup aside section.filters-container filters {
+            box-sizing: border-box;
+            display: block;
+            padding: 10px;
+            color: #86888b;
+            top: 46px; }
+            html body hgroup aside section.filters-container filters input[type="search"] {
+              width: 100%;
+              border: none;
+              border-radius: 2em;
+              padding: 5px;
+              box-sizing: border-box;
+              text-indent: 15px;
+              background: #3a3c3d;
+              color: #eeeeef;
+              margin: 15px 0; }
+            html body hgroup aside section.filters-container filters list item {
+              margin: 15px 5px;
+              border-bottom: 1px solid #3a3c3d;
+              color: #d4d5d6; }
+              html body hgroup aside section.filters-container filters list item input[type="checkbox"] {
+                margin-right: 10px;
+                background: #535557;
+                border: none;
+                height: 12px;
+                width: 12px;
+                border-radius: 3px;
+                -webkit-appearance: initial;
+                display: inline-block; }
+                html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked {
+                  background: #39d;
+                  -webkit-transform: scale(0.75); }
+                  html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked + label {
+                    color: #39d; }
+              html body hgroup aside section.filters-container filters list item label {
+                width: 80%;
+                display: inline-block;
+                cursor: pointer; }
+          html body hgroup aside section.filters-container credits {
+            color: #535557;
+            display: block;
+            margin: 50px auto;
+            width: 200px;
+            bottom: 0;
+            padding: 10px; }
+            html body hgroup aside section.filters-container credits span.powered-by {
+              font-size: 0.8em; }
+            html body hgroup aside section.filters-container credits h4.bullhorn {
+              color: #fff;
+              font-weight: 300;
+              text-transform: uppercase;
+              letter-spacing: 3px;
+              margin-top: 5px; }
+              html body hgroup aside section.filters-container credits h4.bullhorn span {
+                color: red; }
       html body hgroup main {
         flex: 1;
         width: 100%;
@@ -178,6 +190,9 @@ html {
           background: #2e2f30; }
       html body.overview-open aside section.filters-container > * {
         -webkit-transform: translateX(-400px); }
+      html body.overview-open aside section.filters-container:before {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px); }
     html body.grid-view aside section.filters-container header button {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
