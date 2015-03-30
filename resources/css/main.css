@@ -1,36 +1,120 @@
-body {
-	width: 100%;
-	height: 100%;
-}
-
-hgroup {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	height: 100%;
-}
-
-main {
-	flex: 1;
-}
-
-aside {
-	width: 240px;
-}
-
-list {
-	display: block;
-	list-style-type: none;
-}
-
-item {
-	display: list-item;
-}
-
-.overview-open aside {
-	 margin-left: -200px;
-}
+/* ==============
+    Variables
+===============*/
+/* Color Schemes */
+/* ==============
+     Styles
+===============*/
+html {
+  -webkit-font-smoothing: antialiased;
+  font-family: "Roboto";
+  font-size: 13px; }
+  html body {
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    /* create 'list' element */
+    /* create 'item' element */
+    /* ----- Overview Open Styles ----- */
+    /* ----- Grid / List Styles ----- */
+    /* Grid View */
+    /* List View */ }
+    html body list {
+      display: block;
+      list-style-type: none; }
+    html body item {
+      display: list-item; }
+    html body a {
+      color: #39d;
+      text-decoration: none; }
+    html body button:focus, html body button:active {
+      outline: none; }
+    html body hgroup {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      /* Sidebar Styles */
+      /* Main Content Styles */ }
+      html body hgroup header {
+        height: 48px;
+        box-sizing: border-box;
+        line-height: 46px; }
+      html body hgroup aside {
+        width: 240px;
+        background: #2e2f30; }
+        html body hgroup aside section.filters-container header {
+          padding: 0 10px;
+          background: #242526; }
+          html body hgroup aside section.filters-container header label {
+            color: #6c6f71;
+            line-height: 46px; }
+          html body hgroup aside section.filters-container header button {
+            background: transparent;
+            border: none;
+            float: right;
+            color: #a0a2a4;
+            padding: 5px;
+            font-size: 1.2em;
+            line-height: 35px; }
+        html body hgroup aside section.filters-container filters {
+          box-sizing: border-box;
+          display: block;
+          padding: 10px; }
+        html body hgroup aside section.filters-container credits {
+          color: #535557;
+          display: block;
+          margin: 50px auto;
+          width: 200px; }
+          html body hgroup aside section.filters-container credits span.powered-by {
+            font-size: 0.8em; }
+          html body hgroup aside section.filters-container credits h4.bullhorn {
+            color: #fff;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 5px; }
+            html body hgroup aside section.filters-container credits h4.bullhorn span {
+              color: red; }
+      html body hgroup main {
+        flex: 1;
+        width: 100%;
+        overflow: scroll;
+        /* View Container */ }
+        html body hgroup main header {
+          position: fixed;
+          width: 100%;
+          background: #fff;
+          font-weight: 300;
+          padding: 0 10px;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+          html body hgroup main header h3 {
+            margin: 0; }
+        html body hgroup main ng-view {
+          display: block;
+          padding: 48px 10px 10px 10px; }
+          html body hgroup main ng-view section.jobs h1 {
+            color: #cecece;
+            font-weight: 300; }
+          html body hgroup main ng-view section.jobs job {
+            display: block;
+            background: #fff;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 4px; }
+    html body.overview-open aside {
+      margin-left: -200px; }
+    html body.grid-view aside section.filters-container header button {
+      /* Change Grid Button Color */ }
+      html body.grid-view aside section.filters-container header button.icon-view-module {
+        color: #fff; }
+    html body.list-view aside section.filters-container header button {
+      /* Change List Button Color */ }
+      html body.list-view aside section.filters-container header button.icon-view-list {
+        color: #fff; }
 
 * {
-	 transition: all 0.5s ease-in-out;
-}
+  transition: all 130ms ease-in-out; }
+
+/*# sourceMappingURL=main.css.map */

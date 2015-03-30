@@ -140,7 +140,7 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout) {
         "dateAdded" : 1289399430630,
         "_score" : 1.0
     }];
-	
+
 	this.openSummary = function(id){
 		$location.path('/jobs/'+id);
 	}
@@ -149,8 +149,8 @@ controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route
     // Form data for the login modal
 	$rootScope.viewState = 'overview-open';
 	this.job_id = $routeParams.id;
-    this.job_data = $route.current.data;
-	
+  this.job_data = $route.current.data;
+
 	this.goBack = function(){
 		$location.path('/jobs');
 	}
@@ -158,7 +158,7 @@ controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route
 }).
 controller('SideBarCtrl', function($rootScope) {
     $rootScope.gridState = 'list-view';
-	
+
 	this.switchViewStyle = function(type){
 		$rootScope.gridState = type + '-view';
 	}
