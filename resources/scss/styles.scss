@@ -189,6 +189,7 @@ html {
               padding: 10px;
               box-sizing: border-box;
               margin: 4px;
+              vertical-align: top;
             }
             &.jobs {
               h1 {
@@ -196,6 +197,18 @@ html {
                 font-weight: 300;
               }
             }
+           &.job-overview {
+             card {
+               &.description {
+                 width: 70%;
+                 display: inline-block;
+               }
+               &.apply {
+                 width: 25%;
+                 display: inline-block;
+               }
+             }
+           }
           }
         }
       }

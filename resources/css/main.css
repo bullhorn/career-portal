@@ -141,10 +141,17 @@ html {
             box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
             padding: 10px;
             box-sizing: border-box;
-            margin: 4px; }
+            margin: 4px;
+            vertical-align: top; }
           html body hgroup main ng-view section.jobs h1 {
             color: #cecece;
             font-weight: 300; }
+          html body hgroup main ng-view section.job-overview card.description {
+            width: 70%;
+            display: inline-block; }
+          html body hgroup main ng-view section.job-overview card.apply {
+            width: 25%;
+            display: inline-block; }
     html body.overview-open aside {
       margin-left: -200px; }
       html body.overview-open aside:hover {

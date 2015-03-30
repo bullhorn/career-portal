@@ -57,17 +57,3 @@
 		</list>
 	</card>
 </section>
-
-<script>
-  $(window).scroll(function() {
-  	var minDistance = 80;
-  	var startDistance = 88;
-  	var scrollTop = $(document).scrollTop();
-  	if (scrollTop > startDistance - minDistance) {
-  		$('#overview header, #overview .job-overview').addClass('scrolled');
-
-  	} else {
-  		$('#overview header, #overview .job-overview').removeClass('scrolled');
-  	}
-  });
-</script>
