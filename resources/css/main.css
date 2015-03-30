@@ -170,7 +170,6 @@ html {
           html body hgroup main ng-view section {
             /* Job Overview Styles */ }
             html body hgroup main ng-view section card {
-              flex-direction: row;
               display: block;
               background: #fff;
               box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
@@ -178,13 +177,22 @@ html {
               box-sizing: border-box;
               margin: 4px;
               vertical-align: top; }
-            html body hgroup main ng-view section.jobs h1 {
-              color: #cecece;
-              font-weight: 300; }
-            html body hgroup main ng-view section.jobs card .key-container span {
-              color: #999; }
-            html body hgroup main ng-view section.jobs card a.joblist-apply {
-              color: #7abd00; }
+            html body hgroup main ng-view section.jobs {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: flex-start;
+              align-content: flex-start;
+              align-items: stretch; }
+              html body hgroup main ng-view section.jobs h1 {
+                color: #cecece;
+                font-weight: 300;
+                display: block;
+                width: 100%; }
+              html body hgroup main ng-view section.jobs card .key-container span {
+                color: #999; }
+              html body hgroup main ng-view section.jobs card a.joblist-apply {
+                color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
               display: flex; }
               html body hgroup main ng-view section.job-overview card.description {
@@ -241,7 +249,8 @@ html {
       html body.list-view aside section.filters-container header button.icon-view-list {
         color: #fff; }
     html body.list-view main ng-view section.jobs card {
-      overflow: auto; }
+      overflow: auto;
+      width: 100%; }
       html body.list-view main ng-view section.jobs card > * {
         display: inline-block; }
       html body.list-view main ng-view section.jobs card .key-container > * {
