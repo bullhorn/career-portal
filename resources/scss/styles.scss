@@ -22,6 +22,8 @@ html {
   -webkit-font-smoothing: antialiased;
   font-family: $font-family;
   font-size: $font-size;
+  width: 100%;
+  height: 100%;
   body {
     width: 100%;
     height: 100%;
@@ -64,7 +66,10 @@ html {
       /* Sidebar Styles */
       aside {
         width: 240px;
+        height: 100%;
         background: $dark-bg;
+        -webkit-transition: width 120ms ease-in-out;
+        transition: width 120ms ease-in-out;
         section {
           & > * {
             position: fixed;
@@ -72,6 +77,9 @@ html {
             left: 0;
           }
           &.filters-container {
+            & > * {
+              transition: transform 200ms ease-in-out;
+            }
             header {
               top: 0;
               padding: 0 10px;
@@ -144,6 +152,7 @@ html {
               margin: 50px auto;
               width: 200px;
               bottom: 0;
+              padding: 10px;
               span.powered-by {
                 font-size: 0.8em;
               }
@@ -165,6 +174,13 @@ html {
       main {
         flex: 1;
         width: 100%;
+        height: 100%;
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: stretch;
         overflow: scroll;
         header {
           position: fixed;
@@ -180,9 +196,10 @@ html {
         /* View Container */
         ng-view {
           display: block;
-          padding: 48px 10px 10px 10px;
+          padding: 58px 10px 10px 10px;
           section {
             card {
+              flex-direction: row;
               display: block;
               background: #fff;
               box-shadow: 0px 1px 3px rgba(0,0,0,.15);
@@ -216,11 +233,11 @@ html {
     /* ----- Overview Open Styles ----- */
     &.overview-open {
       aside {
-        margin-left: -200px;
+        width: 46px;
         &:hover {
           cursor: pointer;
           background: lighten($dark-bg, 3%);
-          margin-left: -170px;
+          width: 76px;
           section {
             &.filters-container {
               header {
@@ -255,6 +272,20 @@ html {
           }
         }
       }
+      main {
+        ng-view {
+          section {
+            &.jobs {
+              card {
+                width: 32%;
+                max-height: 360px;
+                min-height: 180px;
+                display: inline-flex;
+              }
+            }
+          }
+        }
+      }
     }
     /* List View */
     &.list-view {
@@ -274,7 +305,4 @@ html {
       }
     }
   }
-}
-* {
-  transition: all 130ms ease-in-out;
 }

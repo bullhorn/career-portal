@@ -8,7 +8,9 @@
 html {
   -webkit-font-smoothing: antialiased;
   font-family: "Roboto";
-  font-size: 13px; }
+  font-size: 13px;
+  width: 100%;
+  height: 100%; }
   html body {
     width: 100%;
     height: 100%;
@@ -44,11 +46,16 @@ html {
         line-height: 46px; }
       html body hgroup aside {
         width: 240px;
-        background: #2e2f30; }
+        height: 100%;
+        background: #2e2f30;
+        -webkit-transition: width 120ms ease-in-out;
+        transition: width 120ms ease-in-out; }
         html body hgroup aside section > * {
           position: fixed;
           width: 240px;
           left: 0; }
+        html body hgroup aside section.filters-container > * {
+          transition: transform 200ms ease-in-out; }
         html body hgroup aside section.filters-container header {
           top: 0;
           padding: 0 10px;
@@ -107,7 +114,8 @@ html {
           display: block;
           margin: 50px auto;
           width: 200px;
-          bottom: 0; }
+          bottom: 0;
+          padding: 10px; }
           html body hgroup aside section.filters-container credits span.powered-by {
             font-size: 0.8em; }
           html body hgroup aside section.filters-container credits h4.bullhorn {
@@ -121,6 +129,13 @@ html {
       html body hgroup main {
         flex: 1;
         width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: stretch;
         overflow: scroll;
         /* View Container */ }
         html body hgroup main header {
@@ -134,8 +149,9 @@ html {
             margin: 0; }
         html body hgroup main ng-view {
           display: block;
-          padding: 48px 10px 10px 10px; }
+          padding: 58px 10px 10px 10px; }
           html body hgroup main ng-view section card {
+            flex-direction: row;
             display: block;
             background: #fff;
             box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
@@ -153,11 +169,11 @@ html {
             width: 25%;
             display: inline-block; }
     html body.overview-open aside {
-      margin-left: -200px; }
+      width: 46px; }
       html body.overview-open aside:hover {
         cursor: pointer;
         background: #353738;
-        margin-left: -170px; }
+        width: 76px; }
         html body.overview-open aside:hover section.filters-container header {
           background: #2e2f30; }
       html body.overview-open aside section.filters-container > * {
@@ -166,12 +182,14 @@ html {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
         color: #fff; }
+    html body.grid-view main ng-view section.jobs card {
+      width: 32%;
+      max-height: 360px;
+      min-height: 180px;
+      display: inline-flex; }
     html body.list-view aside section.filters-container header button {
       /* Change List Button Color */ }
       html body.list-view aside section.filters-container header button.icon-view-list {
         color: #fff; }
-
-* {
-  transition: all 130ms ease-in-out; }
 
 /*# sourceMappingURL=main.css.map */
