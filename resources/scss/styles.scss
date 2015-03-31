@@ -209,7 +209,7 @@ html {
           font-weight: 300;
           padding: 0 10px;
           box-shadow: 0 1px 3px rgba(0,0,0,.25);
-          h3 {
+          h2 {
             margin: 0;
             color: lighten($header-bg, 55%);
           }
@@ -235,11 +235,13 @@ html {
               justify-content: flex-start;
               align-content: flex-start;
               align-items: stretch;
-              h1 {
+              h5 {
                 color: darken($light-bg, 15%);
-                font-weight: 300;
+                font-weight: 400;
+                font-size: 1.3em;
                 display: block;
                 width: 100%;
+                margin: 10px 0;
               }
               card {
                 .key-container {
@@ -255,8 +257,15 @@ html {
             /* Job Overview Styles */
            &.job-overview {
              display: flex;
+             align-items: flex-start;
              card {
                padding: 25px;
+
+               -webkit-animation-name: slide-left; /* Chrome, Safari, Opera */
+               -webkit-animation-duration: 550ms; /* Chrome, Safari, Opera */
+               animation-name: slide-left;
+               animation-duration: 550ms;
+
                &.description {
                  display: inline-block;
                  h2 {
@@ -284,7 +293,7 @@ html {
                  }
                }
                &.apply {
-                 width: 50%;
+                 width: 48%;
                  display: inline-block;
                  & > * {
                    display: block;
@@ -322,6 +331,9 @@ html {
                        display: block;
                      }
                    }
+                 }
+                 a.category-filter {
+                   margin-top: 25px;
                  }
                }
              }
@@ -447,4 +459,36 @@ html {
       }
     }
   }
+}
+
+/* ==============
+    Animations
+===============*/
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide-left {
+    from {
+      -webkit-transform: translateX(100px);
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to {
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1;
+    }
+}
+
+/* Standard syntax */
+@keyframes slide-left {
+    from {
+      -webkit-transform: translateX(100px);
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to {
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      opacity: 1
+    }
 }
