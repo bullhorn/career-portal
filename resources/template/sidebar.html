@@ -7,7 +7,10 @@
 	</header>
 
 	<filters>
-		<input type="search" name="keyword" value="" placeholder="Keyword Search">
+		<searchbox>
+			<label for="keyword" class="icon-search"></label>
+			<input type="search" name="keyword" value="" placeholder="Keyword Search">
+		</searchbox>
 		<h4>Location</h4>
 		<list>
 			<item><input type="checkbox" id="bos"><label for="bos">Boston</label></item>
@@ -23,6 +26,8 @@
 			<item><input type="checkbox" id="sal"><label for="sal">Sales</label></item>
 			<item><input type="checkbox" id="ps"><label for="ps">Professional Services</label></item>
 		</list>
+
+		<button name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>
 	</filters>
 
 	<credits>
