@@ -194,6 +194,9 @@ html {
                 margin: 10px 0; }
               html body hgroup main ng-view section.jobs card .key-container span {
                 color: #9fa0a4; }
+                html body hgroup main ng-view section.jobs card .key-container span.item-description {
+                  margin-top: 10px;
+                  color: #6b6d71; }
               html body hgroup main ng-view section.jobs card a.joblist-apply {
                 color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
@@ -294,15 +297,26 @@ html {
         color: #fff; }
     html body.list-view main ng-view section.jobs card {
       overflow: auto;
-      width: 100%; }
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-content: flex-start;
+      align-items: stretch; }
       html body.list-view main ng-view section.jobs card > * {
         display: inline-block; }
       html body.list-view main ng-view section.jobs card .key-container > * {
         display: inline-block;
         margin: 0 15px; }
+      html body.list-view main ng-view section.jobs card .key-container span.item-description {
+        max-width: 660px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
       html body.list-view main ng-view section.jobs card a.joblist-apply {
-        padding: 15px;
-        float: right; }
+        padding: 20px;
+        width: 85px; }
 
 /* ==============
     Animations

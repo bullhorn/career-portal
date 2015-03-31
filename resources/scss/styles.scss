@@ -246,7 +246,11 @@ html {
               card {
                 .key-container {
                   span  {
-                    color: lighten($base-color, 35%);;
+                    color: lighten($base-color, 35%);
+                    &.item-description {
+                      margin-top: 10px;
+                      color: lighten($base-color, 15%);
+                    }
                   }
                 }
                 a.joblist-apply {
@@ -439,6 +443,12 @@ html {
               card {
                 overflow: auto;
                 width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-content: flex-start;
+                align-items: stretch;
                 & > * {
                   display: inline-block;
                 }
@@ -447,10 +457,18 @@ html {
                     display: inline-block;
                     margin: 0 15px;
                   }
+                  span {
+                    &.item-description {
+                      max-width: 660px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    }
+                  }
                 }
                 a.joblist-apply {
-                  padding: 15px;
-                  float: right;
+                  padding: 20px;
+                  width: 85px;
                 }
               }
             }
