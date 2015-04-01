@@ -1,0 +1,37 @@
+{
+	"name": "CareerPortal",
+	"version": "0.0.1",
+	"build": 2150,
+	"description": "A sample project showing how to create a job boards with the Bullhorn Platform.",
+	"author": {
+		"name": "Bullhorn, Inc."
+	},
+	"contributors": [{
+		"name": "Brian Kimball",
+		"email": "bkimball@bullhorn.com"
+	},{
+		"name": "Alec Sibilia",
+		"email": "asibilia@bullhorn.com"
+	}],
+	"dependencies": {},
+	"engines": {
+		"node": ">= 0.8.9"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.x",
+		"grunt-contrib-connect": "*",
+		"grunt-contrib-jshint": "*",
+		"grunt-contrib-sass": "*",
+		"grunt-contrib-watch": "*",
+		"load-grunt-tasks": "*",
+		"karma": "^0.12.28",
+		"karma-mocha-reporter": "^0.3.2",
+		"karma-babel-preprocessor": "^4.0.0",
+		"karma-chrome-launcher": "^0.1.7",
+		"karma-jasmine": "^0.3.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/bullhorn/career-portal.git"
+	}
+}
