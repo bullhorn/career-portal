@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
-    
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                 loopfunc: true
             }
         },
-        
+
 		sass: {
 			dist: {
 			  files: {
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
 		  },
 		watch: {
 			styles: {
-				files: ['resources/**/*.scss'],
+				files: ['resources/**/*.scss','resources/**/*.js','./*.html','resources/**/*.html'],
 				tasks: ['sass'],
 				options: {
 				  livereload: true
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 			  }
 			}
 		},
-		
+
         karma: {
             unit: {
                 configFile: 'test/karma.conf.js',

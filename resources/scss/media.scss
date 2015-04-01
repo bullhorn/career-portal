@@ -1,0 +1,87 @@
+
+
+html {
+  body {
+    hgroup {
+      @media (max-width: 1100px) {
+        aside {
+          display: none;
+        }
+        main {
+          header {
+            button[name="filters-menu"] {
+              display: inline-block;
+            }
+            button[name="over-arrow-back"] {
+              display: none;
+            }
+          }
+        }
+      }
+      @media (min-width: 1100px) {
+        aside {
+          display: block !important;
+        }
+        main {
+          header {
+            button[name="filters-menu"] {
+              display: none;
+            }
+            button[name="over-arrow-back"] {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    &.overview-open {
+      hgroup {
+        @media (max-width: 1100px) {
+          main {
+            header {
+              button[name="filters-menu"] {
+                display: none;
+              }
+              button[name="over-arrow-back"] {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.grid-view {
+      hgroup {
+        @media (max-width: 900px) {
+          main {
+            ng-view {
+              section {
+                &.jobs {
+                  card {
+                    width: 48%;
+                  }
+                }
+              }
+            }
+          }
+        }
+        @media (max-width: 700px) {
+          main {
+            ng-view {
+              section {
+                &.jobs {
+                  card {
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &.list-view {
+
+    }
+  }
+}

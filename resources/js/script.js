@@ -29,7 +29,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Administrative"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Temporary",
         "dateAdded" : 1326738770830,
         "_score" : 1.0
     }, {
@@ -42,7 +43,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Permanent",
         "dateAdded" : 1307477347270,
         "_score" : 1.0
     }, {
@@ -55,7 +57,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Permanent",
         "dateAdded" : 1307477339840,
         "_score" : 1.0
     }, {
@@ -68,7 +71,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Permanent",
         "dateAdded" : 1307477330883,
         "_score" : 1.0
     }, {
@@ -81,7 +85,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Permanent",
         "dateAdded" : 1289487666677,
         "_score" : 1.0
     }, {
@@ -94,7 +99,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Temporary",
         "dateAdded" : 1289487666677,
         "_score" : 1.0
     }, {
@@ -107,7 +113,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Temporary",
         "dateAdded" : 1289487666677,
         "_score" : 1.0
     }, {
@@ -120,7 +127,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Human Resources"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Temporary",
         "dateAdded" : 1289487666677,
         "_score" : 1.0
     }, {
@@ -136,7 +144,8 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
                 "name" : "Health & Welfare Plans"
             } ]
         },
-        "type" : 1,
+        "location" : "Boston, MA",
+        "type" : "Temporary",
         "dateAdded" : 1289399430630,
         "_score" : 1.0
     }];
@@ -173,4 +182,13 @@ controller('SideBarCtrl', function($rootScope, $location) {
     }
   }
 
+}).
+controller('HeaderCtrl', function($rootScope, $location, $scope) {
+  this.goBack = function(){
+		$location.path('/jobs');
+	}
+});
+
+$("button[name='filters-menu']").on("click",function(){
+  $('html body hgroup aside').toggle();
 });

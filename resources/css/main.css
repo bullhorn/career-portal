@@ -178,12 +178,27 @@ html {
           font-weight: 300;
           padding: 0 10px;
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+          html body hgroup main header button[name="filters-menu"] {
+            display: none;
+            background: transparent;
+            border: none; }
+          html body hgroup main header button[name="over-arrow-back"] {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.3em; }
           html body hgroup main header h2 {
             margin: 0;
-            color: white; }
+            color: white;
+            display: inline-block; }
+          html body hgroup main header feed {
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 15px; }
         html body hgroup main ng-view {
           display: block;
-          padding: 58px 10px 10px 10px; }
+          padding: 58px 10px 10px 10px;
+          min-width: 380px; }
           html body hgroup main ng-view section {
             /* Job Overview Styles */ }
             html body hgroup main ng-view section card {
@@ -200,7 +215,7 @@ html {
               flex-wrap: wrap;
               justify-content: flex-start;
               align-content: flex-start;
-              align-items: stretch; }
+              align-items: flex-start; }
               html body hgroup main ng-view section.jobs h5 {
                 color: #cecece;
                 font-weight: 400;
@@ -208,11 +223,18 @@ html {
                 display: block;
                 width: 100%;
                 margin: 10px 0; }
+              html body hgroup main ng-view section.jobs card .key-container h3 {
+                text-transform: uppercase; }
               html body hgroup main ng-view section.jobs card .key-container span {
                 color: #9fa0a4; }
+                html body hgroup main ng-view section.jobs card .key-container span.item-cat {
+                  font-weight: 600; }
+                html body hgroup main ng-view section.jobs card .key-container span.item-loc, html body hgroup main ng-view section.jobs card .key-container span.item-type {
+                  color: #525457; }
                 html body hgroup main ng-view section.jobs card .key-container span.item-description {
                   margin-top: 10px;
-                  color: #6b6d71; }
+                  font-family: 'PT Serif';
+                  color: #5f6064; }
               html body hgroup main ng-view section.jobs card a.joblist-apply {
                 color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
@@ -245,11 +267,13 @@ html {
                     html body hgroup main ng-view section.job-overview card.description button[name="print"] span {
                       margin-right: 5px; }
                   html body hgroup main ng-view section.job-overview card.description p {
+                    font-family: 'PT Serif';
                     font-size: 1.2em;
-                    line-height: 1.4em;
-                    color: #6b6d71; }
+                    line-height: 1.6em;
+                    color: #5f6064; }
                 html body hgroup main ng-view section.job-overview card.apply {
                   width: 48%;
+                  min-width: 300px;
                   display: inline-block; }
                   html body hgroup main ng-view section.job-overview card.apply > * {
                     display: block; }
@@ -305,6 +329,19 @@ html {
         display: block; }
       html body.grid-view main ng-view section.jobs card .key-container > * {
         display: block; }
+      html body.grid-view main ng-view section.jobs card .key-container h3.item-title {
+        margin-bottom: 5px; }
+      html body.grid-view main ng-view section.jobs card .key-container span.item-cat:first-of-type {
+        margin-top: 15px; }
+      html body.grid-view main ng-view section.jobs card .key-container span.item-loc {
+        margin-top: 15px; }
+      html body.grid-view main ng-view section.jobs card .key-container span.item-type {
+        margin: 0 0 15px 0; }
+      html body.grid-view main ng-view section.jobs card hr {
+        border: none;
+        margin: 20px -10px 10px -10px;
+        height: 1px;
+        background: #f4f4f4; }
       html body.grid-view main ng-view section.jobs card a.joblist-apply {
         width: 100%;
         padding: 15px;
@@ -329,10 +366,12 @@ html {
         display: inline-block;
         margin: 0 15px; }
       html body.list-view main ng-view section.jobs card .key-container span.item-description {
-        max-width: 660px;
+        max-width: 80%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; }
+      html body.list-view main ng-view section.jobs card hr {
+        display: none; }
       html body.list-view main ng-view section.jobs card a.joblist-apply {
         padding: 20px;
         width: 85px; }
@@ -360,5 +399,30 @@ html {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
     opacity: 1; } }
+@media (max-width: 1100px) {
+  html body hgroup aside {
+    display: none; }
+  html body hgroup main header button[name="filters-menu"] {
+    display: inline-block; }
+  html body hgroup main header button[name="over-arrow-back"] {
+    display: none; } }
+@media (min-width: 1100px) {
+  html body hgroup aside {
+    display: block !important; }
+  html body hgroup main header button[name="filters-menu"] {
+    display: none; }
+  html body hgroup main header button[name="over-arrow-back"] {
+    display: none; } }
+@media (max-width: 1100px) {
+  html body.overview-open hgroup main header button[name="filters-menu"] {
+    display: none; }
+  html body.overview-open hgroup main header button[name="over-arrow-back"] {
+    display: inline-block; } }
+@media (max-width: 900px) {
+  html body.grid-view hgroup main ng-view section.jobs card {
+    width: 48%; } }
+@media (max-width: 700px) {
+  html body.grid-view hgroup main ng-view section.jobs card {
+    width: 100%; } }
 
 /*# sourceMappingURL=main.css.map */

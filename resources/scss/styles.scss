@@ -229,15 +229,33 @@ html {
           font-weight: 300;
           padding: 0 10px;
           box-shadow: 0 1px 3px rgba(0,0,0,.25);
+          button[name="filters-menu"] {
+            display: none;
+            background: transparent;
+            border: none;
+          }
+          button[name="over-arrow-back"] {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.3em;
+          }
           h2 {
             margin: 0;
             color: lighten($header-bg, 55%);
+            display: inline-block;
+          }
+          feed {
+            display: inline-block;
+            cursor: pointer;
+            margin-left: 15px;
           }
         }
         /* View Container */
         ng-view {
           display: block;
           padding: 58px 10px 10px 10px;
+          min-width: 380px;
           section {
             card {
               display: block;
@@ -254,7 +272,7 @@ html {
               flex-wrap: wrap;
               justify-content: flex-start;
               align-content: flex-start;
-              align-items: stretch;
+              align-items: flex-start;
               h5 {
                 color: darken($light-bg, 15%);
                 font-weight: 400;
@@ -265,11 +283,22 @@ html {
               }
               card {
                 .key-container {
+                  h3 {
+                    text-transform: uppercase;
+                  }
                   span  {
                     color: lighten($base-color, 35%);
+                    &.item-cat {
+                      font-weight: 600;
+                    }
+                    &.item-loc,
+                    &.item-type {
+                      color: lighten($base-color, 5%);
+                    }
                     &.item-description {
                       margin-top: 10px;
-                      color: lighten($base-color, 15%);
+                      font-family: 'PT Serif';
+                      color: lighten($base-color, 10%);
                     }
                   }
                 }
@@ -311,13 +340,15 @@ html {
                    }
                  }
                  p {
+                   font-family: 'PT Serif';
                    font-size: 1.2em;
-                   line-height: 1.4em;
-                   color: lighten($base-color, 15%);
+                   line-height: 1.6em;
+                   color: lighten($base-color, 10%);
                  }
                }
                &.apply {
                  width: 48%;
+                 min-width: 300px;
                  display: inline-block;
                  & > * {
                    display: block;
@@ -430,6 +461,28 @@ html {
                   & > * {
                     display: block;
                   }
+                  h3.item-title {
+                    margin-bottom: 5px;
+                  }
+                  span {
+                    &.item-cat {
+                      &:first-of-type {
+                        margin-top: 15px;
+                      }
+                    }
+                    &.item-loc {
+                      margin-top: 15px;
+                    }
+                    &.item-type {
+                      margin: 0 0 15px 0;
+                    }
+                  }
+                }
+                hr {
+                  border: none;
+                  margin: 20px -10px 10px -10px;
+                  height: 1px;
+                  background: #f4f4f4;
                 }
                 a.joblist-apply {
                   width: 100%;
@@ -483,12 +536,15 @@ html {
                   }
                   span {
                     &.item-description {
-                      max-width: 660px;
+                      max-width: 80%;
                       white-space: nowrap;
                       overflow: hidden;
                       text-overflow: ellipsis;
                     }
                   }
+                }
+                hr {
+                  display: none;
                 }
                 a.joblist-apply {
                   padding: 20px;

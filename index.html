@@ -6,8 +6,8 @@
   <title>Bullhorn Career Portal</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <!-- Include 'Roboto' Google Font -->
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  <!-- Include 'Roboto + PT Serif' Google Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic|Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
   <!-- Include Icon Font -->
   <link rel="stylesheet" href="resources/css/icon.css">
   <!-- Include Normalize http://necolas.github.io/normalize.css/ -->
@@ -20,9 +20,11 @@
   <hgroup>
     <aside ng-include="'resources/template/sidebar.html'"></aside>
     <main>
-      <header>
+      <header ng-controller="HeaderCtrl as header">
+        <button name="filters-menu" class="icon-filters-menu"></button>
+        <button name="over-arrow-back" class="icon-arrow-back" ng-click="header.goBack()"></button>
         <!-- <img src="resources/img/logo.png"> -->
-        <h2>Acme Staffing</h2>
+        <h2>Acme Staffing</h2><feed class="icon-feed"></feed>
       </header>
       <ng-view></ng-view>
     </main>
