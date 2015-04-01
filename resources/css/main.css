@@ -247,7 +247,9 @@ html {
                 -webkit-animation-duration: 550ms;
                 /* Chrome, Safari, Opera */
                 animation-name: slide-left;
-                animation-duration: 550ms; }
+                animation-duration: 550ms;
+                align-self: stretch;
+                overflow: scroll; }
                 html body hgroup main ng-view section.job-overview card.description {
                   display: inline-block; }
                   html body hgroup main ng-view section.job-overview card.description h2 {

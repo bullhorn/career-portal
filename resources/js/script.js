@@ -157,8 +157,16 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
 
 }).
 controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route, $scope) {
-    // Form data for the login modal
+  // Form data for the login modal
 	$rootScope.viewState = 'overview-open';
+
+  // NEED TO SET THE HEIGHT OF THE JOB OVERVIEW CONTAINER TO THE WINDOW HEIGHT
+  // $scope.height
+  //
+  // var windowH = $(window).height();
+  // $("body.overview-open hgroup ng-view section.job-overview").css("height", windowH - 60 + "px");
+  //
+
 	this.job_id = $routeParams.id;
   this.job_data = $rootScope.job_data;
 

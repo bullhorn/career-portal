@@ -319,6 +319,9 @@ html {
                animation-name: slide-left;
                animation-duration: 550ms;
 
+               align-self: stretch;
+               overflow: scroll;
+
                &.description {
                  display: inline-block;
                  h2 {
