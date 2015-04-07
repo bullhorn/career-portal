@@ -57,6 +57,17 @@ html {
                   align-items: flex-start;
                   card {
                     width: 100%;
+                    margin: 0;
+                    &.apply {
+                      position: fixed;
+                      margin: -10px;
+                      .related-jobs {
+                        display: none;
+                      }
+                    }
+                    &.description {
+                      margin-top: 240px;
+                    }
                     button{
                       &[name="print"] {
                         display: none;

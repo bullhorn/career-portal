@@ -56,15 +56,19 @@
 		<span class="date-added">Added—{{overview.job_data.dateAdded | date : fullDate}}</span>
 		<h1 class="title">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
 		<h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>
-		<span class="type">{{overview.job_data.type}}</span>
+    <div class="loc-type">
+      <span class="location">{{overview.job_data.location}}</span> | <span class="type">{{overview.job_data.type}}</span>
+    </div>
 		<button name="apply" onClick="alert('Thanks!!!');">Apply</button>
-		<hr>
-		<h3>Related Jobs</h3>
-		<list>
-			<item><a href="#">Career Portal Enthusiast | </a><span class="category">UX/UI</span>
-			<span class="location">Boston, MA</span></item>
-		</list>
-		<hr>
-		<a href="" ng-click="overview.goBack()" class="category-filter">See all *Category* Jobs <i class="icon-arrow-forward"></i> </a>
+		<div class="related-jobs">
+      <hr>
+  		<h3>Related Jobs</h3>
+  		<list>
+  			<item><a href="#">Career Portal Enthusiast | </a><span class="category">UX/UI</span>
+  			<span class="location">Boston, MA</span></item>
+  		</list>
+  		<hr>
+  		<a href="" ng-click="overview.goBack()" class="category-filter">See all *Category* Jobs <i class="icon-arrow-forward"></i> </a>
+		</div>
 	</card>
 </section>
