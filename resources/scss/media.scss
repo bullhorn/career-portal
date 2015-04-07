@@ -48,6 +48,26 @@ html {
             }
           }
         }
+        @media (max-width: 850px) {
+          main {
+            ng-view {
+              section {
+                &.job-overview {
+                  flex-direction: column-reverse;
+                  align-items: flex-start;
+                  card {
+                    width: 100%;
+                    button{
+                      &[name="print"] {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     &.grid-view {

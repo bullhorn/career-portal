@@ -239,7 +239,8 @@ html {
                 color: #7abd00; }
             html body hgroup main ng-view section.job-overview {
               display: flex;
-              align-items: flex-start; }
+              align-items: flex-start;
+              flex-direction: row; }
               html body hgroup main ng-view section.job-overview card {
                 padding: 25px;
                 -webkit-animation-name: slide-left;
@@ -421,6 +422,14 @@ html {
     display: none; }
   html body.overview-open hgroup main header button[name="over-arrow-back"] {
     display: inline-block; } }
+@media (max-width: 850px) {
+  html body.overview-open hgroup main ng-view section.job-overview {
+    flex-direction: column-reverse;
+    align-items: flex-start; }
+    html body.overview-open hgroup main ng-view section.job-overview card {
+      width: 100%; }
+      html body.overview-open hgroup main ng-view section.job-overview card button[name="print"] {
+        display: none; } }
 @media (max-width: 900px) {
   html body.grid-view hgroup main ng-view section.jobs card {
     width: 48%; } }

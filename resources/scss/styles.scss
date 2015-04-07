@@ -311,6 +311,7 @@ html {
            &.job-overview {
              display: flex;
              align-items: flex-start;
+             flex-direction: row;
              card {
                padding: 25px;
 
