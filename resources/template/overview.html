@@ -1,5 +1,5 @@
 <section class="job-overview">
-  <card class="description">
+  <card class="description slide-left">
 		<h2>Job Description</h2>
 		<button name="print" onClick="alert('Print Me | PDF');">
 			<span class="icon-print"></span>
@@ -52,7 +52,7 @@
 			<br>
 		</p>
 	</card>
-	<card class="apply">
+	<card class="apply slide-left">
 		<span class="date-added">Added—{{overview.job_data.dateAdded | date : fullDate}}</span>
 		<h1 class="title">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
 		<h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>

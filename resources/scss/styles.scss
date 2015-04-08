@@ -4,18 +4,19 @@
 
 /* Color Schemes */
 
-$primary:             #39d;  // Links + Header
-$secondary:        #7abd00;  // Apply Buttons
-$light-bg:         #f4f4f4;  // Main Background
-$dark-bg:          #2e2f30;  // Sidebar Background
-$header-bg:       $primary;  // Header Background
-$toggle-active:       #fff;  // Grid-List toggle button 'active' color
+$primary:                  #39d;  // Links + Header
+$secondary:             #7abd00;  // Apply Buttons
+$light-bg:              #f4f4f4;  // Main Background
+$dark-bg:               #2e2f30;  // Sidebar Background
+$header-bg:            $primary;  // Header Background
+$toggle-active:            #fff;  // Grid-List toggle button 'active' color
+$cancel: darken($light-bg, 15%);  // Cancel button color
 
 /* Typography */
 
-$font-size: 13px;
-$font-family: 'Roboto';
-$base-color: #46474A;
+$font-size:           13px;
+$font-family:     'Roboto';
+$base-color:       #46474A;
 
 
 /* ==============
@@ -54,6 +55,91 @@ html {
       &:focus,
       &:active {
         outline: none;
+      }
+    }
+    /* ==== Modal Styles ====*/
+    .modal-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 9999;
+      modal {
+        display: block;
+        margin: 80px auto;
+        width: 100%;
+        max-width: 500px;
+        background: #fff;
+        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+        box-sizing: border-box;
+
+        header {
+          background: $primary;
+          padding: 10px 0px 20px 0px;
+          display: block;
+          box-sizing: border-box;
+          color: #fff;
+          text-align: center;
+          h2 {
+            color: #fff;
+          }
+        }
+        main {
+          padding: 10px 25px 20px 25px;
+          display: block;
+          box-sizing: border-box;
+          form.apply-form {
+            & > * {
+              display: block;
+              box-sizing: border-box;
+              margin: 25px 0;
+              width: 100%;
+            }
+            input{
+              &[type="text"] {
+                border: none;
+                border-bottom: 1px solid darken($light-bg, 15%);
+                padding: 5px;
+                &:focus {
+                  border-bottom: 1px solid $primary;
+                }
+              }
+              &[type="file"] {
+                cursor: pointer;
+                text-align: center;
+                padding: 10px;
+                background: $light-bg;
+                border-radius: 3px;
+              }
+            }
+          }
+        }
+        .btn-container {
+          width: 100%;
+          padding-top: 25px;
+          text-align: center;
+          text-align: right;
+          button {
+            text-transform: uppercase;
+            padding: 10px 15px;
+            border: none;
+            margin: 0 10px;
+            &[name="cancel"] {
+              color: $cancel;
+              background: transparent;
+              font-weight: 600;
+            }
+            &[name="submit"] {
+              color: #fff;
+              background: $primary;
+              border-radius: 2px;
+            }
+          }
+        }
       }
     }
     hgroup {
@@ -568,30 +654,51 @@ html {
     Animations
 ===============*/
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes slide-left {
-    from {
-      -webkit-transform: translateX(100px);
-      transform: translateX(100px);
-      opacity: 0;
-    }
-    to {
-      -webkit-transform: translateX(0px);
-      transform: translateX(0px);
-      opacity: 1;
-    }
+/*==== Pop Open (Used on Modals) ====*/
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} { @content; }
+    @-moz-keyframes #{$name} { @content; }
+    @-ms-keyframes #{$name} { @content; }
+    @-o-keyframes #{$name} { @content; }
+    @keyframes #{$name} { @content; }
 }
 
-/* Standard syntax */
-@keyframes slide-left {
-    from {
-      -webkit-transform: translateX(100px);
-      transform: translateX(100px);
-      opacity: 0;
-    }
-    to {
-      -webkit-transform: translateX(0px);
-      transform: translateX(0px);
-      opacity: 1
-    }
+@include keyframes(pop-open) {
+	0% {
+    -webkit-transform: scale(.2);
+    transform: scale(.2);
+    opacity: 0;
+  }
+	40% {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+	60% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/*==== Slide Left (Used on Overview Cards) ====*/
+
+@include keyframes(slide-left) {
+	from {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0;
+  }
+	to {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.slide-left {
+  @include vendor-prefix(animation, slide-left 550ms)
+}
+.pop-open {
+  @include vendor-prefix(animation, pop-open 200ms ease-in-out);
 }
