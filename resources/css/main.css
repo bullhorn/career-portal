@@ -311,7 +311,7 @@ html {
                   html body hgroup main ng-view section.jobs card .key-container span.item-loc, html body hgroup main ng-view section.jobs card .key-container span.item-type {
                     color: #6b6d71; }
                   html body hgroup main ng-view section.jobs card .key-container span.item-description {
-                    margin-top: 15px;
+                    margin-top: 10px;
                     font-family: 'PT Serif';
                     color: #5f6064;
                     font-weight: 400; }
