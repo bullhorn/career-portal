@@ -21,7 +21,7 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
 
     this.data = [ {
         "id" : 3501,
-        "title" : "Administrative Assistant",
+        "title" : "Account Supervisor - integrated agency - Metrowest",
         "categories" : {
             "total" : 1,
             "data" : [ {
@@ -35,7 +35,7 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4087,
-        "title" : "Senior HR Generalist",
+        "title" : "Display & Social Manager",
         "categories" : {
             "total" : 1,
             "data" : [ {
@@ -49,12 +49,12 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4086,
-        "title" : "Senior HR Generalist",
+        "title" : "Client Success Manager",
         "categories" : {
             "total" : 1,
             "data" : [ {
                 "id" : 99636,
-                "name" : "Human Resources"
+                "name" : "Account Services"
             } ]
         },
         "location" : "Boston, MA",
@@ -63,7 +63,7 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4085,
-        "title" : "Senior HR Generalist",
+        "title" : "Senior Account Manager",
         "categories" : {
             "total" : 1,
             "data" : [ {
@@ -77,7 +77,7 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4066,
-        "title" : "Senior HR Generalist",
+        "title" : "Senior Campaign Manager, SEM",
         "categories" : {
             "total" : 1,
             "data" : [ {
@@ -91,12 +91,12 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4066,
-        "title" : "Senior HR Generalist",
+        "title" : "SEM Campaign Manager",
         "categories" : {
             "total" : 1,
             "data" : [ {
                 "id" : 99636,
-                "name" : "Human Resources"
+                "name" : "Account Services"
             } ]
         },
         "location" : "Boston, MA",
@@ -105,12 +105,12 @@ controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
         "_score" : 1.0
     }, {
         "id" : 4066,
-        "title" : "Senior HR Generalist",
+        "title" : "Implementation Manager",
         "categories" : {
             "total" : 1,
             "data" : [ {
                 "id" : 99636,
-                "name" : "Human Resources"
+                "name" : "Media"
             } ]
         },
         "location" : "Boston, MA",

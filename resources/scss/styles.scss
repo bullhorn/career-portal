@@ -315,6 +315,7 @@ html {
           font-weight: 300;
           padding: 0 10px;
           box-shadow: 0 1px 3px rgba(0,0,0,.25);
+          z-index: 999;
           button[name="filters-menu"] {
             display: none;
             background: transparent;
@@ -368,23 +369,34 @@ html {
                 margin: 10px 0;
               }
               card {
+                cursor: pointer;
+                &:hover {
+                  background: lighten($light-bg,2%);
+                }
                 .key-container {
                   h3 {
                     text-transform: uppercase;
+                    max-width: 300px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: $primary;
                   }
                   span  {
                     color: lighten($base-color, 35%);
+                    font-size: 1.1em;
+                    font-weight: 600;
                     &.item-cat {
-                      font-weight: 600;
                     }
                     &.item-loc,
                     &.item-type {
-                      color: lighten($base-color, 5%);
+                      color: lighten($base-color, 15%);
                     }
                     &.item-description {
-                      margin-top: 10px;
+                      margin-top: 15px;
                       font-family: 'PT Serif';
                       color: lighten($base-color, 10%);
+                      font-weight: 400;
                     }
                   }
                 }
@@ -543,7 +555,6 @@ html {
             &.jobs {
               card {
                 width: 32%;
-                max-height: 360px;
                 padding-bottom: 45px;
                 & > * {
                   display: block;
@@ -574,6 +585,9 @@ html {
                   margin: 20px -10px 10px -10px;
                   height: 1px;
                   background: #f4f4f4;
+                }
+                i {
+                  display: none;
                 }
                 a.joblist-apply {
                   width: 100%;
@@ -627,7 +641,7 @@ html {
                   }
                   span {
                     &.item-description {
-                      max-width: 80%;
+                      max-width: 90%;
                       white-space: nowrap;
                       overflow: hidden;
                       text-overflow: ellipsis;
@@ -640,6 +654,19 @@ html {
                 a.joblist-apply {
                   padding: 20px;
                   width: 85px;
+                }
+                i {
+                  cursor: pointer;
+                  color: $primary;
+                  font-size: 1.3em;
+                  padding: 10px;
+                  box-sizing: border-box;
+                  line-height: 14px;
+                  margin-top: 7px;
+                  opacity: .7;
+                  &:hover {
+                    opacity: 1;
+                  }
                 }
               }
             }
