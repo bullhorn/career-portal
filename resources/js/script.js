@@ -167,7 +167,25 @@ controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route
 		$location.path('/jobs');
 	}
 
+  this.applyModal = function() {
+    $rootScope.modalState = 'open';
+  }
+
   $scope.job_id = $routeParams.id;
+
+  this.open = true;
+
+  this.openShare = function() {
+
+    this.open = this.open === false ? true: false;
+
+    if(!this.open) {
+      this.share = 'share-open';
+    } else {
+      this.share = '';
+    }
+
+  }
 
 }).
 controller('SideBarCtrl', function($rootScope, $location) {
@@ -189,6 +207,11 @@ controller('HeaderCtrl', function($rootScope, $location, $scope) {
 		$location.path('/jobs');
 	}
 }).
+controller('ModalCtrl', function($rootScope, $location, $scope){
+  this.closeModal = function(){
+    $rootScope.modalState = 'closed';
+  }
+}).
 directive('elHeight',function($timeout, $rootScope) {
 
     return {
@@ -196,7 +219,6 @@ directive('elHeight',function($timeout, $rootScope) {
       link: function(scope, element) {
         $timeout(function(){
           var elHeight = element[0].offsetHeight;
-          console.log(element[0].offsetHeight);
           if ($(window).width() <= 850) {
             $rootScope.topPad = {
               "margin-top": elHeight+"px"

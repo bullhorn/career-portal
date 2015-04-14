@@ -419,10 +419,6 @@ html {
                animation-name: slide-left;
                animation-duration: 550ms;
 
-              //  -webkit-transition: all 60ms ease;
-              //  transition: all 60ms ease;
-
-
                align-self: stretch;
                overflow: scroll;
 
@@ -433,17 +429,50 @@ html {
                    font-weight: 500;
                    color: $base-color;
                  }
-                 button[name="share"],
-                 button[name="print"] {
+                 div.job-actions {
                    float: right;
                    display: inline-block;
-                   border: none;
-                   background: transparent;
-                   margin-left: 15px;
-                   font-size: 1.3em;
-                   color: lighten($base-color, 15%);
-                   span {
-                     margin-right: 5px;
+                   overflow: auto;
+                   div.share-outlets {
+                     display: inline-block;
+                     float: right;
+                     box-sizing: border-box;
+                     border-right: 1px solid #DBDBDB;
+                     padding-right: 20px;
+                     @for $i from 1 through 10 {
+                        a:nth-child(#{$i}) {
+                          -webkit-transition-delay:(#{$i*100ms});
+                          transition-delay:(#{$i*100ms});
+                        }
+                      }
+                     a {
+                       padding: 5px 10px;
+                       box-sizing: border-box;
+                       display: inline-block;
+                       opacity: 0;
+                       -webkit-transition: opacity 100ms ease;
+                       transition: opacity 100ms ease;
+                     }
+                   }
+                   &.share-open {
+                     div.share-outlets {
+                       a {
+                         opacity: 1;
+                       }
+                     }
+                   }
+                   button[name="share"],
+                   button[name="print"] {
+                     float: right;
+                     display: inline-block;
+                     border: none;
+                     background: transparent;
+                     margin-left: 15px;
+                     font-size: 1.3em;
+                     color: lighten($base-color, 15%);
+                     span {
+                       margin-right: 5px;
+                     }
                    }
                  }
                  p {

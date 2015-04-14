@@ -1,14 +1,22 @@
 <section class="job-overview">
   <card class="description slide-left" ng-style="topPad">
-		<h2>Job Description</h2>
-		<button name="print" onClick="alert('Print Me | PDF');">
-			<span class="icon-print"></span>
-			Print
-		</button>
-		<button name="share" onClick="alert('Share Me | Facebook , Twitter, LinkedIn, Email');">
-			<span class="icon-share"></span>
-			Share
-		</button>
+    <div class="job-actions" ng-class="overview.share">
+      <button name="print" onClick="alert('Print Me | PDF');">
+  			<span class="icon-print"></span>
+  			Print
+  		</button>
+  		<button name="share" ng-click="overview.openShare()">
+  			<span class="icon-share"></span>
+  			Share
+  		</button>
+      <div class="share-outlets">
+        <a href="" class="icon-facebook"></a>
+        <a href="" class="icon-twitter"></a>
+        <a href="" class="icon-linkedin"></a>
+        <a href="" class="icon-email"></a>
+      </div>
+    </div>
+    <h2>Job Description</h2>
 		<p>
 			About Us
 			<br>We’ve been in business for over 10 years, with hundreds of satisfied clients. Millions of $’s in revenue. Profitable.
@@ -59,7 +67,7 @@
     <div class="loc-type">
       <span class="location">{{overview.job_data.location}}</span> | <span class="type">{{overview.job_data.type}}</span>
     </div>
-		<button name="apply" onClick="alert('Thanks!!!');">Apply</button>
+		<button name="apply" ng-click="overview.applyModal()">Apply</button>
 		<div class="related-jobs">
       <hr>
   		<h3>Related Jobs</h3>
