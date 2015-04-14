@@ -160,13 +160,6 @@ controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route
   // Form data for the login modal
 	$rootScope.viewState = 'overview-open';
 
-  // NEED TO SET THE HEIGHT OF THE JOB OVERVIEW CONTAINER TO THE WINDOW HEIGHT
-  // $scope.height
-  //
-  // var windowH = $(window).height();
-  // $("body.overview-open hgroup ng-view section.job-overview").css("height", windowH - 60 + "px");
-  //
-
 	this.job_id = $routeParams.id;
   this.job_data = $rootScope.job_data;
 
@@ -195,6 +188,25 @@ controller('HeaderCtrl', function($rootScope, $location, $scope) {
   this.goBack = function(){
 		$location.path('/jobs');
 	}
+}).
+directive('elHeight',function($timeout, $rootScope) {
+
+    return {
+      restrict: 'A',
+      link: function(scope, element) {
+        $timeout(function(){
+          var elHeight = element[0].offsetHeight;
+          console.log(element[0].offsetHeight);
+          if ($(window).width() <= 900) {
+            $rootScope.topPad = {
+              "margin-top": elHeight+"px"
+            }
+          }
+        }, 120);
+
+      }
+    }
+
 });
 
 $("button[name='filters-menu']").on("click",function(){

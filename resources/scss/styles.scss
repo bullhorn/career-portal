@@ -419,6 +419,10 @@ html {
                animation-name: slide-left;
                animation-duration: 550ms;
 
+              //  -webkit-transition: all 60ms ease;
+              //  transition: all 60ms ease;
+
+
                align-self: stretch;
                overflow: scroll;
 

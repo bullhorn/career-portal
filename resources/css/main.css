@@ -629,7 +629,7 @@ html {
         html body.overview-open hgroup main ng-view section.job-overview card.apply .related-jobs {
           display: none; }
       html body.overview-open hgroup main ng-view section.job-overview card.description {
-        margin-top: 240px; }
+        margin-top: 75%; }
       html body.overview-open hgroup main ng-view section.job-overview card button[name="print"] {
         display: none; } }
 @media (max-width: 900px) {
