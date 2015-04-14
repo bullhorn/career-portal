@@ -169,15 +169,23 @@ html {
             height: 100%;
             width: 100%;
             position: relative;
-            &:before {
-              color: #fff;
-              z-index: 999;
+            button[type="back-arrow"] {
+              height: 100%;
+              width: 46px;
               position: absolute;
-              top: 50%;
-              right: 18px;
+              background: transparent;
+              color: #fff;
+              border: none;
+              right: 46px;
               -webkit-transform: translateX(300px);
               transform: translateX(300px);
-              transition: transform 550ms ease-in-out;
+              transition: all 250ms ease-in-out;
+              &:before {
+                color: #fff;
+                position: absolute;
+                top: 50%;
+                right: 18px;
+              }
             }
             & > * {
               transition: transform 200ms ease-in-out;
@@ -307,6 +315,7 @@ html {
         align-content: flex-start;
         align-items: stretch;
         overflow: scroll;
+        z-index: 9999;
         header {
           position: fixed;
           width: 100%;
@@ -437,12 +446,12 @@ html {
                      display: inline-block;
                      float: right;
                      box-sizing: border-box;
-                     border-right: 1px solid #DBDBDB;
+                     border-right: 1px solid transparent;
                      padding-right: 20px;
-                     @for $i from 1 through 10 {
+                     @for $i from 1 through 4 {
                         a:nth-child(#{$i}) {
-                          -webkit-transition-delay:(#{$i*100ms});
-                          transition-delay:(#{$i*100ms});
+                          -webkit-transition-delay:((#{400-($i*100ms)}));
+                          transition-delay:((#{400-($i*100ms)}));
                         }
                       }
                      a {
@@ -450,14 +459,22 @@ html {
                        box-sizing: border-box;
                        display: inline-block;
                        opacity: 0;
-                       -webkit-transition: opacity 100ms ease;
-                       transition: opacity 100ms ease;
+                       -webkit-transition: all 100ms ease;
+                       transition: all 100ms ease;
+                       -webkit-transform: translateX(15px);
+                       transform: translateX(15px);
                      }
                    }
                    &.share-open {
+                     button[name="share"] {
+                       opacity: .5;
+                     }
                      div.share-outlets {
+                       border-right: 1px solid #DBDBDB;
                        a {
                          opacity: 1;
+                         -webkit-transform: translateX(0);
+                         transform: translateX(0);
                        }
                      }
                    }
@@ -550,6 +567,9 @@ html {
               header {
                 background: $dark-bg;
               }
+              button[type="back-arrow"] {
+                width: 60px;
+              }
             }
           }
         }
@@ -557,10 +577,11 @@ html {
           &.filters-container {
             & > * {
               -webkit-transform: translateX(-400px);
+              transform: translateX(-400px);
             }
-            &:before {
-              -webkit-transform: translateX(0px);
-              transform: translateX(0px);
+            button[type="back-arrow"] {
+              -webkit-transform: translateX(0px) !important;
+              transform: translateX(0px) !important;
             }
           }
         }

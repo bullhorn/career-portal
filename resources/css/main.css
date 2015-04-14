@@ -127,15 +127,22 @@ html {
           height: 100%;
           width: 100%;
           position: relative; }
-          html body hgroup aside section.filters-container:before {
-            color: #fff;
-            z-index: 999;
+          html body hgroup aside section.filters-container button[type="back-arrow"] {
+            height: 100%;
+            width: 46px;
             position: absolute;
-            top: 50%;
-            right: 18px;
+            background: transparent;
+            color: #fff;
+            border: none;
+            right: 46px;
             -webkit-transform: translateX(300px);
             transform: translateX(300px);
-            transition: transform 550ms ease-in-out; }
+            transition: all 250ms ease-in-out; }
+            html body hgroup aside section.filters-container button[type="back-arrow"]:before {
+              color: #fff;
+              position: absolute;
+              top: 50%;
+              right: 18px; }
           html body hgroup aside section.filters-container > * {
             transition: transform 200ms ease-in-out; }
           html body hgroup aside section.filters-container header {
@@ -238,6 +245,7 @@ html {
         align-content: flex-start;
         align-items: stretch;
         overflow: scroll;
+        z-index: 9999;
         /* View Container */ }
         html body hgroup main header {
           position: fixed;
@@ -346,47 +354,37 @@ html {
                       display: inline-block;
                       float: right;
                       box-sizing: border-box;
-                      border-right: 1px solid #DBDBDB;
+                      border-right: 1px solid transparent;
                       padding-right: 20px; }
                       html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(1) {
-                        -webkit-transition-delay: 100ms;
-                        transition-delay: 100ms; }
+                        -webkit-transition-delay: 300ms;
+                        transition-delay: 300ms; }
                       html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(2) {
                         -webkit-transition-delay: 200ms;
                         transition-delay: 200ms; }
                       html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(3) {
-                        -webkit-transition-delay: 300ms;
-                        transition-delay: 300ms; }
+                        -webkit-transition-delay: 100ms;
+                        transition-delay: 100ms; }
                       html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(4) {
-                        -webkit-transition-delay: 400ms;
-                        transition-delay: 400ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(5) {
-                        -webkit-transition-delay: 500ms;
-                        transition-delay: 500ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(6) {
-                        -webkit-transition-delay: 600ms;
-                        transition-delay: 600ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(7) {
-                        -webkit-transition-delay: 700ms;
-                        transition-delay: 700ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(8) {
-                        -webkit-transition-delay: 800ms;
-                        transition-delay: 800ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(9) {
-                        -webkit-transition-delay: 900ms;
-                        transition-delay: 900ms; }
-                      html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a:nth-child(10) {
-                        -webkit-transition-delay: 1000ms;
-                        transition-delay: 1000ms; }
+                        -webkit-transition-delay: 0ms;
+                        transition-delay: 0ms; }
                       html body hgroup main ng-view section.job-overview card.description div.job-actions div.share-outlets a {
                         padding: 5px 10px;
                         box-sizing: border-box;
                         display: inline-block;
                         opacity: 0;
-                        -webkit-transition: opacity 100ms ease;
-                        transition: opacity 100ms ease; }
-                    html body hgroup main ng-view section.job-overview card.description div.job-actions.share-open div.share-outlets a {
-                      opacity: 1; }
+                        -webkit-transition: all 100ms ease;
+                        transition: all 100ms ease;
+                        -webkit-transform: translateX(15px);
+                        transform: translateX(15px); }
+                    html body hgroup main ng-view section.job-overview card.description div.job-actions.share-open button[name="share"] {
+                      opacity: .5; }
+                    html body hgroup main ng-view section.job-overview card.description div.job-actions.share-open div.share-outlets {
+                      border-right: 1px solid #DBDBDB; }
+                      html body hgroup main ng-view section.job-overview card.description div.job-actions.share-open div.share-outlets a {
+                        opacity: 1;
+                        -webkit-transform: translateX(0);
+                        transform: translateX(0); }
                     html body hgroup main ng-view section.job-overview card.description div.job-actions button[name="share"],
                     html body hgroup main ng-view section.job-overview card.description div.job-actions button[name="print"] {
                       float: right;
@@ -446,11 +444,14 @@ html {
         width: 76px; }
         html body.overview-open aside:hover section.filters-container header {
           background: #2e2f30; }
+        html body.overview-open aside:hover section.filters-container button[type="back-arrow"] {
+          width: 60px; }
       html body.overview-open aside section.filters-container > * {
-        -webkit-transform: translateX(-400px); }
-      html body.overview-open aside section.filters-container:before {
-        -webkit-transform: translateX(0px);
-        transform: translateX(0px); }
+        -webkit-transform: translateX(-400px);
+        transform: translateX(-400px); }
+      html body.overview-open aside section.filters-container button[type="back-arrow"] {
+        -webkit-transform: translateX(0px) !important;
+        transform: translateX(0px) !important; }
     html body.grid-view aside section.filters-container header button {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
