@@ -197,7 +197,7 @@ directive('elHeight',function($timeout, $rootScope) {
         $timeout(function(){
           var elHeight = element[0].offsetHeight;
           console.log(element[0].offsetHeight);
-          if ($(window).width() <= 900) {
+          if ($(window).width() <= 850) {
             $rootScope.topPad = {
               "margin-top": elHeight+"px"
             }
