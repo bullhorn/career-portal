@@ -245,7 +245,7 @@ html {
         align-content: flex-start;
         align-items: stretch;
         overflow: scroll;
-        z-index: 9999;
+        z-index: 99;
         /* View Container */ }
         html body hgroup main header {
           position: fixed;
@@ -693,5 +693,20 @@ html {
     display: block; }
     html body.list-view hgroup main ng-view section.jobs card span.item-type, html body.list-view hgroup main ng-view section.jobs card span.item-date, html body.list-view hgroup main ng-view section.jobs card span.item-description {
       display: none; } }
+
+/* ==============
+   Print Styles
+===============*/
+@media print {
+  html body.overview-open hgroup aside {
+    display: none; }
+  html body.overview-open hgroup main header button[name="filters-menu"] {
+    display: none; }
+  html body.overview-open hgroup main header button[name="over-arrow-back"] {
+    display: none; }
+  html body.overview-open hgroup main ng-view section.job-overview card {
+    display: block;
+    margin: 10px 0;
+    padding: 5px; } }
 
 /*# sourceMappingURL=main.css.map */

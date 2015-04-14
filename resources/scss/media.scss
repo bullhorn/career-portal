@@ -149,3 +149,44 @@ html {
     }
   }
 }
+
+
+/* ==============
+   Print Styles
+===============*/
+
+@media print {
+  html {
+    body {
+      &.overview-open {
+        hgroup {
+          aside {
+            display: none;
+          }
+          main {
+            header {
+              button[name="filters-menu"] {
+                display: none;
+              }
+              button[name="over-arrow-back"] {
+                display: none;
+              }
+            }
+            ng-view {
+              section {
+                &.job-overview {
+                  card {
+                    display: block;
+                    margin: 10px 0;
+                    padding: 5px;
+
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
