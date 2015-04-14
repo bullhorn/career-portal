@@ -343,6 +343,7 @@ html {
           display: block;
           padding: 58px 10px 10px 10px;
           min-width: 380px;
+          box-sizing: border-box;
           section {
             card {
               display: block;

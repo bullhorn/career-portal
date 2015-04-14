@@ -112,7 +112,40 @@ html {
       }
     }
     &.list-view {
-
+      hgroup {
+        @media (max-width: 900px) {
+          main {
+            ng-view {
+              section {
+                &.jobs {
+                  card {
+                    span {
+                      display: block;
+                      &.item-type,
+                      &.item-date,
+                      &.item-description {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        @media (max-width: 700px) {
+          main {
+            ng-view {
+              section {
+                &.jobs {
+                  card {
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
