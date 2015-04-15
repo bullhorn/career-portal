@@ -698,15 +698,35 @@ html {
    Print Styles
 ===============*/
 @media print {
-  html body.overview-open hgroup aside {
-    display: none; }
-  html body.overview-open hgroup main header button[name="filters-menu"] {
-    display: none; }
-  html body.overview-open hgroup main header button[name="over-arrow-back"] {
-    display: none; }
-  html body.overview-open hgroup main ng-view section.job-overview card {
-    display: block;
-    margin: 10px 0;
-    padding: 5px; } }
+  html {
+    overflow: visible; }
+    html body {
+      overflow: visible; }
+      html body.overview-open {
+        overflow: visible; }
+        html body.overview-open hgroup aside {
+          display: none; }
+        html body.overview-open hgroup main {
+          overflow: visible; }
+          html body.overview-open hgroup main header {
+            width: 100%; }
+            html body.overview-open hgroup main header button[name="filters-menu"] {
+              display: none; }
+            html body.overview-open hgroup main header button[name="over-arrow-back"] {
+              display: none; }
+          html body.overview-open hgroup main ng-view section.job-overview card {
+            display: block;
+            margin-top: 10px !important;
+            margin: 10px 0;
+            padding: 5px;
+            position: relative; }
+            html body.overview-open hgroup main ng-view section.job-overview card .job-actions {
+              display: none !important; }
+            html body.overview-open hgroup main ng-view section.job-overview card.apply {
+              position: relative !important; }
+              html body.overview-open hgroup main ng-view section.job-overview card.apply div.related-jobs {
+                display: none; }
+              html body.overview-open hgroup main ng-view section.job-overview card.apply button[name="apply"] {
+                display: none; } }
 
 /*# sourceMappingURL=main.css.map */

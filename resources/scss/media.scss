@@ -157,14 +157,19 @@ html {
 
 @media print {
   html {
+    overflow: visible;
     body {
+      overflow: visible;
       &.overview-open {
+        overflow: visible;
         hgroup {
           aside {
             display: none;
           }
           main {
+            overflow: visible;
             header {
+              width: 100%;
               button[name="filters-menu"] {
                 display: none;
               }
@@ -177,9 +182,22 @@ html {
                 &.job-overview {
                   card {
                     display: block;
+                    margin-top: 10px !important;
                     margin: 10px 0;
                     padding: 5px;
-
+                    position: relative;
+                    .job-actions {
+                      display: none !important;
+                    }
+                    &.apply {
+                     position: relative !important;
+                     div.related-jobs {
+                       display: none;
+                     }
+                     button[name="apply"] {
+                       display: none;
+                     }
+                    }
                   }
                 }
               }
