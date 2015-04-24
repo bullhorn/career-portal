@@ -157,6 +157,10 @@ html {
               section {
                 &.jobs {
                   card {
+                    .item-title {
+                      width: 100%;
+                      max-width: 80%;
+                    }
                   }
                 }
               }

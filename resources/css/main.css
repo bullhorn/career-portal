@@ -20,6 +20,7 @@ html {
     height: 100%;
     background: #f4f4f4;
     /* ==== Modal Styles ====*/
+    /* ==== END Modal Styles ====*/
     /* ==== Job Overview Open Styles =====*/
     /* ==== Grid / List Swap Styles =====*/
     /* Grid View */
@@ -501,9 +502,6 @@ html {
       html body.list-view main ng-view section.jobs card .key-container > * {
         display: inline-block;
         margin: 0 15px; }
-      html body.list-view main ng-view section.jobs card .key-container .item-title {
-        width: 100%;
-        max-width: 80%; }
       html body.list-view main ng-view section.jobs card .key-container span.item-description {
         max-width: 90%;
         white-space: nowrap;
@@ -530,6 +528,7 @@ html {
     Animations
 ===============*/
 /*==== Pop Open (Used on Modals) ====*/
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
 @-webkit-keyframes pop-open {
   0% {
     -webkit-transform: scale(0.2);
@@ -600,6 +599,77 @@ html {
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
+@-webkit-keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0; }
+
+  40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1; } }
+@-moz-keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0; }
+
+  40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1; } }
+@-ms-keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0; }
+
+  40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1; } }
+@-o-keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0; }
+
+  40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1; } }
+@keyframes slide-up {
+  0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0; }
+
+  40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1; } }
 /*==== Slide Left (Used on Overview Cards) ====*/
 @-webkit-keyframes slide-left {
   from {
@@ -665,6 +735,13 @@ html {
   -o-animation: pop-open 200ms ease-in-out;
   animation: pop-open 200ms ease-in-out; }
 
+.slide-up {
+  -webkit-animation: slide-up 400ms ease-in-out;
+  -ms-animation: slide-up 400ms ease-in-out;
+  -moz-animation: slide-up 400ms ease-in-out;
+  -o-animation: slide-up 400ms ease-in-out;
+  animation: slide-up 400ms ease-in-out; }
+
 @media (max-width: 1100px) {
   html body hgroup aside {
     display: none; }
@@ -718,6 +795,10 @@ html {
     display: block; }
     html body.list-view hgroup main ng-view section.jobs card span.item-type, html body.list-view hgroup main ng-view section.jobs card span.item-date, html body.list-view hgroup main ng-view section.jobs card span.item-description {
       display: none; } }
+@media (max-width: 700px) {
+  html body.list-view hgroup main ng-view section.jobs card .item-title {
+    width: 100%;
+    max-width: 80%; } }
 
 /* ==============
    Print Styles

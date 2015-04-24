@@ -142,6 +142,7 @@ html {
         }
       }
     }
+    /* ==== END Modal Styles ====*/
     hgroup {
       display: flex;
       flex-direction: row;
@@ -694,10 +695,6 @@ html {
                     display: inline-block;
                     margin: 0 15px;
                   }
-                  .item-title {
-                    width: 100%;
-                    max-width: 80%;
-                  }
                   span {
                     &.item-description {
                       max-width: 90%;
@@ -750,6 +747,8 @@ html {
     @keyframes #{$name} { @content; }
 }
 
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
+
 @include keyframes(pop-open) {
 	0% {
     -webkit-transform: scale(.2);
@@ -766,6 +765,27 @@ html {
     transform: scale(1);
   }
 }
+
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
+
+@include keyframes(slide-up) {
+	0% {
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
+    opacity: 0;
+  }
+	40% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+	60% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+
 
 /*==== Slide Left (Used on Overview Cards) ====*/
 
@@ -787,4 +807,7 @@ html {
 }
 .pop-open {
   @include vendor-prefix(animation, pop-open 200ms ease-in-out);
+}
+.slide-up {
+  @include vendor-prefix(animation, slide-up 400ms ease-in-out);
 }
