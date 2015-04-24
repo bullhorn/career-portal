@@ -35,8 +35,10 @@ html {
       }
     }
     &.overview-open {
-      hgroup {
-        @media (max-width: 1100px) {
+      @media (max-width: 1100px) {
+        div.modal-container {
+        }
+        hgroup {
           main {
             header {
               button[name="filters-menu"] {
@@ -48,7 +50,15 @@ html {
             }
           }
         }
-        @media (max-width: 850px) {
+      }
+      @media (max-width: 850px) {
+        div.modal-container {
+          modal {
+            margin: auto;
+            height: 100%;
+          }
+        }
+        hgroup {
           main {
             ng-view {
               section {
@@ -67,6 +77,14 @@ html {
                     }
                     &.description {
                       margin-top: 75%;
+                      .job-actions {
+                        button[name="print"] {
+                          display: none;
+                        }
+                        .share-outlets {
+                          padding-right: 10px;
+                        }
+                      }
                     }
                     button{
                       &[name="print"] {

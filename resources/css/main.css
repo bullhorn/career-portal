@@ -14,7 +14,7 @@ html {
   font-size: 13px;
   width: 100%;
   height: 100%;
-  color: #46474A; }
+  color: #46474a; }
   html body {
     width: 100%;
     height: 100%;
@@ -30,7 +30,7 @@ html {
     html body item {
       display: list-item; }
     html body a {
-      color: #39d;
+      color: #3399dd;
       text-decoration: none; }
     html body input:focus, html body input:active {
       outline: none; }
@@ -55,7 +55,7 @@ html {
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
         box-sizing: border-box; }
         html body .modal-container modal header {
-          background: #39d;
+          background: #3399dd;
           padding: 10px 0px 20px 0px;
           display: block;
           box-sizing: border-box;
@@ -77,7 +77,7 @@ html {
             border-bottom: 1px solid #cecece;
             padding: 5px; }
             html body .modal-container modal main form.apply-form input[type="text"]:focus {
-              border-bottom: 1px solid #39d; }
+              border-bottom: 1px solid #3399dd; }
           html body .modal-container modal main form.apply-form input[type="file"] {
             cursor: pointer;
             text-align: center;
@@ -100,7 +100,7 @@ html {
               font-weight: 600; }
             html body .modal-container modal .btn-container button[name="submit"] {
               color: #fff;
-              background: #39d;
+              background: #3399dd;
               border-radius: 2px; }
     html body hgroup {
       display: flex;
@@ -203,10 +203,10 @@ html {
                 -webkit-transition: all 130ms ease-in-out;
                 transition: all 130ms ease-in-out; }
                 html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked {
-                  background: #39d;
+                  background: #3399dd;
                   -webkit-transform: scale(0.75); }
                   html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked + label {
-                    color: #39d; }
+                    color: #3399dd; }
               html body hgroup aside section.filters-container filters list item label {
                 width: 80%;
                 display: inline-block;
@@ -250,7 +250,7 @@ html {
         html body hgroup main header {
           position: fixed;
           width: 100%;
-          background: #39d;
+          background: #3399dd;
           color: #fff;
           font-weight: 300;
           padding: 0 10px;
@@ -276,7 +276,7 @@ html {
         html body hgroup main ng-view {
           display: block;
           padding: 58px 10px 10px 10px;
-          min-width: 380px;
+          min-width: 320px;
           box-sizing: border-box; }
           html body hgroup main ng-view section {
             /* Job Overview Styles */ }
@@ -312,7 +312,7 @@ html {
                   white-space: nowrap;
                   overflow: hidden;
                   text-overflow: ellipsis;
-                  color: #39d; }
+                  color: #3399dd; }
                 html body hgroup main ng-view section.jobs card .key-container span {
                   color: #9fa0a4;
                   font-size: 1.1em;
@@ -345,7 +345,7 @@ html {
                   html body hgroup main ng-view section.job-overview card.description h2 {
                     display: inline-block;
                     font-weight: 500;
-                    color: #46474A; }
+                    color: #46474a; }
                   html body hgroup main ng-view section.job-overview card.description div.job-actions {
                     float: right;
                     display: inline-block;
@@ -411,7 +411,7 @@ html {
                   html body hgroup main ng-view section.job-overview card.apply span.date-added {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply h1.title {
-                    color: #46474A; }
+                    color: #46474a; }
                   html body hgroup main ng-view section.job-overview card.apply h3.category {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply div.loc-type {
@@ -455,7 +455,7 @@ html {
     html body.grid-view aside section.filters-container header button {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
-        color: #fff; }
+        color: white; }
     html body.grid-view main ng-view section.jobs card {
       width: 32%;
       padding-bottom: 45px; }
@@ -486,7 +486,7 @@ html {
     html body.list-view aside section.filters-container header button {
       /* Change List Button Color */ }
       html body.list-view aside section.filters-container header button.icon-view-list {
-        color: #fff; }
+        color: white; }
     html body.list-view main ng-view section.jobs card {
       overflow: auto;
       width: 100%;
@@ -501,6 +501,9 @@ html {
       html body.list-view main ng-view section.jobs card .key-container > * {
         display: inline-block;
         margin: 0 15px; }
+      html body.list-view main ng-view section.jobs card .key-container .item-title {
+        width: 100%;
+        max-width: 80%; }
       html body.list-view main ng-view section.jobs card .key-container span.item-description {
         max-width: 90%;
         white-space: nowrap;
@@ -513,7 +516,7 @@ html {
         width: 85px; }
       html body.list-view main ng-view section.jobs card i {
         cursor: pointer;
-        color: #39d;
+        color: #3399dd;
         font-size: 1.3em;
         padding: 10px;
         box-sizing: border-box;
@@ -532,10 +535,12 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
+
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
+
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -544,10 +549,12 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
+
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
+
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -556,10 +563,12 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
+
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
+
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -568,10 +577,12 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
+
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
+
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -580,10 +591,12 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
+
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
+
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -593,6 +606,7 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
+
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -602,6 +616,7 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
+
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -611,6 +626,7 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
+
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -620,6 +636,7 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
+
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -629,6 +646,7 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
+
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -667,6 +685,9 @@ html {
   html body.overview-open hgroup main header button[name="over-arrow-back"] {
     display: inline-block; } }
 @media (max-width: 850px) {
+  html body.overview-open div.modal-container modal {
+    margin: auto;
+    height: 100%; }
   html body.overview-open hgroup main ng-view section.job-overview {
     flex-direction: column-reverse;
     align-items: flex-start; }
@@ -680,6 +701,10 @@ html {
           display: none; }
       html body.overview-open hgroup main ng-view section.job-overview card.description {
         margin-top: 75%; }
+        html body.overview-open hgroup main ng-view section.job-overview card.description .job-actions button[name="print"] {
+          display: none; }
+        html body.overview-open hgroup main ng-view section.job-overview card.description .job-actions .share-outlets {
+          padding-right: 10px; }
       html body.overview-open hgroup main ng-view section.job-overview card button[name="print"] {
         display: none; } }
 @media (max-width: 900px) {
@@ -728,5 +753,3 @@ html {
                 display: none; }
               html body.overview-open hgroup main ng-view section.job-overview card.apply button[name="apply"] {
                 display: none; } }
-
-/*# sourceMappingURL=main.css.map */
