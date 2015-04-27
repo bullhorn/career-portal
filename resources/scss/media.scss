@@ -56,6 +56,9 @@ html {
           modal {
             margin: auto;
             height: 100%;
+            div.mobile-only {
+              display: block;
+            }
           }
         }
         hgroup {

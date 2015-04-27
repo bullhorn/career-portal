@@ -92,6 +92,25 @@ html {
           padding: 10px 25px 20px 25px;
           display: block;
           box-sizing: border-box;
+          div.mobile-only {
+            display: none;
+            width: 100%;
+            .divider {
+              width: 100%;
+              text-align: center;
+              padding: 40px 0 20px 0;
+              & > * {
+                display: inline-block;
+                width: 30%;
+                text-align: center;
+                margin: 0 auto;
+                color: darken($light-bg, 25%);
+              }
+              hr {
+                border: 1px solid darken($light-bg, 5%);
+              }
+            }
+          }
           form.apply-form {
             & > * {
               display: block;
@@ -99,22 +118,24 @@ html {
               margin: 25px 0;
               width: 100%;
             }
-            input{
-              &[type="text"] {
-                border: none;
-                border-bottom: 1px solid darken($light-bg, 15%);
-                padding: 5px;
-                &:focus {
-                  border-bottom: 1px solid $primary;
-                }
+          }
+          input{
+            box-sizing: border-box;
+            width: 100%;
+            &[type="text"] {
+              border: none;
+              border-bottom: 1px solid darken($light-bg, 15%);
+              padding: 5px;
+              &:focus {
+                border-bottom: 1px solid $primary;
               }
-              &[type="file"] {
-                cursor: pointer;
-                text-align: center;
-                padding: 10px;
-                background: $light-bg;
-                border-radius: 3px;
-              }
+            }
+            &[type="file"] {
+              cursor: pointer;
+              text-align: center;
+              padding: 10px;
+              background: $light-bg;
+              border-radius: 3px;
             }
           }
         }

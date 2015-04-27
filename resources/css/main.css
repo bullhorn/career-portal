@@ -14,7 +14,7 @@ html {
   font-size: 13px;
   width: 100%;
   height: 100%;
-  color: #46474a; }
+  color: #46474A; }
   html body {
     width: 100%;
     height: 100%;
@@ -31,7 +31,7 @@ html {
     html body item {
       display: list-item; }
     html body a {
-      color: #3399dd;
+      color: #39d;
       text-decoration: none; }
     html body input:focus, html body input:active {
       outline: none; }
@@ -56,7 +56,7 @@ html {
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
         box-sizing: border-box; }
         html body .modal-container modal header {
-          background: #3399dd;
+          background: #39d;
           padding: 10px 0px 20px 0px;
           display: block;
           box-sizing: border-box;
@@ -68,23 +68,41 @@ html {
           padding: 10px 25px 20px 25px;
           display: block;
           box-sizing: border-box; }
+          html body .modal-container modal main div.mobile-only {
+            display: none;
+            width: 100%; }
+            html body .modal-container modal main div.mobile-only .divider {
+              width: 100%;
+              text-align: center;
+              padding: 40px 0 20px 0; }
+              html body .modal-container modal main div.mobile-only .divider > * {
+                display: inline-block;
+                width: 30%;
+                text-align: center;
+                margin: 0 auto;
+                color: #b4b4b4; }
+              html body .modal-container modal main div.mobile-only .divider hr {
+                border: 1px solid #e7e7e7; }
           html body .modal-container modal main form.apply-form > * {
             display: block;
             box-sizing: border-box;
             margin: 25px 0;
             width: 100%; }
-          html body .modal-container modal main form.apply-form input[type="text"] {
-            border: none;
-            border-bottom: 1px solid #cecece;
-            padding: 5px; }
-            html body .modal-container modal main form.apply-form input[type="text"]:focus {
-              border-bottom: 1px solid #3399dd; }
-          html body .modal-container modal main form.apply-form input[type="file"] {
-            cursor: pointer;
-            text-align: center;
-            padding: 10px;
-            background: #f4f4f4;
-            border-radius: 3px; }
+          html body .modal-container modal main input {
+            box-sizing: border-box;
+            width: 100%; }
+            html body .modal-container modal main input[type="text"] {
+              border: none;
+              border-bottom: 1px solid #cecece;
+              padding: 5px; }
+              html body .modal-container modal main input[type="text"]:focus {
+                border-bottom: 1px solid #39d; }
+            html body .modal-container modal main input[type="file"] {
+              cursor: pointer;
+              text-align: center;
+              padding: 10px;
+              background: #f4f4f4;
+              border-radius: 3px; }
         html body .modal-container modal .btn-container {
           width: 100%;
           padding-top: 25px;
@@ -101,7 +119,7 @@ html {
               font-weight: 600; }
             html body .modal-container modal .btn-container button[name="submit"] {
               color: #fff;
-              background: #3399dd;
+              background: #39d;
               border-radius: 2px; }
     html body hgroup {
       display: flex;
@@ -204,10 +222,10 @@ html {
                 -webkit-transition: all 130ms ease-in-out;
                 transition: all 130ms ease-in-out; }
                 html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked {
-                  background: #3399dd;
+                  background: #39d;
                   -webkit-transform: scale(0.75); }
                   html body hgroup aside section.filters-container filters list item input[type="checkbox"]:checked + label {
-                    color: #3399dd; }
+                    color: #39d; }
               html body hgroup aside section.filters-container filters list item label {
                 width: 80%;
                 display: inline-block;
@@ -251,7 +269,7 @@ html {
         html body hgroup main header {
           position: fixed;
           width: 100%;
-          background: #3399dd;
+          background: #39d;
           color: #fff;
           font-weight: 300;
           padding: 0 10px;
@@ -313,7 +331,7 @@ html {
                   white-space: nowrap;
                   overflow: hidden;
                   text-overflow: ellipsis;
-                  color: #3399dd; }
+                  color: #39d; }
                 html body hgroup main ng-view section.jobs card .key-container span {
                   color: #9fa0a4;
                   font-size: 1.1em;
@@ -346,7 +364,7 @@ html {
                   html body hgroup main ng-view section.job-overview card.description h2 {
                     display: inline-block;
                     font-weight: 500;
-                    color: #46474a; }
+                    color: #46474A; }
                   html body hgroup main ng-view section.job-overview card.description div.job-actions {
                     float: right;
                     display: inline-block;
@@ -412,7 +430,7 @@ html {
                   html body hgroup main ng-view section.job-overview card.apply span.date-added {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply h1.title {
-                    color: #46474a; }
+                    color: #46474A; }
                   html body hgroup main ng-view section.job-overview card.apply h3.category {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply div.loc-type {
@@ -456,7 +474,7 @@ html {
     html body.grid-view aside section.filters-container header button {
       /* Change Grid Button Color */ }
       html body.grid-view aside section.filters-container header button.icon-view-module {
-        color: white; }
+        color: #fff; }
     html body.grid-view main ng-view section.jobs card {
       width: 32%;
       padding-bottom: 45px; }
@@ -487,7 +505,7 @@ html {
     html body.list-view aside section.filters-container header button {
       /* Change List Button Color */ }
       html body.list-view aside section.filters-container header button.icon-view-list {
-        color: white; }
+        color: #fff; }
     html body.list-view main ng-view section.jobs card {
       overflow: auto;
       width: 100%;
@@ -514,7 +532,7 @@ html {
         width: 85px; }
       html body.list-view main ng-view section.jobs card i {
         cursor: pointer;
-        color: #3399dd;
+        color: #39d;
         font-size: 1.3em;
         padding: 10px;
         box-sizing: border-box;
@@ -534,12 +552,10 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
-
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
-
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -548,12 +564,10 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
-
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
-
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -562,12 +576,10 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
-
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
-
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -576,12 +588,10 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
-
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
-
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -590,12 +600,10 @@ html {
     -webkit-transform: scale(0.2);
     transform: scale(0.2);
     opacity: 0; }
-
   40% {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     opacity: 1; }
-
   60% {
     -webkit-transform: scale(1);
     transform: scale(1); } }
@@ -605,11 +613,9 @@ html {
     -webkit-transform: translateY(500px);
     transform: translateY(500px);
     opacity: 0; }
-
   40% {
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px); }
-
   60% {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -619,11 +625,9 @@ html {
     -webkit-transform: translateY(500px);
     transform: translateY(500px);
     opacity: 0; }
-
   40% {
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px); }
-
   60% {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -633,11 +637,9 @@ html {
     -webkit-transform: translateY(500px);
     transform: translateY(500px);
     opacity: 0; }
-
   40% {
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px); }
-
   60% {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -647,11 +649,9 @@ html {
     -webkit-transform: translateY(500px);
     transform: translateY(500px);
     opacity: 0; }
-
   40% {
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px); }
-
   60% {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -661,11 +661,9 @@ html {
     -webkit-transform: translateY(500px);
     transform: translateY(500px);
     opacity: 0; }
-
   40% {
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px); }
-
   60% {
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -676,7 +674,6 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
-
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -686,7 +683,6 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
-
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -696,7 +692,6 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
-
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -706,7 +701,6 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
-
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -716,7 +710,6 @@ html {
     -webkit-transform: translateX(100px);
     transform: translateX(100px);
     opacity: 0; }
-
   to {
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -765,6 +758,8 @@ html {
   html body.overview-open div.modal-container modal {
     margin: auto;
     height: 100%; }
+    html body.overview-open div.modal-container modal div.mobile-only {
+      display: block; }
   html body.overview-open hgroup main ng-view section.job-overview {
     flex-direction: column-reverse;
     align-items: flex-start; }
@@ -834,3 +829,5 @@ html {
                 display: none; }
               html body.overview-open hgroup main ng-view section.job-overview card.apply button[name="apply"] {
                 display: none; } }
+
+/*# sourceMappingURL=main.css.map */
