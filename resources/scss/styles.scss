@@ -519,6 +519,7 @@ html {
                    font-size: 1.2em;
                    line-height: 1.6em;
                    color: lighten($base-color, 10%);
+                   text-align: justify;
                  }
                }
                &.apply {
@@ -533,6 +534,7 @@ html {
                  }
                  h1.title {
                    color: $base-color;
+                   @include vendor-prefix(transition, font-size 120ms linear);
                  }
                  h3.category {
                    color: lighten($base-color, 35%);

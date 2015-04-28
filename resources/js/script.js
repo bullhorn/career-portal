@@ -229,6 +229,30 @@ directive('elHeight',function($timeout, $rootScope) {
       }
     }
 
+}).
+directive("scroll", function ($window) {
+  console.log("load scroll?");
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        var raw = element[0];
+        console.log('loading directive...');
+        angular.element($window).bind('scroll', function () {
+            console.log('in scroll');
+            console.log(raw.scrollTop + raw.offsetHeight);
+            console.log(raw.scrollHeight);
+            if (this.pageYOffset >= 100) {
+                 scope.boolChangeClass = true;
+                 console.log('Scrolled below header.');
+             } else {
+                 scope.boolChangeClass = false;
+                 console.log('Header is in view.');
+             }
+
+            scope.$apply();
+        });
+      }
+    }
 });
 
 $("button[name='filters-menu']").on("click",function(){

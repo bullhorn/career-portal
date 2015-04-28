@@ -1,4 +1,4 @@
-<section class="job-overview">
+<section class="job-overview" scroll>
   <card class="description slide-left" ng-style="topPad">
     <div class="job-actions" ng-class="overview.share">
       <button name="print" onClick="window.print();">
@@ -62,7 +62,7 @@
 	</card>
 	<card class="apply slide-left" el-height>
 		<span class="date-added">Added—{{overview.job_data.dateAdded | date : fullDate}}</span>
-		<h1 class="title">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
+		<h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
 		<h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>
     <div class="loc-type">
       <span class="location">{{overview.job_data.location}}</span> | <span class="type">{{overview.job_data.type}}</span>

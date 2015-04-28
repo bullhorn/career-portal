@@ -74,6 +74,9 @@ html {
                     &.apply {
                       position: fixed;
                       margin: -10px;
+                      h1.title.min {
+                        font-size: 1.3em;
+                      }
                       .related-jobs {
                         display: none;
                       }

@@ -420,7 +420,8 @@ html {
                     font-family: 'PT Serif';
                     font-size: 1.2em;
                     line-height: 1.6em;
-                    color: #5f6064; }
+                    color: #5f6064;
+                    text-align: justify; }
                 html body hgroup main ng-view section.job-overview card.apply {
                   width: 48%;
                   min-width: 300px;
@@ -430,7 +431,12 @@ html {
                   html body hgroup main ng-view section.job-overview card.apply span.date-added {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply h1.title {
-                    color: #46474A; }
+                    color: #46474A;
+                    -webkit-transition: font-size 120ms linear;
+                    -ms-transition: font-size 120ms linear;
+                    -moz-transition: font-size 120ms linear;
+                    -o-transition: font-size 120ms linear;
+                    transition: font-size 120ms linear; }
                   html body hgroup main ng-view section.job-overview card.apply h3.category {
                     color: #9fa0a4; }
                   html body hgroup main ng-view section.job-overview card.apply div.loc-type {
@@ -769,6 +775,8 @@ html {
       html body.overview-open hgroup main ng-view section.job-overview card.apply {
         position: fixed;
         margin: -10px; }
+        html body.overview-open hgroup main ng-view section.job-overview card.apply h1.title.min {
+          font-size: 1.3em; }
         html body.overview-open hgroup main ng-view section.job-overview card.apply .related-jobs {
           display: none; }
       html body.overview-open hgroup main ng-view section.job-overview card.description {
