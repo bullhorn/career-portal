@@ -465,6 +465,10 @@ html {
                     padding: 10px 0px 10px 0px; }
                     html body hgroup main ng-view section.job-overview card.apply a.category-filter i {
                       float: right; }
+    html body.overview-closed aside section.filters-container > * {
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+      transition-delay: 220ms; }
     html body.overview-open aside {
       width: 46px; }
       html body.overview-open aside:hover {

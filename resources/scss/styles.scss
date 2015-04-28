@@ -585,6 +585,19 @@ html {
         }
       }
     }
+    &.overview-closed {
+      aside {
+        section {
+          &.filters-container {
+            & > * {
+              -webkit-transform: translateX(0px);
+              transform: translateX(0px);
+              transition-delay: 220ms;
+            }
+          }
+        }
+      }
+    }
     /* ==== Job Overview Open Styles =====*/
     &.overview-open {
       aside {
