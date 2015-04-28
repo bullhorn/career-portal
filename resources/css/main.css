@@ -102,7 +102,32 @@ html {
               text-align: center;
               padding: 10px;
               background: #f4f4f4;
-              border-radius: 3px; }
+              border-radius: 3px;
+              border: 1px solid #39d;
+              opacity: 0;
+              position: relative;
+              z-index: 5; }
+          html body .modal-container modal main .upload-container {
+            border: 1px solid #39d;
+            border-radius: 3px;
+            background: transparent;
+            position: relative;
+            cursor: pointer; }
+            html body .modal-container modal main .upload-container .upload-content {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 12px;
+              text-align: center;
+              color: #39d;
+              z-index: 0; }
+              html body .modal-container modal main .upload-container .upload-content > * {
+                line-height: 13px; }
+              html body .modal-container modal main .upload-container .upload-content i {
+                margin-right: 10px;
+                font-size: 1.5em; }
+              html body .modal-container modal main .upload-container .upload-content .upload-text {
+                vertical-align: 3px; }
         html body .modal-container modal .btn-container {
           width: 100%;
           padding-top: 25px;

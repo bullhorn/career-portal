@@ -136,6 +136,37 @@ html {
               padding: 10px;
               background: $light-bg;
               border-radius: 3px;
+              border: 1px solid $primary;
+              opacity: 0;
+              position: relative;
+              z-index: 5;
+            }
+          }
+          // Custom Upload Resume Button styles
+          .upload-container {
+            border: 1px solid $primary;
+            border-radius: 3px;
+            background: transparent;
+            position: relative;
+            cursor: pointer;
+            .upload-content {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 12px;
+              text-align: center;
+              color: $primary;
+              z-index: 0;
+              & > * {
+                line-height: 13px;
+              }
+              i {
+                margin-right: 10px;
+                font-size: 1.5em;
+              }
+              .upload-text {
+                vertical-align: 3px;
+              }
             }
           }
         }

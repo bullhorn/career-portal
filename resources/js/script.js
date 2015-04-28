@@ -201,6 +201,10 @@ controller('SideBarCtrl', function($rootScope, $location) {
     }
   }
 
+  this.filterCounter = function($rootScope) {
+    var counter;
+  }
+
 }).
 controller('HeaderCtrl', function($rootScope, $location, $scope) {
   this.goBack = function(){
