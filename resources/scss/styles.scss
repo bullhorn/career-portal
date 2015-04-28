@@ -92,25 +92,6 @@ html {
           padding: 10px 25px 20px 25px;
           display: block;
           box-sizing: border-box;
-          div.mobile-only {
-            display: none;
-            width: 100%;
-            .divider {
-              width: 100%;
-              text-align: center;
-              padding: 40px 0 20px 0;
-              & > * {
-                display: inline-block;
-                width: 30%;
-                text-align: center;
-                margin: 0 auto;
-                color: darken($light-bg, 25%);
-              }
-              hr {
-                border: 1px solid darken($light-bg, 5%);
-              }
-            }
-          }
           form.apply-form {
             & > * {
               display: block;

@@ -68,21 +68,6 @@ html {
           padding: 10px 25px 20px 25px;
           display: block;
           box-sizing: border-box; }
-          html body .modal-container modal main div.mobile-only {
-            display: none;
-            width: 100%; }
-            html body .modal-container modal main div.mobile-only .divider {
-              width: 100%;
-              text-align: center;
-              padding: 40px 0 20px 0; }
-              html body .modal-container modal main div.mobile-only .divider > * {
-                display: inline-block;
-                width: 30%;
-                text-align: center;
-                margin: 0 auto;
-                color: #b4b4b4; }
-              html body .modal-container modal main div.mobile-only .divider hr {
-                border: 1px solid #e7e7e7; }
           html body .modal-container modal main form.apply-form > * {
             display: block;
             box-sizing: border-box;
@@ -879,8 +864,6 @@ html {
   html body.overview-open div.modal-container modal {
     margin: auto;
     height: 100%; }
-    html body.overview-open div.modal-container modal div.mobile-only {
-      display: block; }
   html body.overview-open hgroup main ng-view section.job-overview {
     flex-direction: column-reverse;
     align-items: flex-start; }
