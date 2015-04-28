@@ -376,12 +376,6 @@ html {
               flex-direction: row; }
               html body hgroup main ng-view section.job-overview card {
                 padding: 25px;
-                -webkit-animation-name: slide-left;
-                /* Chrome, Safari, Opera */
-                -webkit-animation-duration: 550ms;
-                /* Chrome, Safari, Opera */
-                animation-name: slide-left;
-                animation-duration: 550ms;
                 align-self: stretch;
                 overflow: scroll; }
                 html body hgroup main ng-view section.job-overview card.description {
@@ -576,7 +570,103 @@ html {
 /* ==============
     Animations
 ===============*/
-/*==== Pop Open (Used on Modals) ====*/
+/*==== Fade In (Used on Views) ====*/
+.fade {
+  opacity: 1; }
+
+.fade.ng-enter,
+.fade.ng-leave {
+  -webkit-transition: opacity 220ms ease-in-out;
+  -ms-transition: opacity 220ms ease-in-out;
+  -moz-transition: opacity 220ms ease-in-out;
+  -o-transition: opacity 220ms ease-in-out;
+  transition: opacity 220ms ease-in-out; }
+
+.fade.ng-enter {
+  opacity: 0; }
+
+.fade.ng-enter-active {
+  opacity: 1; }
+
+.fade.ng-leave {
+  opacity: 1; }
+
+.fade.ng-leave-active {
+  opacity: 0; }
+
+/*==== Slide Up Items (Used on Views) ====*/
+.slide-up-item {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1; }
+
+.slide-up-item.ng-enter,
+.slide-up-item.ng-leave {
+  -webkit-transition: all 120ms ease-in-out;
+  -ms-transition: all 120ms ease-in-out;
+  -moz-transition: all 120ms ease-in-out;
+  -o-transition: all 120ms ease-in-out;
+  transition: all 120ms ease-in-out; }
+
+.slide-up-item.ng-enter, .slide-up-item.ng-move {
+  -webkit-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -o-transform: translateY(50px);
+  transform: translateY(50px);
+  opacity: 0; }
+
+.slide-up-item.ng-enter-active {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1; }
+
+.slide-up-item.ng-leave {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1; }
+
+.slide-up-item.ng-leave-active {
+  -webkit-transform: translateY(50px);
+  -ms-transform: translateY(50px);
+  -moz-transform: translateY(50px);
+  -o-transform: translateY(50px);
+  transform: translateY(50px);
+  opacity: 0; }
+
+/**
+ * Stagger Leave (hide) animation
+ */
+.slide-up-item.ng-leave-stagger {
+  /* this will have a 100ms delay between each successive leave animation */
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  /* in case the stagger doesn't work then these two values
+   must be set to 0 to avoid an accidental CSS inheritance */
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s; }
+
+/**
+ * Stagger ENTER ANIMATION
+ */
+.slide-up-item.ng-enter-stagger {
+  /* this will have a 100ms delay between each successive enter animation */
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  /* in case the stagger doesn't work then these two values
+   must be set to 0 to avoid an accidental CSS inheritance */
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s; }
+
 /*==== Pop Open (Used on Modal @ larger device widths) ====*/
 @-webkit-keyframes pop-open {
   0% {

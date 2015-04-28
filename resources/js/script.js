@@ -1,4 +1,4 @@
-angular.module('careers', ['ngRoute'])
+angular.module('careers', ['ngRoute', 'ngAnimate'])
 .config(function($routeProvider) {
     $routeProvider.
     when('/jobs', {
@@ -16,8 +16,6 @@ angular.module('careers', ['ngRoute'])
 controller('JobListCtrl', function( $rootScope, $location, $timeout, $scope) {
   console.log('INIT');
 	$rootScope.viewState = 'overview-closed';
-	  // Form data for the login modal
-    //$scope.view = 'resources/template/jobgrid.html'
 
     this.data = [ {
         "id" : 3501,

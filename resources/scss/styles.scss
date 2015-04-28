@@ -476,11 +476,6 @@ html {
              card {
                padding: 25px;
 
-               -webkit-animation-name: slide-left; /* Chrome, Safari, Opera */
-               -webkit-animation-duration: 550ms; /* Chrome, Safari, Opera */
-               animation-name: slide-left;
-               animation-duration: 550ms;
-
                align-self: stretch;
                overflow: scroll;
 
@@ -791,8 +786,6 @@ html {
     Animations
 ===============*/
 
-/*==== Pop Open (Used on Modals) ====*/
-
 @mixin keyframes($name) {
     @-webkit-keyframes #{$name} { @content; }
     @-moz-keyframes #{$name} { @content; }
@@ -801,6 +794,79 @@ html {
     @keyframes #{$name} { @content; }
 }
 
+/*==== Fade In (Used on Views) ====*/
+.fade {
+    opacity: 1;
+}
+.fade.ng-enter,
+.fade.ng-leave {
+    @include vendor-prefix(transition, opacity 220ms ease-in-out);
+}
+.fade.ng-enter {
+    opacity: 0;
+}
+.fade.ng-enter-active {
+    opacity: 1;
+}
+.fade.ng-leave {
+    opacity: 1;
+}
+.fade.ng-leave-active {
+    opacity: 0;
+}
+
+/*==== Slide Up Items (Used on Views) ====*/
+.slide-up-item {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+.slide-up-item.ng-enter,
+.slide-up-item.ng-leave {
+    @include vendor-prefix(transition, all 120ms ease-in-out);
+}
+.slide-up-item.ng-enter, .slide-up-item.ng-move {
+    @include vendor-prefix(transform, translateY(50px));
+    opacity: 0;
+}
+.slide-up-item.ng-enter-active {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+.slide-up-item.ng-leave {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+.slide-up-item.ng-leave-active {
+    @include vendor-prefix(transform, translateY(50px));
+    opacity: 0;
+}
+/**
+ * Stagger Leave (hide) animation
+ */
+.slide-up-item.ng-leave-stagger {
+    /* this will have a 100ms delay between each successive leave animation */
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+/**
+ * Stagger ENTER ANIMATION
+ */
+.slide-up-item.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive enter animation */
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
 /*==== Pop Open (Used on Modal @ larger device widths) ====*/
 
 @include keyframes(pop-open) {
