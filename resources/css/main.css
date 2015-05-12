@@ -504,6 +504,11 @@ html {
         margin-top: 15px; }
       html body.grid-view main ng-view section.jobs card .key-container span.item-type {
         margin: 0 0 15px 0; }
+      html body.grid-view main ng-view section.jobs card .key-container span.item-description {
+        max-height: 210px;
+        overflow: hidden;
+        position: relative;
+        -webkit-mask-box-image: -webkit-linear-gradient(black 75%, transparent); }
       html body.grid-view main ng-view section.jobs card hr {
         border: none;
         margin: 20px -10px 10px -10px;

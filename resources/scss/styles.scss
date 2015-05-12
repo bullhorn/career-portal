@@ -677,6 +677,12 @@ html {
                     &.item-type {
                       margin: 0 0 15px 0;
                     }
+                    &.item-description {
+                      max-height: 210px;
+                      overflow:hidden;
+                      position: relative;
+                      -webkit-mask-box-image:-webkit-linear-gradient(black 75%, transparent);
+                    }
                   }
                 }
                 hr {
