@@ -1,8 +1,8 @@
 <section class="jobs">
     <h5>Open Jobs </h5>
 
-    <div id="job-list-container" ng-show="searchService.config.showJobList">
-        <card ng-repeat="job in searchService.currentListData" ng-click="jobs.openSummary(job.id, job);"
+
+        <card ng-repeat="job in searchService.currentListData" ng-click="openSummary(job.id, job);"
               class="slide-up-item">
             <div class="key-container">
                 <h3 class="item-title"><a href="">{{job.title}}</a></h3>
@@ -10,12 +10,22 @@
                 <span class="item-loc">{{job.address.city}}</span>
                 <span class="item-type">{{job.employmentType}}</span>
                 <span class="item-date">Added—{{job.dateAdded | date : fullDate}}</span>
-      <span class="item-description">
+      <span class="item-description break-word">
       {{job.publicDescription}}
       </span>
             </div>
-            <i class="icon-arrow-forward" ng-click="jobs.openSummary(job.id, job);"></i>
+            <i class="icon-arrow-forward" ng-click="openSummary(job.id, job);"></i>
         </card>
 
-    </div>
+
+        <card ng-click="loadMoreData();" ng-show="searchService.helper.moreRecordsExist()" class="slide-up-item">
+            <div class="key-container">
+                <h3 class="item-title">Show more jobs</h3>
+            </div>
+
+        </card>
+
+
+
+
 </section>

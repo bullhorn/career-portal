@@ -29,63 +29,93 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         var service = {};
 
         service = {
-            searchService: {
-                config: {
-                    searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
-                    showJobList: true,
-                    additionalQuery: 'isOpen:1',
-                    sort: "title",
-                    fields: "id,title,categories,address,employmentType,dataAdded,publicDescription",
-                    count: "20",
-                    start: "0"
+            config: {
+                searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
+                showJobList: true,
+                additionalQuery: 'isOpen:1',
+                sort: "title",
+                fields: "id,title,categories,address,employmentType,dataAdded,publicDescription",
+                count: "5",
+                start: "0"
+            },
+            searchParams: {
+                textSearch: "",
+                location: "",
+                category: "",
+                sort: "",
+                count: "",
+                start: "",
+                total: "",
+                reloadAllData: true
+            },
+            requestParams: {
+                sort: function () {
+                    return (service.searchParams.sort ? service.searchParams.sort : service.config.sort)
                 },
-                searchParams: {
-                    text: "",
-                    location: "",
-                    category: "",
-                    sort: "",
-                    count: "",
-                    start: ""
+                count: function () {
+                    return (service.searchParams.count ? service.searchParams.count : service.config.count)
                 },
-                requestParams: {
-                    sort: function () {
-                        return (service.searchService.searchParams.sort ? service.searchService.searchParams.sort : service.searchService.config.sort)
-                    },
-                    count: function () {
-                        return (service.searchService.searchParams.count ? service.searchService.searchParams.count : service.searchService.config.count)
-                    },
-                    start: function () {
-                        return (service.searchService.searchParams.start ? service.searchService.searchParams.start : service.searchService.config.start)
-                    },
-                    assemble: function () {
-                        var query = '(' + service.searchService.config.additionalQuery + ')';
+                start: function () {
+                    return (service.searchParams.start ? service.searchParams.start : service.config.start)
+                },
+                assemble: function () {
+                    var query = '(' + service.config.additionalQuery + ')';
 
-                        if (service.searchService.searchParams.text) {
-                            query += ' AND (title:' + service.searchService.searchParams.text + '* OR publishedDescription:' + service.searchService.searchParams.text + '*)';
-                        }
-
-                        return '?' +
-                            'query=' + query + '&fields=' + service.searchService.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort();
-
+                    if (service.searchParams.textSearch) {
+                        query += ' AND (title:' + service.searchParams.textSearch + '* OR publishedDescription:' + service.searchParams.textSearch + '*)';
                     }
-                },
-                currentListData: [],
-                currentDetailData: {},
-                makeApiCall: function () {
-                    service.searchService.config.showJobList = false;
-                    service.searchService.currentListData.length = 0;
-                    $http({
-                        method: 'GET',
-                        url: service.searchService.config.searchUrl + service.searchService.requestParams.assemble()
-                    }).success(function (data) {
-                        service.searchService.currentListData = data.data;
-                        service.searchService.config.showJobList = true;
-                    }).error(function () {
-                        alert("error");
-                    });
+
+                    return '?' +
+                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort();
+                }
+            },
+            currentListData: [],
+            currentDetailData: {},
+            makeSearchApiCall: function () {
+                if (service.searchParams.reloadAllData) {
+                    service.helper.toggleViewCurrentDataList(false);
+                    service.helper.emptyCurrentDataList();
+                    service.helper.resetStartAndTotal();
                 }
 
+                $http({
+                    method: 'GET',
+                    url: service.config.searchUrl + service.requestParams.assemble()
+                }).success(function (data) {
+                    service.helper.updateStartAndTotal(data);
+                    if (service.searchParams.reloadAllData) {
+                        service.currentListData = data.data;
+                        service.helper.toggleViewCurrentDataList(true);
+                    } else {
+                        service.currentListData.push.apply(service.currentListData, data.data);
+                    }
+                }).error(function () {
+                    alert("error");
+                });
+            },
+            helper: {
+                emptyCurrentDataList: function () {
+                    service.currentListData.length = 0;
+                },
+                toggleViewCurrentDataList: function (show) {
+                    service.config.showJobList = show;
+                },
+                updateStartAndTotal: function (data) {
+                    service.searchParams.total = data.total;
+                    service.searchParams.start = (parseInt(service.requestParams.count()) + parseInt(service.requestParams.start()));
+                },
+                resetStartAndTotal: function () {
+                    service.searchParams.total = 0;
+                    service.searchParams.start = 0;
+                },
+                moreRecordsExist: function () {
+                    if ((parseInt(service.searchParams.total) - parseInt(service.requestParams.start())) > 0) {
+                        return true;
+                    }
+                    return false;
+                }
             }
+
         };
 
         return service;
@@ -93,11 +123,15 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
     controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) {
         console.log('INIT');
         $rootScope.viewState = 'overview-closed';
-        $scope.searchService = SearchData.searchService;
+        $scope.searchService = SearchData;
 
+        $scope.loadMoreData = function () {
+            SearchData.searchParams.reloadAllData = false;
+            SearchData.makeSearchApiCall();
+        }
 
-        this.openSummary = function (id, Data) {
-            SearchData.searchService.currentDetailData = Data;
+        $scope.openSummary = function (id, Data) {
+            SearchData.currentDetailData = Data;
             $location.path('/jobs/' + id);
         }
 
@@ -107,7 +141,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         $rootScope.viewState = 'overview-open';
 
         this.job_id = $routeParams.id;
-        this.job_data = SearchData.searchService.currentDetailData;
+        this.job_data = SearchData.currentDetailData;
 
         this.goBack = function () {
             $location.path('/jobs');
@@ -137,13 +171,14 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
     controller('SideBarCtrl', function ($rootScope, $location, $scope, SearchData) {
         $rootScope.gridState = 'list-view';
 
-        $scope.searchService = SearchData.searchService;
+        $scope.searchService = SearchData;
 
 
-        SearchData.searchService.makeApiCall();
+        SearchData.makeSearchApiCall();
 
         $scope.searchJobs = function () {
-            SearchData.searchService.makeApiCall();
+            SearchData.searchParams.reloadAllData = true;
+            SearchData.makeSearchApiCall();
         }
 
 
