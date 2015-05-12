@@ -12,12 +12,12 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             otherwise({
                 redirectTo: '/jobs'
             });
-    }).directive('ngEnter', function () {
+    }).directive('customNgEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
                 if (event.which === 13) {
                     scope.$apply(function () {
-                        scope.$eval(attrs.ngEnter, {'event': event});
+                        scope.$eval(attrs.customNgEnter, {'event': event});
                     });
 
                     event.preventDefault();
@@ -35,7 +35,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                 additionalQuery: 'isOpen:1',
                 sort: "title",
                 fields: "id,title,categories,address,employmentType,dataAdded,publicDescription",
-                count: "5",
+                count: "10",
                 start: "0"
             },
             searchParams: {
@@ -113,6 +113,11 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                         return true;
                     }
                     return false;
+                },
+                clearSearchParams : function(){
+                    service.searchParams.textSearch = '';
+                    service.searchParams.location = '';
+                    service.searchParams.category = '';
                 }
             }
 
@@ -181,6 +186,11 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             SearchData.makeSearchApiCall();
         }
 
+
+        $scope.clearSearchParamsAndLoadData = function() {
+            SearchData.helper.clearSearchParams();
+            SearchData.makeSearchApiCall();
+        }
 
         this.switchViewStyle = function (type) {
             $rootScope.gridState = type + '-view';

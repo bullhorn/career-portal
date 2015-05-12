@@ -9,7 +9,7 @@
 	<filters>
 		<searchbox>
 			<label for="keyword" class="icon-search"></label>
-			<input ng-enter="searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" name="keyword" value="" placeholder="Keyword Search">
+			<input custom-ng-enter="searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" name="keyword" value="" placeholder="Keyword Search">
 		</searchbox>
 
 		<h4>Location</h4>
@@ -28,7 +28,7 @@
 			<item><input type="checkbox" id="ps"><label for="ps">Professional Services</label></item>
 		</list>
 
-		<button name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>
+		<button ng-click="clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>
 	</filters>
 
 	<credits>

@@ -57,6 +57,9 @@ html {
         outline: none;
       }
     }
+    .break-word {
+      word-wrap: break-word;
+    }
     /* ==== Modal Styles ====*/
     .modal-container {
       position: absolute;
@@ -411,6 +414,10 @@ html {
                 display: block;
                 width: 100%;
                 margin: 10px 0;
+              }
+              #load-more-data {
+                width: 100%;
+
               }
               card {
                 cursor: pointer;
@@ -820,10 +827,12 @@ html {
     @include vendor-prefix(transform, translateY(0));
     opacity: 1;
 }
-.slide-up-item.ng-enter,
-.slide-up-item.ng-leave {
-    @include vendor-prefix(transition, all 120ms ease-in-out);
+.slide-up-item.ng-enter {
+    @include vendor-prefix(transition, all 250ms ease-in-out);
 }
+
+
+
 .slide-up-item.ng-enter, .slide-up-item.ng-move {
     @include vendor-prefix(transform, translateY(50px));
     opacity: 0;
