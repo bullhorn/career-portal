@@ -18,46 +18,7 @@
     </div>
     <h2>Job Description</h2>
 		<p>
-			About Us
-			<br>We’ve been in business for over 10 years, with hundreds of satisfied clients. Millions of $’s in revenue. Profitable.
-			<br>We work with major home improvement brands, such as Home Depot, Renewal by Andersen and Re-Bath.
-			<br>We have pioneered a unique approach to paid search lead generation. That approach incorporates our powerful, custom-built hyperlocal paid search platform, delivering superior performance our competitors just can’t touch.
-			<br>We have achieved the highest client loyalty and retention rates in the business. 100% of our first 25 clients are still using our services! And, we’ve only tapped a small portion of our market potential.
-			<br>Contact us if you are ready to step up to the challenge—and push paid search marketing to new limits.
-			<br>About You
-			<br>You are *smart and a quick study*. You love learning and using cloud-based tools to meet your job needs.
-			<br>You are articulate in expressing yourself to clients and colleagues, in both the spoken and written word. You’re comfortable editing landing page marketing copy, and even writing it in a pinch.
-			<br>You have a high energy level, and a great ability to multitask.
-			<br>And, you are DETAIL ORIENTED. In fact, you love the details. You understand that even the best, most-effective campaigns can easily come to a crashing halt by overlooking even a small detail.
-			<br>You may currently work for an Internet marketing agency and you have a track record ofmanaging development of great Web sites*, and/or *running highly successful search marketing campaigns.
-			<br>You bring demonstrated ability to track, manage and streamline our internal business processes through leadership, personnel and technology.
-			<br>You are intellectually curious about your work, eager for clues to squeeze more return from the work we do.
-			<br>And you particularly love the satisfaction of *consistently improving on your results*, and exceeding all expectations.
-			<br>Above all, you are committed to flawless and timely delivery of service to both clients and internal users.
-			<br>Requirements
-			<br>- At least 4 years’ experience running online marketing campaigns.
-			<br>- Degree in liberal arts or marketing.
-			<br>- Experience with SharePoint, Basecamp or other project tracking systems a plus.
-			<br>Responsibilities
-			<br>- Set go-live dates for clients’ campaigns and ensure they are met.
-			<br>- Drive the workflow necessary to develop &amp; launch new client campaigns across:
-			<br>- Client interaction
-			<br>- Copywriting
-			<br>- Campaign territory mapping
-			<br>- Landing page design
-			<br>- Custom interfaces &amp; other coding
-			<br>- Paid search ads and campaigns
-			<br>- Call center script
-			<br>- Final testing
-			<br>- Expedite workflow as necessary
-			<br>- Track progress of campaigns through launch
-			<br>- Troubleshoot operational campaigns, as needed
-			<br>- Work with technical team to evolve our tracking, reporting and campaign management tools.
-			<br>You will manage a combination of direct reports, other company resources and outside contractors and vendors.
-			<br>About the Position
-			<br>This is a full time position in our Waltham, Massachusetts offices. We’ll train you on our platform, our process, our unique online marketing techniques and the home improvement industry that we serve.
-			<br>Your compensation includes a competitive base salary, benefits and a year-end bonus.
-			<br>
+			{{overview.job_data.publicDescription}}
 		</p>
 	</card>
 	<card class="apply" el-height>
@@ -65,7 +26,7 @@
 		<h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
 		<h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>
     <div class="loc-type">
-      <span class="location">{{overview.job_data.location}}</span> | <span class="type">{{overview.job_data.type}}</span>
+      <span class="location">{{overview.job_data.address.city}}, {{overview.job_data.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
     </div>
 		<button name="apply" ng-click="overview.applyModal()">Apply</button>
 		<div class="related-jobs">

@@ -9,8 +9,9 @@
 	<filters>
 		<searchbox>
 			<label for="keyword" class="icon-search"></label>
-			<input type="search" name="keyword" value="" placeholder="Keyword Search">
+			<input ng-enter="searchJobs()" ng-model="searchService.searchParams.text" type="search" name="keyword" value="" placeholder="Keyword Search">
 		</searchbox>
+
 		<h4>Location</h4>
 		<list>
 			<item><input type="checkbox" id="bos"><label for="bos">Boston</label></item>
