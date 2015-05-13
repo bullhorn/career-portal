@@ -32,11 +32,32 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             config: {
                 searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
                 additionalQuery: 'isOpen:1',
-                sort: "title",
-                fields: "id,title,categories,address,employmentType,dataAdded,publicDescription",
+                sort: "-dateAdded",
+                fields: "id,title,categories,address,employmentType,dateAdded,publicDescription",
                 count: "15",
                 start: "0",
-                loadJobsOnStart : true
+                loadJobsOnStart : true,
+                portalText : {
+                    companyName : 'Acme Staffing',
+                    joblist : {
+                        header : "Open Jobs",
+                        loadMoreData : "Load more..."
+                    },
+                    overview : {
+                        header : "Job Description",
+                        applyButtonLabel : 'Apply now'
+                    },
+                    sidebar : {
+                        searchPlaceholder : 'Keyword Search',
+                        locationHeader : 'Location',
+                        categoryHeader : 'Category'
+                    },
+                    modal : {
+                        header : 'Before You Apply...',
+                        subHeader : 'Please let us know who you are and upload your resume',
+                        uploadResumeFile : 'Upload Resume File'
+                    }
+                }
             },
             searchParams: {
                 textSearch: "",
@@ -115,7 +136,6 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                     service.searchParams.category = '';
                 }
             }
-
         };
 
         return service;
@@ -139,6 +159,8 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
     controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData) {
         // Form data for the login modal
         $rootScope.viewState = 'overview-open';
+
+        $scope.searchService = SearchData;
 
         this.job_id = $routeParams.id;
         this.job_data = SearchData.currentDetailData;
@@ -205,12 +227,17 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         }
 
     }).
-    controller('HeaderCtrl', function ($rootScope, $location, $scope) {
+    controller('HeaderCtrl', function ($rootScope, $location, $scope, SearchData) {
+
+        $scope.searchService = SearchData;
+
         this.goBack = function () {
             $location.path('/jobs');
         }
     }).
-    controller('ModalCtrl', function ($rootScope, $location, $scope) {
+    controller('ModalCtrl', function ($rootScope, $location, $scope,SearchData) {
+
+        $scope.searchService = SearchData;
         this.closeModal = function () {
             $rootScope.modalState = 'closed';
         }

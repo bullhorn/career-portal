@@ -9,10 +9,10 @@
 	<filters>
 		<searchbox>
 			<label for="keyword" class="icon-search"></label>
-			<input custom-ng-enter="searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" name="keyword" value="" placeholder="Keyword Search">
+			<input custom-ng-enter="searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" name="keyword" value="" ng-attr-placeholder="{{::searchService.config.portalText.sidebar.searchPlaceholder}}">
 		</searchbox>
 
-		<h4>Location</h4>
+		<h4>{{::searchService.config.portalText.sidebar.locationHeader}}</h4>
 		<list>
 			<item><input type="checkbox" id="bos"><label for="bos">Boston</label></item>
 			<item><input type="checkbox" id="ldn"><label for="ldn">London</label></item>
@@ -20,7 +20,7 @@
 			<item><input type="checkbox" id="van"><label for="van">Vancouver</label></item>
 			<item><input type="checkbox" id="syd"><label for="syd">Sydney</label></item>
 		</list>
-		<h4>Category</h4>
+		<h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
 		<list>
 			<item><input type="checkbox" id="ux"><label for="ux">UX/UI</label></item>
 			<item><input type="checkbox" id="mar"><label for="mar">Marketing</label></item>
