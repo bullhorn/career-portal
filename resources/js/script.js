@@ -31,12 +31,12 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         service = {
             config: {
                 searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
-                showJobList: true,
                 additionalQuery: 'isOpen:1',
                 sort: "title",
                 fields: "id,title,categories,address,employmentType,dataAdded,publicDescription",
-                count: "10",
-                start: "0"
+                count: "15",
+                start: "0",
+                loadJobsOnStart : true
             },
             searchParams: {
                 textSearch: "",
@@ -73,7 +73,6 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             currentDetailData: {},
             makeSearchApiCall: function () {
                 if (service.searchParams.reloadAllData) {
-                    service.helper.toggleViewCurrentDataList(false);
                     service.helper.emptyCurrentDataList();
                     service.helper.resetStartAndTotal();
                 }
@@ -85,7 +84,6 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                     service.helper.updateStartAndTotal(data);
                     if (service.searchParams.reloadAllData) {
                         service.currentListData = data.data;
-                        service.helper.toggleViewCurrentDataList(true);
                     } else {
                         service.currentListData.push.apply(service.currentListData, data.data);
                     }
@@ -96,9 +94,6 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             helper: {
                 emptyCurrentDataList: function () {
                     service.currentListData.length = 0;
-                },
-                toggleViewCurrentDataList: function (show) {
-                    service.config.showJobList = show;
                 },
                 updateStartAndTotal: function (data) {
                     service.searchParams.total = data.total;
@@ -179,7 +174,10 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         $scope.searchService = SearchData;
 
 
-        SearchData.makeSearchApiCall();
+        if(SearchData.config.loadJobsOnStart){
+            SearchData.makeSearchApiCall();
+        }
+
 
         $scope.searchJobs = function () {
             SearchData.searchParams.reloadAllData = true;
