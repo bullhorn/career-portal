@@ -2,43 +2,45 @@
 <html ng-app="careers">
 
 <head>
-  <meta charset="utf-8">
-  <title>Bullhorn Career Portal</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <!-- Include 'Roboto + PT Serif' Google Fonts -->
-  <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic|Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-  <!-- Include Icon Font -->
-  <link href="resources/css/icon.css" rel="stylesheet" type="text/css">
-  <!-- Include Normalize http://necolas.github.io/normalize.css/ -->
-  <link href="resources/css/normalize.css" rel="stylesheet" type="text/css">
-  <!-- Main CSS file compiled from main.scss // To edit styles use style.scss -->
-  <link href="resources/css/main.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>Bullhorn Career Portal</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Include 'Roboto + PT Serif' Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic|Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <!-- Include Icon Font -->
+    <link href="resources/css/icon.css" rel="stylesheet" type="text/css">
+    <!-- Include Normalize http://necolas.github.io/normalize.css/ -->
+    <link href="resources/css/normalize.css" rel="stylesheet" type="text/css">
+    <!-- Main CSS file compiled from main.scss // To edit styles use style.scss -->
+    <link href="resources/css/main.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="portal" ng-class="[viewState,gridState]">
 
-  <div class="modal-container" ng-include="'resources/template/modal.html'" ng-show="modalState==='open'" ng-controller="ModalCtrl as modal"></div>
+<div class="modal-container" ng-include="'resources/template/modal.html'" ng-show="modalState==='open'"
+     ng-controller="ModalCtrl as modal"></div>
 
-  <hgroup>
+<hgroup>
     <aside ng-include="'resources/template/sidebar.html'"></aside>
     <main>
-      <header ng-controller="HeaderCtrl as header">
-        <button name="filters-menu" class="icon-filters-menu"></button>
-        <button name="over-arrow-back" class="icon-arrow-back" ng-click="header.goBack()"></button>
-        <!-- <img src="resources/img/logo.png"> -->
-        <h2>{{::searchService.config.portalText.companyName}}</h2>
-      </header>
-      <ng-view class="fade"></ng-view>
+        <header ng-controller="HeaderCtrl as header">
+            <button name="filters-menu" class="icon-filters-menu"></button>
+            <button name="over-arrow-back" class="icon-arrow-back" ng-click="header.goBack()"></button>
+            <!-- <img src="resources/img/logo.png"> -->
+            <h2>{{::searchService.config.portalText.companyName}}</h2>
+        </header>
+        <ng-view class="fade"></ng-view>
     </main>
-  </hgroup>
+</hgroup>
 
-  <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
-  <script src="resources/js/script.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+<script src="resources/js/script.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-angular.module('careers', ['ngRoute', 'ngAnimate'])
+angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
     .config(function ($routeProvider) {
         $routeProvider.
             when('/jobs', {
@@ -34,28 +34,28 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                 additionalQuery: 'isOpen:1',
                 sort: "-dateAdded",
                 fields: "id,title,categories,address,employmentType,dateAdded,publicDescription",
-                count: "15",
+                count: "20",
                 start: "0",
-                loadJobsOnStart : true,
-                portalText : {
-                    companyName : 'Acme Staffing',
-                    joblist : {
-                        header : "Open Jobs",
-                        loadMoreData : "Load more..."
+                loadJobsOnStart: true,
+                portalText: {
+                    companyName: 'Acme Staffing',
+                    joblist: {
+                        header: "Open Jobs",
+                        loadMoreData: "Load more..."
                     },
-                    overview : {
-                        header : "Job Description",
-                        applyButtonLabel : 'Apply now'
+                    overview: {
+                        header: "Job Description",
+                        applyButtonLabel: 'Apply now'
                     },
-                    sidebar : {
-                        searchPlaceholder : 'Keyword Search',
-                        locationHeader : 'Location',
-                        categoryHeader : 'Category'
+                    sidebar: {
+                        searchPlaceholder: 'Keyword Search',
+                        locationHeader: 'Location',
+                        categoryHeader: 'Category'
                     },
-                    modal : {
-                        header : 'Before You Apply...',
-                        subHeader : 'Please let us know who you are and upload your resume',
-                        uploadResumeFile : 'Upload Resume File'
+                    modal: {
+                        header: 'Before You Apply...',
+                        subHeader: 'Please let us know who you are and upload your resume',
+                        uploadResumeFile: 'Upload Resume File'
                     }
                 }
             },
@@ -130,7 +130,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
                     }
                     return false;
                 },
-                clearSearchParams : function(){
+                clearSearchParams: function () {
                     service.searchParams.textSearch = '';
                     service.searchParams.location = '';
                     service.searchParams.category = '';
@@ -145,7 +145,9 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         $rootScope.viewState = 'overview-closed';
         $scope.searchService = SearchData;
 
+
         $scope.loadMoreData = function () {
+            console.log("OUch!!")
             SearchData.searchParams.reloadAllData = false;
             SearchData.makeSearchApiCall();
         }
@@ -196,7 +198,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         $scope.searchService = SearchData;
 
 
-        if(SearchData.config.loadJobsOnStart){
+        if (SearchData.config.loadJobsOnStart) {
             SearchData.makeSearchApiCall();
         }
 
@@ -207,7 +209,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
         }
 
 
-        $scope.clearSearchParamsAndLoadData = function() {
+        $scope.clearSearchParamsAndLoadData = function () {
             SearchData.helper.clearSearchParams();
             SearchData.makeSearchApiCall();
         }
@@ -235,7 +237,7 @@ angular.module('careers', ['ngRoute', 'ngAnimate'])
             $location.path('/jobs');
         }
     }).
-    controller('ModalCtrl', function ($rootScope, $location, $scope,SearchData) {
+    controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData) {
 
         $scope.searchService = SearchData;
         this.closeModal = function () {
