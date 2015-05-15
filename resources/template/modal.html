@@ -2,10 +2,10 @@
   <modal class="slide-up">
     <header>
       <!-- This title should be dynamic -->
-      <h2>Before You Apply...</h2>
+      <h2>{{::searchService.config.portalText.modal.header}}</h2>
       <!-- This subtitle should be dynamic -->
       <p>
-        Please let us know who you are and upload your resume
+        {{::searchService.config.portalText.modal.subHeader}}
       </p>
 
     </header>
@@ -19,7 +19,7 @@
         <div class="upload-container">
           <input type="file" name="resume" value="" accept=".pdf">
           <div class="upload-content">
-            <i class="icon-cloud-upload"></i><span class="upload-text">Upload Resume File</span>
+            <i class="icon-cloud-upload"></i><span class="upload-text"> {{::searchService.config.portalText.modal.uploadResumeFile}}</span>
           </div>
         </div>
       </form>

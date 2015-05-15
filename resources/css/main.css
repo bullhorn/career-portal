@@ -37,6 +37,8 @@ html {
       outline: none; }
     html body button:focus, html body button:active {
       outline: none; }
+    html body .break-word {
+      word-wrap: break-word; }
     html body .modal-container {
       position: absolute;
       width: 100%;
@@ -331,6 +333,8 @@ html {
                 display: block;
                 width: 100%;
                 margin: 10px 0; }
+              html body hgroup main ng-view section.jobs #load-more-data {
+                width: 100%; }
               html body hgroup main ng-view section.jobs card {
                 cursor: pointer; }
                 html body hgroup main ng-view section.jobs card:hover {
@@ -597,13 +601,12 @@ html {
   transform: translateY(0);
   opacity: 1; }
 
-.slide-up-item.ng-enter,
-.slide-up-item.ng-leave {
-  -webkit-transition: all 120ms ease-in-out;
-  -ms-transition: all 120ms ease-in-out;
-  -moz-transition: all 120ms ease-in-out;
-  -o-transition: all 120ms ease-in-out;
-  transition: all 120ms ease-in-out; }
+.slide-up-item.ng-enter {
+  -webkit-transition: all 250ms ease-in-out;
+  -ms-transition: all 250ms ease-in-out;
+  -moz-transition: all 250ms ease-in-out;
+  -o-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out; }
 
 .slide-up-item.ng-enter, .slide-up-item.ng-move {
   -webkit-transform: translateY(50px);
