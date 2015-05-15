@@ -30,7 +30,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         service = {
             config: {
-                searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
+                searchUrl: 'http://public.jay.api:8181/rest-services/1hs/search/JobOrder',
                 additionalQuery: 'isOpen:1',
                 sort: "-dateAdded",
                 fields: "id,title,categories,address,employmentType,dateAdded,publicDescription",
