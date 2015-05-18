@@ -30,7 +30,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         service = {
             config: {
-                searchUrl: 'http://public.jay.api:8181/rest-services/1hs/search/JobOrder',
+                searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
                 additionalQuery: 'isOpen:1',
                 sort: "-dateAdded",
                 fields: "id,title,categories,address,employmentType,dateAdded,publicDescription",
@@ -53,9 +53,15 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                         categoryHeader: 'Category'
                     },
                     modal: {
-                        header: 'Before You Apply...',
-                        subHeader: 'Please let us know who you are and upload your resume',
-                        uploadResumeFile: 'Upload Resume File'
+                        uploadResumeFile: 'Upload Resume File',
+                        apply: {
+                            header: 'Before You Apply...',
+                            subHeader: 'Please let us know who you are and upload your resume'
+                        },
+                        thankYou: {
+                            header: 'Thank you!',
+                            subHeader: 'Thank you for submitting your online application'
+                        }
                     }
                 }
             },
@@ -79,7 +85,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 start: function () {
                     return (service.searchParams.start ? service.searchParams.start : service.config.start)
                 },
-                assemble: function () {
+                assemble: function (resume) {
                     var query = '(' + service.config.additionalQuery + ')';
 
                     if (service.searchParams.textSearch) {
@@ -87,7 +93,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                     }
 
                     return '?' +
-                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort();
+                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort()+'&useV2=true';
                 }
             },
             currentListData: [],
@@ -140,6 +146,110 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         return service;
     }]).
+    factory('ApplyJob', ['$http', function ($http) {
+        var service = {};
+
+        service = {
+            config: {
+                applyUrl: 'http://public.rest.api:8181/rest-services/1hs/apply/'
+            },
+            initializeModel: function() {
+                if(service.storage.hasLocalStorage()) {
+                    service.form = service.storage.getStoredForm();
+                }
+            },
+            form : {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                resumeName: '',
+                resumeInfo: {}
+            },
+            storage: {
+                hasLocalStorage: function() {
+                    var hasStorage = typeof(Storage) != "undefined";
+
+                    if(!hasStorage) {
+                        console.log("Local storage is not supported!");
+                    }
+
+                    return hasStorage;
+                },
+                getStoredForm : function() {
+                    if(service.storage.hasLocalStorage()) {
+                        return {
+                            firstName: localStorage.getItem("firstName"),
+                            lastName: localStorage.getItem("lastName"),
+                            email: localStorage.getItem("email"),
+                            mobile: localStorage.getItem("mobile")
+                        };
+                    }
+
+                    return {};
+                },
+                store : function() {
+                    if(service.storage.hasLocalStorage()) {
+                        localStorage.setItem("firstName", service.form.firstName);
+                        localStorage.setItem("lastName", service.form.lastName);
+                        localStorage.setItem("email", service.form.email);
+                        localStorage.setItem("mobile", service.form.mobile);
+                    }
+                }
+            },
+            requestParams: {
+                firstName: function () {
+                    return service.form.firstName;
+                },
+                lastName: function () {
+                    return service.form.lastName;
+                },
+                email: function () {
+                    return service.form.email;
+                },
+                phone: function () {
+                    return (service.form.phone ? service.form.phone : '')
+                },
+                assemble: function (resume) {
+                    var format = resume.name.substring(resume.name.lastIndexOf('.')+1);
+
+                    return '?firstName='+service.requestParams.firstName()+'&lastName='+service.requestParams.lastName()
+                        +'&email='+service.requestParams.email()+'&phone='+service.requestParams.phone()+'&format='+format;
+                }
+            },
+            submit: function(jobID, successCallback) {
+                successCallback = successCallback || function() {};
+
+                service.storage.store();
+
+                var form = new FormData();
+
+                form.append("resume", service.form.resumeInfo);
+
+                var applyUrl = service.config.applyUrl+jobID+'/raw'+service.requestParams.assemble(service.form.resumeInfo);
+
+                $http.post(applyUrl, form, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }).success(function( data ) {
+                    service.form.email = data.candidate.email;
+                    service.form.firstName = data.candidate.firstName;
+                    service.form.lastName = data.candidate.lastName;
+                    service.form.phone = data.candidate.phone;
+
+                    service.storage.store();
+
+                    console.log(JSON.stringify(data));
+
+                    successCallback();
+                }).error(function (data) {
+                    alert(data.errorMessage);
+                })
+            }
+        };
+
+        return service;
+    }]).
     controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) {
         console.log('INIT');
         $rootScope.viewState = 'overview-closed';
@@ -177,10 +287,10 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         $scope.job_id = $routeParams.id;
 
+
         this.open = true;
 
         this.openShare = function () {
-
             this.open = this.open === false ? true : false;
 
             if (!this.open) {
@@ -188,7 +298,6 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
             } else {
                 this.share = '';
             }
-
         }
 
     }).
@@ -230,22 +339,46 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
     }).
     controller('HeaderCtrl', function ($rootScope, $location, $scope, SearchData) {
-
         $scope.searchService = SearchData;
 
         this.goBack = function () {
             $location.path('/jobs');
         }
     }).
-    controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData) {
-
+    controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData, ApplyJob) {
         $scope.searchService = SearchData;
+        $scope.applyService = ApplyJob;
+
+        $scope.applyService.initializeModel();
+
         this.closeModal = function () {
             $rootScope.modalState = 'closed';
+            $scope.showForm = true;
+            $scope.searchService.config.portalText.modal.header=$scope.searchService.config.portalText.modal.apply.header;
+            $scope.searchService.config.portalText.modal.subHeader=$scope.searchService.config.portalText.modal.apply.subHeader;
+        }
+
+        this.applySuccess = function() {
+            $scope.showForm = false;
+            $scope.searchService.config.portalText.modal.header=$scope.searchService.config.portalText.modal.thankYou.header;
+            $scope.searchService.config.portalText.modal.subHeader=$scope.searchService.config.portalText.modal.thankYou.subHeader;
+        };
+
+        this.closeModal();
+
+        var controller = this;
+
+        this.submit = function(applyForm) {
+            if(applyForm.$valid) {
+                $scope.applyService.submit($scope.searchService.currentDetailData.id, function() {
+                    controller.applySuccess();
+                });
+            } else {
+                alert('Fix the form!');
+            }
         }
     }).
     directive('elHeight', function ($timeout, $rootScope) {
-
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -257,10 +390,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                         }
                     }
                 }, 120);
-
             }
         }
-
     }).
     directive("scroll", function ($window) {
         console.log("load scroll?");
@@ -285,7 +416,39 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 });
             }
         }
-    });
+    }).directive('fileModel', ['$parse', function ($parse) {
+        return {
+            require: 'ngModel',
+            restrict: 'A',
+            link: function(scope, element, attrs, ngModel) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                ngModel.$render = function () {
+                    var fileName = element.val();
+
+                    if(fileName) {
+                        var index = fileName.lastIndexOf('\\');
+
+                        if(!index) {
+                            index = fileName.lastIndexOf('/');
+                        }
+
+                        fileName = fileName.substring(index+1);
+                    }
+
+                    ngModel.$setViewValue(fileName);
+                };
+
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                        ngModel.$render();
+                    });
+                });
+            }
+        };
+    }]);
 
 $("button[name='filters-menu']").on("click", function () {
     $('html body hgroup aside').toggle();
