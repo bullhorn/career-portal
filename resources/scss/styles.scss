@@ -11,6 +11,7 @@ $dark-bg:               #2e2f30;  // Sidebar Background
 $header-bg:            $primary;  // Header Background
 $toggle-active:            #fff;  // Grid-List toggle button 'active' color
 $cancel: darken($light-bg, 15%);  // Cancel button color
+$error:              #da4453;  // Required asterix
 
 /* Typography */
 
@@ -102,11 +103,21 @@ html {
               margin: 25px 0;
               width: 100%;
             }
+
+            .required {
+              color: $error;
+              font-size: 1.2em;
+            }
+
+            .error {
+              color: $error;
+              margin-left: 4%;
+            }
           }
           input{
             box-sizing: border-box;
-            width: 100%;
-            &[type="text"] {
+            width: 96%;
+            &[type="text"], &[type="email"] {
               border: none;
               border-bottom: 1px solid darken($light-bg, 15%);
               padding: 5px;

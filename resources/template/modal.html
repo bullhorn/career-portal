@@ -1,32 +1,80 @@
 
   <modal class="slide-up">
-    <header>
-      <!-- This title should be dynamic -->
-      <h2>{{::searchService.config.portalText.modal.header}}</h2>
-      <!-- This subtitle should be dynamic -->
-      <p>
-        {{::searchService.config.portalText.modal.subHeader}}
-      </p>
-
-    </header>
-    <main>
-      <!-- This content should be dynamic -->
-      <form class="apply-form" action="index.html" method="post">
-        <input type="text" name="firstName" value="" placeholder="First Name">
-        <input type="text" name="lastName" value="" placeholder="Last Name">
-        <input type="text" name="email" value="" placeholder="Email@domain.com">
-        <input type="text" name="mobile-phone" value="" placeholder="Mobile Phone (Optional)">
-        <div class="upload-container">
-          <input type="file" name="resume" value="" accept=".pdf">
-          <div class="upload-content">
-            <i class="icon-cloud-upload"></i><span class="upload-text"> {{::searchService.config.portalText.modal.uploadResumeFile}}</span>
-          </div>
+      <header>
+        <!-- This title should be dynamic -->
+        <h2>{{searchService.config.portalText.modal.header}}</h2>
+        <!-- This subtitle should be dynamic -->
+        <p>
+          {{searchService.config.portalText.modal.subHeader}}
+        </p>     </header>
+      <main ng-show="showForm">
+        <!-- This content should be dynamic -->
+        <form name="applyForm" class="apply-form" action="index.html" method="post" novalidate>
+          <span>
+            <span class="required">*</span>
+            <input type="text" name="firstName" value="" ng-model="applyService.form.firstName" placeholder="First Name" required>
+            <span class="error">
+                <span ng-show="applyForm.firstName.$touched || applyForm.$submitted">
+                    <span ng-show="applyForm.firstName.$error.required">
+                      Please enter your first name.
+                    </span>
+                </span>
+            </span>
+          </span>
+          <span>
+            <span class="required">*</span>
+            <input type="text" name="lastName" value="" ng-model="applyService.form.lastName" placeholder="Last Name" required>
+            <span class="error">
+                <span ng-show="applyForm.lastName.$touched || applyForm.$submitted">
+                    <span ng-show="applyForm.lastName.$error.required">
+                      Please enter your last name.
+                    </span>
+                </span>
+            </span>
+          </span>
+          <span>
+            <span class="required">*</span>
+            <input type="email" name="email" value="" ng-model="applyService.form.email" placeholder="Email@domain.com" required>
+            <span class="error">
+                <span ng-show="applyForm.email.$touched || applyForm.$submitted">
+                    <span ng-show="applyForm.email.$error.required">
+                      Please enter your email.
+                    </span>
+                    <span ng-show="applyForm.email.$error.email">
+                      Please enter a valid email.
+                    </span>
+                </span>
+            </span>
+          </span>
+          <span>
+            <span>&nbsp;</span>
+            <input type="text" name="mobile-phone" value="" ng-model="applyService.form.phone" placeholder="Mobile Phone (Optional)">
+          </span>
+            <div class="upload-container">
+                <input type="file" name="resume" value="" ng-model="applyService.form.resumeName" file-model="applyService.form.resumeInfo" required>
+                <div class="upload-content">
+                    <i class="icon-cloud-upload"></i>
+                    <span class="upload-text" ng-show="!applyService.form.resumeName">{{::searchService.config.portalText.modal.uploadResumeFile}}</span>
+                    <span class="upload-text" ng-show="applyService.form.resumeName">{{applyService.form.resumeName}}</span>
+                </div>
+            </div>
+            <span class="error">
+              <span ng-show="applyForm.$submitted">
+                  <span ng-show="applyForm.resume.$error.required">
+                    Please upload your resume.
+                  </span>
+              </span>
+            </span>
+        </form>
+        <!-- These buttons should be dynamic -->
+        <div class="btn-container">
+          <button name="cancel" ng-click="modal.closeModal()">Cancel</button>
+          <button type="submit" name="submit" ng-click="modal.submit(applyForm)">Submit</button>
         </div>
-      </form>
-      <!-- These buttons should be dynamic -->
-      <div class="btn-container">
-        <button type="submit" name="cancel" ng-click="modal.closeModal()">Cancel</button>
-        <button type="submit" name="submit">Submit</button>
-      </div>
-    </main>
+      </main>
+      <main ng-show="!showForm">
+        <div class="btn-container">
+          <button type="submit" name="submit" ng-click="modal.closeModal()">Ok</button>
+        </div>
+      </main>
   </modal>
