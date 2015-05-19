@@ -93,7 +93,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                     }
 
                     return '?' +
-                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort()+'&useV2=true';
+                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort()+'&useV2=true&clearCache=true';
                 }
             },
             currentListData: [],
@@ -255,7 +255,6 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         $rootScope.viewState = 'overview-closed';
         $scope.searchService = SearchData;
 
-
         $scope.loadMoreData = function () {
             console.log("OUch!!")
             SearchData.searchParams.reloadAllData = false;
@@ -369,12 +368,12 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         var controller = this;
 
         this.submit = function(applyForm) {
+            applyForm.$submitted = true;
+
             if(applyForm.$valid) {
                 $scope.applyService.submit($scope.searchService.currentDetailData.id, function() {
                     controller.applySuccess();
                 });
-            } else {
-                alert('Fix the form!');
             }
         }
     }).

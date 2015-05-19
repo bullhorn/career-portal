@@ -75,14 +75,20 @@ html {
             box-sizing: border-box;
             margin: 25px 0;
             width: 100%; }
+          html body .modal-container modal main form.apply-form .required {
+            color: #da4453;
+            font-size: 1.2em; }
+          html body .modal-container modal main form.apply-form .error {
+            color: #da4453;
+            margin-left: 4%; }
           html body .modal-container modal main input {
             box-sizing: border-box;
-            width: 100%; }
-            html body .modal-container modal main input[type="text"] {
+            width: 96%; }
+            html body .modal-container modal main input[type="text"], html body .modal-container modal main input[type="email"] {
               border: none;
               border-bottom: 1px solid #cecece;
               padding: 5px; }
-              html body .modal-container modal main input[type="text"]:focus {
+              html body .modal-container modal main input[type="text"]:focus, html body .modal-container modal main input[type="email"]:focus {
                 border-bottom: 1px solid #39d; }
             html body .modal-container modal main input[type="file"] {
               cursor: pointer;
