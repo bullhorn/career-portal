@@ -213,8 +213,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 assemble: function (resume) {
                     var format = resume.name.substring(resume.name.lastIndexOf('.')+1);
 
-                    return '?firstName='+service.requestParams.firstName()+'&lastName='+service.requestParams.lastName()
-                        +'&email='+service.requestParams.email()+'&phone='+service.requestParams.phone()+'&format='+format;
+                    return '?firstName='+service.requestParams.firstName()+'&lastName='+service.requestParams.lastName()+'&email='+service.requestParams.email()+'&phone='+service.requestParams.phone()+'&format='+format;
                 }
             },
             submit: function(jobID, successCallback) {
@@ -254,6 +253,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         console.log('INIT');
         $rootScope.viewState = 'overview-closed';
         $scope.searchService = SearchData;
+        console.log($scope.searchService.currentListData.length);
 
         $scope.loadMoreData = function () {
             console.log("OUch!!")
@@ -265,7 +265,6 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
             SearchData.currentDetailData = Data;
             $location.path('/jobs/' + id);
         }
-
     }).
     controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData) {
         // Form data for the login modal
@@ -415,7 +414,13 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 });
             }
         }
-    }).directive('fileModel', ['$parse', function ($parse) {
+    }).
+    filter("stripHtml", function () {
+      return function(text) {
+        return String(text).replace(/<[^>]+>/gm, '');
+      }
+    }).
+    directive('fileModel', ['$parse', function ($parse) {
         return {
             require: 'ngModel',
             restrict: 'A',
