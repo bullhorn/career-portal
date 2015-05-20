@@ -100,10 +100,35 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
                     return '?'+
                         'query=' + query + '&fields=' + service.config.fields + '&count=1&start=0&sort=' + this.sort()+'&useV2=true';
+                },
+                assembleForCategories: function(categoryID) {
+                    var query = '(' + service.config.additionalQuery + ') AND categories.id:'+categoryID;
+
+                    return '?'+
+                        'query=' + query + '&fields=' + service.config.fields + '&count='+this.count()+'&start=0&sort=' + this.sort()+'&useV2=true';
                 }
             },
             currentListData: [],
             currentDetailData: {},
+            loadJobDataByCategory : function(categoryID) {
+                service.helper.emptyCurrentDataList();
+                service.helper.resetStartAndTotal();
+
+                $http({
+                    method: 'GET',
+                    url: service.config.searchUrl + service.requestParams.assembleForCategories(categoryID)
+                }).success(function (data) {
+                    if(data && data.data.length > 0) {
+                        service.currentListData = data.data;
+                    } else {
+                        console.log('No jobs found with categoryID '+categoryID);
+                    }
+                }).error(function (data) {
+                    console.log(data.errorMessage);
+
+                    $location.path('/jobs');
+                });
+            },
             loadJobData: function(jobID, $location, callback) {
                 $http({
                     method: 'GET',
@@ -359,9 +384,9 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         this.job_id = $routeParams.id;
         $scope.job_id = $routeParams.id;
 
-        if(!SearchData.currentDetailData.id) {
-            var controller = this;
+        var controller = this;
 
+        if(!SearchData.currentDetailData.id) {
             SearchData.loadJobData(this.job_id, $location, function(job) {
                 controller.job_data = job;
             });
@@ -374,7 +399,9 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         };
 
         this.loadJobsWithCategory = function(categoryID) {
-            alert(categoryID);
+            $scope.searchService.loadJobDataByCategory(categoryID);
+
+            controller.goBack();
         };
 
         this.applyModal = function () {
