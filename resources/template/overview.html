@@ -33,13 +33,16 @@
       <hr>
   		<h3>Related Jobs</h3>
   		<list>
-  			<item><a href="#">Career Portal Enthusiast | </a><span class="category">UX/UI</span>
-  			<span class="location">Boston, MA</span></item>
+  			<item ng-repeat="job in relatedJobs">
+				<a href="javascript:void(0);" ng-click="overview.switchToJob(job.id)">{{ job.title }}</a>
+				<span ng-repeat="cat in job.categories.data" class="category">{{ cat.name }}{{$last ? '' : ', '}}</span>
+  				<span class="location">{{ job.address.city+','+job.address.state }}</span>
+			</item>
   		</list>
   		<hr>
-  		<span ng-repeat="cat in overview.job_data.categories.data">
+  		<div ng-repeat="cat in overview.job_data.categories.data">
 			<a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(cat.id)" class="category-filter">See all {{cat.name}} Jobs <i class="icon-arrow-forward"></i> </a>
-		</span>
+		</div>
 		</div>
 	</card>
 </section>

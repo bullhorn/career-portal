@@ -1,4 +1,4 @@
-angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
+angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
     .config(function ($routeProvider) {
         $routeProvider.
             when('/jobs', {
@@ -33,7 +33,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
                 additionalQuery: 'isOpen:1',
                 sort: "-dateAdded",
-                fields: "id,title,categories,address,employmentType,dateAdded,publicDescription",
+                fields: "id,title,categories[10],address,employmentType,dateAdded,publicDescription",
                 count: "20",
                 start: "0",
                 loadJobsOnStart: true,
@@ -67,8 +67,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
             },
             searchParams: {
                 textSearch: "",
-                location: "",
-                category: "",
+                location: [],
+                category: [],
                 sort: "",
                 count: "",
                 start: "",
@@ -85,51 +85,130 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 start: function () {
                     return (service.searchParams.start ? service.searchParams.start : service.config.start)
                 },
-                assemble: function () {
+
+                assembleUsingAll: function(groupBy, field) {
                     var query = '(' + service.config.additionalQuery + ')';
 
                     if (service.searchParams.textSearch) {
                         query += ' AND (title:' + service.searchParams.textSearch + '* OR publishedDescription:' + service.searchParams.textSearch + '*)';
                     }
 
+                    if(service.searchParams.category.length > 0) {
+                        query += ' AND (';
+
+                        var first = true;
+                        for(var i = 0; i < service.searchParams.category.length; i++) {
+                            if(!first) {
+                                query += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            query += 'categories.id:'+service.searchParams.category[i];
+                        }
+
+                        query += ')';
+                    }
+
+                    if(service.searchParams.location.length > 0) {
+                        query += ' AND (';
+
+                        var first = true;
+                        for(var i = 0; i < service.searchParams.location.length; i++) {
+                            if(!first) {
+                                query += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            query += 'address.city:"'+service.searchParams.location[i]+'"';
+                        }
+
+                        query += ')';
+                    }
+
+                    var count;
+                    var sort;
+
+                    if(groupBy) {
+                        count = '&groupByCount='+field;
+                        sort = '&sort='+field;
+                    } else {
+                        count = '&count='+this.count();
+                        sort = '&sort='+this.sort();
+                    }
+
                     return '?' +
-                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=' + this.start() + '&sort=' + this.sort()+'&useV2=true';
+                        'query=' + query + '&fields=' + service.config.fields + count + '&start=' + this.start() + sort+'&useV2=true';
+                },
+                assemble: function () {
+                    return this.assembleUsingAll(false);
+                },
+                assembleForCategories: function(categoryID, idToExclude) {
+                    var query = '(' + service.config.additionalQuery + ') AND categories.id:'+categoryID;
+
+                    if(idToExclude && parseInt(idToExclude) > 0) {
+                        query += ' NOT id:'+idToExclude;
+                    }
+
+                    return '?' +
+                        'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=0&sort=' + this.sort()+'&useV2=true';
+                },
+                assembleForGroupBy: function(field) {
+                    return this.assembleUsingAll(true, field);
                 },
                 assembleForFind: function(jobID) {
                     var query = '(' + service.config.additionalQuery + ') AND id:'+jobID;
 
                     return '?'+
                         'query=' + query + '&fields=' + service.config.fields + '&count=1&start=0&sort=' + this.sort()+'&useV2=true';
-                },
-                assembleForCategories: function(categoryID) {
-                    var query = '(' + service.config.additionalQuery + ') AND categories.id:'+categoryID;
-
-                    return '?'+
-                        'query=' + query + '&fields=' + service.config.fields + '&count='+this.count()+'&start=0&sort=' + this.sort()+'&useV2=true';
                 }
             },
             currentListData: [],
             currentDetailData: {},
-            loadJobDataByCategory : function(categoryID) {
-                service.helper.emptyCurrentDataList();
-                service.helper.resetStartAndTotal();
+            getCountBy : function(field, callback, errorCallback) {
+                errorCallback = errorCallback || function() {};
 
                 $http({
                     method: 'GET',
-                    url: service.config.searchUrl + service.requestParams.assembleForCategories(categoryID)
+                    url: service.config.searchUrl + service.requestParams.assembleForGroupBy(field)
                 }).success(function (data) {
                     if(data && data.data.length > 0) {
-                        service.currentListData = data.data;
+                        callback(data.data);
                     } else {
-                        console.log('No jobs found with categoryID '+categoryID);
+                        console.log('No group by data found for field '+field);
+
+                        errorCallback();
                     }
                 }).error(function (data) {
                     console.log(data.errorMessage);
 
-                    $location.path('/jobs');
+                    errorCallback();
                 });
             },
-            loadJobData: function(jobID, $location, callback) {
+            loadJobDataByCategory : function(categoryID, callback, errorCallback, idToExclude) {
+                errorCallback = errorCallback || function() {};
+
+                $http({
+                    method: 'GET',
+                    url: service.config.searchUrl + service.requestParams.assembleForCategories(categoryID, idToExclude)
+                }).success(function (data) {
+                    if(data && data.data.length > 0) {
+                        callback(data.data);
+                    } else {
+                        console.log('No jobs found with categoryID '+categoryID);
+
+                        errorCallback();
+                    }
+                }).error(function (data) {
+                    console.log(data.errorMessage);
+
+                    errorCallback();
+                });
+            },
+            loadJobData: function(jobID, callback, errorCallback) {
+                errorCallback = errorCallback || function() {};
+
                 $http({
                     method: 'GET',
                     url: service.config.searchUrl + service.requestParams.assembleForFind(jobID)
@@ -137,12 +216,12 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                     if(data && data.data.length > 0) {
                         callback(data.data[0]);
                     } else {
-                        $location.path('/jobs');
+                        errorCallback();
                     }
                 }).error(function (data) {
                     console.log(data.errorMessage);
 
-                    $location.path('/jobs');
+                    errorCallback();
                 });
             },
             makeSearchApiCall: function () {
@@ -185,8 +264,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 },
                 clearSearchParams: function () {
                     service.searchParams.textSearch = '';
-                    service.searchParams.location = '';
-                    service.searchParams.category = '';
+                    service.searchParams.location = [];
+                    service.searchParams.category = [];
                 }
             }
         };
@@ -198,7 +277,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         service = {
             config: {
-                applyUrl: 'http://public.rest.api:8181/rest-services/1hs/apply/'
+                applyUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/apply/'
             },
             initializeModel: function() {
                 if(service.storage.hasLocalStorage()) {
@@ -385,26 +464,36 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         var controller = this;
 
-        if(!SearchData.currentDetailData.id) {
-            SearchData.loadJobData(this.job_id, $location, function(job) {
+        this.loadRelatedJobs = function() {
+            $scope.relatedJobs = [];
+
+            for(var i = 0; i < controller.job_data.categories.data.length; i ++) {
+                SearchData.loadJobDataByCategory(controller.job_data.categories.data[i].id, function (jobs) {
+                    $scope.relatedJobs = $scope.relatedJobs.concat(jobs);
+                }, function() {}, controller.job_data.id);
+            }
+        };
+
+        this.loadJob = function(jobID) {
+            SearchData.loadJobData(jobID, function(job) {
                 controller.job_data = job;
+
+                controller.loadRelatedJobs();
+            }, function() {
+                controller.goBack();
             });
+        };
+
+        if(!SearchData.currentDetailData.id) {
+            controller.loadJob(this.job_id);
         } else {
-            this.job_data = SearchData.currentDetailData;
+            controller.job_data = SearchData.currentDetailData;
+
+            controller.loadRelatedJobs();
         }
 
         this.goBack = function () {
             $location.path('/jobs');
-        };
-
-        this.loadJobsWithCategory = function(categoryID) {
-            $scope.searchService.loadJobDataByCategory(categoryID);
-
-            controller.goBack();
-        };
-
-        this.applyModal = function () {
-            $rootScope.modalState = 'open';
         };
 
         this.shareFacebook = ShareSocial.facebook;
@@ -413,6 +502,32 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
         this.shareEmail = ShareSocial.email;
 
         this.open = true;
+
+        this.switchToJob = function(jobID) {
+            $location.path('/jobs/' + jobID);
+
+            controller.loadJob(jobID);
+        };
+
+        this.loadJobsWithCategory = function(categoryID) {
+            SearchData.helper.emptyCurrentDataList();
+            SearchData.helper.resetStartAndTotal();
+
+            SearchData.loadJobDataByCategory(categoryID, function(jobs) {
+                SearchData.currentListData = jobs;
+                SearchData.searchParams.category.push(categoryID);
+
+                controller.goBack();
+            }, function() {
+                SearchData.makeSearchApiCall();
+
+                controller.goBack();
+            });
+        };
+
+        this.applyModal = function () {
+            $rootScope.modalState = 'open';
+        };
 
         this.openShare = function () {
             this.open = this.open === false ? true : false;
@@ -429,32 +544,50 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
 
         $scope.searchService = SearchData;
 
-
         if (SearchData.config.loadJobsOnStart) {
             SearchData.makeSearchApiCall();
         }
 
-
         $scope.searchJobs = function () {
             SearchData.searchParams.reloadAllData = true;
             SearchData.makeSearchApiCall();
-        }
-
+        };
 
         $scope.clearSearchParamsAndLoadData = function () {
             SearchData.helper.clearSearchParams();
             SearchData.makeSearchApiCall();
-        }
+        };
+
+        SearchData.getCountBy('address.city', function(locations) {
+           $scope.locations = locations;
+        });
+
+        $scope.selectedLocations = SearchData.searchParams.location;
+
+        $scope.filterBy = function(field) {
+            console.log($scope.selectedLocations);
+            console.log(SearchData.searchParams.location);
+            //SearchData.searchParams[field] = $scope[]
+            //var indexOfValue = SearchData.searchParams[field].indexOf(value);
+            //
+            //if(indexOfValue < 0) {
+            //    SearchData.searchParams[field].push(value);
+            //} else {
+            //    SearchData.searchParams[field].splice(indexOfValue, 1);
+            //}
+
+            SearchData.makeSearchApiCall();
+        };
 
         this.switchViewStyle = function (type) {
             $rootScope.gridState = type + '-view';
-        }
+        };
 
         this.goBack = function (state) {
             if ($rootScope.viewState === state) {
                 $location.path('/jobs');
             }
-        }
+        };
 
         this.filterCounter = function ($rootScope) {
             var counter;

@@ -287,6 +287,9 @@ html {
               }
 
               list {
+                height: 200px;
+                overflow-y: scroll;
+
                 item {
                   margin: 10px 5px;
                   padding-bottom: 5px;
@@ -313,7 +316,7 @@ html {
                     }
                   }
                   label {
-                    width: 80%;
+                    width: 75%;
                     display: inline-block;
                     cursor: pointer;
                   }
@@ -561,7 +564,7 @@ html {
                    color: $base-color;
                    @include vendor-prefix(transition, font-size 120ms linear);
                  }
-                 h3.category {
+                 span.category {
                    color: lighten($base-color, 35%);
                  }
                  div.loc-type {
