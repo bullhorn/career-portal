@@ -260,8 +260,7 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                 assemble: function (resume) {
                     var format = resume.name.substring(resume.name.lastIndexOf('.')+1);
 
-                    return '?firstName='+service.requestParams.firstName()+'&lastName='+service.requestParams.lastName()
-                        +'&email='+service.requestParams.email()+'&phone='+service.requestParams.phone()+'&format='+format;
+                    return '?firstName='+service.requestParams.firstName()+'&lastName='+service.requestParams.lastName()+'&email='+service.requestParams.email()+'&phone='+service.requestParams.phone()+'&format='+format;
                 }
             },
             submit: function(jobID, successCallback) {
@@ -550,9 +549,9 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize'])
                         var entity = s.substring(i + 1, semicolonIndex);
                         if (entity.length > 1 && entity.charAt(0) == '#') {
                             if (entity.charAt(1) == 'x' || entity.charAt(1) == 'X')
-                                ch = String.fromCharCode(eval('0' + entity.substring(1)));
+                                ch = String.fromCharCode(eval('0' + entity.substring(1))); //jshint ignore:line
                             else
-                                ch = String.fromCharCode(eval(entity.substring(1)));
+                                ch = String.fromCharCode(eval(entity.substring(1))); //jshint ignore:line
                         } else {
                             switch (entity) {
                                 case ' quot ':
