@@ -12,17 +12,18 @@ module.exports = function(grunt) {
         },
         clean: {
             compile: ['dist'],
-            reset: ['dist', 'lib', 'bower_components', 'node_modules']
+            postcompile: ['.sass-cache'],
+            reset: ['dist', 'lib', '.sass-cache', 'bower_components', 'node_modules']
         },
         copy: {
             compile: {
-                cwd: '/',
                 dest: 'dist/',
                 expand: true,
                 src: [
                     '*.html',
                     'font/**/*',
                     'lib/**/*.js',
+                    'lib/**/*.css',
                     'media/**/*.png',
                     'res/**/*.json',
                     'script**/*.js',
@@ -69,19 +70,27 @@ module.exports = function(grunt) {
         },
         watch: {
             autobuild: {
-                files: ['script/**/*.js'],
+                files: [
+                    '*.html',
+                    'media/**/*.png',
+                    'res/**/*.json',
+                    'script/**/*.js',
+                    'style/**/*.scss',
+                    'view/**/*.html'
+                ],
                 tasks: ['build'],
                 options: {
-                    livereload: 35729
+                    livereload: true
                 }
             }
         },
         connect: {
             host: {
                 options: {
+                    base: 'dist',
                     hostname: 'portal.bh-bos2.bullhorn.local',
-                    livereload: 35729,
-                    port: 9001
+                    livereload: true,
+                    port: 80
                 }
             }
         }
@@ -105,7 +114,7 @@ module.exports = function(grunt) {
     grunt.registerTask('reset', ['clean:reset']);
     grunt.registerTask('restore', ['bower:restore']);
     grunt.registerTask('analyze', ['jshint:analyze']);
-    grunt.registerTask('compile', ['clean:compile', 'copy:compile', 'sass:compile', 'version']);
+    grunt.registerTask('compile', ['clean:compile', 'copy:compile', 'sass:compile', 'version', 'clean:postcompile']);
     grunt.registerTask('test', []); // TODO
     grunt.registerTask('pack', []); // TODO
     grunt.registerTask('min', []); // TODO
