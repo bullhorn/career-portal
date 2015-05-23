@@ -1,0 +1,1090 @@
+/* ==============
+    Variables
+===============*/
+
+/* Color Schemes */
+
+$primary: #39d; // Links + Header
+$secondary: #7abd00; // Apply Buttons
+$light-bg: #f4f4f4; // Main Background
+$dark-bg: #2e2f30; // Sidebar Background
+$header-bg: $primary; // Header Background
+$toggle-active: #fff; // Grid-List toggle button 'active' color
+$cancel: darken($light-bg, 15%); // Cancel button color
+$error: #da4453; // Required asterix
+
+/* Typography */
+
+$font-size: 13px;
+$font-family: 'Roboto';
+$base-color: #46474A;
+
+/* ==============
+     Styles
+===============*/
+
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-family;
+    font-size: $font-size;
+    width: 100%;
+    height: 100%;
+    color: $base-color;
+
+    body {
+        width: 100%;
+        height: 100%;
+        background: $light-bg;
+
+        list {
+            display: block;
+            list-style-type: none;
+        }
+
+        item {
+            display: list-item;
+        }
+
+        a {
+            color: $primary;
+            text-decoration: none;
+        }
+
+        input {
+            &:focus,
+            &:active {
+                outline: none;
+            }
+        }
+
+        button {
+            &:focus,
+            &:active {
+                outline: none;
+            }
+        }
+
+        .break-word {
+            word-wrap: break-word;
+        }
+        /* ==== Modal Styles ====*/
+        .modal-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,.7);
+            z-index: 9999;
+
+            modal {
+                display: block;
+                margin: 80px auto;
+                width: 100%;
+                max-width: 500px;
+                background: #fff;
+                box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+                box-sizing: border-box;
+
+                header {
+                    background: $primary;
+                    padding: 10px 0px 20px 0px;
+                    display: block;
+                    box-sizing: border-box;
+                    color: #fff;
+                    text-align: center;
+
+                    h2 {
+                        color: #fff;
+                    }
+                }
+
+                main {
+                    padding: 10px 25px 20px 25px;
+                    display: block;
+                    box-sizing: border-box;
+
+                    form.apply-form {
+                        & > * {
+                            display: block;
+                            box-sizing: border-box;
+                            margin: 25px 0;
+                            width: 100%;
+                        }
+
+                        .required {
+                            color: $error;
+                            font-size: 1.2em;
+                        }
+
+                        .error {
+                            color: $error;
+                            margin-left: 4%;
+                        }
+                    }
+
+                    input {
+                        box-sizing: border-box;
+                        width: 96%;
+
+                        &[type="text"], &[type="email"] {
+                            border: none;
+                            border-bottom: 1px solid darken($light-bg, 15%);
+                            padding: 5px;
+
+                            &:focus {
+                                border-bottom: 1px solid $primary;
+                            }
+                        }
+
+                        &[type="file"] {
+                            cursor: pointer;
+                            text-align: center;
+                            padding: 10px;
+                            background: $light-bg;
+                            border-radius: 3px;
+                            border: 1px solid $primary;
+                            opacity: 0;
+                            position: relative;
+                            z-index: 5;
+                        }
+                    }
+                    // Custom Upload Resume Button styles
+                    .upload-container {
+                        border: 1px solid $primary;
+                        border-radius: 3px;
+                        background: transparent;
+                        position: relative;
+                        cursor: pointer;
+
+                        .upload-content {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            top: 12px;
+                            text-align: center;
+                            color: $primary;
+                            z-index: 0;
+
+                            & > * {
+                                line-height: 13px;
+                            }
+
+                            i {
+                                margin-right: 10px;
+                                font-size: 1.5em;
+                            }
+
+                            .upload-text {
+                                vertical-align: 3px;
+                            }
+                        }
+                    }
+                }
+
+                .btn-container {
+                    width: 100%;
+                    padding-top: 25px;
+                    text-align: center;
+                    text-align: right;
+
+                    button {
+                        text-transform: uppercase;
+                        padding: 10px 15px;
+                        border: none;
+                        margin: 0 10px;
+
+                        &[name="cancel"] {
+                            color: $cancel;
+                            background: transparent;
+                            font-weight: 600;
+                        }
+
+                        &[name="submit"] {
+                            color: #fff;
+                            background: $primary;
+                            border-radius: 2px;
+                        }
+                    }
+                }
+            }
+        }
+        /* ==== END Modal Styles ====*/
+        hgroup {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+
+            header {
+                height: 48px;
+                box-sizing: border-box;
+                line-height: 46px;
+            }
+            /* ==== Sidebar Styles =====*/
+            aside {
+                width: 240px;
+                height: 100%;
+                background: $dark-bg;
+                -webkit-transition: width 120ms ease-in-out;
+                transition: width 120ms ease-in-out;
+
+                section {
+                    & > * {
+                        position: fixed;
+                        width: 240px;
+                        left: 0;
+                    }
+
+                    &.filters-container {
+                        height: 100%;
+                        width: 100%;
+                        position: relative;
+
+                        button[type="back-arrow"] {
+                            height: 100%;
+                            width: 46px;
+                            position: absolute;
+                            background: transparent;
+                            color: #fff;
+                            border: none;
+                            right: 46px;
+                            -webkit-transform: translateX(300px);
+                            transform: translateX(300px);
+                            transition: all 250ms ease-in-out;
+
+                            &:before {
+                                color: #fff;
+                                position: absolute;
+                                top: 50%;
+                                right: 18px;
+                            }
+                        }
+
+                        & > * {
+                            transition: transform 200ms ease-in-out;
+                        }
+
+                        header {
+                            top: 0;
+                            padding: 0 10px;
+                            background: darken($dark-bg, 4%);
+
+                            label {
+                                color: lighten($dark-bg, 25%);
+                                line-height: 46px;
+                            }
+
+                            button {
+                                background: transparent;
+                                border: none;
+                                float: right;
+                                color: lighten($dark-bg, 45%);
+                                padding: 5px;
+                                font-size: 1.2em;
+                                line-height: 35px;
+                            }
+                        }
+
+                        filters {
+                            box-sizing: border-box;
+                            display: block;
+                            padding: 10px;
+                            color: lighten($dark-bg, 35%);
+                            top: 46px;
+
+                            searchbox {
+                                display: block;
+                                width: 100%;
+                                position: relative;
+
+                                label[for="keyword"] {
+                                    position: absolute;
+                                    top: 37%;
+                                    font-size: 1.5em;
+                                    left: 8px;
+                                }
+
+                                input[type="search"] {
+                                    width: 100%;
+                                    border: none;
+                                    border-radius: 2em;
+                                    padding: 5px;
+                                    box-sizing: border-box;
+                                    text-indent: 30px;
+                                    background: lighten($dark-bg, 5%);
+                                    color: lighten($dark-bg, 75%);
+                                    margin: 15px 0;
+                                    line-height: 2;
+                                }
+                            }
+
+                            list {
+                                height: 200px;
+                                overflow-y: scroll;
+
+                                item {
+                                    margin: 10px 5px;
+                                    padding-bottom: 5px;
+                                    border-bottom: 1px solid lighten($dark-bg, 5%);
+                                    color: lighten($dark-bg, 65%);
+
+                                    input[type="checkbox"] {
+                                        margin-right: 10px;
+                                        background: lighten($dark-bg, 15%);
+                                        border: none;
+                                        height: 12px;
+                                        width: 12px;
+                                        border-radius: 3px;
+                                        -webkit-appearance: initial;
+                                        display: inline-block;
+                                        -webkit-transition: all 130ms ease-in-out;
+                                        transition: all 130ms ease-in-out;
+
+                                        &:checked {
+                                            background: $primary;
+                                            -webkit-transform: scale(.75);
+                                            // border-radius: 50%;
+                                            & + label {
+                                                color: $primary;
+                                            }
+                                        }
+                                    }
+
+                                    label {
+                                        width: 75%;
+                                        display: inline-block;
+                                        cursor: pointer;
+                                    }
+                                }
+                            }
+
+                            button[name="clear-all"] {
+                                padding: 7px 10px;
+                                border: none;
+                                background: transparent;
+                                border-radius: 4px;
+                                margin-top: 35px;
+                            }
+                        }
+
+                        credits {
+                            color: lighten($dark-bg, 15%);
+                            display: block;
+                            width: 200px;
+                            bottom: 0;
+                            left: 15px;
+                            padding: 10px;
+
+                            span.powered-by {
+                                font-size: 0.8em;
+                            }
+
+                            h4.bullhorn {
+                                color: #fff;
+                                font-weight: 300;
+                                text-transform: uppercase;
+                                letter-spacing: 3px;
+                                margin-top: 5px;
+
+                                span {
+                                    color: red;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            /* ==== Main Content Styles (List / Grid / Overview) =====*/
+            main {
+                flex: 1;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-content: flex-start;
+                align-items: stretch;
+                overflow: scroll;
+                z-index: 99;
+
+                header {
+                    position: fixed;
+                    width: 100%;
+                    background: $header-bg;
+                    color: #fff;
+                    font-weight: 300;
+                    padding: 0 10px;
+                    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+                    z-index: 999;
+
+                    button[name="filters-menu"] {
+                        display: none;
+                        background: transparent;
+                        border: none;
+                    }
+
+                    button[name="over-arrow-back"] {
+                        display: none;
+                        background: transparent;
+                        border: none;
+                        font-size: 1.3em;
+                    }
+
+                    h2 {
+                        margin: 0;
+                        color: lighten($header-bg, 55%);
+                        display: inline-block;
+                    }
+
+                    feed {
+                        display: inline-block;
+                        cursor: pointer;
+                        margin-left: 15px;
+                    }
+                }
+                /* View Container */
+                ng-view {
+                    display: block;
+                    padding: 58px 10px 10px 10px;
+                    min-width: 320px;
+                    box-sizing: border-box;
+
+                    section {
+                        card {
+                            display: block;
+                            background: #fff;
+                            box-shadow: 0px 1px 3px rgba(0,0,0,.15);
+                            padding: 10px;
+                            box-sizing: border-box;
+                            margin: 4px;
+                            vertical-align: top;
+                        }
+
+                        &.jobs {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: flex-start;
+                            align-content: flex-start;
+                            align-items: flex-start;
+
+                            h5 {
+                                color: darken($light-bg, 15%);
+                                font-weight: 400;
+                                font-size: 1.3em;
+                                display: block;
+                                width: 100%;
+                                margin: 10px 0;
+                            }
+
+                            #load-more-data {
+                                width: 100%;
+                            }
+
+                            card {
+                                cursor: pointer;
+
+                                &:hover {
+                                    background: lighten($light-bg,2%);
+                                }
+
+                                .key-container {
+                                    h3 {
+                                        text-transform: uppercase;
+                                        max-width: 300px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        color: $primary;
+                                    }
+
+                                    span {
+                                        color: lighten($base-color, 35%);
+                                        font-size: 1.1em;
+                                        font-weight: 600;
+
+                                        &.item-cat {
+                                        }
+
+                                        &.item-loc,
+                                        &.item-type {
+                                            color: lighten($base-color, 15%);
+                                        }
+
+                                        &.item-description {
+                                            margin-top: 10px;
+                                            font-family: 'PT Serif';
+                                            color: lighten($base-color, 10%);
+                                            font-weight: 400;
+                                        }
+                                    }
+                                }
+
+                                a.joblist-apply {
+                                    color: $secondary;
+                                }
+                            }
+                        }
+                        /* Job Overview Styles */
+                        &.job-overview {
+                            display: flex;
+                            align-items: flex-start;
+                            flex-direction: row;
+
+                            card {
+                                padding: 25px;
+                                align-self: stretch;
+                                overflow: scroll;
+
+                                &.description {
+                                    display: inline-block;
+
+                                    h2 {
+                                        display: inline-block;
+                                        font-weight: 500;
+                                        color: $base-color;
+                                    }
+
+                                    div.job-actions {
+                                        float: right;
+                                        display: inline-block;
+                                        overflow: auto;
+
+                                        div.share-outlets {
+                                            display: inline-block;
+                                            float: right;
+                                            box-sizing: border-box;
+                                            border-right: 1px solid transparent;
+                                            padding-right: 20px;
+
+                                            @for $i from 1 through 4 {
+                                                a:nth-child(#{$i}) {
+                                                    -webkit-transition-delay: ((#{400-($i*100ms)}));
+                                                    transition-delay: ((#{400-($i*100ms)}));
+                                                }
+                                            }
+
+                                            a {
+                                                padding: 5px 10px;
+                                                box-sizing: border-box;
+                                                display: inline-block;
+                                                opacity: 0;
+                                                -webkit-transition: all 100ms ease;
+                                                transition: all 100ms ease;
+                                                -webkit-transform: translateX(15px);
+                                                transform: translateX(15px);
+                                            }
+                                        }
+
+                                        &.share-open {
+                                            button[name="share"] {
+                                                opacity: .5;
+                                            }
+
+                                            div.share-outlets {
+                                                border-right: 1px solid #DBDBDB;
+
+                                                a {
+                                                    opacity: 1;
+                                                    -webkit-transform: translateX(0);
+                                                    transform: translateX(0);
+                                                }
+                                            }
+                                        }
+
+                                        button[name="share"],
+                                        button[name="print"] {
+                                            float: right;
+                                            display: inline-block;
+                                            border: none;
+                                            background: transparent;
+                                            margin-left: 15px;
+                                            font-size: 1.3em;
+                                            color: lighten($base-color, 15%);
+
+                                            span {
+                                                margin-right: 5px;
+                                            }
+                                        }
+                                    }
+
+                                    p {
+                                        font-family: 'PT Serif';
+                                        font-size: 1.2em;
+                                        line-height: 1.6em;
+                                        color: lighten($base-color, 10%);
+                                        text-align: justify;
+                                    }
+                                }
+
+                                &.apply {
+                                    width: 48%;
+                                    min-width: 300px;
+                                    display: inline-block;
+
+                                    & > * {
+                                        display: block;
+                                    }
+
+                                    span.date-added {
+                                        color: lighten($base-color, 35%);
+                                    }
+
+                                    h1.title {
+                                        color: $base-color;
+                                        @include vendor-prefix(transition, font-size 120ms linear);
+                                    }
+
+                                    span.category {
+                                        color: lighten($base-color, 35%);
+                                    }
+
+                                    div.loc-type {
+                                        margin-bottom: 25px;
+                                    }
+
+                                    button[name="apply"] {
+                                        width: 100%;
+                                        border: none;
+                                        background: $secondary;
+                                        color: #fff;
+                                        padding: 10px;
+                                        border-radius: 3px;
+                                        text-transform: uppercase;
+                                        font-weight: 600;
+                                    }
+
+                                    hr {
+                                        border: none;
+                                        height: 1px;
+                                        background: #E8E8E8;
+                                        margin: 15px 0;
+                                    }
+
+                                    list {
+                                        item {
+                                            .location {
+                                                display: block;
+                                            }
+                                        }
+                                    }
+
+                                    a.category-filter {
+                                        padding: 10px 0px 10px 0px;
+
+                                        i {
+                                            float: right;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.overview-closed {
+            aside {
+                section {
+                    &.filters-container {
+                        & > * {
+                            -webkit-transform: translateX(0px);
+                            transform: translateX(0px);
+                            transition-delay: 220ms;
+                        }
+                    }
+                }
+            }
+        }
+        /* ==== Job Overview Open Styles =====*/
+        &.overview-open {
+            aside {
+                width: 46px;
+
+                &:hover {
+                    cursor: pointer;
+                    background: lighten($dark-bg, 3%);
+                    width: 76px;
+
+                    section {
+                        &.filters-container {
+                            header {
+                                background: $dark-bg;
+                            }
+
+                            button[type="back-arrow"] {
+                                width: 60px;
+                            }
+                        }
+                    }
+                }
+
+                section {
+                    &.filters-container {
+                        & > * {
+                            -webkit-transform: translateX(-400px);
+                            transform: translateX(-400px);
+                        }
+
+                        button[type="back-arrow"] {
+                            -webkit-transform: translateX(0px) !important;
+                            transform: translateX(0px) !important;
+                        }
+                    }
+                }
+            }
+        }
+        /* ==== Grid / List Swap Styles =====*/
+        /* Grid View */
+        &.grid-view {
+            aside {
+                section {
+                    &.filters-container {
+                        header {
+                            button {
+                                /* Change Grid Button Color */
+                                &.icon-view-module {
+                                    color: $toggle-active;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            main {
+                ng-view {
+                    section {
+                        &.jobs {
+                            card {
+                                width: 32%;
+                                height: 420px;
+                                padding-bottom: 45px;
+
+                                & > * {
+                                    display: block;
+                                }
+
+                                .key-container {
+                                    & > * {
+                                        display: block;
+                                    }
+
+                                    h3.item-title {
+                                        margin-bottom: 5px;
+                                    }
+
+                                    span {
+                                        &.item-cat {
+                                            &:first-of-type {
+                                                margin-top: 15px;
+                                            }
+                                        }
+
+                                        &.item-loc {
+                                            margin-top: 15px;
+                                        }
+
+                                        &.item-type {
+                                            margin: 0 0 15px 0;
+                                        }
+
+                                        &.item-description {
+                                            max-height: 210px;
+                                            overflow: hidden;
+                                            position: relative;
+                                            -webkit-mask-box-image: -webkit-linear-gradient(black 75%, transparent);
+                                        }
+                                    }
+                                }
+
+                                hr {
+                                    border: none;
+                                    margin: 20px -10px 10px -10px;
+                                    height: 1px;
+                                    background: #f4f4f4;
+                                }
+
+                                i {
+                                    display: none;
+                                }
+
+                                a.joblist-apply {
+                                    width: 100%;
+                                    padding: 15px;
+                                    text-align: center;
+                                    box-sizing: border-box;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /* List View */
+        &.list-view {
+            aside {
+                section {
+                    &.filters-container {
+                        header {
+                            button {
+                                /* Change List Button Color */
+                                &.icon-view-list {
+                                    color: $toggle-active;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            main {
+                ng-view {
+                    section {
+                        &.jobs {
+                            card {
+                                overflow: auto;
+                                width: 100%;
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: nowrap;
+                                justify-content: space-between;
+                                align-content: flex-start;
+                                align-items: stretch;
+
+                                & > * {
+                                    display: inline-block;
+                                }
+
+                                .key-container {
+                                    & > * {
+                                        display: inline-block;
+                                        margin: 0 15px;
+                                    }
+
+                                    span {
+                                        &.item-description {
+                                            max-width: 90%;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                        }
+                                    }
+                                }
+
+                                hr {
+                                    display: none;
+                                }
+
+                                a.joblist-apply {
+                                    padding: 20px;
+                                    width: 85px;
+                                }
+
+                                i {
+                                    cursor: pointer;
+                                    color: $primary;
+                                    font-size: 1.3em;
+                                    padding: 10px;
+                                    box-sizing: border-box;
+                                    line-height: 14px;
+                                    margin-top: 7px;
+                                    opacity: .7;
+
+                                    &:hover {
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* ==============
+    Animations
+===============*/
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @-o-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+/*==== Fade In (Used on Views) ====*/
+.fade {
+    opacity: 1;
+}
+
+.fade.ng-enter,
+.fade.ng-leave {
+    @include vendor-prefix(transition, opacity 220ms ease-in-out);
+}
+
+.fade.ng-enter {
+    opacity: 0;
+}
+
+.fade.ng-enter-active {
+    opacity: 1;
+}
+
+.fade.ng-leave {
+    opacity: 1;
+}
+
+.fade.ng-leave-active {
+    opacity: 0;
+}
+
+/*==== Slide Up Items (Used on Views) ====*/
+.slide-up-item {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+
+.slide-up-item.ng-enter {
+    @include vendor-prefix(transition, all 250ms ease-in-out);
+}
+
+
+
+.slide-up-item.ng-enter, .slide-up-item.ng-move {
+    @include vendor-prefix(transform, translateY(50px));
+    opacity: 0;
+}
+
+.slide-up-item.ng-enter-active {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+
+.slide-up-item.ng-leave {
+    @include vendor-prefix(transform, translateY(0));
+    opacity: 1;
+}
+
+.slide-up-item.ng-leave-active {
+    @include vendor-prefix(transform, translateY(50px));
+    opacity: 0;
+}
+/**
+ * Stagger Leave (hide) animation
+ */
+.slide-up-item.ng-leave-stagger {
+    /* this will have a 100ms delay between each successive leave animation */
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+
+/**
+ * Stagger ENTER ANIMATION
+ */
+.slide-up-item.ng-enter-stagger {
+    /* this will have a 100ms delay between each successive enter animation */
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+    /* in case the stagger doesn't work then these two values
+     must be set to 0 to avoid an accidental CSS inheritance */
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+}
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
+
+@include keyframes(pop-open) {
+    0% {
+        -webkit-transform: scale(.2);
+        transform: scale(.2);
+        opacity: 0;
+    }
+
+    40% {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    60% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+/*==== Pop Open (Used on Modal @ larger device widths) ====*/
+
+@include keyframes(slide-up) {
+    0% {
+        -webkit-transform: translateY(500px);
+        transform: translateY(500px);
+        opacity: 0;
+    }
+
+    40% {
+        -webkit-transform: translateY(-5px);
+        transform: translateY(-5px);
+    }
+
+    60% {
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+
+
+/*==== Slide Left (Used on Overview Cards) ====*/
+
+@include keyframes(slide-left) {
+    from {
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+        opacity: 0;
+    }
+
+    to {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.slide-left {
+    @include vendor-prefix(animation, slide-left 550ms)
+}
+
+.pop-open {
+    @include vendor-prefix(animation, pop-open 200ms ease-in-out);
+}
+
+.slide-up {
+    @include vendor-prefix(animation, slide-up 400ms ease-in-out);
+}

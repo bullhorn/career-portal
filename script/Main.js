@@ -1,18 +1,20 @@
-angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
+angular
+    .module('careers', ['ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
     .config(function ($routeProvider) {
         $routeProvider.
             when('/jobs', {
-                templateUrl: 'resources/template/joblist.html',
+                templateUrl: 'view/joblist.html',
                 controller: 'JobListCtrl as jobs'
             }).
             when('/jobs/:id', {
-                templateUrl: 'resources/template/overview.html',
+                templateUrl: 'view/overview.html',
                 controller: 'JobDetailCtrl as overview'
             }).
             otherwise({
                 redirectTo: '/jobs'
             });
-    }).directive('customNgEnter', function () {
+    })
+    .directive('customNgEnter', function() {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
                 if (event.which === 13) {
@@ -24,7 +26,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
                 }
             });
         };
-    }).factory('SearchData', ['$http', function ($http) {
+    })
+    .factory('SearchData', ['$http', function($http) {
 
         var service = {};
 
@@ -271,8 +274,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
         };
 
         return service;
-    }]).
-    factory('ApplyJob', ['$http', function ($http) {
+    }])
+    .factory('ApplyJob', ['$http', function ($http) {
         var service = {};
 
         service = {
@@ -372,8 +375,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
         };
 
         return service;
-    }]).
-    factory('ShareSocial', ['$http', function ($http) {
+    }])
+    .factory('ShareSocial', ['$http', function ($http) {
         var service = {};
 
         service = {
@@ -436,8 +439,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
         };
 
         return service;
-    }]).
-    controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) {
+    }])
+    .controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) {
         console.log('INIT');
         $rootScope.viewState = 'overview-closed';
         $scope.searchService = SearchData;
@@ -452,8 +455,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
             $location.path('/jobs/' + id);
         }
 
-    }).
-    controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData, ShareSocial) {
+    })
+    .controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData, ShareSocial) {
         // Form data for the login modal
         $rootScope.viewState = 'overview-open';
 
@@ -538,8 +541,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
                 this.share = '';
             }
         }
-    }).
-    controller('SideBarCtrl', function ($rootScope, $location, $scope, SearchData) {
+    })
+    .controller('SideBarCtrl', function ($rootScope, $location, $scope, SearchData) {
         $rootScope.gridState = 'list-view';
 
         $scope.searchService = SearchData;
@@ -593,15 +596,15 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
             var counter;
         }
 
-    }).
-    controller('HeaderCtrl', function ($rootScope, $location, $scope, SearchData) {
+    })
+    .controller('HeaderCtrl', function ($rootScope, $location, $scope, SearchData) {
         $scope.searchService = SearchData;
 
         this.goBack = function () {
             $location.path('/jobs');
         }
-    }).
-    controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData, ApplyJob) {
+    })
+    .controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData, ApplyJob) {
         $scope.searchService = SearchData;
         $scope.applyService = ApplyJob;
 
@@ -633,8 +636,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
                 });
             }
         }
-    }).
-    directive('elHeight', function ($timeout, $rootScope) {
+    })
+    .directive('elHeight', function ($timeout, $rootScope) {
         return {
             restrict: 'A',
             link: function (scope, element) {
@@ -648,8 +651,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
                 }, 120);
             }
         }
-    }).
-    directive("scroll", function ($window) {
+    })
+    .directive("scroll", function ($window) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -666,8 +669,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
                 });
             }
         }
-    }).
-    filter("stripHtml", function() {
+    })
+    .filter("stripHtml", function() {
         return function(text) {
             var s = String(text).replace(/<[^>]+>/gm, '');
             var out = "";
@@ -714,8 +717,8 @@ angular.module('careers', [ 'ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-mod
             }
             return out;
         }
-    }).
-    directive('fileModel', ['$parse', function ($parse) {
+    })
+    .directive('fileModel', ['$parse', function ($parse) {
         return {
             require: 'ngModel',
             restrict: 'A',
