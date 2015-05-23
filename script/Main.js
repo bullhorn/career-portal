@@ -80,17 +80,18 @@ angular
             },
             requestParams: {
                 sort: function () {
-                    return (service.searchParams.sort ? service.searchParams.sort : service.config.sort)
+                    return (service.searchParams.sort ? service.searchParams.sort : service.config.sort);
                 },
                 count: function () {
-                    return (service.searchParams.count ? service.searchParams.count : service.config.count)
+                    return (service.searchParams.count ? service.searchParams.count : service.config.count);
                 },
                 start: function () {
-                    return (service.searchParams.start ? service.searchParams.start : service.config.start)
+                    return (service.searchParams.start ? service.searchParams.start : service.config.start);
                 },
 
                 assembleUsingAll: function(groupBy, field) {
                     var query = '(' + service.config.additionalQuery + ')';
+                    var first;
 
                     if (service.searchParams.textSearch) {
                         query += ' AND (title:' + service.searchParams.textSearch + '* OR publishedDescription:' + service.searchParams.textSearch + '*)';
@@ -99,7 +100,7 @@ angular
                     if(service.searchParams.category.length > 0) {
                         query += ' AND (';
 
-                        var first = true;
+                        first = true;
                         for(var i = 0; i < service.searchParams.category.length; i++) {
                             if(!first) {
                                 query += ' OR ';
@@ -116,15 +117,15 @@ angular
                     if(service.searchParams.location.length > 0) {
                         query += ' AND (';
 
-                        var first = true;
-                        for(var i = 0; i < service.searchParams.location.length; i++) {
+                        first = true;
+                        for(var j = 0; j < service.searchParams.location.length; j++) {
                             if(!first) {
                                 query += ' OR ';
                             } else {
                                 first = false;
                             }
 
-                            query += 'address.city:"'+service.searchParams.location[i]+'"';
+                            query += 'address.city:"'+service.searchParams.location[j]+'"';
                         }
 
                         query += ')';
@@ -179,13 +180,9 @@ angular
                     if(data && data.data.length > 0) {
                         callback(data.data);
                     } else {
-                        console.log('No group by data found for field '+field);
-
                         errorCallback();
                     }
-                }).error(function (data) {
-                    console.log(data.errorMessage);
-
+                }).error(function () {
                     errorCallback();
                 });
             },
@@ -199,13 +196,9 @@ angular
                     if(data && data.data.length > 0) {
                         callback(data.data);
                     } else {
-                        console.log('No jobs found with categoryID '+categoryID);
-
                         errorCallback();
                     }
-                }).error(function (data) {
-                    console.log(data.errorMessage);
-
+                }).error(function () {
                     errorCallback();
                 });
             },
@@ -221,9 +214,7 @@ angular
                     } else {
                         errorCallback();
                     }
-                }).error(function (data) {
-                    console.log(data.errorMessage);
-
+                }).error(function () {
                     errorCallback();
                 });
             },
@@ -243,9 +234,7 @@ angular
                     } else {
                         service.currentListData.push.apply(service.currentListData, data.data);
                     }
-                }).error(function (data) {
-                    console.log(data.errorMessage);
-                });
+                }).error(function () { });
             },
             helper: {
                 emptyCurrentDataList: function () {
@@ -299,10 +288,6 @@ angular
                 hasLocalStorage: function() {
                     var hasStorage = typeof(Storage) != "undefined";
 
-                    if(!hasStorage) {
-                        console.log("Local storage is not supported!");
-                    }
-
                     return hasStorage;
                 },
                 getStoredForm : function() {
@@ -337,7 +322,7 @@ angular
                     return service.form.email;
                 },
                 phone: function () {
-                    return (service.form.phone ? service.form.phone : '')
+                    return (service.form.phone ? service.form.phone : '');
                 },
                 assemble: function (resume) {
                     var format = resume.name.substring(resume.name.lastIndexOf('.')+1);
@@ -358,8 +343,8 @@ angular
 
                 $http.post(applyUrl, form, {
                     transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                }).success(function( data ) {
+                    headers: { 'Content-Type': undefined }
+                }).success(function(data) {
                     service.form.email = data.candidate.email;
                     service.form.firstName = data.candidate.firstName;
                     service.form.lastName = data.candidate.lastName;
@@ -368,15 +353,13 @@ angular
                     service.storage.store();
 
                     successCallback();
-                }).error(function (data) {
-                    console.log(data.errorMessage);
-                })
+                }).error(function() { });
             }
         };
 
         return service;
     }])
-    .factory('ShareSocial', ['$http', function ($http) {
+    .factory('ShareSocial', [function () {
         var service = {};
 
         service = {
@@ -392,7 +375,7 @@ angular
             },
 
             requestParams: {
-                facebook: function(job) {
+                facebook: function() {
                     var url = encodeURIComponent(window.location.href);
 
                     return '?display=popup&app_id='+service.config.keys.facebook+'&href='+url+'&redirect_uri='+url;
@@ -440,46 +423,45 @@ angular
 
         return service;
     }])
-    .controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) {
-        console.log('INIT');
+    .controller('JobListCtrl', function ($rootScope, $location, $timeout, $scope, $http, SearchData) { //jshint ignore:line
         $rootScope.viewState = 'overview-closed';
         $scope.searchService = SearchData;
 
-        $scope.loadMoreData = function () {
+        $scope.loadMoreData = function() {
             SearchData.searchParams.reloadAllData = false;
             SearchData.makeSearchApiCall();
-        }
+        };
 
-        $scope.openSummary = function (id, Data) {
+        $scope.openSummary = function(id, Data) {
             SearchData.currentDetailData = Data;
             $location.path('/jobs/' + id);
-        }
+        };
 
     })
-    .controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData, ShareSocial) {
+    .controller('JobDetailCtrl', function ($rootScope, $location, $routeParams, $route, $scope, SearchData, ShareSocial) { //jshint ignore:line
         // Form data for the login modal
         $rootScope.viewState = 'overview-open';
 
         $scope.searchService = SearchData;
 
-        this.job_id = $routeParams.id;
-        $scope.job_id = $routeParams.id;
+        this.jobId = $routeParams.id;
+        $scope.jobId = $routeParams.id;
 
         var controller = this;
 
         this.loadRelatedJobs = function() {
             $scope.relatedJobs = [];
 
-            for(var i = 0; i < controller.job_data.categories.data.length; i ++) {
-                SearchData.loadJobDataByCategory(controller.job_data.categories.data[i].id, function (jobs) {
+            for(var i = 0; i < controller.jobData.categories.data.length; i ++) {
+                SearchData.loadJobDataByCategory(controller.jobData.categories.data[i].id, function(jobs) {
                     $scope.relatedJobs = $scope.relatedJobs.concat(jobs);
-                }, function() {}, controller.job_data.id);
+                }, function() { }, controller.jobData.id); //jshint ignore:line
             }
         };
 
         this.loadJob = function(jobID) {
             SearchData.loadJobData(jobID, function(job) {
-                controller.job_data = job;
+                controller.jobData = job;
 
                 controller.loadRelatedJobs();
             }, function() {
@@ -488,9 +470,9 @@ angular
         };
 
         if(!SearchData.currentDetailData.id) {
-            controller.loadJob(this.job_id);
+            controller.loadJob(this.jobId);
         } else {
-            controller.job_data = SearchData.currentDetailData;
+            controller.jobData = SearchData.currentDetailData;
 
             controller.loadRelatedJobs();
         }
@@ -540,7 +522,7 @@ angular
             } else {
                 this.share = '';
             }
-        }
+        };
     })
     .controller('SideBarCtrl', function ($rootScope, $location, $scope, SearchData) {
         $rootScope.gridState = 'list-view';
@@ -562,14 +544,12 @@ angular
         };
 
         SearchData.getCountBy('address.city', function(locations) {
-           $scope.locations = locations;
+            $scope.locations = locations;
         });
 
         $scope.selectedLocations = SearchData.searchParams.location;
 
-        $scope.filterBy = function(field) {
-            console.log($scope.selectedLocations);
-            console.log(SearchData.searchParams.location);
+        $scope.filterBy = function(field) { //jshint ignore:line
             //SearchData.searchParams[field] = $scope[]
             //var indexOfValue = SearchData.searchParams[field].indexOf(value);
             //
@@ -592,17 +572,16 @@ angular
             }
         };
 
-        this.filterCounter = function ($rootScope) {
-            var counter;
-        }
-
+        this.filterCounter = function() {
+            //var counter;
+        };
     })
     .controller('HeaderCtrl', function ($rootScope, $location, $scope, SearchData) {
         $scope.searchService = SearchData;
 
-        this.goBack = function () {
+        this.goBack = function() {
             $location.path('/jobs');
-        }
+        };
     })
     .controller('ModalCtrl', function ($rootScope, $location, $scope, SearchData, ApplyJob) {
         $scope.searchService = SearchData;
@@ -610,12 +589,12 @@ angular
 
         $scope.applyService.initializeModel();
 
-        this.closeModal = function () {
+        this.closeModal = function() {
             $rootScope.modalState = 'closed';
             $scope.showForm = true;
-            $scope.searchService.config.portalText.modal.header=$scope.searchService.config.portalText.modal.apply.header;
-            $scope.searchService.config.portalText.modal.subHeader=$scope.searchService.config.portalText.modal.apply.subHeader;
-        }
+            $scope.searchService.config.portalText.modal.header = $scope.searchService.config.portalText.modal.apply.header;
+            $scope.searchService.config.portalText.modal.subHeader = $scope.searchService.config.portalText.modal.apply.subHeader;
+        };
 
         this.applySuccess = function() {
             $scope.showForm = false;
@@ -635,30 +614,28 @@ angular
                     controller.applySuccess();
                 });
             }
-        }
+        };
     })
     .directive('elHeight', function ($timeout, $rootScope) {
         return {
             restrict: 'A',
-            link: function (scope, element) {
-                $timeout(function () {
+            link: function(scope, element) {
+                $timeout(function() {
                     var elHeight = element[0].offsetHeight;
                     if ($(window).width() <= 850) {
                         $rootScope.topPad = {
                             "margin-top": elHeight + "px"
-                        }
+                        };
                     }
                 }, 120);
             }
-        }
+        };
     })
     .directive("scroll", function ($window) {
         return {
             restrict: 'A',
-            link: function (scope, element, attrs) {
-                var raw = element[0];
-
-                angular.element($window).bind('scroll', function () {
+            link: function(scope) {
+                angular.element($window).bind('scroll', function() {
                     if (this.pageYOffset >= 100) {
                         scope.boolChangeClass = true;
                     } else {
@@ -668,7 +645,7 @@ angular
                     scope.$apply();
                 });
             }
-        }
+        };
     })
     .filter("stripHtml", function() {
         return function(text) {
@@ -716,7 +693,7 @@ angular
                 out += ch;
             }
             return out;
-        }
+        };
     })
     .directive('fileModel', ['$parse', function ($parse) {
         return {

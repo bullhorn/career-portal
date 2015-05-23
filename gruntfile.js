@@ -16,8 +16,9 @@ module.exports = function(grunt) {
         },
         copy: {
             compile: {
-                expand: true,
                 cwd: '/',
+                dest: 'dist/',
+                expand: true,
                 src: [
                     '*.html',
                     'font/**/*',
@@ -27,8 +28,7 @@ module.exports = function(grunt) {
                     'script**/*.js',
                     'style/**/*.css',
                     'view/**/*.html'
-                ],
-                dest: 'dist/'
+                ]
             }
         },
         jshint: {
@@ -42,7 +42,11 @@ module.exports = function(grunt) {
                     freeze: true,
                     indent: 4,
                     esnext: false,
-                    globals: {},
+                    globals: {
+                        $: true,
+                        angular: true,
+                        require: true
+                    },
                     laxbreak: true,
                     maxparams: 5,
                     maxdepth: 4,

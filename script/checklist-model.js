@@ -77,7 +77,7 @@ angular.module('checklist-model', [])
             });
 
             // declare one function to be used for both $watch functions
-            function setChecked(newArr, oldArr) {
+            function setChecked(newArr) {
                 scope.checked = contains(newArr, value, comparator);
             }
 

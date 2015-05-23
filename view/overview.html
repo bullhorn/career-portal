@@ -10,23 +10,23 @@
                 Share
             </button>
             <div class="share-outlets">
-                <a href="" class="icon-facebook" ng-click="overview.shareFacebook(overview.job_data)"></a>
-                <a href="" class="icon-twitter" ng-click="overview.shareTwitter(overview.job_data)"></a>
-                <a href="" class="icon-linkedin" ng-click="overview.shareLinkedin(overview.job_data)"></a>
-                <a href="" class="icon-email" ng-click="overview.shareEmail(overview.job_data)"></a>
+                <a href="" class="icon-facebook" ng-click="overview.shareFacebook(overview.jobData)"></a>
+                <a href="" class="icon-twitter" ng-click="overview.shareTwitter(overview.jobData)"></a>
+                <a href="" class="icon-linkedin" ng-click="overview.shareLinkedin(overview.jobData)"></a>
+                <a href="" class="icon-email" ng-click="overview.shareEmail(overview.jobData)"></a>
             </div>
         </div>
         <h2>{{::searchService.config.portalText.overview.header}}</h2>
         <div class="break-word">
-            <p ng-bind-html="overview.job_data.publicDescription"></p>
+            <p ng-bind-html="overview.jobData.publicDescription"></p>
         </div>
     </card>
     <card class="apply" el-height>
-        <span class="date-added">Added—{{overview.job_data.dateAdded | date : fullDate}}</span>
-        <h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.job_id}}: <br>{{overview.job_data.title}}</h1>
-        <h3 class="category" ng-repeat="cat in overview.job_data.categories">{{cat.data.name}}</h3>
+        <span class="date-added">Added—{{overview.jobData.dateAdded | date : fullDate}}</span>
+        <h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.jobId}}: <br>{{overview.jobData.title}}</h1>
+        <h3 class="category" ng-repeat="cat in overview.jobData.categories">{{cat.data.name}}</h3>
         <div class="loc-type">
-            <span class="location">{{overview.job_data.address.city}}, {{overview.job_data.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
+            <span class="location">{{overview.jobData.address.city}}, {{overview.jobData.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
         </div>
         <button name="apply" ng-click="overview.applyModal()">{{searchService.config.portalText.overview.applyButtonLabel}}</button>
         <div class="related-jobs">
@@ -40,7 +40,7 @@
                 </item>
             </list>
             <hr>
-            <div ng-repeat="cat in overview.job_data.categories.data">
+            <div ng-repeat="cat in overview.jobData.categories.data">
                 <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(cat.id)" class="category-filter">See all {{cat.name}} Jobs <i class="icon-arrow-forward"></i> </a>
             </div>
         </div>

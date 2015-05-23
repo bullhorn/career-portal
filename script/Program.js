@@ -13,8 +13,6 @@ require(
     function() {
         'use strict';
 
-        //#region Using
-
-        alert('hello world!');
+        alert('hello world!'); //jshint ignore:line
     }
 );
