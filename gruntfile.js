@@ -10,6 +10,16 @@ module.exports = function(grunt) {
     var debugUrl = [server.protocol, ['//', server.hostname].join(''), server.port].join(':');
 
     grunt.initConfig({
+        babel: {
+            compile: {
+                dest: 'dist/',
+                expand: true,
+                src: 'script/**/*.js',
+                options: {
+                    modules: 'amd'
+                }
+            }
+        },
         bower: {
             restore: {
                 options: {
@@ -42,12 +52,11 @@ module.exports = function(grunt) {
                 expand: true,
                 src: [
                     '*.html',
-                    'font/**/*',
-                    'lib/**/*',
-                    'media/**/*',
-                    'res/**/*',
-                    'script/**/*',
-                    'view/**/*'
+                    'font/**',
+                    'lib/**',
+                    'media/**',
+                    'res/**',
+                    'view/**'
                 ]
             }
         },
@@ -61,7 +70,7 @@ module.exports = function(grunt) {
                     camelcase: true,
                     freeze: true,
                     indent: 4,
-                    esnext: false,
+                    esnext: true,
                     globals: {
                         $: true,
                         angular: true,
@@ -110,11 +119,11 @@ module.exports = function(grunt) {
             debug: {
                 files: [
                     '*.html',
-                    'media/**/*',
-                    'res/**/*',
-                    'script/**/*',
-                    'style/**/*',
-                    'view/**/*'
+                    'media/**',
+                    'res/**',
+                    'script/**',
+                    'style/**',
+                    'view/**'
                 ],
                 tasks: ['build'],
                 options: {
@@ -140,7 +149,7 @@ module.exports = function(grunt) {
     grunt.registerTask('reset', ['clean:reset']);
     grunt.registerTask('restore', ['bower:restore']);
     grunt.registerTask('analyze', ['jshint:analyze']);
-    grunt.registerTask('compile', ['clean:compile', 'copy:compile', 'sass:compile', 'version', 'clean:postcompile']);
+    grunt.registerTask('compile', ['clean:compile', 'copy:compile', 'babel:compile', 'sass:compile', 'version', 'clean:postcompile']);
     grunt.registerTask('test', []); // TODO
     grunt.registerTask('pack', []); // TODO
     grunt.registerTask('min', []); // TODO
