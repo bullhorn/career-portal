@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                     'lib/**/*.css',
                     'media/**/*.png',
                     'res/**/*.json',
-                    'script**/*.js',
+                    'script/**/*.js',
                     'style/**/*.css',
                     'view/**/*.html'
                 ]
@@ -46,6 +46,7 @@ module.exports = function(grunt) {
                     globals: {
                         $: true,
                         angular: true,
+                        define: true,
                         require: true
                     },
                     laxbreak: true,

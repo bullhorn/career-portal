@@ -1,18 +1,33 @@
 require.config({
     paths: {
         'angular': '/lib/angular/angular',
+        'angular-animate': '/lib/angular-animate/angular-animate',
+        'angular-route': '/lib/angular-route/angular-route',
+        'angular-sanitize': '/lib/angular-sanitize/angular-sanitize',
         'jquery': '/lib/jquery/jquery'
     },
     shim: {
-        'angular': ['jquery']
+        'angular': ['jquery'],
+        'angular-animate': ['angular'],
+        'angular-route': ['angular'],
+        'angular-sanitize': ['angular']
     }
 });
 
 require(
-    [],
-    function() {
+    [
+        './Main',
+
+        'jquery'
+    ],
+    function(Main, $) {
         'use strict';
 
-        alert('hello world!'); //jshint ignore:line
+        //??? is this button visible and used? if so, push handler into HeaderCtrl ilo ad-hoc jquery handler
+        $('button[name="filters-menu"]').on('click', function() {
+            $('html body hgroup aside').toggle();
+        });
+
+        Main.run();
     }
 );
