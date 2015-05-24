@@ -6,10 +6,18 @@ import 'jquery';
 
 import './directives/Checklist';
 
+import CustomNgEnter from './directives/CustomNgEnter';
+import ElHeight from './directives/ElHeight';
+import Scroll from './directives/Scroll';
+import StripHtml from './filters/StripHtml';
+import ApplyJob from './services/ApplyJob';
+import SearchData from './services/SearchData';
+import ShareSocial from './services/ShareSocial';
+
 export default class {
 
     constructor() {
-        throw new Error.create("Cannot invoke the constructor function of a static class.");
+        throw new Error("Cannot invoke the constructor function of a static class.");
     }
 
     //#region Properties
@@ -64,40 +72,39 @@ export default class {
 
             angular
                 .module('CareerPortal', ['ngRoute', 'ngAnimate', 'ngSanitize', 'Checklist'])
-                .config(function($routeProvider) {
-                    $routeProvider.
-                        when('/jobs', {
-                            templateUrl: 'view/joblist.html',
-                            controller: 'JobListCtrl as jobs'
-                        }).
-                        when('/jobs/:id', {
-                            templateUrl: 'view/overview.html',
-                            controller: 'JobDetailCtrl as overview'
-                        }).
-                        otherwise({
-                            redirectTo: '/jobs'
-                        });
-                })
-                .controller('JobListCtrl', function($rootScope, $location, $timeout, $scope, $http, SearchData) { //jshint ignore:line
+                .config(['$routeProvider', $routeProvider => $routeProvider
+                    .when('/jobs', {
+                        templateUrl: 'view/joblist.html',
+                        controller: 'JobList as jobs'
+                    })
+                    .when('/jobs/:id', {
+                        templateUrl: 'view/overview.html',
+                        controller: 'JobDetail as overview'
+                    })
+                    .otherwise({
+                        redirectTo: '/jobs'
+                    })
+                ])
+                .controller('JobList', ['$rootScope', '$location', '$timeout', '$scope', '$http', 'searchData', function($rootScope, $location, $timeout, $scope, $http, searchData) { //jshint ignore:line
                     $rootScope.viewState = 'overview-closed';
-                    $scope.searchService = SearchData;
+                    $scope.searchService = searchData;
 
                     $scope.loadMoreData = function() {
-                        SearchData.searchParams.reloadAllData = false;
-                        SearchData.makeSearchApiCall();
+                        searchData.searchParams.reloadAllData = false;
+                        searchData.makeSearchApiCall();
                     };
 
                     $scope.openSummary = function(id, Data) {
-                        SearchData.currentDetailData = Data;
+                        searchData.currentDetailData = Data;
                         $location.path('/jobs/' + id);
                     };
 
-                })
-                .controller('JobDetailCtrl', function($rootScope, $location, $routeParams, $route, $scope, SearchData, ShareSocial) { //jshint ignore:line
+                }])
+                .controller('JobDetail', ['$rootScope', '$location', '$routeParams', '$route', '$scope', 'searchData', 'shareSocial', function($rootScope, $location, $routeParams, $route, $scope, searchData, shareSocial) { //jshint ignore:line
                     // Form data for the login modal
                     $rootScope.viewState = 'overview-open';
 
-                    $scope.searchService = SearchData;
+                    $scope.searchService = searchData;
 
                     this.jobId = $routeParams.id;
                     $scope.jobId = $routeParams.id;
@@ -108,14 +115,14 @@ export default class {
                         $scope.relatedJobs = [];
 
                         for (var i = 0; i < controller.jobData.categories.data.length; i++) {
-                            SearchData.loadJobDataByCategory(controller.jobData.categories.data[i].id, function(jobs) {
+                            searchData.loadJobDataByCategory(controller.jobData.categories.data[i].id, function(jobs) {
                                 $scope.relatedJobs = $scope.relatedJobs.concat(jobs);
                             }, function() { }, controller.jobData.id); //jshint ignore:line
                         }
                     };
 
                     this.loadJob = function(jobID) {
-                        SearchData.loadJobData(jobID, function(job) {
+                        searchData.loadJobData(jobID, function(job) {
                             controller.jobData = job;
 
                             controller.loadRelatedJobs();
@@ -124,10 +131,10 @@ export default class {
                         });
                     };
 
-                    if (!SearchData.currentDetailData.id) {
+                    if (!searchData.currentDetailData.id) {
                         controller.loadJob(this.jobId);
                     } else {
-                        controller.jobData = SearchData.currentDetailData;
+                        controller.jobData = searchData.currentDetailData;
 
                         controller.loadRelatedJobs();
                     }
@@ -136,10 +143,10 @@ export default class {
                         $location.path('/jobs');
                     };
 
-                    this.shareFacebook = ShareSocial.facebook;
-                    this.shareTwitter = ShareSocial.twitter;
-                    this.shareLinkedin = ShareSocial.linkedin;
-                    this.shareEmail = ShareSocial.email;
+                    this.shareFacebook = () => shareSocial.facebook(this);
+                    this.shareTwitter = () => shareSocial.twitter(this);
+                    this.shareLinkedin = () => shareSocial.linkedin(this);
+                    this.shareEmail = () => shareSocial.email(this);
 
                     this.open = true;
 
@@ -150,16 +157,16 @@ export default class {
                     };
 
                     this.loadJobsWithCategory = function(categoryID) {
-                        SearchData.helper.emptyCurrentDataList();
-                        SearchData.helper.resetStartAndTotal();
+                        searchData.helper.emptyCurrentDataList();
+                        searchData.helper.resetStartAndTotal();
 
-                        SearchData.loadJobDataByCategory(categoryID, function(jobs) {
-                            SearchData.currentListData = jobs;
-                            SearchData.searchParams.category.push(categoryID);
+                        searchData.loadJobDataByCategory(categoryID, function(jobs) {
+                            searchData.currentListData = jobs;
+                            searchData.searchParams.category.push(categoryID);
 
                             controller.goBack();
                         }, function() {
-                            SearchData.makeSearchApiCall();
+                            searchData.makeSearchApiCall();
 
                             controller.goBack();
                         });
@@ -178,43 +185,43 @@ export default class {
                             this.share = '';
                         }
                     };
-                })
-                .controller('SideBarCtrl', function($rootScope, $location, $scope, SearchData) {
+                }])
+                .controller('SideBar', ['$rootScope', '$location', '$scope', 'searchData', function($rootScope, $location, $scope, searchData) {
                     $rootScope.gridState = 'list-view';
 
-                    $scope.searchService = SearchData;
+                    $scope.searchService = searchData;
 
-                    if (SearchData.config.loadJobsOnStart) {
-                        SearchData.makeSearchApiCall();
+                    if (searchData.config.loadJobsOnStart) {
+                        searchData.makeSearchApiCall();
                     }
 
                     $scope.searchJobs = function() {
-                        SearchData.searchParams.reloadAllData = true;
-                        SearchData.makeSearchApiCall();
+                        searchData.searchParams.reloadAllData = true;
+                        searchData.makeSearchApiCall();
                     };
 
                     $scope.clearSearchParamsAndLoadData = function() {
-                        SearchData.helper.clearSearchParams();
-                        SearchData.makeSearchApiCall();
+                        searchData.helper.clearSearchParams();
+                        searchData.makeSearchApiCall();
                     };
 
-                    SearchData.getCountBy('address.city', function(locations) {
+                    searchData.getCountBy('address.city', function(locations) {
                         $scope.locations = locations;
                     });
 
-                    $scope.selectedLocations = SearchData.searchParams.location;
+                    $scope.selectedLocations = searchData.searchParams.location;
 
                     $scope.filterBy = function(field) { //jshint ignore:line
-                        //SearchData.searchParams[field] = $scope[]
-                        //var indexOfValue = SearchData.searchParams[field].indexOf(value);
+                        //searchData.searchParams[field] = $scope[]
+                        //var indexOfValue = searchData.searchParams[field].indexOf(value);
                         //
                         //if(indexOfValue < 0) {
-                        //    SearchData.searchParams[field].push(value);
+                        //    searchData.searchParams[field].push(value);
                         //} else {
-                        //    SearchData.searchParams[field].splice(indexOfValue, 1);
+                        //    searchData.searchParams[field].splice(indexOfValue, 1);
                         //}
 
-                        SearchData.makeSearchApiCall();
+                        searchData.makeSearchApiCall();
                     };
 
                     this.switchViewStyle = function(type) {
@@ -230,17 +237,17 @@ export default class {
                     this.filterCounter = function() {
                         //var counter;
                     };
-                })
-                .controller('HeaderCtrl', function($rootScope, $location, $scope, SearchData) {
-                    $scope.searchService = SearchData;
+                }])
+                .controller('Header', ['$rootScope', '$location', '$scope', 'searchData', function($rootScope, $location, $scope, searchData) {
+                    $scope.searchService = searchData;
 
                     this.goBack = function() {
                         $location.path('/jobs');
                     };
-                })
-                .controller('ModalCtrl', function($rootScope, $location, $scope, SearchData, ApplyJob) {
-                    $scope.searchService = SearchData;
-                    $scope.applyService = ApplyJob;
+                }])
+                .controller('Modal', ['$rootScope', '$location', '$scope', 'searchData', 'applyJob', function($rootScope, $location, $scope, searchData, applyJob) {
+                    $scope.searchService = searchData;
+                    $scope.applyService = applyJob;
 
                     $scope.applyService.initializeModel();
 
@@ -270,35 +277,9 @@ export default class {
                             });
                         }
                     };
-                })
-                .directive('customNgEnter', function() {
-                    return function(scope, element, attrs) {
-                        element.bind("keydown keypress", function(event) {
-                            if (event.which === 13) {
-                                scope.$apply(function() {
-                                    scope.$eval(attrs.customNgEnter, { 'event': event });
-                                });
-
-                                event.preventDefault();
-                            }
-                        });
-                    };
-                })
-                .directive('elHeight', function($timeout, $rootScope) {
-                    return {
-                        restrict: 'A',
-                        link: function(scope, element) {
-                            $timeout(function() {
-                                var elHeight = element[0].offsetHeight;
-                                if ($(window).width() <= 850) {
-                                    $rootScope.topPad = {
-                                        "margin-top": elHeight + "px"
-                                    };
-                                }
-                            }, 120);
-                        }
-                    };
-                })
+                }])
+                .directive('customNgEnter', CustomNgEnter)
+                .directive('elHeight', ElHeight)
                 .directive('fileModel', ['$parse', function($parse) {
                     return {
                         require: 'ngModel',
@@ -332,468 +313,13 @@ export default class {
                         }
                     };
                 }])
-                .directive("scroll", function($window) {
-                    return {
-                        restrict: 'A',
-                        link: function(scope) {
-                            angular.element($window).bind('scroll', function() {
-                                if (this.pageYOffset >= 100) {
-                                    scope.boolChangeClass = true;
-                                } else {
-                                    scope.boolChangeClass = false;
-                                }
+                .directive("scroll", Scroll)
+                .service('searchData', SearchData)
+                .service('applyJob', ApplyJob)
+                .service('shareSocial', ShareSocial)
+                .filter("stripHtml", StripHtml);
 
-                                scope.$apply();
-                            });
-                        }
-                    };
-                })
-                .factory('SearchData', ['$http', function($http) {
-
-                    var service = {};
-
-                    service = {
-                        config: {
-                            searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
-                            additionalQuery: 'isOpen:1',
-                            sort: "-dateAdded",
-                            fields: "id,title,categories[10],address,employmentType,dateAdded,publicDescription",
-                            count: "20",
-                            start: "0",
-                            loadJobsOnStart: true,
-                            portalText: {
-                                companyName: 'Acme Staffing',
-                                joblist: {
-                                    header: "Open Jobs",
-                                    loadMoreData: "Load more..."
-                                },
-                                overview: {
-                                    header: "Job Description",
-                                    applyButtonLabel: 'Apply now'
-                                },
-                                sidebar: {
-                                    searchPlaceholder: 'Keyword Search',
-                                    locationHeader: 'Location',
-                                    categoryHeader: 'Category'
-                                },
-                                modal: {
-                                    uploadResumeFile: 'Upload Resume File',
-                                    apply: {
-                                        header: 'Before You Apply...',
-                                        subHeader: 'Please let us know who you are and upload your resume'
-                                    },
-                                    thankYou: {
-                                        header: 'Thank you!',
-                                        subHeader: 'Thank you for submitting your online application'
-                                    }
-                                }
-                            }
-                        },
-                        searchParams: {
-                            textSearch: "",
-                            location: [],
-                            category: [],
-                            sort: "",
-                            count: "",
-                            start: "",
-                            total: "",
-                            reloadAllData: true
-                        },
-                        requestParams: {
-                            sort: function() {
-                                return (service.searchParams.sort ? service.searchParams.sort : service.config.sort);
-                            },
-                            count: function() {
-                                return (service.searchParams.count ? service.searchParams.count : service.config.count);
-                            },
-                            start: function() {
-                                return (service.searchParams.start ? service.searchParams.start : service.config.start);
-                            },
-
-                            assembleUsingAll: function(groupBy, field) {
-                                var query = '(' + service.config.additionalQuery + ')';
-                                var first;
-
-                                if (service.searchParams.textSearch) {
-                                    query += ' AND (title:' + service.searchParams.textSearch + '* OR publishedDescription:' + service.searchParams.textSearch + '*)';
-                                }
-
-                                if (service.searchParams.category.length > 0) {
-                                    query += ' AND (';
-
-                                    first = true;
-                                    for (var i = 0; i < service.searchParams.category.length; i++) {
-                                        if (!first) {
-                                            query += ' OR ';
-                                        } else {
-                                            first = false;
-                                        }
-
-                                        query += 'categories.id:' + service.searchParams.category[i];
-                                    }
-
-                                    query += ')';
-                                }
-
-                                if (service.searchParams.location.length > 0) {
-                                    query += ' AND (';
-
-                                    first = true;
-                                    for (var j = 0; j < service.searchParams.location.length; j++) {
-                                        if (!first) {
-                                            query += ' OR ';
-                                        } else {
-                                            first = false;
-                                        }
-
-                                        query += 'address.city:"' + service.searchParams.location[j] + '"';
-                                    }
-
-                                    query += ')';
-                                }
-
-                                var count;
-                                var sort;
-
-                                if (groupBy) {
-                                    count = '&groupByCount=' + field;
-                                    sort = '&sort=' + field;
-                                } else {
-                                    count = '&count=' + this.count();
-                                    sort = '&sort=' + this.sort();
-                                }
-
-                                return '?' +
-                                    'query=' + query + '&fields=' + service.config.fields + count + '&start=' + this.start() + sort + '&useV2=true';
-                            },
-                            assemble: function() {
-                                return this.assembleUsingAll(false);
-                            },
-                            assembleForCategories: function(categoryID, idToExclude) {
-                                var query = '(' + service.config.additionalQuery + ') AND categories.id:' + categoryID;
-
-                                if (idToExclude && parseInt(idToExclude) > 0) {
-                                    query += ' NOT id:' + idToExclude;
-                                }
-
-                                return '?' +
-                                    'query=' + query + '&fields=' + service.config.fields + '&count=' + this.count() + '&start=0&sort=' + this.sort() + '&useV2=true';
-                            },
-                            assembleForGroupBy: function(field) {
-                                return this.assembleUsingAll(true, field);
-                            },
-                            assembleForFind: function(jobID) {
-                                var query = '(' + service.config.additionalQuery + ') AND id:' + jobID;
-
-                                return '?' +
-                                    'query=' + query + '&fields=' + service.config.fields + '&count=1&start=0&sort=' + this.sort() + '&useV2=true';
-                            }
-                        },
-                        currentListData: [],
-                        currentDetailData: {},
-                        getCountBy: function(field, callback, errorCallback) {
-                            errorCallback = errorCallback || function() { };
-
-                            $http({
-                                method: 'GET',
-                                url: service.config.searchUrl + service.requestParams.assembleForGroupBy(field)
-                            }).success(function(data) {
-                                if (data && data.data.length > 0) {
-                                    callback(data.data);
-                                } else {
-                                    errorCallback();
-                                }
-                            }).error(function() {
-                                errorCallback();
-                            });
-                        },
-                        loadJobDataByCategory: function(categoryID, callback, errorCallback, idToExclude) {
-                            errorCallback = errorCallback || function() { };
-
-                            $http({
-                                method: 'GET',
-                                url: service.config.searchUrl + service.requestParams.assembleForCategories(categoryID, idToExclude)
-                            }).success(function(data) {
-                                if (data && data.data.length > 0) {
-                                    callback(data.data);
-                                } else {
-                                    errorCallback();
-                                }
-                            }).error(function() {
-                                errorCallback();
-                            });
-                        },
-                        loadJobData: function(jobID, callback, errorCallback) {
-                            errorCallback = errorCallback || function() { };
-
-                            $http({
-                                method: 'GET',
-                                url: service.config.searchUrl + service.requestParams.assembleForFind(jobID)
-                            }).success(function(data) {
-                                if (data && data.data.length > 0) {
-                                    callback(data.data[0]);
-                                } else {
-                                    errorCallback();
-                                }
-                            }).error(function() {
-                                errorCallback();
-                            });
-                        },
-                        makeSearchApiCall: function() {
-                            if (service.searchParams.reloadAllData) {
-                                service.helper.emptyCurrentDataList();
-                                service.helper.resetStartAndTotal();
-                            }
-
-                            $http({
-                                method: 'GET',
-                                url: service.config.searchUrl + service.requestParams.assemble()
-                            }).success(function(data) {
-                                service.helper.updateStartAndTotal(data);
-                                if (service.searchParams.reloadAllData) {
-                                    service.currentListData = data.data;
-                                } else {
-                                    service.currentListData.push.apply(service.currentListData, data.data);
-                                }
-                            }).error(function() { });
-                        },
-                        helper: {
-                            emptyCurrentDataList: function() {
-                                service.currentListData.length = 0;
-                            },
-                            updateStartAndTotal: function(data) {
-                                service.searchParams.total = data.total;
-                                service.searchParams.start = (parseInt(service.requestParams.count()) + parseInt(service.requestParams.start()));
-                            },
-                            resetStartAndTotal: function() {
-                                service.searchParams.total = 0;
-                                service.searchParams.start = 0;
-                            },
-                            moreRecordsExist: function() {
-                                if ((parseInt(service.searchParams.total) - parseInt(service.requestParams.start())) > 0) {
-                                    return true;
-                                }
-                                return false;
-                            },
-                            clearSearchParams: function() {
-                                service.searchParams.textSearch = '';
-                                service.searchParams.location = [];
-                                service.searchParams.category = [];
-                            }
-                        }
-                    };
-
-                    return service;
-                }])
-                .factory('ApplyJob', ['$http', function($http) {
-                    var service = {};
-
-                    service = {
-                        config: {
-                            applyUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/apply/'
-                        },
-                        initializeModel: function() {
-                            if (service.storage.hasLocalStorage()) {
-                                service.form = service.storage.getStoredForm();
-                            }
-                        },
-                        form: {
-                            firstName: '',
-                            lastName: '',
-                            email: '',
-                            phone: '',
-                            resumeName: '',
-                            resumeInfo: {}
-                        },
-                        storage: {
-                            hasLocalStorage: function() {
-                                var hasStorage = typeof (Storage) != "undefined";
-
-                                return hasStorage;
-                            },
-                            getStoredForm: function() {
-                                if (service.storage.hasLocalStorage()) {
-                                    return {
-                                        firstName: localStorage.getItem("firstName"),
-                                        lastName: localStorage.getItem("lastName"),
-                                        email: localStorage.getItem("email"),
-                                        mobile: localStorage.getItem("mobile")
-                                    };
-                                }
-
-                                return {};
-                            },
-                            store: function() {
-                                if (service.storage.hasLocalStorage()) {
-                                    localStorage.setItem("firstName", service.form.firstName);
-                                    localStorage.setItem("lastName", service.form.lastName);
-                                    localStorage.setItem("email", service.form.email);
-                                    localStorage.setItem("mobile", service.form.mobile);
-                                }
-                            }
-                        },
-                        requestParams: {
-                            firstName: function() {
-                                return service.form.firstName;
-                            },
-                            lastName: function() {
-                                return service.form.lastName;
-                            },
-                            email: function() {
-                                return service.form.email;
-                            },
-                            phone: function() {
-                                return (service.form.phone ? service.form.phone : '');
-                            },
-                            assemble: function(resume) {
-                                var format = resume.name.substring(resume.name.lastIndexOf('.') + 1);
-
-                                return '?firstName=' + service.requestParams.firstName() + '&lastName=' + service.requestParams.lastName() + '&email=' + service.requestParams.email() + '&phone=' + service.requestParams.phone() + '&format=' + format;
-                            }
-                        },
-                        submit: function(jobID, successCallback) {
-                            successCallback = successCallback || function() { };
-
-                            service.storage.store();
-
-                            var form = new FormData();
-
-                            form.append("resume", service.form.resumeInfo);
-
-                            var applyUrl = service.config.applyUrl + jobID + '/raw' + service.requestParams.assemble(service.form.resumeInfo);
-
-                            $http.post(applyUrl, form, {
-                                transformRequest: angular.identity,
-                                headers: { 'Content-Type': undefined }
-                            }).success(function(data) {
-                                service.form.email = data.candidate.email;
-                                service.form.firstName = data.candidate.firstName;
-                                service.form.lastName = data.candidate.lastName;
-                                service.form.phone = data.candidate.phone;
-
-                                service.storage.store();
-
-                                successCallback();
-                            }).error(function() { });
-                        }
-                    };
-
-                    return service;
-                }])
-                .factory('ShareSocial', [function() {
-                    var service = {};
-
-                    service = {
-                        config: {
-                            url: {
-                                facebook: 'https://www.facebook.com/dialog/share',
-                                twitter: 'https://twitter.com/intent/tweet',
-                                linkedin: 'https://www.linkedin.com/shareArticle'
-                            },
-                            keys: {
-                                facebook: '1439597326343190'
-                            }
-                        },
-
-                        requestParams: {
-                            facebook: function() {
-                                var url = encodeURIComponent(window.location.href);
-
-                                return '?display=popup&app_id=' + service.config.keys.facebook + '&href=' + url + '&redirect_uri=' + url;
-                            },
-                            twitter: function(job) {
-                                return '?text=' + service.description(job) + '&url=' + encodeURIComponent(window.location.href);
-                            },
-                            linkedin: function(job) {
-                                return '?mini=true&source=Bullhorn%20Carrer%20Portal&title=' + service.description(job) + '&url=' + encodeURIComponent(window.location.href);
-                            },
-                            email: function(job) {
-                                return '?subject=' + job.title + '&body=' + service.description(job, window.location.href);
-                            }
-                        },
-
-                        description: function(job, url) {
-                            if (url) {
-                                return 'Hey, check out this ' + job.title + ' job: ' + encodeURIComponent(url);
-                            }
-
-                            return 'Hey, check out this ' + job.title + ' job!';
-                        },
-
-                        facebook: function(job) {
-                            var url = service.config.url.facebook + service.requestParams.facebook(job);
-
-                            window.open(url);
-                        },
-                        twitter: function(job) {
-                            var url = service.config.url.twitter + service.requestParams.twitter(job);
-
-                            window.open(url);
-                        },
-                        linkedin: function(job) {
-                            var url = service.config.url.linkedin + service.requestParams.linkedin(job);
-
-                            window.open(url);
-                        },
-                        email: function(job) {
-                            var url = 'mailto:' + service.requestParams.email(job);
-
-                            window.location.href = url;
-                        }
-                    };
-
-                    return service;
-                }])
-                .filter("stripHtml", function() {
-                    return function(text) {
-                        var s = String(text).replace(/<[^>]+>/gm, '');
-                        var out = "";
-
-                        var l = s.length;
-
-                        for (var i = 0; i < l; i++) {
-                            var ch = s.charAt(i);
-                            if (ch == '&') {
-                                var semicolonIndex = s.indexOf(';', i + 1);
-                                if (semicolonIndex > 0) {
-                                    var entity = s.substring(i + 1, semicolonIndex);
-                                    if (entity.length > 1 && entity.charAt(0) == '#') {
-                                        if (entity.charAt(1) == 'x' || entity.charAt(1) == 'X')
-                                            ch = String.fromCharCode(eval('0' + entity.substring(1))); //jshint ignore:line
-                                        else
-                                            ch = String.fromCharCode(eval(entity.substring(1))); //jshint ignore:line
-                                    } else {
-                                        switch (entity) {
-                                            case ' quot ':
-                                                ch = String.fromCharCode(0x0022);
-                                                break;
-                                            case ' amp ':
-                                                ch = String.fromCharCode(0x0026);
-                                                break;
-                                            case ' lt ':
-                                                ch = String.fromCharCode(0x003c);
-                                                break;
-                                            case ' gt ':
-                                                ch = String.fromCharCode(0x003e);
-                                                break;
-                                            case ' nbsp ':
-                                                ch = String.fromCharCode(0x00a0);
-                                                break;
-                                            default:
-                                                ch = '';
-                                                break;
-                                        }
-                                    }
-                                    i = semicolonIndex;
-                                }
-                            }
-                            out += ch;
-                        }
-                        return out;
-                    };
-                });
-
-            angular.bootstrap(document, ['CareerPortal']);
+            angular.bootstrap(document, ['CareerPortal'], { strictDi: true });
             document.body.style.display = 'block';
         }
     }

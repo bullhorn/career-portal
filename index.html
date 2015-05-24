@@ -18,12 +18,12 @@
 </head>
 <body class="portal" ng-class="[viewState,gridState]">
 
-    <div class="modal-container" ng-controller="ModalCtrl as modal" ng-include="'view/modal.html'" ng-show="modalState==='open'"></div>
+    <div class="modal-container" ng-controller="Modal as modal" ng-include="'view/modal.html'" ng-show="modalState==='open'"></div>
 
     <hgroup>
         <aside ng-include="'view/sidebar.html'"></aside>
         <main>
-            <header ng-controller="HeaderCtrl as header">
+            <header ng-controller="Header as header">
                 <button name="filters-menu" class="icon-filters-menu"></button>
                 <button name="over-arrow-back" class="icon-arrow-back" ng-click="header.goBack()"></button>
                 <h2>{{::searchService.config.portalText.companyName}}</h2>
