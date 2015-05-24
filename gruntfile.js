@@ -2,8 +2,8 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     var server = {
-        hostname: 'portal.bh-bos2.bullhorn.local',
-        port: 80,
+        hostname: 'localhost',
+        port: 9001,
         protocol: 'http'
     };
 
