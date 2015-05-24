@@ -1,4 +1,14 @@
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
+
+    var server = {
+        hostname: 'portal.bh-bos2.bullhorn.local',
+        port: 80,
+        protocol: 'http'
+    };
+
+    var debugUrl = [server.protocol, ['//', server.hostname].join(''), server.port].join(':');
+
     grunt.initConfig({
         bower: {
             restore: {
@@ -15,6 +25,17 @@ module.exports = function(grunt) {
             postcompile: ['.sass-cache'],
             reset: ['dist', 'lib', '.sass-cache', 'bower_components', 'node_modules']
         },
+        connect: {
+            host: {
+                options: {
+                    base: 'dist',
+                    protocol: server.protocol,
+                    hostname: server.hostname,
+                    livereload: true,
+                    port: server.port
+                }
+            }
+        },
         copy: {
             compile: {
                 dest: 'dist/',
@@ -22,13 +43,11 @@ module.exports = function(grunt) {
                 src: [
                     '*.html',
                     'font/**/*',
-                    'lib/**/*.js',
-                    'lib/**/*.css',
-                    'media/**/*.png',
-                    'res/**/*.json',
-                    'script/**/*.js',
-                    'style/**/*.css',
-                    'view/**/*.html'
+                    'lib/**/*',
+                    'media/**/*',
+                    'res/**/*',
+                    'script/**/*',
+                    'view/**/*'
                 ]
             }
         },
@@ -61,6 +80,24 @@ module.exports = function(grunt) {
                 }
             }
         },
+        open: {
+            chrome: {
+                app: 'Chrome',
+                path: debugUrl
+            },
+            firefox: {
+                app: 'Firefox',
+                path: debugUrl
+            },
+            ie: {
+                app: 'iexplore',
+                path: debugUrl
+            },
+            safari: {
+                app: 'Safari',
+                path: debugUrl
+            }
+        },
         pkg: grunt.file.readJSON('package.json'),
         sass: {
             compile: {
@@ -70,34 +107,22 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            autobuild: {
+            debug: {
                 files: [
                     '*.html',
-                    'media/**/*.png',
-                    'res/**/*.json',
-                    'script/**/*.js',
-                    'style/**/*.scss',
-                    'view/**/*.html'
+                    'media/**/*',
+                    'res/**/*',
+                    'script/**/*',
+                    'style/**/*',
+                    'view/**/*'
                 ],
                 tasks: ['build'],
                 options: {
                     livereload: true
                 }
             }
-        },
-        connect: {
-            host: {
-                options: {
-                    base: 'dist',
-                    hostname: 'portal.bh-bos2.bullhorn.local',
-                    livereload: true,
-                    port: 80
-                }
-            }
         }
     });
-
-    require('load-grunt-tasks')(grunt);
 
     grunt.registerTask('version', function() {
         var pkg = grunt.file.readJSON('package.json');
@@ -121,6 +146,11 @@ module.exports = function(grunt) {
     grunt.registerTask('min', []); // TODO
 
     grunt.registerTask('build', ['analyze', 'compile', 'test', 'pack', 'min']);
-    grunt.registerTask('autobuild', ['watch:autobuild']);
-    grunt.registerTask('host', ['restore', 'build', 'connect:host', 'autobuild']);
+    grunt.registerTask('host', ['restore', 'build', 'connect:host']);
+
+    grunt.registerTask('debug:chrome', ['host', 'open:chrome', 'watch:debug']);
+    grunt.registerTask('debug:firefox', ['host', 'open:firefox', 'watch:debug']);
+    grunt.registerTask('debug:ie', ['host', 'open:ie', 'watch:debug']);
+    grunt.registerTask('debug:safari', ['host', 'open:safari', 'watch:debug']);
+    grunt.registerTask('debug', ['debug:chrome']);
 };
