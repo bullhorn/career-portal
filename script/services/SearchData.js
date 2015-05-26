@@ -116,7 +116,7 @@ export default [
                                 first = false;
                             }
 
-                            query += 'categories.id:' + this.searchParams.category[i];
+                            query += 'categories.id:'+this.searchParams.category[i];
                         }
 
                         query += ')';
@@ -133,7 +133,7 @@ export default [
                                 first = false;
                             }
 
-                            query += 'address.city:"' + this.searchParams.location[j] + '"';
+                            query += 'address.state:"' + this.searchParams.location[j] + '"';
                         }
 
                         query += ')';
@@ -141,17 +141,20 @@ export default [
 
                     var count;
                     var sort;
+                    var fields;
 
                     if (groupBy) {
                         count = '&groupByCount=' + field;
-                        sort = '&sort=' + field;
+                        sort = '&sort=+' + field;
+                        fields = '&fields='+field;
                     } else {
                         count = '&count=' + this.requestParams.count();
                         sort = '&sort=' + this.requestParams.sort();
+                        fields = '&fields='+this.config.fields;
                     }
 
                     return '?' +
-                        'query=' + query + '&fields=' + this.config.fields + count + '&start=' + this.requestParams.start() + sort + '&useV2=true';
+                        'query=' + query + fields + count + '&start=' + this.requestParams.start() + sort + '&useV2=true';
                 },
                 assemble: () => this.requestParams.assembleUsingAll(false),
                 assembleForCategories: (categoryID, idToExclude) => {

@@ -106,7 +106,6 @@ export default class {
 
                     $scope.searchService = searchData;
 
-                    this.jobId = $routeParams.id;
                     $scope.jobId = $routeParams.id;
 
                     var controller = this;
@@ -123,6 +122,8 @@ export default class {
 
                     this.loadJob = function(jobID) {
                         searchData.loadJobData(jobID, function(job) {
+                            $scope.jobId = job.id;
+
                             controller.jobData = job;
 
                             controller.loadRelatedJobs();
@@ -132,7 +133,7 @@ export default class {
                     };
 
                     if (!searchData.currentDetailData.id) {
-                        controller.loadJob(this.jobId);
+                        controller.loadJob($scope.jobId);
                     } else {
                         controller.jobData = searchData.currentDetailData;
 
@@ -151,8 +152,6 @@ export default class {
                     this.open = true;
 
                     this.switchToJob = function(jobID) {
-                        $location.path('/jobs/' + jobID);
-
                         controller.loadJob(jobID);
                     };
 
@@ -160,16 +159,11 @@ export default class {
                         searchData.helper.emptyCurrentDataList();
                         searchData.helper.resetStartAndTotal();
 
-                        searchData.loadJobDataByCategory(categoryID, function(jobs) {
-                            searchData.currentListData = jobs;
-                            searchData.searchParams.category.push(categoryID);
+                        searchData.searchParams.category = [ categoryID ];
 
-                            controller.goBack();
-                        }, function() {
-                            searchData.makeSearchApiCall();
+                        searchData.makeSearchApiCall();
 
-                            controller.goBack();
-                        });
+                        controller.goBack();
                     };
 
                     this.applyModal = function() {
@@ -205,22 +199,29 @@ export default class {
                         searchData.makeSearchApiCall();
                     };
 
-                    searchData.getCountBy('address.city', function(locations) {
-                        $scope.locations = locations;
+                    searchData.getCountBy('address.state', function(locations) {
+                        $scope.locations = locations.sort(function(location1, location2) {
+                            var state1 = Object.keys(location1)[0].toString().toLowerCase();
+                            var state2 = Object.keys(location2)[0].toString().toLowerCase();
+
+                            if(state1 < state2) {
+                                return -1;
+                            } else if(state1 > state2) {
+                                return 1;
+                            }
+
+                            return 0;
+                        });
+                    });
+
+                    searchData.getCountBy('categories', function(categories) {
+                        $scope.categories = categories;
                     });
 
                     $scope.selectedLocations = searchData.searchParams.location;
+                    $scope.selectedCategories = searchData.searchParams.category;
 
-                    $scope.filterBy = function(field) { //jshint ignore:line
-                        //searchData.searchParams[field] = $scope[]
-                        //var indexOfValue = searchData.searchParams[field].indexOf(value);
-                        //
-                        //if(indexOfValue < 0) {
-                        //    searchData.searchParams[field].push(value);
-                        //} else {
-                        //    searchData.searchParams[field].splice(indexOfValue, 1);
-                        //}
-
+                    $scope.filter = function() {
                         searchData.makeSearchApiCall();
                     };
 

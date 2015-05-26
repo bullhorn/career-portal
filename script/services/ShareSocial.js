@@ -21,7 +21,7 @@
                     linkedin: 'https://www.linkedin.com/shareArticle'
                 },
                 keys: {
-                    facebook: '1439597326343190'
+                    facebook: '821471654606643'
                 }
             };
         }
@@ -41,9 +41,9 @@
 
         description(job, url) {
             if (url)
-                return 'Hey, check out this ' + job.title + ' job: ' + encodeURIComponent(url);
+                return 'Check out this ' + job.title + ' job: ' + encodeURIComponent(url);
 
-            return 'Hey, check out this ' + job.title + ' job!';
+            return 'Check out this ' + job.title + ' job!';
         }
 
         email(job) {

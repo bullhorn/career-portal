@@ -1,4 +1,5 @@
 <section class="filters-container" ng-controller="SideBar as aside" ng-click="aside.goBack('overview-open');">
+
     <header>
         <label>Filters</label>
         <button class="icon-view-list" ng-click="aside.switchViewStyle('list');"></button>
@@ -15,16 +16,25 @@
         <list>
 
             <span ng-repeat="loc in locations">
-                <item ng-repeat="(city, count) in loc" ng-if="city && city != 'null'">
-                    <input type="checkbox" id="{{city}}" checklist-model="selectedLocations" checklist-value="city"
-                           ng-click="filterBy('location', city)">
-                    <label for="{{city}}">{{city}}</label>
+                <item ng-repeat="(state, count) in loc | orderBy:'state.toString()'" ng-if="state && state != 'null'">
+                    <input type="checkbox" id="{{state}}" checklist-model="selectedLocations" checklist-value="state"
+                           ng-click="filter()">
+                    <label for="{{state}}">{{state}}</label>
                     <span>{{count}}</span>
                 </item>
             </span>
         </list>
         <h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
         <list>
+			<span ng-repeat="cat in categories">
+				<item ng-repeat="(name, count) in cat" ng-if="name && name != 'null'">
+                    <input type="checkbox" id="{{name}}" checklist-model="selectedCategories" checklist-value="name"
+                           ng-click="filter()">
+                    <label for="{{name}}">{{name}}</label>
+                    <span>{{count}}</span>
+                </item>
+			</span>
+
             <item><input type="checkbox" id="ux"><label for="ux">UX/UI</label></item>
             <item><input type="checkbox" id="mar"><label for="mar">Marketing</label></item>
             <item><input type="checkbox" id="sal"><label for="sal">Sales</label></item>

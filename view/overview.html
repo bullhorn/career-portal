@@ -23,7 +23,7 @@
     </card>
     <card class="apply" el-height>
         <span class="date-added">Added—{{overview.jobData.dateAdded | date : fullDate}}</span>
-        <h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.jobId}}: <br>{{overview.jobData.title}}</h1>
+        <h1 class="title" ng-class="{min:boolChangeClass}">Job {{overview.jobData.id}}: <br>{{overview.jobData.title}}</h1>
         <h3 class="category" ng-repeat="cat in overview.jobData.categories">{{cat.data.name}}</h3>
         <div class="loc-type">
             <span class="location">{{overview.jobData.address.city}}, {{overview.jobData.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
