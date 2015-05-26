@@ -144,10 +144,10 @@ export default class {
                         $location.path('/jobs');
                     };
 
-                    this.shareFacebook = () => shareSocial.facebook(this);
-                    this.shareTwitter = () => shareSocial.twitter(this);
-                    this.shareLinkedin = () => shareSocial.linkedin(this);
-                    this.shareEmail = () => shareSocial.email(this);
+                    this.shareFacebook = (job) => shareSocial.facebook(job);
+                    this.shareTwitter = (job) => shareSocial.twitter(job);
+                    this.shareLinkedin = (job) => shareSocial.linkedin(job);
+                    this.shareEmail = (job) => shareSocial.email(job);
 
                     this.open = true;
 
@@ -159,7 +159,8 @@ export default class {
                         searchData.helper.emptyCurrentDataList();
                         searchData.helper.resetStartAndTotal();
 
-                        searchData.searchParams.category = [ categoryID ];
+                        searchData.searchParams.category.length = 0;
+                        searchData.searchParams.category.push(categoryID);
 
                         searchData.makeSearchApiCall();
 
@@ -189,9 +190,35 @@ export default class {
                         searchData.makeSearchApiCall();
                     }
 
+                    $scope.getLocationFacets = function() {
+                        searchData.getCountBy('address.state', function(locations) {
+                            $scope.locations = locations.sort(function(location1, location2) {
+                                var state1 = Object.keys(location1)[0].toString().toLowerCase();
+                                var state2 = Object.keys(location2)[0].toString().toLowerCase();
+
+                                if(state1 < state2) {
+                                    return -1;
+                                } else if(state1 > state2) {
+                                    return 1;
+                                }
+
+                                return 0;
+                            });
+                        });
+                    };
+
+                    $scope.getCategoryFacets = function() {
+                        searchData.getCountBy('categories', function(categories) {
+                            $scope.categories = categories;
+                        });
+                    };
+
+                    $scope.getLocationFacets();
+                    $scope.getCategoryFacets();
+
                     $scope.searchJobs = function() {
-                        searchData.searchParams.reloadAllData = true;
                         searchData.makeSearchApiCall();
+                        $scope.getLocationFacets();
                     };
 
                     $scope.clearSearchParamsAndLoadData = function() {
@@ -199,27 +226,16 @@ export default class {
                         searchData.makeSearchApiCall();
                     };
 
-                    searchData.getCountBy('address.state', function(locations) {
-                        $scope.locations = locations.sort(function(location1, location2) {
-                            var state1 = Object.keys(location1)[0].toString().toLowerCase();
-                            var state2 = Object.keys(location2)[0].toString().toLowerCase();
-
-                            if(state1 < state2) {
-                                return -1;
-                            } else if(state1 > state2) {
-                                return 1;
-                            }
-
-                            return 0;
-                        });
-                    });
-
-                    searchData.getCountBy('categories', function(categories) {
-                        $scope.categories = categories;
-                    });
-
                     $scope.selectedLocations = searchData.searchParams.location;
                     $scope.selectedCategories = searchData.searchParams.category;
+
+                    $scope.$watchCollection('searchService.searchParams.category', function() {
+                        $scope.getLocationFacets();
+                    });
+
+                    $scope.$watchCollection('searchService.searchParams.location', function() {
+                        $scope.getCategoryFacets();
+                    });
 
                     $scope.filter = function() {
                         searchData.makeSearchApiCall();
