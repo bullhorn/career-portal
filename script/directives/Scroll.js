@@ -8,21 +8,8 @@ class Scroll {
 
     //#region Properties
 
-    /**
-     * A dictionary that contains the collective state of an Scroll instance.
-     * 
-     * @private
-     * @returns { Object }
-     */
-    get _() {
-        return this.__ || (this.__ = Object.create(null, {}));
-    }
-
     get restrict() {
-        return this._.restrict || (this._.restrict = 'A');
-    }
-    set restrict(value) {
-        this._.restrict = value;
+        return 'A';
     }
 
     //#endregion
@@ -45,5 +32,12 @@ class Scroll {
 
 export default [
     '$window',
-    ($window) => new Scroll($window)
+    ($window) => {
+        let scroll = new Scroll($window);
+
+        return {
+            restrict: scroll.restrict,
+            link: function() { scroll.link(...arguments); }
+        };
+    }
 ];

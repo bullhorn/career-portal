@@ -10,21 +10,8 @@ class ElHeight {
 
     //#region Properties
 
-    /**
-     * A dictionary that contains the collective state of an ElHeight instance.
-     * 
-     * @private
-     * @returns { Object }
-     */
-    get _() {
-        return this.__ || (this.__ = Object.create(null, {}));
-    }
-
     get restrict() {
-        return this._.restrict || (this._.restrict = 'A');
-    }
-    set restrict(value) {
-        this._.restrict = value;
+        return 'A';
     }
 
     //#endregion
@@ -32,10 +19,11 @@ class ElHeight {
     //#region Methods
 
     link(scope, element) {
-        //TODO: fix for this.$timeout, this.$window, this.$rootScope
+        //??? should this be $interval?
         this.$timeout(() => {
-            if (angular.element(this.$window).width() <= 850)
-                this.$rootScope.topPad = { "margin-top": element[0].offsetHeight + "px" };
+            if (angular.element(this.$window).width() <= 850) {
+                this.$rootScope.topPad = { 'margin-top': `${element[0].offsetHeight}px` };
+            }
         }, 120);
     }
 
@@ -47,5 +35,12 @@ export default [
     '$timeout',
     '$rootScope',
     '$window',
-    ($timeout, $rootScope, $window) => new ElHeight($timeout, $rootScope, $window)
+    ($timeout, $rootScope, $window) => {
+        let elHeight = new ElHeight($timeout, $rootScope, $window);
+        
+        return {
+            restrict: elHeight.restrict,
+            link: function() { elHeight.link(...arguments); }
+        };
+    }
 ];
