@@ -186,6 +186,9 @@ export default class {
 
                     $scope.searchService = searchData;
 
+                    $scope.selectedLocations = searchData.searchParams.location;
+                    $scope.selectedCategories = searchData.searchParams.category;
+
                     if (searchData.config.loadJobsOnStart) {
                         searchData.makeSearchApiCall();
                     }
@@ -225,9 +228,6 @@ export default class {
                         searchData.helper.clearSearchParams();
                         searchData.makeSearchApiCall();
                     };
-
-                    $scope.selectedLocations = searchData.searchParams.location;
-                    $scope.selectedCategories = searchData.searchParams.category;
 
                     $scope.$watchCollection('searchService.searchParams.category', function() {
                         $scope.getLocationFacets();
