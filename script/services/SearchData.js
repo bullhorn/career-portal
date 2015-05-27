@@ -46,6 +46,15 @@ export default [
                     },
                     modal: {
                         uploadResumeFile: 'Upload Resume File',
+                        toggle: function() {
+                            if(!this.header || this.header == this.thankYou.header) {
+                                this.header = this.apply.header;
+                                this.subHeader = this.apply.subHeader;
+                            } else {
+                                this.header = this.thankYou.header;
+                                this.subHeader = this.thankYou.subHeader;
+                            }
+                        },
                         apply: {
                             header: 'Before You Apply...',
                             subHeader: 'Please let us know who you are and upload your resume'
@@ -105,7 +114,7 @@ export default [
                     if (this.searchParams.textSearch)
                         query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
 
-                    if (this.searchParams.category.length > 0) {
+                    if ('categories' != field && this.searchParams.category.length > 0) {
                         query += ' AND (';
 
                         first = true;
@@ -122,7 +131,7 @@ export default [
                         query += ')';
                     }
 
-                    if (this.searchParams.location.length > 0) {
+                    if ('address.state' != field && this.searchParams.location.length > 0) {
                         query += ' AND (';
 
                         first = true;

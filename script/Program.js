@@ -2,9 +2,8 @@ import 'angular';
 import 'angular-animate';
 import 'angular-route';
 import 'angular-sanitize';
+import 'checklist-model';
 import 'jquery';
-
-import './directives/Checklist';
 
 import FileModel from './directives/FileModel';
 import CustomNgEnter from './directives/CustomNgEnter';
@@ -14,6 +13,8 @@ import StripHtml from './filters/StripHtml';
 import ApplyJob from './services/ApplyJob';
 import SearchData from './services/SearchData';
 import ShareSocial from './services/ShareSocial';
+import Header from './controllers/Header';
+import Modal from './controllers/Modal';
 
 export default class {
 
@@ -72,7 +73,7 @@ export default class {
             $('button[name="filters-menu"]').on('click', () => $('html body hgroup aside').toggle());
 
             angular
-                .module('CareerPortal', ['ngRoute', 'ngAnimate', 'ngSanitize', 'Checklist'])
+                .module('CareerPortal', ['ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
                 .config(['$routeProvider', $routeProvider => $routeProvider
                     .when('/jobs', {
                         templateUrl: 'view/joblist.html',
@@ -99,7 +100,6 @@ export default class {
                         searchData.currentDetailData = Data;
                         $location.path('/jobs/' + id);
                     };
-
                 }])
                 .controller('JobDetail', ['$rootScope', '$location', '$routeParams', '$route', '$scope', 'searchData', 'shareSocial', function($rootScope, $location, $routeParams, $route, $scope, searchData, shareSocial) { //jshint ignore:line
                     // Form data for the login modal
@@ -126,6 +126,7 @@ export default class {
                             $scope.jobId = job.id;
 
                             controller.jobData = job;
+                            $scope.searchService.currentDetailData = job;
 
                             controller.loadRelatedJobs();
                         }, function() {
@@ -191,52 +192,87 @@ export default class {
                         searchData.makeSearchApiCall();
                     }
 
-                    $scope.getLocationFacets = function() {
-                        searchData.getCountBy('address.state', function(locations) {
-                            $scope.locations = locations.sort(function(location1, location2) {
-                                var state1 = Object.keys(location1)[0].toString().toLowerCase();
-                                var state2 = Object.keys(location2)[0].toString().toLowerCase();
+                    $scope.capitalize = function(value) {
+                        if(typeof value === 'object') {
+                            var key = Object.keys(value)[0].toString();
 
-                                if(state1 < state2) {
-                                    return -1;
-                                } else if(state1 > state2) {
-                                    return 1;
+                            var capitalized = $scope.capitalize(key);
+
+                            if(key != capitalized) {
+                                value[capitalized] = value[key];
+
+                                delete value[key];
+                            }
+
+                            return value;
+                        }
+
+                        return value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                    };
+
+                    searchData.getCountBy('address.state', function(locations) {
+                        $scope.locations = locations.sort(function(location1, location2) {
+                            var state1 = Object.keys(location1)[0].toString().toLowerCase();
+                            var state2 = Object.keys(location2)[0].toString().toLowerCase();
+
+                            if(state1 < state2) {
+                                return -1;
+                            } else if(state1 > state2) {
+                                return 1;
+                            }
+
+                            return 0;
+                        }).map($scope.capitalize);
+                    });
+
+                    searchData.getCountBy('categories', function(categories) {
+                        $scope.categories = categories;
+                    });
+
+                    $scope.updateCountsByIntersection = function(oldCounts, newCounts) {
+                        angular.forEach(oldCounts, function(oldCount, i) {
+                            var key1 = $scope.capitalize(Object.keys(oldCount)[0].toString());
+
+                            var found = false;
+
+                            angular.forEach(newCounts, function(newCount, i2) {
+                                var key2 = Object.keys(newCount)[0].toString();
+
+                                if(key1 == $scope.capitalize(key2)) {
+                                    oldCounts[i][key1] = newCounts[i2][key2];
+                                    found = true;
                                 }
-
-                                return 0;
                             });
+
+                            if(!found) {
+                                oldCounts[i][key1] = 0;
+                            }
                         });
                     };
 
-                    $scope.getCategoryFacets = function() {
-                        searchData.getCountBy('categories', function(categories) {
-                            $scope.categories = categories;
+                    $scope.updateFilterCounts = function() {
+                        searchData.getCountBy('address.state', function(locations) {
+                            $scope.updateCountsByIntersection($scope.locations, locations);
+                        });
+
+                        searchData.getCountBy('address.state', function(categories) {
+                            $scope.updateCountsByIntersection($scope.categories, categories);
                         });
                     };
 
-                    $scope.getLocationFacets();
-                    $scope.getCategoryFacets();
+                    $scope.$watchCollection('searchService.searchParams.category', $scope.updateFilterCounts);
+                    $scope.$watchCollection('searchService.searchParams.location', $scope.updateFilterCounts);
 
                     $scope.searchJobs = function() {
                         searchData.makeSearchApiCall();
-                        $scope.getLocationFacets();
+
+                        $scope.updateFilterCounts();
                     };
 
                     $scope.clearSearchParamsAndLoadData = function() {
                         searchData.helper.clearSearchParams();
                         searchData.makeSearchApiCall();
-                    };
-
-                    $scope.$watchCollection('searchService.searchParams.category', function() {
-                        $scope.getLocationFacets();
-                    });
-
-                    $scope.$watchCollection('searchService.searchParams.location', function() {
-                        $scope.getCategoryFacets();
-                    });
-
-                    $scope.filter = function() {
-                        searchData.makeSearchApiCall();
+                        $scope.updateFilterCounts();
                     };
 
                     this.switchViewStyle = function(type) {
@@ -248,54 +284,11 @@ export default class {
                             $location.path('/jobs');
                         }
                     };
-
-                    this.filterCounter = function() {
-                        //var counter;
-                    };
                 }])
-                .controller('Header', ['$rootScope', '$location', '$scope', 'searchData', function($rootScope, $location, $scope, searchData) {
-                    $scope.searchService = searchData;
-
-                    this.goBack = function() {
-                        $location.path('/jobs');
-                    };
-                }])
-                .controller('Modal', ['$rootScope', '$location', '$scope', 'searchData', 'applyJob', function($rootScope, $location, $scope, searchData, applyJob) {
-                    $scope.searchService = searchData;
-                    $scope.applyService = applyJob;
-
-                    $scope.applyService.initializeModel();
-
-                    this.closeModal = function() {
-                        $rootScope.modalState = 'closed';
-                        $scope.showForm = true;
-                        $scope.searchService.config.portalText.modal.header = $scope.searchService.config.portalText.modal.apply.header;
-                        $scope.searchService.config.portalText.modal.subHeader = $scope.searchService.config.portalText.modal.apply.subHeader;
-                    };
-
-                    this.applySuccess = function() {
-                        $scope.showForm = false;
-                        $scope.searchService.config.portalText.modal.header = $scope.searchService.config.portalText.modal.thankYou.header;
-                        $scope.searchService.config.portalText.modal.subHeader = $scope.searchService.config.portalText.modal.thankYou.subHeader;
-                    };
-
-                    this.closeModal();
-
-                    var controller = this;
-
-                    this.submit = function(applyForm) {
-                        applyForm.$submitted = true;
-
-                        if (applyForm.$valid) {
-                            $scope.applyService.submit($scope.searchService.currentDetailData.id, function() {
-                                controller.applySuccess();
-                            });
-                        }
-                    };
-                }])
+                .controller('Header', Header)
+                .controller('Modal', Modal)
                 .directive('customNgEnter', CustomNgEnter)
                 .directive('elHeight', ElHeight)
-                //.directive('checklistModel', Checklist)
                 .directive('fileModel', FileModel)
                 .directive("scroll", Scroll)
                 .service('searchData', SearchData)
