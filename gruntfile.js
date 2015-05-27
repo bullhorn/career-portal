@@ -83,7 +83,7 @@ module.exports = function(grunt) {
                     newcap: true,
                     proto: true,
                     reporter: require('jshint-summary'),
-                    undef: true,
+                    undef: false,
                     unused: true,
                     white: true
                 }

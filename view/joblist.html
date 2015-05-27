@@ -8,7 +8,6 @@
             <span class="item-loc">{{::job.address.city}}, {{::job.address.state}}</span>
             <span class="item-type">{{::job.employmentType}}</span>
             <span class="item-date">Added - {{::job.dateAdded | date : fullDate}}</span>
-            <span class="item-description break-word">{{::job.publicDescription | stripHtml}}</span>
         </div>
         <i class="icon-arrow-forward" ng-click="openSummary(job.id, job);"></i>
     </card>

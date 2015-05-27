@@ -187,9 +187,6 @@ export default class {
 
                     $scope.searchService = searchData;
 
-                    $scope.selectedLocations = searchData.searchParams.location;
-                    $scope.selectedCategories = searchData.searchParams.category;
-
                     if (searchData.config.loadJobsOnStart) {
                         searchData.makeSearchApiCall();
                     }

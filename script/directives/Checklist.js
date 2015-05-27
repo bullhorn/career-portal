@@ -1,8 +1,13 @@
 import 'angular';
 
-angular
-    .module('Checklist', [])
+/**
+ * Checklist-model
+ * AngularJS directive for list of checkboxes
+ */
+
+angular.module('Checklist', [])
     .directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+        // contains
         function contains(arr, item, comparator) {
             if (angular.isArray(arr)) {
                 for (var i = arr.length; i--;) {
@@ -14,14 +19,16 @@ angular
             return false;
         }
 
+        // add
         function add(arr, item, comparator) {
             arr = angular.isArray(arr) ? arr : [];
-            if (!contains(arr, item, comparator)) {
+            if(!contains(arr, item, comparator)) {
                 arr.push(item);
             }
             return arr;
         }
 
+        // remove
         function remove(arr, item, comparator) {
             if (angular.isArray(arr)) {
                 for (var i = arr.length; i--;) {
@@ -50,7 +57,7 @@ angular
 
             var comparator = angular.equals;
 
-            if (attrs.hasOwnProperty('checklistComparator')) {
+            if (attrs.hasOwnProperty('checklistComparator')){
                 comparator = $parse(attrs.checklistComparator)(scope.$parent);
             }
 
@@ -73,6 +80,7 @@ angular
 
             // declare one function to be used for both $watch functions
             function setChecked(newArr) {
+                console.log('set cheked');
                 scope.checked = contains(newArr, value, comparator);
             }
 

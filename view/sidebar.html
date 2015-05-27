@@ -17,7 +17,7 @@
 
             <span ng-repeat="loc in locations">
                 <item ng-repeat="(state, count) in loc | orderBy:'state.toString()'" ng-if="state && state != 'null'">
-                    <input type="checkbox" id="{{state}}" checklist-model="selectedLocations" checklist-value="state"
+                    <input type="checkbox" id="{{state}}" checklist-model="searchService.searchParams.location" checklist-value="state"
                            ng-click="filter()">
                     <label for="{{state}}">{{state}}</label>
                     <span>{{count}}</span>
@@ -28,7 +28,7 @@
         <list>
 			<span ng-repeat="cat in categories">
 				<item ng-repeat="(name, count) in cat" ng-if="name && name != 'null'">
-                    <input type="checkbox" id="{{name}}" checklist-model="selectedCategories" checklist-value="name"
+                    <input type="checkbox" id="{{name}}" checklist-model="searchService.searchParams.category" checklist-value="name"
                            ng-click="filter()">
                     <label for="{{name}}">{{name}}</label>
                     <span>{{count}}</span>
