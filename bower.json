@@ -10,6 +10,6 @@
         "checklist-model": "~0.2.4",
         "jquery": "2.1.3",
         "normalize-css": "^3.0.3",
-        "requirejs": "2.1.17",
+        "requirejs": "2.1.17"
     }
 }
