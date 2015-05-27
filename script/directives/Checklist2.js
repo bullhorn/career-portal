@@ -126,9 +126,7 @@ class Checklist {
         // local scope var storing individual checkbox model
         tElement.attr('ng-model', 'checked');
 
-        return {
-            post: this.postLinkFn
-        };
+        return this.postLinkFn;
     }
 
     //#endregion

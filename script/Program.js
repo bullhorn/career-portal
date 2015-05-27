@@ -6,6 +6,7 @@ import 'jquery';
 
 import './directives/Checklist';
 
+import FileModel from './directives/FileModel';
 import CustomNgEnter from './directives/CustomNgEnter';
 import ElHeight from './directives/ElHeight';
 import Scroll from './directives/Scroll';
@@ -297,39 +298,8 @@ export default class {
                 }])
                 .directive('customNgEnter', CustomNgEnter)
                 .directive('elHeight', ElHeight)
-                .directive('fileModel', ['$parse', function($parse) {
-                    return {
-                        require: 'ngModel',
-                        restrict: 'A',
-                        link: function(scope, element, attrs, ngModel) {
-                            var model = $parse(attrs.fileModel);
-                            var modelSetter = model.assign;
-
-                            ngModel.$render = function() {
-                                var fileName = element.val();
-
-                                if (fileName) {
-                                    var index = fileName.lastIndexOf('\\');
-
-                                    if (!index) {
-                                        index = fileName.lastIndexOf('/');
-                                    }
-
-                                    fileName = fileName.substring(index + 1);
-                                }
-
-                                ngModel.$setViewValue(fileName);
-                            };
-
-                            element.bind('change', function() {
-                                scope.$apply(function() {
-                                    modelSetter(scope, element[0].files[0]);
-                                    ngModel.$render();
-                                });
-                            });
-                        }
-                    };
-                }])
+                //.directive('checklistModel', Checklist)
+                .directive('fileModel', FileModel)
                 .directive("scroll", Scroll)
                 .service('searchData', SearchData)
                 .service('applyJob', ApplyJob)
