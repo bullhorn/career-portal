@@ -42,7 +42,6 @@ export default [
 
             this.$scope.$watchCollection('searchService.searchParams.category', this.updateFilterCountsAnonymous());
             this.$scope.$watchCollection('searchService.searchParams.location', this.updateFilterCountsAnonymous());
-            this.$scope.$watch('searchService.searchParams.textSearch', this.updateFilterCountsAnonymous());
         }
 
         setLocations() {
@@ -170,7 +169,7 @@ export default [
         searchJobs() {
             this.$scope.searchService.makeSearchApiCall();
 
-            this.updateFilterCountsAnonymous()();
+            this.updateFilterCounts();
         }
 
         clearSearchParamsAndLoadData() {
