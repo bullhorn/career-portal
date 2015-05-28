@@ -96,8 +96,8 @@ export default [
                 moreRecordsExist: () => ((parseInt(this.searchParams.total) - parseInt(this.requestParams.start())) > 0),
                 clearSearchParams: () => {
                     this.searchParams.textSearch = '';
-                    this.searchParams.location = [];
-                    this.searchParams.category = [];
+                    this.searchParams.location.length = 0;
+                    this.searchParams.category.length = 0;
                 }
             });
         }
@@ -151,19 +151,22 @@ export default [
                     var count;
                     var sort;
                     var fields;
+                    var start;
 
                     if (groupBy) {
                         count = '&groupByCount=' + field;
                         sort = '&sort=+' + field;
                         fields = '&fields='+field;
+                        start = '';
                     } else {
                         count = '&count=' + this.requestParams.count();
                         sort = '&sort=' + this.requestParams.sort();
                         fields = '&fields='+this.config.fields;
+                        start = '&start='+this.requestParams.start();
                     }
 
                     return '?' +
-                        'query=' + query + fields + count + '&start=' + this.requestParams.start() + sort + '&useV2=true';
+                        'query=' + query + fields + count + start + sort + '&useV2=true';
                 },
                 assemble: () => this.requestParams.assembleUsingAll(false),
                 assembleForCategories: (categoryID, idToExclude) => {
@@ -205,7 +208,7 @@ export default [
                     url: this.config.searchUrl + this.requestParams.assembleForGroupBy(field)
                 })
                 .success(data => {
-                    if (data && data.data && data.data.length) callback(data.data);
+                    if (data && data.data) callback(data.data);
                     else errorCallback();
                 })
                 .error(() => errorCallback());

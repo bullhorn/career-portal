@@ -96,8 +96,10 @@ export default [
         loadJobsWithCategory(categoryID) {
             this.$scope.searchService.helper.emptyCurrentDataList();
             this.$scope.searchService.helper.resetStartAndTotal();
+            this.$scope.searchService.helper.clearSearchParams();
 
-            this.$scope.searchService.searchParams.category.length = 0;
+            this.$scope.searchService.searchParams.reloadAllData = true;
+
             this.$scope.searchService.searchParams.category.push(categoryID);
 
             this.$scope.searchService.makeSearchApiCall();

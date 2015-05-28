@@ -13,6 +13,7 @@ import StripHtml from './filters/StripHtml';
 import ApplyJob from './services/ApplyJob';
 import SearchData from './services/SearchData';
 import ShareSocial from './services/ShareSocial';
+import Sidebar from './controllers/Sidebar';
 import JobDetail from './controllers/JobDetail';
 import JobList from './controllers/JobList';
 import Header from './controllers/Header';
@@ -89,114 +90,7 @@ export default class {
                         redirectTo: '/jobs'
                     })
                 ])
-                .controller('SideBar', ['$rootScope', '$location', '$scope', 'searchData', function($rootScope, $location, $scope, searchData) {
-                    $rootScope.gridState = 'list-view';
-
-                    $scope.searchService = searchData;
-
-                    if (searchData.config.loadJobsOnStart) {
-                        searchData.makeSearchApiCall();
-                    }
-
-                    $scope.capitalize = function(value) {
-                        if(typeof value === 'object') {
-                            var key = Object.keys(value)[0].toString();
-
-                            var capitalized = $scope.capitalize(key);
-
-                            if(key != capitalized) {
-                                value[capitalized] = value[key];
-
-                                delete value[key];
-                            }
-
-                            return value;
-                        }
-
-                        return value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-                    };
-
-                    $scope.sortLocations = function(locations) {
-                        return locations.sort(function(location1, location2) {
-                            var state1 = Object.keys(location1)[0];
-                            var state2 = Object.keys(location2)[0];
-
-                            if(location1[state1] < location2[state2]) {
-                                return 1;
-                            } else if(location1[state1] > location2[state2]) {
-                                return -1;
-                            }
-
-                            return 0;
-                        }).map($scope.capitalize);
-                    };
-
-                    searchData.getCountBy('address.state', function(locations) {
-                        $scope.locations = $scope.sortLocations(locations);
-                    });
-
-                    searchData.getCountBy('categories', function(categories) {
-                        $scope.categories = categories;
-                    });
-
-                    $scope.updateCountsByIntersection = function(oldCounts, newCounts) {
-                        angular.forEach(oldCounts, function(oldCount, i) {
-                            var key1 = $scope.capitalize(Object.keys(oldCount)[0].toString());
-
-                            var found = false;
-
-                            angular.forEach(newCounts, function(newCount, i2) {
-                                var key2 = Object.keys(newCount)[0].toString();
-
-                                if(key1 == $scope.capitalize(key2)) {
-                                    oldCounts[i][key1] = newCounts[i2][key2];
-                                    found = true;
-                                }
-                            });
-
-                            if(!found) {
-                                oldCounts[i][key1] = 0;
-                            }
-                        });
-                    };
-
-                    $scope.updateFilterCounts = function() {
-                        searchData.getCountBy('address.state', function(locations) {
-                            $scope.updateCountsByIntersection($scope.locations, locations);
-
-                            $scope.locations = $scope.sortLocations($scope.locations);
-                        });
-
-                        searchData.getCountBy('address.state', function(categories) {
-                            $scope.updateCountsByIntersection($scope.categories, categories);
-                        });
-                    };
-
-                    $scope.$watchCollection('searchService.searchParams.category', $scope.updateFilterCounts);
-                    $scope.$watchCollection('searchService.searchParams.location', $scope.updateFilterCounts);
-
-                    $scope.searchJobs = function() {
-                        searchData.makeSearchApiCall();
-
-                        $scope.updateFilterCounts();
-                    };
-
-                    $scope.clearSearchParamsAndLoadData = function() {
-                        searchData.helper.clearSearchParams();
-                        searchData.makeSearchApiCall();
-                        $scope.updateFilterCounts();
-                    };
-
-                    this.switchViewStyle = function(type) {
-                        $rootScope.gridState = type + '-view';
-                    };
-
-                    this.goBack = function(state) {
-                        if ($rootScope.viewState === state) {
-                            $location.path('/jobs');
-                        }
-                    };
-                }])
+                .controller('SideBar', Sidebar)
                 .controller('JobDetail', JobDetail)
                 .controller('JobList', JobList)
                 .controller('Header', Header)
