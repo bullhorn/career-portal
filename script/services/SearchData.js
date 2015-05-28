@@ -96,8 +96,8 @@ export default [
                 moreRecordsExist: () => ((parseInt(this.searchParams.total) - parseInt(this.requestParams.start())) > 0),
                 clearSearchParams: () => {
                     this.searchParams.textSearch = '';
-                    this.searchParams.location.length = 0;
                     this.searchParams.category.length = 0;
+                    this.searchParams.location.length = 0;
                 }
             });
         }

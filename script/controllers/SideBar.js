@@ -41,6 +41,8 @@ export default [
             this.$scope.searchService.getCountBy('categories', this.setCategories());
 
             this.$scope.$watchCollection('searchService.searchParams.category', this.updateFilterCountsAnonymous());
+            this.$scope.$watchCollection('searchService.searchParams.location', this.updateFilterCountsAnonymous());
+            this.$scope.$watch('searchService.searchParams.textSearch', this.updateFilterCountsAnonymous());
         }
 
         setLocations() {
@@ -104,7 +106,7 @@ export default [
 
         updateCountsByIntersection(oldCounts, newCounts) {
             var controller = this;
-            
+
             angular.forEach(oldCounts, function (oldCount, i) {
                 var key1 = controller.capitalize(Object.keys(oldCount)[0].toString());
 

@@ -98,8 +98,6 @@ export default [
             this.$scope.searchService.helper.resetStartAndTotal();
             this.$scope.searchService.helper.clearSearchParams();
 
-            this.$scope.searchService.searchParams.reloadAllData = true;
-
             this.$scope.searchService.searchParams.category.push(categoryID);
 
             this.$scope.searchService.makeSearchApiCall();
