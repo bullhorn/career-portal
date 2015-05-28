@@ -86,15 +86,31 @@ export default [
                 var key1 = Object.keys(checkbox1)[0];
                 var key2 = Object.keys(checkbox2)[0];
 
-                if(checkbox1[key1] < checkbox2[key2]) {
+                if(checkbox1[key1] === 0) {
+                    if(checkbox2[key2] === 0) {
+                        if(key1 < key2) {
+                            return -1;
+                        } else if(key1 > key2) {
+                            return 1;
+                        }
+
+                        return 0;
+                    }
+
                     return 1;
-                } else if(checkbox1[key1] > checkbox2[key2]) {
+                } else if(checkbox2[key2] === 0) {
                     return -1;
                 }
 
                 if(key1 < key2) {
                     return -1;
                 } else if(key1 > key2) {
+                    return 1;
+                }
+
+                if(checkbox1[key1] < checkbox2[key2]) {
+                    return -1;
+                } else if(checkbox1[key1] > checkbox2[key2]) {
                     return 1;
                 }
 
