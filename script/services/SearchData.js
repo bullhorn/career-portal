@@ -25,7 +25,7 @@ export default [
                 searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
                 additionalQuery: 'isOpen:1',
                 sort: "-dateAdded",
-                fields: "id,title,categories[10],address,employmentType,dateAdded,publicDescription",
+                fields: "id,title,publishedCategory,address,employmentType,dateAdded,publicDescription",
                 count: "20",
                 start: "0",
                 loadJobsOnStart: true,
@@ -114,7 +114,7 @@ export default [
                     if (this.searchParams.textSearch)
                         query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
 
-                    if ('categories' != field && this.searchParams.category.length > 0) {
+                    if ('publishedCategory.name' != field && this.searchParams.category.length > 0) {
                         query += ' AND (';
 
                         first = true;
@@ -125,7 +125,7 @@ export default [
                                 first = false;
                             }
 
-                            query += 'categories.id:'+this.searchParams.category[i];
+                            query += 'publishedCategory.id:'+this.searchParams.category[i];
                         }
 
                         query += ')';
@@ -170,7 +170,7 @@ export default [
                 },
                 assemble: () => this.requestParams.assembleUsingAll(false),
                 assembleForCategories: (categoryID, idToExclude) => {
-                    var query = '(' + this.config.additionalQuery + ') AND categories.id:' + categoryID;
+                    var query = '(' + this.config.additionalQuery + ') AND publishedCategory.id:' + categoryID;
 
                     if (idToExclude && parseInt(idToExclude) > 0)
                         query += ' NOT id:' + idToExclude;

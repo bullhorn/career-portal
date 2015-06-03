@@ -78,7 +78,9 @@ export default [
             }
         }
 
-        addRelatedJobs(controller) {
+        addRelatedJobs() {
+            var controller = this;
+
             return function(jobs) {
                 controller.$scope.relatedJobs = controller.$scope.relatedJobs.concat(jobs);
             };
@@ -87,10 +89,8 @@ export default [
         loadRelatedJobs() {
             this.$scope.relatedJobs = [];
 
-            for (var i = 0; i < this.$scope.jobData.categories.data.length; i++) {
-                this.$scope.searchService.loadJobDataByCategory(this.$scope.jobData.categories.data[i].id, this.addRelatedJobs(this), undefined,
-                    this.$scope.jobData.id);
-            }
+            this.$scope.searchService.loadJobDataByCategory(this.$scope.jobData.publishedCategory.id, this.addRelatedJobs(), undefined,
+                this.$scope.jobData.id);
         }
 
         loadJobsWithCategory(categoryID) {

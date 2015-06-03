@@ -38,7 +38,7 @@ export default [
             }
 
             this.$scope.searchService.getCountBy('address.state', this.setLocations());
-            this.$scope.searchService.getCountBy('categories', this.setCategories());
+            this.$scope.searchService.getCountBy('publishedCategory.name', this.setCategories());
 
             this.$scope.$watchCollection('searchService.searchParams.category', this.updateFilterCountsAnonymous());
             this.$scope.$watchCollection('searchService.searchParams.location', this.updateFilterCountsAnonymous());
@@ -151,7 +151,7 @@ export default [
                 controller.$scope.locations = controller.sortCheckboxes(controller.$scope.locations);
             });
 
-            this.$scope.searchService.getCountBy('primaryCategory', function (categories) {
+            this.$scope.searchService.getCountBy('publishedCategory.name', function (categories) {
                 controller.updateCountsByIntersection(controller.$scope.categories, categories);
 
                 controller.$scope.categories = controller.sortCheckboxes(controller.$scope.categories);
