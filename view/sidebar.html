@@ -27,18 +27,13 @@
         <h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
         <list>
 			<span ng-repeat="cat in categories">
-				<item ng-repeat="(name, count) in cat" ng-if="name && name != 'null'">
+				<item ng-repeat="(name, count) in cat" ng-if="name && name != 'Null'">
                     <input type="checkbox" id="{{name}}" checklist-model="searchService.searchParams.category" checklist-value="name"
                            ng-click="aside.searchJobs()">
                     <label for="{{name}}">{{name}}</label>
                     <span>{{count}}</span>
                 </item>
 			</span>
-
-            <item><input type="checkbox" id="ux"><label for="ux">UX/UI</label></item>
-            <item><input type="checkbox" id="mar"><label for="mar">Marketing</label></item>
-            <item><input type="checkbox" id="sal"><label for="sal">Sales</label></item>
-            <item><input type="checkbox" id="ps"><label for="ps">Professional Services</label></item>
         </list>
 
         <button ng-click="aside.clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>

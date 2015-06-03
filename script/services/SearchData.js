@@ -114,7 +114,7 @@ export default [
                     if (this.searchParams.textSearch)
                         query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
 
-                    if ('publishedCategory.name' != field && this.searchParams.category.length > 0) {
+                    if ('publishedCategory.id' != field && this.searchParams.category.length > 0) {
                         query += ' AND (';
 
                         first = true;
@@ -156,7 +156,7 @@ export default [
                     if (groupBy) {
                         count = '&groupByCount=' + field;
                         sort = '&sort=+' + field;
-                        fields = '&fields='+field;
+                        fields = '&fields=TODO';
                         start = '';
                     } else {
                         count = '&count=' + this.requestParams.count();

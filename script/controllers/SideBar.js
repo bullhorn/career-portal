@@ -38,7 +38,7 @@ export default [
             }
 
             this.$scope.searchService.getCountBy('address.state', this.setLocations());
-            this.$scope.searchService.getCountBy('publishedCategory.name', this.setCategories());
+            this.$scope.searchService.getCountBy('publishedCategory.id', this.setCategories());
 
             this.$scope.$watchCollection('searchService.searchParams.category', this.updateFilterCountsAnonymous());
             this.$scope.$watchCollection('searchService.searchParams.location', this.updateFilterCountsAnonymous());
@@ -145,17 +145,21 @@ export default [
         updateFilterCounts() {
             var controller = this;
 
-            this.$scope.searchService.getCountBy('address.state', function (locations) {
-                controller.updateCountsByIntersection(controller.$scope.locations, locations);
+            if(this.$scope.locations) {
+                this.$scope.searchService.getCountBy('address.state', function (locations) {
+                    controller.updateCountsByIntersection(controller.$scope.locations, locations);
 
-                controller.$scope.locations = controller.sortCheckboxes(controller.$scope.locations);
-            });
+                    controller.$scope.locations = controller.sortCheckboxes(controller.$scope.locations);
+                });
+            }
 
-            this.$scope.searchService.getCountBy('publishedCategory.name', function (categories) {
-                controller.updateCountsByIntersection(controller.$scope.categories, categories);
+            if(this.$scope.categories) {
+                this.$scope.searchService.getCountBy('publishedCategory.id', function (categories) {
+                    controller.updateCountsByIntersection(controller.$scope.categories, categories);
 
-                controller.$scope.categories = controller.sortCheckboxes(controller.$scope.categories);
-            });
+                    controller.$scope.categories = controller.sortCheckboxes(controller.$scope.categories);
+                });
+            }
         }
 
         updateFilterCountsAnonymous() {
