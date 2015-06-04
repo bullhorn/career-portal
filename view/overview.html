@@ -35,13 +35,13 @@
             <list>
                 <item ng-repeat="job in relatedJobs">
                     <a href="javascript:void(0);" ng-click="overview.switchToJob(job.id)">{{ job.title }}</a>
-                    <span ng-repeat="cat in job.categories.data" class="category">{{ cat.name }}{{$last ? '' : ', '}}</span>
+                    <span class="category">{{ job.publishedCategory.name }}</span>
                     <span class="location">{{ job.address.city+','+job.address.state }}</span>
                 </item>
             </list>
             <hr>
-            <div ng-repeat="cat in jobData.categories.data">
-                <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(cat.id)" class="category-filter">See all {{cat.name}} Jobs <i class="icon-arrow-forward"></i> </a>
+            <div>
+                <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(jobData.publishedCategory.id)" class="category-filter">See all {{jobData.publishedCategory.name}} Jobs <i class="icon-arrow-forward"></i> </a>
             </div>
         </div>
     </card>
