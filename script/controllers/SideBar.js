@@ -37,8 +37,8 @@ export default [
                 this.$scope.searchService.makeSearchApiCall();
             }
 
-            this.$scope.searchService.getCountBy('address.state', this.setLocations());
-            this.$scope.searchService.getCountBy('publishedCategory.id', this.setCategories());
+            this.$scope.searchService.getCountByLocation(this.setLocations());
+            this.$scope.searchService.getCountByCategory(this.setCategories());
 
             this.$scope.$watchCollection('searchService.searchParams.category', this.updateFilterCountsAnonymous());
             this.$scope.$watchCollection('searchService.searchParams.location', this.updateFilterCountsAnonymous());
@@ -48,7 +48,7 @@ export default [
             var controller = this;
 
             return function(locations) {
-                controller.$scope.locations = controller.sortCheckboxes(locations);
+                controller.$scope.locations = locations;
             };
         }
 
@@ -56,88 +56,24 @@ export default [
             var controller = this;
 
             return function(categories) {
-                controller.$scope.categories = controller.sortCheckboxes(categories);
+                controller.$scope.categories = categories;
             };
         }
 
-        capitalize(value) {
-            if(typeof value === 'object') {
-                var key = Object.keys(value)[0].toString();
-
-                var capitalized = this.capitalize(key);
-
-                if(key != capitalized) {
-                    value[capitalized] = value[key];
-
-                    delete value[key];
-                }
-
-                return value;
-            }
-
-            return value.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-        }
-
-        sortCheckboxes(checkboxes) {
-            var controller = this;
-
-            return checkboxes.sort(function(checkbox1, checkbox2) {
-                var key1 = Object.keys(checkbox1)[0];
-                var key2 = Object.keys(checkbox2)[0];
-
-                if(checkbox1[key1] === 0) {
-                    if(checkbox2[key2] === 0) {
-                        if(key1 < key2) {
-                            return -1;
-                        } else if(key1 > key2) {
-                            return 1;
-                        }
-
-                        return 0;
-                    }
-
-                    return 1;
-                } else if(checkbox2[key2] === 0) {
-                    return -1;
-                }
-
-                if(key1 < key2) {
-                    return -1;
-                } else if(key1 > key2) {
-                    return 1;
-                }
-
-                if(checkbox1[key1] < checkbox2[key2]) {
-                    return -1;
-                } else if(checkbox1[key1] > checkbox2[key2]) {
-                    return 1;
-                }
-
-                return 0;
-            }).map(function(value) {
-                return controller.capitalize(value);
-            });
-        }
-
-        updateCountsByIntersection(oldCounts, newCounts) {
-            var controller = this;
-
-            angular.forEach(oldCounts, function (oldCount, i) {
-                var key1 = controller.capitalize(Object.keys(oldCount)[0].toString());
-
+        updateCountsByIntersection(oldCounts, newCounts, getProperty) {
+            angular.forEach(oldCounts, function (oldCount) {
                 var found = false;
 
-                angular.forEach(newCounts, function (newCount, i2) {
-                    var key2 = Object.keys(newCount)[0].toString();
+                angular.forEach(newCounts, function (newCount) {
 
-                    if (key1 == controller.capitalize(key2)) {
-                        oldCounts[i][key1] = newCounts[i2][key2];
+                    if (getProperty.call(oldCount) == getProperty.call(newCount)) {
+                        oldCount.idCount = newCount.idCount;
                         found = true;
                     }
                 });
 
                 if (!found) {
-                    oldCounts[i][key1] = 0;
+                    oldCount.idCount = 0;
                 }
             });
         }
@@ -146,18 +82,22 @@ export default [
             var controller = this;
 
             if(this.$scope.locations) {
-                this.$scope.searchService.getCountBy('address.state', function (locations) {
-                    controller.updateCountsByIntersection(controller.$scope.locations, locations);
+                this.$scope.searchService.getCountByLocation(function (locations) {
+                    controller.updateCountsByIntersection(controller.$scope.locations, locations, function() {
+                        return this.address.state;
+                    });
 
-                    controller.$scope.locations = controller.sortCheckboxes(controller.$scope.locations);
+                    controller.$scope.locations = controller.$scope.locations;
                 });
             }
 
             if(this.$scope.categories) {
-                this.$scope.searchService.getCountBy('publishedCategory.id', function (categories) {
-                    controller.updateCountsByIntersection(controller.$scope.categories, categories);
+                this.$scope.searchService.getCountByCategory(function (categories) {
+                    controller.updateCountsByIntersection(controller.$scope.categories, categories, function() {
+                        return this.publishedCategory.id;
+                    });
 
-                    controller.$scope.categories = controller.sortCheckboxes(controller.$scope.categories);
+                    controller.$scope.categories = controller.$scope.categories;
                 });
             }
         }

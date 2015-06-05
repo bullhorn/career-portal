@@ -23,7 +23,9 @@ export default [
         get config() {
             return {
                 searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
-                additionalQuery: 'isOpen:1',
+                queryUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobOrder',
+                additionalSearchQuery: 'isOpen:1',
+                additionalQuery: 'isOpen=true',
                 sort: "-dateAdded",
                 fields: "id,title,publishedCategory,address,employmentType,dateAdded,publicDescription",
                 count: "20",
@@ -107,14 +109,62 @@ export default [
                 sort: () => this.searchParams.sort || this.config.sort,
                 count: () => this.searchParams.count || this.config.count,
                 start: () => this.searchParams.start || this.config.start,
-                assembleUsingAll: (groupBy, field) => {
-                    var query = '(' + this.config.additionalQuery + ')';
+                assembleForGroupByQuery: (fields, orderByFields, additionalQuery) => {
+                    var where = '(' + this.config.additionalQuery + ')';
+                    var first;
+
+                    if(additionalQuery) {
+                        where += ' AND ('+additionalQuery+')';
+                    }
+
+                    if (this.searchParams.textSearch)
+                        where += ' AND (title LIKE ' + this.searchParams.textSearch + '% OR publishedDescription LIKE ' + this.searchParams.textSearch + '%)';
+
+                    if ('publishedCategory(id,name)' != fields && this.searchParams.category.length > 0) {
+                        where += ' AND (';
+
+                        first = true;
+                        for (var i = 0; i < this.searchParams.category.length; i++) {
+                            if (!first) {
+                                where += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            where += 'publishedCategory.id='+this.searchParams.category[i];
+                        }
+
+                        where += ')';
+                    }
+
+                    if ('address(state)' != fields && this.searchParams.location.length > 0) {
+                        where += ' AND (';
+
+                        first = true;
+                        for (var j = 0; j < this.searchParams.location.length; j++) {
+                            if (!first) {
+                                where += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            where += 'address.state=\'' + this.searchParams.location[j] + '\'';
+                        }
+
+                        where += ')';
+                    }
+
+                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
+                        + '&count=500&orderBy=-count.id,+' + orderByFields + '&start=0&useV2=true';
+                },
+                assembleForSearch: () => {
+                    var query = '(' + this.config.additionalSearchQuery + ')';
                     var first;
 
                     if (this.searchParams.textSearch)
                         query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
 
-                    if ('publishedCategory.id' != field && this.searchParams.category.length > 0) {
+                    if (this.searchParams.category.length > 0) {
                         query += ' AND (';
 
                         first = true;
@@ -131,7 +181,7 @@ export default [
                         query += ')';
                     }
 
-                    if ('address.state' != field && this.searchParams.location.length > 0) {
+                    if (this.searchParams.location.length > 0) {
                         query += ' AND (';
 
                         first = true;
@@ -148,37 +198,17 @@ export default [
                         query += ')';
                     }
 
-                    var count;
-                    var sort;
-                    var fields;
-                    var start;
-
-                    if (groupBy) {
-                        count = '&groupByCount=' + field;
-                        sort = '&sort=+' + field;
-                        fields = '&fields=TODO';
-                        start = '';
-                    } else {
-                        count = '&count=' + this.requestParams.count();
-                        sort = '&sort=' + this.requestParams.sort();
-                        fields = '&fields='+this.config.fields;
-                        start = '&start='+this.requestParams.start();
-                    }
-
-                    return '?' +
-                        'query=' + query + fields + count + start + sort + '&useV2=true';
+                    return '?query=' + query + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start() + '&useV2=true';
                 },
-                assemble: () => this.requestParams.assembleUsingAll(false),
                 assembleForCategories: (categoryID, idToExclude) => {
-                    var query = '(' + this.config.additionalQuery + ') AND publishedCategory.id:' + categoryID;
+                    var query = '(' + this.config.additionalSearchQuery + ') AND publishedCategory.id:' + categoryID;
 
                     if (idToExclude && parseInt(idToExclude) > 0)
                         query += ' NOT id:' + idToExclude;
 
                     return '?' + 'query=' + query + '&fields=' + this.config.fields + '&count=' + this.requestParams.count() + '&start=0&sort=' + this.requestParams.sort() + '&useV2=true';
                 },
-                assembleForGroupBy: field => this.requestParams.assembleUsingAll(true, field),
-                assembleForFind: jobID => '?' + 'query=(' + this.config.additionalQuery + ') AND id:' + jobID + '&fields=' + this.config.fields + '&count=1&start=0&sort=' + this.requestParams.sort() + '&useV2=true'
+                assembleForFind: jobID => '?' + 'query=(' + this.config.additionalSearchQuery + ') AND id:' + jobID + '&fields=' + this.config.fields + '&count=1&start=0&sort=' + this.requestParams.sort() + '&useV2=true'
             });
         }
 
@@ -199,13 +229,21 @@ export default [
 
         //#region Methods
 
-        getCountBy(field, callback, errorCallback) {
+        getCountByLocation(callback, errorCallback) {
+            return this.getCountBy('address(state)', 'address.state', 'address.state IS NOT NULL', callback, errorCallback);
+        }
+
+        getCountByCategory(callback, errorCallback) {
+            return this.getCountBy('publishedCategory(id,name)', 'publishedCategory.name', 'publishedCategory IS NOT NULL',callback, errorCallback);
+        }
+
+        getCountBy(fields, orderByFields, additionalQuery, callback, errorCallback) {
             errorCallback = errorCallback || function() { };
 
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForGroupBy(field)
+                    url: this.config.queryUrl + this.requestParams.assembleForGroupByQuery(fields, orderByFields, additionalQuery)
                 })
                 .success(data => {
                     if (data && data.data) callback(data.data);
@@ -253,7 +291,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assemble()
+                    url: this.config.searchUrl + this.requestParams.assembleForSearch()
                 })
                 .success(data => {
                     this.helper.updateStartAndTotal(data);

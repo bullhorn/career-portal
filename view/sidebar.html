@@ -15,25 +15,21 @@
         <h4>{{::searchService.config.portalText.sidebar.locationHeader}}</h4>
         <list>
 
-            <span ng-repeat="loc in locations">
-                <item ng-repeat="(state, count) in loc" ng-if="state && state != 'Null'">
-                    <input type="checkbox" id="{{state}}" checklist-model="searchService.searchParams.location"checklist-value="state"
-                           ng-click="aside.searchJobs()">
-                    <label for="{{state}}">{{state}}</label>
-                    <span>{{count}}</span>
-                </item>
-            </span>
+            <item ng-repeat="location in locations" ng-if="location && location.address && location.address.state && location.address.state.length">
+                <input type="checkbox" id="{{location.address.state}}" checklist-model="searchService.searchParams.location"
+                       checklist-value="location.address.state" ng-click="aside.searchJobs()">
+                <label for="{{location.address.state}}">{{location.address.state}}</label>
+                <span>{{location.idCount}}</span>
+            </item>
         </list>
         <h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
         <list>
-			<span ng-repeat="cat in categories">
-				<item ng-repeat="(name, count) in cat" ng-if="name && name != 'Null'">
-                    <input type="checkbox" id="{{name}}" checklist-model="searchService.searchParams.category" checklist-value="name"
-                           ng-click="aside.searchJobs()">
-                    <label for="{{name}}">{{name}}</label>
-                    <span>{{count}}</span>
-                </item>
-			</span>
+            <item ng-repeat="cat in categories" ng-if="cat && cat.publishedCategory && cat.publishedCategory.name && cat.publishedCategory.name.length">
+                <input type="checkbox" id="{{cat.publishedCategory.id}}" checklist-model="searchService.searchParams.category"
+                       checklist-value="cat.publishedCategory.id" ng-click="aside.searchJobs()">
+                <label for="{{cat.publishedCategory.id}}">{{cat.publishedCategory.name}}</label>
+                <span>{{cat.idCount}}</span>
+            </item>
         </list>
 
         <button ng-click="aside.clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>
