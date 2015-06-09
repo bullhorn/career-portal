@@ -137,7 +137,7 @@ export default [
                         where += ')';
                     }
 
-                    if ('address(state)' != fields && this.searchParams.location.length > 0) {
+                    if ('address(city,state)' != fields && this.searchParams.location.length > 0) {
                         where += ' AND (';
 
                         first = true;
@@ -148,7 +148,9 @@ export default [
                                 first = false;
                             }
 
-                            where += 'address.state=\'' + this.searchParams.location[j] + '\'';
+                            var location = this.searchParams.location[j].split(',');
+
+                            where += '(address.city=\''+location[0]+'\' AND address.state=\'' + location[1] + '\')';
                         }
 
                         where += ')';
@@ -192,7 +194,9 @@ export default [
                                 first = false;
                             }
 
-                            query += 'address.state:"' + this.searchParams.location[j] + '"';
+                            var location = this.searchParams.location[j].split(',');
+
+                            query += '(address.city:"'+location[0]+'" AND address.state:"' + location[1] + '")';
                         }
 
                         query += ')';
@@ -230,7 +234,7 @@ export default [
         //#region Methods
 
         getCountByLocation(callback, errorCallback) {
-            return this.getCountBy('address(state)', 'address.state', 'address.state IS NOT NULL', callback, errorCallback);
+            return this.getCountBy('address(city,state)', 'address.city,address.state', 'address.city IS NOT NULL AND address.state IS NOT NULL', callback, errorCallback);
         }
 
         getCountByCategory(callback, errorCallback) {

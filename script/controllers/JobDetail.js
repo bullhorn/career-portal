@@ -89,9 +89,13 @@ export default [
         loadRelatedJobs() {
             this.$scope.relatedJobs = [];
 
-            this.$scope.searchService.loadJobDataByCategory(this.$scope.jobData.publishedCategory.id, this.addRelatedJobs(), undefined,
-                this.$scope.jobData.id);
+
+            if (this.$scope.jobData.publishedCategory) {
+                this.$scope.searchService.loadJobDataByCategory(this.$scope.jobData.publishedCategory.id, this.addRelatedJobs(), undefined,
+                    this.$scope.jobData.id);
+            }
         }
+
 
         loadJobsWithCategory(categoryID) {
             this.$scope.searchService.helper.emptyCurrentDataList();

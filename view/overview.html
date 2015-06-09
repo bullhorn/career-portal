@@ -16,7 +16,7 @@
                 <a href="" class="icon-email" ng-click="overview.shareEmail(jobData)"></a>
             </div>
         </div>
-        <h2>{{::searchService.config.portalText.overview.header}}</h2>
+        <h2>{{::overview.searchService.config.portalText.overview.header}}</h2>
         <div class="break-word">
             <p ng-bind-html="jobData.publicDescription"></p>
         </div>
@@ -28,7 +28,7 @@
         <div class="loc-type">
             <span class="location">{{jobData.address.city}}, {{jobData.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
         </div>
-        <button name="apply" ng-click="overview.applyModal()">{{searchService.config.portalText.overview.applyButtonLabel}}</button>
+        <button name="apply" ng-click="overview.applyModal()">{{overview.searchService.config.portalText.overview.applyButtonLabel}}</button>
         <div class="related-jobs">
             <hr>
             <h3>Related Jobs</h3>

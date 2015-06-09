@@ -15,16 +15,20 @@
         <h4>{{::searchService.config.portalText.sidebar.locationHeader}}</h4>
         <list>
 
-            <item ng-repeat="location in locations" ng-if="location && location.address && location.address.state && location.address.state.length">
-                <input type="checkbox" id="{{location.address.state}}" checklist-model="searchService.searchParams.location"
-                       checklist-value="location.address.state" ng-click="aside.searchJobs()">
-                <label for="{{location.address.state}}">{{location.address.state}}</label>
+            <item ng-repeat="location in locations"
+                  ng-if="location && location.address && location.address.state.length && location.address.city.length"
+                  ng-show="location.idCount > 0 || checked">
+                <input type="checkbox" id="{{location.address.city+','+location.address.state}}" checklist-model="searchService.searchParams.location"
+                       checklist-value="location.address.city+','+location.address.state" ng-click="aside.searchJobs()">
+                <label for="{{location.address.city+','+location.address.state}}">{{location.address.city+', '+location.address.state}}</label>
                 <span>{{location.idCount}}</span>
             </item>
         </list>
         <h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
         <list>
-            <item ng-repeat="cat in categories" ng-if="cat && cat.publishedCategory && cat.publishedCategory.name && cat.publishedCategory.name.length">
+            <item ng-repeat="cat in categories"
+                  ng-if="cat && cat.publishedCategory && cat.publishedCategory.name && cat.publishedCategory.name.length"
+                  ng-show="cat.idCount > 0 || checked">
                 <input type="checkbox" id="{{cat.publishedCategory.id}}" checklist-model="searchService.searchParams.category"
                        checklist-value="cat.publishedCategory.id" ng-click="aside.searchJobs()">
                 <label for="{{cat.publishedCategory.id}}">{{cat.publishedCategory.name}}</label>

@@ -76,6 +76,26 @@ export default [
                     oldCount.idCount = 0;
                 }
             });
+
+            oldCounts.sort(function(count1, count2) {
+                var idCount1 = count1.idCount;
+                var idCount2 = count2.idCount;
+
+                if(idCount1 == idCount2) {
+                    var name1 = getProperty.call(count1);
+                    var name2 = getProperty.call(count2);
+
+                    if(name1 < name2) {
+                        return -1;
+                    } else if(name1 > name2) {
+                        return 1;
+                    }
+
+                    return 0;
+                }
+
+                return idCount2 - idCount1;
+            });
         }
 
         updateFilterCounts() {
@@ -84,7 +104,7 @@ export default [
             if(this.$scope.locations) {
                 this.$scope.searchService.getCountByLocation(function (locations) {
                     controller.updateCountsByIntersection(controller.$scope.locations, locations, function() {
-                        return this.address.state;
+                        return this.address.city+','+this.address.state;
                     });
 
                     controller.$scope.locations = controller.$scope.locations;
