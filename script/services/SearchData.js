@@ -118,7 +118,7 @@ export default [
                     }
 
                     if (this.searchParams.textSearch)
-                        where += ' AND (title LIKE ' + this.searchParams.textSearch + '% OR publishedDescription LIKE ' + this.searchParams.textSearch + '%)';
+                        where += ' AND (title LIKE \'' + this.searchParams.textSearch + '%25\' OR publicDescription LIKE \'' + this.searchParams.textSearch + '%25\')';
 
                     if ('publishedCategory(id,name)' != fields && this.searchParams.category.length > 0) {
                         where += ' AND (';
