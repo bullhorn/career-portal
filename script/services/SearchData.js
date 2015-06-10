@@ -110,47 +110,51 @@ export default [
                 sort: () => this.searchParams.sort || this.config.sort,
                 count: () => this.searchParams.count || this.config.count,
                 start: () => this.searchParams.start || this.config.start,
-                query:() => {
+                query:(fields) => {
                     var query = '(' + this.config.additionalSearchQuery + ')';
                     var first;
 
                     if (this.searchParams.textSearch)
                         query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
 
-                    if (this.searchParams.category.length > 0) {
-                        query += ' AND (';
+                    if('publishedCategory(id,name)' != fields) {
+                        if (this.searchParams.category.length > 0) {
+                            query += ' AND (';
 
-                        first = true;
-                        for (var i = 0; i < this.searchParams.category.length; i++) {
-                            if (!first) {
-                                query += ' OR ';
-                            } else {
-                                first = false;
+                            first = true;
+                            for (var i = 0; i < this.searchParams.category.length; i++) {
+                                if (!first) {
+                                    query += ' OR ';
+                                } else {
+                                    first = false;
+                                }
+
+                                query += 'publishedCategory.id:' + this.searchParams.category[i];
                             }
 
-                            query += 'publishedCategory.id:'+this.searchParams.category[i];
+                            query += ')';
                         }
-
-                        query += ')';
                     }
 
-                    if (this.searchParams.location.length > 0) {
-                        query += ' AND (';
+                    if('address(city,state)' != fields) {
+                        if (this.searchParams.location.length > 0) {
+                            query += ' AND (';
 
-                        first = true;
-                        for (var j = 0; j < this.searchParams.location.length; j++) {
-                            if (!first) {
-                                query += ' OR ';
-                            } else {
-                                first = false;
+                            first = true;
+                            for (var j = 0; j < this.searchParams.location.length; j++) {
+                                if (!first) {
+                                    query += ' OR ';
+                                } else {
+                                    first = false;
+                                }
+
+                                var location = this.searchParams.location[j].split(',');
+
+                                query += '(address.city:"' + location[0] + '" AND address.state:"' + location[1] + '")';
                             }
 
-                            var location = this.searchParams.location[j].split(',');
-
-                            query += '(address.city:"'+location[0]+'" AND address.state:"' + location[1] + '")';
+                            query += ')';
                         }
-
-                        query += ')';
                     }
 
                     return query;
@@ -214,8 +218,8 @@ export default [
                     return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
                         + '&count=' + start + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
                 },
-                assembleForSearchForIDs: (start, count) => {
-                    return '?query=' + this.requestParams.query() + '&fields=id&sort=id&count=' + count + '&start=' + start + '&useV2=true&showTotalMatched=true';
+                assembleForSearchForIDs: (start, count, fields) => {
+                    return '?query=' + this.requestParams.query(fields) + '&fields=id&sort=id&count=' + count + '&start=' + start + '&useV2=true&showTotalMatched=true';
                 },
                 assembleForSearch: () => {
                     return '?query=' + this.requestParams.query() + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start() + '&useV2=true';
@@ -311,11 +315,11 @@ export default [
                 .error(() => { });
         }
 
-        recursiveSearchForIDs(callback, start, count) {
+        recursiveSearchForIDs(callback, start, count, fields) {
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForSearchForIDs(start, count)
+                    url: this.config.searchUrl + this.requestParams.assembleForSearchForIDs(start, count, fields)
                 })
                 .success(data => {
                     callback(data);
@@ -352,7 +356,7 @@ export default [
                     }
                 };
 
-                this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize);
+                this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize, fields);
             } else {
                 callbackIfNoMore = (data) => {
                     totalRecords = totalRecords.concat(data.data);
