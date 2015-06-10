@@ -335,17 +335,21 @@ export default [
             if(this.searchParams.textSearch) {
                 callbackIfNoMore = (data) => {
                     //fields, orderByFields, ids, start, count
-                    controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
-                        totalRecords = totalRecords.concat(counts.data);
+                    if(data.data) {
+                        controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
+                            totalRecords = totalRecords.concat(counts.data);
 
-                        if(data.total > data.count) {
-                            start += controller.config.batchSize;
+                            if (data.total > data.count) {
+                                start += controller.config.batchSize;
 
-                            controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
-                        } else {
-                            callback(totalRecords);
-                        }
-                    });
+                                controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
+                            } else {
+                                callback(totalRecords);
+                            }
+                        });
+                    } else {
+                        callback(totalRecords);
+                    }
                 };
 
                 this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize);
