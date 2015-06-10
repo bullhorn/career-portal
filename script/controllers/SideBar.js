@@ -106,18 +106,14 @@ export default [
                     controller.updateCountsByIntersection(controller.$scope.locations, locations, function() {
                         return this.address.city+','+this.address.state;
                     });
-
-                    controller.$scope.locations = controller.$scope.locations;
                 });
             }
 
             if(this.$scope.categories) {
                 this.$scope.searchService.getCountByCategory(function (categories) {
                     controller.updateCountsByIntersection(controller.$scope.categories, categories, function() {
-                        return this.publishedCategory.id;
+                        return !this.publishedCategory ? null : this.publishedCategory.id;
                     });
-
-                    controller.$scope.categories = controller.$scope.categories;
                 });
             }
         }

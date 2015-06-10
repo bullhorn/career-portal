@@ -30,6 +30,7 @@ export default [
                 fields: "id,title,publishedCategory,address,employmentType,dateAdded,publicDescription",
                 count: "20",
                 start: "0",
+                batchSize: 500,
                 loadJobsOnStart: true,
                 portalText: {
                     companyName: 'Acme Staffing',
@@ -48,7 +49,7 @@ export default [
                     },
                     modal: {
                         uploadResumeFile: 'Upload Resume File',
-                        toggle: function() {
+                        toggle: () => {
                             if(!this.header || this.header == this.thankYou.header) {
                                 this.header = this.apply.header;
                                 this.subHeader = this.apply.subHeader;
@@ -109,57 +110,7 @@ export default [
                 sort: () => this.searchParams.sort || this.config.sort,
                 count: () => this.searchParams.count || this.config.count,
                 start: () => this.searchParams.start || this.config.start,
-                assembleForGroupByQuery: (fields, orderByFields, additionalQuery) => {
-                    var where = '(' + this.config.additionalQuery + ')';
-                    var first;
-
-                    if(additionalQuery) {
-                        where += ' AND ('+additionalQuery+')';
-                    }
-
-                    if (this.searchParams.textSearch)
-                        where += ' AND (title LIKE \'' + this.searchParams.textSearch + '%25\' OR publicDescription LIKE \'' + this.searchParams.textSearch + '%25\')';
-
-                    if ('publishedCategory(id,name)' != fields && this.searchParams.category.length > 0) {
-                        where += ' AND (';
-
-                        first = true;
-                        for (var i = 0; i < this.searchParams.category.length; i++) {
-                            if (!first) {
-                                where += ' OR ';
-                            } else {
-                                first = false;
-                            }
-
-                            where += 'publishedCategory.id='+this.searchParams.category[i];
-                        }
-
-                        where += ')';
-                    }
-
-                    if ('address(city,state)' != fields && this.searchParams.location.length > 0) {
-                        where += ' AND (';
-
-                        first = true;
-                        for (var j = 0; j < this.searchParams.location.length; j++) {
-                            if (!first) {
-                                where += ' OR ';
-                            } else {
-                                first = false;
-                            }
-
-                            var location = this.searchParams.location[j].split(',');
-
-                            where += '(address.city=\''+location[0]+'\' AND address.state=\'' + location[1] + '\')';
-                        }
-
-                        where += ')';
-                    }
-
-                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
-                        + '&count=500&orderBy=-count.id,+' + orderByFields + '&start=0&useV2=true';
-                },
-                assembleForSearch: () => {
+                query:() => {
                     var query = '(' + this.config.additionalSearchQuery + ')';
                     var first;
 
@@ -202,7 +153,72 @@ export default [
                         query += ')';
                     }
 
-                    return '?query=' + query + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start() + '&useV2=true';
+                    return query;
+                },
+                assembleForGroupByQuery: (fields, orderByFields, additionalQuery, start, count) => {
+                    var where = '(' + this.config.additionalQuery + ')';
+                    var first;
+
+                    if(additionalQuery) {
+                        where += ' AND ('+additionalQuery+')';
+                    }
+
+                    if ('publishedCategory(id,name)' != fields && this.searchParams.category.length > 0) {
+                        where += ' AND (';
+
+                        first = true;
+                        for (var i = 0; i < this.searchParams.category.length; i++) {
+                            if (!first) {
+                                where += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            where += 'publishedCategory.id='+this.searchParams.category[i];
+                        }
+
+                        where += ')';
+                    }
+
+                    if ('address(city,state)' != fields && this.searchParams.location.length > 0) {
+                        where += ' AND (';
+
+                        first = true;
+                        for (var j = 0; j < this.searchParams.location.length; j++) {
+                            if (!first) {
+                                where += ' OR ';
+                            } else {
+                                first = false;
+                            }
+
+                            var location = this.searchParams.location[j].split(',');
+
+                            where += '(address.city=\''+location[0]+'\' AND address.state=\'' + location[1] + '\')';
+                        }
+
+                        where += ')';
+                    }
+
+                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
+                        + '&count=' + count + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
+                },
+                assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
+                    var ids = [];
+
+                    for(var i = 0; i < jobs.length; i++) {
+                        ids.push(jobs[i].id);
+                    }
+
+                    var where = 'id IN (' + ids.join(',') + ')';
+
+                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
+                        + '&count=' + start + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
+                },
+                assembleForSearchForIDs: (start, count) => {
+                    return '?query=' + this.requestParams.query() + '&fields=id&sort=id&count=' + count + '&start=' + start + '&useV2=true&showTotalMatched=true';
+                },
+                assembleForSearch: () => {
+                    return '?query=' + this.requestParams.query() + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start() + '&useV2=true';
                 },
                 assembleForCategories: (categoryID, idToExclude) => {
                     var query = '(' + this.config.additionalSearchQuery + ') AND publishedCategory.id:' + categoryID;
@@ -241,21 +257,6 @@ export default [
             return this.getCountBy('publishedCategory(id,name)', 'publishedCategory.name', 'publishedCategory IS NOT NULL',callback, errorCallback);
         }
 
-        getCountBy(fields, orderByFields, additionalQuery, callback, errorCallback) {
-            errorCallback = errorCallback || function() { };
-
-            this
-                .$http({
-                    method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForGroupByQuery(fields, orderByFields, additionalQuery)
-                })
-                .success(data => {
-                    if (data && data.data) callback(data.data);
-                    else errorCallback();
-                })
-                .error(() => errorCallback());
-        }
-
         loadJobData(jobID, callback, errorCallback) {
             errorCallback = errorCallback || function() { };
 
@@ -284,6 +285,85 @@ export default [
                     else errorCallback();
                 })
                 .error(() => errorCallback());
+        }
+
+        recursiveGetCountBy() {
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.queryUrl + this.requestParams.assembleForGroupByQuery(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4])
+                })
+                .success(data => {
+                    arguments[5](data);
+                })
+                .error(() => arguments[6]());
+        }
+
+        getCountWhereIDs() {
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.queryUrl + this.requestParams.assembleForGroupByWhereIDs(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4])
+                })
+                .success(data => {
+                    arguments[5](data);
+                })
+                .error(() => { });
+        }
+
+        recursiveSearchForIDs(callback, start, count) {
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.searchUrl + this.requestParams.assembleForSearchForIDs(start, count)
+                })
+                .success(data => {
+                    callback(data);
+                })
+                .error(() => { });
+        }
+
+        getCountBy(fields, orderByFields, additionalQuery, callback, errorCallback) {
+            errorCallback = errorCallback || function() { };
+
+            var totalRecords = [];
+            var start = 0;
+
+            var controller = this;
+            var callbackIfNoMore;
+
+            if(this.searchParams.textSearch) {
+                callbackIfNoMore = (data) => {
+                    //fields, orderByFields, ids, start, count
+                    controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
+                        totalRecords = totalRecords.concat(counts.data);
+
+                        if(data.total > data.count) {
+                            start += controller.config.batchSize;
+
+                            controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
+                        } else {
+                            callback(totalRecords);
+                        }
+                    });
+                };
+
+                this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize);
+            } else {
+                callbackIfNoMore = (data) => {
+                    totalRecords = totalRecords.concat(data.data);
+
+                    if (data.data.length >= controller.config.batchSize) {
+                        start += controller.config.batchSize;
+
+                        controller.recursiveGetCountBy(fields, orderByFields, additionalQuery, start, controller.config.batchSize, callbackIfNoMore, errorCallback);
+                    } else {
+                        callback(totalRecords);
+                    }
+                };
+
+                this.recursiveGetCountBy(fields, orderByFields, additionalQuery, start, this.config.batchSize, callbackIfNoMore, errorCallback);
+            }
         }
 
         makeSearchApiCall() {

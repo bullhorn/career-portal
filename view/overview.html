@@ -40,7 +40,7 @@
                 </item>
             </list>
             <hr>
-            <div>
+            <div ng-if="jobData.publishedCategory">
                 <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(jobData.publishedCategory.id)" class="category-filter">See all {{jobData.publishedCategory.name}} Jobs <i class="icon-arrow-forward"></i> </a>
             </div>
         </div>
