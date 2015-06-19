@@ -23,6 +23,8 @@ export default [
         get config() {
             return {
                 applyUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/apply/'
+
+                //applyUrl: 'http://public.rest.api:8181/rest-services/1hs/apply/'
             };
         }
 
@@ -46,7 +48,7 @@ export default [
                 lastName: () => this.form.lastName,
                 email: () => this.form.email,
                 phone: () => this.form.phone || '',
-                assemble: resume => { return '?firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1); }
+                assemble: resume => { return '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1); }
             });
         }
 

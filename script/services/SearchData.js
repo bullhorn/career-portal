@@ -22,12 +22,14 @@ export default [
 
         get config() {
             return {
+                //searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
+                //queryUrl: 'http://public.rest.api:8181/rest-services/1hs/query/JobOrder',
                 searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
                 queryUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobOrder',
                 additionalSearchQuery: 'isOpen:1',
                 additionalQuery: 'isOpen=true',
                 sort: "-dateAdded",
-                fields: "id,title,publishedCategory,address,employmentType,dateAdded,publicDescription",
+                fields: "id,title,publishedCategory(id,name),address(city,state),employmentType,dateAdded,publicDescription",
                 count: "20",
                 start: "0",
                 batchSize: 500,
