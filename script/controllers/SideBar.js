@@ -34,7 +34,7 @@ export default [
 
         initialize() {
             if (this.$scope.searchService.config.loadJobsOnStart) {
-                this.$scope.searchService.makeSearchApiCall();
+                this.$scope.searchService.findJobs();
             }
 
             this.$scope.searchService.getCountByLocation(this.setLocations());
@@ -127,14 +127,14 @@ export default [
         }
 
         searchJobs() {
-            this.$scope.searchService.makeSearchApiCall();
+            this.$scope.searchService.findJobs();
 
             this.updateFilterCounts();
         }
 
         clearSearchParamsAndLoadData() {
             this.$scope.searchService.helper.clearSearchParams();
-            this.$scope.searchService.makeSearchApiCall();
+            this.$scope.searchService.findJobs();
 
             this.updateFilterCounts();
         }

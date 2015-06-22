@@ -23,8 +23,6 @@ export default [
         get config() {
             return {
                 applyUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/apply/'
-
-                //applyUrl: 'http://public.rest.api:8181/rest-services/1hs/apply/'
             };
         }
 

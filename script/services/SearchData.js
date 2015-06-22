@@ -22,16 +22,14 @@ export default [
 
         get config() {
             return {
-                //searchUrl: 'http://public.rest.api:8181/rest-services/1hs/search/JobOrder',
-                //queryUrl: 'http://public.rest.api:8181/rest-services/1hs/query/JobOrder',
                 searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
-                queryUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobOrder',
+                queryUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobBoardPost',
                 additionalSearchQuery: 'isOpen:1',
                 additionalQuery: 'isOpen=true',
-                sort: "-dateAdded",
-                fields: "id,title,publishedCategory(id,name),address(city,state),employmentType,dateAdded,publicDescription",
-                count: "20",
-                start: "0",
+                sort: "-dateLastPublished",
+                fields: "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription",
+                count: 20,
+                start: 0,
                 batchSize: 500,
                 loadJobsOnStart: true,
                 portalText: {
@@ -112,129 +110,130 @@ export default [
                 sort: () => this.searchParams.sort || this.config.sort,
                 count: () => this.searchParams.count || this.config.count,
                 start: () => this.searchParams.start || this.config.start,
-                query:(fields) => {
-                    var query = '(' + this.config.additionalSearchQuery + ')';
-                    var first;
-
-                    if (this.searchParams.textSearch)
-                        query += ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
-
+                publishedCategory: (isSearch, fields) => {
                     if('publishedCategory(id,name)' != fields) {
                         if (this.searchParams.category.length > 0) {
-                            query += ' AND (';
+                            var equals = isSearch ? ':' : '=';
 
-                            first = true;
+                            var fragment = ' AND (';
+                            var first = true;
+
                             for (var i = 0; i < this.searchParams.category.length; i++) {
                                 if (!first) {
-                                    query += ' OR ';
+                                    fragment += ' OR ';
                                 } else {
                                     first = false;
                                 }
 
-                                query += 'publishedCategory.id:' + this.searchParams.category[i];
+                                fragment += 'publishedCategory.id' + equals + this.searchParams.category[i];
                             }
 
-                            query += ')';
+                            return fragment + ')';
                         }
                     }
 
+                    return '';
+                },
+                location: (isSearch, fields) => {
                     if('address(city,state)' != fields) {
                         if (this.searchParams.location.length > 0) {
-                            query += ' AND (';
+                            var delimiter = isSearch ? '"' : '\'';
+                            var equals = isSearch ? ':' : '=';
 
-                            first = true;
+                            var fragment = ' AND (';
+                            var first = true;
+
                             for (var j = 0; j < this.searchParams.location.length; j++) {
                                 if (!first) {
-                                    query += ' OR ';
+                                    fragment += ' OR ';
                                 } else {
                                     first = false;
                                 }
 
                                 var location = this.searchParams.location[j].split(',');
 
-                                query += '(address.city:"' + location[0] + '" AND address.state:"' + location[1] + '")';
+                                fragment += '(address.city' + equals + delimiter + location[0] + delimiter + ' AND address.state' + equals + delimiter + location[1] + delimiter + ')';
                             }
 
-                            query += ')';
+                            return fragment + ')';
                         }
                     }
+
+                    return '';
+                },
+                text : () => {
+                    if (this.searchParams.textSearch) {
+                        return ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
+                    }
+
+                    return '';
+                },
+
+                query: (isSearch, additionalQuery, fields) => {
+                    var query = '(' + (isSearch ? this.config.additionalSearchQuery : this.config.additionalQuery) + ')';
+
+                    if(additionalQuery) {
+                        query += ' AND (' + additionalQuery + ')';
+                    }
+
+                    if(isSearch) {
+                        query += this.requestParams.text();
+                    }
+
+                    query += this.requestParams.publishedCategory(isSearch, fields);
+                    query += this.requestParams.location(isSearch, fields);
 
                     return query;
                 },
-                assembleForGroupByQuery: (fields, orderByFields, additionalQuery, start, count) => {
-                    var where = '(' + this.config.additionalQuery + ')';
-                    var first;
+                whereIDs: (jobs, isSearch) => {
+                    var getValue = isSearch ? (job) => 'id:'+job.id : (job) => job.id;
+                    var join = isSearch ? ' OR ' : ',';
+                    var prefix = isSearch ? '' : 'id IN ';
 
-                    if(additionalQuery) {
-                        where += ' AND ('+additionalQuery+')';
-                    }
-
-                    if ('publishedCategory(id,name)' != fields && this.searchParams.category.length > 0) {
-                        where += ' AND (';
-
-                        first = true;
-                        for (var i = 0; i < this.searchParams.category.length; i++) {
-                            if (!first) {
-                                where += ' OR ';
-                            } else {
-                                first = false;
-                            }
-
-                            where += 'publishedCategory.id='+this.searchParams.category[i];
-                        }
-
-                        where += ')';
-                    }
-
-                    if ('address(city,state)' != fields && this.searchParams.location.length > 0) {
-                        where += ' AND (';
-
-                        first = true;
-                        for (var j = 0; j < this.searchParams.location.length; j++) {
-                            if (!first) {
-                                where += ' OR ';
-                            } else {
-                                first = false;
-                            }
-
-                            var location = this.searchParams.location[j].split(',');
-
-                            where += '(address.city=\''+location[0]+'\' AND address.state=\'' + location[1] + '\')';
-                        }
-
-                        where += ')';
-                    }
-
-                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
-                        + '&count=' + count + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
-                },
-                assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
-                    var ids = [];
+                    var values = [];
 
                     for(var i = 0; i < jobs.length; i++) {
-                        ids.push(jobs[i].id);
+                        values.push(getValue(jobs[i]));
                     }
 
-                    var where = 'id IN (' + ids.join(',') + ')';
-
-                    return '?where=' + where + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
-                        + '&count=' + start + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
+                    return prefix + '(' + values.join(join) + ')';
                 },
-                assembleForSearchForIDs: (start, count, fields) => {
-                    return '?query=' + this.requestParams.query(fields) + '&fields=id&sort=id&count=' + count + '&start=' + start + '&useV2=true&showTotalMatched=true';
-                },
-                assembleForSearch: () => {
-                    return '?query=' + this.requestParams.query() + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start() + '&useV2=true';
-                },
-                assembleForCategories: (categoryID, idToExclude) => {
-                    var query = '(' + this.config.additionalSearchQuery + ') AND publishedCategory.id:' + categoryID;
+                relatedJobs: (publishedCategoryID, idToExclude) => {
+                    var query = '(' + this.config.additionalQuery + ') AND publishedCategory.id=' + publishedCategoryID;
 
                     if (idToExclude && parseInt(idToExclude) > 0)
-                        query += ' NOT id:' + idToExclude;
+                        query += ' AND id !=' + idToExclude;
 
-                    return '?' + 'query=' + query + '&fields=' + this.config.fields + '&count=' + this.requestParams.count() + '&start=0&sort=' + this.requestParams.sort() + '&useV2=true';
+                    return query;
                 },
-                assembleForFind: jobID => '?' + 'query=(' + this.config.additionalSearchQuery + ') AND id:' + jobID + '&fields=' + this.config.fields + '&count=1&start=0&sort=' + this.requestParams.sort() + '&useV2=true'
+                find: (jobID) => {
+                    return '(' + this.config.additionalQuery + ') AND id=' + jobID;
+                },
+
+                assembleForSearchWhereIDs: (jobs) => {
+                    var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
+
+                    return '?useV2=true&start=0&query=' + where + '&fields=id&count=' + this.config.count ;
+                },
+                assembleForQueryForIDs: (start, count) => {
+                    return '?useV2=true&where=' + this.requestParams.query(false) + '&fields=' + this.config.fields + '&count=' + count + '&orderBy=' + this.config.sort + '&start=' + start;
+                },
+                assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
+                    return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
+                        + '&count=' + count + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
+                },
+                assembleForSearchForIDs: (start, count, fields) => {
+                    return '?useV2=true&showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
+                },
+                assembleForFindJobs: () => {
+                    return '?useV2=true&query=' + this.requestParams.query(true) + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start();
+                },
+                assembleForRelatedJobs: (publishedCategoryID, idToExclude) => {
+                    return '?useV2=true&start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count();
+                },
+                assembleForFind: (jobID) => {
+                    return '?useV2=true&start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + this.config.fields;
+                }
             });
         }
 
@@ -256,53 +255,11 @@ export default [
         //#region Methods
 
         getCountByLocation(callback, errorCallback) {
-            return this.getCountBy('address(city,state)', 'address.city,address.state', 'address.city IS NOT NULL AND address.state IS NOT NULL', callback, errorCallback);
+            return this.getCountBy('address(city,state)', 'address.city,address.state', callback, errorCallback);
         }
 
         getCountByCategory(callback, errorCallback) {
-            return this.getCountBy('publishedCategory(id,name)', 'publishedCategory.name', 'publishedCategory IS NOT NULL',callback, errorCallback);
-        }
-
-        loadJobData(jobID, callback, errorCallback) {
-            errorCallback = errorCallback || function() { };
-
-            this
-                .$http({
-                    method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForFind(jobID)
-                })
-                .success(data => {
-                    if (data && data.data && data.data.length) callback(data.data[0]);
-                    else errorCallback();
-                })
-                .error(() => errorCallback());
-        }
-
-        loadJobDataByCategory(categoryID, callback, errorCallback, idToExclude) {
-            errorCallback = errorCallback || function() { };
-
-            this
-                .$http({
-                    method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForCategories(categoryID, idToExclude)
-                })
-                .success(data => {
-                    if (data && data.data && data.data.length) callback(data.data);
-                    else errorCallback();
-                })
-                .error(() => errorCallback());
-        }
-
-        recursiveGetCountBy() {
-            this
-                .$http({
-                    method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForGroupByQuery(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4])
-                })
-                .success(data => {
-                    arguments[5](data);
-                })
-                .error(() => arguments[6]());
+            return this.getCountBy('publishedCategory(id,name)', 'publishedCategory.name', callback, errorCallback);
         }
 
         getCountWhereIDs() {
@@ -329,71 +286,136 @@ export default [
                 .error(() => { });
         }
 
-        getCountBy(fields, orderByFields, additionalQuery, callback, errorCallback) {
+        getCountBy(fields, orderByFields, callback, errorCallback) {
             errorCallback = errorCallback || function() { };
 
             var totalRecords = [];
             var start = 0;
 
             var controller = this;
-            var callbackIfNoMore;
 
-            if(this.searchParams.textSearch) {
-                callbackIfNoMore = (data) => {
-                    //fields, orderByFields, ids, start, count
-                    if(data.data) {
-                        controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
-                            totalRecords = totalRecords.concat(counts.data);
+            var callbackIfNoMore = (data) => {
+                if(data.data.length) {
+                    controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
+                        totalRecords = totalRecords.concat(counts.data);
 
-                            if (data.total > data.count) {
-                                start += controller.config.batchSize;
+                        if (data.total > data.count) {
+                            start += controller.config.batchSize;
 
-                                controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
-                            } else {
-                                callback(totalRecords);
-                            }
-                        });
-                    } else {
-                        callback(totalRecords);
-                    }
-                };
+                            controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
+                        } else {
+                            callback(totalRecords);
+                        }
+                    });
+                } else {
+                    callback(totalRecords);
+                }
+            };
 
-                this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize, fields);
-            } else {
-                callbackIfNoMore = (data) => {
-                    totalRecords = totalRecords.concat(data.data);
-
-                    if (data.data.length >= controller.config.batchSize) {
-                        start += controller.config.batchSize;
-
-                        controller.recursiveGetCountBy(fields, orderByFields, additionalQuery, start, controller.config.batchSize, callbackIfNoMore, errorCallback);
-                    } else {
-                        callback(totalRecords);
-                    }
-                };
-
-                this.recursiveGetCountBy(fields, orderByFields, additionalQuery, start, this.config.batchSize, callbackIfNoMore, errorCallback);
-            }
+            this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize, fields);
         }
 
-        makeSearchApiCall() {
+        searchWhereIDs(jobs, callback) {
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.searchUrl + this.requestParams.assembleForSearchWhereIDs(jobs)
+                })
+                .success(data => {
+                    callback(data.data);
+                })
+                .error(() => { });
+        }
+
+        recursiveQueryForIDs(callbackIfNoMore, start, count, errorCallback) {
+            errorCallback = errorCallback || (() => { });
+
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.queryUrl + this.requestParams.assembleForQueryForIDs(start, count)
+                })
+                .success(callbackIfNoMore)
+                .error(errorCallback);
+        }
+
+        findJobs() {
             if (this.searchParams.reloadAllData) {
                 this.helper.emptyCurrentDataList();
                 this.helper.resetStartAndTotal();
             }
 
+            var controller = this;
+
+            var allJobs = [];
+            var start = 0;
+            var count = this.config.count;
+
+            var doneFinding = (jobs) => {
+                controller.helper.updateStartAndTotal(jobs);
+
+                if (controller.searchParams.reloadAllData) {
+                    controller.currentListData = jobs;
+                } else {
+                    controller.currentListData.push.apply(controller.currentListData, jobs);
+                }
+            };
+
+            var callbackIfNoMore = (data) => {
+                if(data.data.length) {
+                    controller.searchWhereIDs(data.data, (jobs) => {
+                        for(var i = 0; i < data.data.length; i++) {
+                            for(var i2 = 0; i2 < jobs.length; i2++) {
+                                if(jobs[i2].id == data.data[i].id) {
+                                    allJobs.push(data.data[i]);
+                                }
+                            }
+                        }
+
+                        if (allJobs.length >= controller.config.count || jobs.length < controller.config.count) {
+                            doneFinding(allJobs);
+                        } else {
+                            start += controller.config.batchSize;
+                            count = parseInt((controller.config.count / jobs.length) * count);
+                            controller.recursiveQueryForIDs(callbackIfNoMore, start, count);
+                        }
+                    });
+                } else {
+                    doneFinding(allJobs);
+                }
+            };
+
+            this.recursiveQueryForIDs(callbackIfNoMore, start, count);
+        }
+
+        loadJobData(jobID, callback, errorCallback) {
+            errorCallback = errorCallback || function() { };
+
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForSearch()
+                    url: this.config.queryUrl + this.requestParams.assembleForFind(jobID)
                 })
                 .success(data => {
-                    this.helper.updateStartAndTotal(data);
-
-                    if (this.searchParams.reloadAllData) this.currentListData = data.data;
-                    else this.currentListData.push.apply(this.currentListData, data.data);
+                    if (data && data.data && data.data.length) callback(data.data[0]);
+                    else errorCallback();
                 })
-                .error(() => { });
+                .error(() => errorCallback());
+        }
+
+        loadJobDataByCategory(categoryID, callback, errorCallback, idToExclude) {
+            errorCallback = errorCallback || function() { };
+
+            this
+                .$http({
+                    method: 'GET',
+                    url: this.config.queryUrl + this.requestParams.assembleForRelatedJobs(categoryID, idToExclude)
+                })
+                .success(data => {
+                    if (data && data.data && data.data.length) callback(data.data);
+                    else errorCallback();
+                })
+                .error(() => errorCallback());
         }
 
         //#endregion

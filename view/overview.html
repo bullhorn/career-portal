@@ -22,7 +22,7 @@
         </div>
     </card>
     <card class="apply" el-height>
-        <span class="date-added">Added—{{jobData.dateAdded | date : fullDate}}</span>
+        <span class="date-added">Added—{{jobData.dateLastPublished | date : fullDate}}</span>
         <h1 class="title" ng-class="{min:boolChangeClass}">Job {{jobData.id}}: <br>{{jobData.title}}</h1>
         <h3 class="category">{{jobData.publishedCategory.name}}</h3>
         <div class="loc-type">

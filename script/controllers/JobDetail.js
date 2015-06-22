@@ -104,7 +104,7 @@ export default [
 
             this.$scope.searchService.searchParams.category.push(categoryID);
 
-            this.$scope.searchService.makeSearchApiCall();
+            this.$scope.searchService.findJobs();
 
             this.goBack();
         }

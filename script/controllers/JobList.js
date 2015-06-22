@@ -31,7 +31,7 @@ export default [
 
         loadMoreData() {
             this.$scope.searchService.searchParams.reloadAllData = false;
-            this.$scope.searchService.makeSearchApiCall();
+            this.$scope.searchService.findJobs();
         }
 
         openSummary(id, job) {
