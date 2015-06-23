@@ -202,7 +202,7 @@ export default [
                     var query = '(' + this.config.additionalQuery + ') AND publishedCategory.id=' + publishedCategoryID;
 
                     if (idToExclude && parseInt(idToExclude) > 0)
-                        query += ' AND id !=' + idToExclude;
+                        query += ' AND id <>' + idToExclude;
 
                     return query;
                 },
