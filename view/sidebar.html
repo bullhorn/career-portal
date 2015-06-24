@@ -1,7 +1,7 @@
 <section class="filters-container" ng-controller="SideBar as aside" ng-click="aside.goBack('overview-open');">
 
     <header>
-        <label>Filters</label>
+        <label>{{configuration.text.sidebar.filtersHeader}}</label>
         <button class="icon-view-list" ng-click="aside.switchViewStyle('list');"></button>
         <button class="icon-view-module" ng-click="aside.switchViewStyle('grid');"></button>
     </header>
@@ -9,10 +9,10 @@
     <filters>
         <searchbox>
             <label for="keyword" class="icon-search"></label>
-            <input custom-ng-enter="aside.searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" id="keyword" name="keyword" value="" ng-attr-placeholder="{{::searchService.config.portalText.sidebar.searchPlaceholder}}">
+            <input custom-ng-enter="aside.searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" id="keyword" name="keyword" value="" ng-attr-placeholder="{{::configuration.text.sidebar.searchPlaceholder}}">
         </searchbox>
 
-        <h4>{{::searchService.config.portalText.sidebar.locationHeader}}</h4>
+        <h4>{{::configuration.text.sidebar.locationHeader}}</h4>
         <list>
 
             <item ng-repeat="location in locations"
@@ -24,7 +24,7 @@
                 <span>{{location.idCount}}</span>
             </item>
         </list>
-        <h4>{{::searchService.config.portalText.sidebar.categoryHeader}}</h4>
+        <h4>{{::configuration.text.sidebar.categoryHeader}}</h4>
         <list>
             <item ng-repeat="cat in categories"
                   ng-if="cat && cat.publishedCategory && cat.publishedCategory.name && cat.publishedCategory.name.length"
@@ -36,11 +36,11 @@
             </item>
         </list>
 
-        <button ng-click="aside.clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i> Clear Filters</button>
+        <button ng-click="aside.clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i>{{configuration.text.sidebar.clearFilters}}</button>
     </filters>
 
     <credits>
-        <span class="powered-by">Powered by</span>
+        <span class="powered-by">{{configuration.text.sidebar.poweredBy}}</span>
         <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
     </credits>
 

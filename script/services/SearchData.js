@@ -2,10 +2,12 @@
 
 export default [
     '$http',
+    'configuration',
     class {
 
-        constructor($http) {
+        constructor($http, configuration) {
             this.$http = $http;
+            this.configuration = configuration;
         }
 
         //#region Properties
@@ -18,57 +20,6 @@ export default [
          */
         get _() {
             return this.__ || (this.__ = Object.create(null, {}));
-        }
-
-        get config() {
-            return {
-                searchUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder',
-                queryUrl: 'http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobBoardPost',
-                additionalSearchQuery: 'isOpen:1',
-                additionalQuery: 'isOpen=true',
-                sort: "-dateLastPublished",
-                fields: "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription",
-                count: 20,
-                start: 0,
-                batchSize: 500,
-                loadJobsOnStart: true,
-                portalText: {
-                    companyName: 'Acme Staffing',
-                    joblist: {
-                        header: "Open Jobs",
-                        loadMoreData: "Load more..."
-                    },
-                    overview: {
-                        header: "Job Description",
-                        applyButtonLabel: 'Apply now'
-                    },
-                    sidebar: {
-                        searchPlaceholder: 'Keyword Search',
-                        locationHeader: 'Location',
-                        categoryHeader: 'Category'
-                    },
-                    modal: {
-                        uploadResumeFile: 'Upload Resume File',
-                        toggle: () => {
-                            if(!this.header || this.header == this.thankYou.header) {
-                                this.header = this.apply.header;
-                                this.subHeader = this.apply.subHeader;
-                            } else {
-                                this.header = this.thankYou.header;
-                                this.subHeader = this.thankYou.subHeader;
-                            }
-                        },
-                        apply: {
-                            header: 'Before You Apply...',
-                            subHeader: 'Please let us know who you are and upload your resume'
-                        },
-                        thankYou: {
-                            header: 'Thank you!',
-                            subHeader: 'Thank you for submitting your online application'
-                        }
-                    }
-                }
-            };
         }
 
         get currentDetailData() {
@@ -87,12 +38,13 @@ export default [
 
         get helper() {
             return this._.helper || (this._.helper = {
+                hasMore: true,
                 emptyCurrentDataList: () => this.currentListData.length = 0,
-                updateStartAndTotal: data => {
-                    this.searchParams.total = data.total;
+                updateStart: () => {
                     this.searchParams.start = (parseInt(this.requestParams.count()) + parseInt(this.requestParams.start()));
                 },
                 resetStartAndTotal: () => {
+                    this.helper.hasMore = true;
                     this.searchParams.total = 0;
                     this.searchParams.start = 0;
                 },
@@ -107,9 +59,9 @@ export default [
 
         get requestParams() {
             return this._.requestParams || (this._.requestParams = {
-                sort: () => this.searchParams.sort || this.config.sort,
-                count: () => this.searchParams.count || this.config.count,
-                start: () => this.searchParams.start || this.config.start,
+                sort: () => this.searchParams.sort || this.configuration.search.sort,
+                count: () => this.searchParams.count || this.configuration.search.count,
+                start: () => this.searchParams.start || this.configuration.search.start,
                 publishedCategory: (isSearch, fields) => {
                     if('publishedCategory(id,name)' != fields) {
                         if (this.searchParams.category.length > 0) {
@@ -170,7 +122,7 @@ export default [
                 },
 
                 query: (isSearch, additionalQuery, fields) => {
-                    var query = '(' + (isSearch ? this.config.additionalSearchQuery : this.config.additionalQuery) + ')';
+                    var query = '(' + (isSearch ? this.configuration.search.additionalSearchQuery : this.configuration.search.additionalQuery) + ')';
 
                     if(additionalQuery) {
                         query += ' AND (' + additionalQuery + ')';
@@ -199,7 +151,7 @@ export default [
                     return prefix + '(' + values.join(join) + ')';
                 },
                 relatedJobs: (publishedCategoryID, idToExclude) => {
-                    var query = '(' + this.config.additionalQuery + ') AND publishedCategory.id=' + publishedCategoryID;
+                    var query = '(' + this.configuration.search.additionalQuery + ') AND publishedCategory.id=' + publishedCategoryID;
 
                     if (idToExclude && parseInt(idToExclude) > 0)
                         query += ' AND id <>' + idToExclude;
@@ -207,16 +159,16 @@ export default [
                     return query;
                 },
                 find: (jobID) => {
-                    return '(' + this.config.additionalQuery + ') AND id=' + jobID;
+                    return '(' + this.configuration.search.additionalQuery + ') AND id=' + jobID;
                 },
 
                 assembleForSearchWhereIDs: (jobs) => {
                     var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
 
-                    return '?useV2=true&start=0&query=' + where + '&fields=id&count=' + this.config.count ;
+                    return '?useV2=true&start=0&query=' + where + '&fields=id&count=' + this.configuration.search.count ;
                 },
                 assembleForQueryForIDs: (start, count) => {
-                    return '?useV2=true&where=' + this.requestParams.query(false) + '&fields=' + this.config.fields + '&count=' + count + '&orderBy=' + this.config.sort + '&start=' + start;
+                    return '?useV2=true&where=' + this.requestParams.query(false) + '&fields=' + this.configuration.search.fields + '&count=' + count + '&orderBy=' + this.configuration.search.sort + '&start=' + start;
                 },
                 assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
                     return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
@@ -225,14 +177,11 @@ export default [
                 assembleForSearchForIDs: (start, count, fields) => {
                     return '?useV2=true&showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
                 },
-                assembleForFindJobs: () => {
-                    return '?useV2=true&query=' + this.requestParams.query(true) + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count() + '&start=' + this.requestParams.start();
-                },
                 assembleForRelatedJobs: (publishedCategoryID, idToExclude) => {
-                    return '?useV2=true&start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + this.config.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count();
+                    return '?useV2=true&start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + this.configuration.search.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count();
                 },
                 assembleForFind: (jobID) => {
-                    return '?useV2=true&start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + this.config.fields;
+                    return '?useV2=true&start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + this.configuration.search.fields;
                 }
             });
         }
@@ -266,7 +215,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForGroupByWhereIDs(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4])
+                    url: this.configuration.search.queryUrl + this.requestParams.assembleForGroupByWhereIDs(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4])
                 })
                 .success(data => {
                     arguments[5](data);
@@ -278,7 +227,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForSearchForIDs(start, count, fields)
+                    url: this.configuration.search.searchUrl + this.requestParams.assembleForSearchForIDs(start, count, fields)
                 })
                 .success(data => {
                     callback(data);
@@ -296,13 +245,13 @@ export default [
 
             var callbackIfNoMore = (data) => {
                 if(data.data.length) {
-                    controller.getCountWhereIDs(fields, orderByFields, start, controller.config.batchSize, data.data, (counts) => {
+                    controller.getCountWhereIDs(fields, orderByFields, start, controller.configuration.search.batchSize, data.data, (counts) => {
                         totalRecords = totalRecords.concat(counts.data);
 
                         if (data.total > data.count) {
-                            start += controller.config.batchSize;
+                            start += controller.configuration.search.batchSize;
 
-                            controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.config.batchSize);
+                            controller.recursiveSearchForIDs(callbackIfNoMore, start, controller.configuration.search.batchSize);
                         } else {
                             callback(totalRecords);
                         }
@@ -312,14 +261,14 @@ export default [
                 }
             };
 
-            this.recursiveSearchForIDs(callbackIfNoMore, start, this.config.batchSize, fields);
+            this.recursiveSearchForIDs(callbackIfNoMore, start, this.configuration.search.batchSize, fields);
         }
 
         searchWhereIDs(jobs, callback) {
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.searchUrl + this.requestParams.assembleForSearchWhereIDs(jobs)
+                    url: this.configuration.search.searchUrl + this.requestParams.assembleForSearchWhereIDs(jobs)
                 })
                 .success(data => {
                     callback(data.data);
@@ -333,7 +282,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForQueryForIDs(start, count)
+                    url: this.configuration.search.queryUrl + this.requestParams.assembleForQueryForIDs(start, count)
                 })
                 .success(callbackIfNoMore)
                 .error(errorCallback);
@@ -348,11 +297,11 @@ export default [
             var controller = this;
 
             var allJobs = [];
-            var start = 0;
-            var count = this.config.count;
+            var start = this.requestParams.start();
+            var count = this.requestParams.count();
 
             var doneFinding = (jobs) => {
-                controller.helper.updateStartAndTotal(jobs);
+                controller.helper.updateStart();
 
                 if (controller.searchParams.reloadAllData) {
                     controller.currentListData = jobs;
@@ -372,15 +321,26 @@ export default [
                             }
                         }
 
-                        if (allJobs.length >= controller.config.count || jobs.length < controller.config.count) {
+                        if(data.count < controller.requestParams.count()) {
+                            controller.helper.hasMore = false;
+                            doneFinding(allJobs);
+                        } else if (allJobs.length >= controller.requestParams.count()) {
                             doneFinding(allJobs);
                         } else {
-                            start += controller.config.batchSize;
-                            count = parseInt((controller.config.count / jobs.length) * count);
+                            controller.helper.updateStart();
+                            start = controller.requestParams.start();
+
+                            if(jobs.length > 0) {
+                                count = parseInt((controller.configuration.search.count / jobs.length) * count);
+                            } else {
+                                count = controller.configuration.search.count * count;
+                            }
+                            
                             controller.recursiveQueryForIDs(callbackIfNoMore, start, count);
                         }
                     });
                 } else {
+                    controller.helper.hasMore = false;
                     doneFinding(allJobs);
                 }
             };
@@ -394,7 +354,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForFind(jobID)
+                    url: this.configuration.search.queryUrl + this.requestParams.assembleForFind(jobID)
                 })
                 .success(data => {
                     if (data && data.data && data.data.length) callback(data.data[0]);
@@ -409,7 +369,7 @@ export default [
             this
                 .$http({
                     method: 'GET',
-                    url: this.config.queryUrl + this.requestParams.assembleForRelatedJobs(categoryID, idToExclude)
+                    url: this.configuration.search.queryUrl + this.requestParams.assembleForRelatedJobs(categoryID, idToExclude)
                 })
                 .success(data => {
                     if (data && data.data && data.data.length) callback(data.data);

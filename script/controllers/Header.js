@@ -5,14 +5,15 @@ export default [
     '$location',
     '$scope',
     'searchData',
+    'configuration',
     class {
 
-        constructor($rootScope, $location, $scope, searchData) {
+        constructor($rootScope, $location, $scope, searchData, configuration) {
             this.$rootScope = $rootScope;
             this.$location = $location;
             this.$scope = $scope;
 
-            this.handleScope(searchData);
+            this.handleScope(searchData, configuration);
         }
 
         //#region Properties
@@ -25,8 +26,9 @@ export default [
 
         //#region Methods
 
-        handleScope(searchData) {
+        handleScope(searchData, configuration) {
             this.$scope.searchService = searchData;
+            this.$scope.configuration = configuration;
         }
 
         goBack() {

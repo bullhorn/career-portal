@@ -16,7 +16,7 @@
                 <a href="" class="icon-email" ng-click="overview.shareEmail(jobData)"></a>
             </div>
         </div>
-        <h2>{{::searchService.config.portalText.overview.header}}</h2>
+        <h2>{{::configuration.text.overview.header}}</h2>
         <div class="break-word">
             <p ng-bind-html="jobData.publicDescription"></p>
         </div>
@@ -28,10 +28,10 @@
         <div class="loc-type">
             <span class="location">{{jobData.address.city}}, {{jobData.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
         </div>
-        <button name="apply" ng-click="overview.applyModal()">{{searchService.config.portalText.overview.applyButtonLabel}}</button>
+        <button name="apply" ng-click="overview.applyModal()">{{configuration.text.overview.applyButtonLabel}}</button>
         <div class="related-jobs">
             <hr>
-            <h3>Related Jobs</h3>
+            <h3>{{configuration.text.overview.relatedJobs}}</h3>
             <list>
                 <item ng-repeat="job in relatedJobs">
                     <a href="javascript:void(0);" ng-click="overview.switchToJob(job.id)">{{ job.title }}</a>
@@ -41,7 +41,7 @@
             </list>
             <hr>
             <div ng-if="jobData.publishedCategory">
-                <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(jobData.publishedCategory.id)" class="category-filter">See all {{jobData.publishedCategory.name}} Jobs <i class="icon-arrow-forward"></i> </a>
+                <a href="javascript:void(0);" ng-click="overview.loadJobsWithCategory(jobData.publishedCategory.id)" class="category-filter">{{configuration.text.overview.seeAll}} {{jobData.publishedCategory.name}} {{configuration.text.overview.jobs}}<i class="icon-arrow-forward"></i> </a>
             </div>
         </div>
     </card>

@@ -63,6 +63,41 @@ export default class {
 
     //#region Methods
 
+    static start(configuration) {
+        angular
+            .module('CareerPortal', ['ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
+            .config(['$routeProvider', $routeProvider => $routeProvider
+                .when('/jobs', {
+                    templateUrl: 'view/joblist.html',
+                    controller: 'JobList as jobs'
+                })
+                .when('/jobs/:id', {
+                    templateUrl: 'view/overview.html',
+                    controller: 'JobDetail as overview'
+                })
+                .otherwise({
+                    redirectTo: '/jobs'
+                })
+            ])
+            .controller('SideBar', Sidebar)
+            .controller('JobDetail', JobDetail)
+            .controller('JobList', JobList)
+            .controller('Header', Header)
+            .controller('Modal', Modal)
+            .directive('customNgEnter', CustomNgEnter)
+            .directive('elHeight', ElHeight)
+            .directive('fileModel', FileModel)
+            .directive("scroll", Scroll)
+            .service('searchData', SearchData)
+            .service('applyJob', ApplyJob)
+            .service('shareSocial', ShareSocial)
+            .filter("stripHtml", StripHtml)
+            .value('configuration', configuration);
+
+        angular.bootstrap(document, ['CareerPortal'], { strictDi: true });
+        document.body.style.display = 'block';
+    }
+
     /**
      * Bootstraps the CareerPortal angular module on the document in context.
      * 
@@ -75,37 +110,15 @@ export default class {
             //??? is this button visible and used? if so, push handler into HeaderCtrl ilo ad-hoc jquery handler
             $('button[name="filters-menu"]').on('click', () => $('html body hgroup aside').toggle());
 
-            angular
-                .module('CareerPortal', ['ngRoute', 'ngAnimate', 'ngSanitize', 'checklist-model'])
-                .config(['$routeProvider', $routeProvider => $routeProvider
-                    .when('/jobs', {
-                        templateUrl: 'view/joblist.html',
-                        controller: 'JobList as jobs'
-                    })
-                    .when('/jobs/:id', {
-                        templateUrl: 'view/overview.html',
-                        controller: 'JobDetail as overview'
-                    })
-                    .otherwise({
-                        redirectTo: '/jobs'
-                    })
-                ])
-                .controller('SideBar', Sidebar)
-                .controller('JobDetail', JobDetail)
-                .controller('JobList', JobList)
-                .controller('Header', Header)
-                .controller('Modal', Modal)
-                .directive('customNgEnter', CustomNgEnter)
-                .directive('elHeight', ElHeight)
-                .directive('fileModel', FileModel)
-                .directive("scroll", Scroll)
-                .service('searchData', SearchData)
-                .service('applyJob', ApplyJob)
-                .service('shareSocial', ShareSocial)
-                .filter("stripHtml", StripHtml);
+            var app = this;
 
-            angular.bootstrap(document, ['CareerPortal'], { strictDi: true });
-            document.body.style.display = 'block';
+            $.ajax({
+                method: 'GET',
+                url: '/app.json',
+                success: function(data) {
+                    app.start(data);
+                }
+            });
         }
     }
 

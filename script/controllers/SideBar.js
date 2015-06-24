@@ -5,14 +5,15 @@ export default [
     '$location',
     '$scope',
     'searchData',
+    'configuration',
     class {
 
-        constructor($rootScope, $location, $scope, searchData) {
+        constructor($rootScope, $location, $scope, searchData, configuration) {
             this.$rootScope = $rootScope;
             this.$location = $location;
             this.$scope = $scope;
 
-            this.handleScope(searchData);
+            this.handleScope(searchData, configuration);
             this.initialize();
         }
 
@@ -26,14 +27,15 @@ export default [
 
         //#region Methods
 
-        handleScope(searchData) {
+        handleScope(searchData, configuration) {
             this.$rootScope.gridState = 'list-view';
 
             this.$scope.searchService = searchData;
+            this.$scope.configuration = configuration;
         }
 
         initialize() {
-            if (this.$scope.searchService.config.loadJobsOnStart) {
+            if (this.$scope.configuration.search.loadJobsOnStart) {
                 this.$scope.searchService.findJobs();
             }
 
@@ -127,6 +129,7 @@ export default [
         }
 
         searchJobs() {
+            this.$scope.searchService.searchParams.reloadAllData = true;
             this.$scope.searchService.findJobs();
 
             this.updateFilterCounts();
@@ -134,6 +137,7 @@ export default [
 
         clearSearchParamsAndLoadData() {
             this.$scope.searchService.helper.clearSearchParams();
+            this.$scope.searchService.searchParams.reloadAllData = true;
             this.$scope.searchService.findJobs();
 
             this.updateFilterCounts();

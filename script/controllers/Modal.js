@@ -6,14 +6,15 @@ export default [
     '$scope',
     'searchData',
     'applyJob',
+    'configuration',
     class {
 
-        constructor($rootScope, $location, $scope, searchData, applyJob) {
+        constructor($rootScope, $location, $scope, searchData, applyJob, configuration) {
             this.$rootScope = $rootScope;
             this.$location = $location;
             this.$scope = $scope;
 
-            this.handleScope(searchData, applyJob);
+            this.handleScope(searchData, applyJob, configuration);
             this.initialize();
         }
 
@@ -27,9 +28,10 @@ export default [
 
         //#region Methods
 
-        handleScope(searchData, applyJob) {
+        handleScope(searchData, applyJob, configuration) {
             this.$scope.searchService = searchData;
             this.$scope.applyService = applyJob;
+            this.$scope.configuration = configuration;
         }
 
         initialize() {
@@ -41,15 +43,15 @@ export default [
             this.$rootScope.modalState = 'closed';
 
             this.$scope.showForm = true;
-            this.$scope.header = this.$scope.searchService.config.portalText.modal.apply.header;
-            this.$scope.subHeader = this.$scope.searchService.config.portalText.modal.apply.subHeader;
+            this.$scope.header = this.$scope.configuration.text.modal.apply.header;
+            this.$scope.subHeader = this.$scope.configuration.text.modal.apply.subHeader;
         }
 
         applySuccess() {
             this.$scope.showForm = false;
 
-            this.$scope.header = this.$scope.searchService.config.portalText.modal.thankYou.header;
-            this.$scope.subHeader = this.$scope.searchService.config.portalText.modal.thankYou.subHeader;
+            this.$scope.header = this.$scope.configuration.text.modal.thankYou.header;
+            this.$scope.subHeader = this.$scope.configuration.text.modal.thankYou.subHeader;
         }
 
         submit(applyForm) {

@@ -1,5 +1,5 @@
 <section class="jobs">
-    <h5>{{::searchService.config.portalText.joblist.header}} </h5>
+    <h5>{{::configuration.text.joblist.header}}</h5>
 
     <card ng-repeat="job in searchService.currentListData" ng-click="jobs.openSummary(job.id, job);" class="slide-up-item">
         <div class="key-container">
@@ -7,15 +7,15 @@
             <span class="item-cat">{{::job.publishedCategory.name}}</span>
             <span class="item-loc">{{::job.address.city}}, {{::job.address.state}}</span>
             <span class="item-type">{{::job.employmentType}}</span>
-            <span class="item-date">Added - {{::job.dateLastPublished | date : fullDate}}</span>
+            <span class="item-date">{{configuration.text.joblist.added}} - {{::job.dateLastPublished | date : fullDate}}</span>
             <span class="item-description break-word">{{::job.publicDescription | stripHtml}}</span>
         </div>
         <i class="icon-arrow-forward" ng-click="openSummary(job.id, job);"></i>
     </card>
 
-    <card ng-click="jobs.loadMoreData();" ng-show="searchService.helper.moreRecordsExist()" id="load-more-data">
+    <card ng-click="jobs.loadMoreData();" ng-show="searchService.helper.hasMore" id="load-more-data">
         <div class="key-container">
-            <h3 class="item-title">{{::searchService.config.portalText.joblist.loadMoreData}}</h3>
+            <h3 class="item-title">{{::configuration.text.joblist.loadMoreData}}</h3>
         </div>
     </card>
 </section>

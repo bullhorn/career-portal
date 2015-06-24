@@ -7,6 +7,7 @@ export default [
     '$scope',
     '$http',
     'searchData',
+    'configuration',
     class {
 
         constructor() {
@@ -16,7 +17,7 @@ export default [
             this.$scope = arguments[3];
             this.$http = arguments[4];
 
-            this.handleScope(arguments[5]);
+            this.handleScope(arguments[5], arguments[6]);
         }
 
         //#region Properties
@@ -39,10 +40,11 @@ export default [
             this.$location.path('/jobs/' + id);
         }
 
-        handleScope(searchData) {
+        handleScope(searchData, configuration) {
             this.$rootScope.viewState = 'overview-closed';
 
             this.$scope.searchService = searchData;
+            this.$scope.configuration = configuration;
         }
 
         //#endregion

@@ -26,7 +26,7 @@
             <header ng-controller="Header as header">
                 <button name="filters-menu" class="icon-filters-menu"></button>
                 <button name="over-arrow-back" class="icon-arrow-back" ng-click="header.goBack()"></button>
-                <h2>{{::searchService.config.portalText.companyName}}</h2>
+                <h2>{{::configuration.text.companyName}}</h2>
             </header>
             <ng-view class="fade"></ng-view>
         </main>

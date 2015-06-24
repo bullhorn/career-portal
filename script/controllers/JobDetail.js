@@ -7,6 +7,7 @@ export default [
     '$route',
     '$scope',
     'searchData',
+    'configuration',
     'shareSocial',
     class {
 
@@ -17,9 +18,9 @@ export default [
             this.$route = arguments[3];
             this.$scope = arguments[4];
 
-            this.handleScope(arguments[5]);
+            this.handleScope(arguments[5], arguments[6]);
 
-            this.initialize(arguments[6]);
+            this.initialize(arguments[7]);
         }
 
         //#region Properties
@@ -32,10 +33,11 @@ export default [
 
         //#region Methods
 
-        handleScope(searchData) {
+        handleScope(searchData, configuration) {
             this.$rootScope.viewState = 'overview-open';
 
             this.$scope.searchService = searchData;
+            this.$scope.configuration = configuration;
             this.$scope.jobId = this.$routeParams.id;
         }
 

@@ -56,7 +56,8 @@ module.exports = function(grunt) {
                     'lib/**',
                     'media/**',
                     'res/**',
-                    'view/**'
+                    'view/**',
+                    'app.json'
                 ]
             }
         },
@@ -78,7 +79,7 @@ module.exports = function(grunt) {
                         require: true
                     },
                     laxbreak: true,
-                    maxparams: 5,
+                    //maxparams: 5,
                     maxdepth: 4,
                     newcap: true,
                     proto: true,
@@ -123,7 +124,8 @@ module.exports = function(grunt) {
                     'res/**',
                     'script/**',
                     'style/**',
-                    'view/**'
+                    'view/**',
+                    'app.json'
                 ],
                 tasks: ['build'],
                 options: {
