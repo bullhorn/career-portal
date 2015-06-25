@@ -102,9 +102,12 @@ export default [
                                     first = false;
                                 }
 
-                                var location = this.searchParams.location[j].split(',');
+                                var location = this.searchParams.location[j];
 
-                                fragment += '(address.city' + equals + delimiter + location[0] + delimiter + ' AND address.state' + equals + delimiter + location[1] + delimiter + ')';
+                                var city = location.split('|')[0];
+                                var state = location.split('|')[1];
+
+                                fragment += '(address.city' + equals + delimiter + city + delimiter + ' AND address.state' + equals + delimiter + state + delimiter + ')';
                             }
 
                             return fragment + ')';

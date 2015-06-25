@@ -19,7 +19,7 @@
                   ng-if="location && location.address && location.address.state.length && location.address.city.length"
                   ng-show="location.idCount > 0 || checked">
                 <input type="checkbox" id="{{location.address.city+','+location.address.state}}" checklist-model="searchService.searchParams.location"
-                       checklist-value="location.address.city+','+location.address.state" ng-click="aside.searchJobs()">
+                       checklist-value="location.address.city+'|'+location.address.state" ng-click="aside.searchJobs()">
                 <label for="{{location.address.city+','+location.address.state}}">{{location.address.city+', '+location.address.state}}</label>
                 <span>{{location.idCount}}</span>
             </item>
