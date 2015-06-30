@@ -67,9 +67,9 @@ export default [
                 var found = false;
 
                 angular.forEach(newCounts, function (newCount) {
-
                     if (getProperty.call(oldCount) == getProperty.call(newCount)) {
                         oldCount.idCount = newCount.idCount;
+
                         found = true;
                     }
                 });
@@ -80,23 +80,19 @@ export default [
             });
 
             oldCounts.sort(function(count1, count2) {
-                var idCount1 = count1.idCount;
-                var idCount2 = count2.idCount;
+                var name1 = getProperty.call(count1);
+                var name2 = getProperty.call(count2);
 
-                if(idCount1 == idCount2) {
-                    var name1 = getProperty.call(count1);
-                    var name2 = getProperty.call(count2);
+                if(name1 < name2) {
+                    return -1;
+                } else if(name1 > name2) {
+                    return 1;
+                } else {
+                    var idCount1 = count1.idCount;
+                    var idCount2 = count2.idCount;
 
-                    if(name1 < name2) {
-                        return -1;
-                    } else if(name1 > name2) {
-                        return 1;
-                    }
-
-                    return 0;
+                    return idCount2 - idCount1;
                 }
-
-                return idCount2 - idCount1;
             });
         }
 

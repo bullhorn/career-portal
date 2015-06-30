@@ -175,7 +175,7 @@ export default [
                 },
                 assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
                     return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)'
-                        + '&count=' + count + '&orderBy=-count.id,+' + orderByFields + '&start=' + start + '&useV2=true';
+                        + '&count=' + count + '&orderBy=+' + orderByFields + ',-count.id&start=' + start + '&useV2=true';
                 },
                 assembleForSearchForIDs: (start, count, fields) => {
                     return '?useV2=true&showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
