@@ -896,10 +896,23 @@ html {
                                             width: 200px;
                                         }
 
-                                        &.item-loc,
-                                        &.item-cat,
-                                        &.item-type {
+                                        &.item-cat {
                                             width: 200px;
+                                            display: inline-block;
+                                        }
+
+                                        &.item-group {
+                                            width: 500px;
+                                            display: inline-block;
+
+                                            .item-type,
+                                            .item-loc {
+                                                width: 200px;
+                                            }
+
+                                            .item-type {
+                                                float: right;
+                                            }
                                         }
 
                                         &.item-sep {
