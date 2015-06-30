@@ -409,7 +409,7 @@ html {
                 justify-content: flex-start;
                 align-content: flex-start;
                 align-items: stretch;
-                overflow: scroll;
+                overflow-y: scroll;
                 z-index: 99;
 
                 header {
@@ -846,10 +846,12 @@ html {
 
             main {
                 ng-view {
+                    width: 100%;
+
                     section {
                         &.jobs {
                             card {
-                                overflow: auto;
+                                overflow: hidden;
                                 width: 100%;
                                 display: flex;
                                 flex-direction: row;
@@ -870,9 +872,11 @@ html {
 
                                     span {
                                         &.item-description {
-                                            max-width: 90%;
                                             white-space: nowrap;
                                             overflow: hidden;
+                                            word-wrap: normal;
+                                            display: inline-block;
+                                            width: 1200px;
                                             text-overflow: ellipsis;
                                         }
                                     }
