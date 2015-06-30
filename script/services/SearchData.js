@@ -181,7 +181,7 @@ export default [
                     return '?useV2=true&showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
                 },
                 assembleForRelatedJobs: (publishedCategoryID, idToExclude) => {
-                    return '?useV2=true&start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + this.configuration.search.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.requestParams.count();
+                    return '?useV2=true&start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + this.configuration.search.fields + '&sort=' + this.requestParams.sort() + '&count=' + this.configuration.search.maxRelatedJobs;
                 },
                 assembleForFind: (jobID) => {
                     return '?useV2=true&start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + this.configuration.search.fields;
