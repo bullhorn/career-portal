@@ -62,12 +62,16 @@ export default [
             };
         }
 
-        updateCountsByIntersection(oldCounts, newCounts, getProperty) {
+        updateCountsByIntersection(oldCounts, newCounts, getID, getLabel) {
+            if(!getLabel) {
+                getLabel = getID;
+            }
+
             angular.forEach(oldCounts, function (oldCount) {
                 var found = false;
 
                 angular.forEach(newCounts, function (newCount) {
-                    if (getProperty.call(oldCount) == getProperty.call(newCount)) {
+                    if (getID.call(oldCount) == getID.call(newCount)) {
                         oldCount.idCount = newCount.idCount;
 
                         found = true;
@@ -80,8 +84,8 @@ export default [
             });
 
             oldCounts.sort(function(count1, count2) {
-                var name1 = getProperty.call(count1);
-                var name2 = getProperty.call(count2);
+                var name1 = getLabel.call(count1);
+                var name2 = getLabel.call(count2);
 
                 if(name1 < name2) {
                     return -1;
@@ -111,6 +115,8 @@ export default [
                 this.$scope.searchService.getCountByCategory(function (categories) {
                     controller.updateCountsByIntersection(controller.$scope.categories, categories, function() {
                         return !this.publishedCategory ? null : this.publishedCategory.id;
+                    }, function() {
+                        return !this.publishedCategory ? null : this.publishedCategory.name;
                     });
                 });
             }
