@@ -244,7 +244,7 @@ html {
                         width: 100%;
                         position: relative;
 
-                        button[type="back-arrow"] {
+                        button[name="back-arrow"] {
                             height: 100%;
                             width: 46px;
                             position: absolute;
@@ -718,7 +718,7 @@ html {
                                 background: $dark-bg;
                             }
 
-                            button[type="back-arrow"] {
+                            button[name="back-arrow"] {
                                 width: 60px;
                             }
                         }
@@ -732,7 +732,7 @@ html {
                             transform: translateX(-400px);
                         }
 
-                        button[type="back-arrow"] {
+                        button[name="back-arrow"] {
                             -webkit-transform: translateX(0px) !important;
                             transform: translateX(0px) !important;
                         }
