@@ -311,6 +311,10 @@ export default [
                 } else {
                     controller.currentListData.push.apply(controller.currentListData, jobs);
                 }
+
+                if(controller.currentListData.length === 0) {
+                    controller.helper.hasMore = false;
+                }
             };
 
             var callbackIfNoMore = (data) => {
@@ -333,10 +337,12 @@ export default [
                             controller.helper.updateStart();
                             start = controller.requestParams.start();
 
-                            if(jobs.length > 0) {
-                                count = parseInt((controller.configuration.search.count / jobs.length) * count);
-                            } else {
-                                count = controller.configuration.search.count * count;
+                            if(count < controller.configuration.search.batchSize) {
+                                if (jobs.length > 0) {
+                                    count = parseInt((controller.configuration.search.count / jobs.length) * count);
+                                } else {
+                                    count = controller.configuration.search.count * count;
+                                }
                             }
                             
                             controller.recursiveQueryForIDs(callbackIfNoMore, start, count);

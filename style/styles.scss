@@ -509,11 +509,13 @@ html {
                                         font-weight: 600;
 
                                         &.item-cat {
+                                            color: lighten($base-color, 15%);
                                         }
 
                                         &.item-loc,
-                                        &.item-type {
-                                            color: lighten($base-color, 15%);
+                                        &.item-type,
+                                        &.item-sep {
+                                            display: inline;
                                         }
 
                                         &.item-description {
@@ -778,21 +780,26 @@ html {
 
                                     h3.item-title {
                                         margin-bottom: 5px;
+                                        font-size: 1.4em;
                                     }
 
                                     span {
+                                        &.item-date {
+                                            font-weight: 400;
+                                        }
+
                                         &.item-cat {
-                                            &:first-of-type {
-                                                margin-top: 15px;
-                                            }
+                                            font-size: 1.2em;
                                         }
 
-                                        &.item-loc {
+                                        &.item-group {
                                             margin-top: 15px;
-                                        }
 
-                                        &.item-type {
-                                            margin: 0 0 15px 0;
+                                            .item-loc,
+                                            .item-sep,
+                                            .item-type {
+                                                font-weight: 400;
+                                            }
                                         }
 
                                         &.item-description {
@@ -870,6 +877,11 @@ html {
                                         margin: 0 15px;
                                     }
 
+                                    h3.item-title {
+                                        float: left;
+                                        width: 300px;
+                                    }
+
                                     span {
                                         &.item-description {
                                             white-space: nowrap;
@@ -878,6 +890,20 @@ html {
                                             display: inline-block;
                                             width: 1200px;
                                             text-overflow: ellipsis;
+                                        }
+
+                                        &.item-date {
+                                            width: 200px;
+                                        }
+
+                                        &.item-loc,
+                                        &.item-cat,
+                                        &.item-type {
+                                            width: 200px;
+                                        }
+
+                                        &.item-sep {
+                                            display: none;
                                         }
                                     }
                                 }
