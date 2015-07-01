@@ -36,6 +36,7 @@ html {
         width: 100%;
         height: 100%;
         background: $light-bg;
+        overflow: hidden;
 
         list {
             display: block;
@@ -484,6 +485,14 @@ html {
 
                             #load-more-data {
                                 width: 100%;
+                                height: 3em;
+
+                                .key-container {
+                                    h3.item-title {
+                                        width: 100%;
+                                        position: relative;
+                                    }
+                                }
                             }
 
                             card {
@@ -545,6 +554,7 @@ html {
 
                                 &.description {
                                     display: inline-block;
+                                    width: 66%;
 
                                     h2 {
                                         display: inline-block;
@@ -762,6 +772,8 @@ html {
 
             main {
                 ng-view {
+                    width: 100%;
+
                     section {
                         &.jobs {
                             card {
@@ -806,7 +818,6 @@ html {
                                             max-height: 210px;
                                             overflow: hidden;
                                             position: relative;
-                                            -webkit-mask-box-image: -webkit-linear-gradient(black 75%, transparent);
                                         }
                                     }
                                 }
@@ -872,14 +883,15 @@ html {
                                 }
 
                                 .key-container {
+                                    width: 100%;
+
                                     & > * {
-                                        display: inline-block;
                                         margin: 0 15px;
+                                        position: absolute;
                                     }
 
                                     h3.item-title {
-                                        float: left;
-                                        width: 300px;
+                                        width: 20%;
                                     }
 
                                     span {
@@ -888,30 +900,37 @@ html {
                                             overflow: hidden;
                                             word-wrap: normal;
                                             display: inline-block;
-                                            width: 1200px;
+                                            width: 80%;
                                             text-overflow: ellipsis;
+                                            top: 2em;
                                         }
 
                                         &.item-date {
-                                            width: 200px;
+                                            width: 15%;
+                                            left: 25%;
                                         }
 
                                         &.item-cat {
-                                            width: 200px;
+                                            width: 15%;
+                                            left: 40%;
                                             display: inline-block;
                                         }
 
                                         &.item-group {
-                                            width: 500px;
                                             display: inline-block;
+                                            width: 30%;
+                                            left: 55%;
 
-                                            .item-type,
+                                            & > * {
+                                                position: absolute;
+                                            }
+
                                             .item-loc {
-                                                width: 200px;
+
                                             }
 
                                             .item-type {
-                                                float: right;
+                                                left: 50%;
                                             }
                                         }
 

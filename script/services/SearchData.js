@@ -40,8 +40,12 @@ export default [
             return this._.helper || (this._.helper = {
                 hasMore: true,
                 emptyCurrentDataList: () => this.currentListData.length = 0,
-                updateStart: () => {
-                    this.searchParams.start = (parseInt(this.requestParams.count()) + parseInt(this.requestParams.start()));
+                updateStart: (count) => {
+                    if(count) {
+                        this.searchParams.start = (parseInt(count) + parseInt(this.requestParams.start()));
+                    } else {
+                        this.searchParams.start = (parseInt(this.requestParams.count()) + parseInt(this.requestParams.start()));
+                    }
                 },
                 resetStartAndTotal: () => {
                     this.helper.hasMore = true;
@@ -303,6 +307,9 @@ export default [
             var start = this.requestParams.start();
             var count = this.requestParams.count();
 
+
+            this.helper.hasMore = false;
+
             var doneFinding = (jobs) => {
                 controller.helper.updateStart();
 
@@ -310,10 +317,6 @@ export default [
                     controller.currentListData = jobs;
                 } else {
                     controller.currentListData.push.apply(controller.currentListData, jobs);
-                }
-
-                if(controller.currentListData.length === 0) {
-                    controller.helper.hasMore = false;
                 }
             };
 
@@ -328,13 +331,13 @@ export default [
                             }
                         }
 
-                        if(data.count < controller.requestParams.count()) {
-                            controller.helper.hasMore = false;
+                        if(data.count < count) {
                             doneFinding(allJobs);
                         } else if (allJobs.length >= controller.requestParams.count()) {
+                            this.helper.hasMore = true;
                             doneFinding(allJobs);
                         } else {
-                            controller.helper.updateStart();
+                            controller.helper.updateStart(count);
                             start = controller.requestParams.start();
 
                             if(count < controller.configuration.search.batchSize) {
@@ -349,7 +352,6 @@ export default [
                         }
                     });
                 } else {
-                    controller.helper.hasMore = false;
                     doneFinding(allJobs);
                 }
             };
