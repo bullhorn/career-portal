@@ -217,6 +217,10 @@ html {
         hgroup {
             display: flex;
             flex-direction: row;
+
+            display: -webkit-flex;
+            -webkit-flex-direction: row;
+
             width: 100%;
             height: 100%;
 
@@ -402,7 +406,7 @@ html {
             }
             /* ==== Main Content Styles (List / Grid / Overview) =====*/
             main {
-                flex: 1;
+                flex:1;
                 width: 100%;
                 height: 100%;
                 display: flex;
@@ -413,6 +417,14 @@ html {
                 align-items: stretch;
                 overflow-y: scroll;
                 z-index: 99;
+
+                -webkit-flex: 1;
+                display: -webkit-flex;
+                -webkit-flex-direction: column;
+                -webkit-flex-wrap: wrap;
+                -webkit-justify-content: flex-start;
+                -webkit-align-content: flex-start;
+                -webkit-align-items: stretch;
 
                 header {
                     position: fixed;
@@ -474,6 +486,13 @@ html {
                             justify-content: flex-start;
                             align-content: flex-start;
                             align-items: flex-start;
+
+                            display: -webkit-flex;
+                            -webkit-flex-direction: row;
+                            -webkit-flex-wrap: wrap;
+                            -webkit-justify-content: flex-start;
+                            -webkit-align-content: flex-start;
+                            -webkit-align-items: flex-start;
 
                             h5 {
                                 color: darken($light-bg, 15%);
@@ -547,6 +566,10 @@ html {
                             display: flex;
                             align-items: flex-start;
                             flex-direction: row;
+
+                            display: -webkit-flex;
+                            -webkit-align-items: flex-start;
+                            -webkit-flex-direction: row;
 
                             card {
                                 padding: 25px;
@@ -878,6 +901,13 @@ html {
                                 justify-content: space-between;
                                 align-content: flex-start;
                                 align-items: stretch;
+
+                                display: -webkit-flex;
+                                -webkit-flex-direction: row;
+                                -webkit-flex-wrap: nowrap;
+                                -webkit-justify-content: space-between;
+                                -webkit-align-content: flex-start;
+                                -webkit-align-items: stretch;
 
                                 & > * {
                                     display: inline-block;
