@@ -26,7 +26,7 @@
         <h1 class="title" ng-class="{min:boolChangeClass}">Job {{jobData.id}}: <br>{{jobData.title}}</h1>
         <h3 class="category">{{jobData.publishedCategory.name}}</h3>
         <div class="loc-type">
-            <span class="location">{{jobData.address.city}}, {{jobData.address.state}}</span> | <span class="type">{{overview.job_data.employmentType}}</span>
+            <span class="location">{{jobData.address.city}}, {{jobData.address.state}}</span> | <span class="type">{{jobData.employmentType}}</span>
         </div>
         <button name="apply" ng-click="overview.applyModal()">{{configuration.text.overview.applyButtonLabel}}</button>
         <div class="related-jobs">
