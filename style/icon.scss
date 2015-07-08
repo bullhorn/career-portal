@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('/font/IcoMoon/icomoon.eot?-33jho6');
+    src: url('/font/IcoMoon/icomoon.eot?#iefix-33jho6') format('embedded-opentype'),
+        url('/font/IcoMoon/icomoon.woff2?-33jho6') format('woff2'),
+        url('/font/IcoMoon/icomoon.woff?-33jho6') format('woff'),
+        url('/font/IcoMoon/icomoon.ttf?-33jho6') format('truetype'),
+        url('/font/IcoMoon/icomoon.svg?-33jho6#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-filters-menu:before {
+    content: "\e612";
+}
+
+.icon-account-circle:before {
+    content: "\e611";
+}
+
+.icon-open-in-new:before {
+    content: "\e600";
+}
+
+.icon-print:before {
+    content: "\e601";
+}
+
+.icon-search:before {
+    content: "\e602";
+}
+
+.icon-view-list:before {
+    content: "\e603";
+}
+
+.icon-view-module:before {
+    content: "\e604";
+}
+
+.icon-email:before {
+    content: "\e605";
+}
+
+.icon-cloud-upload:before {
+    content: "\e613";
+}
+
+.icon-arrow-back:before {
+    content: "\e606";
+}
+
+.icon-arrow-forward:before {
+    content: "\e607";
+}
+
+.icon-cancel:before {
+    content: "\e608";
+}
+
+.icon-close:before {
+    content: "\e609";
+}
+
+.icon-more-vert:before {
+    content: "\e60a";
+}
+
+.icon-person:before {
+    content: "\e60b";
+}
+
+.icon-share:before {
+    content: "\e60c";
+}
+
+.icon-rss:before {
+    content: "\e60d";
+}
+
+.icon-facebook:before {
+    content: "\e60e";
+}
+
+.icon-linkedin:before {
+    content: "\e60f";
+}
+
+.icon-twitter:before {
+    content: "\e610";
+}

@@ -1,0 +1,76 @@
+<modal class="slide-up">
+    <header>
+        <h2>{{header}}</h2>
+        <p>{{subHeader}}</p>
+    </header>
+    <main ng-show="showForm">
+        <!-- This content should be dynamic -->
+        <form name="applyForm" class="apply-form" action="index.html" method="post" novalidate>
+            <span>
+                <span class="required">*</span>
+                <input type="text" name="firstName" value="" ng-model="applyService.form.firstName" placeholder="{{configuration.text.modal.fields.firstName.placeholder}}" required>
+                <span class="error">
+                    <span ng-show="applyForm.firstName.$touched || applyForm.$submitted">
+                        <span ng-show="applyForm.firstName.$error.required">
+                            {{configuration.text.modal.fields.firstName.validation}}
+                        </span>
+                    </span>
+                </span>
+            </span>
+            <span>
+                <span class="required">*</span>
+                <input type="text" name="lastName" value="" ng-model="applyService.form.lastName" placeholder="{{configuration.text.modal.fields.lastName.placeholder}}" required>
+                <span class="error">
+                    <span ng-show="applyForm.lastName.$touched || applyForm.$submitted">
+                        <span ng-show="applyForm.lastName.$error.required">
+                            {{configuration.text.modal.fields.lastName.validation}}
+                        </span>
+                    </span>
+                </span>
+            </span>
+            <span>
+                <span class="required">*</span>
+                <input type="email" name="email" value="" ng-model="applyService.form.email" placeholder="{{configuration.text.modal.fields.email.placeholder}}" required>
+                <span class="error">
+                    <span ng-show="applyForm.email.$touched || applyForm.$submitted">
+                        <span ng-show="applyForm.email.$error.required">
+                            {{configuration.text.modal.fields.email.validation.required}}
+                        </span>
+                        <span ng-show="applyForm.email.$error.email">
+                            {{configuration.text.modal.fields.email.validation.format}}
+                        </span>
+                    </span>
+                </span>
+            </span>
+            <span>
+                <span>&nbsp;</span>
+                <input type="text" name="mobile-phone" value="" ng-model="applyService.form.phone" placeholder="{{configuration.text.modal.fields.phone.placeholder}}">
+            </span>
+            <div class="upload-container">
+                <input type="file" name="resume" value="" ng-model="applyService.form.resumeName" file-model="applyService.form.resumeInfo" required>
+                <div class="upload-content">
+                    <i class="icon-cloud-upload"></i>
+                    <span class="upload-text" ng-show="!applyService.form.resumeName">{{::configuration.text.modal.uploadResumeFile}}</span>
+                    <span class="upload-text" ng-show="applyService.form.resumeName">{{applyService.form.resumeName}}</span>
+                </div>
+            </div>
+            <span class="error">
+                <span ng-show="applyForm.$submitted">
+                    <span ng-show="applyForm.resume.$error.required">
+                        {{configuration.text.modal.fields.resume.validation}}
+                    </span>
+                </span>
+            </span>
+        </form>
+        <!-- These buttons should be dynamic -->
+        <div class="btn-container">
+            <button name="cancel" ng-click="modal.closeModal()">Cancel</button>
+            <button type="submit" name="submit" ng-click="modal.submit(applyForm)">Submit</button>
+        </div>
+    </main>
+    <main ng-show="!showForm">
+        <div class="btn-container">
+            <button type="submit" name="submit" ng-click="modal.closeModal()">Ok</button>
+        </div>
+    </main>
+</modal>

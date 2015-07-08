@@ -1,0 +1,48 @@
+<section class="filters-container" ng-controller="SideBar as aside" ng-click="aside.goBack('overview-open');">
+
+    <header>
+        <label>{{configuration.text.sidebar.filtersHeader}}</label>
+        <button class="icon-view-list" ng-click="aside.switchViewStyle('list');"></button>
+        <button class="icon-view-module" ng-click="aside.switchViewStyle('grid');"></button>
+    </header>
+
+    <filters>
+        <searchbox>
+            <label for="keyword" class="icon-search"></label>
+            <input custom-ng-enter="aside.searchJobs()" ng-model="searchService.searchParams.textSearch" type="search" id="keyword" name="keyword" value="" ng-attr-placeholder="{{::configuration.text.sidebar.searchPlaceholder}}">
+        </searchbox>
+
+        <h4>{{::configuration.text.sidebar.locationHeader}}</h4>
+        <list>
+
+            <item ng-repeat="location in locations"
+                  ng-if="location && location.address && location.address.state.length && location.address.city.length"
+                  ng-show="location.idCount > 0  || searchService.searchParams.location.indexOf(location.address.city+'|'+location.address.state) >= 0">
+                <input type="checkbox" id="{{location.address.city+','+location.address.state}}" checklist-model="searchService.searchParams.location"
+                       checklist-value="location.address.city+'|'+location.address.state" ng-click="aside.searchJobs()">
+                <label for="{{location.address.city+','+location.address.state}}">{{location.address.city+', '+location.address.state}}</label>
+                <span>{{location.idCount}}</span>
+            </item>
+        </list>
+        <h4>{{::configuration.text.sidebar.categoryHeader}}</h4>
+        <list>
+            <item ng-repeat="cat in categories"
+                  ng-if="cat && cat.publishedCategory && cat.publishedCategory.name && cat.publishedCategory.name.length"
+                  ng-show="cat.idCount > 0 || searchService.searchParams.category.indexOf(cat.publishedCategory.id) >= 0">
+                <input type="checkbox" id="{{cat.publishedCategory.id}}" checklist-model="searchService.searchParams.category"
+                       checklist-value="cat.publishedCategory.id" ng-click="aside.searchJobs()">
+                <label for="{{cat.publishedCategory.id}}">{{cat.publishedCategory.name}}</label>
+                <span>{{cat.idCount}}</span>
+            </item>
+        </list>
+
+        <button ng-click="aside.clearSearchParamsAndLoadData();" name="clear-all"><i class="icon-cancel"></i>{{configuration.text.sidebar.clearFilters}}</button>
+    </filters>
+
+    <credits>
+        <span class="powered-by">{{configuration.text.sidebar.poweredBy}}</span>
+        <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
+    </credits>
+
+    <button type="button" class="icon-arrow-back" name="back-arrow"></button>
+</section>
