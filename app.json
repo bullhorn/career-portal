@@ -1,6 +1,6 @@
 {
 	"text": {
-		"companyName": "Acme Staffing",
+		"companyName": "[COMPANY NAME HERE]",
 		"joblist": {
 			"header": "Open Jobs",
 			"loadMoreData": "Load more...",
@@ -57,8 +57,8 @@
 		}
 	},
 	"search": {
-		"searchUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder",
-		"queryUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobBoardPost",
+		"searchUrl": "[SEARCH REST URL HERE]",
+		"queryUrl": "[QUERY REST URL HERE]",
 		"additionalSearchQuery": "isOpen:1",
 		"additionalQuery": "isOpen=true",
 		"sort": "-dateLastPublished",
