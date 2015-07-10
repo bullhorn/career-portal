@@ -47,7 +47,7 @@
         }
 
         email(job) {
-            window.location.href = 'mailto:' + this.requestParams.email(job);
+            window.open('mailto:' + this.requestParams.email(job));
         }
 
         facebook(job) {
