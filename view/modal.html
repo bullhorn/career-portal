@@ -59,6 +59,9 @@
                     <span ng-show="applyForm.resume.$error.required">
                         {{configuration.text.modal.fields.resume.validation}}
                     </span>
+                    <span>
+                        {{applyService.ajaxError}}
+                    </span>
                 </span>
             </span>
         </form>

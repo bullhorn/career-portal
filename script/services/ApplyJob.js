@@ -26,6 +26,14 @@ export default [
             };
         }
 
+        get ajaxError() {
+            return this._.ajaxError;
+        }
+
+        set ajaxError(value) {
+            this._.ajaxError = value;
+        }
+
         get form() {
             return this._.form || (this._.form = {
                 firstName: '',
@@ -42,10 +50,10 @@ export default [
 
         get requestParams() {
             return this._.requestParams || (this._.requestParams = {
-                firstName: () => this.form.firstName,
-                lastName: () => this.form.lastName,
-                email: () => this.form.email,
-                phone: () => this.form.phone || '',
+                firstName: () => encodeURIComponent(this.form.firstName),
+                lastName: () => encodeURIComponent(this.form.lastName),
+                email: () => encodeURIComponent(this.form.email),
+                phone: () => encodeURIComponent(this.form.phone || ''),
                 assemble: resume => { return '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1); }
             });
         }
@@ -90,6 +98,8 @@ export default [
         submit(jobID, successCallback) {
             successCallback = successCallback || function() { };
 
+            var self = this;
+
             this.storage.store();
 
             var form = new FormData();
@@ -101,16 +111,20 @@ export default [
             this.$http
                 .post(applyUrl, form, { transformRequest: angular.identity, headers: { 'Content-Type': undefined } })
                 .success((data) => {
-                    this.form.email = data.candidate.email;
-                    this.form.firstName = data.candidate.firstName;
-                    this.form.lastName = data.candidate.lastName;
-                    this.form.phone = data.candidate.phone;
+                    self.form.email = data.candidate.email;
+                    self.form.firstName = data.candidate.firstName;
+                    self.form.lastName = data.candidate.lastName;
+                    self.form.phone = data.candidate.phone;
 
-                    this.storage.store();
+                    self.storage.store();
 
                     successCallback();
                 })
-                .error(() => { });
+                .error((data) => {
+                    if(data.errorCode === 400) {
+                        self.ajaxError = data.errorMessage;
+                    }
+                });
         }
 
         //#endregion
