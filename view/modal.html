@@ -64,13 +64,13 @@
         </form>
         <!-- These buttons should be dynamic -->
         <div class="btn-container">
-            <button name="cancel" ng-click="modal.closeModal()">Cancel</button>
-            <button type="submit" name="submit" ng-click="modal.submit(applyForm)">Submit</button>
+            <button name="cancel" ng-click="modal.closeModal()">{{configuration.text.modal.cancelButton}}</button>
+            <button type="submit" name="submit" ng-click="modal.submit(applyForm)">{{configuration.text.modal.submitButton}}</button>
         </div>
     </main>
     <main ng-show="!showForm">
         <div class="btn-container">
-            <button type="submit" name="submit" ng-click="modal.closeModal()">Ok</button>
+            <button type="submit" name="submit" ng-click="modal.closeModal()">{{configuration.text.modal.okButton}}</button>
         </div>
     </main>
 </modal>

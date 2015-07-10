@@ -29,8 +29,11 @@
 			},
 			"thankYou": {
 				"header": "Thank you!",
-				"subHeader": "Thank you for submitting your online application"
+				"subHeader": "You will be contacted by a recruiter shortly"
 			},
+			"submitButton": "Submit",
+			"okButton": "Okay, Got it!",
+			"cancelButton": "Cancel",
             "fields": {
                 "firstName": {
                     "placeholder": "First Name",
