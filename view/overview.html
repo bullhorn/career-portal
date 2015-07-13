@@ -13,7 +13,7 @@
                 <a href="" class="icon-facebook" ng-click="overview.shareFacebook(jobData)"></a>
                 <a href="" class="icon-twitter" ng-click="overview.shareTwitter(jobData)"></a>
                 <a href="" class="icon-linkedin" ng-click="overview.shareLinkedin(jobData)"></a>
-                <a href="" class="icon-email" ng-click="overview.shareEmail(jobData)"></a>
+                <a ng-href="{{overview.emailLink(jobData)}}" class="icon-email" target="_blank"></a>
             </div>
         </div>
         <h2>{{::configuration.text.overview.header}}</h2>

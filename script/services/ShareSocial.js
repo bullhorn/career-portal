@@ -29,9 +29,9 @@
         get requestParams() {
             return this._.requestParams || (this._.requestParams = {
                 facebook: () => '?display=popup&app_id=' + this.config.keys.facebook + '&href=' + encodeURIComponent(window.location.href) + '&redirect_uri=' + encodeURIComponent(window.location.href),
-                twitter: job => '?text=' + this.description(job) + '&url=' + encodeURIComponent(window.location.href),
-                linkedin: job => '?mini=true&source=Bullhorn%20Carrer%20Portal&title=' + this.description(job) + '&url=' + encodeURIComponent(window.location.href),
-                email: job => '?subject=' + job.title + '&body=' + this.description(job, window.location.href)
+                twitter: job => '?text=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
+                linkedin: job => '?mini=true&source=Bullhorn%20Carrer%20Portal&title=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
+                email: job => '?subject=' + encodeURIComponent(job.title) + '&body=' + this.description(job, window.location.href)
             });
         }
 
@@ -46,8 +46,8 @@
             return 'Check out this ' + job.title + ' job!';
         }
 
-        email(job) {
-            window.open('mailto:' + this.requestParams.email(job));
+        emailLink(job) {
+            return 'mailto:' + this.requestParams.email(job);
         }
 
         facebook(job) {

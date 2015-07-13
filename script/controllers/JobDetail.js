@@ -45,7 +45,7 @@ export default [
             this.shareFacebook = (job) => shareSocial.facebook(job);
             this.shareTwitter = (job) => shareSocial.twitter(job);
             this.shareLinkedin = (job) => shareSocial.linkedin(job);
-            this.shareEmail = (job) => shareSocial.email(job);
+            this.emailLink = (job) => shareSocial.emailLink(job);
 
             this.open = true;
 
