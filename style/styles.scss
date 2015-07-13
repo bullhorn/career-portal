@@ -204,6 +204,10 @@ html {
                             font-weight: 600;
                         }
 
+                        &.normal-case {
+                            text-transform: none;
+                        }
+
                         &[name="submit"] {
                             color: #fff;
                             background: $primary;

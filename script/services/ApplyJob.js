@@ -118,6 +118,8 @@ export default [
 
                     self.storage.store();
 
+                    self.ajaxError = '';
+
                     successCallback();
                 })
                 .error((data) => {
