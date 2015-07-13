@@ -843,7 +843,9 @@ html {
                                         }
 
                                         &.item-description {
-                                            max-height: 210px;
+                                            text-overflow: ellipsis;
+                                            height: 17.8em;
+                                            line-height: 1.5em;
                                             overflow: hidden;
                                             position: relative;
                                         }
