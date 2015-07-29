@@ -64,6 +64,7 @@ aside {
       font-size: 1.4em;
       cursor: pointer;
       transition: all 0.2s;
+      display: inline-block;
 
       &:focus {
         outline: none;
