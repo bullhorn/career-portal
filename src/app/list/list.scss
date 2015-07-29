@@ -1,0 +1,93 @@
+body {
+  &.list-view {
+    div.card-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      > a.card {
+        flex: 1;
+        margin-bottom: 1.5em;
+        overflow: hidden;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        > .card-date {
+          flex: 1;
+          color: lighten($dark-bg, 40%);
+          font-weight: 500;
+          font-size: 1.1em;
+          order: 4;
+          text-align: center;
+        }
+
+        > .card-title-category {
+          width: 40%;
+
+          > .card-title {
+            margin: 0 0 0.2em;
+          }
+
+          > .card-category {
+            font-size: 1.2em;
+            margin: 0;
+          }
+        }
+
+        > .card-location, > .card-type {
+          flex: 1;
+          text-align: center;
+        }
+
+        > .card-separator, > .card-description {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.grid-view {
+    div.card-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      flex-flow: row wrap;
+      justify-content: space-between;
+
+      > a.card {
+        width: 32%;
+        margin-bottom: 1.5em;
+        height: 360px;
+        background: $white;
+        padding: 1em;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+
+        > .card-description {
+          margin-top: 1em;
+          color: lighten($dark-bg, 20%);
+          line-height: 1.5em;
+          font-weight: 500;
+          display: block;
+          word-break: break-all;
+        }
+      }
+    }
+  }
+
+}
+
+section.job-list {
+  flex: 1;
+  padding: 1.5em;
+
+  > h4 {
+    color: darken($light-bg, 15%);
+    font-size: 1.3em;
+    font-weight: 500;
+    margin: 0 0 1em;
+  }
+}

@@ -1,0 +1,142 @@
+/* Do not remove this comments bellow. It's the markers used by wiredep to inject
+   sass dependencies when defined in the bower.json of your dependencies */
+// bower:scss
+// endbower
+
+$white: #FFFFFF;
+$primary: #5198DE;
+$secondary: #ACC72E;
+$light-bg: #F4F4F4;
+$dark-bg: #2E2F30;
+$header-bg: $primary;
+$sidebar-header-bg: #252728;
+$toggle-active: #fff;
+$cancel: darken($light-bg, 15%);
+$error: #da4453;
+
+$font-size: 13px;
+$font-family: 'Roboto';
+$base-color: #46474A;
+
+$header-height: 60px;
+$sidebar-width: 240px;
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $base-color;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $light-bg;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.fill {
+  flex: 1;
+}
+
+input {
+  &:focus, &:active {
+    outline: none;
+  }
+}
+
+button {
+  cursor: pointer;
+
+  &:focus, &:active {
+    outline: none;
+  }
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:visited, &:focus, &:active {
+    color: $primary;
+  }
+}
+
+.card {
+  background: $white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+  padding: 1em;
+
+  > .card-date {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: lighten($dark-bg, 50%);
+  }
+
+  > .card-title-category {
+    > .card-title {
+      font-size: 1.7em;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.2em;
+      margin-top: 1em;
+      white-space: nowrap;
+      display: block;
+
+      color: $primary;
+      text-decoration: none;
+
+      &:visited, &:focus, &:active {
+        color: $primary;
+      }
+    }
+
+    > .card-category {
+      display: block;
+      margin-bottom: 1em;
+      font-size: 1.2em;
+      color: $dark-bg;
+      font-weight: 600;
+    }
+  }
+
+  > .card-location, > .card-type, > .card-separator {
+    color: lighten($dark-bg, 40%);
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+}
+
+section.portal-app {
+  display: flex;
+  flex-direction: row;
+
+  height: 100%;
+  width: 100%;
+
+  > section.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    > section.fade {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: auto;
+      height: calc(100% - #{$header-height});
+    }
+  }
+}
+
+/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector

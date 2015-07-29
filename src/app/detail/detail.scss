@@ -1,0 +1,193 @@
+section.job-detail {
+  display: flex;
+  flex-direction: row;
+
+  padding: 1.5em;
+
+  > div.description {
+    flex: 1;
+    margin-right: 1.5em;
+
+    > div.job-heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > h2 {
+        font-size: 1.6em;
+        font-weight: 500;
+      }
+
+      > div.job-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        > button {
+          border: none;
+          background: transparent;
+          margin: 0 1em;
+          font-size: 1.1em;
+          color: lighten($base-color, 15%);
+
+          > i {
+            margin-right: 5px;
+            font-size: 1.3em;
+          }
+        }
+
+        > div.share-outlets {
+          border-right: 1px solid transparent;
+          padding-right: 20px;
+
+          @for $i from 1 through 4 {
+            a:nth-child(#{$i}) {
+              transition-delay: ((#{400-($i*100ms)}));
+            }
+          }
+
+          > a {
+            font-size: 1.3em;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            display: inline-block;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 100ms ease;
+            transform: translateX(15px);
+          }
+        }
+
+        &.share-open {
+          > button[name="share"] {
+            color: lighten($primary, 20%);
+          }
+
+          > div.share-outlets {
+            border-right: 1px solid lighten($primary, 20%);
+
+            > a {
+              opacity: 1;
+              visibility: visible;
+              transform: translateX(0);
+            }
+          }
+        }
+      }
+    }
+
+    > div.job-details {
+      word-wrap: break-word;
+      line-height: 1.5em;
+    }
+  }
+
+  > div.apply {
+    width: 30%;
+    max-width: 350px;
+    height: 100%;
+
+    padding-top: 2em;
+
+    > .card-date {
+      font-size: 0.9em;
+    }
+
+    > .card-title-category {
+      > .card-title {
+        margin-top: 0.7em;
+      }
+
+      > .card-category {
+        color: lighten($dark-bg, 50%);
+        margin-bottom: 1.3em;
+      }
+    }
+
+    > .card-location, > .card-type, > .card-separator {
+      color: lighten($dark-bg, 25%);
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+
+    > button.apply {
+      cursor: pointer;
+      margin-top: 1.5em;
+      width: 100%;
+      border: none;
+      background: $secondary;
+      color: $white;
+      padding: 0.5em;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 1.3em;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+      }
+    }
+
+    > hr {
+      border: none;
+      height: 1px;
+      background: #E8E8E8;
+      margin: 2em -0.5em;
+    }
+
+    > div.related-jobs {
+      > h5 {
+        font-size: 1.2em;
+        font-weight: 400;
+      }
+
+      > div.related-job {
+        padding: 0 1em;
+        margin-bottom: 1.5em;
+
+        > a {
+          font-size: 1.2em;
+          font-weight: 500;
+          max-width: 60%;
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          vertical-align: bottom;
+        }
+
+        > span.separator {
+          font-size: 1.2em;
+        }
+
+        > span.category {
+          font-size: 1.1em;
+          color: lighten($dark-bg, 5%);
+          font-weight: 400;
+        }
+
+        > span.location {
+          margin-top: 0.2em;
+          display: block;
+          font-size: 1em;
+          color: lighten($dark-bg, 45%);
+          font-weight: 500;
+        }
+      }
+    }
+
+    > a.category-filter {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 1em;
+
+      > i {
+        float: right;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,62 @@
+html {
+  body {
+    section.portal-app {
+      @media (max-width: 1100px) {
+        aside {
+          display: none;
+        }
+
+        section.main {
+          header {
+            button[name="filters-menu"] {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      @media (min-width: 1100px) {
+        aside {
+          display: block !important;
+        }
+
+        section.main {
+          header {
+            button[name="filters-menu"] {
+              display: none;
+            }
+
+            button[name="over-arrow-back"] {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    &.overview-open {
+      @media (max-width: 1100px) {
+        section.main {
+          header {
+            button[name="filters-menu"] {
+              display: none !important;
+            }
+
+            button[name="over-arrow-back"] {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      @media (max-width: 850px) {
+        div.modal-container {
+          div.modal {
+            margin: auto;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}

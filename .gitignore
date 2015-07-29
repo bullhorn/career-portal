@@ -7,7 +7,8 @@ node_modules/
 dist/
 
 # Transient Build Output
-.sass-cache
+.tmp/
+.sass-cache/
 
 # Others
 .DS_Store

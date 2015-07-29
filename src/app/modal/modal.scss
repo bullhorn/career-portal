@@ -1,0 +1,155 @@
+.modal-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .7);
+  z-index: 9999;
+
+  > div.modal {
+    display: block;
+    margin: 80px auto;
+    width: 100%;
+    max-width: 500px;
+    background: $white;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+
+    > header {
+      background: $primary;
+      padding: 1em 1em 1.5em;
+      display: block;
+      color: $white;
+      text-align: center;
+      height: auto;
+
+      > h2 {
+        font-size: 1.8em;
+      }
+
+      > p {
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+    }
+
+    > div.main {
+      padding: 3em 2em;
+
+      > form.apply-form {
+        > div.form-field {
+          margin: 2em 0;
+
+          > div.input {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            > .required {
+              color: $error;
+              font-size: 1.2em;
+            }
+
+            > input {
+              flex: 1;
+
+              &[type="text"], &[type="email"] {
+                border: none;
+                border-bottom: 1px solid darken($light-bg, 15%);
+                transition: border-bottom 0.2s ease-in-out;
+                padding: 0.5em;
+
+                &:focus {
+                  border-bottom: 1px solid $primary;
+                }
+              }
+
+              &[type="file"] {
+                cursor: pointer;
+                text-align: center;
+                padding: 10px;
+                background: $light-bg;
+                border-radius: 3px;
+                border: 1px solid $primary;
+                opacity: 0;
+                position: relative;
+                z-index: 5;
+              }
+            }
+          }
+
+          &.upload-container {
+            border: 1px solid $primary;
+            border-radius: 3px;
+            background: transparent;
+            margin-top: 3.5em;
+            position: relative;
+            cursor: pointer;
+
+            .upload-content {
+              position: absolute;
+              left: 0;
+              right: 0;
+              top: 10px;
+              text-align: center;
+              color: $primary;
+
+              i {
+                margin-right: 10px;
+                font-size: 1.5em;
+              }
+
+              .upload-text {
+                vertical-align: 3px;
+              }
+            }
+          }
+
+          &:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .btn-container {
+      width: 100%;
+      padding-top: 2em;
+      text-align: right;
+
+      &.success {
+        text-align: center;
+        padding-top: 0;
+      }
+
+      button {
+        text-transform: uppercase;
+        padding: 1em 1.5em;
+        border: none;
+        margin: 0 1em;
+
+        &[name="cancel"] {
+          color: $cancel;
+          background: transparent;
+          font-weight: 600;
+        }
+
+        &[name="submit"] {
+          color: $white;
+          background: $primary;
+          border-radius: 2px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.error {
+  display: block;
+  color: $error;
+  margin-left: 1.1em;
+  margin-top: 0.3em;
+}
