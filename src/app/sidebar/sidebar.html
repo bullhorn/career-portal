@@ -12,8 +12,13 @@
     <section>
         <form class="keyword-search" data-ng-submit="sidebar.searchJobs()">
             <label for="keyword"><i class="fa fa-search"></i></label>
-            <input class="search" type="search" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-ng-attr-placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
+            <input class="search" type="search" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-ng-attr-placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
         </form>
+
+        <button data-ng-show="sidebar.SearchService.searchParams.location.length || sidebar.SearchService.searchParams.category.length || sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData();" name="clear-all">
+            <i class="fa fa-times-circle"></i> {{::sidebar.configuration.text.sidebar.clearFilters}}
+        </button>
+
         <section class="filter-section">
             <h4>{{::sidebar.configuration.text.sidebar.locationHeader}}</h4>
 

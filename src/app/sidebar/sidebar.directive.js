@@ -17,14 +17,14 @@ class CareerPortalSidebar {
 }
 
 class CareerPortalSidebarController {
-    constructor($rootScope, $scope, $location, configuration, SearchService) {
+    constructor($rootScope, $location, configuration, SearchService, $timeout) {
         'ngInject';
 
         $rootScope.gridState = 'list-view';
 
         this.$rootScope = $rootScope;
         this.$location = $location;
-        this.$scope = $scope;
+        this.$timeout = $timeout;
         this.gridState = $rootScope.gridState;
         this.configuration = configuration;
         this.SearchService = SearchService;
@@ -32,24 +32,12 @@ class CareerPortalSidebarController {
         this.locationLimitTo = 8;
         this.categoryLimitTo = 8;
 
-        this.initialize();
-    }
-
-    initialize() {
         if (this.configuration.search.loadJobsOnStart) {
             this.SearchService.findJobs();
         }
 
         this.SearchService.getCountByLocation(this.setLocations());
         this.SearchService.getCountByCategory(this.setCategories());
-
-        this.$scope.$watchCollection(angular.bind(this, function () {
-            return this.SearchService.searchParams.category;
-        }), this.updateFilterCountsAnonymous());
-
-        this.$scope.$watchCollection(angular.bind(this, function () {
-            return this.SearchService.searchParams.location;
-        }), this.updateFilterCountsAnonymous());
     }
 
     updateLocationLimitTo(value) {
@@ -172,6 +160,16 @@ class CareerPortalSidebarController {
         if (this.$rootScope.viewState === 'overview-open') {
             this.$location.path('/jobs');
         }
+    }
+
+    searchOnDelay() {
+        if (this.searchTimeout) {
+            this.$timeout.cancel(this.searchTimeout);
+        }
+
+        this.searchTimeout = this.$timeout(angular.bind(this, function () {
+            this.searchJobs();
+        }), 250);
     }
 }
 

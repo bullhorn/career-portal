@@ -77,6 +77,13 @@ aside {
     overflow: auto;
     padding: 1em;
 
+    > button[name="clear-all"] {
+      padding: 7px 10px;
+      border: none;
+      background: transparent;
+      border-radius: 4px;
+    }
+
     > form.keyword-search {
       position: relative;
       margin: 1em 0 2em;
@@ -97,6 +104,7 @@ aside {
         width: 100%;
         font-size: 1em;
         color: lighten($dark-bg, 75%);
+        box-sizing: border-box;
 
         &:focus {
           outline: none;
