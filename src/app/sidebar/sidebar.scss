@@ -21,6 +21,10 @@ body.overview-open {
       > button[name="back-arrow"] {
         display: block;
       }
+
+      > button[name="clear-all"] {
+        display: none;
+      }
     }
 
     &:hover {
@@ -129,6 +133,7 @@ aside {
 
       > .filter-item {
         padding-bottom: 5px;
+        padding-top: 8px;
         border-bottom: 1px solid lighten($dark-bg, 5%);
         color: lighten($dark-bg, 65%);
 
