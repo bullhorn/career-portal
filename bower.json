@@ -3,12 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "angular-animate": "~1.4.0",
-    "angular-cookies": "~1.4.0",
     "angular-touch": "~1.4.0",
     "angular-sanitize": "~1.4.0",
-    "jquery": "~2.1.4",
     "angular": "~1.4.0",
-    "angular-deferred-bootstrap": "~0.1.7",
     "font-awesome": "~4.3.0",
     "moment": "~2.10.5",
     "checklist-model": "~0.2.4",
@@ -21,7 +18,6 @@
     "angular-mocks": "~1.4.0"
   },
   "resolutions": {
-    "jquery": "~2.1.4",
     "angular": "~1.4.0"
   }
 }

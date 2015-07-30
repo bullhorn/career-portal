@@ -25,7 +25,10 @@ class CareerPortalHeaderController {
     }
 
     toggleFilters() {
-        $('.portal-canvas').toggleClass('show-nav');
+        var $portalCanvas = document.querySelector('.portal-canvas');
+        if ($portalCanvas) {
+            $portalCanvas.classList.toggle('show-nav');
+        }
     }
 
     goBack() {

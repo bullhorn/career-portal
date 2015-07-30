@@ -22,7 +22,6 @@ function listFiles() {
 }
 
 module.exports = function (config) {
-
     var configuration = {
         files: listFiles(),
 
@@ -36,7 +35,7 @@ module.exports = function (config) {
 
         ngHtml2JsPreprocessor: {
             stripPrefix: 'src/',
-            moduleName: 'careerPortalNew'
+            moduleName: 'CareerPortal'
         },
 
         browsers: ['PhantomJS'],

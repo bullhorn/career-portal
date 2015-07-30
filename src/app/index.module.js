@@ -16,8 +16,11 @@ import ApplyService from './services/apply.service';
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
 
-angular.module('CareerPortal', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'checklist-model', 'file-model'])
+import AppConfig from '../app.json';
+
+angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'checklist-model', 'file-model'])
     .constant('moment', moment)
+    .constant('configuration', AppConfig)
     .config(config)
     .config(routerConfig)
     .directive('careerPortalSidebar', () => new CareerPortalSidebar())
@@ -30,14 +33,3 @@ angular.module('CareerPortal', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService);
-
-// Defer the application until we have the configuration for the app!
-deferredBootstrapper.bootstrap({
-    element: document.body,
-    module: 'CareerPortal',
-    resolve: {
-        configuration: ['$http', function ($http) {
-            return $http.get('app.json');
-        }]
-    }
-});

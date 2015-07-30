@@ -13,7 +13,10 @@ function webpack(watch, callback) {
         watch: watch,
         module: {
             preLoaders: [{test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
-            loaders: [{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}]
+            loaders: [
+                {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+                {test: /\.json$/, exclude: /node_modules/, loader: 'json-loader'}
+            ]
         },
         output: {filename: 'index.module.js'}
     };
