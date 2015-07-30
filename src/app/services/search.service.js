@@ -120,7 +120,7 @@ class SearchService {
                 },
                 text: () => {
                     if (this.searchParams.textSearch) {
-                        return ' AND (title:' + this.searchParams.textSearch + '* OR publishedDescription:' + this.searchParams.textSearch + '*)';
+                        return ' AND (title:' + this.searchParams.textSearch + '* OR publicDescription:' + this.searchParams.textSearch + '*)';
                     }
 
                     return '';
