@@ -18,6 +18,11 @@ class JobListController {
         }
         return momentDate.fromNow();
     }
+
+    loadMoreData() {
+        this.SearchService.searchParams.reloadAllData = false;
+        this.SearchService.findJobs();
+    }
 }
 
 export default JobListController;

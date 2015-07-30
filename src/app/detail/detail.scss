@@ -1,16 +1,12 @@
 section.job-detail {
-  display: flex;
-  flex-direction: column;
-
   padding: 1.5em;
 
   @include desktop() {
+    display: flex;
     flex-direction: row;
   }
 
   > div.description {
-    margin-bottom: 1.5em;
-
     @include desktop() {
       margin-right: 1.5em;
       order: 1;
@@ -18,19 +14,36 @@ section.job-detail {
     }
 
     > div.job-heading {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+
+      @include desktop() {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
 
       > h2 {
         font-size: 1.6em;
         font-weight: 500;
+
+        @include desktop() {
+          order: 1;
+        }
+      }
+
+      > span.fill {
+        order: 2;
       }
 
       > div.job-actions {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: flex-end;
+
+        @include desktop() {
+          justify-content: flex-start;
+          order: 3;
+        }
 
         > button {
           border: none;
@@ -42,6 +55,14 @@ section.job-detail {
           > i {
             margin-right: 5px;
             font-size: 1.3em;
+          }
+
+          &[name="print"] {
+            display: none;
+
+            @include desktop() {
+              display: inline-block;
+            }
           }
         }
 
@@ -94,7 +115,6 @@ section.job-detail {
   > div.apply {
     margin-bottom: 1.5em;
     padding-top: 2em;
-    padding-bottom: 2em;
 
     @include desktop() {
       width: 30%;
@@ -197,10 +217,6 @@ section.job-detail {
       display: block;
       font-weight: 700;
       margin-bottom: 1em;
-
-      @include desktop() {
-        margin-bottom: 0;
-      }
 
       > i {
         float: right;

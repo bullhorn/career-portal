@@ -1,11 +1,26 @@
-body {
-  &.list-view {
+section.job-list {
+  padding: 1.5em;
+
+  > h4 {
+    color: darken($light-bg, 15%);
+    font-size: 1.3em;
+    font-weight: 500;
+    margin: 0 0 1em;
+  }
+
+  > p.load-more-data {
+    text-align: center;
+    margin: 0 0 1.5em;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+
+  // Parent selector
+  .list-view & {
     div.card-wrapper {
-      display: flex;
-      flex-direction: column;
+      display: block;
 
       > a.card {
-        flex: 1;
         margin-bottom: 1.5em;
         overflow: hidden;
         cursor: pointer;
@@ -70,7 +85,8 @@ body {
     }
   }
 
-  &.grid-view {
+  // Parent selector
+  .grid-view & {
     div.card-wrapper {
       display: flex;
       flex-direction: row;
@@ -110,25 +126,5 @@ body {
         }
       }
     }
-  }
-
-}
-
-section.job-list {
-  flex: 1;
-  padding: 1.5em;
-
-  > h4 {
-    color: darken($light-bg, 15%);
-    font-size: 1.3em;
-    font-weight: 500;
-    margin: 0 0 1em;
-  }
-
-  > p.load-more-data {
-    text-align: center;
-    margin: 0 0 1.5em;
-    font-size: 1.2em;
-    cursor: pointer;
   }
 }

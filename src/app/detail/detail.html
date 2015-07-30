@@ -35,8 +35,6 @@
     </div>
     <div class="card description">
         <div class="job-heading">
-            <h2>{{::detail.configuration.text.overview.header}}</h2>
-
             <span class="fill"></span>
 
             <div class="job-actions" data-ng-class="detail.share">
@@ -53,6 +51,8 @@
                     <i class="bhi-print"></i> Print
                 </button>
             </div>
+
+            <h2>{{::detail.configuration.text.overview.header}}</h2>
         </div>
         <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
     </div>
