@@ -8,7 +8,7 @@
         </span>
 
         <span class="card-location">
-            {{::detail.job.address.city}}<span data-ng-if="::(detail.job.address.city && detail.job.address.state)">, </span>{{::detail.job.address.state}}
+            {{::detail.job.address.city}}<span data-ng-if="::(detail.job.address.city && detail.job.address.state)">,&nbsp;</span>{{::detail.job.address.state}}
         </span>
 
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">|</span>
