@@ -22,16 +22,19 @@
         <!-- endinject -->
         <!-- endbuild -->
     </head>
-    <body class="portal" data-ng-class="[viewState,gridState]">
+    <body data-ng-class="[viewState,gridState]">
 
         <career-portal-modal data-ng-show="modalState === 'open'"></career-portal-modal>
 
-        <section class="portal-app">
-            <career-portal-sidebar></career-portal-sidebar>
-            <section class="main">
-                <career-portal-header></career-portal-header>
-                <section class="fade" data-ui-view></section>
-            </section>
+        <section class="portal">
+            <div class="portal-canvas">
+                <career-portal-sidebar></career-portal-sidebar>
+
+                <section class="main">
+                    <career-portal-header></career-portal-header>
+                    <section class="fade" data-ui-view></section>
+                </section>
+            </div>
         </section>
 
         <!-- build:js(src) scripts/vendor.js -->

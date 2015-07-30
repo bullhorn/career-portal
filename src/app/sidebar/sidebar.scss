@@ -1,18 +1,19 @@
 aside {
   height: 100%;
-  width: 300px;
-  min-width: 300px;
-
+  width: $sidebar-width;
+  min-width: $sidebar-width;
+  position: absolute;
+  top: 0;
+  left: -$sidebar-width;
   background-color: $dark-bg;
   color: $white;
-
-  display: none;
   flex-direction: column;
-
-  transition: width 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   @include desktop() {
     display: flex;
+    position: initial;
+    float: left;
   }
 
   > header {
@@ -221,8 +222,8 @@ aside {
 
   // Parent selector
   .overview-open & {
-    width: 50px;
-    min-width: 50px;
+    width: $sidebar-width-small;
+    min-width: $sidebar-width-small;
 
     > header {
       display: none;
