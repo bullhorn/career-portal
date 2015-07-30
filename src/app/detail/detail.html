@@ -1,27 +1,4 @@
 <section class="job-detail">
-    <div class="card description">
-        <div class="job-heading">
-            <h2>{{::detail.configuration.text.overview.header}}</h2>
-
-            <span class="fill"></span>
-
-            <div class="job-actions" data-ng-class="detail.share">
-                <div class="share-outlets">
-                    <a data-ng-href="{{detail.emailLink(detail.job)}}" target="_blank"><i class="bhi-email"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareTwitter(detail.job);"><i class="bhi-twitter"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareFacebook(detail.job);"><i class="fa fa-facebook-official"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareLinkedin(detail.job);"><i class="bhi-linkedin"></i></a>
-                </div>
-                <button name="share" data-ng-click="detail.openShare();">
-                    <i class="fa fa-share-alt"></i> Share
-                </button>
-                <button name="print" data-ng-click="detail.print();">
-                    <i class="bhi-print"></i> Print
-                </button>
-            </div>
-        </div>
-        <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
-    </div>
     <div class="card apply">
         <span class="card-date">{{detail.configuration.text.joblist.added}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
 
@@ -55,5 +32,28 @@
         <hr/>
 
         <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{::detail.configuration.text.overview.seeAll}}<i class="bhi-arrow-right"></i></a>
+    </div>
+    <div class="card description">
+        <div class="job-heading">
+            <h2>{{::detail.configuration.text.overview.header}}</h2>
+
+            <span class="fill"></span>
+
+            <div class="job-actions" data-ng-class="detail.share">
+                <div class="share-outlets">
+                    <a data-ng-href="{{detail.emailLink(detail.job)}}" target="_blank"><i class="bhi-email"></i></a>
+                    <a href="javascript:;" data-ng-click="detail.shareTwitter(detail.job);"><i class="bhi-twitter"></i></a>
+                    <a href="javascript:;" data-ng-click="detail.shareFacebook(detail.job);"><i class="fa fa-facebook-official"></i></a>
+                    <a href="javascript:;" data-ng-click="detail.shareLinkedin(detail.job);"><i class="bhi-linkedin"></i></a>
+                </div>
+                <button name="share" data-ng-click="detail.openShare();">
+                    <i class="fa fa-share-alt"></i> Share
+                </button>
+                <button name="print" data-ng-click="detail.print();">
+                    <i class="bhi-print"></i> Print
+                </button>
+            </div>
+        </div>
+        <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
     </div>
 </section>

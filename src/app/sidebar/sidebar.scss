@@ -1,39 +1,3 @@
-body.overview-open {
-  aside {
-    width: 50px;
-    min-width: 50px;
-
-    > header {
-      display: none;
-    }
-
-    > section {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      > form.keyword-search, > section.filter-section, > section.credits {
-        display: none;
-      }
-
-      > button[name="back-arrow"] {
-        display: block;
-      }
-
-      > button[name="clear-all"] {
-        display: none;
-      }
-    }
-
-    &:hover {
-      cursor: pointer;
-      background: lighten($dark-bg, 3%);
-    }
-  }
-}
-
 aside {
   height: 100%;
   width: 300px;
@@ -42,10 +6,14 @@ aside {
   background-color: $dark-bg;
   color: $white;
 
-  display: flex;
+  display: none;
   flex-direction: column;
 
   transition: width 0.1s ease-in-out;
+
+  @include desktop() {
+    display: flex;
+  }
 
   > header {
     background-color: $sidebar-header-bg;
@@ -249,5 +217,40 @@ aside {
 
   &.show {
     display: block !important;
+  }
+
+  // Parent selector
+  .overview-open & {
+    width: 50px;
+    min-width: 50px;
+
+    > header {
+      display: none;
+    }
+
+    > section {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      > form.keyword-search, > section.filter-section, > section.credits {
+        display: none;
+      }
+
+      > button[name="back-arrow"] {
+        display: block;
+      }
+
+      > button[name="clear-all"] {
+        display: none;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: lighten($dark-bg, 3%);
+    }
   }
 }

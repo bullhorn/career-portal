@@ -1,12 +1,21 @@
 section.job-detail {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
   padding: 1.5em;
 
+  @include desktop() {
+    flex-direction: row;
+  }
+
   > div.description {
-    flex: 1;
-    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+
+    @include desktop() {
+      margin-right: 1.5em;
+      order: 1;
+      flex: 1;
+    }
 
     > div.job-heading {
       display: flex;
@@ -83,11 +92,16 @@ section.job-detail {
   }
 
   > div.apply {
-    width: 30%;
-    max-width: 350px;
-    height: 100%;
-
+    margin-bottom: 1.5em;
     padding-top: 2em;
+    padding-bottom: 2em;
+
+    @include desktop() {
+      width: 30%;
+      max-width: 350px;
+      height: 100%;
+      order: 2;
+    }
 
     > .card-date {
       font-size: 0.9em;
@@ -183,6 +197,10 @@ section.job-detail {
       display: block;
       font-weight: 700;
       margin-bottom: 1em;
+
+      @include desktop() {
+        margin-bottom: 0;
+      }
 
       > i {
         float: right;

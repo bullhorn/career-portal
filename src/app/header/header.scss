@@ -23,4 +23,27 @@ header {
     font-size: 1.5em;
     margin-right: 0.5em;
   }
+
+  > button.toggle-filters {
+    display: inline-block;
+
+    @include desktop() {
+      display: none;
+    }
+  }
+
+  // Parent selector
+  .overview-open & {
+    > button.toggle-filters {
+      display: none;
+    }
+
+    > button.go-back {
+      display: inline-block;
+
+      @include desktop() {
+        display: none;
+      }
+    }
+  }
 }

@@ -25,6 +25,11 @@ body {
           font-size: 1.1em;
           order: 4;
           text-align: center;
+          display: none;
+
+          @include tablet() {
+            display: block;
+          }
         }
 
         > .card-title-category {
@@ -74,7 +79,7 @@ body {
       justify-content: space-between;
 
       > a.card {
-        width: 32%;
+        width: 100%;
         margin-bottom: 1.5em;
         height: 360px;
         background: $white;
@@ -82,6 +87,14 @@ body {
         overflow: hidden;
         cursor: pointer;
         display: block;
+
+        @include tablet() {
+          width: 49%;
+        }
+
+        @include large-desktop() {
+          width: 32%;
+        }
 
         > i {
           display: none;
