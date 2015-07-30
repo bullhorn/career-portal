@@ -11,11 +11,17 @@
 
   > div.modal {
     display: block;
-    margin: 80px auto;
+    margin: auto;
+    height: 100%;
     width: 100%;
     max-width: 500px;
     background: $white;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+
+    @include desktop() {
+      margin: 80px auto;
+      height: auto;
+    }
 
     > header {
       background: $primary;
