@@ -35,6 +35,10 @@ html, body {
   box-sizing: border-box;
 }
 
+[class^="bhi-"]:before, [class*=" bhi-"]:before {
+  vertical-align: initial;
+}
+
 *, *:before, *:after {
   box-sizing: inherit;
 }

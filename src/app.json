@@ -17,9 +17,11 @@
       "searchPlaceholder": "Keyword Search",
       "locationHeader": "Location",
       "categoryHeader": "Category",
-      "clearFilters": "Clear Filters",
+      "clear": "Clear",
       "filtersHeader": "Filters",
-      "poweredBy": "Powered by"
+      "poweredBy": "Powered by",
+      "showMore": "Show More",
+      "showLess": "Show Less"
     },
     "modal": {
       "uploadResumeFile": "Upload Resume File",

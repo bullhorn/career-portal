@@ -37,7 +37,7 @@ deferredBootstrapper.bootstrap({
     module: 'CareerPortal',
     resolve: {
         configuration: ['$http', function ($http) {
-            return $http.get('/app.json');
+            return $http.get('app.json');
         }]
     }
 });

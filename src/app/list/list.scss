@@ -11,8 +11,12 @@ body {
         cursor: pointer;
 
         display: flex;
-        flex-direction: row;
+        flex-flow: row wrap;
         align-items: center;
+
+        > i {
+          order: 5;
+        }
 
         > .card-date {
           flex: 1;
@@ -41,8 +45,21 @@ body {
           text-align: center;
         }
 
-        > .card-separator, > .card-description {
+        > .card-separator {
           display: none;
+        }
+
+        > .card-description {
+          order: 6;
+          width: 100%;
+          margin-top: 1em;
+          color: lighten($dark-bg, 20%);
+          line-height: 1em;
+          font-weight: 500;
+          height: 1em;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
         }
       }
     }
@@ -65,6 +82,10 @@ body {
         overflow: hidden;
         cursor: pointer;
         display: block;
+
+        > i {
+          display: none;
+        }
 
         > .card-description {
           margin-top: 1em;
@@ -89,5 +110,12 @@ section.job-list {
     font-size: 1.3em;
     font-weight: 500;
     margin: 0 0 1em;
+  }
+
+  > p.load-more-data {
+    text-align: center;
+    margin: 0 0 1.5em;
+    font-size: 1.2em;
+    cursor: pointer;
   }
 }

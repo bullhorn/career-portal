@@ -43,10 +43,18 @@ class SearchService {
                     this.searchParams.start = 0;
                 },
                 moreRecordsExist: () => ((parseInt(this.searchParams.total) - parseInt(this.requestParams.start())) > 0),
-                clearSearchParams: () => {
-                    this.searchParams.textSearch = '';
-                    this.searchParams.category.length = 0;
-                    this.searchParams.location.length = 0;
+                clearSearchParams: (specificParam) => {
+                    if (specificParam === 'location') {
+                        this.searchParams.location.length = 0;
+                    } else if (specificParam === 'category') {
+                        this.searchParams.category.length = 0;
+                    } else if (specificParam === 'text') {
+                        this.searchParams.textSearch = '';
+                    } else {
+                        this.searchParams.textSearch = '';
+                        this.searchParams.category.length = 0;
+                        this.searchParams.location.length = 0;
+                    }
                 }
             });
     }

@@ -17,6 +17,12 @@
             <span class="card-type">{{::job.employmentType}}</span>
 
             <span class="card-description">{{::job.publicDescription | stripHtml}}</span>
+
+            <i class="bhi-arrow-right"></i>
         </a>
     </div>
+
+    <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">
+        {{::list.configuration.text.joblist.loadMoreData}}
+    </p>
 </section>

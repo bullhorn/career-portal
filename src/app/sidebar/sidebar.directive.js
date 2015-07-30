@@ -148,11 +148,10 @@ class CareerPortalSidebarController {
         this.updateFilterCounts();
     }
 
-    clearSearchParamsAndLoadData() {
-        this.SearchService.helper.clearSearchParams();
+    clearSearchParamsAndLoadData(param) {
+        this.SearchService.helper.clearSearchParams(param);
         this.SearchService.searchParams.reloadAllData = true;
         this.SearchService.findJobs();
-
         this.updateFilterCounts();
     }
 

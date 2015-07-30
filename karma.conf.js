@@ -17,13 +17,7 @@ function listFiles() {
             path.join(conf.paths.tmp, '/serve/app/index.module.js'),
             path.join(conf.paths.src, '/**/*.spec.js'),
             path.join(conf.paths.src, '/**/*.mock.js'),
-            path.join(conf.paths.src, '/**/*.html'),
-            {
-                pattern: 'src/app.json',
-                watched: true,
-                served: true,
-                included: false
-            }
+            path.join(conf.paths.src, '/**/*.html')
         ]);
 }
 

@@ -3,24 +3,27 @@
         <label>{{::sidebar.configuration.text.sidebar.filtersHeader}}</label>
         <span class="fill"></span>
         <button data-ng-class="{'active': sidebar.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
-            <i class="fa fa-th-list"></i>
+            <i class="bhi-list"></i>
         </button>
-        <button data-ng-class="{'active': sidebar.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
+        <button class="fa-button" data-ng-class="{'active': sidebar.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
             <i class="fa fa-th"></i>
         </button>
     </header>
     <section>
         <form class="keyword-search" data-ng-submit="sidebar.searchJobs()">
-            <label for="keyword"><i class="fa fa-search"></i></label>
+            <label for="keyword"><i class="bhi-search"></i></label>
             <input class="search" type="search" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-ng-attr-placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
+            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('text');" name="clear-all">
+                <i class="bhi-times"></i>
+            </button>
         </form>
-
-        <button data-ng-show="sidebar.SearchService.searchParams.location.length || sidebar.SearchService.searchParams.category.length || sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData();" name="clear-all">
-            <i class="fa fa-times-circle"></i> {{::sidebar.configuration.text.sidebar.clearFilters}}
-        </button>
 
         <section class="filter-section">
             <h4>{{::sidebar.configuration.text.sidebar.locationHeader}}</h4>
+            <span class="fill"></span>
+            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
+                <i class="bhi-times"></i> {{::sidebar.configuration.text.sidebar.clear}}
+            </button>
 
             <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo">
                 <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" checklist-model="sidebar.SearchService.searchParams.location" checklist-value="location.address.city+'|'+location.address.state" data-ng-click="sidebar.searchJobs()">
@@ -28,20 +31,32 @@
                 <span>{{location.idCount}}</span>
             </div>
 
-            <span class="pager" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">Show More</span>
-            <span class="pager" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">Show Less</span>
+            <span class="show-more" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">
+                 {{::sidebar.configuration.text.sidebar.showMore}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">
+                 {{::sidebar.configuration.text.sidebar.showMore}}
+            </span>
         </section>
         <section class="filter-section">
             <h4>{{::sidebar.configuration.text.sidebar.categoryHeader}}</h4>
+            <span class="fill"></span>
+            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
+                <i class="bhi-times"></i> {{::sidebar.configuration.text.sidebar.clear}}
+            </button>
 
-            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories) | limitTo:sidebar.categoryLimitTo">
+            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo">
                 <input type="checkbox" id="{{::category.publishedCategory.id}}" checklist-model="sidebar.SearchService.searchParams.category" checklist-value="category.publishedCategory.id" data-ng-click="sidebar.searchJobs()">
                 <label for="{{::category.publishedCategory.id}}">{{::category.publishedCategory.name}}</label>
                 <span>{{category.idCount}}</span>
             </div>
 
-            <span class="pager" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">Show More</span>
-            <span class="pager" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">Show Less</span>
+            <span class="show-more" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">
+                {{::sidebar.configuration.text.sidebar.showMore}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">
+                 {{::sidebar.configuration.text.sidebar.showLess}}
+            </span>
         </section>
 
         <section class="credits">
@@ -49,6 +64,6 @@
             <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
         </section>
 
-        <button type="button" class="fa fa-arrow-left" name="back-arrow"></button>
+        <button type="button" class="bhi-arrow-left" name="back-arrow"></button>
     </section>
 </aside>
