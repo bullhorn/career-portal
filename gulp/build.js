@@ -67,17 +67,16 @@ gulp.task('html', ['inject', 'partials'], function () {
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
 gulp.task('fonts', function () {
+    // TEMP!
+    gulp.src($.mainBowerFiles())
+        .pipe($.filter('**/Bullhorn-Glyphicons.{eot,svg,ttf,woff,woff2}'))
+        .pipe($.flatten())
+        .pipe(gulp.dest(path.join(conf.paths.dist, '/styles/')));
+
     return gulp.src($.mainBowerFiles())
         .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
         .pipe($.flatten())
         .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
-});
-
-gulp.task('fonts:inject', function () {
-    return gulp.src(path.join(conf.paths.src, '/assets/fonts'))
-        .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
-        .pipe($.flatten())
-        .pipe(gulp.dest(path.join(conf.paths.tmp)));
 });
 
 gulp.task('other', function () {
