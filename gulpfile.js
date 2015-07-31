@@ -21,3 +21,11 @@ wrench.readdirSyncRecursive('./gulp').filter(function (file) {
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
+
+gulp.task('build-test', ['test'], function () {
+    gulp.start('build');
+});
+
+gulp.task('jenkins-build', ['clean'], function () {
+    gulp.start('build-test');
+});
