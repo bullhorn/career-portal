@@ -33,6 +33,8 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
+        reporters: ['coverage', 'progress'],
+
         ngHtml2JsPreprocessor: {
             stripPrefix: 'src/',
             moduleName: 'CareerPortal'
@@ -43,10 +45,16 @@ module.exports = function (config) {
         plugins: [
             'karma-phantomjs-launcher',
             'karma-jasmine',
-            'karma-ng-html2js-preprocessor'
+            'karma-ng-html2js-preprocessor',
+            'karma-coverage'
         ],
 
+        coverageReporter: {
+            dir: 'coverage/'
+        },
+
         preprocessors: {
+            'src/app/**/!(*.mock|*.spec|*.config|*.run|*.module).js': ['coverage'],
             'src/**/*.html': ['ng-html2js']
         }
     };
