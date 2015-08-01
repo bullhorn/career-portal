@@ -44,9 +44,47 @@ class CareerPortalModalController {
         }
     }
 
+    validateResume(file) {
+        if (!file) {
+            return false;
+        }
+
+        // First check the size
+        if (file.size > this.configuration.search.maxUploadSize) {
+            this.resumeUploadErrorMessage = this.configuration.text.modal.toBig + ' (max size: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
+            return false;
+        }
+
+        if (file.size < this.configuration.search.minUploadSize) {
+            this.resumeUploadErrorMessage = this.configuration.text.modal.toSmall + ' (min size: ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
+            return false;
+        }
+
+        // Now check the type
+        var fileArray = file.name.split('.');
+        var fileExtension = fileArray[fileArray.length - 1];
+
+        if (this.configuration.search.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
+            this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.configuration.text.modal.invalidFormat;
+            return false;
+        }
+
+        this.resumeUploadErrorMessage = '';
+        return true;
+    }
+
+    getTooltipText() {
+        var tooltip = '<ul>';
+
+        this.configuration.search.acceptedResumeTypes.forEach(function (type) {
+            tooltip += '<li>' + type + '</li>';
+        });
+        tooltip += '</ul>';
+        return tooltip;
+    }
+
     applySuccess() {
         this.showForm = false;
-
         this.header = this.configuration.text.modal.thankYou.header;
         this.subHeader = this.configuration.text.modal.thankYou.subHeader;
     }

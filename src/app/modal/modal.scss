@@ -7,7 +7,7 @@
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, .7);
-  z-index: 9999;
+  z-index: $modal-z-index;
 
   > div.modal {
     display: block;
@@ -71,50 +71,38 @@
                   border-bottom: 1px solid $primary;
                 }
               }
-
-              &[type="file"] {
-                cursor: pointer;
-                text-align: center;
-                padding: 10px;
-                background: $light-bg;
-                border-radius: 3px;
-                border: 1px solid $primary;
-                opacity: 0;
-                position: relative;
-                z-index: 5;
-              }
             }
           }
 
           &.upload-container {
             border: 1px solid $primary;
+            color: $primary;
             border-radius: 3px;
             background: transparent;
-            margin-top: 3.5em;
+            text-align: center;
+            padding: 1em 0;
             position: relative;
             cursor: pointer;
-
-            .upload-content {
-              position: absolute;
-              left: 0;
-              right: 0;
-              top: 10px;
-              text-align: center;
-              color: $primary;
-
-              i {
-                margin-right: 10px;
-                font-size: 1.5em;
-              }
-
-              .upload-text {
-                vertical-align: 3px;
-              }
-            }
+            font-size: 1.2em;
+            margin-top: 1em;
           }
 
           &:first-child {
             margin-top: 0;
+          }
+        }
+
+        > div.upload-label {
+          font-size: 1.1em;
+          color: lighten($dark-bg, 30%);
+
+          > i {
+            color: lighten($dark-bg, 20%);
+          }
+
+          > .error {
+            margin-top: 0;
+            float: right;
           }
         }
       }
@@ -122,7 +110,6 @@
 
     .btn-container {
       width: 100%;
-      padding-top: 2em;
       text-align: right;
 
       &.success {
@@ -158,4 +145,16 @@
   color: $error;
   margin-left: 1.1em;
   margin-top: 0.3em;
+}
+
+.accepted-formats {
+  ._720kb-tooltip-title {
+    font-size: 0.8em;
+  }
+
+  ul {
+    margin: 0.2em 0 0 1.1em;
+    font-size: 0.9em;
+    padding: 0;
+  }
 }

@@ -45,19 +45,22 @@
                         <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" placeholder="{{::modal.configuration.text.modal.fields.phone.placeholder}}">
                     </div>
                 </div>
-                <div class="form-field upload-container">
-                    <div class="input">
-                        <input type="file" name="resume" value="" file-model="modal.ApplyService.form.resumeInfo" required>
-
-                        <div class="upload-content">
-                            <i class="bhi-upload"></i>
-                            <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{::modal.configuration.text.modal.uploadResumeFile}}</span>
-                            <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
-                        </div>
-                    </div>
+                <div class="upload-label">
+                    Resume File
+                    <i class="bhi-question" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
+                    <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
+                        {{modal.resumeUploadErrorMessage}}
+                    </span>
+                    <span class="error" data-ng-show="applyForm.$submitted && !modal.ApplyService.form.resumeInfo">
+                        {{modal.configuration.text.modal.fields.resume.validation}}
+                    </span>
+                </div>
+                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.search.minUploadSize" data-ngf-max-size="modal.configuration.search.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);">
+                    <i class="bhi-upload"></i>
+                    <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{::modal.configuration.text.modal.uploadResumeFile}}</span>
+                    <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
                 </div>
                 <span class="error" data-ng-show="applyForm.$submitted">
-                    <span data-ng-show="!modal.ApplyService.form.resumeInfo">{{::modal.configuration.text.modal.fields.resume.validation}}</span>
                     <span>{{modal.ApplyService.ajaxError}}</span>
                 </span>
             </form>

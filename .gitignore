@@ -6,6 +6,7 @@ node_modules/
 # Build Output
 dist/
 coverage/
+reports/
 
 # Transient Build Output
 .tmp/

@@ -12,7 +12,9 @@
     "angular-file-model": "~0.3.0",
     "normalize.css": "~3.0.3",
     "angular-ui-router": "~0.2.15",
-    "bullhorn-icons": "git@github.com:bullhorn/bullhorn-icons.git#~1.0.0"
+    "bullhorn-icons": "git@github.com:bullhorn/bullhorn-icons.git#~1.0.0",
+    "angular-tooltips": "~0.1.18",
+    "ng-file-upload": "~6.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

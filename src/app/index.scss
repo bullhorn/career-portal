@@ -22,6 +22,8 @@ $header-height: 60px;
 $sidebar-width: 300px;
 $sidebar-width-small: 50px;
 
+$modal-z-index: 1000;
+
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector
@@ -41,26 +43,6 @@ html, body {
   box-sizing: border-box;
 }
 
-.mask {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  width: 0;
-  height: 0;
-  background-color: #000;
-  opacity: 0;
-  transition: opacity 0.3s, width 0s 0.3s, height 0s 0.3s;
-
-  &.active {
-    width: 100%;
-    height: 100%;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
-}
-
 [class^="bhi-"]:before, [class*=" bhi-"]:before {
   vertical-align: initial;
 }
@@ -71,6 +53,10 @@ html, body {
 
 .fill {
   flex: 1;
+}
+
+._720kb-tooltip {
+  z-index: $modal-z-index + 1;
 }
 
 input {

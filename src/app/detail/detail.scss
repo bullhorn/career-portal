@@ -7,6 +7,9 @@ section.job-detail {
   }
 
   > div.description {
+    padding-left: 2em;
+    padding-right: 2em;
+
     @include desktop() {
       margin-right: 1.5em;
       order: 1;

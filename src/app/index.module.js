@@ -18,7 +18,7 @@ import OmitFiltersFilter from './filters/omitfilters.filter';
 
 import AppConfig from '../app.json';
 
-angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'checklist-model', 'file-model'])
+angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'checklist-model', 'ngFileUpload', '720kb.tooltips'])
     .constant('moment', moment)
     .constant('configuration', AppConfig)
     .config(config)

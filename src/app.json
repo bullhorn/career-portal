@@ -36,6 +36,9 @@
       "submitButton": "Submit",
       "okButton": "Okay, Got it!",
       "cancelButton": "Cancel",
+      "invalidFormat": "is not a supported file format",
+      "toBig": "File is to big.",
+      "toSmall": "File is to small.",
       "fields": {
         "firstName": {
           "placeholder": "First Name",
@@ -56,7 +59,7 @@
           "placeholder": "Mobile Phone (Optional)"
         },
         "resume": {
-          "validation": " Please upload your resume."
+          "validation": "Please upload your resume."
         }
       }
     }
@@ -73,6 +76,18 @@
     "start": 0,
     "batchSize": 500,
     "loadJobsOnStart": true,
-    "maxRelatedJobs": 5
+    "maxRelatedJobs": 5,
+    "maxUploadSize": 200000,
+    "minUploadSize": 1000,
+    "acceptedResumeTypes": [
+      "html",
+      "text",
+      "txt",
+      "pdf",
+      "doc",
+      "docx",
+      "rtf",
+      "odt"
+    ]
   }
 }
