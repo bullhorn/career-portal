@@ -1,13 +1,11 @@
 class JobDetailController {
-    constructor($rootScope, $window, $location, configuration, ShareService, SearchService, job, moment) {
+    constructor($window, $location, configuration, ShareService, SearchService, SharedData, job, moment) {
         'ngInject';
-
-        $rootScope.viewState = 'overview-open';
 
         this.moment = moment;
         this.$window = $window;
         this.$location = $location;
-        this.$rootScope = $rootScope;
+        this.SharedData = SharedData;
         this.configuration = configuration;
         this.ShareService = ShareService;
         this.SearchService = SearchService;
@@ -15,6 +13,9 @@ class JobDetailController {
 
         // Load the related jobs
         this.loadRelatedJobs();
+
+        // Set the view state
+        this.SharedData.viewState = 'overview-open';
     }
 
     shareFacebook(job) {
@@ -38,7 +39,7 @@ class JobDetailController {
     }
 
     applyModal() {
-        this.$rootScope.modalState = 'open';
+        this.SharedData.modalState = 'open';
     }
 
     openShare() {

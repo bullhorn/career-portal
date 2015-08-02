@@ -17,15 +17,12 @@ class CareerPortalSidebar {
 }
 
 class CareerPortalSidebarController {
-    constructor($rootScope, $location, configuration, SearchService, $timeout) {
+    constructor(SharedData, $location, configuration, SearchService, $timeout) {
         'ngInject';
 
-        $rootScope.gridState = 'list-view';
-
-        this.$rootScope = $rootScope;
+        this.SharedData = SharedData;
         this.$location = $location;
         this.$timeout = $timeout;
-        this.gridState = $rootScope.gridState;
         this.configuration = configuration;
         this.SearchService = SearchService;
 
@@ -38,6 +35,9 @@ class CareerPortalSidebarController {
 
         this.SearchService.getCountByLocation(this.setLocations());
         this.SearchService.getCountByCategory(this.setCategories());
+
+        // Set the grid state
+        this.SharedData.gridState = 'list-view';
     }
 
     updateLocationLimitTo(value) {
@@ -137,8 +137,7 @@ class CareerPortalSidebarController {
     }
 
     switchViewStyle(type) {
-        this.$rootScope.gridState = type + '-view';
-        this.gridState = type + '-view';
+        this.SharedData.gridState = type + '-view';
     }
 
     searchJobs() {
@@ -156,7 +155,7 @@ class CareerPortalSidebarController {
     }
 
     goBack() {
-        if (this.$rootScope.viewState === 'overview-open') {
+        if (this.SharedData.viewState === 'overview-open') {
             this.$location.path('/jobs');
         }
     }

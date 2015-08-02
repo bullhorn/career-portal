@@ -2,10 +2,10 @@
     <header>
         <label>{{::sidebar.configuration.text.sidebar.filtersHeader}}</label>
         <span class="fill"></span>
-        <button data-ng-class="{'active': sidebar.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
+        <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
             <i class="bhi-list"></i>
         </button>
-        <button class="fa-button" data-ng-class="{'active': sidebar.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
+        <button class="fa-button" data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
             <i class="fa fa-th"></i>
         </button>
     </header>
@@ -18,7 +18,7 @@
             </button>
         </form>
 
-        <section class="filter-section">
+        <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
             <h4>{{::sidebar.configuration.text.sidebar.locationHeader}}</h4>
             <span class="fill"></span>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
@@ -38,7 +38,7 @@
                  {{::sidebar.configuration.text.sidebar.showLess}}
             </span>
         </section>
-        <section class="filter-section">
+        <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
             <h4>{{::sidebar.configuration.text.sidebar.categoryHeader}}</h4>
             <span class="fill"></span>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">

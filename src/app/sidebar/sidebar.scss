@@ -1,14 +1,20 @@
 aside {
   height: 100%;
-  width: $sidebar-width;
-  min-width: $sidebar-width;
+  width: 80%;
+  min-width: 80%;
   position: absolute;
   top: 0;
-  left: -$sidebar-width;
+  left: -80%;
   background-color: $dark-bg;
   color: $white;
   flex-direction: column;
   transition: all 0.2s ease-in-out;
+
+  @include tablet() {
+    width: $sidebar-width;
+    min-width: $sidebar-width;
+    left: -$sidebar-width;
+  }
 
   @include desktop() {
     display: flex;
@@ -33,8 +39,12 @@ aside {
       font-size: 1.4em;
       cursor: pointer;
       transition: all 0.2s;
-      display: inline-block;
+      display: none;
       margin-right: 0;
+
+      @include desktop() {
+        display: inline-block;
+      }
 
       &:focus {
         outline: none;
@@ -94,6 +104,13 @@ aside {
       margin-bottom: 2em;
       display: flex;
       flex-flow: row wrap;
+
+      max-height: 330px;
+      overflow: hidden;
+
+      &.active {
+        max-height: initial;
+      }
 
       > h4 {
         color: lighten($dark-bg, 35%);

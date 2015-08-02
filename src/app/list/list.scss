@@ -24,34 +24,49 @@ section.job-list {
         margin-bottom: 1.5em;
         overflow: hidden;
         cursor: pointer;
+        display: block;
 
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
+        @include desktop() {
+          display: flex;
+          flex-flow: row wrap;
+          align-items: center;
+        }
 
         > i {
           order: 5;
+          display: none;
+
+          @include desktop() {
+            display: inline-block;
+          }
         }
 
         > .card-date {
-          flex: 1;
-          color: lighten($dark-bg, 40%);
-          font-weight: 500;
-          font-size: 1.1em;
-          order: 4;
-          text-align: center;
           display: none;
 
-          @include tablet() {
+          @include desktop() {
             display: block;
+            flex: 1;
+            color: lighten($dark-bg, 40%);
+            font-weight: 500;
+            font-size: 1.1em;
+            order: 4;
+            text-align: center;
           }
         }
 
         > .card-title-category {
-          width: 40%;
+          display: block;
+          width: 100%;
+          margin-bottom: 0.25em;
+
+          @include desktop() {
+            width: 40%;
+            margin-bottom: 0;
+          }
 
           > .card-title {
-            margin: 0 0 0.2em;
+            margin: 0 0 0.1em;
           }
 
           > .card-category {
@@ -66,7 +81,9 @@ section.job-list {
         }
 
         > .card-separator {
-          display: none;
+          @include desktop() {
+            display: none;
+          }
         }
 
         > .card-description {
@@ -80,6 +97,11 @@ section.job-list {
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
+          display: none;
+
+          @include desktop() {
+            display: inline-block;
+          }
         }
       }
     }

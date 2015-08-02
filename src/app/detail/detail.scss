@@ -1,7 +1,8 @@
 section.job-detail {
-  padding: 1.5em;
+  padding: 0;
 
   @include desktop() {
+    padding: 1.5em;
     display: flex;
     flex-direction: row;
   }
@@ -9,11 +10,15 @@ section.job-detail {
   > div.description {
     padding-left: 2em;
     padding-right: 2em;
+    background-color: inherit;
+    box-shadow: none;
 
     @include desktop() {
       margin-right: 1.5em;
       order: 1;
       flex: 1;
+      background-color: $white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
     }
 
     > div.job-heading {
@@ -27,33 +32,45 @@ section.job-detail {
       > h2 {
         font-size: 1.6em;
         font-weight: 500;
+        display: none;
 
         @include desktop() {
+          display: inline-block;
           order: 1;
         }
       }
 
       > span.fill {
         order: 2;
+        display: none;
+
+        @include desktop() {
+          display: inline-block;
+        }
       }
 
       > div.job-actions {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
 
         @include desktop() {
-          justify-content: flex-start;
           order: 3;
         }
 
         > button {
           border: none;
           background: transparent;
-          margin: 0 1em;
+          margin: 0 1em 0 0;
           font-size: 1.1em;
           color: lighten($base-color, 15%);
+          order: 1;
+
+          @include desktop() {
+            order: 2;
+            margin: 0 1em;
+          }
 
           > i {
             margin-right: 5px;
@@ -70,8 +87,15 @@ section.job-detail {
         }
 
         > div.share-outlets {
-          border-right: 1px solid transparent;
+          border-left: 1px solid transparent;
           padding-right: 20px;
+          order: 2;
+
+          @include desktop() {
+            order: 1;
+            border-left: none;
+            border-right: 1px solid transparent;
+          }
 
           @for $i from 1 through 4 {
             a:nth-child(#{$i}) {
@@ -97,7 +121,12 @@ section.job-detail {
           }
 
           > div.share-outlets {
-            border-right: 1px solid lighten($primary, 20%);
+            border-left: 1px solid lighten($primary, 20%);
+
+            @include desktop() {
+              border-left: none;
+              border-right: 1px solid lighten($primary, 20%);
+            }
 
             > a {
               opacity: 1;
@@ -174,9 +203,20 @@ section.job-detail {
       height: 1px;
       background: #E8E8E8;
       margin: 2em -0.5em;
+      display: none;
+
+      @include desktop() {
+        display: block;
+      }
     }
 
     > div.related-jobs {
+      display: none;
+
+      @include desktop() {
+        display: block;
+      }
+
       > h5 {
         font-size: 1.2em;
         font-weight: 400;
@@ -217,9 +257,13 @@ section.job-detail {
     }
 
     > a.category-filter {
-      display: block;
       font-weight: 700;
       margin-bottom: 1em;
+      display: none;
+
+      @include desktop() {
+        display: block;
+      }
 
       > i {
         float: right;

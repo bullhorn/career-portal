@@ -41,6 +41,11 @@ html, body {
   overflow: hidden;
   background-color: $light-bg;
   box-sizing: border-box;
+
+  > section.main {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 [class^="bhi-"]:before, [class*=" bhi-"]:before {
@@ -146,7 +151,11 @@ section.portal {
     transition: .3s ease all;
 
     &.show-nav {
-      transform: translateX($sidebar-width);
+      transform: translateX(80%);
+
+      @include tablet() {
+        transform: translateX($sidebar-width);
+      }
     }
 
     > section.main {

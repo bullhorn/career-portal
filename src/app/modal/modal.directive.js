@@ -17,10 +17,10 @@ class CareerPortalModal {
 }
 
 class CareerPortalModalController {
-    constructor($rootScope, $location, SearchService, ApplyService, configuration) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration) {
         'ngInject';
 
-        this.$rootScope = $rootScope;
+        this.SharedData = SharedData;
         this.$location = $location;
         this.SearchService = SearchService;
         this.ApplyService = ApplyService;
@@ -32,7 +32,7 @@ class CareerPortalModalController {
     }
 
     closeModal(applyForm) {
-        this.$rootScope.modalState = 'closed';
+        this.SharedData.modalState = 'closed';
 
         this.showForm = true;
         this.header = this.configuration.text.modal.apply.header;

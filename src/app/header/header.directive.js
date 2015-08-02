@@ -17,9 +17,10 @@ class CareerPortalHeader {
 }
 
 class CareerPortalHeaderController {
-    constructor(configuration, $location) {
+    constructor(configuration, $location, SearchService) {
         'ngInject';
 
+        this.SearchService = SearchService;
         this.$location = $location;
         this.configuration = configuration;
     }

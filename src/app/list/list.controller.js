@@ -1,12 +1,14 @@
 class JobListController {
-    constructor($rootScope, configuration, SearchService, moment) {
+    constructor(SharedData, configuration, SearchService, moment) {
         'ngInject';
-
-        $rootScope.viewState = 'overview-closed';
 
         this.configuration = configuration;
         this.SearchService = SearchService;
         this.moment = moment;
+        this.SharedData = SharedData;
+
+        // Set the view state
+        this.SharedData.viewState = 'overview-closed';
     }
 
     getDisplayDate(date) {

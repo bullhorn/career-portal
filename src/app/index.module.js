@@ -5,6 +5,7 @@ import routerConfig from './index.route';
 import JobListController from './list/list.controller';
 import JobDetailController from './detail/detail.controller';
 
+import Main from './main/main.directive';
 import CareerPortalSidebar from './sidebar/sidebar.directive';
 import CareerPortalHeader from './header/header.directive';
 import CareerPortalModal from './modal/modal.directive';
@@ -12,6 +13,7 @@ import CareerPortalModal from './modal/modal.directive';
 import SearchService from './services/search.service';
 import ShareService from './services/share.service';
 import ApplyService from './services/apply.service';
+import SharedData from './services/shared.factory';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
@@ -23,6 +25,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .constant('configuration', AppConfig)
     .config(config)
     .config(routerConfig)
+    .directive('main', () => new Main())
     .directive('careerPortalSidebar', () => new CareerPortalSidebar())
     .directive('careerPortalHeader', () => new CareerPortalHeader())
     .directive('careerPortalModal', () => new CareerPortalModal())
@@ -30,6 +33,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .controller('JobDetailController', JobDetailController)
     .filter('stripHtml', () => new StripHtmlFilter())
     .filter('omitFilters', () => new OmitFiltersFilter())
+    .factory('SharedData', () => new SharedData())
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService);

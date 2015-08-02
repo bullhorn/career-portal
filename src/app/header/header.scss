@@ -20,15 +20,44 @@ header {
     display: none;
     background: transparent;
     border: none;
-    font-size: 1.5em;
+    font-size: 2em;
     margin-right: 0.5em;
   }
 
   > button.toggle-filters {
     display: inline-block;
+    position: relative;
+
+    > .badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 12px;
+      padding: 1px 5px;
+      background-color: $error;
+      border-radius: 50%;
+      color: $white;
+    }
+
+    > .close {
+      display: none;
+    }
 
     @include desktop() {
       display: none;
+    }
+  }
+
+  // Parent selector
+  .show-nav & {
+    > button.toggle-filters {
+      > .close {
+        display: block;
+      }
+
+      > .open, > .badge {
+        display: none;
+      }
     }
   }
 
