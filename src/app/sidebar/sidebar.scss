@@ -18,8 +18,9 @@ aside {
 
   @include desktop() {
     display: flex;
-    position: initial;
+    position: inherit;
     float: left;
+    left: 0;
   }
 
   > header {
@@ -109,7 +110,7 @@ aside {
       overflow: hidden;
 
       &.active {
-        max-height: initial;
+        max-height: inherit;
       }
 
       > h4 {

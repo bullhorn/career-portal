@@ -23,6 +23,7 @@ $sidebar-width: 300px;
 $sidebar-width-small: 50px;
 
 $modal-z-index: 1000;
+$header-z-index: 100;
 
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */
@@ -48,10 +49,6 @@ html, body {
   }
 }
 
-[class^="bhi-"]:before, [class*=" bhi-"]:before {
-  vertical-align: initial;
-}
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -62,6 +59,11 @@ html, body {
 
 ._720kb-tooltip {
   z-index: $modal-z-index + 1;
+  visibility: hidden !important;
+
+  &._720kb-tooltip-open {
+    visibility: visible !important;
+  }
 }
 
 input {
@@ -148,13 +150,20 @@ section.portal {
     height: 100%;
     position: relative;
     transform: translateX(0);
+    transform: translateZ(0) translateX(0);
+    transform: translate3d(0, 0, 0);
     transition: .3s ease all;
+    backface-visibility: hidden;
 
     &.show-nav {
       transform: translateX(80%);
+      transform: translateZ(0) translateX(80%);
+      transform: translate3d(80%, 0, 0);
 
       @include tablet() {
         transform: translateX($sidebar-width);
+        transform: translateZ(0) translateX($sidebar-width);
+        transform: translate3d($sidebar-width, 0, 0);
       }
     }
 

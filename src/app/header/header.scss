@@ -9,6 +9,7 @@ header {
 
   background-color: $header-bg;
   color: $white;
+  z-index: $header-z-index;
 
   > label {
     display: inline-block;
