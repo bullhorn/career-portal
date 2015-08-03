@@ -119,7 +119,6 @@ section.job-list {
       > a.card {
         width: 100%;
         margin-bottom: 1.5em;
-        height: 360px;
         background: $white;
         padding: 1em;
         overflow: hidden;
@@ -145,6 +144,23 @@ section.job-list {
           font-weight: 500;
           display: block;
           word-break: break-all;
+
+          text-overflow: ellipsis;
+          height: 16em;
+          overflow: hidden;
+          position: relative;
+
+          &:after {
+            content: "";
+            text-align: right;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 70%;
+            height: 1.2em;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), $white 100%);
+            pointer-events: none;
+          }
         }
       }
     }
