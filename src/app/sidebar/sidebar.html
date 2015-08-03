@@ -1,4 +1,4 @@
-<aside class="side-bar" data-ng-click="sidebar.goBack();" role="navigation" aria-labelledby="main aside">
+<aside class="side-bar">
     <header>
         <label>{{::sidebar.configuration.text.sidebar.filtersHeader}}</label>
 
@@ -66,6 +66,6 @@
             <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
         </section>
 
-        <button type="button" class="bhi-arrow-left" name="back-arrow"></button>
+        <button type="button" class="bhi-arrow-left" name="back-arrow" data-ng-click="sidebar.goBack();"></button>
     </section>
 </aside>
