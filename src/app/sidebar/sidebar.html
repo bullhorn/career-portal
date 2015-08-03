@@ -4,10 +4,10 @@
 
         <div class="button-container">
             <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
-                <i class="bhi-list"></i>
+                <i class="bhi-view-list"></i>
             </button>
-            <button class="fa-button" data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
-                <i class="fa fa-th"></i>
+            <button data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
+                <i class="bhi-view-module"></i>
             </button>
         </div>
     </header>
