@@ -169,6 +169,37 @@ class CareerPortalSidebarController {
             this.searchJobs();
         }), 250);
     }
+
+    addOrRemoveLocation(location) {
+        var key = location.address.city + '|' + location.address.state;
+        if (!this.hasLocationFilter(location)) {
+            this.SearchService.searchParams.location.push(key);
+        } else {
+            var index = this.SearchService.searchParams.location.indexOf(key);
+            this.SearchService.searchParams.location.splice(index, 1);
+        }
+        this.searchJobs();
+    }
+
+    addOrRemoveCategory(category) {
+        var key = category.publishedCategory.id;
+        if (!this.hasCategoryFilter(category)) {
+            this.SearchService.searchParams.category.push(key);
+        } else {
+            var index = this.SearchService.searchParams.category.indexOf(key);
+            this.SearchService.searchParams.category.splice(index, 1);
+        }
+        this.searchJobs();
+    }
+
+    hasLocationFilter(location) {
+        var key = location.address.city + '|' + location.address.state;
+        return this.SearchService.searchParams.location.indexOf(key) !== -1;
+    }
+
+    hasCategoryFilter(category) {
+        return this.SearchService.searchParams.category.indexOf(category.publishedCategory.id) !== -1;
+    }
 }
 
 export default CareerPortalSidebar;
