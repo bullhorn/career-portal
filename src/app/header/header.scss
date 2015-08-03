@@ -33,7 +33,7 @@ header {
     > .badge {
       position: absolute;
       top: 0;
-      left: 0;
+      left: -5px;
       font-size: 12px;
       padding: 1px 5px;
       background-color: $error;
