@@ -32,27 +32,35 @@ aside {
       font-weight: 500;
     }
 
-    > button {
-      background: transparent;
-      border: none;
-      color: lighten($dark-bg, 45%);
-      padding: 5px;
-      font-size: 1.4em;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: none;
-      margin-right: 0;
+    > div.button-container {
+      flex: 1;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-end;
 
-      @include desktop() {
-        display: inline-block;
-      }
+      > button {
+        background: transparent;
+        border: none;
+        color: lighten($dark-bg, 45%);
+        padding: 5px;
+        font-size: 1.4em;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: none;
+        margin-right: 0;
 
-      &:focus {
-        outline: none;
-      }
+        @include desktop() {
+          display: inline-block;
+        }
 
-      &.active {
-        color: $white;
+        &:focus {
+          outline: none;
+        }
+
+        &.active {
+          color: $white;
+        }
       }
     }
   }
@@ -63,7 +71,7 @@ aside {
     overflow: auto;
     padding: 1em;
 
-    > form.keyword-search {
+    > div.keyword-search {
       position: relative;
       margin: 1em 0 2em;
 

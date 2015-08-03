@@ -1,22 +1,24 @@
-<aside class="side-bar" data-ng-click="sidebar.goBack();">
+<aside class="side-bar" data-ng-click="sidebar.goBack();" role="navigation" aria-labelledby="main aside">
     <header>
         <label>{{::sidebar.configuration.text.sidebar.filtersHeader}}</label>
-        <span class="fill"></span>
-        <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
-            <i class="bhi-list"></i>
-        </button>
-        <button class="fa-button" data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
-            <i class="fa fa-th"></i>
-        </button>
+
+        <div class="button-container">
+            <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
+                <i class="bhi-list"></i>
+            </button>
+            <button class="fa-button" data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
+                <i class="fa fa-th"></i>
+            </button>
+        </div>
     </header>
     <section>
-        <form class="keyword-search" data-ng-submit="sidebar.searchJobs()">
+        <div class="keyword-search">
             <label for="keyword"><i class="bhi-search"></i></label>
-            <input class="search" type="search" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-ng-attr-placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
+            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('text');" name="clear-all">
                 <i class="bhi-times"></i>
             </button>
-        </form>
+        </div>
 
         <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
             <h4>{{::sidebar.configuration.text.sidebar.locationHeader}}</h4>
