@@ -11,7 +11,10 @@
       "applyButtonLabel": "Apply",
       "relatedJobs": "Related Jobs",
       "jobs": "Jobs",
-      "seeAll": "View all jobs in this category"
+      "seeAll": "View all jobs in this category",
+      "jobClosedHeader": "Oh no!",
+      "jobClosedMessage": "Looks like this job has closed.",
+      "jobClosedOtherJobs": "You can find some similar jobs"
     },
     "sidebar": {
       "searchPlaceholder": "Keyword Search",

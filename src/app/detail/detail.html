@@ -1,5 +1,5 @@
 <section class="job-detail">
-    <div class="card apply">
+    <div class="card apply" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
         <span class="card-date">{{detail.configuration.text.joblist.added}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
 
         <span class="card-title-category">
@@ -33,7 +33,7 @@
 
         <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{::detail.configuration.text.overview.seeAll}}<i class="bhi-arrow-right"></i></a>
     </div>
-    <div class="card description">
+    <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
         <div class="job-heading">
             <span class="fill"></span>
 
@@ -55,5 +55,15 @@
             <h2>{{::detail.configuration.text.overview.header}}</h2>
         </div>
         <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
+    </div>
+    <div class="job-closed" data-ng-if="!(detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen)">
+        <h2>{{::detail.configuration.text.overview.jobClosedHeader}}</h2>
+
+        <h3>{{::detail.configuration.text.overview.jobClosedMessage}}</h3>
+
+        <p>
+            {{::detail.configuration.text.overview.jobClosedOtherJobs}}
+            <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">here.</a>
+        </p>
     </div>
 </section>
