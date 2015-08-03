@@ -1,23 +1,23 @@
 'use strict';
 
 var path = require('path');
-var conf = require('./gulp/conf');
+var conf = require('../../build/conf');
 
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
 function listFiles() {
-    var wiredepOptions = _.extend({}, conf.wiredep, {
+    var wiredepOptions = _.extend({}, '../../lib', {
         dependencies: true,
         devDependencies: true
     });
 
     return wiredep(wiredepOptions).js
         .concat([
-            path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-            path.join(conf.paths.src, '/**/*.spec.js'),
-            path.join(conf.paths.src, '/**/*.mock.js'),
-            path.join(conf.paths.src, '/**/*.html')
+            '../../.tmp/serve/app/index.module.js',
+            '../../src/**/*.html',
+            '../../test/unit/**/*.spec.js',
+            '../../test/unit/**/*.mock.js'
         ]);
 }
 
@@ -58,7 +58,7 @@ module.exports = function (config) {
         },
 
         preprocessors: {
-            'src/app/**/!(*.mock|*.spec|*.config|*.run|*.module).js': ['coverage'],
+            'src/app/**/!(*.config|*.run|*.module).js': ['coverage'],
             'src/**/*.html': ['ng-html2js']
         }
     };

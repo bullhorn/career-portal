@@ -1,181 +1,181 @@
 .modal-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, .7);
-  z-index: $modal-z-index;
-
-  > div.modal {
-    display: block;
-    margin: auto;
-    height: 100%;
+    position: absolute;
     width: 100%;
-    max-width: 500px;
-    background: $white;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: $modal-z-index;
 
-    @include desktop() {
-      margin: 80px auto;
-      height: auto;
-    }
+    > div.modal {
+        display: block;
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        max-width: 500px;
+        background: $white;
+        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
 
-    > header {
-      background: $primary;
-      padding: 1em 1em 1.5em;
-      display: block;
-      color: $white;
-      text-align: center;
-      height: auto;
+        @include desktop() {
+            margin: 80px auto;
+            height: auto;
+        }
 
-      > h2 {
-        font-size: 1.8em;
-      }
-
-      > p {
-        font-size: 1.1em;
-        font-weight: 500;
-      }
-    }
-
-    > div.main {
-      padding: 2em;
-
-      > form.apply-form {
-        > div.form-field {
-          margin: 2em 0;
-
-          > div.input {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            > .required {
-              color: $error;
-              font-size: 1.2em;
-            }
-
-            > input {
-              flex: 1;
-
-              &.ng-valid {
-                color: #52D74F;
-              }
-
-              &[type="text"], &[type="email"] {
-                border: none;
-                border-bottom: 1px solid darken($light-bg, 15%);
-                transition: border-bottom 0.2s ease-in-out;
-                padding: 0.5em;
-
-                &:focus {
-                  border-bottom: 1px solid $primary;
-                }
-              }
-            }
-          }
-
-          &.upload-container {
-            border: 1px solid $primary;
-            color: $primary;
-            border-radius: 3px;
-            background: transparent;
+        > header {
+            background: $primary;
+            padding: 1em 1em 1.5em;
+            display: block;
+            color: $white;
             text-align: center;
-            padding: 1em 0;
-            position: relative;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin-top: 1em;
-            margin-bottom: 1.6em;
+            height: auto;
 
-            &.valid {
-              border-color: #52D74F;
-              color: #52D74F;
+            > h2 {
+                font-size: 1.8em;
             }
-          }
 
-          &:first-child {
-            margin-top: 0;
-          }
+            > p {
+                font-size: 1.1em;
+                font-weight: 500;
+            }
         }
 
-        > div.upload-label {
-          font-size: 1.1em;
-          color: lighten($dark-bg, 30%);
+        > div.main {
+            padding: 2em;
 
-          > i {
-            color: lighten($dark-bg, 20%);
-          }
+            > form.apply-form {
+                > div.form-field {
+                    margin: 2em 0;
 
-          > .error {
-            margin-top: 0;
-            float: right;
-          }
+                    > div.input {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        > .required {
+                            color: $error;
+                            font-size: 1.2em;
+                        }
+
+                        > input {
+                            flex: 1;
+
+                            &.ng-valid {
+                                color: #52D74F;
+                            }
+
+                            &[type="text"], &[type="email"] {
+                                border: none;
+                                border-bottom: 1px solid darken($light-bg, 15%);
+                                transition: border-bottom 0.2s ease-in-out;
+                                padding: 0.5em;
+
+                                &:focus {
+                                    border-bottom: 1px solid $primary;
+                                }
+                            }
+                        }
+                    }
+
+                    &.upload-container {
+                        border: 1px solid $primary;
+                        color: $primary;
+                        border-radius: 3px;
+                        background: transparent;
+                        text-align: center;
+                        padding: 1em 0;
+                        position: relative;
+                        cursor: pointer;
+                        font-size: 1.2em;
+                        margin-top: 1em;
+                        margin-bottom: 1.6em;
+
+                        &.valid {
+                            border-color: #52D74F;
+                            color: #52D74F;
+                        }
+                    }
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+
+                > div.upload-label {
+                    font-size: 1.1em;
+                    color: lighten($dark-bg, 30%);
+
+                    > i {
+                        color: lighten($dark-bg, 20%);
+                    }
+
+                    > .error {
+                        margin-top: 0;
+                        float: right;
+                    }
+                }
+            }
         }
-      }
+
+        .btn-container {
+            width: 100%;
+            text-align: right;
+
+            &.success {
+                text-align: right;
+                padding-top: 0;
+
+                button {
+                    background-color: transparent !important;
+                    text-align: right;
+                    color: $primary !important;
+                }
+            }
+
+            button {
+                text-transform: uppercase;
+                padding: 1em 1.5em;
+                border: none;
+                width: 49%;
+                font-weight: 700;
+
+                &[name="cancel"] {
+                    color: $cancel;
+                    background: transparent;
+                    font-weight: 600;
+                }
+
+                &[name="submit"] {
+                    color: $white;
+                    background: $primary;
+                    border-radius: 2px;
+                    margin-right: 0;
+
+                    > i {
+                        float: right;
+                    }
+                }
+            }
+        }
     }
-
-    .btn-container {
-      width: 100%;
-      text-align: right;
-
-      &.success {
-        text-align: right;
-        padding-top: 0;
-
-        button {
-          background-color: transparent !important;
-          text-align: right;
-          color: $primary !important;
-        }
-      }
-
-      button {
-        text-transform: uppercase;
-        padding: 1em 1.5em;
-        border: none;
-        width: 49%;
-        font-weight: 700;
-
-        &[name="cancel"] {
-          color: $cancel;
-          background: transparent;
-          font-weight: 600;
-        }
-
-        &[name="submit"] {
-          color: $white;
-          background: $primary;
-          border-radius: 2px;
-          margin-right: 0;
-
-          > i {
-            float: right;
-          }
-        }
-      }
-    }
-  }
 }
 
 .error {
-  display: block;
-  color: $error;
-  margin-left: 1.1em;
-  margin-top: 0.3em;
+    display: block;
+    color: $error;
+    margin-left: 1.1em;
+    margin-top: 0.3em;
 }
 
 .accepted-formats {
-  ._720kb-tooltip-title {
-    font-size: 0.8em;
-  }
+    ._720kb-tooltip-title {
+        font-size: 0.8em;
+    }
 
-  ul {
-    margin: 0.2em 0 0 1.1em;
-    font-size: 0.9em;
-    padding: 0;
-  }
+    ul {
+        margin: 0.2em 0 0 1.1em;
+        font-size: 0.9em;
+        padding: 0;
+    }
 }

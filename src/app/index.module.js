@@ -1,5 +1,4 @@
 /* moment:false */
-import config from './index.config';
 import routerConfig from './index.route';
 
 import JobListController from './list/list.controller';
@@ -23,7 +22,6 @@ import AppConfig from '../app.json';
 angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng-fastclick'])
     .constant('moment', moment)
     .constant('configuration', AppConfig)
-    .config(config)
     .config(routerConfig)
     .directive('main', () => new Main())
     .directive('careerPortalSidebar', () => new CareerPortalSidebar())

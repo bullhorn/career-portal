@@ -1,11 +1,11 @@
 'use strict';
 
-describe('View: JobDetail', function () {
+describe('View: JobList', function () {
     var page;
 
     beforeEach(function () {
         browser.get('/index.html');
-        page = require('./jobdetail.po');
+        page = require('./list.po');
     });
 
     // TODO

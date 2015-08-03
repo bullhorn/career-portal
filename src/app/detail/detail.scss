@@ -1,298 +1,298 @@
 section.job-detail {
-  padding: 0;
-
-  @include desktop() {
-    padding: 1.5em;
-    display: flex;
-    flex-direction: row;
-  }
-
-  > div.description {
-    padding-left: 2em;
-    padding-right: 2em;
-    background-color: inherit;
-    box-shadow: none;
+    padding: 0;
 
     @include desktop() {
-      margin-right: 1.5em;
-      order: 1;
-      flex: 1;
-      background-color: $white;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+        padding: 1.5em;
+        display: flex;
+        flex-direction: row;
     }
 
-    > div.job-heading {
-
-      @include desktop() {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-      }
-
-      > h2 {
-        font-size: 1.6em;
-        font-weight: 500;
-        display: none;
+    > div.description {
+        padding-left: 2em;
+        padding-right: 2em;
+        background-color: inherit;
+        box-shadow: none;
 
         @include desktop() {
-          display: inline-block;
-          order: 1;
+            margin-right: 1.5em;
+            order: 1;
+            flex: 1;
+            background-color: $white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
         }
-      }
 
-      > span.fill {
-        order: 2;
-        display: none;
+        > div.job-heading {
+
+            @include desktop() {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            > h2 {
+                font-size: 1.6em;
+                font-weight: 500;
+                display: none;
+
+                @include desktop() {
+                    display: inline-block;
+                    order: 1;
+                }
+            }
+
+            > span.fill {
+                order: 2;
+                display: none;
+
+                @include desktop() {
+                    display: inline-block;
+                }
+            }
+
+            > div.job-actions {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+
+                @include desktop() {
+                    order: 3;
+                }
+
+                > button {
+                    border: none;
+                    background: transparent;
+                    margin: 0 1em 0 0;
+                    font-size: 1.1em;
+                    color: lighten($base-color, 15%);
+                    order: 1;
+
+                    @include desktop() {
+                        order: 2;
+                        margin: 0 1em;
+                    }
+
+                    > i {
+                        margin-right: 5px;
+                        font-size: 1.3em;
+                    }
+
+                    &[name="print"] {
+                        display: none;
+
+                        @include desktop() {
+                            display: inline-block;
+                        }
+                    }
+                }
+
+                > div.share-outlets {
+                    border-left: 1px solid transparent;
+                    padding-right: 20px;
+                    order: 2;
+
+                    @include desktop() {
+                        order: 1;
+                        border-left: none;
+                        border-right: 1px solid transparent;
+                    }
+
+                    @for $i from 1 through 4 {
+                        a:nth-child(#{$i}) {
+                            transition-delay: ((#{400-($i*100ms)}));
+                        }
+                    }
+
+                    > a {
+                        font-size: 1.3em;
+                        padding: 5px 10px;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        opacity: 0;
+                        visibility: hidden;
+                        transition: all 100ms ease;
+                        transform: translateX(15px);
+                    }
+                }
+
+                &.share-open {
+                    > button[name="share"] {
+                        color: lighten($primary, 20%);
+                    }
+
+                    > div.share-outlets {
+                        border-left: 1px solid lighten($primary, 20%);
+
+                        @include desktop() {
+                            border-left: none;
+                            border-right: 1px solid lighten($primary, 20%);
+                        }
+
+                        > a {
+                            opacity: 1;
+                            visibility: visible;
+                            transform: translateX(0);
+                        }
+                    }
+                }
+            }
+        }
+
+        > div.job-details {
+            word-wrap: break-word;
+            line-height: 1.5em;
+        }
+    }
+
+    > div.apply {
+        margin-bottom: 1.5em;
+        padding-top: 2em;
 
         @include desktop() {
-          display: inline-block;
-        }
-      }
-
-      > div.job-actions {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-
-        @include desktop() {
-          order: 3;
-        }
-
-        > button {
-          border: none;
-          background: transparent;
-          margin: 0 1em 0 0;
-          font-size: 1.1em;
-          color: lighten($base-color, 15%);
-          order: 1;
-
-          @include desktop() {
+            width: 30%;
+            max-width: 350px;
+            height: 100%;
             order: 2;
-            margin: 0 1em;
-          }
+        }
 
-          > i {
-            margin-right: 5px;
+        > .card-date {
+            font-size: 0.9em;
+        }
+
+        > .card-title-category {
+            > .card-title {
+                margin-top: 0.7em;
+            }
+
+            > .card-category {
+                color: lighten($dark-bg, 50%);
+                margin-bottom: 1.3em;
+            }
+        }
+
+        > .card-location, > .card-type, > .card-separator {
+            color: lighten($dark-bg, 25%);
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        > button.apply {
+            cursor: pointer;
+            margin-top: 1.5em;
+            width: 100%;
+            border: none;
+            background: $secondary;
+            color: $white;
+            padding: 0.5em;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
             font-size: 1.3em;
-          }
 
-          &[name="print"] {
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+            }
+        }
+
+        > hr {
+            border: none;
+            height: 1px;
+            background: #E8E8E8;
+            margin: 2em -0.5em;
             display: none;
 
             @include desktop() {
-              display: inline-block;
+                display: block;
             }
-          }
         }
 
-        > div.share-outlets {
-          border-left: 1px solid transparent;
-          padding-right: 20px;
-          order: 2;
-
-          @include desktop() {
-            order: 1;
-            border-left: none;
-            border-right: 1px solid transparent;
-          }
-
-          @for $i from 1 through 4 {
-            a:nth-child(#{$i}) {
-              transition-delay: ((#{400-($i*100ms)}));
-            }
-          }
-
-          > a {
-            font-size: 1.3em;
-            padding: 5px 10px;
-            box-sizing: border-box;
-            display: inline-block;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 100ms ease;
-            transform: translateX(15px);
-          }
-        }
-
-        &.share-open {
-          > button[name="share"] {
-            color: lighten($primary, 20%);
-          }
-
-          > div.share-outlets {
-            border-left: 1px solid lighten($primary, 20%);
+        > div.related-jobs {
+            display: none;
 
             @include desktop() {
-              border-left: none;
-              border-right: 1px solid lighten($primary, 20%);
+                display: block;
             }
 
-            > a {
-              opacity: 1;
-              visibility: visible;
-              transform: translateX(0);
+            > h5 {
+                font-size: 1.2em;
+                font-weight: 400;
             }
-          }
-        }
-      }
-    }
 
-    > div.job-details {
-      word-wrap: break-word;
-      line-height: 1.5em;
-    }
-  }
+            > div.related-job {
+                padding: 0 1em;
+                margin-bottom: 1.5em;
 
-  > div.apply {
-    margin-bottom: 1.5em;
-    padding-top: 2em;
+                > a {
+                    font-size: 1.2em;
+                    font-weight: 500;
+                    max-width: 60%;
+                    display: inline-block;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    vertical-align: bottom;
+                }
 
-    @include desktop() {
-      width: 30%;
-      max-width: 350px;
-      height: 100%;
-      order: 2;
-    }
+                > span.separator {
+                    font-size: 1.2em;
+                }
 
-    > .card-date {
-      font-size: 0.9em;
-    }
+                > span.category {
+                    font-size: 1.1em;
+                    color: lighten($dark-bg, 5%);
+                    font-weight: 400;
+                }
 
-    > .card-title-category {
-      > .card-title {
-        margin-top: 0.7em;
-      }
-
-      > .card-category {
-        color: lighten($dark-bg, 50%);
-        margin-bottom: 1.3em;
-      }
-    }
-
-    > .card-location, > .card-type, > .card-separator {
-      color: lighten($dark-bg, 25%);
-      font-weight: 500;
-      font-size: 1.1em;
-    }
-
-    > button.apply {
-      cursor: pointer;
-      margin-top: 1.5em;
-      width: 100%;
-      border: none;
-      background: $secondary;
-      color: $white;
-      padding: 0.5em;
-      border-radius: 3px;
-      text-transform: uppercase;
-      font-weight: 300;
-      font-size: 1.3em;
-
-      &:focus {
-        outline: none;
-      }
-
-      &:hover {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
-      }
-    }
-
-    > hr {
-      border: none;
-      height: 1px;
-      background: #E8E8E8;
-      margin: 2em -0.5em;
-      display: none;
-
-      @include desktop() {
-        display: block;
-      }
-    }
-
-    > div.related-jobs {
-      display: none;
-
-      @include desktop() {
-        display: block;
-      }
-
-      > h5 {
-        font-size: 1.2em;
-        font-weight: 400;
-      }
-
-      > div.related-job {
-        padding: 0 1em;
-        margin-bottom: 1.5em;
-
-        > a {
-          font-size: 1.2em;
-          font-weight: 500;
-          max-width: 60%;
-          display: inline-block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          vertical-align: bottom;
+                > span.location {
+                    margin-top: 0.2em;
+                    display: block;
+                    font-size: 1em;
+                    color: lighten($dark-bg, 45%);
+                    font-weight: 500;
+                }
+            }
         }
 
-        > span.separator {
-          font-size: 1.2em;
+        > a.category-filter {
+            font-weight: 700;
+            margin-bottom: 1em;
+            display: none;
+
+            @include desktop() {
+                display: block;
+            }
+
+            > i {
+                float: right;
+            }
+        }
+    }
+
+    > div.job-closed {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        margin-top: 10%;
+
+        > h2 {
+            font-size: 3.5em;
+            font-weight: normal;
+            color: lighten($dark-bg, 50%);
+            margin: 0 0 0.1em;
         }
 
-        > span.category {
-          font-size: 1.1em;
-          color: lighten($dark-bg, 5%);
-          font-weight: 400;
+        > h3 {
+            font-size: 2.5em;
+            font-weight: normal;
+            color: lighten($dark-bg, 50%);
+            margin: 0 0 0.5em;
         }
 
-        > span.location {
-          margin-top: 0.2em;
-          display: block;
-          font-size: 1em;
-          color: lighten($dark-bg, 45%);
-          font-weight: 500;
+        > p {
+            font-size: 1.3em;
         }
-      }
     }
-
-    > a.category-filter {
-      font-weight: 700;
-      margin-bottom: 1em;
-      display: none;
-
-      @include desktop() {
-        display: block;
-      }
-
-      > i {
-        float: right;
-      }
-    }
-  }
-
-  > div.job-closed {
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: 10%;
-
-    > h2 {
-      font-size: 3.5em;
-      font-weight: normal;
-      color: lighten($dark-bg, 50%);
-      margin: 0 0 0.1em;
-    }
-
-    > h3 {
-      font-size: 2.5em;
-      font-weight: normal;
-      color: lighten($dark-bg, 50%);
-      margin: 0 0 0.5em;
-    }
-
-    > p {
-      font-size: 1.3em;
-    }
-  }
 }

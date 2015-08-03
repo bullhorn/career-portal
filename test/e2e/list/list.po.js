@@ -5,8 +5,8 @@
 
 'use strict';
 
-var JobListPage = function() {
-  // TODO
+var JobListPage = function () {
+    // TODO
 };
 
 module.exports = new JobListPage();
