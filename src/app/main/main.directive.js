@@ -1,3 +1,11 @@
+class MainController {
+    constructor(SharedData) {
+        'ngInject';
+
+        this.SharedData = SharedData;
+    }
+}
+
 class Main {
     constructor() {
         'ngInject';
@@ -13,14 +21,6 @@ class Main {
         };
 
         return directive;
-    }
-}
-
-class MainController {
-    constructor(SharedData) {
-        'ngInject';
-
-        this.SharedData = SharedData;
     }
 }
 

@@ -1,21 +1,3 @@
-class CareerPortalSidebar {
-    constructor() {
-        'ngInject';
-
-        let directive = {
-            restrict: 'E',
-            templateUrl: 'app/sidebar/sidebar.html',
-            scope: false,
-            controller: CareerPortalSidebarController,
-            controllerAs: 'sidebar',
-            bindToController: true,
-            replace: true
-        };
-
-        return directive;
-    }
-}
-
 class CareerPortalSidebarController {
     constructor(SharedData, $location, configuration, SearchService, $timeout) {
         'ngInject';
@@ -199,6 +181,24 @@ class CareerPortalSidebarController {
 
     hasCategoryFilter(category) {
         return this.SearchService.searchParams.category.indexOf(category.publishedCategory.id) !== -1;
+    }
+}
+
+class CareerPortalSidebar {
+    constructor() {
+        'ngInject';
+
+        let directive = {
+            restrict: 'E',
+            templateUrl: 'app/sidebar/sidebar.html',
+            scope: false,
+            controller: CareerPortalSidebarController,
+            controllerAs: 'sidebar',
+            bindToController: true,
+            replace: true
+        };
+
+        return directive;
     }
 }
 

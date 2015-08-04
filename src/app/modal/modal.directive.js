@@ -1,21 +1,3 @@
-class CareerPortalModal {
-    constructor() {
-        'ngInject';
-
-        let directive = {
-            restrict: 'E',
-            templateUrl: 'app/modal/modal.html',
-            scope: false,
-            controller: CareerPortalModalController,
-            controllerAs: 'modal',
-            bindToController: true,
-            replace: true
-        };
-
-        return directive;
-    }
-}
-
 class CareerPortalModalController {
     constructor(SharedData, $location, SearchService, ApplyService, configuration) {
         'ngInject';
@@ -111,6 +93,24 @@ class CareerPortalModalController {
                 controller.applySuccess();
             });
         }
+    }
+}
+
+class CareerPortalModal {
+    constructor() {
+        'ngInject';
+
+        let directive = {
+            restrict: 'E',
+            templateUrl: 'app/modal/modal.html',
+            scope: false,
+            controller: CareerPortalModalController,
+            controllerAs: 'modal',
+            bindToController: true,
+            replace: true
+        };
+
+        return directive;
     }
 }
 

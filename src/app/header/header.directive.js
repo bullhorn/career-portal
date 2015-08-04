@@ -1,21 +1,3 @@
-class CareerPortalHeader {
-    constructor() {
-        'ngInject';
-
-        let directive = {
-            restrict: 'E',
-            templateUrl: 'app/header/header.html',
-            scope: false,
-            controller: CareerPortalHeaderController,
-            controllerAs: 'header',
-            bindToController: true,
-            replace: true
-        };
-
-        return directive;
-    }
-}
-
 class CareerPortalHeaderController {
     constructor(configuration, $location, SearchService) {
         'ngInject';
@@ -34,6 +16,24 @@ class CareerPortalHeaderController {
 
     goBack() {
         this.$location.path('/jobs');
+    }
+}
+
+class CareerPortalHeader {
+    constructor() {
+        'ngInject';
+
+        let directive = {
+            restrict: 'E',
+            templateUrl: 'app/header/header.html',
+            scope: false,
+            controller: CareerPortalHeaderController,
+            controllerAs: 'header',
+            bindToController: true,
+            replace: true
+        };
+
+        return directive;
     }
 }
 
