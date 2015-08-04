@@ -25,7 +25,7 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('jenkins:build', function (done) {
-    runSequence('clean', 'build', 'test:jenkins', 'protractor:jenkins', done);
+    runSequence('clean', 'build', 'test:jenkins', done);
 });
 
 // Temporary babel for plato, until plato supports ES6 (better then nothing for now)
