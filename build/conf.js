@@ -16,7 +16,9 @@ exports.paths = {
     dist: 'dist',
     tmp: '.tmp',
     e2e: 'test/e2e',
-    karma: 'test/unit'
+    karma: 'test/unit',
+    reports: 'reports',
+    zip: 'career-portal.zip'
 };
 
 /**

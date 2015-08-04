@@ -24,8 +24,8 @@ gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
-gulp.task('jenkins-build', ['clean'], function (done) {
-    runSequence('clean', 'test', 'build', 'plato', 'protractor', done);
+gulp.task('jenkins:build', function (done) {
+    runSequence('clean', 'build', 'test:jenkins', 'protractor:jenkins', done);
 });
 
 // Temporary babel for plato, until plato supports ES6 (better then nothing for now)
@@ -36,12 +36,10 @@ gulp.task('babel', function () {
 });
 
 gulp.task('plato', ['babel'], function () {
-    gulp.src('.tmp/plato/**/*.js').
-        pipe(plato('reports/plato', {
+    gulp.src('.tmp/plato/**/*.js')
+        .pipe(plato('reports/plato', {
             jshint: {
-                options: {
-                    strict: true
-                }
+                options: {}
             },
             complexity: {
                 trycatch: true
