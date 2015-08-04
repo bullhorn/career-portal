@@ -74,7 +74,7 @@
         "additionalSearchQuery": "isOpen:1",
         "additionalQuery": "isOpen=true",
         "sort": "-dateLastPublished",
-        "fields": "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription",
+        "fields": "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted",
         "count": 20,
         "start": 0,
         "batchSize": 500,
