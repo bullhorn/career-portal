@@ -1,12 +1,11 @@
 class JobDetailController {
-    constructor($window, $location, configuration, ShareService, SearchService, SharedData, job, moment) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, moment) {
         'ngInject';
 
         this.moment = moment;
         this.$window = $window;
         this.$location = $location;
         this.SharedData = SharedData;
-        this.configuration = configuration;
         this.ShareService = ShareService;
         this.SearchService = SearchService;
         this.job = job;

@@ -1,20 +1,16 @@
 class CareerPortalSidebarController {
-    constructor(SharedData, $location, configuration, SearchService, $timeout) {
+    constructor(SharedData, $location, SearchService, $timeout) {
         'ngInject';
 
         this.SharedData = SharedData;
         this.$location = $location;
         this.$timeout = $timeout;
-        this.configuration = configuration;
         this.SearchService = SearchService;
 
         this.locationLimitTo = 8;
         this.categoryLimitTo = 8;
 
-        if (this.configuration.search.loadJobsOnStart) {
-            this.SearchService.findJobs();
-        }
-
+        this.SearchService.findJobs();
         this.SearchService.getCountByLocation(this.setLocations());
         this.SearchService.getCountByCategory(this.setCategories());
 

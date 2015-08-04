@@ -1,5 +1,6 @@
 /* moment:false */
 import routerConfig from './index.route';
+import localeConfig from './index.locale';
 
 import JobListController from './list/list.controller';
 import JobDetailController from './detail/detail.controller';
@@ -19,10 +20,13 @@ import OmitFiltersFilter from './filters/omitfilters.filter';
 
 import AppConfig from '../app.json';
 
-angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng-fastclick'])
+angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng-fastclick', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'ngLocalize.Events'])
     .constant('moment', moment)
     .constant('configuration', AppConfig)
+    .constant('localeConf', {})
+    .constant('localeSupported', [])
     .config(routerConfig)
+    .config(localeConfig)
     .directive('main', () => new Main())
     .directive('careerPortalSidebar', () => new CareerPortalSidebar())
     .directive('careerPortalHeader', () => new CareerPortalHeader())

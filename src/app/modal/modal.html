@@ -10,54 +10,54 @@
                 <div class="form-field">
                     <div class="input">
                         <span class="required">*</span>
-                        <input type="text" name="firstName" value="" data-ng-model="modal.ApplyService.form.firstName" placeholder="{{::modal.configuration.text.modal.fields.firstName.placeholder}}" required>
+                        <input type="text" name="firstName" value="" data-ng-model="modal.ApplyService.form.firstName" data-i18n-attr="{placeholder: 'modal.firstNamePlaceholder'}" required>
                     </div>
                     <span class="error" data-ng-show="applyForm.firstName.$dirty || applyForm.$submitted">
-                        <span data-ng-show="applyForm.firstName.$error.required">{{::modal.configuration.text.modal.fields.firstName.validation}}</span>
+                        <span data-ng-show="applyForm.firstName.$error.required">{{'modal.firstNameValidation' | i18n}}</span>
                     </span>
                 </div>
                 <div class="form-field">
                     <div class="input">
                         <span class="required">*</span>
-                        <input type="text" name="lastName" value="" data-ng-model="modal.ApplyService.form.lastName" placeholder="{{::modal.configuration.text.modal.fields.lastName.placeholder}}" required>
+                        <input type="text" name="lastName" value="" data-ng-model="modal.ApplyService.form.lastName" data-i18n-attr="{placeholder: 'modal.lastNamePlaceholder'}" required>
                     </div>
                     <span class="error" data-ng-show="applyForm.lastName.$dirty || applyForm.$submitted">
-                        <span data-ng-show="applyForm.lastName.$error.required">{{::modal.configuration.text.modal.fields.lastName.validation}}</span>
+                        <span data-ng-show="applyForm.lastName.$error.required">{{'modal.lastNameValidation' | i18n}}</span>
                     </span>
                 </div>
                 <div class="form-field">
                     <div class="input">
                         <span class="required">*</span>
-                        <input type="email" name="email" value="" data-ng-model="modal.ApplyService.form.email" placeholder="{{::modal.configuration.text.modal.fields.email.placeholder}}" required>
+                        <input type="email" name="email" value="" data-ng-model="modal.ApplyService.form.email" data-i18n-attr="{placeholder: 'modal.emailPlaceholder'}" required>
                     </div>
                     <span class="error" data-ng-show="applyForm.email.$dirty || applyForm.$submitted">
                         <span data-ng-show="applyForm.email.$error.required">
-                            {{::modal.configuration.text.modal.fields.email.validation.required}}
+                            {{'modal.emailValidationRequired' | i18n}}
                         </span>
                         <span data-ng-show="applyForm.email.$error.email">
-                            {{::modal.configuration.text.modal.fields.email.validation.format}}
+                            {{'modal.emailValidationFormat' | i18n}}
                         </span>
                     </span>
                 </div>
                 <div class="form-field">
                     <div class="input">
                         <span>&nbsp;</span>
-                        <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" placeholder="{{::modal.configuration.text.modal.fields.phone.placeholder}}">
+                        <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" data-i18n-attr="{placeholder: 'modal.phonePlaceholder'}">
                     </div>
                 </div>
                 <div class="upload-label">
-                    Resume File
+                    {{'modal.resumeFilePlaceholder' | i18n}}
                     <i class="bhi-question" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
                     <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
                         {{modal.resumeUploadErrorMessage}}
                     </span>
                     <span class="error" data-ng-show="applyForm.$submitted && !modal.ApplyService.form.resumeInfo">
-                        {{modal.configuration.text.modal.fields.resume.validation}}
+                        {{'modal.resumeValidation' | i18n}}
                     </span>
                 </div>
                 <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.search.minUploadSize" data-ngf-max-size="modal.configuration.search.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);">
                     <i class="bhi-upload"></i>
-                    <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{::modal.configuration.text.modal.uploadResumeFile}}</span>
+                    <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{'modal.uploadResumeFile' | i18n}}</span>
                     <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
                 </div>
                 <span class="error" data-ng-show="applyForm.$submitted">
@@ -65,14 +65,14 @@
                 </span>
             </form>
             <div class="btn-container">
-                <button name="cancel" data-ng-click="modal.closeModal(applyForm)">{{::modal.configuration.text.modal.cancelButton}}</button>
-                <button name="submit" data-ng-click="modal.submit(applyForm)">{{::modal.configuration.text.modal.submitButton}}
+                <button name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
+                <button name="submit" data-ng-click="modal.submit(applyForm)">{{'modal.submitButton' | i18n}}
                     <i class="bhi-arrow-right"></i></button>
             </div>
         </div>
         <div class="main" data-ng-show="!modal.showForm">
             <div class="btn-container success">
-                <button name="submit" data-ng-click="modal.closeModal(applyForm)">{{::modal.configuration.text.modal.okButton}}</button>
+                <button name="submit" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
             </div>
         </div>
     </div>

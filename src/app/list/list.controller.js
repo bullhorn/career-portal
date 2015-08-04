@@ -1,8 +1,7 @@
 class JobListController {
-    constructor(SharedData, configuration, SearchService, moment) {
+    constructor(SharedData, SearchService, moment) {
         'ngInject';
 
-        this.configuration = configuration;
         this.SearchService = SearchService;
         this.moment = moment;
         this.SharedData = SharedData;

@@ -1,6 +1,6 @@
 <section class="job-detail">
     <div class="card apply" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
-        <span class="card-date">{{detail.configuration.text.joblist.added}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
+        <span class="card-date">{{'common.addedLabel' | i18n}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
 
         <span class="card-title-category">
             <span class="card-title">{{::detail.job.title}}</span>
@@ -14,12 +14,12 @@
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">|</span>
         <span class="card-type">{{::detail.job.employmentType}}</span>
 
-        <button class="apply" data-ng-click="detail.applyModal()">{{::detail.configuration.text.overview.applyButtonLabel}}</button>
+        <button class="apply" data-ng-click="detail.applyModal()">{{'detail.applyButton' | i18n}}</button>
 
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
 
         <div class="related-jobs" data-ng-if="detail.relatedJobs.length !== 0">
-            <h5>{{::detail.configuration.text.overview.relatedJobs}}</h5>
+            <h5>{{'detail.relatedJobsLabel' | i18n}}</h5>
 
             <div class="related-job" data-ng-repeat="job in detail.relatedJobs">
                 <a ng-href="#/jobs/{{::job.id}}">{{::job.title}}</a>
@@ -31,7 +31,7 @@
 
         <hr/>
 
-        <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{::detail.configuration.text.overview.seeAll}}<i class="bhi-arrow-right"></i></a>
+        <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{'detail.viewAllJobsLabel' | i18n}}<i class="bhi-arrow-right"></i></a>
     </div>
     <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
         <div class="job-heading">
@@ -45,25 +45,25 @@
                     <a href="javascript:;" data-ng-click="detail.shareLinkedin(detail.job);"><i class="bhi-linkedin"></i></a>
                 </div>
                 <button name="share" data-ng-click="detail.openShare();">
-                    <i class="bhi-share"></i> Share
+                    <i class="bhi-share"></i> {{'common.shareLabel' | i18n}}
                 </button>
                 <button name="print" data-ng-click="detail.print();">
-                    <i class="bhi-print"></i> Print
+                    <i class="bhi-print"></i> {{'common.printLabel' | i18n}}
                 </button>
             </div>
 
-            <h2>{{::detail.configuration.text.overview.header}}</h2>
+            <h2>{{'detail.jobDescriptionHeading' | i18n}}</h2>
         </div>
         <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
     </div>
     <div class="job-closed" data-ng-if="!(detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen)">
-        <h2>{{::detail.configuration.text.overview.jobClosedHeader}}</h2>
+        <h2>{{'detail.jobClosedHeading' | i18n}}</h2>
 
-        <h3>{{::detail.configuration.text.overview.jobClosedMessage}}</h3>
+        <h3>{{'detail.jobClosedMessage' | i18n}}</h3>
 
         <p>
-            {{::detail.configuration.text.overview.jobClosedOtherJobs}}
-            <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">here.</a>
+            {{'detail.jobClosedOtherJobsLabel' | i18n}}
+            <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">{{'detail.jobClosedOtherJobsHere' | i18n}}</a>
         </p>
     </div>
 </section>

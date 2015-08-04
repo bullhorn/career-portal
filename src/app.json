@@ -1,72 +1,10 @@
 {
-    "text": {
-        "companyName": "Acme Staffing",
-        "joblist": {
-            "header": "Open Jobs",
-            "loadMoreData": "Load more...",
-            "added": "Added"
-        },
-        "overview": {
-            "header": "Job Description",
-            "applyButtonLabel": "Apply",
-            "relatedJobs": "Related Jobs",
-            "jobs": "Jobs",
-            "seeAll": "View all jobs in this category",
-            "jobClosedHeader": "Oh no!",
-            "jobClosedMessage": "Looks like this job has closed.",
-            "jobClosedOtherJobs": "You can find some similar jobs"
-        },
-        "sidebar": {
-            "searchPlaceholder": "Keyword Search",
-            "locationHeader": "Location",
-            "categoryHeader": "Category",
-            "clear": "Clear",
-            "filtersHeader": "Filters",
-            "poweredBy": "Powered by",
-            "showMore": "Show More",
-            "showLess": "Show Less"
-        },
-        "modal": {
-            "uploadResumeFile": "Upload Resume File",
-            "apply": {
-                "header": "Before You Apply...",
-                "subHeader": "Please let us know who you are and upload your resume"
-            },
-            "thankYou": {
-                "header": "Thank you!",
-                "subHeader": "You will be contacted by a recruiter shortly"
-            },
-            "submitButton": "Submit",
-            "okButton": "Okay, Got it!",
-            "cancelButton": "Cancel",
-            "invalidFormat": "is not a supported file format",
-            "toBig": "File is to big.",
-            "toSmall": "File is to small.",
-            "fields": {
-                "firstName": {
-                    "placeholder": "First Name",
-                    "validation": "Please enter your first name."
-                },
-                "lastName": {
-                    "placeholder": "Last Name",
-                    "validation": "Please enter your last name."
-                },
-                "email": {
-                    "placeholder": "Email@domain.com",
-                    "validation": {
-                        "required": "Please enter your email.",
-                        "format": "Please enter a valid email."
-                    }
-                },
-                "phone": {
-                    "placeholder": "Mobile Phone (Optional)"
-                },
-                "resume": {
-                    "validation": "Please upload your resume."
-                }
-            }
-        }
-    },
+    "companyName": "Acme Staffing",
+    "localeSupported": [
+        "en-US",
+        "fr-FR"
+    ],
+    "defaultLocale": "fr-FR",
     "search": {
         "searchUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder",
         "queryUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobBoardPost",

@@ -271,7 +271,8 @@ class SearchService {
     }
 
     recursiveQueryForIDs(callbackIfNoMore, start, count, errorCallback) {
-        errorCallback = errorCallback || (() => {});
+        errorCallback = errorCallback || (() => {
+            });
 
         this
             .$http({
@@ -318,13 +319,9 @@ class SearchService {
                     }
 
                     if (data.count < count) {
-                        console.log('data.count < count', count);
-                        console.log('HAS MORE', this.helper.hasMore);
                         doneFinding(allJobs);
                     } else if (allJobs.length >= controller.requestParams.count()) {
                         this.helper.hasMore = true;
-                        console.log('allJobs.length >= controller.requestParams.count()', count);
-                        console.log('HAS MORE', this.helper.hasMore);
                         doneFinding(allJobs);
                     } else {
                         controller.helper.updateStart(count);
@@ -342,8 +339,6 @@ class SearchService {
                     }
                 });
             } else {
-                console.log('NO DATA LENGTH');
-                console.log('HAS MORE', this.helper.hasMore);
                 doneFinding(allJobs);
             }
         };

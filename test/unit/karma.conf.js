@@ -58,7 +58,7 @@ module.exports = function (config) {
         },
 
         preprocessors: {
-            'src/app/**/!(*.config|*.run|*.module).js': ['coverage'],
+            'src/app/**/!(*.config|*.run|*.module|*.route|*.locale).js': ['coverage'],
             'src/**/*.html': ['ng-html2js']
         }
     };

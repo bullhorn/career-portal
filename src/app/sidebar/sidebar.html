@@ -1,6 +1,6 @@
 <aside class="side-bar">
     <header>
-        <label>{{::sidebar.configuration.text.sidebar.filtersHeader}}</label>
+        <label>{{'sidebar.sidebarHeading' | i18n}}</label>
 
         <div class="button-container">
             <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
@@ -14,17 +14,17 @@
     <section>
         <div class="keyword-search">
             <label for="keyword"><i class="bhi-search"></i></label>
-            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" placeholder="{{::sidebar.configuration.text.sidebar.searchPlaceholder}}"/>
+            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-i18n-attr="{placeholder: 'sidebar.sidebarSearchPlaceholder'}"/>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('text');" name="clear-all">
                 <i class="bhi-times"></i>
             </button>
         </div>
 
         <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
-            <h4>{{::sidebar.configuration.text.sidebar.locationHeader}}</h4>
+            <h4>{{'sidebar.locationSectionHeading' | i18n}}</h4>
             <span class="fill"></span>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
-                <i class="bhi-times"></i> {{::sidebar.configuration.text.sidebar.clear}}
+                <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
             </button>
 
             <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo">
@@ -34,17 +34,17 @@
             </div>
 
             <span class="show-more" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">
-                 {{::sidebar.configuration.text.sidebar.showMore}}
+                 {{'sidebar.showMoreLabel' | i18n}}
             </span>
             <span class="show-more" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">
-                 {{::sidebar.configuration.text.sidebar.showLess}}
+                 {{'sidebar.showLessLabel' | i18n}}
             </span>
         </section>
         <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
-            <h4>{{::sidebar.configuration.text.sidebar.categoryHeader}}</h4>
+            <h4>{{'sidebar.categorySectionHeading' | i18n}}</h4>
             <span class="fill"></span>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
-                <i class="bhi-times"></i> {{::sidebar.configuration.text.sidebar.clear}}
+                <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
             </button>
 
             <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo">
@@ -54,15 +54,15 @@
             </div>
 
             <span class="show-more" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">
-                {{::sidebar.configuration.text.sidebar.showMore}}
+                {{'sidebar.showMoreLabel' | i18n}}
             </span>
             <span class="show-more" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">
-                 {{::sidebar.configuration.text.sidebar.showLess}}
+                {{'sidebar.showLessLabel' | i18n}}
             </span>
         </section>
 
         <section class="credits">
-            <span class="powered-by">{{sidebar.configuration.text.sidebar.poweredBy}}</span>
+            <span class="powered-by">{{'sidebar.poweredByText' | i18n}}</span>
             <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
         </section>
 

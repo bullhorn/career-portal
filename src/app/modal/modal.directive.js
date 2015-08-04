@@ -1,5 +1,5 @@
 class CareerPortalModalController {
-    constructor(SharedData, $location, SearchService, ApplyService, configuration) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale) {
         'ngInject';
 
         this.SharedData = SharedData;
@@ -7,6 +7,7 @@ class CareerPortalModalController {
         this.SearchService = SearchService;
         this.ApplyService = ApplyService;
         this.configuration = configuration;
+        this.locale = locale;
 
         // Initialize the model
         this.ApplyService.initializeModel();
@@ -17,8 +18,11 @@ class CareerPortalModalController {
         this.SharedData.modalState = 'closed';
 
         this.showForm = true;
-        this.header = this.configuration.text.modal.apply.header;
-        this.subHeader = this.configuration.text.modal.apply.subHeader;
+
+        this.locale.ready('modal').then(angular.bind(this, function () {
+            this.header = this.locale.getString('modal.modalHeading');
+            this.subHeader = this.locale.getString('modal.modalSubHeading');
+        }));
 
         // Clear the errors if we have the form
         if (applyForm) {
@@ -34,13 +38,13 @@ class CareerPortalModalController {
 
         // First check the size
         if (file.size > this.configuration.search.maxUploadSize) {
-            this.resumeUploadErrorMessage = this.configuration.text.modal.toBig + ' (max size: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
+            this.resumeUploadErrorMessage = this.configuration.text.modal.toBig + ' (max: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
 
         if (file.size < this.configuration.search.minUploadSize) {
-            this.resumeUploadErrorMessage = this.configuration.text.modal.toSmall + ' (min size: ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
+            this.resumeUploadErrorMessage = this.configuration.text.modal.toSmall + ' (min: ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
@@ -79,8 +83,10 @@ class CareerPortalModalController {
 
     applySuccess() {
         this.showForm = false;
-        this.header = this.configuration.text.modal.thankYou.header;
-        this.subHeader = this.configuration.text.modal.thankYou.subHeader;
+        this.locale.ready('modal').then(angular.bind(this, function () {
+            this.header = this.locale.getString('modal.successHeading');
+            this.subHeader = this.locale.getString('modal.successSubHeading');
+        }));
     }
 
     submit(applyForm) {

@@ -1,10 +1,10 @@
 <section class="job-list">
-    <h4>{{::list.configuration.text.joblist.header}}</h4>
+    <h4>{{'list.jobListHeading' | i18n}}</h4>
 
     <div class="cards">
         <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
             <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}">
-                <span class="card-date">{{list.configuration.text.joblist.added}} - {{::list.getDisplayDate(job.dateLastPublished)}}</span>
+                <span class="card-date">{{'common.addedLabel' | i18n}} - {{::list.getDisplayDate(job.dateLastPublished)}}</span>
 
                 <span class="card-title-category">
                     <span class="card-title">{{::job.title}}</span>
@@ -25,6 +25,6 @@
     </div>
 
     <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">
-        {{::list.configuration.text.joblist.loadMoreData}}
+        {{'list.loadMoreDataLabel' | i18n}}
     </p>
 </section>
