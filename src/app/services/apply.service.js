@@ -46,15 +46,15 @@ class ApplyService {
 
     get storage() {
         return {
-            hasLocalStorage: () => typeof Storage !== "undefined",
+            hasLocalStorage: () => typeof Storage !== 'undefined',
 
             getStoredForm: () => {
                 if (this.storage.hasLocalStorage()) {
                     return {
-                        firstName: localStorage.getItem("firstName"),
-                        lastName: localStorage.getItem("lastName"),
-                        email: localStorage.getItem("email"),
-                        mobile: localStorage.getItem("mobile")
+                        firstName: localStorage.getItem('firstName'),
+                        lastName: localStorage.getItem('lastName'),
+                        email: localStorage.getItem('email'),
+                        mobile: localStorage.getItem('mobile')
                     };
                 }
 
@@ -63,10 +63,10 @@ class ApplyService {
 
             store: () => {
                 if (this.storage.hasLocalStorage()) {
-                    localStorage.setItem("firstName", this.form.firstName);
-                    localStorage.setItem("lastName", this.form.lastName);
-                    localStorage.setItem("email", this.form.email);
-                    localStorage.setItem("mobile", this.form.mobile);
+                    localStorage.setItem('firstName', this.form.firstName);
+                    localStorage.setItem('lastName', this.form.lastName);
+                    localStorage.setItem('email', this.form.email);
+                    localStorage.setItem('mobile', this.form.mobile);
                 }
             }
         };
@@ -88,8 +88,7 @@ class ApplyService {
 
         if (this.form.resumeInfo) {
             var form = new FormData();
-            form.append("resume", this.form.resumeInfo);
-            
+            form.append('resume', this.form.resumeInfo);
             var applyUrl = this.configuration.search.applyUrl + jobID + '/raw' + this.requestParams.assemble(this.form.resumeInfo);
 
             this.$http.post(applyUrl, form, {transformRequest: angular.identity, headers: {'Content-Type': undefined}})

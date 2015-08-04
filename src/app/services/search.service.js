@@ -191,13 +191,13 @@ class SearchService {
 
     get searchParams() {
         return this._.searchParams || (this._.searchParams = {
-                textSearch: "",
+                textSearch: '',
                 location: [],
                 category: [],
-                sort: "",
-                count: "",
-                start: "",
-                total: "",
+                sort: '',
+                count: '',
+                start: '',
+                total: '',
                 reloadAllData: true
             });
     }
@@ -271,8 +271,7 @@ class SearchService {
     }
 
     recursiveQueryForIDs(callbackIfNoMore, start, count, errorCallback) {
-        errorCallback = errorCallback || (() => {
-            });
+        errorCallback = errorCallback || (() => {});
 
         this
             .$http({

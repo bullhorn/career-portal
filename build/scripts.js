@@ -12,7 +12,10 @@ function webpack(watch, callback) {
     var webpackOptions = {
         watch: watch,
         module: {
-            preLoaders: [{test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
+            preLoaders: [
+                {test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'},
+                {test: /\.js$/, exclude: /node_modules/, loader: 'jscs-loader'}
+            ],
             loaders: [
                 {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
                 {test: /\.json$/, exclude: /node_modules/, loader: 'json-loader'}
