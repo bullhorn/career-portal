@@ -1,25 +1,27 @@
 <section class="job-list">
     <h4>{{::list.configuration.text.joblist.header}}</h4>
 
-    <div class="card-wrapper">
-        <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
-            <span class="card-date">{{list.configuration.text.joblist.added}} - {{::list.getDisplayDate(job.dateLastPublished)}}</span>
+    <div class="cards">
+        <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
+            <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}">
+                <span class="card-date">{{list.configuration.text.joblist.added}} - {{::list.getDisplayDate(job.dateLastPublished)}}</span>
 
-            <span class="card-title-category">
-                <span class="card-title">{{::job.title}}</span>
-                <span class="card-category">{{::job.publishedCategory.name}}</span>
-            </span>
+                <span class="card-title-category">
+                    <span class="card-title">{{::job.title}}</span>
+                    <span class="card-category">{{::job.publishedCategory.name}}</span>
+                </span>
 
-            <span class="card-location">
-                {{::job.address.city}}<span data-ng-if="::(job.address.city && job.address.state)">,&nbsp;</span>{{::job.address.state}}
-            </span>
-            <span class="card-separator" data-ng-show="::((job.address.city || job.address.state) && job.employmentType)">|</span>
-            <span class="card-type">{{::job.employmentType}}</span>
+                <span class="card-location">
+                    {{::job.address.city}}<span data-ng-if="::(job.address.city && job.address.state)">,&nbsp;</span>{{::job.address.state}}
+                </span>
+                <span class="card-separator" data-ng-show="::((job.address.city || job.address.state) && job.employmentType)">|</span>
+                <span class="card-type">{{::job.employmentType}}</span>
 
-            <span class="card-description">{{::job.publicDescription | stripHtml}}</span>
+                <span class="card-description">{{::job.publicDescription | stripHtml}}</span>
 
-            <i class="bhi-arrow-right"></i>
-        </a>
+                <i class="bhi-arrow-right"></i>
+            </a>
+        </div>
     </div>
 
     <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">
