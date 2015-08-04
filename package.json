@@ -52,6 +52,7 @@
         "main-bower-files": "~2.8.0",
         "merge-stream": "~0.1.7",
         "require-dir": "~0.3.0",
+        "run-sequence": "^1.1.2",
         "uglify-save-license": "~0.4.1",
         "wiredep": "~2.2.2",
         "wrench": "~1.5.8"

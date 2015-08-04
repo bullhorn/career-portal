@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var wrench = require('wrench');
 var babel = require('gulp-babel');
 var plato = require('gulp-plato');
+var runSequence = require('run-sequence');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -23,12 +24,8 @@ gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
-gulp.task('build-test', ['test', 'plato'], function () {
-    gulp.start('build');
-});
-
-gulp.task('jenkins-build', ['clean'], function () {
-    gulp.start('build-test');
+gulp.task('jenkins-build', ['clean'], function (done) {
+    runSequence('clean', 'test', 'build', 'plato', 'protractor', done);
 });
 
 // Temporary babel for plato, until plato supports ES6 (better then nothing for now)
