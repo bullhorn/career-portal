@@ -319,32 +319,17 @@ class SearchService {
                     }
 
                     if (data.count < count) {
-                        console.log('data.count < count', count);
-                        console.log('HAS MORE', this.helper.hasMore);
                         doneFinding(allJobs);
                     } else if (allJobs.length >= controller.requestParams.count()) {
                         this.helper.hasMore = true;
-                        console.log('allJobs.length >= controller.requestParams.count()', count);
-                        console.log('HAS MORE', this.helper.hasMore);
                         doneFinding(allJobs);
                     } else {
                         controller.helper.updateStart(count);
                         start = controller.requestParams.start();
-
-                        if (count < controller.configuration.search.batchSize) {
-                            if (jobs.length > 0) {
-                                count = parseInt((controller.configuration.search.count / jobs.length) * count);
-                            } else {
-                                count = controller.configuration.search.count * count;
-                            }
-                        }
-
                         controller.recursiveQueryForIDs(callbackIfNoMore, start, count);
                     }
                 });
             } else {
-                console.log('NO DATA LENGTH');
-                console.log('HAS MORE', this.helper.hasMore);
                 doneFinding(allJobs);
             }
         };
