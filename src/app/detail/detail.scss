@@ -234,6 +234,7 @@ section.job-detail {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     vertical-align: bottom;
+                    white-space: nowrap;
                 }
 
                 > span.separator {
