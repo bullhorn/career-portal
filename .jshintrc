@@ -26,7 +26,6 @@
         "module": false,
         "document": false,
         "$": false,
-        "moment": false,
-        "deferredBootstrapper": false
+        "moment": false
     }
 }
