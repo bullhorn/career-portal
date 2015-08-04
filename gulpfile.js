@@ -3,8 +3,8 @@
 var gulp = require('gulp');
 var wrench = require('wrench');
 var babel = require('gulp-babel');
-var plato = require('gulp-plato');
 var runSequence = require('run-sequence');
+var exec = require('child_process').exec;
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -25,7 +25,7 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('jenkins:build', function (done) {
-    runSequence('clean', 'build', 'test:jenkins', done);
+    runSequence('clean', 'build', 'test:jenkins', 'report:plato', done);
 });
 
 // Temporary babel for plato, until plato supports ES6 (better then nothing for now)
@@ -35,14 +35,10 @@ gulp.task('babel', function () {
         .pipe(gulp.dest('.tmp/plato'));
 });
 
-gulp.task('plato', ['babel'], function () {
-    gulp.src('.tmp/plato/**/*.js')
-        .pipe(plato('reports/plato', {
-            jshint: {
-                options: {}
-            },
-            complexity: {
-                trycatch: true
-            }
-        }));
+gulp.task('report:plato', ['babel'], function (done) {
+    exec('node_modules/plato/bin/plato -r -d reports/plato .tmp/plato/**/*.js', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        done(err);
+    });
 });
