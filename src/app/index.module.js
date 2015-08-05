@@ -39,9 +39,10 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService)
-    .run(['$rootScope', '$window', function ($rootScope, $window) {
-        $rootScope.$on('$stateChangeSuccess',
-            function (event, toState, toParams, fromState, fromParams) {
-                $window.scrollTo(0, 0);
-            });
-    }]);
+    .run(function ($rootScope, $window) {
+        'ngInject';
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $window.scrollTo(0, 0);
+        });
+    });
