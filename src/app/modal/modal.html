@@ -60,14 +60,26 @@
                     <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{'modal.uploadResumeFile' | i18n}}</span>
                     <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
                 </div>
-                <span class="error" data-ng-show="applyForm.$submitted">
-                    <span>{{modal.ApplyService.ajaxError}}</span>
+                <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
+                    <i class="bhi-caution"></i> <span>{{modal.ApplyService.ajaxError}}</span>
                 </span>
             </form>
             <div class="btn-container">
                 <button name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
-                <button name="submit" data-ng-click="modal.submit(applyForm)">{{'modal.submitButton' | i18n}}
-                    <i class="bhi-arrow-right"></i></button>
+                <button name="submit" data-ng-click="modal.submit(applyForm)">
+                    <span data-ng-if="!modal.isSubmitting">
+                        {{'modal.submitButton' | i18n}}
+                        <i class="bhi-arrow-right"></i>
+                    </span>
+                    <span data-ng-if="modal.isSubmitting">
+                        {{'modal.submittingButton' | i18n}}
+                        <div class="loading">
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                        </div>
+                    </span>
+                </button>
             </div>
         </div>
         <div class="main" data-ng-show="!modal.showForm">

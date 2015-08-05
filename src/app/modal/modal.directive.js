@@ -91,12 +91,15 @@ class CareerPortalModalController {
 
     submit(applyForm) {
         applyForm.$submitted = true;
-
+        this.isSubmitting = true;
         if (applyForm.$valid) {
             var controller = this;
 
             this.ApplyService.submit(this.SearchService.currentDetailData.id, function () {
                 controller.applySuccess();
+                controller.isSubmitting = false;
+            }, function () {
+                controller.isSubmitting = false;
             });
         }
     }

@@ -78,11 +78,15 @@ class ApplyService {
         }
     }
 
-    submit(jobID, successCallback) {
+    submit(jobID, successCallback, errorCallback) {
         successCallback = successCallback || function () {
             };
 
+        errorCallback = errorCallback || function () {
+            };
+
         var self = this;
+        self.ajaxError = '';
 
         this.storage.store();
 
@@ -107,6 +111,8 @@ class ApplyService {
                     if (data.errorCode === 400) {
                         self.ajaxError = data.errorMessage;
                     }
+                    self.ajaxError = 'There was an error when applying. Try again.';
+                    errorCallback();
                 });
         }
     }
