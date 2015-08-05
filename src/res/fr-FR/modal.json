@@ -21,5 +21,7 @@
     "resumeInvalidFormat": "est pas un format de fichier pris en charge",
     "resumeToBig": "Fichier est trop grand .",
     "resumeToSmall": "Fichier est trop petit .",
+    "minLabel": "min",
+    "maxLabel": "max",
     "supportedFileFormatsLabel": "Formats de fichiers pris en charge"
 }

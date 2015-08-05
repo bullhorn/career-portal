@@ -1,5 +1,5 @@
 class CareerPortalModalController {
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter) {
         'ngInject';
 
         this.SharedData = SharedData;
@@ -8,6 +8,7 @@ class CareerPortalModalController {
         this.ApplyService = ApplyService;
         this.configuration = configuration;
         this.locale = locale;
+        this.$filter = $filter;
 
         // Initialize the model
         this.ApplyService.initializeModel();
@@ -36,25 +37,26 @@ class CareerPortalModalController {
             return false;
         }
 
-        // First check the size
+        // First check the type
+        var fileArray = file.name.split('.');
+        var fileExtension = fileArray[fileArray.length - 1];
+
+        if (this.configuration.search.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
+            this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.$filter('i18n')('modal.resumeInvalidFormat');
+            this.updateUploadClass(false);
+            return false;
+        }
+
+        // Now check the size
         if (file.size > this.configuration.search.maxUploadSize) {
-            this.resumeUploadErrorMessage = this.configuration.text.modal.toBig + ' (max: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
+            this.resumeUploadErrorMessage = 'File is too big. (max: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + '(' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
 
         if (file.size < this.configuration.search.minUploadSize) {
-            this.resumeUploadErrorMessage = this.configuration.text.modal.toSmall + ' (min: ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
-            this.updateUploadClass(false);
-            return false;
-        }
-
-        // Now check the type
-        var fileArray = file.name.split('.');
-        var fileExtension = fileArray[fileArray.length - 1];
-
-        if (this.configuration.search.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
-            this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.configuration.text.modal.invalidFormat;
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + '(' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
