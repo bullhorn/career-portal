@@ -1,4 +1,6 @@
 {
     "jobListHeading": "Open Jobs",
-    "loadMoreDataLabel": "Load more..."
+    "loadMoreDataLabel": "Load more...",
+    "noDataMessage": "Looks like there are no jobs matching the criteria.",
+    "noDataResolution": "Clear the criteria and research by clicking"
 }

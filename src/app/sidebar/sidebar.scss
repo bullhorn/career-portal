@@ -50,7 +50,7 @@ aside {
                 display: none;
                 margin-right: 0;
 
-                @include desktop() {
+                @include tablet() {
                     display: inline-block;
                 }
 

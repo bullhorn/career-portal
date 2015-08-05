@@ -4,8 +4,6 @@
     "relatedLabel": "Emplois",
     "jobsLabel": "connexes",
     "viewAllJobsLabel": "Voir tous les emplois dans cette catégorie",
-    "jobClosedHeading": "Oh non!",
     "jobClosedMessage": "On dirait que cette offre a été fermée.",
-    "jobClosedOtherJobsLabel": "Vous pouvez trouver des emplois similaires",
-    "jobClosedOtherJobsHere": "Ici."
+    "jobClosedOtherJobsLabel": "Vous pouvez trouver des emplois similaires"
 }

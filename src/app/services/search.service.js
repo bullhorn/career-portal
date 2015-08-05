@@ -296,8 +296,10 @@ class SearchService {
         var count = this.requestParams.count();
 
         this.helper.hasMore = false;
+        this.helper.isSearching = true;
 
         var doneFinding = (jobs) => {
+            controller.helper.isSearching = false;
             controller.helper.updateStart();
 
             if (controller.searchParams.reloadAllData) {

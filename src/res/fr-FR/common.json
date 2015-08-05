@@ -1,5 +1,7 @@
 {
     "printLabel": "Impression",
     "shareLabel": "Partager",
-    "addedLabel": "Ajouté"
+    "addedLabel": "Ajouté",
+    "noDataHeading": "Oh Non!",
+    "hereLabel": "Ici."
 }

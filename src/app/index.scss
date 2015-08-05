@@ -186,3 +186,27 @@ section.portal {
         }
     }
 }
+
+div.no-data-message {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+
+    > h2 {
+        font-size: 3.5em;
+        font-weight: normal;
+        color: lighten($dark-bg, 50%);
+        margin: 10% 0 0.1em;
+    }
+
+    > h3 {
+        font-size: 2.5em;
+        font-weight: normal;
+        color: lighten($dark-bg, 50%);
+        margin: 0 0 0.5em;
+    }
+
+    > p {
+        font-size: 1.3em;
+    }
+}

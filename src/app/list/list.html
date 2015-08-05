@@ -1,5 +1,5 @@
 <section class="job-list">
-    <h4>{{'list.jobListHeading' | i18n}}</h4>
+    <h4 data-ng-if="!list.SearchService.helper.isSearching && list.SearchService.currentListData.length">{{'list.jobListHeading' | i18n}}</h4>
 
     <div class="cards">
         <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
@@ -22,6 +22,17 @@
                 <i class="bhi-arrow-right"></i>
             </a>
         </div>
+    </div>
+
+    <div class="no-data-message" data-ng-if="!list.SearchService.helper.isSearching && !list.SearchService.currentListData.length">
+        <h2>{{'common.noDataHeading' | i18n}}</h2>
+
+        <h3>{{'list.noDataMessage' | i18n}}</h3>
+
+        <p data-ng-if="list.SearchService.searchParams.location.length || list.SearchService.searchParams.category.length">
+            {{'list.noDataResolution' | i18n}}
+            <a href data-ng-click="list.clearSearchParamsAndLoadData();">{{'common.hereLabel' | i18n}}</a>
+        </p>
     </div>
 
     <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">

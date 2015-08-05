@@ -4,8 +4,6 @@
     "relatedLabel": "Related",
     "jobsLabel": "Jobs",
     "viewAllJobsLabel": "View all jobs in this category",
-    "jobClosedHeading": "Oh no!",
     "jobClosedMessage": "Looks like this job has closed.",
-    "jobClosedOtherJobsLabel": "You can find some similar jobs",
-    "jobClosedOtherJobsHere": "here."
+    "jobClosedOtherJobsLabel": "You can find some similar jobs"
 }

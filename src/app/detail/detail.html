@@ -54,14 +54,14 @@
         </div>
         <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
     </div>
-    <div class="job-closed" data-ng-if="!(detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen)">
-        <h2>{{'detail.jobClosedHeading' | i18n}}</h2>
+    <div class="no-data-message" data-ng-if="!(detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen)">
+        <h2>{{'common.noDataHeading' | i18n}}</h2>
 
         <h3>{{'detail.jobClosedMessage' | i18n}}</h3>
 
         <p>
             {{'detail.jobClosedOtherJobsLabel' | i18n}}
-            <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">{{'detail.jobClosedOtherJobsHere' | i18n}}</a>
+            <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">{{'common.hereLabel' | i18n}}</a>
         </p>
     </div>
 </section>
