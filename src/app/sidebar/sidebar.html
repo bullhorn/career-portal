@@ -21,11 +21,12 @@
         </div>
 
         <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
-            <h4>{{'sidebar.locationSectionHeading' | i18n}}</h4>
-            <span class="fill"></span>
-            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
-                <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
-            </button>
+            <div class="filter-section-header">
+                <h4>{{'sidebar.locationSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
 
             <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo">
                 <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" data-ng-checked="sidebar.hasLocationFilter(location)" data-ng-click="sidebar.addOrRemoveLocation(location)">
@@ -41,11 +42,12 @@
             </span>
         </section>
         <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
-            <h4>{{'sidebar.categorySectionHeading' | i18n}}</h4>
-            <span class="fill"></span>
-            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
-                <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
-            </button>
+            <div class="filter-section-header">
+                <h4>{{'sidebar.categorySectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
 
             <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo">
                 <input type="checkbox" id="{{::category.publishedCategory.id}}" data-ng-checked="sidebar.hasCategoryFilter(category)" data-ng-click="sidebar.addOrRemoveCategory(category)">

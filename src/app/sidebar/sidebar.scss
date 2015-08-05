@@ -120,17 +120,25 @@ aside {
                 max-height: inherit;
             }
 
-            > h4 {
-                color: lighten($dark-bg, 35%);
-                font-size: 1.1em;
-                font-weight: 500;
-            }
+            > .filter-section-header {
+                width: 100%;
+                margin-bottom: 1em;
 
-            > button.clear-filter {
-                padding: 0;
-                margin: 0;
-                border: none;
-                background: transparent;
+                > h4 {
+                    color: lighten($dark-bg, 35%);
+                    font-size: 1.1em;
+                    font-weight: 500;
+                    display: inline-block;
+                    margin: 0;
+                }
+
+                > button.clear-filter {
+                    padding: 0;
+                    margin: 0;
+                    border: none;
+                    background: transparent;
+                    float: right;
+                }
             }
 
             > span.show-more {
