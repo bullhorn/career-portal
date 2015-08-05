@@ -38,4 +38,10 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .factory('SharedData', () => new SharedData())
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
-    .service('SearchService', SearchService);
+    .service('SearchService', SearchService)
+    .run(['$rootScope', '$window', function ($rootScope, $window) {
+        $rootScope.$on('$stateChangeSuccess',
+            function (event, toState, toParams, fromState, fromParams) {
+                $window.scrollTo(0, 0);
+            });
+    }]);
