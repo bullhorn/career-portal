@@ -276,13 +276,12 @@ section.job-detail {
         height: 100%;
         width: 100%;
         text-align: center;
-        margin-top: 10%;
 
         > h2 {
             font-size: 3.5em;
             font-weight: normal;
             color: lighten($dark-bg, 50%);
-            margin: 0 0 0.1em;
+            margin: 10% 0 0.1em;
         }
 
         > h3 {
