@@ -1,7 +1,8 @@
 {
     "jobDescriptionHeading": "Job Description",
     "applyButton": "Apply",
-    "relatedJobsLabel": "Related Jobs",
+    "relatedLabel": "Related",
+    "jobsLabel": "Jobs",
     "viewAllJobsLabel": "View all jobs in this category",
     "jobClosedHeading": "Oh no!",
     "jobClosedMessage": "Looks like this job has closed.",

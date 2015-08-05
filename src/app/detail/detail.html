@@ -19,12 +19,10 @@
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
 
         <div class="related-jobs" data-ng-if="detail.relatedJobs.length !== 0">
-            <h5>{{'detail.relatedJobsLabel' | i18n}}</h5>
+            <h5>{{'detail.relatedLabel' | i18n}} {{::detail.job.publishedCategory.name}} {{'detail.jobsLabel' | i18n}}</h5>
 
             <div class="related-job" data-ng-repeat="job in detail.relatedJobs">
                 <a ng-href="#/jobs/{{::job.id}}">{{::job.title}}</a>
-                <span class="separator" data-ng-show="::(job.publishedCategory)">|</span>
-                <span class="category">{{::job.publishedCategory.name}}</span>
                 <span class="location">{{::job.address.city}}<span data-ng-if="::(job.address.city && job.address.state)">, </span>{{::job.address.state}}</span>
             </div>
         </div>
