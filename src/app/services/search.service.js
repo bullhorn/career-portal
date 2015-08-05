@@ -164,7 +164,7 @@ class SearchService {
                     return query;
                 },
                 find: (jobID) => {
-                    return '(' + this.configuration.search.additionalQuery + ') AND id=' + jobID;
+                    return 'id=' + jobID;
                 },
                 assembleForSearchWhereIDs: (jobs) => {
                     var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
