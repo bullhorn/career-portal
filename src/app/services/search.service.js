@@ -106,7 +106,7 @@ class SearchService {
 
                                 var location = this.searchParams.location[j];
 
-                                var city = location.split('|')[0];
+                                var city = isSearch ? location.split('|')[0] : location.split('|')[0].replace(/'/g, '\'\'');
                                 var state = location.split('|')[1];
 
                                 fragment += '(address.city' + equals + delimiter + city + delimiter + ' AND address.state' + equals + delimiter + state + delimiter + ')';
