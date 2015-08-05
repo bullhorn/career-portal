@@ -47,12 +47,7 @@ aside {
                 font-size: 1.8em;
                 cursor: pointer;
                 transition: all 0.2s;
-                display: none;
                 margin-right: 0;
-
-                @include tablet() {
-                    display: inline-block;
-                }
 
                 &:focus {
                     outline: none;
