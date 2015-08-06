@@ -5,6 +5,9 @@ var wrench = require('wrench');
 var babel = require('gulp-babel');
 var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
+var fs = require('fs');
+var argv = require('yargs').argv;
+var dateFormat = require('dateformat');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -25,7 +28,25 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('jenkins:build', function (done) {
-    runSequence('clean', 'build', 'test:jenkins', 'report:plato', done);
+    runSequence('clean', 'build', 'version', 'test:jenkins', 'report:plato', done);
+});
+
+gulp.task('version', function () {
+    var pkg = JSON.parse(fs.readFileSync('./package.json'));
+    var data = '';
+
+    data += 'Project Name: ' + pkg.name + '\r\n';
+    data += 'Build Date: ' + dateFormat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT') + '\r\n';
+
+    if (argv.ji) {
+        data += 'Jenkins Build Number: ' + argv.ji + '\r\n';
+    }
+
+    if (argv.gi) {
+        data += 'Git Info: ' + argv.gi + '\r\n';
+    }
+
+    fs.writeFileSync('dist/version.txt', data);
 });
 
 // Temporary babel for plato, until plato supports ES6 (better then nothing for now)

@@ -12,6 +12,7 @@
         "browser-sync-spa": "~1.0.2",
         "chalk": "~1.0.0",
         "concat-stream": "~1.5.0",
+        "dateformat": "^1.0.11",
         "del": "~1.2.0",
         "gulp": "^3.9.0",
         "gulp-angular-templatecache": "~1.6.0",
@@ -55,7 +56,8 @@
         "run-sequence": "^1.1.2",
         "uglify-save-license": "~0.4.1",
         "wiredep": "~2.2.2",
-        "wrench": "~1.5.8"
+        "wrench": "~1.5.8",
+        "yargs": "^3.17.1"
     },
     "engines": {
         "node": ">=0.10.0"
