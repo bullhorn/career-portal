@@ -41,22 +41,21 @@ class CareerPortalModalController {
         var fileArray = file.name.split('.');
         var fileExtension = fileArray[fileArray.length - 1];
 
-        if (this.configuration.search.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
+        if (this.configuration.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
             this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.$filter('i18n')('modal.resumeInvalidFormat');
             this.updateUploadClass(false);
             return false;
         }
 
         // Now check the size
-        if (file.size > this.configuration.search.maxUploadSize) {
-            this.resumeUploadErrorMessage = 'File is too big. (max: ' + this.configuration.search.maxUploadSize / 1000 + 'KB)';
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + '(' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
+        if (file.size > this.configuration.maxUploadSize) {
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + '(' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.maxUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
 
         if (file.size < this.configuration.search.minUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + '(' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.search.minUploadSize / 1000 + 'KB)';
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + '(' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
             return false;
         }
@@ -76,7 +75,7 @@ class CareerPortalModalController {
     getTooltipText() {
         var tooltip = '<ul>';
 
-        this.configuration.search.acceptedResumeTypes.forEach(function (type) {
+        this.configuration.acceptedResumeTypes.forEach(function (type) {
             tooltip += '<li>' + type + '</li>';
         });
         tooltip += '</ul>';

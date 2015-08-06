@@ -18,6 +18,10 @@ class ApplyService {
         this._.ajaxError = value;
     }
 
+    get _applyUrl() {
+        return this._.applyUrl || (this._.applyUrl = `${this._publicServiceUrl}/apply`);
+    }
+
     get form() {
         return this._.form || (this._.form = {
                 firstName: '',
@@ -30,6 +34,21 @@ class ApplyService {
 
     set form(value) {
         this._.form = value;
+    }
+
+    get _publicServiceUrl() {
+        let result = this._.publicServiceUrl;
+
+        if(!result) {
+            let corpToken = this.configuration.service.corpToken;
+            let port = Number.parseInt(this.configuration.service.port) || 443;
+            let scheme = `http${port === 443 ? 's' : ''}`;
+            let swimlane = this.configuration.service.swimlane;
+
+            result = this._.publicServiceUrl = `${scheme}://public-rest${swimlane}.bullhornstaffing.com:${port}/rest-services/${corpToken}`;
+        }
+
+        return result;
     }
 
     get requestParams() {
@@ -93,7 +112,7 @@ class ApplyService {
         if (this.form.resumeInfo) {
             var form = new FormData();
             form.append('resume', this.form.resumeInfo);
-            var applyUrl = this.configuration.search.applyUrl + jobID + '/raw' + this.requestParams.assemble(this.form.resumeInfo);
+            var applyUrl = this._applyUrl + '/' + jobID + '/raw' + this.requestParams.assemble(this.form.resumeInfo);
 
             this.$http.post(applyUrl, form, {transformRequest: angular.identity, headers: {'Content-Type': undefined}})
                 .success((data) => {

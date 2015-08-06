@@ -1,34 +1,27 @@
 {
-    "companyName": "Acme Staffing",
+    "acceptedResumeTypes": [
+        "html",
+        "text",
+        "txt",
+        "pdf",
+        "doc",
+        "docx",
+        "rtf",
+        "odt"
+    ],
+    "companyName": "[ COMPANY NAME HERE ]",
+    "defaultLocale": "en-US",
     "localeSupported": [
         "en-US",
         "fr-FR"
     ],
-    "defaultLocale": "fr-FR",
-    "search": {
-        "searchUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/search/JobOrder",
-        "queryUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/query/JobBoardPost",
-        "applyUrl": "http://public.bh-bos2.bullhorn.qa:8181/rest-services/1hs/apply/",
-        "additionalSearchQuery": "isOpen:1",
-        "additionalQuery": "isOpen=true",
-        "sort": "-dateLastPublished",
-        "fields": "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted",
-        "count": 20,
-        "start": 0,
+    "minUploadSize": 1024,
+    "maxRelatedJobs": 5,
+    "maxUploadSize": 204800,
+    "service": {
         "batchSize": 500,
-        "loadJobsOnStart": true,
-        "maxRelatedJobs": 5,
-        "maxUploadSize": 200000,
-        "minUploadSize": 1000,
-        "acceptedResumeTypes": [
-            "html",
-            "text",
-            "txt",
-            "pdf",
-            "doc",
-            "docx",
-            "rtf",
-            "odt"
-        ]
+        "corpToken": "1hs",
+        "port": 8181,
+        "swimlane": "-qa"
     }
 }
