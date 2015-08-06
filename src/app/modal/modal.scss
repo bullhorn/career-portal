@@ -17,41 +17,72 @@
         max-width: 500px;
         background: $white;
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
-        overflow: auto;
+        overflow: hidden;
+        position: relative;
 
-        @include desktop() {
+        @include tablet() {
             margin: 80px auto;
             height: auto;
         }
 
         > header {
             background: $primary;
-            padding: 1em 1em 1.5em;
+            padding: 1em 3em 2em 2em;
             display: block;
             color: $white;
-            text-align: center;
             height: auto;
+            position: relative;
+            text-align: left;
 
             > h2 {
                 font-size: 1.8em;
+                margin: 0.5em 0 0.2em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
-            > p {
+            > span {
                 font-size: 1.1em;
                 font-weight: 500;
+
+                &.category {
+                    display: block;
+                    color: lighten($primary, 20%);
+                    font-size: 1.3em;
+                    font-weight: 700;
+                    margin-bottom: 1.2em;
+                }
+
+                &.location, &.separator, &.type {
+                    color: lighten($dark-bg, 10%);
+                }
+            }
+
+            > i.close {
+                position: absolute;
+                top: 0.5em;
+                right: 0.5em;
+                cursor: pointer;
+                color: lighten($primary, 15%);
+                font-size: 2em;
             }
         }
 
         > div.main {
-            padding: 1em;
+            padding: 2em 1em 60px;
 
             @include tablet() {
-                padding: 2em;
+                padding: 2em 2em 60px;
             }
 
             > form.apply-form {
                 > div.form-field {
-                    margin: 2em 0;
+                    margin: 1.5em 0;
+
+                    @include desktop() {
+                        margin: 2em 0;
+                    }
 
                     > div.input {
                         display: flex;
@@ -89,12 +120,22 @@
                         border-radius: 3px;
                         background: transparent;
                         text-align: center;
-                        padding: 1em 0;
                         position: relative;
                         cursor: pointer;
                         font-size: 1.2em;
                         margin-top: 1em;
                         margin-bottom: 1.6em;
+                        height: 50px;
+
+                        > i {
+                            line-height: 50px;
+                            font-size: 1.3em;
+                            padding-right: 0.5em;
+                        }
+
+                        > span {
+                            line-height: 50px;
+                        }
 
                         &.valid {
                             border-color: #52D74F;
@@ -115,17 +156,50 @@
                         color: lighten($dark-bg, 20%);
                     }
 
+                    > .field-label {
+                        display: none;
+
+                        @include desktop() {
+                            display: inline-block;
+                        }
+                    }
+
                     > .error {
                         margin-top: 0;
                         float: right;
                     }
                 }
             }
+
+            > div.success-message {
+                text-align: center;
+
+                > h3 {
+                    font-size: 1.8em;
+                    color: lighten($dark-bg, 40%);
+                    margin-top: 0;
+                }
+
+                > p {
+                    font-size: 1.2em;
+                }
+            }
         }
 
-        .btn-container {
+        footer {
             width: 100%;
             text-align: right;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 50px;
+
+            display: flex;
+            flex-flow: row nowrap;
+
+            @include tablet() {
+                position: absolute;
+            }
 
             &.success {
                 text-align: right;
@@ -140,22 +214,30 @@
 
             button {
                 text-transform: uppercase;
-                padding: 1em 1.5em;
+                line-height: 50px;
+                font-size: 1.5em;
                 border: none;
                 width: 49%;
                 font-weight: 700;
+                flex: 1;
 
                 &[name="cancel"] {
                     color: $cancel;
                     background: transparent;
                     font-weight: 600;
+                    display: none;
+
+                    @include desktop() {
+                        display: inline-block;
+                    }
                 }
 
                 &[name="submit"] {
                     color: $white;
-                    background: $primary;
+                    background: $secondary;
                     border-radius: 2px;
-                    margin-right: 0;
+                    width: 100%;
+                    font-weight: 700;
 
                     > i {
                         float: right;
@@ -190,7 +272,6 @@
 }
 
 .loading {
-    float: right;
     text-align: center;
 
     .loading-dot {
