@@ -41,7 +41,7 @@ class ApplyService {
 
         if(!result) {
             let corpToken = this.configuration.service.corpToken;
-            let port = Number.parseInt(this.configuration.service.port) || 443;
+            let port = parseInt(this.configuration.service.port) || 443;
             let scheme = `http${port === 443 ? 's' : ''}`;
             let swimlane = this.configuration.service.swimlane;
 
