@@ -1,0 +1,54 @@
+@media print {
+    html {
+        overflow: visible;
+
+        > body {
+            overflow: visible;
+
+            &.overview-open {
+                overflow: visible;
+
+                > section.portal-app {
+                    overflow: visible;
+
+                    > aside.sidebar {
+                        display: none;
+                    }
+
+                    > section.main {
+                        overflow: visible;
+
+                        > header {
+                            button[name="filters-menu"], button[name="over-arrow-back"] {
+                                display: none;
+                            }
+                        }
+
+                        > section.fade {
+                            overflow: visible;
+
+                            > section.job-detail {
+                                overflow: visible;
+                                flex-direction: column;
+
+                                > div.description {
+                                    order: 2;
+                                    .job-actions {
+                                        display: none;
+                                    }
+                                }
+
+                                > div.apply {
+                                    width: 100%;
+                                    button.apply, hr, .related-jobs, .category-filter {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

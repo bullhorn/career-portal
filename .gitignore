@@ -5,9 +5,12 @@ node_modules/
 
 # Build Output
 dist/
+coverage/
+reports/
 
 # Transient Build Output
-.sass-cache
+.tmp/
+.sass-cache/
 
 # Others
 .DS_Store

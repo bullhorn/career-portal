@@ -1,0 +1,27 @@
+{
+    "acceptedResumeTypes": [
+        "html",
+        "text",
+        "txt",
+        "pdf",
+        "doc",
+        "docx",
+        "rtf",
+        "odt"
+    ],
+    "companyName": "[ COMPANY NAME HERE ]",
+    "defaultLocale": "en-US",
+    "localeSupported": [
+        "en-US",
+        "fr-FR"
+    ],
+    "minUploadSize": 1024,
+    "maxRelatedJobs": 5,
+    "maxUploadSize": 204800,
+    "service": {
+        "batchSize": 500,
+        "corpToken": "[ CORP TOKEN HERE ]",
+        "port": null,
+        "swimlane": "[ SWIMLANE HERE ]"
+    }
+}

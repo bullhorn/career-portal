@@ -1,0 +1,73 @@
+<aside class="side-bar">
+    <header>
+        <label>{{'sidebar.sidebarHeading' | i18n}}</label>
+
+        <div class="button-container">
+            <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
+                <i class="bhi-view-list"></i>
+            </button>
+            <button data-ng-class="{'active': sidebar.SharedData.gridState === 'grid-view'}" data-ng-click="sidebar.switchViewStyle('grid');">
+                <i class="bhi-view-module"></i>
+            </button>
+        </div>
+    </header>
+    <section>
+        <div class="keyword-search">
+            <label for="keyword"><i class="bhi-search"></i></label>
+            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-i18n-attr="{placeholder: 'sidebar.sidebarSearchPlaceholder'}"/>
+            <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('text');" name="clear-all">
+                <i class="bhi-times"></i>
+            </button>
+        </div>
+
+        <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'sidebar.locationSectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+
+            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo">
+                <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" data-ng-checked="sidebar.hasLocationFilter(location)" data-ng-click="sidebar.addOrRemoveLocation(location)">
+                <label for="{{::location.address.city}},{{::location.address.state}}">{{::location.address.city}},&nbsp;{{::location.address.state}}</label>
+                <span>{{location.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">
+                 {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">
+                 {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+        <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
+            <div class="filter-section-header">
+                <h4>{{'sidebar.categorySectionHeading' | i18n}}</h4>
+                <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
+                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                </button>
+            </div>
+
+            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo">
+                <input type="checkbox" id="{{::category.publishedCategory.id}}" data-ng-checked="sidebar.hasCategoryFilter(category)" data-ng-click="sidebar.addOrRemoveCategory(category)">
+                <label for="{{::category.publishedCategory.id}}">{{::category.publishedCategory.name}}</label>
+                <span>{{category.idCount}}</span>
+            </div>
+
+            <span class="show-more" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">
+                {{'sidebar.showMoreLabel' | i18n}}
+            </span>
+            <span class="show-more" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">
+                {{'sidebar.showLessLabel' | i18n}}
+            </span>
+        </section>
+
+        <section class="credits">
+            <span class="powered-by">{{'sidebar.poweredByText' | i18n}}</span>
+            <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
+        </section>
+
+        <button type="button" class="bhi-arrow-left" name="back-arrow" data-ng-click="sidebar.goBack();"></button>
+    </section>
+</aside>

@@ -1,0 +1,212 @@
+/* Do not remove this comments bellow. It's the markers used by wiredep to inject
+   sass dependencies when defined in the bower.json of your dependencies */
+// bower:scss
+// endbower
+
+$white: #FFFFFF;
+$primary: #5198DE;
+$secondary: #ACC72E;
+$light-bg: #F4F4F4;
+$dark-bg: #2E2F30;
+$header-bg: $primary;
+$sidebar-header-bg: #252728;
+$toggle-active: #fff;
+$cancel: darken($light-bg, 15%);
+$error: #da4453;
+
+$font-size: 13px;
+$font-family: 'Roboto';
+$base-color: #46474A;
+
+$header-height: 60px;
+$sidebar-width: 300px;
+$sidebar-width-small: 50px;
+
+$modal-z-index: 1000;
+$header-z-index: 100;
+
+/* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector
+
+html, body {
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-family;
+    font-size: $font-size;
+    color: $base-color;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $light-bg;
+    box-sizing: border-box;
+
+    > section.main {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.fill {
+    flex: 1;
+}
+
+._720kb-tooltip {
+    z-index: $modal-z-index + 1;
+    visibility: hidden !important;
+
+    &._720kb-tooltip-open {
+        visibility: visible !important;
+    }
+}
+
+input {
+    &:focus, &:active {
+        outline: none;
+    }
+}
+
+button {
+    cursor: pointer;
+
+    &:focus, &:active {
+        outline: none;
+    }
+}
+
+a {
+    color: $primary;
+    text-decoration: none;
+
+    &:visited, &:focus, &:active {
+        color: $primary;
+    }
+}
+
+.card {
+    background: $white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+    padding: 1em;
+
+    > .card-date {
+        font-size: 0.8em;
+        font-weight: 500;
+        color: lighten($dark-bg, 50%);
+    }
+
+    > .card-title-category {
+        > .card-title {
+            font-size: 1.7em;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.2em;
+            margin-top: 1em;
+            white-space: nowrap;
+            display: block;
+
+            color: $primary;
+            text-decoration: none;
+
+            &:visited, &:focus, &:active {
+                color: $primary;
+            }
+        }
+
+        > .card-category {
+            display: block;
+            margin-bottom: 1em;
+            font-size: 1.2em;
+            color: $dark-bg;
+            font-weight: 600;
+        }
+    }
+
+    > .card-location, > .card-type, > .card-separator {
+        color: lighten($dark-bg, 40%);
+        font-weight: 500;
+        font-size: 1.1em;
+    }
+}
+
+section.portal {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    width: 100%;
+
+    > .portal-canvas {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform: translateX(0);
+        transform: translateZ(0) translateX(0);
+        transform: translate3d(0, 0, 0);
+        transition: .3s ease all;
+        backface-visibility: hidden;
+
+        &.show-nav {
+            transform: translateX(80%);
+            transform: translateZ(0) translateX(80%);
+            transform: translate3d(80%, 0, 0);
+
+            @include tablet() {
+                transform: translateX($sidebar-width);
+                transform: translateZ(0) translateX($sidebar-width);
+                transform: translate3d($sidebar-width, 0, 0);
+            }
+        }
+
+        > section.main {
+            height: 100%;
+            transition: padding-left 0.2s ease-in-out;
+
+            @include desktop() {
+                padding-left: $sidebar-width;
+
+                .overview-open & {
+                    padding-left: $sidebar-width-small;
+                }
+            }
+
+            > section.fade {
+                height: calc(100% - #{$header-height});
+                overflow: auto;
+            }
+        }
+    }
+}
+
+div.no-data-message {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+
+    > h2 {
+        font-size: 3.5em;
+        font-weight: normal;
+        color: lighten($dark-bg, 50%);
+        margin: 10% 0 0.1em;
+    }
+
+    > h3 {
+        font-size: 2.5em;
+        font-weight: normal;
+        color: lighten($dark-bg, 50%);
+        margin: 0 0 0.5em;
+    }
+
+    > p {
+        font-size: 1.3em;
+    }
+}

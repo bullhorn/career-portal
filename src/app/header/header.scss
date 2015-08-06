@@ -1,0 +1,80 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: $header-height;
+    min-height: $header-height;
+    padding: 0 1.5em;
+
+    background-color: $header-bg;
+    color: $white;
+    z-index: $header-z-index;
+
+    > label {
+        display: inline-block;
+        font-size: 2em;
+        font-weight: 700;
+    }
+
+    > button {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 1.8em;
+        margin-right: 0.5em;
+        padding: 0;
+    }
+
+    > button.toggle-filters {
+        display: inline-block;
+        position: relative;
+
+        > .badge {
+            position: absolute;
+            top: 0;
+            left: -5px;
+            font-size: 12px;
+            padding: 1px 5px;
+            background-color: $error;
+            border-radius: 50%;
+            color: $white;
+        }
+
+        > .close {
+            display: none;
+        }
+
+        @include desktop() {
+            display: none;
+        }
+    }
+
+    // Parent selector
+    .show-nav & {
+        > button.toggle-filters {
+            > .close {
+                display: block;
+            }
+
+            > .open, > .badge {
+                display: none;
+            }
+        }
+    }
+
+    // Parent selector
+    .overview-open & {
+        > button.toggle-filters {
+            display: none;
+        }
+
+        > button.go-back {
+            display: inline-block;
+
+            @include desktop() {
+                display: none;
+            }
+        }
+    }
+}

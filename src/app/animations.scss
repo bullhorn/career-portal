@@ -1,0 +1,97 @@
+//////////////////
+// FADE
+//////////////////
+
+.fade {
+    opacity: 1;
+    visibility: visible;
+
+    &.ng-enter, &.ng-leave {
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    &.ng-enter, &.ng-leave-active {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &.ng-enter-active, &.ng-leave {
+        opacity: 1;
+    }
+}
+
+//////////////////
+// SLIDE UP
+//////////////////
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(500px);
+        opacity: 0;
+    }
+
+    40% {
+        transform: translateY(-5px);
+    }
+
+    60% {
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation: slide-up 0.4s ease-in-out;
+}
+
+//////////////////
+// SLIDE UP ITEM (NG-REPEAT)
+//////////////////
+
+.slide-up-item {
+    transform: translateY(0);
+    opacity: 1;
+
+    &.ng-enter {
+        transition: all 250ms ease-in-out;
+    }
+
+    &.ng-enter, &.ng-move, &.ng-leave-active {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    &.ng-enter-active, &.ng-leave {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    &.ng-leave {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    &.ng-leave-stagger, &.ng-enter-stagger {
+        transition-delay: 0.1s;
+        transition-duration: 0s;
+    }
+}
+
+//////////////////
+// SLIDE DOWN ITEM (NG-REPEAT)
+//////////////////
+
+.slide-down-item {
+    &.ng-move, &.ng-enter, &.ng-leave {
+        transition: all linear 0.2s;
+    }
+
+    &.ng-leave.ng-leave-active, &.ng-move, &.ng-enter {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    &.ng-leave, &.ng-move.ng-move-active, &.ng-enter.ng-enter-active {
+        opacity: 1;
+        max-height: 40px;
+    }
+}

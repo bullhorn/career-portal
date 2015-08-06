@@ -1,0 +1,12 @@
+<header>
+    <button class="toggle-filters" name="filters-menu" data-ng-click="header.toggleFilters()">
+        <i class="bhi-search-menu open"></i>
+        <i class="bhi-times close"></i>
+        <span class="badge" data-ng-show="header.SearchService.searchParams.category.length + header.SearchService.searchParams.location.length > 0">{{header.SearchService.searchParams.category.length + header.SearchService.searchParams.location.length}}</span>
+    </button>
+    <button class="go-back" name="over-arrow-back" data-ng-click="header.goBack()">
+        <i class="bhi-arrow-left"></i>
+    </button>
+
+    <label>{{::header.configuration.companyName}}</label>
+</header>
