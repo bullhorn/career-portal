@@ -43,7 +43,11 @@
         }
 
         > div.main {
-            padding: 2em;
+            padding: 1em;
+
+            @include tablet() {
+                padding: 2em;
+            }
 
             > form.apply-form {
                 > div.form-field {

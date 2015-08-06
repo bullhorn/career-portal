@@ -15,6 +15,9 @@ header {
         display: inline-block;
         font-size: 2em;
         font-weight: 700;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     > button {

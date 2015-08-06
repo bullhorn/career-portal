@@ -66,6 +66,7 @@ section.job-detail {
                     font-size: 1.1em;
                     color: lighten($base-color, 15%);
                     order: 1;
+                    white-space: nowrap;
 
                     @include desktop() {
                         order: 2;
@@ -77,8 +78,8 @@ section.job-detail {
                         font-size: 1.3em;
                     }
 
-                    &[name="print"] {
-                        display: none;
+                    &[name="share"] {
+                        padding-left: 0;
 
                         @include desktop() {
                             display: inline-block;
@@ -90,6 +91,7 @@ section.job-detail {
                     border-left: 1px solid transparent;
                     padding-right: 20px;
                     order: 2;
+                    white-space: nowrap;
 
                     @include desktop() {
                         order: 1;
@@ -99,7 +101,7 @@ section.job-detail {
 
                     @for $i from 1 through 4 {
                         a:nth-child(#{$i}) {
-                            transition-delay: ((#{400-($i*100ms)}));
+                            transition-delay: ((#{500-($i*100ms)}));
                         }
                     }
 
@@ -118,6 +120,14 @@ section.job-detail {
                 &.share-open {
                     > button[name="share"] {
                         color: lighten($primary, 20%);
+                    }
+
+                    > button[name="print"] {
+                        display: none;
+
+                        @include desktop() {
+                            display: inline-block;
+                        }
                     }
 
                     > div.share-outlets {

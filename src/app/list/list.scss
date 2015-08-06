@@ -123,13 +123,13 @@ section.job-list {
 
             div.card-wrapper {
                 width: 100%;
+                padding-bottom: 1.5em;
 
                 @include tablet() {
                     width: 50%;
 
                     padding-right: 0.75em;
                     padding-left: 0.75em;
-                    padding-bottom: 1.5em;
                 }
 
                 @include large-desktop() {
