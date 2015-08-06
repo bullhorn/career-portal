@@ -54,7 +54,7 @@ class CareerPortalModalController {
             return false;
         }
 
-        if (file.size < this.configuration.search.minUploadSize) {
+        if (file.size < this.configuration.minUploadSize) {
             this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + '(' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
             return false;

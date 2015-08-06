@@ -30,8 +30,7 @@
         <h3>{{'list.noDataMessage' | i18n}}</h3>
 
         <p data-ng-if="list.SearchService.searchParams.location.length || list.SearchService.searchParams.category.length || list.SearchService.searchParams.textSearch.length">
-            {{'list.noDataResolution' | i18n}}
-            <a href data-ng-click="list.clearSearchParamsAndLoadData();">{{'common.hereLabel' | i18n}}</a>
+            <a href data-ng-click="list.clearSearchParamsAndLoadData();">{{'list.noDataResolution' | i18n}}</a>
         </p>
     </div>
 
