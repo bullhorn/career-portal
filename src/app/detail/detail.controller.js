@@ -15,8 +15,6 @@ class JobDetailController {
 
         // Set the view state
         this.SharedData.viewState = 'overview-open';
-
-        this.applyModal();
     }
 
     shareFacebook(job) {
