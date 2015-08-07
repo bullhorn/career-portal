@@ -120,9 +120,12 @@
 
                         > input {
                             flex: 1;
+                            color: lighten($dark-bg, 30%);
 
-                            &.ng-valid {
-                                color: #52D74F;
+                            &.ng-invalid {
+                                &.ng-valid-required {
+                                    color: $error;
+                                }
                             }
 
                             &[type="text"], &[type="email"] {
@@ -155,10 +158,15 @@
                             line-height: 50px;
                             font-size: 1.3em;
                             padding-right: 0.5em;
+
+                            &:before {
+                                vertical-align: inherit;
+                            }
                         }
 
                         > span {
                             line-height: 50px;
+                            vertical-align: top;
                         }
 
                         &.valid {
