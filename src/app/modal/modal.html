@@ -1,18 +1,25 @@
 <div class="modal-container">
-    <div class="modal slide-up">
+    <div class="modal slide-up" data-ng-class="{'success':!modal.showForm}">
         <header>
-            <h2>{{modal.SearchService.currentDetailData.title}}</h2>
-            <span class="category">{{modal.SearchService.currentDetailData.publishedCategory.name}}</span>
+            <section data-ng-if="modal.showForm">
+                <h2>{{modal.SearchService.currentDetailData.title}}</h2>
+                <span class="category">{{modal.SearchService.currentDetailData.publishedCategory.name}}</span>
 
-            <span class="location">
-                {{::modal.SearchService.currentDetailData.address.city}}<span data-ng-if="::(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{::modal.SearchService.currentDetailData.address.state}}
-            </span>
-            <span class="separator" data-ng-show="::((modal.SearchService.currentDetailData.address.city || modal.SearchService.currentDetailData.address.state) && modal.SearchService.currentDetailData.employmentType)">|</span>
-            <span class="type">{{::modal.SearchService.currentDetailData.employmentType}}</span>
+                <span class="location">
+                    {{::modal.SearchService.currentDetailData.address.city}}<span data-ng-if="::(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{::modal.SearchService.currentDetailData.address.state}}
+                </span>
+                <span class="separator" data-ng-show="::((modal.SearchService.currentDetailData.address.city || modal.SearchService.currentDetailData.address.state) && modal.SearchService.currentDetailData.employmentType)">|</span>
+                <span class="type">{{::modal.SearchService.currentDetailData.employmentType}}</span>
 
-            <i class="bhi-times close" data-ng-click="modal.closeModal(applyForm)"></i>
+                <i class="bhi-times close" data-ng-click="modal.closeModal(applyForm)"></i>
+            </section>
+            <section class="success" data-ng-if="!modal.showForm">
+                <h2>{{'modal.successHeading' | i18n}}</h2>
+
+                <h3>{{'modal.successSubHeading' | i18n}}</h3>
+            </section>
         </header>
-        <div class="main">
+        <div class="main" data-ng-class="{'success':!modal.showForm}">
             <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
                 <div class="form-field">
                     <div class="input">
@@ -75,14 +82,7 @@
                     <i class="bhi-caution"></i> <span>{{modal.ApplyService.ajaxError}}</span>
                 </span>
             </form>
-
-            <div class="success-message" data-ng-if="!modal.showForm">
-                <h3>{{'modal.successHeading' | i18n}}</h3>
-
-                <p>{{'modal.successSubHeading' | i18n}}</p>
-            </div>
-
-            <footer>
+            <footer data-ng-class="{'success':!modal.showForm}">
                 <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
                 <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)">
                     <span data-ng-if="!modal.isSubmitting">
@@ -97,7 +97,7 @@
                         </div>
                     </span>
                 </button>
-                <button data-ng-show="!modal.showForm" name="submit" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
+                <button data-ng-show="!modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
             </footer>
         </div>
     </div>

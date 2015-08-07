@@ -23,6 +23,16 @@
         @include tablet() {
             margin: 80px auto;
             height: auto;
+
+            &.success {
+                max-width: 500px !important;
+            }
+        }
+
+        &.success {
+            height: auto;
+            margin: 80px auto;
+            max-width: 300px;
         }
 
         > header {
@@ -34,46 +44,60 @@
             position: relative;
             text-align: left;
 
-            > h2 {
-                font-size: 1.8em;
-                margin: 0.5em 0 0.2em;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            > span {
-                font-size: 1.1em;
-                font-weight: 500;
-
-                &.category {
-                    display: block;
-                    color: lighten($primary, 20%);
-                    font-size: 1.3em;
-                    font-weight: 700;
-                    margin-bottom: 1.2em;
+            > section {
+                > h2 {
+                    font-size: 1.8em;
+                    margin: 0.5em 0 0.2em;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
-                &.location, &.separator, &.type {
-                    color: lighten($dark-bg, 10%);
+                > h3 {
+                    margin-bottom: 0;
                 }
-            }
 
-            > i.close {
-                position: absolute;
-                top: 0.5em;
-                right: 0.5em;
-                cursor: pointer;
-                color: lighten($primary, 15%);
-                font-size: 2em;
+                > span {
+                    font-size: 1.1em;
+                    font-weight: 500;
+
+                    &.category {
+                        display: block;
+                        color: lighten($primary, 20%);
+                        font-size: 1.3em;
+                        font-weight: 700;
+                        margin-bottom: 1.2em;
+                    }
+
+                    &.location, &.separator, &.type {
+                        color: lighten($dark-bg, 10%);
+                    }
+                }
+
+                > i.close {
+                    position: absolute;
+                    top: 0.5em;
+                    right: 0.5em;
+                    cursor: pointer;
+                    color: lighten($primary, 15%);
+                    font-size: 2em;
+
+                    @include tablet() {
+                        display: none;
+                    }
+                }
+
+                &.success {
+                    text-align: center;
+                }
             }
         }
 
         > div.main {
-            padding: 2em 1em 60px;
+            padding: 1em 1em 60px;
 
             @include tablet() {
-                padding: 2em 2em 60px;
+                padding: 2em 2em;
             }
 
             > form.apply-form {
@@ -171,18 +195,8 @@
                 }
             }
 
-            > div.success-message {
-                text-align: center;
-
-                > h3 {
-                    font-size: 1.8em;
-                    color: lighten($dark-bg, 40%);
-                    margin-top: 0;
-                }
-
-                > p {
-                    font-size: 1.2em;
-                }
+            &.success {
+                padding: 1em;
             }
         }
 
@@ -198,12 +212,14 @@
             flex-flow: row nowrap;
 
             @include tablet() {
-                position: absolute;
+                position: relative;
             }
 
             &.success {
                 text-align: right;
                 padding-top: 0;
+                display: inline-block;
+                position: relative;
 
                 button {
                     background-color: transparent !important;
@@ -221,13 +237,13 @@
                 font-weight: 700;
                 flex: 1;
 
-                &[name="cancel"] {
+                &[name="cancel"], &[name="ok"] {
                     color: $cancel;
                     background: transparent;
                     font-weight: 600;
                     display: none;
 
-                    @include desktop() {
+                    @include tablet() {
                         display: inline-block;
                     }
                 }
@@ -242,6 +258,15 @@
                     > i {
                         float: right;
                     }
+                }
+
+                &[name="ok"] {
+                    flex: 0;
+                    float: right;
+                    color: $primary;
+                    font-size: 1em;
+                    width: 200px;
+                    display: inline-block;
                 }
             }
         }
