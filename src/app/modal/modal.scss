@@ -70,7 +70,7 @@
                     }
 
                     &.location, &.separator, &.type {
-                        color: lighten($dark-bg, 10%);
+                        color: #3D5668
                     }
                 }
 
@@ -162,8 +162,8 @@
                         }
 
                         &.valid {
-                            border-color: #52D74F;
-                            color: #52D74F;
+                            border-color: $secondary;
+                            color: $secondary;
                         }
                     }
 
