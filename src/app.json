@@ -15,9 +15,9 @@
         "en-US",
         "fr-FR"
     ],
-    "minUploadSize": 1024,
+    "minUploadSize": 30720,
     "maxRelatedJobs": 5,
-    "maxUploadSize": 204800,
+    "maxUploadSize": 5242880,
     "service": {
         "batchSize": 500,
         "corpToken": "[ CORP TOKEN HERE ]",

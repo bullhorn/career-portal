@@ -11,7 +11,7 @@ class SearchService {
     }
 
     static get _count() {
-        return SearchService._.pageSize|| (SearchService._.pageSize = 20);
+        return SearchService._.pageSize || (SearchService._.pageSize = 20);
     }
 
     static get _fields() {
@@ -19,7 +19,7 @@ class SearchService {
     }
 
     static get _sort() {
-        return SearchService._.sort|| (SearchService._.sort = '-dateLastPublished');
+        return SearchService._.sort || (SearchService._.sort = '-dateLastPublished');
     }
 
     get _() {
@@ -78,7 +78,7 @@ class SearchService {
     get _publicServiceUrl() {
         let result = this._.publicServiceUrl;
 
-        if(!result) {
+        if (!result) {
             let corpToken = this.configuration.service.corpToken;
             let port = parseInt(this.configuration.service.port) || 443;
             let scheme = `http${port === 443 ? 's' : ''}`;
@@ -96,132 +96,132 @@ class SearchService {
 
     get requestParams() {
         return this._.requestParams || (this._.requestParams = {
-            sort: () => this.searchParams.sort || SearchService._sort,
-            count: () => this.searchParams.count || SearchService._count,
-            start: () => this.searchParams.start || 0,
-            publishedCategory: (isSearch, fields) => {
-                if ('publishedCategory(id,name)' !== fields) {
-                    if (this.searchParams.category.length > 0) {
-                        var equals = isSearch ? ':' : '=';
+                sort: () => this.searchParams.sort || SearchService._sort,
+                count: () => this.searchParams.count || SearchService._count,
+                start: () => this.searchParams.start || 0,
+                publishedCategory: (isSearch, fields) => {
+                    if ('publishedCategory(id,name)' !== fields) {
+                        if (this.searchParams.category.length > 0) {
+                            var equals = isSearch ? ':' : '=';
 
-                        var fragment = ' AND (';
-                        var first = true;
+                            var fragment = ' AND (';
+                            var first = true;
 
-                        for (var i = 0; i < this.searchParams.category.length; i++) {
-                            if (!first) {
-                                fragment += ' OR ';
-                            } else {
-                                first = false;
+                            for (var i = 0; i < this.searchParams.category.length; i++) {
+                                if (!first) {
+                                    fragment += ' OR ';
+                                } else {
+                                    first = false;
+                                }
+
+                                fragment += 'publishedCategory.id' + equals + this.searchParams.category[i];
                             }
 
-                            fragment += 'publishedCategory.id' + equals + this.searchParams.category[i];
+                            return fragment + ')';
                         }
-
-                        return fragment + ')';
                     }
-                }
 
-                return '';
-            },
-            location: (isSearch, fields) => {
-                if ('address(city,state)' !== fields) {
-                    if (this.searchParams.location.length > 0) {
-                        var delimiter = isSearch ? '"' : '\'';
-                        var equals = isSearch ? ':' : '=';
+                    return '';
+                },
+                location: (isSearch, fields) => {
+                    if ('address(city,state)' !== fields) {
+                        if (this.searchParams.location.length > 0) {
+                            var delimiter = isSearch ? '"' : '\'';
+                            var equals = isSearch ? ':' : '=';
 
-                        var fragment = ' AND (';
-                        var first = true;
+                            var fragment = ' AND (';
+                            var first = true;
 
-                        for (var j = 0; j < this.searchParams.location.length; j++) {
-                            if (!first) {
-                                fragment += ' OR ';
-                            } else {
-                                first = false;
+                            for (var j = 0; j < this.searchParams.location.length; j++) {
+                                if (!first) {
+                                    fragment += ' OR ';
+                                } else {
+                                    first = false;
+                                }
+
+                                var location = this.searchParams.location[j];
+
+                                var city = isSearch ? location.split('|')[0] : location.split('|')[0].replace(/'/g, '\'\'');
+                                var state = location.split('|')[1];
+
+                                fragment += '(address.city' + equals + delimiter + city + delimiter + ' AND address.state' + equals + delimiter + state + delimiter + ')';
                             }
 
-                            var location = this.searchParams.location[j];
-
-                            var city = isSearch ? location.split('|')[0] : location.split('|')[0].replace(/'/g, '\'\'');
-                            var state = location.split('|')[1];
-
-                            fragment += '(address.city' + equals + delimiter + city + delimiter + ' AND address.state' + equals + delimiter + state + delimiter + ')';
+                            return fragment + ')';
                         }
-
-                        return fragment + ')';
                     }
+
+                    return '';
+                },
+                text: () => {
+                    if (this.searchParams.textSearch) {
+                        return ' AND (title:' + this.searchParams.textSearch + '* OR publicDescription:' + this.searchParams.textSearch + '*)';
+                    }
+
+                    return '';
+                },
+                query: (isSearch, additionalQuery, fields) => {
+                    var query = `(isOpen${isSearch ? ':1' : '=true'})`;
+
+                    if (additionalQuery) {
+                        query += ` AND (${additionalQuery})`;
+                    }
+
+                    if (isSearch) {
+                        query += this.requestParams.text();
+                    }
+
+                    query += this.requestParams.publishedCategory(isSearch, fields);
+                    query += this.requestParams.location(isSearch, fields);
+
+                    return query;
+                },
+                whereIDs: (jobs, isSearch) => {
+                    var getValue = isSearch ? (job) => 'id:' + job.id : (job) => job.id;
+                    var join = isSearch ? ' OR ' : ',';
+                    var prefix = isSearch ? '' : 'id IN ';
+
+                    var values = [];
+
+                    for (var i = 0; i < jobs.length; i++) {
+                        values.push(getValue(jobs[i]));
+                    }
+
+                    return prefix + '(' + values.join(join) + ')';
+                },
+                relatedJobs: (publishedCategoryID, idToExclude) => {
+                    var query = `(isOpen=true) AND publishedCategory.id=${publishedCategoryID}`;
+
+                    if (idToExclude && parseInt(idToExclude) > 0) {
+                        query += ' AND id <>' + idToExclude;
+                    }
+
+                    return query;
+                },
+                find: (jobID) => {
+                    return 'id=' + jobID;
+                },
+                assembleForSearchWhereIDs: (jobs) => {
+                    var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
+
+                    return '?start=0&query=' + where + '&fields=id&count=' + SearchService._count;
+                },
+                assembleForQueryForIDs: (start, count) => {
+                    return '?where=' + this.requestParams.query(false) + '&fields=' + SearchService._fields + '&count=' + count + '&orderBy=' + SearchService._sort + '&start=' + start;
+                },
+                assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
+                    return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)&count=' + count + '&orderBy=+' + orderByFields + ',-count.id&start=' + start;
+                },
+                assembleForSearchForIDs: (start, count, fields) => {
+                    return '?showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
+                },
+                assembleForRelatedJobs: (publishedCategoryID, idToExclude) => {
+                    return '?start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + SearchService._fields + '&sort=' + this.requestParams.sort() + '&count=' + this.configuration.maxRelatedJobs;
+                },
+                assembleForFind: (jobID) => {
+                    return '?start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + SearchService._fields;
                 }
-
-                return '';
-            },
-            text: () => {
-                if (this.searchParams.textSearch) {
-                    return ' AND (title:' + this.searchParams.textSearch + '* OR publicDescription:' + this.searchParams.textSearch + '*)';
-                }
-
-                return '';
-            },
-            query: (isSearch, additionalQuery, fields) => {
-                var query = `(isOpen${isSearch ? ':1' : '=true'})`;
-
-                if (additionalQuery) {
-                    query += ` AND (${additionalQuery})`;
-                }
-
-                if (isSearch) {
-                    query += this.requestParams.text();
-                }
-
-                query += this.requestParams.publishedCategory(isSearch, fields);
-                query += this.requestParams.location(isSearch, fields);
-
-                return query;
-            },
-            whereIDs: (jobs, isSearch) => {
-                var getValue = isSearch ? (job) => 'id:' + job.id : (job) => job.id;
-                var join = isSearch ? ' OR ' : ',';
-                var prefix = isSearch ? '' : 'id IN ';
-
-                var values = [];
-
-                for (var i = 0; i < jobs.length; i++) {
-                    values.push(getValue(jobs[i]));
-                }
-
-                return prefix + '(' + values.join(join) + ')';
-            },
-            relatedJobs: (publishedCategoryID, idToExclude) => {
-                var query = `(isOpen=true) AND publishedCategory.id=${publishedCategoryID}`;
-
-                if (idToExclude && parseInt(idToExclude) > 0) {
-                    query += ' AND id <>' + idToExclude;
-                }
-
-                return query;
-            },
-            find: (jobID) => {
-                return 'id=' + jobID;
-            },
-            assembleForSearchWhereIDs: (jobs) => {
-                var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
-
-                return '?start=0&query=' + where + '&fields=id&count=' + SearchService._count;
-            },
-            assembleForQueryForIDs: (start, count) => {
-                return '?where=' + this.requestParams.query(false) + '&fields=' + SearchService._fields + '&count=' + count + '&orderBy=' + SearchService._sort + '&start=' + start;
-            },
-            assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
-                return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)&count=' + count + '&orderBy=+' + orderByFields + ',-count.id&start=' + start;
-            },
-            assembleForSearchForIDs: (start, count, fields) => {
-                return '?showTotalMatched=true&query=' + this.requestParams.query(true, undefined, fields) + '&fields=id&sort=id&count=' + count + '&start=' + start;
-            },
-            assembleForRelatedJobs: (publishedCategoryID, idToExclude) => {
-                return '?start=0&where=' + this.requestParams.relatedJobs(publishedCategoryID, idToExclude) + '&fields=' + SearchService._fields + '&sort=' + this.requestParams.sort() + '&count=' + this.configuration.maxRelatedJobs;
-            },
-            assembleForFind: (jobID) => {
-                return '?start=0&count=1&where=' + this.requestParams.find(jobID) + '&fields=' + SearchService._fields;
-            }
-        });
+            });
     }
 
     get searchParams() {

@@ -18,11 +18,8 @@ import SharedData from './services/shared.factory';
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
 
-import AppConfig from '../app.json';
-
 angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng-fastclick', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'ngLocalize.Events'])
     .constant('moment', moment)
-    .constant('configuration', AppConfig)
     .constant('localeConf', {})
     .constant('localeSupported', [])
     .config(routerConfig)
@@ -39,3 +36,15 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService);
+
+// Deferring the bootstrap to make sure we have loaded the config from app.json
+deferredBootstrapper.bootstrap({
+    element: document.body,
+    module: 'CareerPortal',
+    resolve: {
+        configuration: function ($http) {
+            'ngInject';
+            return $http.get('/app.json');
+        }
+    }
+});

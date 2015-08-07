@@ -1,20 +1,26 @@
-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
+header.app {
     height: $header-height;
     min-height: $header-height;
     padding: 0 1.5em;
+    text-align: center;
 
     background-color: $header-bg;
     color: $white;
     z-index: $header-z-index;
 
+    @include desktop() {
+        text-align: left;
+    }
+
     > label {
         display: inline-block;
         font-size: 2em;
         font-weight: 700;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: $header-height;
+        width: 75%;
     }
 
     > button {
@@ -22,23 +28,27 @@ header {
         background: transparent;
         border: none;
         font-size: 1.8em;
+        line-height: $header-height;
         margin-right: 0.5em;
         padding: 0;
+        position: absolute;
+        left: 1em;
+        top: 0;
     }
 
     > button.toggle-filters {
         display: inline-block;
-        position: relative;
 
         > .badge {
             position: absolute;
-            top: 0;
-            left: -5px;
+            top: 15px;
+            left: -7px;
             font-size: 12px;
             padding: 1px 5px;
             background-color: $error;
             border-radius: 50%;
             color: $white;
+            line-height: 1;
         }
 
         > .close {

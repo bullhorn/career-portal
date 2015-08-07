@@ -17,13 +17,7 @@ class CareerPortalModalController {
 
     closeModal(applyForm) {
         this.SharedData.modalState = 'closed';
-
         this.showForm = true;
-
-        this.locale.ready('modal').then(angular.bind(this, function () {
-            this.header = this.locale.getString('modal.modalHeading');
-            this.subHeader = this.locale.getString('modal.modalSubHeading');
-        }));
 
         // Clear the errors if we have the form
         if (applyForm) {
@@ -44,23 +38,26 @@ class CareerPortalModalController {
         if (this.configuration.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
             this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.$filter('i18n')('modal.resumeInvalidFormat');
             this.updateUploadClass(false);
+            this.isSubmitting = false;
             return false;
         }
 
         // Now check the size
         if (file.size > this.configuration.maxUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + '(' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.maxUploadSize / 1024 + 'KB)';
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + ' (' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.maxUploadSize / (1024 * 1024) + 'MB)';
             this.updateUploadClass(false);
+            this.isSubmitting = false;
             return false;
         }
 
-        if (file.size < this.configuration.search.minUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + '(' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
+        if (file.size < this.configuration.minUploadSize) {
+            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + ' (' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
+            this.isSubmitting = false;
             return false;
         }
 
-        this.resumeUploadErrorMessage = '';
+        this.resumeUploadErrorMessage = null;
         this.updateUploadClass(true);
         return true;
     }
@@ -84,18 +81,16 @@ class CareerPortalModalController {
 
     applySuccess() {
         this.showForm = false;
-        this.locale.ready('modal').then(angular.bind(this, function () {
-            this.header = this.locale.getString('modal.successHeading');
-            this.subHeader = this.locale.getString('modal.successSubHeading');
-        }));
     }
 
     submit(applyForm) {
         applyForm.$submitted = true;
-        this.isSubmitting = true;
-        if (applyForm.$valid) {
-            var controller = this;
 
+        var isFileValid = this.validateResume(this.ApplyService.form.resumeInfo);
+
+        if (applyForm.$valid && isFileValid) {
+            var controller = this;
+            controller.isSubmitting = true;
             this.ApplyService.submit(this.SearchService.currentDetailData.id, function () {
                 controller.applySuccess();
                 controller.isSubmitting = false;

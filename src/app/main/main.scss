@@ -1,0 +1,48 @@
+section.portal {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    width: 100%;
+
+    > .portal-canvas {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: .3s ease all;
+        backface-visibility: hidden;
+
+        &.show-nav {
+            transform: translateX(80%);
+            transform: translateZ(0) translateX(80%);
+            transform: translate3d(80%, 0, 0);
+
+            @include tablet() {
+                transform: translateX($sidebar-width);
+                transform: translateZ(0) translateX($sidebar-width);
+                transform: translate3d($sidebar-width, 0, 0);
+            }
+        }
+
+        > section.main {
+            height: 100%;
+            transition: padding-left 0.2s ease-in-out;
+
+            @include desktop() {
+                padding-left: $sidebar-width;
+
+                .overview-open & {
+                    padding-left: $sidebar-width-small;
+                }
+            }
+
+            > section.fade {
+                height: calc(100% - #{$header-height});
+                overflow: auto;
+            }
+        }
+    }
+}

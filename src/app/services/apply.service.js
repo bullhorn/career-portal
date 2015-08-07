@@ -39,7 +39,7 @@ class ApplyService {
     get _publicServiceUrl() {
         let result = this._.publicServiceUrl;
 
-        if(!result) {
+        if (!result) {
             let corpToken = this.configuration.service.corpToken;
             let port = parseInt(this.configuration.service.port) || 443;
             let scheme = `http${port === 443 ? 's' : ''}`;

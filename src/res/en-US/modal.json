@@ -1,5 +1,5 @@
 {
-    "uploadResumeFile": "Upload Resume File",
+    "uploadResumeFile": "Attach Resume File",
     "modalHeading": "Before You Apply...",
     "modalSubHeading": "Please let us know who you are and upload your resume.",
     "successHeading": "Thank you!",
@@ -19,8 +19,8 @@
     "resumeFilePlaceholder": "Resume File",
     "resumeValidation": "Please upload your resume.",
     "resumeInvalidFormat": "is not a supported file format",
-    "resumeToBig": "File is to big.",
-    "resumeToSmall": "File is to small.",
+    "resumeToBig": "File is too big.",
+    "resumeToSmall": "File is too small.",
     "minLabel": "min",
     "maxLabel": "max",
     "supportedFileFormatsLabel": "Supported File Formats"

@@ -26,10 +26,15 @@ aside {
     > header {
         background-color: $sidebar-header-bg;
         height: $header-height;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        padding: 0 1.5em;
 
         > label {
             font-size: 1.8em;
             font-weight: 500;
+            width: auto;
         }
 
         > div.button-container {
