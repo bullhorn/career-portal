@@ -40,3 +40,4 @@ You will need the following things properly installed on your computer.
 ### "Nice-To-Have" Utilities
 * [NPM-Check-Updates](https://github.com/tjunnone/npm-check-updates) - Checks for updates of node modules with CLI
 * [Bower-Check-Updates](https://github.com/se-panfilov/bower-check-updates) - Checks for updates of bower dependencies with CLI
+* 
