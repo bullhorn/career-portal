@@ -19,5 +19,4 @@ script:
 
 after_success:
   - npm install codeclimate-test-reporter -g
-  - CODECLIMATE_REPO_TOKEN=process.env.CODECLIMATE_REPO_TOKEN
-  - codeclimate-test-reporter < reports/lcov/lcov.info
+  - CODECLIMATE_REPO_TOKEN=process.env.CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < reports/lcov/lcov.info
