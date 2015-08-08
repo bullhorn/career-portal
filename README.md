@@ -1,12 +1,12 @@
-# Bullhorn - Career Portal
+# Bullhorn Career Portal
 
 ## Prerequisites
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 * [Node.js](http://nodejs.org/)
-* Bower `npm install -g bower`
-* Gulp `npm install -g gulp`
+* Bower `npm install bower -g`
+* Gulp `npm install gulp -g`
 
 ## Installation
 * `git clone REPO`

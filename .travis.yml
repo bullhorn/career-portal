@@ -1,0 +1,18 @@
+language: node_js
+
+branches:
+  only:
+    - development
+
+before_script:
+  - npm install gulp -g
+  - npm install bower -g
+  - npm install codeclimate-test-reporter -g
+
+script:
+  - bower install
+  - gulp test
+  - gulp build
+
+after_script:
+  - CODECLIMATE_REPO_TOKEN=process.env.CODECLIMATE_REPO_TOKEN codeclimate < reports/lcov/lcov.info

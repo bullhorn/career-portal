@@ -1,4 +1,5 @@
 class CareerPortalModalController {
+    /* jshint -W072 */
     constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter) {
         'ngInject';
 
@@ -14,6 +15,7 @@ class CareerPortalModalController {
         this.ApplyService.initializeModel();
         this.closeModal();
     }
+    /* jshint +W072 */
 
     closeModal(applyForm) {
         this.SharedData.modalState = 'closed';

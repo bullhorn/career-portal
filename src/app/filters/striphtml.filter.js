@@ -13,12 +13,14 @@ class StripHtml {
                     if (semicolonIndex > 0) {
                         var entity = s.substring(i + 1, semicolonIndex);
                         if (entity.length > 1 && entity.charAt(0) === '#') {
+                            /* jshint -W073 */
                             if (entity.charAt(1) === 'x' || entity.charAt(1) === 'X') {
                                 ch = String.fromCharCode('0' + entity.substring(1));
-                            } //jshint ignore:line
+                            }
                             else {
                                 ch = String.fromCharCode(entity.substring(1));
-                            } //jshint ignore:line
+                            }
+                            /* jshint +W073 */
                         } else {
                             switch (entity) {
                                 case ' quot ':

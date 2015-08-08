@@ -1,11 +1,9 @@
 # Package/Dependencies
 lib/
-bower_components/
 node_modules/
 
 # Build Output
 dist/
-coverage/
 reports/
 
 # Transient Build Output
@@ -15,3 +13,4 @@ reports/
 # Others
 .DS_Store
 .idea
+.vs/
