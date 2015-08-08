@@ -10,7 +10,7 @@
         "angular-tooltips": "~0.1.18",
         "angular-touch": "~1.4.0",
         "angular-ui-router": "~0.2.15",
-        "bullhorn-icons": "git@github.com:bullhorn/bullhorn-icons.git#development",
+        "bullhorn-icons": "~1.0.1",
         "moment": "~2.10.5",
         "ng-fastclick": "~1.0.1",
         "ng-file-upload": "~6.0.2",
