@@ -2,7 +2,7 @@
 A Bullhorn Platform SDK sample. Allow candidates to search for and apply to jobs.
 
 [![Build Status](https://travis-ci.org/bullhorn/career-portal.svg?branch=development)](https://travis-ci.org/bullhorn/career-portal)
-[![Dev Dependency Status](https://david-dm.org/bullhorn/career-portal/dev-status.svg)](https://david-dm.org/bullhorn/career-portal#info=devDependencies)
+[![Dependency Status](https://gemnasium.com/bullhorn/career-portal.svg)](https://gemnasium.com/bullhorn/career-portal)
 [![Code Climate](https://codeclimate.com/github/bullhorn/career-portal/badges/gpa.svg)](https://codeclimate.com/github/bullhorn/career-portal)
 [![Test Coverage](https://codeclimate.com/github/bullhorn/career-portal/badges/coverage.svg)](https://codeclimate.com/github/bullhorn/career-portal/coverage)
 
