@@ -15,3 +15,4 @@ script:
 
 after_script:
   - CODECLIMATE_REPO_TOKEN=process.env.CODECLIMATE_REPO_TOKEN codeclimate < reports/lcov/lcov.info
+  
