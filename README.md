@@ -6,10 +6,6 @@ A Bullhorn Platform SDK sample. Allow candidates to search for and apply to jobs
 [![Code Climate](https://codeclimate.com/github/bullhorn/career-portal/badges/gpa.svg)](https://codeclimate.com/github/bullhorn/career-portal)
 [![Test Coverage](https://codeclimate.com/github/bullhorn/career-portal/badges/coverage.svg)](https://codeclimate.com/github/bullhorn/career-portal/coverage)
 
-[![Build Status](https://travis-ci.org/Microsoft/TypeScript.svg?branch=master)](https://travis-ci.org/Microsoft/TypeScript)
-[![npm version](https://badge.fury.io/js/typescript.svg)](http://badge.fury.io/js/typescript)
-[![Downloads](http://img.shields.io/npm/dm/TypeScript.svg)](https://npmjs.org/package/typescript)
-
 [Bullhorn Career Portal](http://www.bullhornt.com/) is the next-generation way to share jobs and source candidates from your Bullhorn ATS/CRM instance. Download, configure and host your own career portal, or fork the source code and make it your own.
 
 ## Releases
