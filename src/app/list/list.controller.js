@@ -15,7 +15,7 @@ class JobListController {
         var now = moment();
 
         if (now.diff(momentDate, 'days') > 1) {
-            return momentDate.format('MM/DD/YY h:mm a');
+            return momentDate.format('MM/DD/YY');
         }
         return momentDate.fromNow();
     }

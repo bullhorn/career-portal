@@ -28,7 +28,7 @@
                 </button>
             </div>
 
-            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo">
+            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo | orderBy:'location.address.city'">
                 <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" data-ng-checked="sidebar.hasLocationFilter(location)" data-ng-click="sidebar.addOrRemoveLocation(location)">
                 <label for="{{::location.address.city}},{{::location.address.state}}">{{::location.address.city}},&nbsp;{{::location.address.state}}</label>
                 <span>{{location.idCount}}</span>
