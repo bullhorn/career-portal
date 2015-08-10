@@ -9,8 +9,14 @@ class CareerPortalHeaderController {
 
     toggleFilters() {
         var $portalCanvas = document.querySelector('.portal-canvas');
+        var $mask = document.querySelector('#mask');
+
         if ($portalCanvas) {
             $portalCanvas.classList.toggle('show-nav');
+        }
+
+        if ($mask) {
+            $mask.classList.toggle('active');
         }
     }
 
