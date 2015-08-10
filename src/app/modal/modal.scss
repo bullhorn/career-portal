@@ -37,12 +37,16 @@
 
         > header {
             background: $primary;
-            padding: 1em 3em 2em 2em;
+            padding: 0.5em 3em 1.3em 1em;
             display: block;
             color: $white;
             height: auto;
             position: relative;
             text-align: left;
+
+            @include tablet() {
+                padding: 1em 3em 2em 2em;
+            }
 
             > section {
                 > h2 {
@@ -102,7 +106,7 @@
 
             > form.apply-form {
                 > div.form-field {
-                    margin: 1.5em 0;
+                    margin: 1em 0;
 
                     @include desktop() {
                         margin: 2em 0;
