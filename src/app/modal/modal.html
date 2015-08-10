@@ -62,7 +62,7 @@
                 <div class="upload-label">
                     <span class="field-label">
                         {{'modal.resumeFilePlaceholder' | i18n}}
-                        <i class="bhi-question" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseover click" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
+                        <i class="bhi-question" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter touchstart" data-tooltip-hide-trigger="mouseleave touchend" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
                     </span>
                     <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
                         {{modal.resumeUploadErrorMessage}}
