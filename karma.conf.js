@@ -14,7 +14,6 @@ function listFiles() {
 
     return wiredep(wiredepOptions).js
         .concat([
-            '.tmp/serve/app/index.module.js',
             'test/unit/**/*.spec.js',
             'test/unit/**/*.mock.js'
         ]);

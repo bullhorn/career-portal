@@ -1,14 +1,25 @@
 import JobDetailController from 'src/app/detail/detail.controller';
 import BaseConfig from 'src/app.json';
 
-beforeEach(angular.mock.module(function ($provide) {
-    $provide.constant('configuration', BaseConfig);
-}));
+beforeEach(function () {
+    angular.module('test', [])
+        .controller('JobDetailController', JobDetailController);
+});
 
 describe('Controller: JobDetailController', () => {
-    beforeEach(angular.mock.module('CareerPortal'));
+    var controller;
 
-    it('should exist', () => {
-        return true;
+    describe('Initial State', () => {
+        beforeEach(angular.mock.module('test', function ($provide) {
+
+        }));
+
+        beforeEach(inject(function (_JobDetailController_) {
+            controller = _JobDetailController_;
+        }));
+
+        it('should exist', () => {
+            expect(controller).toBeDefined();
+        })
     });
 });
