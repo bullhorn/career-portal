@@ -1,42 +1,14 @@
-'use strict';
+import JobDetailController from 'src/app/detail/detail.controller';
+import BaseConfig from 'src/app.json';
 
-describe('Controller: JobDetailController', function () {
-    beforeEach(function () {
-        // Mock configuration
-        module(function ($provide) {
-            $provide.constant('configuration', {
-                "acceptedResumeTypes": [
-                    "html",
-                    "text",
-                    "txt",
-                    "pdf",
-                    "doc",
-                    "docx",
-                    "rtf",
-                    "odt"
-                ],
-                "companyName": "Karma Company",
-                "defaultLocale": "en-US",
-                "localeSupported": [
-                    "en-US",
-                    "fr-FR"
-                ],
-                "minUploadSize": 1024,
-                "maxRelatedJobs": 5,
-                "maxUploadSize": 204800,
-                "service": {
-                    "batchSize": 500,
-                    "corpToken": "1hs",
-                    "port": 8181,
-                    "swimlane": "-qa"
-                }
-            });
-        });
+beforeEach(angular.mock.module(function ($provide) {
+    $provide.constant('configuration', BaseConfig);
+}));
 
-        module('CareerPortal');
-    });
+describe('Controller: JobDetailController', () => {
+    beforeEach(angular.mock.module('CareerPortal'));
 
-    it('should be defined', function () {
+    it('should exist', () => {
         return true;
     });
 });
