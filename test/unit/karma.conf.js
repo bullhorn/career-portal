@@ -1,23 +1,23 @@
 'use strict';
 
 var path = require('path');
-var conf = require('./build/conf');
+var conf = require('../../build/conf');
 
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
 function listFiles() {
-    var wiredepOptions = _.extend({}, conf.wiredep, {
+    var wiredepOptions = _.extend({}, '../../' + conf.wiredep, {
         dependencies: true,
         devDependencies: true
     });
 
     return wiredep(wiredepOptions).js
         .concat([
-            path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-            path.join(conf.paths.karma, '/**/*.spec.js'),
-            path.join(conf.paths.karma, '/**/*.mock.js'),
-            path.join(conf.paths.src, '/**/*.html')
+            path.join('../../' + conf.paths.tmp, '/serve/app/index.module.js'),
+            '**/*.spec.js',
+            '**/*.mock.js',
+            path.join('../../' + conf.paths.src, '/**/*.html')
         ]);
 }
 
