@@ -195,14 +195,6 @@
                         color: lighten($dark-bg, 20%);
                     }
 
-                    > .field-label {
-                        display: none;
-
-                        @include desktop() {
-                            display: inline-block;
-                        }
-                    }
-
                     > .error {
                         margin-top: 0;
                         float: right;
