@@ -21,7 +21,7 @@ class ShareService {
 
     get requestParams() {
         return this._.requestParams || (this._.requestParams = {
-                facebook: () => '?display=popup&app_id=' + this.config.keys.facebook + '&href=' + encodeURIComponent(window.location.href) + '&redirect_uri=' + encodeURIComponent(window.location.href),
+                facebook: () => '?display=popup&app_id=' + this.config.keys.facebook + '&href=' + encodeURIComponent(window.location.href) + '&redirect_uri=' + encodeURIComponent('https://www.facebook.com/'),
                 twitter: job => '?text=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
                 linkedin: job => '?mini=true&source=Bullhorn%20Carrer%20Portal&title=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
                 email: job => '?subject=' + encodeURIComponent(job.title) + '&body=' + this.description(job, window.location.href)

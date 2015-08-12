@@ -1,36 +1,74 @@
-# Bullhorn - Career Portal
+# Bullhorn Career Portal
+A Bullhorn Platform SDK sample. Allow candidates to search for and apply to jobs.
 
-## Prerequisites
-You will need the following things properly installed on your computer.
+[![Build Status](https://travis-ci.org/bullhorn/career-portal.svg?branch=development)](https://travis-ci.org/bullhorn/career-portal)
+[![Dependency Status](https://gemnasium.com/bullhorn/career-portal.svg)](https://gemnasium.com/bullhorn/career-portal)
+[![Code Climate](https://codeclimate.com/github/bullhorn/career-portal/badges/gpa.svg)](https://codeclimate.com/github/bullhorn/career-portal)
+[![Test Coverage](https://codeclimate.com/github/bullhorn/career-portal/badges/coverage.svg)](https://codeclimate.com/github/bullhorn/career-portal/coverage)
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/)
-* Bower `npm install -g bower`
-* Gulp `npm install -g gulp`
+[Bullhorn Career Portal](http://www.bullhornt.com/) is the next-generation way to share jobs and source candidates from your Bullhorn ATS/CRM instance. Download, configure and host your own career portal, or fork the source code and make it your own.
 
-## Installation
-* `git clone REPO`
-* `cd career-portal`
-* `npm install && bower install`
+## Releases
 
-## Running / Development
-* `gulp serve` - runs the client with live-reload
+[Latest Stable Version](https://github.com/bullhorn/career-portal/releases/tag/v0.9.1)
 
-## Before Committing
-* Make sure to write karma/protractor tests for any new code
-* Run `gulp test` - fix any errors
-* Run `gulp protractor` - fix any errors
-* Push!
+Prior Versions
+* [v0.9.0](https://github.com/bullhorn/career-portal/releases/tag/v0.9.0)
+* [v0.0.0](https://github.com/bullhorn/career-portal/releases/tag/v0.0.0)
 
-### All GULP Tasks Available
-* `gulp` or `gulp build` to build an optimized version of your application in `/dist`
-* `gulp serve` to launch a browser sync server on your source files (will also build the extension on changes too)
-* `gulp serve:dist` to launch a server on your optimized application
-* `gulp test` to launch your unit tests with Karma
-* `gulp test:auto` to launch your unit tests with Karma in watch mode
-* `gulp protractor` to launch your e2e tests with Protractor
-* `gulp protractor:dist` to launch your e2e tests with Protractor on the dist files
+## Contribute
 
-### "Nice-To-Have" Utilities
-* [NPM-Check-Updates](https://github.com/tjunnone/npm-check-updates) - Checks for updates of node modules with CLI
-* [Bower-Check-Updates](https://github.com/se-panfilov/bower-check-updates) - Checks for updates of bower dependencies with CLI
+There are many ways to [contribute](https://github.com/bullhorn/career-portal/blob/master/CONTRIBUTING.md) to Bullhorn Career Portal.
+* [Submit bugs](https://github.com/bullhorn/career-portal/issues) and help us verify fixes as they are checked in.
+* Review the [source code changes](https://github.com/bullhorn/career-portal/pulls).
+* [Contribute bug fixes](https://github.com/bullhorn/career-portal/blob/master/CONTRIBUTING.md).
+
+## Documentation
+
+*  [Hosting](http://www.bullhorn.com)
+*  [Bullhorn REST API Reference](http://developer.bullhorn.com/articles/getting_started)
+*  [Bullhorn Platform](http://bullhorn.github.io/platform/)
+*  [Homepage](http://www.bullhorn.com/)
+
+## Building
+
+In order to build the Bullhorn Career Portal, ensure that you have [Git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/) installed.
+
+Clone a copy of the repo:
+
+```
+git clone https://github.com/bullhorn/career-portal.git
+```
+
+Change to the Career Portal directory:
+
+```
+cd career-portal
+```
+
+Install build tools and dev dependencies:
+
+```
+npm install -g bower
+npm install -g gulp
+npm install
+bower install
+
+```
+
+Use one of the following to build and test:
+
+```
+gulp                 # Build an optimized version of Career Portal in `/dist`
+gulp build           # Build an optimized version of Career Portal in `/dist`
+gulp serve           # Launch a BrowserSync server on source files, building extensions on changes
+gulp serve:dist      # Launch a server on optimized version of Career Portal
+gulp test            # Execute unit tests with Karma
+gulp test:auto       # Execute unit tests with Karma in watch mode
+gulp protractor      # Execute e2e tests with Protractor
+gulp protractor:dist # Execute e2e tests with Protractor on build output
+```
+
+### Additional Utilities
+* [NPM-Check-Updates](https://github.com/tjunnone/npm-check-updates)        # Checks for updates of node modules with CLI
+* [Bower-Check-Updates](https://github.com/se-panfilov/bower-check-updates) # Checks for updates of bower dependencies with CLI

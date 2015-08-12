@@ -1,4 +1,5 @@
 class JobDetailController {
+    /* jshint -W072 */
     constructor($window, $location, ShareService, SearchService, SharedData, job, moment) {
         'ngInject';
 
@@ -16,6 +17,7 @@ class JobDetailController {
         // Set the view state
         this.SharedData.viewState = 'overview-open';
     }
+    /* jshint +W072 */
 
     shareFacebook(job) {
         return this.ShareService.facebook(job);

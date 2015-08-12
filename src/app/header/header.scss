@@ -38,6 +38,7 @@ header.app {
 
     > button.toggle-filters {
         display: inline-block;
+        z-index: $header-z-index + 1;
 
         > .badge {
             position: absolute;

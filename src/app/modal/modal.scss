@@ -14,13 +14,13 @@
         margin: auto;
         height: 100%;
         width: 100%;
-        max-width: 500px;
         background: $white;
         box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
         overflow: hidden;
         position: relative;
 
         @include tablet() {
+            max-width: 500px;
             margin: 80px auto;
             height: auto;
 
@@ -37,12 +37,16 @@
 
         > header {
             background: $primary;
-            padding: 1em 3em 2em 2em;
+            padding: 0.5em 3em 1.3em 1em;
             display: block;
             color: $white;
             height: auto;
             position: relative;
             text-align: left;
+
+            @include tablet() {
+                padding: 1em 3em 2em 2em;
+            }
 
             > section {
                 > h2 {
@@ -94,15 +98,18 @@
         }
 
         > div.main {
-            padding: 1em 1em 60px;
+            padding: 1em;
+            overflow: auto;
+            height: calc(100% - 60px - 120px);
 
             @include tablet() {
                 padding: 2em 2em;
+                height: auto;
             }
 
             > form.apply-form {
                 > div.form-field {
-                    margin: 1.5em 0;
+                    margin: 1em 0;
 
                     @include desktop() {
                         margin: 2em 0;
@@ -186,14 +193,6 @@
 
                     > i {
                         color: lighten($dark-bg, 20%);
-                    }
-
-                    > .field-label {
-                        display: none;
-
-                        @include desktop() {
-                            display: inline-block;
-                        }
                     }
 
                     > .error {

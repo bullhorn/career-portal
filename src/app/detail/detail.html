@@ -1,6 +1,6 @@
 <section class="job-detail">
     <div class="card apply" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
-        <span class="card-date">{{'common.addedLabel' | i18n}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
+        <span class="card-date" data-ng-if="detail.job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{::detail.getDisplayDate(detail.job.dateLastPublished)}}</span>
 
         <span class="card-title-category">
             <span class="card-title">{{::detail.job.title}}</span>

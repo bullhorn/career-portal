@@ -31,6 +31,10 @@ gulp.task('jenkins:build', function (done) {
     runSequence('clean', 'build', 'version', 'test:jenkins', 'report:plato', done);
 });
 
+gulp.task('travis:build', function (done) {
+    runSequence('clean', 'build', 'test:jenkins', done);
+});
+
 gulp.task('version', function () {
     var pkg = JSON.parse(fs.readFileSync('./package.json'));
     var data = '';

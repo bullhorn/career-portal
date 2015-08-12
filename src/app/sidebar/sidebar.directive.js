@@ -1,5 +1,5 @@
 class CareerPortalSidebarController {
-    constructor(SharedData, $location, SearchService, $timeout) {
+    constructor($scope, SharedData, $location, SearchService, $timeout) {
         'ngInject';
 
         this.SharedData = SharedData;
@@ -16,6 +16,14 @@ class CareerPortalSidebarController {
 
         // Set the grid state
         this.SharedData.gridState = 'list-view';
+
+        $scope.$watchCollection(angular.bind(this, function () {
+            return this.SearchService.searchParams.category;
+        }), this.updateFilterCountsAnonymous());
+
+        $scope.$watchCollection(angular.bind(this, function () {
+            return this.SearchService.searchParams.location;
+        }), this.updateFilterCountsAnonymous());
     }
 
     updateLocationLimitTo(value) {

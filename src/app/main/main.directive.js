@@ -4,6 +4,19 @@ class MainController {
 
         this.SharedData = SharedData;
     }
+
+    closeFilters() {
+        var $portalCanvas = document.querySelector('.portal-canvas');
+        var $mask = document.querySelector('#mask');
+
+        if ($portalCanvas) {
+            $portalCanvas.classList.remove('show-nav');
+        }
+
+        if ($mask) {
+            $mask.classList.remove('active');
+        }
+    }
 }
 
 class Main {

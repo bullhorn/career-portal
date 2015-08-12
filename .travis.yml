@@ -1,0 +1,22 @@
+language: node_js
+
+notifications:
+  slack:
+    rooms:
+      - secure: "DdtU4qimOtkilUhk3JbKgqmceemoeZ6NgBOK408wi/UP+YNKc1g/zbh0cRF8xoMxUTKOnV1xn7p5MbXRkLbG0jbLiSSdZNkte83GKI+rHmHq5IF+wAcXrwLO+oSFaUDdkQREqMwgPoiQw1OhrMROWj2IW0ynbv08Lr9TfN+jlK4Oj4JEIOb2xNSHgqJexBWKR+qg3JPdSL2kbY6J1PZZ6gqvopQUYOO0toziyUiqdcVpzPBxn6fufL9URybOJdLJI9qnosBNCzzhe8NWoqxNwCLCnF4Pu01249edmtViFFO+ayipfcF+qwiPAcWXgXYl1raRA6h59WDN+Qv/XjHZDXZTJccSXi7tX1J+OelF2S3Tz4HgAKpn+cbmm6VwtrNdsRxHIxuRCaAPBp/SciuLoF0NtwGtXpes1T2cFku1lPDV3/j6FVeMJUHCYF7birjRroY1jveURJxRaKDclmO5UgxYMx2uiO9vltNRgsaKtBtFvkA5oBHxwm6guCRlDI8Vz6VbgvRfA9JC4Cbnoeokmrrea+gcXS35Lh+FdjEPtpSbzeajHwZRxEOmSjwTF/TDH6RItB41jv5YNuTMt+E8uW3585NVcgILQMNFThP5WadwZVRuzVt/3/Zpdx9n/uGqubBgV6UMT+mhuHmyV6NlyO71s4aAMv/XW0zVz6hvggc="
+
+branches:
+  only:
+    - development
+
+before_script:
+  - npm install gulp -g
+  - npm install bower -g
+
+script:
+  - bower install
+  - gulp travis:build
+
+after_success:
+  - npm install codeclimate-test-reporter -g
+  - CODECLIMATE_REPO_TOKEN=process.env.CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < reports/lcov/lcov.info
