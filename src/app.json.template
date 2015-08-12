@@ -11,7 +11,7 @@
     ],
     "companyName": "[ COMPANY NAME HERE ]",
     "defaultLocale": "en-US",
-    "localeSupported": [
+    "supportedLocales": [
         "en-US",
         "fr-FR"
     ],
