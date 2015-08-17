@@ -11,6 +11,7 @@ class CareerPortalModalController {
         this.locale = locale;
         this.$filter = $filter;
         this.isMobile = detectUtils.isMobile();
+        this.isIOS = detectUtils.isIOS();
 
         // Initialize the model
         this.ApplyService.initializeModel();

@@ -59,7 +59,7 @@
                         <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" data-i18n-attr="{placeholder: 'modal.phonePlaceholder'}">
                     </div>
                 </div>
-                <div class="upload-label">
+                <div class="upload-label" data-ng-if="!modal.isIOS">
                     <span class="field-label">
                         {{'modal.resumeFilePlaceholder' | i18n}}
                         <i class="bhi-question" data-ng-if="!modal.isMobile" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
@@ -73,13 +73,13 @@
 
                     <div class="clearfix"></div>
                 </div>
-                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.minUploadSize" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);">
+                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.minUploadSize" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);" data-ng-if="!modal.isIOS">
                     <i data-ng-show="!modal.ApplyService.form.resumeInfo.name" class="bhi-publish"></i>
                     <i data-ng-show="modal.ApplyService.form.resumeInfo.name" class="bhi-resume"></i>
                     <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{'modal.uploadResumeFile' | i18n}}</span>
                     <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
                 </div>
-                <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
+                <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError" data-ng-if="!modal.isIOS">
                     <i class="bhi-caution"></i> <span>{{modal.ApplyService.ajaxError}}</span>
                 </span>
             </form>
