@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, moment) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, moment, detectUtils) {
         'ngInject';
 
         this.moment = moment;
@@ -10,6 +10,8 @@ class JobDetailController {
         this.ShareService = ShareService;
         this.SearchService = SearchService;
         this.job = job;
+        this.isIOS = detectUtils.isIOS();
+
 
         // Load the related jobs
         this.loadRelatedJobs();

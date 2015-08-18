@@ -14,7 +14,7 @@
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">|</span>
         <span class="card-type">{{::detail.job.employmentType}}</span>
 
-        <button class="apply" data-ng-click="detail.applyModal()">{{'detail.applyButton' | i18n}}</button>
+        <button class="apply" data-ng-click="detail.applyModal()" data-ng-if="!detail.isIOS">{{'detail.applyButton' | i18n}}</button>
 
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
 
