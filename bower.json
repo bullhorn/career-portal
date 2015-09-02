@@ -1,6 +1,6 @@
 {
     "name": "CareerPortal",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "dependencies": {
         "angular": "~1.4.3",
         "angular-animate": "~1.4.3",
