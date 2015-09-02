@@ -44,7 +44,7 @@ deferredBootstrapper.bootstrap({
     resolve: {
         configuration: function ($http) {
             'ngInject';
-            return $http.get('/app.json');
+            return $http.get('./app.json');
         }
     }
 });
