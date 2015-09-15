@@ -68,8 +68,8 @@ gulp protractor:dist # Execute e2e tests with Protractor on build output
 Running and building with configuration
 
 ```
-gulp --corpToken [CORP_TOKEN] --sl [SWIMLANE] --companyName [COMPANY_NAME]
-gulp serve --corpToken [CORP_TOKEN] --sl [SWIMLANE] --companyName [COMPANY_NAME]
+gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
+gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
 ```
 
 ## Helpful Utilities
