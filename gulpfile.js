@@ -8,6 +8,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 var argv = require('yargs').argv;
 var dateFormat = require('dateformat');
+var chalk = require('chalk');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -33,6 +34,30 @@ gulp.task('jenkins:build', function (done) {
 
 gulp.task('travis:build', function (done) {
     runSequence('clean', 'build', 'test:jenkins', done);
+});
+
+gulp.task('config:app', function () {
+    var appConfig = JSON.parse(fs.readFileSync('./src/app.json.template'));
+
+    if (argv.corp) {
+        appConfig.service.corpToken = argv.corp;
+    } else {
+        console.log(chalk.red('Argument for corpToken not found, output might not be setup correctly. Supply the corpToken via the --corp flag.'));
+    }
+
+    if (argv.sl) {
+        appConfig.service.swimlane = argv.sl;
+    } else {
+        console.log(chalk.red('Argument for swimlane not found, output might not be setup correctly. Supply the swimlane via the --sl flag.'));
+    }
+
+    if (argv.companyName) {
+        appConfig.companyName = argv.companyName;
+    } else {
+        console.log(chalk.red('Argument for companyName not found, output might not be setup correctly. Supply the companyName via the --companyName flag.'));
+    }
+
+    fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
 
 gulp.task('version', function () {

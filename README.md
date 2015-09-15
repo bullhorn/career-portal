@@ -65,6 +65,13 @@ gulp protractor      # Execute e2e tests with Protractor
 gulp protractor:dist # Execute e2e tests with Protractor on build output
 ```
 
+Running and building with configuration
+
+```
+gulp --corpToken [CORP_TOKEN] --sl [SWIMLANE] --companyName [COMPANY_NAME]
+gulp serve --corpToken [CORP_TOKEN] --sl [SWIMLANE] --companyName [COMPANY_NAME]
+```
+
 ## Helpful Utilities
 
 * **[NPM-Check-Updates](https://github.com/tjunnone/npm-check-updates)** - checks for updates of node modules with CLI

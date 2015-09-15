@@ -44,7 +44,7 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe($.rev())
         .pipe(jsFilter)
         .pipe($.ngAnnotate())
-        .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+        .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe($.csso())
@@ -79,14 +79,14 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
-gulp.task('other', function () {
+gulp.task('other', ['config:app'], function () {
     var fileFilter = $.filter(function (file) {
         return file.stat.isFile();
     });
 
     return gulp.src([
         path.join(conf.paths.src, '/**/*'),
-        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,template}')
     ])
         .pipe(fileFilter)
         .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
