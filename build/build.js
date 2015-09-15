@@ -79,7 +79,7 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
-gulp.task('other', function () {
+gulp.task('other', ['config:app'], function () {
     var fileFilter = $.filter(function (file) {
         return file.stat.isFile();
     });

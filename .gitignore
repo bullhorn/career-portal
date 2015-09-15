@@ -2,6 +2,9 @@
 lib/
 node_modules/
 
+# Config Files
+src/app.json
+
 # Build Output
 dist/
 reports/
