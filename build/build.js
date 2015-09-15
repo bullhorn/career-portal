@@ -44,7 +44,7 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe($.rev())
         .pipe(jsFilter)
         .pipe($.ngAnnotate())
-        .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+        .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe($.csso())
@@ -86,7 +86,7 @@ gulp.task('other', function () {
 
     return gulp.src([
         path.join(conf.paths.src, '/**/*'),
-        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,template}')
     ])
         .pipe(fileFilter)
         .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
