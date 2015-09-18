@@ -29,11 +29,11 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('jenkins:build', function (done) {
-    runSequence('clean', 'build', 'version', 'test:jenkins', 'report:plato', done);
+    runSequence('clean', 'test', 'build', 'version', 'report:plato', done);
 });
 
 gulp.task('travis:build', function (done) {
-    runSequence('clean', 'build', 'test:jenkins', done);
+    runSequence('clean', 'test', 'build', done);
 });
 
 gulp.task('config:app', function () {

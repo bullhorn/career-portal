@@ -43,11 +43,14 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe(assets = $.useref.assets())
         .pipe($.rev())
         .pipe(jsFilter)
-        .pipe($.ngAnnotate())
+        .pipe($.sourcemaps.init())
         .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
+        .pipe($.sourcemaps.write('maps'))
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
-        .pipe($.csso())
+        .pipe($.sourcemaps.init())
+        .pipe($.minifyCss({processImport: false}))
+        .pipe($.sourcemaps.write('maps'))
         .pipe(cssFilter.restore)
         .pipe(assets.restore())
         .pipe($.useref())
@@ -92,8 +95,8 @@ gulp.task('other', ['config:app'], function () {
         .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
-gulp.task('clean', function (done) {
-    $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/'), conf.paths.zip], done);
+gulp.task('clean', function () {
+    $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/'), conf.paths.zip]);
 });
 
 gulp.task('build', ['html', 'fonts', 'other']);
