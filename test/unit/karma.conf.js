@@ -6,6 +6,10 @@ var conf = require('../../build/conf');
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
+var pathSrcHtml = [
+    path.join('../../' + conf.paths.src, '/**/*.html')
+];
+
 function listFiles() {
     var wiredepOptions = _.extend({}, '../../' + conf.wiredep, {
         dependencies: true,
@@ -14,11 +18,9 @@ function listFiles() {
 
     return wiredep(wiredepOptions).js
         .concat([
-            path.join('../../' + conf.paths.tmp, '/serve/app/index.module.js'),
-            '**/*.spec.js',
-            '**/*.mock.js',
-            path.join('../../' + conf.paths.src, '/**/*.html')
-        ]);
+            path.join('../../' + conf.paths.tmp, '/serve/app/index.module.js')
+        ])
+        .concat(pathSrcHtml);
 }
 
 module.exports = function (config) {
@@ -35,18 +37,52 @@ module.exports = function (config) {
             moduleName: 'CareerPortal'
         },
 
-        logLevel: 'INFO',
+        logLevel: 'WARN',
 
         frameworks: ['jasmine'],
 
-        //preprocessors: {
-        //    'src/app/**/*.js': ['coverage']
-        //},
+        browsers: ['PhantomJS'],
 
-        reporters: ['progress'],
+        plugins: [
+            'karma-phantomjs-launcher',
+            'karma-coverage',
+            'karma-jasmine',
+            'karma-ng-html2js-preprocessor'
+        ],
 
-        browsers: ['PhantomJS']
+        coverageReporter: {
+            type: 'html',
+            reporters: [
+                {type: 'html', dir: '../../reports', subdir: 'coverage'},
+                {type: 'lcov', dir: '../../reports', subdir: 'lcov'}
+            ]
+        },
+
+        reporters: ['progress']
     };
+
+    // This is the default preprocessors configuration for a usage with Karma cli
+    // The coverage preprocessor in added in gulp/unit-test.js only for single tests
+    // It was not possible to do it there because karma doesn't let us now if we are
+    // running a single test or not
+    configuration.preprocessors = {};
+    pathSrcHtml.forEach(function (path) {
+        configuration.preprocessors[path] = ['ng-html2js'];
+    });
+
+    // This block is needed to execute Chrome on Travis
+    // If you ever plan to use Chrome and Travis, you can keep it
+    // If not, you can safely remove it
+    // https://github.com/karma-runner/karma/issues/1144#issuecomment-53633076
+    if (configuration.browsers[0] === 'Chrome' && process.env.TRAVIS) {
+        configuration.customLaunchers = {
+            'chrome-travis-ci': {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        };
+        configuration.browsers = ['chrome-travis-ci'];
+    }
 
     config.set(configuration);
 };

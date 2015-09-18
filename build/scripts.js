@@ -5,21 +5,16 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var browserSync = require('browser-sync');
+var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
-function webpack(watch, callback) {
+function webpackWrapper(watch, test, callback) {
     var webpackOptions = {
         watch: watch,
         module: {
-            preLoaders: [
-                {test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'},
-                {test: /\.js$/, exclude: /node_modules/, loader: 'jscs-loader'}
-            ],
-            loaders: [
-                {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-                {test: /\.json$/, exclude: /node_modules/, loader: 'json-loader'}
-            ]
+            preLoaders: [{test: /\.js$/, exclude: /node_modules/, loaders: ['jshint-loader', 'jscs-loader']}],
+            loaders: [{test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader']}]
         },
         output: {filename: 'index.module.js'}
     };
@@ -45,15 +40,30 @@ function webpack(watch, callback) {
         }
     };
 
-    return gulp.src(path.join(conf.paths.src, '/app/index.module.js'))
-        .pipe($.webpack(webpackOptions, null, webpackChangeHandler))
+    var sources = [path.join(conf.paths.src, '/app/index.module.js')];
+
+    if (test) {
+        sources.push(path.join(conf.paths.karma, '/**/*.spec.js'));
+        sources.push(path.join(conf.paths.tmp, '/partials/*.js'));
+    }
+
+    return gulp.src(sources)
+        .pipe(webpack(webpackOptions, null, webpackChangeHandler))
         .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
 gulp.task('scripts', function () {
-    return webpack(false);
+    return webpackWrapper(false, false);
 });
 
 gulp.task('scripts:watch', ['scripts'], function (callback) {
-    return webpack(true, callback);
+    return webpackWrapper(true, false, callback);
+});
+
+gulp.task('scripts:test', ['partials'], function () {
+    return webpackWrapper(false, true);
+});
+
+gulp.task('scripts:test-watch', ['scripts'], function (callback) {
+    return webpackWrapper(true, true, callback);
 });

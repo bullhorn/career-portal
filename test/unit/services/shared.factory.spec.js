@@ -6,16 +6,10 @@ beforeEach(() => {
     });
 });
 
-describe('Controller: JobDetailController', () => {
-    let vm;
-
+describe('Factory: SharedData', () => {
     beforeEach(angular.mock.module('CareerPortal'));
 
-    beforeEach(inject(($controller) => {
-        vm = $controller('JobDetailController');
+    it('should be registered', inject(SharedData => {
+        expect(SharedData).not.toEqual(null);
     }));
-
-    it('blah', () => {
-        expect(true);
-    });
 });
