@@ -28,4 +28,5 @@ script:
   - gulp travis:build
 
 after_success:
+  - npm install codeclimate-test-reporter -g
   - codeclimate-test-reporter < reports/lcov/lcov.info
