@@ -10,7 +10,7 @@ function localeConfig(configuration, localeConf, localeSupported) {
     localeConf.observableAttrs = new RegExp('^data-(?!ng-|i18n)');
     localeConf.delimiter = '::';
 
-    localeSupported.push(...configuration.localeSupported);
+    localeSupported.concat(configuration.supportedLocales);
 }
 
 export default localeConfig;
