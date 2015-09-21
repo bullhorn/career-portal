@@ -16,11 +16,10 @@ branches:
     - master
 
 before_script:
-  - npm install gulp -g
-  - npm install bower -g
+  - npm install -g gulp bower
+  - npm install
 
 script:
-  - bower install
   - gulp travis:build
 
 after_success:
