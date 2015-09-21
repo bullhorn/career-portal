@@ -1,6 +1,8 @@
 {
     "jobDescriptionHeading": "description De L'Emploi",
     "applyButton": "appliquer",
+    "sendButton": "Envoyer",
+    "iosUploadWarning": "S'il vous plaît voir cette offre sur notre site de bureau pour télécharger un CV et postuler directement. En attendant, nous vous enverrons un lien vers cet emploi pour un accès facile.",
     "relatedLabel": "Emplois",
     "jobsLabel": "connexes",
     "viewAllJobsLabel": "Voir tous les emplois dans cette catégorie",

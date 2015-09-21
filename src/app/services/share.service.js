@@ -36,8 +36,9 @@ class ShareService {
         return 'Check out this ' + job.title + ' job!';
     }
 
-    emailLink(job) {
-        return 'mailto:' + this.requestParams.email(job);
+    emailLink(job, toEmail) {
+        toEmail = toEmail || '';
+        return 'mailto:' + toEmail + this.requestParams.email(job);
     }
 
     facebook(job) {

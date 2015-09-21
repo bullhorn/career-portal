@@ -11,6 +11,7 @@ class JobDetailController {
         this.SearchService = SearchService;
         this.job = job;
         this.isIOS = detectUtils.isIOS();
+        this.email = '';
 
 
         // Load the related jobs
@@ -33,8 +34,8 @@ class JobDetailController {
         return this.ShareService.linkedin(job);
     }
 
-    emailLink(job) {
-        return this.ShareService.emailLink(job);
+    emailLink(job, toEmail) {
+        return this.ShareService.emailLink(job, toEmail);
     }
 
     print() {

@@ -3,5 +3,6 @@
     "shareLabel": "Partager",
     "addedLabel": "Ajouté",
     "noDataHeading": "Oh Non!",
-    "hereLabel": "Ici."
+    "hereLabel": "Ici.",
+    "emailPlaceholder": "email@domain.com"
 }
