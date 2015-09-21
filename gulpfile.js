@@ -57,6 +57,10 @@ gulp.task('config:app', function () {
         console.log(chalk.red('Argument for companyName not found, output might not be setup correctly. Supply the companyName via the --companyName flag.'));
     }
 
+    if (argv.port) {
+        appConfig.service.port = argv.port;
+    }
+
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
 
