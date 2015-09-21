@@ -1,42 +1,15 @@
-'use strict';
-
-describe('Filter: StripHTML', function () {
-    beforeEach(function () {
-        // Mock configuration
-        module(function ($provide) {
-            $provide.constant('configuration', {
-                "acceptedResumeTypes": [
-                    "html",
-                    "text",
-                    "txt",
-                    "pdf",
-                    "doc",
-                    "docx",
-                    "rtf",
-                    "odt"
-                ],
-                "companyName": "Karma Company",
-                "defaultLocale": "en-US",
-                "localeSupported": [
-                    "en-US",
-                    "fr-FR"
-                ],
-                "minUploadSize": 1024,
-                "maxRelatedJobs": 5,
-                "maxUploadSize": 204800,
-                "service": {
-                    "batchSize": 500,
-                    "corpToken": "1hs",
-                    "port": 8181,
-                    "swimlane": "-qa"
-                }
-            });
-        });
-
-        module('CareerPortal');
+// Mock the providers
+beforeEach(() => {
+    angular.mock.module(($provide) => {
+        $provide.constant('configuration', {someUrl: '/dummyValue'});
+        $provide.value('job', {});
     });
+});
 
-    it('should be defined', function () {
-        return true;
+describe('Filter: StripHTML', () => {
+    beforeEach(angular.mock.module('CareerPortal'));
+
+    it('TODO', () => {
+        expect(true);
     });
 });

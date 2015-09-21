@@ -1,42 +1,29 @@
-'use strict';
-
-describe('Directive: CareerPortalModal', function () {
-    beforeEach(function () {
-        // Mock configuration
-        module(function ($provide) {
-            $provide.constant('configuration', {
-                "acceptedResumeTypes": [
-                    "html",
-                    "text",
-                    "txt",
-                    "pdf",
-                    "doc",
-                    "docx",
-                    "rtf",
-                    "odt"
-                ],
-                "companyName": "Karma Company",
-                "defaultLocale": "en-US",
-                "localeSupported": [
-                    "en-US",
-                    "fr-FR"
-                ],
-                "minUploadSize": 1024,
-                "maxRelatedJobs": 5,
-                "maxUploadSize": 204800,
-                "service": {
-                    "batchSize": 500,
-                    "corpToken": "1hs",
-                    "port": 8181,
-                    "swimlane": "-qa"
-                }
-            });
-        });
-
-        module('CareerPortal');
-    });
-
-    it('should be defined', function () {
-        return true;
-    });
-});
+//// Mock the providers
+//beforeEach(() => {
+//    angular.mock.module(($provide) => {
+//        $provide.constant('configuration', {someUrl: '/dummyValue'});
+//        $provide.value('job', {})
+//    });
+//});
+//
+//describe('Directive: CareerPortalModal', () => {
+//    let vm;
+//    let element;
+//
+//    beforeEach(angular.mock.module('CareerPortal'));
+//
+//    beforeEach(inject(($compile, $rootScope) => {
+//
+//        element = angular.element(`
+//            <career-portal-modal></career-portal-modal>
+//        `);
+//
+//        $compile(element)($rootScope.$new());
+//        $rootScope.$digest();
+//        vm = element.isolateScope().vm;
+//    }));
+//
+//    it('should be compiled', () => {
+//        expect(element.html()).not.toEqual(null);
+//    });
+//});
