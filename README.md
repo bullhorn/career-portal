@@ -1,7 +1,7 @@
 # Bullhorn Career Portal
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bullhorn/career-portal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Build Status](https://travis-ci.org/bullhorn/career-portal.svg?branch=development)](https://travis-ci.org/bullhorn/career-portal)
+[![Build Status](https://travis-ci.org/bullhorn/career-portal.svg)](https://travis-ci.org/bullhorn/career-portal)
 [![Dependency Status](https://gemnasium.com/bullhorn/career-portal.svg)](https://gemnasium.com/bullhorn/career-portal)
 [![Code Climate](https://codeclimate.com/github/bullhorn/career-portal/badges/gpa.svg)](https://codeclimate.com/github/bullhorn/career-portal)
 [![Test Coverage](https://codeclimate.com/github/bullhorn/career-portal/badges/coverage.svg)](https://codeclimate.com/github/bullhorn/career-portal/coverage)
