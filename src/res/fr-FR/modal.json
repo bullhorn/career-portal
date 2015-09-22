@@ -12,7 +12,6 @@
     "firstNameValidation": "S'il vous plaît entrer votre prénom.",
     "lastNamePlaceholder": "Nom De Famille",
     "lastNameValidation": "S'il vous plaît, entrez votre nom de famille.",
-    "emailPlaceholder": "Email@domain.com",
     "emailValidationRequired": "S'il vous plaît entrer votre e-mail .",
     "emailValidationFormat": "S'il vous plaît entrer une adresse email valide.",
     "phonePlaceholder": "Téléphone mobile (Facultatif)",
