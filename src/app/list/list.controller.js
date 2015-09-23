@@ -1,23 +1,12 @@
 class JobListController {
-    constructor(SharedData, SearchService, moment) {
+    constructor(SharedData, SearchService) {
         'ngInject';
 
         this.SearchService = SearchService;
-        this.moment = moment;
         this.SharedData = SharedData;
 
         // Set the view state
         this.SharedData.viewState = 'overview-closed';
-    }
-
-    getDisplayDate(date) {
-        var momentDate = this.moment(date);
-        var now = moment();
-
-        if (now.diff(momentDate, 'days') > 1) {
-            return momentDate.format('MM/DD/YY');
-        }
-        return momentDate.fromNow();
     }
 
     loadMoreData() {

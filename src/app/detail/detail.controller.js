@@ -1,9 +1,8 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, moment, detectUtils) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils) {
         'ngInject';
 
-        this.moment = moment;
         this.$window = $window;
         this.$location = $location;
         this.SharedData = SharedData;
@@ -86,16 +85,6 @@ class JobDetailController {
         this.SearchService.findJobs();
 
         this.$location.path('/jobs');
-    }
-
-    getDisplayDate(date) {
-        var momentDate = this.moment(date);
-        var now = moment();
-
-        if (now.diff(momentDate, 'days') > 1) {
-            return momentDate.format('MM/DD/YY h:mm a');
-        }
-        return momentDate.fromNow();
     }
 }
 
