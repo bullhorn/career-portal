@@ -24,8 +24,21 @@ class ShareService {
                 facebook: () => '?display=popup&app_id=' + this.config.keys.facebook + '&href=' + encodeURIComponent(window.location.href) + '&redirect_uri=' + encodeURIComponent('https://www.facebook.com/'),
                 twitter: job => '?text=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
                 linkedin: job => '?mini=true&source=Bullhorn%20Carrer%20Portal&title=' + encodeURIComponent(this.description(job)) + '&url=' + encodeURIComponent(window.location.href),
-                email: job => '?subject=' + encodeURIComponent(job.title) + '&body=' + this.description(job, window.location.href)
+                email: job => '?subject=' + encodeURIComponent(job.title) + '&body=' + this.description(job, window.location.href),
+                additionalEmailInfo: job => '?subject=' + encodeURIComponent(job.title) + '&body=' + this.additionalEmailInfo(job, window.location.href)
             });
+    }
+
+    sendEmailLink(job, email) {
+        email = email || '';
+        return 'mailto:' + email + this.requestParams.additionalEmailInfo(job);
+    }
+
+    additionalEmailInfo(job, url) {
+        return encodeURIComponent('This is an automated email from Bullhorn Career Portal! Please view this job on your desktop to attach a resume and apply. ' + url + '\n' +
+            'Job Info: ' + job.title + '\n' +
+            job.publishedCategory.name + '\n' +
+            job.address.city + ', ' + job.address.state + '\n');
     }
 
     description(job, url) {
@@ -36,9 +49,8 @@ class ShareService {
         return 'Check out this ' + job.title + ' job!';
     }
 
-    emailLink(job, toEmail) {
-        toEmail = toEmail || '';
-        return 'mailto:' + toEmail + this.requestParams.email(job);
+    emailLink(job) {
+        return 'mailto:' + this.requestParams.email(job);
     }
 
     facebook(job) {
