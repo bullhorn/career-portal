@@ -22,7 +22,7 @@
 
         <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
             <div class="filter-section-header">
-                <h4>{{'sidebar.locationSectionHeading' | i18n}}</h4>
+                <h4>{{'common.locationSectionHeading' | i18n}}</h4>
                 <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
                     <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
                 </button>
@@ -43,7 +43,7 @@
         </section>
         <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
             <div class="filter-section-header">
-                <h4>{{'sidebar.categorySectionHeading' | i18n}}</h4>
+                <h4>{{'common.categorySectionHeading' | i18n}}</h4>
                 <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
                     <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
                 </button>
