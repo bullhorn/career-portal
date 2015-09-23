@@ -36,7 +36,7 @@
     </div>
     <div class='send' data-ng-if="detail.isIOS">
         <input class="email" type="text" data-ng-model="detail.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
-        <a class="send" data-ng-href="{{detail.emailLink(detail.job, detail.email)}}">{{'detail.sendButton' | i18n}}</a>
+        <a class="send" data-ng-href="{{detail.sendEmailLink(detail.job, detail.email)}}">{{'detail.sendButton' | i18n}}</a>
     </div>
     <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
         <div class="job-heading">

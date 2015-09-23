@@ -13,29 +13,50 @@ describe('Service: ShareService', () => {
         expect(ShareService).not.toEqual(null);
     }));
 
-    describe('Function: emailLink', () => {
+    describe('Function: sendEmailLink', () => {
 
-        it('should insert empty string after mailto: if the toEmail field is undefined', inject(ShareService => {
+        it('should insert empty string after mailto: if the email field is undefined', inject(ShareService => {
             let job = {
-                title: 'My Job Title'
+                title: 'My Job Title',
+                publishedCategory: {
+                    name: 'Category Name'
+                },
+                address: {
+                    city: 'Topeka',
+                    state: 'KS'
+                }
             };
-            let emailLink = ShareService.emailLink(job, undefined);
+            let emailLink = ShareService.sendEmailLink(job, undefined);
             expect(emailLink).toContain('mailto:?subject=My%20Job%20Title');
         }));
 
-        it('should insert empty string after mailto: if the toEmail field is null', inject(ShareService => {
+        it('should insert empty string after mailto: if the email field is null', inject(ShareService => {
             let job = {
-                title: 'My Job Title'
+                title: 'My Job Title',
+                publishedCategory: {
+                    name: 'Category Name'
+                },
+                address: {
+                    city: 'Topeka',
+                    state: 'KS'
+                }
             };
-            let emailLink = ShareService.emailLink(job, null);
+            let emailLink = ShareService.sendEmailLink(job, null);
             expect(emailLink).toContain('mailto:?subject=My%20Job%20Title');
         }));
 
         it('should insert the email address after mailto:', inject(ShareService => {
             let job = {
-                title: 'My Job Title'
+                title: 'My Job Title',
+                publishedCategory: {
+                    name: 'Category Name'
+                },
+                address: {
+                    city: 'Topeka',
+                    state: 'KS'
+                }
             };
-            let emailLink = ShareService.emailLink(job, 'example@test.com');
+            let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).toContain('mailto:example@test.com?subject=My%20Job%20Title');
         }));
     });

@@ -34,8 +34,12 @@ class JobDetailController {
         return this.ShareService.linkedin(job);
     }
 
-    emailLink(job, toEmail) {
-        return this.ShareService.emailLink(job, toEmail);
+    sendEmailLink() {
+        return this.ShareService.sendEmailLink(this.job, this.email);
+    }
+
+    emailLink(job) {
+        return this.ShareService.emailLink(job);
     }
 
     print() {
