@@ -4,7 +4,7 @@
     <div class="cards">
         <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
             <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}">
-                <span class="card-date" data-ng-if="job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{::list.getDisplayDate(job.dateLastPublished)}}</span>
+                <span class="card-date" data-ng-if="job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{job.dateLastPublished | displayDate}}</span>
 
                 <span class="card-title-category">
                     <span class="card-title">{{::job.title}}</span>

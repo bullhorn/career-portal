@@ -17,6 +17,7 @@ import SharedData from './services/shared.factory';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
+import DisplayDateFilter from './filters/displayDate.filter';
 
 angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng.deviceDetector', 'ng-fastclick', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'ngLocalize.Events'])
     .constant('moment', moment)
@@ -32,6 +33,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .controller('JobDetailController', JobDetailController)
     .filter('stripHtml', () => new StripHtmlFilter())
     .filter('omitFilters', () => new OmitFiltersFilter())
+    .filter('displayDate', DisplayDateFilter)
     .factory('SharedData', () => new SharedData())
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
