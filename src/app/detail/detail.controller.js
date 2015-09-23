@@ -25,7 +25,7 @@ class JobDetailController {
     sendEmailLink() {
         return this.ShareService.sendEmailLink(this.job, this.email);
     }
-    
+
     shareFacebook(job) {
         return this.ShareService.facebook(job);
     }

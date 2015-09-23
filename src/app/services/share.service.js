@@ -35,7 +35,7 @@ class ShareService {
     additionalEmailInfo(job) {
         var body = '\n';
         if (job.title) {
-            body += '\nTitle: ' + job.title;
+            body += '\nTitle: ' + this.locale.getString('common.jobsLabel');
         }
 
         if (job.publishedCategory && job.publishedCategory.name) {
