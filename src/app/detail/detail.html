@@ -19,7 +19,7 @@
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
 
         <div class="related-jobs" data-ng-if="detail.relatedJobs.length !== 0">
-            <h5>{{'detail.relatedLabel' | i18n}} {{::detail.job.publishedCategory.name}} {{'detail.jobsLabel' | i18n}}</h5>
+            <h5>{{'detail.relatedLabel' | i18n}} {{::detail.job.publishedCategory.name}} {{'common.jobsLabel' | i18n}}</h5>
 
             <div class="related-job" data-ng-repeat="job in detail.relatedJobs">
                 <a ng-href="#/jobs/{{::job.id}}">{{::job.title}}</a>

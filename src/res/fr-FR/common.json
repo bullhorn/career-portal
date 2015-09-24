@@ -4,5 +4,8 @@
     "addedLabel": "Ajouté",
     "noDataHeading": "Oh Non!",
     "hereLabel": "Ici.",
-    "emailPlaceholder": "email@domain.com"
+    "emailPlaceholder": "email@domain.com",
+    "locationSectionHeading": "emplacement",
+    "categorySectionHeading": "catégorie",
+    "jobsLabel": "connexes"
 }

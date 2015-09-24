@@ -21,6 +21,10 @@ class JobDetailController {
     }
     /* jshint +W072 */
 
+    sendEmailLink() {
+        return this.ShareService.sendEmailLink(this.job, this.email);
+    }
+
     shareFacebook(job) {
         return this.ShareService.facebook(job);
     }
@@ -31,10 +35,6 @@ class JobDetailController {
 
     shareLinkedin(job) {
         return this.ShareService.linkedin(job);
-    }
-
-    sendEmailLink() {
-        return this.ShareService.sendEmailLink(this.job, this.email);
     }
 
     emailLink(job) {
