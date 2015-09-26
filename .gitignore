@@ -4,6 +4,7 @@ node_modules/
 
 # Config Files
 src/app.json
+src/app/index.translations.js
 
 # Build Output
 dist/

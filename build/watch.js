@@ -25,10 +25,13 @@ gulp.task('watch', ['scripts:watch', 'inject'], function () {
         }
     });
 
+    gulp.watch(path.join(conf.paths.src, '/i18n/**/*.json'), ['translations']);
+
+    gulp.watch(path.join(conf.paths.src, '/app.json.template'), ['config:app']);
 
     gulp.watch([
         path.join(conf.paths.src, '/app/**/*.html'),
-        path.join(conf.paths.src, '/res/**/*.json')
+        path.join(conf.paths.src, '/app.json')
     ], function (event) {
         browserSync.reload(event.path);
     });

@@ -10,12 +10,8 @@
         "odt"
     ],
     "companyName": "[ COMPANY NAME HERE ]",
-    "defaultLocale": "en-US",
-    "supportedLocales": [
-        "en-US",
-        "fr-FR"
-    ],
-    "minUploadSize": 30720,
+    "defaultLocale": "en-EU",
+    "minUploadSize": 3720,
     "maxRelatedJobs": 5,
     "maxUploadSize": 5242880,
     "service": {

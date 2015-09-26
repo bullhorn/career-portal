@@ -1,8 +1,8 @@
 class ShareService {
-    constructor(locale) {
+    constructor($filter) {
         'ngInject';
 
-        this.locale = locale;
+        this.$filter = $filter;
     }
 
     get _() {
@@ -35,15 +35,15 @@ class ShareService {
     additionalEmailInfo(job) {
         var body = '\n';
         if (job.title) {
-            body += '\nTitle: ' + this.locale.getString('common.jobsLabel');
+            body += '\nTitle: ' + this.$filter('translate')('COMMON.JOBS');
         }
 
         if (job.publishedCategory && job.publishedCategory.name) {
-            body += '\n' + this.locale.getString('common.categorySectionHeading') + ': ' + job.publishedCategory.name;
+            body += '\n' + this.$filter('translate')('COMMON.CATEGORY') + ': ' + job.publishedCategory.name;
         }
 
         if (job.address) {
-            let location = '\n' + this.locale.getString('common.locationSectionHeading') + ': ';
+            let location = '\n' + this.$filter('translate')('COMMON.LOCATION') + ': ';
             if (job.address.city && job.address.state) {
                 body += location + job.address.city + ', ' + job.address.state + '\n';
             } else if (job.address.city) {

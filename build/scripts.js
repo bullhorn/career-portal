@@ -13,7 +13,7 @@ function webpackWrapper(watch, test, callback) {
     var webpackOptions = {
         watch: watch,
         module: {
-            preLoaders: [{test: /\.js$/, exclude: /node_modules/, loaders: ['jshint-loader', 'jscs-loader']}],
+            preLoaders: [{test: /\.js$/, exclude: /node_modules|index.translations.js|templateCacheHtml.js/, loaders: ['jshint-loader', 'jscs-loader']}],
             loaders: [{test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader']}]
         },
         output: {filename: 'index.module.js'}
@@ -52,7 +52,7 @@ function webpackWrapper(watch, test, callback) {
         .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['translations'], function () {
     return webpackWrapper(false, false);
 });
 
@@ -60,7 +60,7 @@ gulp.task('scripts:watch', ['scripts'], function (callback) {
     return webpackWrapper(true, false, callback);
 });
 
-gulp.task('scripts:test', ['partials'], function () {
+gulp.task('scripts:test', ['partials', 'translations'], function () {
     return webpackWrapper(false, true);
 });
 

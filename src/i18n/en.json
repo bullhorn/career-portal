@@ -1,0 +1,67 @@
+{
+    "COMMON": {
+        "PRINT": "Print",
+        "SHARE": "Share",
+        "ADDED": "Added",
+        "NO_DATA": "Oh No!",
+        "HERE": "here.",
+        "EMAIL_PLACEHOLDER": "email@domain.com",
+        "LOCATION": "Location",
+        "CATEGORY": "Category",
+        "JOBS": "Jobs"
+    },
+    "SIDEBAR": {
+        "HEADING": "Filters",
+        "SEARCH_PLACEHOLDER": "Keyword Search",
+        "CLEAR": "Clear",
+        "POWERED_BY": "Powered by",
+        "SHOW_MORE": "Show More",
+        "SHOW_LESS": "Show Less"
+    },
+    "LIST": {
+        "OPEN_JOBS": "Open Jobs",
+        "LOAD_MORE": "Load more...",
+        "NO_DATA": "Looks like there are no jobs matching the criteria.",
+        "CLEAR_CRITERIA": "Clear the criteria and search again."
+    },
+    "DETAIL": {
+        "JOB_DESCRIPTION": "Job Description",
+        "APPLY": "Apply",
+        "SEND": "Send",
+        "IOS_UPLOAD_WARNING": "Please view this job on our desktop site to upload a resume and apply directly. In the meantime, we'll email you a link to this job for easy access.",
+        "RELATED": "Related",
+        "VIEW_ALL_JOBS": "View all jobs in this category",
+        "JOB_CLOSED": "Looks like this job has closed.",
+        "OTHER_JOBS": "You can find some similar jobs"
+    },
+    "MODAL": {
+        "ATTACH_RESUME": "Attach Resume File",
+        "HEADING": "Before You Apply...",
+        "SUBHEADING": "Please let us know who you are and upload your resume.",
+        "SUCCESS_HEADING": "Thank you!",
+        "SUCCESS_SUBHEADING": "You will be contacted by a recruiter shortly",
+        "SUBMIT": "Submit",
+        "SUBMITTING": "Submitting",
+        "OK": "Okay, Got it!",
+        "CANCEL": "Cancel",
+        "FIRST_NAME_PLACEHOLDER": "First Name",
+        "FIRST_NAME_VALIDATION": "Please enter your first name.",
+        "LAST_NAME_PLACEHOLDER": "Last Name",
+        "LAST_NAME_VALIDATION": "Please enter your last name.",
+        "EMAIL_PLACEHOLDER": "Email@domain.com",
+        "EMAIL_REQUIRED": "Please enter your email.",
+        "EMAIL_VALIDATION": "Please enter a valid email.",
+        "PHONE_PLACEHOLDER": "Mobile Phone (Optional)",
+        "RESUME_FILE_PLACEHOLDER": "Resume File",
+        "RESUME_VALIDATION": "Please upload your resume.",
+        "RESUME_INVALID": "is not a supported file format",
+        "TOO_BIG": "File is too big.",
+        "TOO_SMALL": "File is too small.",
+        "MIN": "min",
+        "MAX": "max",
+        "SUPPORTED_FORMATS": "Supported File Formats"
+    },
+    "FORMATS": {
+        "DATE": "MM/DD/YY"
+    }
+}
