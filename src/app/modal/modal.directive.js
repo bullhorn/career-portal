@@ -1,6 +1,6 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, $filter, detectUtils) {
         'ngInject';
 
         this.SharedData = SharedData;
@@ -8,7 +8,6 @@ class CareerPortalModalController {
         this.SearchService = SearchService;
         this.ApplyService = ApplyService;
         this.configuration = configuration;
-        this.locale = locale;
         this.$filter = $filter;
         this.isMobile = detectUtils.isMobile();
 
@@ -40,7 +39,7 @@ class CareerPortalModalController {
         var fileExtension = fileArray[fileArray.length - 1];
 
         if (this.configuration.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
-            this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.$filter('i18n')('modal.resumeInvalidFormat');
+            this.resumeUploadErrorMessage = (fileExtension || '').toUpperCase() + ' ' + this.$filter('translate')('MODAL.RESUME_INVALID');
             this.updateUploadClass(false);
             this.isSubmitting = false;
             return false;
@@ -48,14 +47,14 @@ class CareerPortalModalController {
 
         // Now check the size
         if (file.size > this.configuration.maxUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + ' (' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.maxUploadSize / (1024 * 1024) + 'MB)';
+            this.resumeUploadErrorMessage = this.$filter('translate')('MODAL.TOO_BIG') + ' (' + this.$filter('translate')('MODAL.MAX') + ': ' + this.configuration.maxUploadSize / (1024 * 1024) + 'MB)';
             this.updateUploadClass(false);
             this.isSubmitting = false;
             return false;
         }
 
         if (file.size < this.configuration.minUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + ' (' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
+            this.resumeUploadErrorMessage = this.$filter('translate')('MODAL.TOO_SMALL') + ' (' + this.$filter('translate')('MODAL.MIN') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
             this.isSubmitting = false;
             return false;

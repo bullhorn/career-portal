@@ -1,6 +1,6 @@
 <aside class="side-bar">
     <header>
-        <label>{{'sidebar.sidebarHeading' | i18n}}</label>
+        <label>{{'SIDEBAR.HEADING' | translate}}</label>
 
         <div class="button-container">
             <button data-ng-class="{'active': sidebar.SharedData.gridState === 'list-view'}" data-ng-click="sidebar.switchViewStyle('list');">
@@ -14,7 +14,7 @@
     <section>
         <div class="keyword-search">
             <label for="keyword"><i class="bhi-search"></i></label>
-            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" data-i18n-attr="{placeholder: 'sidebar.sidebarSearchPlaceholder'}"/>
+            <input class="search" type="text" data-ng-change="sidebar.searchOnDelay()" data-ng-model="sidebar.SearchService.searchParams.textSearch" id="keyword" name="keyword" placeholder="{{'SIDEBAR.SEARCH_PLACEHOLDER' | translate}}"/>
             <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.textSearch.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('text');" name="clear-all">
                 <i class="bhi-times"></i>
             </button>
@@ -22,9 +22,9 @@
 
         <section class="filter-section" data-ng-class="{'active':!sidebar.locationLimitTo}">
             <div class="filter-section-header">
-                <h4>{{'common.locationSectionHeading' | i18n}}</h4>
+                <h4>{{'COMMON.LOCATION' | translate}}</h4>
                 <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.location.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('location');" name="clear-all">
-                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                    <i class="bhi-times"></i> {{'SIDEBAR.CLEAR' | translate}}
                 </button>
             </div>
 
@@ -35,17 +35,17 @@
             </div>
 
             <span class="show-more" data-ng-if="sidebar.locationLimitTo && filteredLocations.length > 8" data-ng-click="sidebar.updateLocationLimitTo(null)">
-                 {{'sidebar.showMoreLabel' | i18n}}
+                 {{'SIDEBAR.SHOW_MORE' | translate}}
             </span>
             <span class="show-more" data-ng-if="!sidebar.locationLimitTo" data-ng-click="sidebar.updateLocationLimitTo(8)">
-                 {{'sidebar.showLessLabel' | i18n}}
+                 {{'SIDEBAR.SHOW_LESS' | translate}}
             </span>
         </section>
         <section class="filter-section" data-ng-class="{'active':!sidebar.categoryLimitTo}">
             <div class="filter-section-header">
-                <h4>{{'common.categorySectionHeading' | i18n}}</h4>
+                <h4>{{'COMMON.CATEGORY' | translate}}</h4>
                 <button class="clear-filter" data-ng-show="sidebar.SearchService.searchParams.category.length" data-ng-click="sidebar.clearSearchParamsAndLoadData('category');" name="clear-all">
-                    <i class="bhi-times"></i> {{'sidebar.clearButton' | i18n}}
+                    <i class="bhi-times"></i> {{'SIDEBAR.CLEAR' | translate}}
                 </button>
             </div>
 
@@ -56,15 +56,15 @@
             </div>
 
             <span class="show-more" data-ng-if="sidebar.categoryLimitTo && filteredCategories.length > 8" data-ng-click="sidebar.updateCategoryLimitTo(null)">
-                {{'sidebar.showMoreLabel' | i18n}}
+                 {{'SIDEBAR.SHOW_MORE' | translate}}
             </span>
             <span class="show-more" data-ng-if="!sidebar.categoryLimitTo" data-ng-click="sidebar.updateCategoryLimitTo(8)">
-                {{'sidebar.showLessLabel' | i18n}}
+               {{'SIDEBAR.SHOW_LESS' | translate}}
             </span>
         </section>
 
         <section class="credits">
-            <span class="powered-by">{{'sidebar.poweredByText' | i18n}}</span>
+            <span class="powered-by">{{'SIDEBAR.POWERED_BY' | translate}}</span>
             <h4 class="bullhorn">Bullh<span>o</span>rn</h4>
         </section>
 

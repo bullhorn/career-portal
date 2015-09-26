@@ -1,10 +1,10 @@
 <section class="job-list">
-    <h4 data-ng-if="!list.SearchService.helper.isSearching && list.SearchService.currentListData.length">{{'list.jobListHeading' | i18n}}</h4>
+    <h4 data-ng-if="!list.SearchService.helper.isSearching && list.SearchService.currentListData.length">{{'LIST.OPEN_JOBS' | translate}}</h4>
 
     <div class="cards">
         <div class="card-wrapper" data-ng-repeat="job in list.SearchService.currentListData | orderBy:dateLastPublished">
             <a class="card slide-up-item" data-ng-href="#/jobs/{{job.id}}">
-                <span class="card-date" data-ng-if="job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{job.dateLastPublished | displayDate}}</span>
+                <span class="card-date" data-ng-if="job.dateLastPublished">{{'COMMON.ADDED' | translate}} - <span translate-date="job.dateLastPublished"></span></span>
 
                 <span class="card-title-category">
                     <span class="card-title">{{::job.title}}</span>
@@ -25,16 +25,16 @@
     </div>
 
     <div class="no-data-message" data-ng-if="!list.SearchService.helper.isSearching && !list.SearchService.currentListData.length">
-        <h2>{{'common.noDataHeading' | i18n}}</h2>
+        <h2>{{'COMMON.NO_DATA' | translate}}</h2>
 
-        <h3>{{'list.noDataMessage' | i18n}}</h3>
+        <h3>{{'LIST.NO_DATA' | translate}}</h3>
 
         <p data-ng-if="list.SearchService.searchParams.location.length || list.SearchService.searchParams.category.length || list.SearchService.searchParams.textSearch.length">
-            <a href data-ng-click="list.clearSearchParamsAndLoadData();">{{'list.noDataResolution' | i18n}}</a>
+            <a href data-ng-click="list.clearSearchParamsAndLoadData();">{{'LIST.CLEAR_CRITERIA' | translate}}</a>
         </p>
     </div>
 
     <p class="load-more-data" data-ng-click="list.loadMoreData();" data-ng-show="list.SearchService.helper.hasMore">
-        {{'list.loadMoreDataLabel' | i18n}}
+        {{'LIST.LOAD_MORE' | translate}}
     </p>
 </section>

@@ -1,16 +1,14 @@
-function localeConfig(configuration, localeConf, localeSupported) {
+function localeConfig(configuration, $translateProvider) {
     'ngInject';
 
-    localeConf.basePath = 'res';
-    localeConf.defaultLocale = configuration.defaultLocale;
-    localeConf.sharedDictionary = 'common';
-    localeConf.fileExtension = '.json';
-    localeConf.persistSelection = true;
-    localeConf.cookieName = 'COOKIE_LOCALE_LANG';
-    localeConf.observableAttrs = new RegExp('^data-(?!ng-|i18n)');
-    localeConf.delimiter = '::';
+    // Tell the module what language to use by default
+    $translateProvider.preferredLanguage(configuration.defaultLocale);
 
-    localeSupported.concat(configuration.supportedLocales);
+    // Set the fallback language to use if the string cannot be found in the default locale
+    $translateProvider.fallbackLanguage('en');
+
+    // For security, we set the sanitize strategy to make sure our strings are sanitized correctly
+    $translateProvider.useSanitizeValueStrategy('sanitize');
 }
 
 export default localeConfig;

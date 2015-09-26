@@ -1,6 +1,7 @@
 /* moment:false */
 import routerConfig from './index.route';
 import localeConfig from './index.locale';
+import translationConfig from './index.translations';
 
 import JobListController from './list/list.controller';
 import JobDetailController from './detail/detail.controller';
@@ -17,23 +18,22 @@ import SharedData from './services/shared.factory';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
-import DisplayDateFilter from './filters/displayDate.filter';
+import TranslateDate from './filters/translateDate.directive';
 
-angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng.deviceDetector', 'ng-fastclick', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'ngLocalize.Events'])
+angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng.deviceDetector', 'ng-fastclick', 'pascalprecht.translate'])
     .constant('moment', moment)
-    .constant('localeConf', {})
-    .constant('localeSupported', [])
     .config(routerConfig)
+    .config(translationConfig)
     .config(localeConfig)
     .directive('main', () => new Main())
     .directive('careerPortalSidebar', () => new CareerPortalSidebar())
     .directive('careerPortalHeader', () => new CareerPortalHeader())
     .directive('careerPortalModal', () => new CareerPortalModal())
+    .directive('translateDate', TranslateDate)
     .controller('JobListController', JobListController)
     .controller('JobDetailController', JobDetailController)
     .filter('stripHtml', () => new StripHtmlFilter())
     .filter('omitFilters', () => new OmitFiltersFilter())
-    .filter('displayDate', DisplayDateFilter)
     .factory('SharedData', () => new SharedData())
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)

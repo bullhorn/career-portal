@@ -20,6 +20,12 @@ There are many ways to **[contribute](https://github.com/bullhorn/career-portal/
 * Review **[source code changes](https://github.com/bullhorn/career-portal/pulls)**.
 * **[Contribute bug fixes](https://github.com/bullhorn/career-portal/blob/master/CONTRIBUTING.md)**.
 
+## Localizing
+
+This project uses the [angular-translate](https://angular-translate.github.io/) module for all localization.
+
+To change the default locale, look in the `app.json` and update the `defaultLocale` to reflect the one that is needed. The current locales that are supported are english based locales. To add more, the resource files will need to be added into the `src/i18n` folder and translate the strings located inside `src/i18n/en.json`.
+
 ## Documentation
 
 *  **[Hosting](https://github.com/bullhorn/career-portal/wiki)**
