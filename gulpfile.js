@@ -33,7 +33,11 @@ gulp.task('jenkins:build', function (done) {
 });
 
 gulp.task('travis:build', function (done) {
-    runSequence('clean', 'test', 'build', done);
+    runSequence('clean', 'test', 'build', 'throwError', done);
+});
+
+gulp.task('throwError', function () {
+    throw Error('MUAHAUHAUA');
 });
 
 gulp.task('config:app', function () {
