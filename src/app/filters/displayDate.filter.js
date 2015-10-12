@@ -13,5 +13,5 @@ export default function (configuration, moment) {
             }
         }
         return momentDate.fromNow();
-    }
-};
+    };
+}
