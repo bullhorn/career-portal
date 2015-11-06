@@ -58,7 +58,13 @@ class ApplyService {
                 email: () => encodeURIComponent(this.form.email),
                 phone: () => encodeURIComponent(this.form.phone || ''),
                 assemble: resume => {
-                    return '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1);
+                    var url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1);
+                    if (window.location.href.indexOf('source=') > -1) {
+                        var sourceRegex = /(source=)([A-Za-z0-9\-]+)?/;
+                        var source = window.location.href.match(sourceRegex)[0];
+                        url += '&' + source;
+                    }
+                    return url;
                 }
             });
     }
