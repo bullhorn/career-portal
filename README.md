@@ -68,9 +68,13 @@ gulp protractor:dist # Execute e2e tests with Protractor on build output
 Running and building with configuration
 
 ```
-gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
-gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
+gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]
+gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
 ```
+
+LinkedIn Integration
+The `LINKED_IN_CLIENT_ID` is defined by LinkedIn's developer portal (i.e. https://developer.linkedin.com). **Note** 
+that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for best results.
 
 ## Helpful Utilities
 

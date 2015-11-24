@@ -1,8 +1,9 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils, configuration) {
         'ngInject';
 
+        // Dependencies
         this.$window = $window;
         this.$location = $location;
         this.SharedData = SharedData;
@@ -10,8 +11,11 @@ class JobDetailController {
         this.SearchService = SearchService;
         this.job = job;
         this.isIOS = detectUtils.isIOS();
-        this.email = '';
+        this.configuration = configuration;
 
+        // Constants
+        this.email = '';
+        this.relatedJobs = [];
 
         // Load the related jobs
         this.loadRelatedJobs();
@@ -25,20 +29,20 @@ class JobDetailController {
         return this.ShareService.sendEmailLink(this.job, this.email);
     }
 
-    shareFacebook(job) {
-        return this.ShareService.facebook(job);
+    shareFacebook() {
+        this.ShareService.facebook(this.job);
     }
 
-    shareTwitter(job) {
-        return this.ShareService.twitter(job);
+    shareTwitter() {
+        this.ShareService.twitter(this.job);
     }
 
-    shareLinkedin(job) {
-        return this.ShareService.linkedin(job);
+    shareLinkedin() {
+        this.ShareService.linkedin(this.job);
     }
 
-    emailLink(job) {
-        return this.ShareService.emailLink(job);
+    emailLink() {
+        return this.ShareService.emailLink(this.job);
     }
 
     print() {
@@ -49,42 +53,26 @@ class JobDetailController {
         this.SharedData.modalState = 'open';
     }
 
-    openShare() {
-        this.open = this.open === false;
-
-        if (!this.open) {
-            this.share = 'share-open';
-        } else {
-            this.share = '';
-        }
-    }
-
-    addRelatedJobs() {
-        var controller = this;
-
-        return function (jobs) {
-            controller.relatedJobs = controller.relatedJobs.concat(jobs);
-        };
-    }
-
     loadRelatedJobs() {
-        this.relatedJobs = [];
-
-        if (this.job.publishedCategory) {
-            this.SearchService.loadJobDataByCategory(this.job.publishedCategory.id, this.addRelatedJobs(), undefined, this.job.id);
-        }
+        let categoryId = this.job.publishedCategory.id,
+            jobId = this.job.id;
+        this.SearchService.loadJobDataByCategory(categoryId, jobId)
+            .then(data => {
+                this.relatedJobs = data;
+            });
     }
 
-    loadJobsWithCategory(categoryID) {
+    loadJobsWithCategory (categoryID) {
         this.SearchService.helper.emptyCurrentDataList();
         this.SearchService.helper.resetStartAndTotal();
         this.SearchService.helper.clearSearchParams();
-
         this.SearchService.searchParams.category.push(categoryID);
-
         this.SearchService.findJobs();
-
         this.$location.path('/jobs');
+    }
+
+    verifyLinkedInIntegration () {
+        return !!this.configuration.integrations.linkedin;
     }
 }
 

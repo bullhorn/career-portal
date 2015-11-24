@@ -23,5 +23,6 @@
         "corpToken": "[ CORP TOKEN HERE ]",
         "port": null,
         "swimlane": "[ SWIMLANE HERE ]"
-    }
+    },
+    "integrations": {}
 }

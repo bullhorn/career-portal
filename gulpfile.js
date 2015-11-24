@@ -9,6 +9,7 @@ var fs = require('fs');
 var argv = require('yargs').argv;
 var dateFormat = require('dateformat');
 var chalk = require('chalk');
+var inject = require('gulp-inject');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -59,6 +60,28 @@ gulp.task('config:app', function () {
 
     if (argv.port) {
         appConfig.service.port = argv.port;
+    }
+
+    // LinkedIn Integration
+    if (argv.liClientId) {
+        // Add LinkedIn source to <head>
+        gulp.src('./src/index.html')
+            .pipe(inject(gulp.src(['./src/index.html']), {
+                starttag: '<!-- inject:integration:{{ext}} -->',
+                transform: function () {
+                    var html =  '<script type="text/javascript" src="//platform.linkedin.com/in.js">' + '\r\t'+
+                        'api_key: ' + argv.liClientId + '\r' +
+                        '</script>';
+                    return html;
+                }
+            }))
+            .pipe(gulp.dest('./src'));
+        // Assign LinkedIn info to configuration object for use in NG
+        appConfig.integrations.linkedin = {
+            clientId: argv.liClientId
+        };
+    } else {
+        console.log(chalk.yellow('An argument for LinkedIn Client ID was not found. Supply your LinkedIn apps Client ID via the --liClientId flag if you want to use LinkedIn Apply.'));
     }
 
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));

@@ -1,93 +1,139 @@
 <div class="modal-container">
     <div class="modal slide-up" data-ng-class="{'success':!modal.showForm}">
+        <!-- HEADER -->
         <header>
             <section data-ng-if="modal.showForm">
                 <h2>{{modal.SearchService.currentDetailData.title}}</h2>
+                <!-- CATEGORY -->
                 <span class="category">{{modal.SearchService.currentDetailData.publishedCategory.name}}</span>
-
+                <!-- LOCATION -->
                 <span class="location">
                     {{::modal.SearchService.currentDetailData.address.city}}<span data-ng-if="::(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{::modal.SearchService.currentDetailData.address.state}}
                 </span>
+                <!-- SEPERATOR -->
                 <span class="separator" data-ng-show="::((modal.SearchService.currentDetailData.address.city || modal.SearchService.currentDetailData.address.state) && modal.SearchService.currentDetailData.employmentType)">|</span>
+                <!-- TYPE -->
                 <span class="type">{{::modal.SearchService.currentDetailData.employmentType}}</span>
-
+                <!-- CLOSE X -->
                 <i class="bhi-times close" data-ng-click="modal.closeModal(applyForm)"></i>
             </section>
+            <!-- SUCCESS MESSAGE -->
             <section class="success" data-ng-if="!modal.showForm">
                 <h2>{{'modal.successHeading' | i18n}}</h2>
-
                 <h3>{{'modal.successSubHeading' | i18n}}</h3>
             </section>
         </header>
         <div class="main" data-ng-class="{'success':!modal.showForm}">
-            <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
-                <div class="form-field">
-                    <div class="input">
-                        <span class="required">*</span>
-                        <input type="text" name="firstName" value="" data-ng-model="modal.ApplyService.form.firstName" data-i18n-attr="{placeholder: 'modal.firstNamePlaceholder'}" required>
+            <!-- STATE 1: APPLY WITH LINKED IN || EMAIL JOB -->
+            <section data-ng-show="modal.showForm">
+                <!-- LINKED IN INTEGRATION (IF ACTIVATED) -->
+                <div data-ng-if="modal.verifyLinkedInIntegration()">
+                    <!-- LINKED IN APPLY BUTTON -->
+                    <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply">
+                        <i class="bhi-linkedin-o"></i>
+                        <span>{{ 'modal.applyWithLI' | i18n }}</span>
+                    </button>
+                    <!-- LINKED IN INFO -->
+                    <div class="alert info" data-ng-if="modal.hasAttemptedLIApply && !modal.LinkedInService.isUserLoaded()">
+                        <strong>{{ 'modal.headsUp' | i18n }}</strong> {{ 'modal.linkedInWarning' | i18n }}
+                        <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
                     </div>
-                    <span class="error" data-ng-show="applyForm.firstName.$dirty || applyForm.$submitted">
-                        <span data-ng-show="applyForm.firstName.$error.required">{{'modal.firstNameValidation' | i18n}}</span>
+                    <!-- OR BREAK -->
+                    <span class="break" data-ng-show="!modal.hasAttemptedLIApply">
+                        <span>Or</span>
                     </span>
+                    <!-- PROMOTE EMAIL EXPERIENCE -->
+                    <p data-ng-if="modal.isIOS && !modal.hasAttemptedLIApply"><strong>Don't have a LinkedIn account?</strong> Email this job to yourself to view it on a desktop and upload your resume file to apply.</p>
                 </div>
-                <div class="form-field">
-                    <div class="input">
-                        <span class="required">*</span>
-                        <input type="text" name="lastName" value="" data-ng-model="modal.ApplyService.form.lastName" data-i18n-attr="{placeholder: 'modal.lastNamePlaceholder'}" required>
-                    </div>
-                    <span class="error" data-ng-show="applyForm.lastName.$dirty || applyForm.$submitted">
-                        <span data-ng-show="applyForm.lastName.$error.required">{{'modal.lastNameValidation' | i18n}}</span>
-                    </span>
+                <!-- EMAIL JOB -->
+                <div data-ng-show="modal.isIOS && !modal.hasAttemptedLIApply">
+                    <input class="email" type="email" data-ng-model="modal.email" id="email" name="email" data-i18n-attr="{ placeholder: 'common.emailPlaceholder' }">
                 </div>
-                <div class="form-field">
-                    <div class="input">
-                        <span class="required">*</span>
-                        <input type="email" name="email" value="" data-ng-model="modal.ApplyService.form.email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}" required>
-                    </div>
-                    <span class="error" data-ng-show="applyForm.email.$dirty || applyForm.$submitted">
-                        <span data-ng-show="applyForm.email.$error.required">
-                            {{'modal.emailValidationRequired' | i18n}}
+            </section>
+            <!-- APPLICANT FORM -->
+            <section data-ng-show="(modal.isIOS && modal.hasAttemptedLIApply) || !modal.isIOS">
+                <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
+                    <!-- FIRST NAME -->
+                    <div class="form-field">
+                        <div class="input">
+                            <span class="required">*</span>
+                            <input type="text" name="firstName" value="" data-ng-model="modal.ApplyService.form.firstName" data-i18n-attr="{placeholder: 'modal.firstNamePlaceholder'}" required>
+                        </div>
+                        <span class="error" data-ng-show="applyForm.firstName.$dirty || applyForm.$submitted">
+                            <span data-ng-show="applyForm.firstName.$error.required">{{ 'modal.firstNameValidation' | i18n }}</span>
                         </span>
-                        <span data-ng-show="applyForm.email.$error.email">
-                            {{'modal.emailValidationFormat' | i18n}}
-                        </span>
-                    </span>
-                </div>
-                <div class="form-field">
-                    <div class="input">
-                        <span>&nbsp;</span>
-                        <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" data-i18n-attr="{placeholder: 'modal.phonePlaceholder'}">
                     </div>
-                </div>
-                <div class="upload-label" >
-                    <span class="field-label">
-                        {{'modal.resumeFilePlaceholder' | i18n}}
-                        <i class="bhi-question" data-ng-if="!modal.isMobile" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{::modal.getTooltipText()}}"></i>
-                    </span>
-                    <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
-                        {{modal.resumeUploadErrorMessage}}
-                    </span>
-                    <span class="error" data-ng-show="applyForm.$submitted && !modal.ApplyService.form.resumeInfo">
-                        {{'modal.resumeValidation' | i18n}}
+                    <!-- LAST NAME -->
+                    <div class="form-field">
+                        <div class="input">
+                            <span class="required">*</span>
+                            <input type="text" name="lastName" value="" data-ng-model="modal.ApplyService.form.lastName" data-i18n-attr="{placeholder: 'modal.lastNamePlaceholder'}" required>
+                        </div>
+                        <span class="error" data-ng-show="applyForm.lastName.$dirty || applyForm.$submitted">
+                            <span data-ng-show="applyForm.lastName.$error.required">{{ 'modal.lastNameValidation' | i18n }}</span>
+                        </span>
+                    </div>
+                    <!-- EMAIL -->
+                    <div class="form-field">
+                        <div class="input">
+                            <span class="required">*</span>
+                            <input type="email" name="email" value="" data-ng-model="modal.ApplyService.form.email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}" required>
+                        </div>
+                        <span class="error" data-ng-show="applyForm.email.$dirty || applyForm.$submitted">
+                            <span data-ng-show="applyForm.email.$error.required">
+                                {{ 'modal.emailValidationRequired' | i18n }}
+                            </span>
+                            <span data-ng-show="applyForm.email.$error.email">
+                                {{ 'modal.emailValidationFormat' | i18n }}
+                            </span>
+                        </span>
+                    </div>
+                    <!-- PHONE -->
+                    <div class="form-field">
+                        <div class="input">
+                            <span>&nbsp;</span>
+                            <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" data-i18n-attr="{placeholder: 'modal.phonePlaceholder'}">
+                        </div>
+                    </div>
+                    <!-- SKILLS & EXPERTISE -->
+                    <div class="form-field" data-ng-if="modal.hasAttemptedLIApply">
+                        <textarea placeholder="{{ 'modal.skills' | i18n }}" name="resume-text" ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="10" data-ng-minlength="number"></textarea>
+                    </div>
+                    <!-- UPLOAD LABEL -->
+                    <div class="upload-label" data-ng-if="!modal.hasAttemptedLIApply" data-ng-hide="modal.isIOS">
+                        <span class="field-label">
+                            {{ 'modal.resumeFilePlaceholder' | i18n }}
+                            <i class="bhi-question" data-ng-if="!modal.isIOS" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{ ::modal.getTooltipText() }}"></i>
+                        </span>
+                        <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
+                            {{ modal.resumeUploadErrorMessage }}
+                        </span>
+                        <span class="error" data-ng-show="applyForm.$submitted && !modal.ApplyService.form.resumeInfo">
+                            {{ 'modal.resumeValidation' | i18n }}
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- RESUME UPLOAD -->
+                    <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false; modal.validateResume($file);"  data-ng-if="!modal.hasAttemptedLIApply" data-ng-hide="modal.isIOS">
+                        <i data-ng-show="!modal.ApplyService.form.resumeInfo.name" class="bhi-publish"></i>
+                        <i data-ng-show="modal.ApplyService.form.resumeInfo.name" class="bhi-resume"></i>
+                        <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{ 'modal.uploadResumeFile' | i18n }}</span>
+                        <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{ modal.ApplyService.form.resumeInfo.name }}</span>
+                    </div>
+                    <!-- ERROR MESSAGE -->
+                    <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
+                        <i class="bhi-caution"></i> <span>{{ modal.ApplyService.ajaxError }}</span>
                     </span>
 
-                    <div class="clearfix"></div>
-                </div>
-                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.minUploadSize" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);">
-                    <i data-ng-show="!modal.ApplyService.form.resumeInfo.name" class="bhi-publish"></i>
-                    <i data-ng-show="modal.ApplyService.form.resumeInfo.name" class="bhi-resume"></i>
-                    <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{'modal.uploadResumeFile' | i18n}}</span>
-                    <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
-                </div>
-                <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
-                    <i class="bhi-caution"></i> <span>{{modal.ApplyService.ajaxError}}</span>
-                </span>
-            </form>
+                </form>
+            </section>
+
+            <!-- FOOTER -->
             <footer data-ng-class="{'success':!modal.showForm}">
                 <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
-                <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)">
+                <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)" data-ng-disabled="modal.enableSendButton(applyForm.$valid)" data-ng-class="{ 'disabled': modal.enableSendButton(applyForm.$valid) }">
                     <span data-ng-if="!modal.isSubmitting">
-                        {{'modal.submitButton' | i18n}}
+                        {{'modal.sendButton' | i18n}}
                     </span>
                     <span data-ng-if="modal.isSubmitting">
                         <div class="loading">
@@ -98,7 +144,7 @@
                         </div>
                     </span>
                 </button>
-                <button data-ng-show="!modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
+                <button data-ng-hide="modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
             </footer>
         </div>
     </div>
