@@ -39,7 +39,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService)
-    .service('LinkedInService', LinkedInService)
+    .service('LinkedInService', LinkedInService);
     // Deferring the bootstrap to make sure we have loaded the config from app.json
     deferredBootstrapper.bootstrap({
         element: document.body,
