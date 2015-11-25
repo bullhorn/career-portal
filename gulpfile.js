@@ -39,8 +39,8 @@ gulp.task('travis:build', function (done) {
 gulp.task('config:app', function () {
     var appConfig = JSON.parse(fs.readFileSync('./src/app.json.template'));
 
-    if (argv.corp) {
-        appConfig.service.corpToken = argv.corp;
+    if (argv.corp || argv.corpToken) {
+        appConfig.service.corpToken = argv.corp || argv.corpToken;
     } else {
         console.log(chalk.red('Argument for corpToken not found, output might not be setup correctly. Supply the corpToken via the --corp flag.'));
     }
