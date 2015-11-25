@@ -14,6 +14,7 @@ import SearchService from './services/search.service';
 import ShareService from './services/share.service';
 import ApplyService from './services/apply.service';
 import SharedData from './services/shared.factory';
+import LinkedInService from './services/linkedin.service';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
@@ -37,16 +38,16 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .factory('SharedData', () => new SharedData())
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
-    .service('SearchService', SearchService);
-
-// Deferring the bootstrap to make sure we have loaded the config from app.json
-deferredBootstrapper.bootstrap({
-    element: document.body,
-    module: 'CareerPortal',
-    resolve: {
-        configuration: function ($http) {
-            'ngInject';
-            return $http.get('./app.json');
+    .service('SearchService', SearchService)
+    .service('LinkedInService', LinkedInService)
+    // Deferring the bootstrap to make sure we have loaded the config from app.json
+    deferredBootstrapper.bootstrap({
+        element: document.body,
+        module: 'CareerPortal',
+        resolve: {
+            configuration: function ($http) {
+                'ngInject';
+                return $http.get('./app.json');
+            }
         }
-    }
-});
+    });
