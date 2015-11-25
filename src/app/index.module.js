@@ -15,6 +15,7 @@ import ShareService from './services/share.service';
 import ApplyService from './services/apply.service';
 import SharedData from './services/shared.factory';
 import LinkedInService from './services/linkedin.service';
+import CacheService from './services/cache.service';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
@@ -39,7 +40,8 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService)
-    .service('LinkedInService', LinkedInService);
+    .service('LinkedInService', LinkedInService)
+    .service('CacheService', CacheService);
     // Deferring the bootstrap to make sure we have loaded the config from app.json
     deferredBootstrapper.bootstrap({
         element: document.body,

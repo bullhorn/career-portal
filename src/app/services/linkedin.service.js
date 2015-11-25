@@ -1,5 +1,5 @@
 class LinkedInService {
-    constructor($rootScope) {
+    constructor($rootScope, CacheService) {
         'ngInject';
 
         this.linkedinUser = {};
@@ -10,6 +10,7 @@ class LinkedInService {
                 let url = '/people/~:(id,first-name,last-name,formatted-name,location,positions,site-standard-profile-request,api-standard-profile-request,public-profile-url,skills,three-past-positions,educations,courses,publications,patents,languages,phone-numbers,main-address,im-accounts,twitter-accounts,email-address)?format=json';
                 IN.API.Raw(url).method('GET').result((linkedinUser) => {
                     this.linkedinUser = linkedinUser;
+                    CacheService.putItem('linkedinUser', linkedinUser);
                     $rootScope.$apply();
                 });
             });
