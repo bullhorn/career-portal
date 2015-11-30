@@ -205,6 +205,93 @@
             &.success {
                 padding: 1em;
             }
+
+            $linked-in-blue: #0077B5;
+
+            hr {
+                display: block;
+                height: 1px;
+                border: 0;
+                border-top: 1px solid #EAEAEA;
+                margin: 2em 0;
+                padding: 0;
+            }
+
+            div.alert {
+                padding: 1em;
+                margin: 1.5em 0 0;
+                border-radius: .5em;
+
+                &.error {
+                    background-color: rgba(255, 0, 0, .15);
+                }
+            }
+
+            textarea {
+                width: 100%;
+                resize: none;
+                border: solid thin #CCC;
+
+                &:focus,
+                &:hover,
+                &:active {
+                    outline: none;
+                }
+            }
+
+            button.btn-li-lg {
+                display: block;
+
+                border: none;
+                border-radius: .25em;
+                padding: 0;
+
+                overflow: hidden;
+
+                background: $linked-in-blue;
+                color: white;
+
+                text-align: left;
+
+                -webkit-transition: background-color 250ms;
+                -moz-transition: background-color 250ms;
+                -ms-transition: background-color 250ms;
+                -o-transition: background-color 250ms;
+                transition: background-color 250ms;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    background-color: darken($linked-in-blue, 5%);
+                }
+
+                &.done,
+                &.loading {
+                    background-color: transparentize($linked-in-blue, .25);
+                    color: rgba(255, 255, 255, .75);
+                    > i {
+                        border-right-color: lighten($linked-in-blue, 10%);
+                    }
+                }
+
+                > i {
+                    font-size: 2.5em;
+                    padding: .15em .25em;
+                    margin: 0 .25em 0 0;
+                    display: inline-block;
+                    height: 100%;
+                    border-right: solid thin darken($linked-in-blue, 7%);
+                }
+
+                > span {
+                    position: relative;
+                    top: -.4em;
+                    font-size: 1.1em;
+                    font-weight: 600;
+                    padding: 0 1.5em 0 0;
+                }
+
+            }
         }
 
         footer {

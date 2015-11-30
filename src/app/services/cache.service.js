@@ -4,8 +4,7 @@ class CacheService {
             this.hasLocalStorage = typeof Storage !== 'undefined';
             localStorage.setItem('test', 1);
             localStorage.removeItem('test');
-        }
-        catch (e) {
+        } catch (e) {
             this.hasLocalStorage = false;
         }
     }

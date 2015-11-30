@@ -20,6 +20,18 @@
             </section>
         </header>
         <div class="main" data-ng-class="{'success':!modal.showForm}">
+            <!-- LINKED IN APPLY BUTTON -->
+            <button class="btn-li-lg">
+                <i class="bhi-linkedin-o"></i>
+                <span>Apply With LinkedIn</span>
+            </button>
+
+            <!-- LINKED IN ERROR -->
+            <!--<div class="alert error">-->
+                <!--<strong>Uh oh!</strong> Your LinkedIn integration could not be authorized.-->
+            <!--</div>-->
+            <hr />
+
             <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
                 <div class="form-field">
                     <div class="input">
@@ -59,6 +71,13 @@
                         <input type="text" name="mobile-phone" value="" data-ng-model="modal.ApplyService.form.phone" data-i18n-attr="{placeholder: 'modal.phonePlaceholder'}">
                     </div>
                 </div>
+
+
+                <div class="form-field">
+                    <textarea name="resume-text" ng-model="modal.ApplyService.form.resumeInfo" id="resume-text" cols="30" rows="10"></textarea>
+                </div>
+
+                <!-- UPLOAD LABEL -->
                 <div class="upload-label" >
                     <span class="field-label">
                         {{'modal.resumeFilePlaceholder' | i18n}}
@@ -73,15 +92,18 @@
 
                     <div class="clearfix"></div>
                 </div>
-                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.minUploadSize" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false;modal.validateResume($file);">
+                <!-- RESUME UPLOAD -->
+                <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-min-size="modal.configuration.minUploadSize" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false; modal.validateResume($file);">
                     <i data-ng-show="!modal.ApplyService.form.resumeInfo.name" class="bhi-publish"></i>
                     <i data-ng-show="modal.ApplyService.form.resumeInfo.name" class="bhi-resume"></i>
                     <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{'modal.uploadResumeFile' | i18n}}</span>
                     <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{modal.ApplyService.form.resumeInfo.name}}</span>
                 </div>
+                <!-- ERROR MESSAGE -->
                 <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
                     <i class="bhi-caution"></i> <span>{{modal.ApplyService.ajaxError}}</span>
                 </span>
+
             </form>
             <footer data-ng-class="{'success':!modal.showForm}">
                 <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>

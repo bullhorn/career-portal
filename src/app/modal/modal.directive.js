@@ -89,9 +89,15 @@ class CareerPortalModalController {
 
     submit(applyForm) {
         applyForm.$submitted = true;
+        var isFileValid = false,
+            resumeInfo = this.ApplyService.form.resumeInfo;
 
-        var isFileValid = this.validateResume(this.ApplyService.form.resumeInfo);
-
+        if (angular.isString(resumeInfo)) {
+            this.ApplyService.form.resumeInfo = new Blob([resumeInfo], {type: 'text/plain'});
+            isFileValid = true;
+        } else {
+            isFileValid = this.validateResume(resumeInfo);
+        }
         if (applyForm.$valid && isFileValid) {
             var controller = this;
             controller.isSubmitting = true;

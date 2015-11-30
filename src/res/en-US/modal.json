@@ -17,7 +17,7 @@
     "emailValidationFormat": "Please enter a valid email.",
     "phonePlaceholder": "Mobile Phone (Optional)",
     "resumeFilePlaceholder": "Resume File",
-    "resumeValidation": "Please upload your resume.",
+    "resumeValidation": "Please attach your resume.",
     "resumeInvalidFormat": "is not a supported file format",
     "resumeToBig": "File is too big.",
     "resumeToSmall": "File is too small.",

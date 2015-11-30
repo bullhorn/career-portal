@@ -16,7 +16,7 @@
     "emailValidationFormat": "S'il vous plaît entrer une adresse email valide.",
     "phonePlaceholder": "Téléphone mobile (Facultatif)",
     "resumeFilePlaceholder": "Reprise fichier",
-    "resumeValidation": "S'il vous plaît télécharger votre CV .",
+    "resumeValidation": "S'il vous plaît de joindre votre CV.",
     "resumeInvalidFormat": "est pas un format de fichier pris en charge",
     "resumeToBig": "Fichier est trop grand .",
     "resumeToSmall": "Fichier est trop petit .",
