@@ -11,9 +11,9 @@ class CacheService {
 
     getItem(key) {
         if (this.hasLocalStorage) {
-            var value = localStorage.getItem(key);
+            var value = JSON.parse(localStorage.getItem(key));
             if (value) {
-                return JSON.parse(value);
+                return value;
             }
             return null;
         }
