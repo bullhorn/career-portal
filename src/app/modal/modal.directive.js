@@ -1,12 +1,13 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService) {
         'ngInject';
 
         this.SharedData = SharedData;
         this.$location = $location;
         this.SearchService = SearchService;
         this.ApplyService = ApplyService;
+        this.LinkedInService = LinkedInService;
         this.configuration = configuration;
         this.locale = locale;
         this.$filter = $filter;
@@ -15,9 +16,24 @@ class CareerPortalModalController {
         // Initialize the model
         this.ApplyService.initializeModel();
         this.closeModal();
+
+        this.hasAttemptedLIApply = false;
     }
 
     /* jshint +W072 */
+
+    applyWithLinkedIn() {
+        this.hasAttemptedLIApply = true;
+        this.LinkedInService.getUser()
+            .then((linkedInUser) => {
+                this.ApplyService.form.firstName = linkedInUser.firstName || '';
+                this.ApplyService.form.lastName = linkedInUser.lastName || '';
+                this.ApplyService.form.email = linkedInUser.emailAddress || '';
+                this.ApplyService.form.phone = linkedInUser.phoneNumbers ? linkedInUser.phoneNumbers.values[0].phoneNumber : '';
+
+                console.log(JSON.stringify(linkedInUser));
+            });
+    }
 
     closeModal(applyForm) {
         this.SharedData.modalState = 'closed';
@@ -49,13 +65,6 @@ class CareerPortalModalController {
         // Now check the size
         if (file.size > this.configuration.maxUploadSize) {
             this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToBig') + ' (' + this.$filter('i18n')('modal.maxLabel') + ': ' + this.configuration.maxUploadSize / (1024 * 1024) + 'MB)';
-            this.updateUploadClass(false);
-            this.isSubmitting = false;
-            return false;
-        }
-
-        if (file.size < this.configuration.minUploadSize) {
-            this.resumeUploadErrorMessage = this.$filter('i18n')('modal.resumeToSmall') + ' (' + this.$filter('i18n')('modal.minLabel') + ': ' + this.configuration.minUploadSize / 1024 + 'KB)';
             this.updateUploadClass(false);
             this.isSubmitting = false;
             return false;

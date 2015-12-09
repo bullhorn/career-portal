@@ -1,20 +1,28 @@
 class LinkedInService {
-    constructor($rootScope, CacheService) {
+    constructor($q) {
         'ngInject';
+        this.$q = $q;
+        this.userIsLoaded = false;
+    }
 
-        this.linkedinUser = {};
-
+    getUser () {
+        var deferred = this.$q.defer();
         // Authenticate user
         if (IN.User) {
             IN.User.authorize(() => {
-                let url = '/people/~:(id,first-name,last-name,formatted-name,location,positions,site-standard-profile-request,api-standard-profile-request,public-profile-url,skills,three-past-positions,educations,courses,publications,patents,languages,phone-numbers,main-address,im-accounts,twitter-accounts,email-address)?format=json';
-                IN.API.Raw(url).method('GET').result((linkedinUser) => {
-                    this.linkedinUser = linkedinUser;
-                    CacheService.putItem('linkedinUser', linkedinUser);
-                    $rootScope.$apply();
-                });
+                let url = '/people/~:(id,email-address,first-name,last-name,formatted-name,location,positions,site-standard-profile-request,api-standard-profile-request,public-profile-url,skills,three-past-positions,educations,courses,publications,patents,languages,phone-numbers,main-address,im-accounts,twitter-accounts)?format=json';
+                IN.API.Raw(url).method('GET')
+                    .result((linkedinUser) => {
+                        deferred.resolve(linkedinUser);
+                        this.userIsLoaded = true;
+                    });
             });
         }
+        return deferred.promise;
+    }
+
+    isUserLoaded () {
+        return this.userIsLoaded;
     }
 }
 export default LinkedInService;

@@ -58,7 +58,6 @@ class ApplyService {
                 email: () => encodeURIComponent(this.form.email),
                 phone: () => encodeURIComponent(this.form.phone || ''),
                 assemble: resume => {
-                    //debugger;
                     var type = resume.name ? resume.name.substring(resume.name.lastIndexOf('.') + 1) : 'txt',
                         url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + type;
                     if (window.location.href.indexOf('source=') > -1) {
@@ -119,6 +118,7 @@ class ApplyService {
 
         if (this.form.resumeInfo) {
             var form = new FormData();
+
             form.append('resume', this.form.resumeInfo);
             var applyUrl = this._applyUrl + '/' + jobID + '/raw' + this.requestParams.assemble(this.form.resumeInfo);
             this.$http.post(applyUrl, form, {transformRequest: angular.identity, headers: {'Content-Type': undefined}})

@@ -218,24 +218,37 @@
             }
 
             div.alert {
+                $info-blue-font: #245C7E;
+                $info-blue-bg: #D0E8F6;
+
+                color: $info-blue-font;
                 padding: 1em;
                 margin: 1.5em 0 0;
                 border-radius: .5em;
 
-                &.error {
-                    background-color: rgba(255, 0, 0, .15);
+                &.info {
+                    border: solid thin darken($info-blue-bg, 10%);
+                    background-color: $info-blue-bg;
                 }
             }
 
             textarea {
                 width: 100%;
                 resize: none;
-                border: solid thin #CCC;
+                border: none;
+                border-bottom: solid thin #CCC;
+                padding: 0 .75em;
+
+                color: #797c7e;
 
                 &:focus,
                 &:hover,
                 &:active {
                     outline: none;
+                }
+
+                &:focus {
+                    border-bottom-color: $primary;
                 }
             }
 
