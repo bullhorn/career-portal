@@ -14,7 +14,7 @@
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">|</span>
         <span class="card-type">{{::detail.job.employmentType}}</span>
 
-        <button class="apply" data-ng-click="detail.applyModal()" data-ng-if="!detail.isIOS">{{'detail.applyButton' | i18n}}</button>
+        <button class="apply" data-ng-click="detail.applyModal()">{{'detail.applyButton' | i18n}}</button>
 
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
 
@@ -30,13 +30,8 @@
         <hr/>
 
         <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{'detail.viewAllJobsLabel' | i18n}}<i class="bhi-arrow-right"></i></a>
-        <div class='ios-upload-warning' data-ng-if="detail.isIOS">
-            <div>{{'detail.iosUploadWarning' | i18n}}</div>
-        </div>
-    </div>
-    <div class='send' data-ng-if="detail.isIOS">
-        <input class="email" type="text" data-ng-model="detail.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
-        <a class="send" data-ng-href="{{detail.sendEmailLink(detail.job, detail.email)}}">{{'detail.sendButton' | i18n}}</a>
+
+
     </div>
     <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
         <div class="job-heading">

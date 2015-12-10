@@ -1,11 +1,13 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService, ShareService) {
         'ngInject';
 
         this.SharedData = SharedData;
         this.$location = $location;
         this.SearchService = SearchService;
+
+        this.ShareService = ShareService;
         this.ApplyService = ApplyService;
         this.LinkedInService = LinkedInService;
         this.configuration = configuration;
@@ -13,11 +15,13 @@ class CareerPortalModalController {
         this.$filter = $filter;
         this.isMobile = detectUtils.isMobile();
 
+        this.email = '';
+
         // Initialize the model
         this.ApplyService.initializeModel();
         this.closeModal();
-
         this.hasAttemptedLIApply = false;
+
     }
 
     /* jshint +W072 */
@@ -31,7 +35,7 @@ class CareerPortalModalController {
                 this.ApplyService.form.email = linkedInUser.emailAddress || '';
                 this.ApplyService.form.phone = linkedInUser.phoneNumbers ? linkedInUser.phoneNumbers.values[0].phoneNumber : '';
 
-                console.log(JSON.stringify(linkedInUser));
+                this.ApplyService.form.resumeInfo = this.formatResume(linkedInUser);
             });
     }
 
@@ -92,6 +96,64 @@ class CareerPortalModalController {
         return tooltip;
     }
 
+
+    formatResume(userProfile) {
+        var resumeText = '',
+            lineBreak = '\n',
+            hardBreak = '\n\n\n',
+            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        // Name & Email
+        resumeText += userProfile.formattedName + lineBreak || '';
+        resumeText += userProfile.emailAddress + lineBreak || '';
+        // Location
+        if (userProfile.location) {
+            resumeText += userProfile.location.name + ', ' || '';
+            resumeText += userProfile.location.country.code + hardBreak || hardBreak;
+        }
+
+        resumeText += 'Education:' + hardBreak;
+
+        resumeText += 'Work Experience:' + lineBreak;
+        // Positions
+        if (userProfile.positions.values && userProfile.positions.values.length) {
+            resumeText += userProfile.positions.values[0].company.name + ' ' || '';
+            // Start Date
+            if (userProfile.positions.values[0].startDate) {
+                resumeText += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' — ' || '';
+            }
+            // End Date or 'Present'
+            if (userProfile.positions.values[0].endDate) {
+                resumeText += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
+            } else {
+                if (userProfile.positions.values[0].isCurrent) {
+                    resumeText += 'Present';
+                }
+            }
+            resumeText += lineBreak;
+            // Title
+            resumeText += userProfile.positions.values[0].title + lineBreak || '';
+            // Industry
+            resumeText += userProfile.positions.values[0].company.industry + lineBreak || '';
+            // Locale
+            resumeText += userProfile.positions.values[0].location.name + lineBreak || '';
+        }
+
+        resumeText += hardBreak;
+
+        // Skills
+        resumeText += 'Skills:' + lineBreak + '*' + hardBreak;
+
+
+        // LinkedIn Information
+        resumeText += 'LinkedIn Profile URL:' + lineBreak;
+        resumeText += userProfile.publicProfileUrl + lineBreak || '';
+        resumeText += userProfile.siteStandardProfileRequest.url + lineBreak || '';
+
+        resumeText += hardBreak;
+
+        return resumeText;
+    }
+
     applySuccess() {
         this.showForm = false;
     }
@@ -117,6 +179,10 @@ class CareerPortalModalController {
                 controller.isSubmitting = false;
             });
         }
+    }
+
+    sendEmailLink() {
+        return this.ShareService.sendEmailLink(this.SearchService.currentDetailData, this.email);
     }
 }
 

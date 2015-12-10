@@ -12,6 +12,8 @@ class JobDetailController {
         this.isIOS = detectUtils.isIOS();
         this.email = '';
 
+        this.emailLink(this.job);
+
         // Load the related jobs
         this.loadRelatedJobs();
 
@@ -20,9 +22,9 @@ class JobDetailController {
     }
     /* jshint +W072 */
 
-    sendEmailLink() {
-        return this.ShareService.sendEmailLink(this.job, this.email);
-    }
+    //sendEmailLink() {
+    //    return this.ShareService.sendEmailLink(this.job, this.email);
+    //}
 
     shareFacebook(job) {
         return this.ShareService.facebook(job);

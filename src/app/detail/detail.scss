@@ -155,49 +155,6 @@ section.job-detail {
         }
     }
 
-    > div.send {
-        margin-top: -56px;
-        background-color: #F4F4F4;
-        display: block;
-        box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px 0px;
-
-        > input.email {
-            text-align: left;
-            width: 73%;
-            height: 35px;
-            font-size: 19px;
-            border: none;
-            background-color: #F4F4F4;
-            text-indent: 15px;
-            padding: 0px 0px 0px 0px;
-        }
-
-
-        > a.send {
-            display: inline-block;
-            width: 25%;
-            cursor: pointer;
-            border: none;
-            background: $secondary;
-            padding-top: 8px;
-            text-align: center;
-            height: 35px;
-            cursor: pointer;
-            color: $white;
-            text-transform: uppercase;
-            font-weight: 400;
-            font-size: 1.3em;
-
-            &:focus {
-                outline: none;
-            }
-
-            &:hover {
-                box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
-            }
-        }
-    }
-
     > div.apply {
         margin-bottom: 1.5em;
         padding-top: 2em;

@@ -206,16 +206,31 @@
                 padding: 1em;
             }
 
+            input {
+                flex: 1;
+                color: lighten($dark-bg, 30%);
+
+                &.ng-invalid {
+                    &.ng-valid-required {
+                        color: $error;
+                    }
+                }
+
+                &[type="text"], &[type="email"] {
+                    border: none;
+                    border-bottom: 1px solid darken($light-bg, 15%);
+                    transition: border-bottom 0.2s ease-in-out;
+                    padding: 0.5em;
+
+                    &:focus {
+                        border-bottom: 1px solid $primary;
+                    }
+                }
+            }
+
+            // Linked In Integration:
             $linked-in-blue: #0077B5;
 
-            hr {
-                display: block;
-                height: 1px;
-                border: 0;
-                border-top: 1px solid #EAEAEA;
-                margin: 2em 0;
-                padding: 0;
-            }
 
             div.alert {
                 $info-blue-font: #245C7E;
@@ -231,7 +246,6 @@
                     background-color: $info-blue-bg;
                 }
             }
-
             textarea {
                 width: 100%;
                 resize: none;
@@ -252,12 +266,32 @@
                 }
             }
 
+            span.break {
+                position: relative;
+                border-bottom: solid lightgray thin;
+                display: block;
+                height: 2em;
+                margin: 2em 0;
+                > span {
+                    position: absolute;
+                    top: -.5em;
+                    text-align: center;
+                    width: 6%;
+                    color: grey;
+                    left: 44%;
+                    background-color: white;
+                    display: block;
+                }
+            }
+
             button.btn-li-lg {
                 display: block;
 
                 border: none;
                 border-radius: .25em;
                 padding: 0;
+
+                margin: auto;
 
                 overflow: hidden;
 
