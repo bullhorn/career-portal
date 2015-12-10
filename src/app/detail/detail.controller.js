@@ -12,8 +12,6 @@ class JobDetailController {
         this.isIOS = detectUtils.isIOS();
         this.email = '';
 
-        this.emailLink(this.job);
-
         // Load the related jobs
         this.loadRelatedJobs();
 
