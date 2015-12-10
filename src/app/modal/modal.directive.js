@@ -102,13 +102,16 @@ class CareerPortalModalController {
             lineBreak = '\n',
             hardBreak = '\n\n\n',
             months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-        // Name & Email
-        resumeText += userProfile.formattedName + lineBreak || '';
-        resumeText += userProfile.emailAddress + lineBreak || '';
+
+        // First Name
+        resumeText += (userProfile.formattedName || '') + lineBreak;
+        // Email Address
+        resumeText += (userProfile.emailAddress || '') + lineBreak;
+
         // Location
-        if (userProfile.location) {
-            resumeText += userProfile.location.name + ', ' || '';
-            resumeText += userProfile.location.country.code + hardBreak || hardBreak;
+        if (userProfile.location && userProfile.location.name) {
+            resumeText += (userProfile.location.name || '') + ', ';
+            resumeText += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
         }
 
         resumeText += 'Education:' + hardBreak;
@@ -116,7 +119,7 @@ class CareerPortalModalController {
         resumeText += 'Work Experience:' + lineBreak;
         // Positions
         if (userProfile.positions.values && userProfile.positions.values.length) {
-            resumeText += userProfile.positions.values[0].company.name + ' ' || '';
+            resumeText += (userProfile.positions.values[0].company.name || '') + ' ';
             // Start Date
             if (userProfile.positions.values[0].startDate) {
                 resumeText += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' — ' || '';
@@ -134,8 +137,11 @@ class CareerPortalModalController {
             resumeText += userProfile.positions.values[0].title + lineBreak || '';
             // Industry
             resumeText += userProfile.positions.values[0].company.industry + lineBreak || '';
-            // Locale
-            resumeText += userProfile.positions.values[0].location.name + lineBreak || '';
+            if (userProfile.positions.values[0].location) {
+                // Locale
+                resumeText += userProfile.positions.values[0].location.name + lineBreak || '';
+            }
+
         }
 
         resumeText += hardBreak;

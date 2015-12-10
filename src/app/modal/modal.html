@@ -38,17 +38,18 @@
                     <span>Or</span>
                 </span>
 
-                <p><strong>Don't have a LinkedIn account?</strong> Email this job to yourself to view it on a desktop and upload your resume file to apply.</p>
+                <p data-ng-if="modal.isMobile"><strong>Don't have a LinkedIn account?</strong> Email this job to yourself to view it on a desktop and upload your resume file to apply.</p>
             </div>
 
             <!-- EMAIL JOB -->
             <div class='send' data-ng-if="modal.isMobile">
                 <input class="email" type="text" data-ng-model="modal.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
                 <a class="send" data-ng-href="{{modal.sendEmailLink()}}">{{'detail.sendButton' | i18n}}</a>
+                <br><br><br><br><br>
             </div>
 
 
-            <br><br><br><br><br>
+
 
             <!-- data-ng-if="!modal.isMobile" -->
 
