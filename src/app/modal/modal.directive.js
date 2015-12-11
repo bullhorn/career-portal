@@ -101,7 +101,9 @@ class CareerPortalModalController {
         var resumeText = '',
             lineBreak = '\n',
             hardBreak = '\n\n\n',
-            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+            friendlyDate = new Date().toLocaleDateString(),
+            legal = 'This message was sent on ' + friendlyDate + '. \n\nIt contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.\n\n';
 
         // First Name
         resumeText += (userProfile.formattedName || '') + lineBreak;
@@ -122,7 +124,7 @@ class CareerPortalModalController {
             resumeText += (userProfile.positions.values[0].company.name || '') + ' ';
             // Start Date
             if (userProfile.positions.values[0].startDate) {
-                resumeText += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' — ' || '';
+                resumeText += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
             }
             // End Date or 'Present'
             if (userProfile.positions.values[0].endDate) {
@@ -155,7 +157,7 @@ class CareerPortalModalController {
         resumeText += userProfile.publicProfileUrl + lineBreak || '';
         resumeText += userProfile.siteStandardProfileRequest.url + lineBreak || '';
 
-        resumeText += hardBreak;
+        resumeText += hardBreak + legal;
 
         return resumeText;
     }
