@@ -174,12 +174,16 @@ class CareerPortalModalController {
     }
 
     applySuccess() {
-
+        // Reset form data
         this.ApplyService.form.firstName = '';
         this.ApplyService.form.lastName = '';
         this.ApplyService.form.email = '';
         this.ApplyService.form.phone = '';
-
+        // Reset LinkedIn Data
+        this.linkedInData.header = '';
+        this.linkedInData.resume = '';
+        this.linkedInData.footer = '';
+        // Hide Form
         this.showForm = false;
     }
 
