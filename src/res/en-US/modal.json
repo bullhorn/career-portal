@@ -23,5 +23,6 @@
     "resumeToSmall": "File is too small.",
     "minLabel": "min",
     "maxLabel": "max",
-    "supportedFileFormatsLabel": "Supported File Formats"
+    "supportedFileFormatsLabel": "Supported File Formats",
+    "sendButton": "Send"
 }

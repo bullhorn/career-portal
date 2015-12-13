@@ -1,11 +1,12 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService, ShareService) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService, ShareService, $window) {
         'ngInject';
 
         this.SharedData = SharedData;
         this.$location = $location;
         this.SearchService = SearchService;
+        this.$window = $window;
 
         this.ShareService = ShareService;
         this.ApplyService = ApplyService;
@@ -21,6 +22,12 @@ class CareerPortalModalController {
         this.ApplyService.initializeModel();
         this.closeModal();
         this.hasAttemptedLIApply = false;
+
+        this.linkedInData = {
+            header: '',
+            resume: '',
+            footer: ''
+        };
 
     }
 
@@ -42,6 +49,7 @@ class CareerPortalModalController {
     closeModal(applyForm) {
         this.SharedData.modalState = 'closed';
         this.showForm = true;
+        this.hasAttemptedLIApply = false;
 
         // Clear the errors if we have the form
         if (applyForm) {
@@ -86,6 +94,13 @@ class CareerPortalModalController {
         }
     }
 
+    showSendButton (form) {
+        if (form || this.email) {
+            return false;
+        }
+        return true;
+    }
+
     getTooltipText() {
         var tooltip = '<ul>';
 
@@ -96,87 +111,97 @@ class CareerPortalModalController {
         return tooltip;
     }
 
-
     formatResume(userProfile) {
         var resumeText = '',
             lineBreak = '\n',
             hardBreak = '\n\n\n',
             months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            friendlyDate = new Date().toLocaleDateString(),
-            legal = 'This message was sent on ' + friendlyDate + '. \n\nIt contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.\n\n';
+            today = new Date(),
+            friendlyDate = today.toLocaleDateString() + ' at ' + today.toLocaleTimeString(),
+            legal = 'This LinkedIn profile information was received on ' + friendlyDate + '. \n\nIt contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.\n\n';
 
         // First Name
-        resumeText += (userProfile.formattedName || '') + lineBreak;
+        this.linkedInData.header += (userProfile.formattedName || '') + lineBreak;
         // Email Address
-        resumeText += (userProfile.emailAddress || '') + lineBreak;
-
+        this.linkedInData.header += (userProfile.emailAddress || '') + lineBreak;
         // Location
         if (userProfile.location && userProfile.location.name) {
-            resumeText += (userProfile.location.name || '') + ', ';
-            resumeText += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
+            this.linkedInData.header += (userProfile.location.name || '') + ', ';
+            this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
         }
+        // Education Block
+        this.linkedInData.header += 'Education:' + hardBreak;
 
-        resumeText += 'Education:' + hardBreak;
-
-        resumeText += 'Work Experience:' + lineBreak;
+        // Work Experience Block
+        this.linkedInData.resume += 'Work Experience:' + lineBreak;
         // Positions
         if (userProfile.positions.values && userProfile.positions.values.length) {
-            resumeText += (userProfile.positions.values[0].company.name || '') + ' ';
+            this.linkedInData.resume += (userProfile.positions.values[0].company.name || '') + ' ';
             // Start Date
             if (userProfile.positions.values[0].startDate) {
-                resumeText += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
+                this.linkedInData.resume += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
             }
             // End Date or 'Present'
             if (userProfile.positions.values[0].endDate) {
-                resumeText += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
+                this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
             } else {
                 if (userProfile.positions.values[0].isCurrent) {
-                    resumeText += 'Present';
+                    this.linkedInData.resume += 'Present';
                 }
             }
-            resumeText += lineBreak;
+            this.linkedInData.resume += lineBreak;
             // Title
-            resumeText += userProfile.positions.values[0].title + lineBreak || '';
+            this.linkedInData.resume += userProfile.positions.values[0].title + lineBreak || '';
             // Industry
-            resumeText += userProfile.positions.values[0].company.industry + lineBreak || '';
+            this.linkedInData.resume += userProfile.positions.values[0].company.industry + lineBreak || '';
             if (userProfile.positions.values[0].location) {
                 // Locale
-                resumeText += userProfile.positions.values[0].location.name + lineBreak || '';
+                this.linkedInData.resume += userProfile.positions.values[0].location.name + lineBreak || '';
             }
 
         }
-
-        resumeText += hardBreak;
-
+        this.linkedInData.resume += hardBreak;
         // Skills
-        resumeText += 'Skills:' + lineBreak + '*' + hardBreak;
-
+        this.linkedInData.resume += 'Skills:' + lineBreak + '*' + hardBreak;
 
         // LinkedIn Information
-        resumeText += 'LinkedIn Profile URL:' + lineBreak;
-        resumeText += userProfile.publicProfileUrl + lineBreak || '';
-        resumeText += userProfile.siteStandardProfileRequest.url + lineBreak || '';
-
-        resumeText += hardBreak + legal;
-
-        return resumeText;
+        this.linkedInData.footer += hardBreak + 'LinkedIn Profile URL:' + lineBreak;
+        this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';
+        this.linkedInData.footer += userProfile.siteStandardProfileRequest.url + lineBreak || '';
+        // Legal
+        this.linkedInData.footer += hardBreak + legal;
+        //return resumeText;
     }
 
     applySuccess() {
+
+        this.ApplyService.form.firstName = '';
+        this.ApplyService.form.lastName = '';
+        this.ApplyService.form.email = '';
+        this.ApplyService.form.phone = '';
+
         this.showForm = false;
     }
 
     submit(applyForm) {
-        applyForm.$submitted = true;
         var isFileValid = false,
-            resumeInfo = this.ApplyService.form.resumeInfo;
+            resumeInfo = this.ApplyService.form.resumeInfo,
+            resumeText = this.linkedInData.header + this.linkedInData.resume + this.linkedInData.footer;
 
-        if (angular.isString(resumeInfo)) {
-            this.ApplyService.form.resumeInfo = new Blob([resumeInfo], {type: 'text/plain'});
+        if (this.hasAttemptedLIApply) {
+            applyForm.$submitted = true;
+            this.ApplyService.form.resumeInfo = new Blob([resumeText], {type: 'text/plain'});
             isFileValid = true;
-        } else {
+        } else if (resumeInfo) {
             isFileValid = this.validateResume(resumeInfo);
+        } else {
+            this.$window.open(this.ShareService.sendEmailLink(this.SearchService.currentDetailData, this.email), '_self');
+            this.email = '';
+            this.closeModal();
         }
+
+
+
         if (applyForm.$valid && isFileValid) {
             var controller = this;
             controller.isSubmitting = true;
@@ -189,9 +214,21 @@ class CareerPortalModalController {
         }
     }
 
-    sendEmailLink() {
-        return this.ShareService.sendEmailLink(this.SearchService.currentDetailData, this.email);
+    verifyLinkedInInfo () {
+        if (this.verifyLinkedInIntegration()) {
+            // Verify that LinkedIn
+
+
+        } else {
+            // Always return valid if linkedIn integration isn't configured
+            return true;
+        }
     }
+
+    verifyLinkedInIntegration () {
+        return (this.configuration.integrations.linkedin && this.configuration.integrations.linkedin.clientId);
+    }
+
 }
 
 class CareerPortalModal {

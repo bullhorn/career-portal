@@ -75,33 +75,33 @@ class ApplyService {
             hasLocalStorage: () => typeof Storage !== 'undefined',
 
             getStoredForm: () => {
-                if (this.storage.hasLocalStorage()) {
-                    return {
-                        firstName: localStorage.getItem('firstName'),
-                        lastName: localStorage.getItem('lastName'),
-                        email: localStorage.getItem('email'),
-                        mobile: localStorage.getItem('mobile')
-                    };
-                }
+                //if (this.storage.hasLocalStorage()) {
+                //    return {
+                //        firstName: localStorage.getItem('firstName'),
+                //        lastName: localStorage.getItem('lastName'),
+                //        email: localStorage.getItem('email'),
+                //        mobile: localStorage.getItem('mobile')
+                //    };
+                //}
 
                 return {};
             },
 
             store: () => {
-                if (this.storage.hasLocalStorage()) {
-                    localStorage.setItem('firstName', this.form.firstName);
-                    localStorage.setItem('lastName', this.form.lastName);
-                    localStorage.setItem('email', this.form.email);
-                    localStorage.setItem('mobile', this.form.mobile);
-                }
+                //if (this.storage.hasLocalStorage()) {
+                //    localStorage.setItem('firstName', this.form.firstName);
+                //    localStorage.setItem('lastName', this.form.lastName);
+                //    localStorage.setItem('email', this.form.email);
+                //    localStorage.setItem('mobile', this.form.mobile);
+                //}
             }
         };
     }
 
     initializeModel() {
-        if (this.storage.hasLocalStorage()) {
-            this.form = this.storage.getStoredForm();
-        }
+        //if (this.storage.hasLocalStorage()) {
+        //    this.form = this.storage.getStoredForm();
+        //}
     }
 
     submit(jobID, successCallback, errorCallback) {
