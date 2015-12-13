@@ -19,7 +19,9 @@ class CareerPortalModalController {
         this.email = '';
 
         // Initialize the model
-        this.ApplyService.initializeModel();
+
+        //this.ApplyService.initializeModel();
+
         this.closeModal();
         this.hasAttemptedLIApply = false;
 
@@ -112,8 +114,7 @@ class CareerPortalModalController {
     }
 
     formatResume(userProfile) {
-        var resumeText = '',
-            lineBreak = '\n',
+        var lineBreak = '\n',
             hardBreak = '\n\n\n',
             months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
             today = new Date(),

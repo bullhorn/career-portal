@@ -46,10 +46,8 @@
                     <p data-ng-if="modal.isMobile && !modal.hasAttemptedLIApply"><strong>Don't have a LinkedIn account?</strong> Email this job to yourself to view it on a desktop and upload your resume file to apply.</p>
                 </div>
                 <!-- EMAIL JOB -->
-                <div class='send' data-ng-show="modal.isMobile && !modal.hasAttemptedLIApply">
+                <div data-ng-show="modal.isMobile && !modal.hasAttemptedLIApply">
                     <input class="email" type="email" data-ng-model="modal.email" id="email" name="email" data-i18n-attr="{ placeholder: 'common.emailPlaceholder' }">
-                    <!-- TODO: delete this stupid breaks @krsween -->
-                    <br><br><br><br><br>
                 </div>
             </section>
             <!-- APPLICANT FORM -->
