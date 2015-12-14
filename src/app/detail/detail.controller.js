@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils, configuration) {
         'ngInject';
 
         this.$window = $window;
@@ -11,6 +11,7 @@ class JobDetailController {
         this.job = job;
         this.isIOS = detectUtils.isIOS();
         this.email = '';
+        this.configuration = configuration;
 
         // Load the related jobs
         this.loadRelatedJobs();
@@ -20,9 +21,9 @@ class JobDetailController {
     }
     /* jshint +W072 */
 
-    //sendEmailLink() {
-    //    return this.ShareService.sendEmailLink(this.job, this.email);
-    //}
+    sendEmailLink() {
+        return this.ShareService.sendEmailLink(this.job, this.email);
+    }
 
     shareFacebook(job) {
         return this.ShareService.facebook(job);
@@ -60,7 +61,6 @@ class JobDetailController {
 
     addRelatedJobs() {
         var controller = this;
-
         return function (jobs) {
             controller.relatedJobs = controller.relatedJobs.concat(jobs);
         };
@@ -78,12 +78,13 @@ class JobDetailController {
         this.SearchService.helper.emptyCurrentDataList();
         this.SearchService.helper.resetStartAndTotal();
         this.SearchService.helper.clearSearchParams();
-
         this.SearchService.searchParams.category.push(categoryID);
-
         this.SearchService.findJobs();
-
         this.$location.path('/jobs');
+    }
+
+    verifyLinkedInIntegration () {
+        return (this.configuration.integrations.linkedin && this.configuration.integrations.linkedin.clientId);
     }
 }
 
