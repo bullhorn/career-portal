@@ -3,6 +3,7 @@ class JobDetailController {
     constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils, configuration) {
         'ngInject';
 
+        // Dependencies
         this.$window = $window;
         this.$location = $location;
         this.SharedData = SharedData;
@@ -10,9 +11,10 @@ class JobDetailController {
         this.SearchService = SearchService;
         this.job = job;
         this.isIOS = detectUtils.isIOS();
-        this.email = '';
         this.configuration = configuration;
 
+        // Constants
+        this.email = '';
         this.relatedJobs = [];
 
         // Load the related jobs
