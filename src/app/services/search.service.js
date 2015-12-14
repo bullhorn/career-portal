@@ -1,9 +1,9 @@
 class SearchService {
-    constructor($http, configuration) {
+    constructor($http, configuration, $q) {
         'ngInject';
-
         this.$http = $http;
         this.configuration = configuration;
+        this.$q = $q;
     }
 
     static get _() {
@@ -395,21 +395,24 @@ class SearchService {
         }).error(() => errorCallback());
     }
 
-    loadJobDataByCategory(categoryID, callback, errorCallback, idToExclude) {
-        errorCallback = errorCallback || function () {
-            };
+    loadJobDataByCategory(categoryID, idToExclude) {
+        let deferred = this.$q.defer();
 
         this.$http({
             method: 'GET',
             url: this._queryUrl + this.requestParams.assembleForRelatedJobs(categoryID, idToExclude)
         }).success(data => {
             if (data && data.data && data.data.length) {
-                callback(data.data);
+                deferred.resolve(data.data);
             }
             else {
-                errorCallback();
+                deferred.reject({message: 'no data was returned from the server'});
             }
-        }).error(() => errorCallback());
+        }).error(error => {
+            deferred.reject(error);
+        });
+
+        return deferred.promise;
     }
 }
 

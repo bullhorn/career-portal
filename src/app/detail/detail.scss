@@ -156,7 +156,6 @@ section.job-detail {
     }
 
 
-
     > div.apply {
         margin-bottom: 1.5em;
         padding-top: 2em;
@@ -172,7 +171,7 @@ section.job-detail {
             margin-top: 1em;
             background-color: #F4F4F4;
             display: block;
-            box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 0px 0px;
+            box-shadow: rgba(0, 0, 0, 0.14902) 0 1px 0 0;
 
             > input.email {
                 text-align: left;
@@ -182,7 +181,7 @@ section.job-detail {
                 border: none;
                 background-color: #F4F4F4;
                 text-indent: 15px;
-                padding: 0px 0px 0px 0px;
+                padding: 0;
             }
 
 
@@ -195,7 +194,6 @@ section.job-detail {
                 padding-top: 8px;
                 text-align: center;
                 height: 35px;
-                cursor: pointer;
                 color: $white;
                 text-transform: uppercase;
                 font-weight: 400;

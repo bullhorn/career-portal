@@ -13,6 +13,8 @@ class JobDetailController {
         this.email = '';
         this.configuration = configuration;
 
+        this.relatedJobs = [];
+
         // Load the related jobs
         this.loadRelatedJobs();
 
@@ -25,20 +27,20 @@ class JobDetailController {
         return this.ShareService.sendEmailLink(this.job, this.email);
     }
 
-    shareFacebook(job) {
-        return this.ShareService.facebook(job);
+    shareFacebook() {
+        this.ShareService.facebook(this.job);
     }
 
-    shareTwitter(job) {
-        return this.ShareService.twitter(job);
+    shareTwitter() {
+        this.ShareService.twitter(this.job);
     }
 
-    shareLinkedin(job) {
-        return this.ShareService.linkedin(job);
+    shareLinkedin() {
+        this.ShareService.linkedin(this.job);
     }
 
-    emailLink(job) {
-        return this.ShareService.emailLink(job);
+    emailLink() {
+        return this.ShareService.emailLink(this.job);
     }
 
     print() {
@@ -49,32 +51,16 @@ class JobDetailController {
         this.SharedData.modalState = 'open';
     }
 
-    openShare() {
-        this.open = this.open === false;
-
-        if (!this.open) {
-            this.share = 'share-open';
-        } else {
-            this.share = '';
-        }
-    }
-
-    addRelatedJobs() {
-        var controller = this;
-        return function (jobs) {
-            controller.relatedJobs = controller.relatedJobs.concat(jobs);
-        };
-    }
-
     loadRelatedJobs() {
-        this.relatedJobs = [];
-
-        if (this.job.publishedCategory) {
-            this.SearchService.loadJobDataByCategory(this.job.publishedCategory.id, this.addRelatedJobs(), undefined, this.job.id);
-        }
+        let categoryId = this.job.publishedCategory.id,
+            jobId = this.job.id;
+        this.SearchService.loadJobDataByCategory(categoryId, jobId)
+            .then(data => {
+                this.relatedJobs = data;
+            });
     }
 
-    loadJobsWithCategory(categoryID) {
+    loadJobsWithCategory (categoryID) {
         this.SearchService.helper.emptyCurrentDataList();
         this.SearchService.helper.resetStartAndTotal();
         this.SearchService.helper.clearSearchParams();
@@ -84,7 +70,7 @@ class JobDetailController {
     }
 
     verifyLinkedInIntegration () {
-        return (this.configuration.integrations.linkedin && this.configuration.integrations.linkedin.clientId);
+        return !!this.configuration.integrations.linkedin;
     }
 }
 

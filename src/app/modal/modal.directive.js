@@ -96,8 +96,8 @@ class CareerPortalModalController {
         }
     }
 
-    showSendButton (form) {
-        if (form || this.email) {
+    showSendButton (isFormValid) {
+        if (isFormValid || this.email) {
             return false;
         }
         return true;
@@ -105,7 +105,6 @@ class CareerPortalModalController {
 
     getTooltipText() {
         var tooltip = '<ul>';
-
         this.configuration.acceptedResumeTypes.forEach(function (type) {
             tooltip += '<li>' + type + '</li>';
         });
@@ -164,7 +163,6 @@ class CareerPortalModalController {
         this.linkedInData.resume += hardBreak;
         // Skills
         this.linkedInData.resume += 'Skills:' + lineBreak + '*' + hardBreak;
-
         // LinkedIn Information
         this.linkedInData.footer += hardBreak + 'LinkedIn Profile URL:' + lineBreak;
         this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';
@@ -205,8 +203,6 @@ class CareerPortalModalController {
             this.closeModal();
         }
 
-
-
         if (applyForm.$valid && isFileValid) {
             var controller = this;
             controller.isSubmitting = true;
@@ -216,17 +212,6 @@ class CareerPortalModalController {
             }, function () {
                 controller.isSubmitting = false;
             });
-        }
-    }
-
-    verifyLinkedInInfo () {
-        if (this.verifyLinkedInIntegration()) {
-            // Verify that LinkedIn
-
-
-        } else {
-            // Always return valid if linkedIn integration isn't configured
-            return true;
         }
     }
 
