@@ -18,7 +18,7 @@ class CareerPortalModalController {
         this.locale = locale;
 
         // Boolean to get user device
-        this.isMobile = detectUtils.isMobile();
+        this.isMobile = detectUtils.isIOS();
         // Create a local variable to store user's email address for sendEmailLink
         this.email = '';
         // Load directive with modal closed by default
