@@ -23,5 +23,12 @@
     "minLabel": "min",
     "maxLabel": "max",
     "supportedFileFormatsLabel": "Formats de fichiers pris en charge",
-    "sendButton": "Envoyer"
+    "sendButton": "Envoyer",
+    "headsUp": "La Tête Haute!",
+    "applyWithLI": "Appliquer avec LinkedIn",
+    "linkedInWarning": "Si le signe LinkedIn dans la page ne semble pas peu, s'il vous plaît assurez-vous que votre navigateur autorise les pop-ups. Cliquez",
+    "here": "ici",
+    "retry": "pour réessayer.",
+    "LIError": "LinkedIn Appliquer n'a pas été effectuée, CV n'a pas été fixé, à l'email était vide.",
+    "skills": "Compétences et Expérience professionnelle"
 }

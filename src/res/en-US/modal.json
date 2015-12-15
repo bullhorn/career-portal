@@ -24,5 +24,12 @@
     "minLabel": "min",
     "maxLabel": "max",
     "supportedFileFormatsLabel": "Supported File Formats",
-    "sendButton": "Send"
+    "sendButton": "Send",
+    "headsUp": "Heads Up!",
+    "applyWithLI": "Apply With LinkedIn",
+    "linkedInWarning": "If the LinkedIn sign in page does not appear shortly, please make sure your browser allows pop-ups. Click",
+    "here": "here",
+    "retry": "to retry.",
+    "LIError": "LinkedIn Apply was not performed, resume was not attached, & email was blank.",
+    "skills": "Skills & Work Experience"
 }

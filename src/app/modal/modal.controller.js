@@ -18,7 +18,7 @@ class CareerPortalModalController {
         this.locale = locale;
 
         // Boolean to get user device
-        this.isMobile = detectUtils.isIOS();
+        this.isIOS = detectUtils.isIOS();
         // Create a local variable to store user's email address for sendEmailLink
         this.email = '';
         // Load directive with modal closed by default
@@ -214,7 +214,7 @@ class CareerPortalModalController {
             applyForm.$submitted = true;
             isFileValid = this.validateResume(resumeInfo);
         } else {
-            this.$log.error('LinkedIn Apply was not performed, resume was not attached, & email was blank.');
+            this.$log.error(this.$filter('i18n')('modal.LIError'));
         }
 
         if (applyForm.$valid && isFileValid) {
