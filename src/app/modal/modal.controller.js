@@ -1,12 +1,13 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService, ShareService, $window) {
+    constructor(SharedData, $location, SearchService, ApplyService, configuration, locale, $filter, detectUtils, LinkedInService, ShareService, $window, $log) {
         'ngInject';
 
         // NG Dependencies
         this.$location = $location;
         this.$window = $window;
         this.$filter = $filter;
+        this.$log = $log;
         // Global app config
         this.configuration = configuration;
         this.SharedData = SharedData;
@@ -94,7 +95,7 @@ class CareerPortalModalController {
         }
     }
 
-    showSendButton (isFormValid) {
+    enableSendButton (isFormValid) {
         var resume = this.ApplyService.form.resumeInfo;
 
         if (isFormValid && (resume || this.linkedInData.resume)) {
@@ -193,22 +194,29 @@ class CareerPortalModalController {
     submit(applyForm) {
         var isFileValid = false,
             resumeInfo = this.ApplyService.form.resumeInfo,
-            resumeText = this.linkedInData.header + this.linkedInData.resume + this.linkedInData.footer;
+            resumeText = this.linkedInData.header + this.linkedInData.resume + this.linkedInData.footer,
+            controller;
 
-        if (this.hasAttemptedLIApply) {
-            applyForm.$submitted = true;
-            this.ApplyService.form.resumeInfo = new Blob([resumeText], {type: 'text/plain'});
-            isFileValid = true;
-        } else if (resumeInfo) {
-            isFileValid = this.validateResume(resumeInfo);
-        } else if (this.email !== '') {
+        if (!this.hasAttemptedLIApply && this.email) {
+            // Send email
             this.$window.open(this.ShareService.sendEmailLink(this.SearchService.currentDetailData, this.email), '_self');
             this.email = '';
             this.closeModal();
+        } else if (this.hasAttemptedLIApply && resumeText) {
+            // LinkedIn Apply
+            applyForm.$submitted = true;
+            this.ApplyService.form.resumeInfo = new Blob([resumeText], {type: 'text/plain'});
+            isFileValid = true;
+        } else if (!this.hasAttemptedLIApply && resumeInfo) {
+            // Validate file & Apply
+            applyForm.$submitted = true;
+            isFileValid = this.validateResume(resumeInfo);
+        } else {
+            this.$log.error('LinkedIn Apply was not performed, resume was not attached, & email was blank.');
         }
 
         if (applyForm.$valid && isFileValid) {
-            var controller = this;
+            controller = this;
             controller.isSubmitting = true;
             this.ApplyService.submit(this.SearchService.currentDetailData.id, function () {
                 controller.applySuccess();

@@ -16,16 +16,23 @@ describe('Controller: CareerPortalModalController', () => {
     }));
 
     it('should have all of its dependencies defined.', () => {
-        expect(vm.SharedData).toBeDefined();
+
+        // NG Dependencies
         expect(vm.$location).toBeDefined();
-        expect(vm.SearchService).toBeDefined();
         expect(vm.$window).toBeDefined();
+        expect(vm.$filter).toBeDefined();
+        expect(vm.$log).toBeDefined();
+
+        // Other Dependencies
+        expect(vm.configuration).toBeDefined();
+        expect(vm.SharedData).toBeDefined();
+        expect(vm.SearchService).toBeDefined();
         expect(vm.ShareService).toBeDefined();
         expect(vm.ApplyService).toBeDefined();
         expect(vm.LinkedInService).toBeDefined();
-        expect(vm.configuration).toBeDefined();
         expect(vm.locale).toBeDefined();
-        expect(vm.$filter).toBeDefined();
+
+        // Variables
         expect(vm.isMobile).toBeDefined();
         expect(vm.email).toBeDefined();
         expect(vm.hasAttemptedLIApply).toBeFalsy();
@@ -74,9 +81,9 @@ describe('Controller: CareerPortalModalController', () => {
         });
     });
 
-    describe('Function: showSendButton()', () => {
+    describe('Function: enableSendButton()', () => {
         it('should be defined.', () => {
-            expect(vm.showSendButton).toBeDefined();
+            expect(vm.enableSendButton).toBeDefined();
         });
     });
 
@@ -97,6 +104,43 @@ describe('Controller: CareerPortalModalController', () => {
     describe('Function: formatResume(userProfile)', () => {
         it('should be defined.', () => {
             expect(vm.formatResume).toBeDefined();
+        });
+
+        // Begin a million cases... *sigh*
+        it('should format a resume with all fields.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
+        });
+
+        it('should format a resume without the  field.', () => {
+
         });
     });
 
