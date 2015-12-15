@@ -132,38 +132,40 @@ class CareerPortalModalController {
         // Location
         if (userProfile.location && userProfile.location.name) {
             this.linkedInData.header += (userProfile.location.name || '') + ', ';
-            this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
+            if (userProfile.location.country) {
+                this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
+            }
         }
         // Education Block
         this.linkedInData.header += 'Education:' + hardBreak;
-
         // Work Experience Block
         this.linkedInData.resume += 'Work Experience:' + lineBreak;
         // Positions
-        if (userProfile.positions.values && userProfile.positions.values.length) {
-            this.linkedInData.resume += (userProfile.positions.values[0].company.name || '') + ' ';
-            // Start Date
-            if (userProfile.positions.values[0].startDate) {
-                this.linkedInData.resume += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
-            }
-            // End Date or 'Present'
-            if (userProfile.positions.values[0].endDate) {
-                this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
-            } else {
-                if (userProfile.positions.values[0].isCurrent) {
-                    this.linkedInData.resume += 'Present';
+        if (userProfile.positions) {
+            if (userProfile.positions.values && userProfile.positions.values.length) {
+                this.linkedInData.resume += (userProfile.positions.values[0].company.name || '') + ' ';
+                // Start Date
+                if (userProfile.positions.values[0].startDate) {
+                    this.linkedInData.resume += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
+                }
+                // End Date or 'Present'
+                if (userProfile.positions.values[0].endDate) {
+                    this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
+                } else {
+                    if (userProfile.positions.values[0].isCurrent) {
+                        this.linkedInData.resume += 'Present';
+                    }
+                }
+                this.linkedInData.resume += lineBreak;
+                // Title
+                this.linkedInData.resume += userProfile.positions.values[0].title + lineBreak || '';
+                // Industry
+                this.linkedInData.resume += userProfile.positions.values[0].company.industry + lineBreak || '';
+                if (userProfile.positions.values[0].location) {
+                    // Locale
+                    this.linkedInData.resume += userProfile.positions.values[0].location.name + lineBreak || '';
                 }
             }
-            this.linkedInData.resume += lineBreak;
-            // Title
-            this.linkedInData.resume += userProfile.positions.values[0].title + lineBreak || '';
-            // Industry
-            this.linkedInData.resume += userProfile.positions.values[0].company.industry + lineBreak || '';
-            if (userProfile.positions.values[0].location) {
-                // Locale
-                this.linkedInData.resume += userProfile.positions.values[0].location.name + lineBreak || '';
-            }
-
         }
         this.linkedInData.resume += hardBreak;
         // Skills
