@@ -42,7 +42,6 @@ class CareerPortalModalController {
                 this.ApplyService.form.lastName = linkedInUser.lastName || '';
                 this.ApplyService.form.email = linkedInUser.emailAddress || '';
                 this.ApplyService.form.phone = linkedInUser.phoneNumbers ? linkedInUser.phoneNumbers.values[0].phoneNumber : '';
-
                 this.ApplyService.form.resumeInfo = this.formatResume(linkedInUser);
             });
     }

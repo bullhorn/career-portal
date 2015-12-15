@@ -4,7 +4,7 @@ describe('Controller: CareerPortalModalController', () => {
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' } });
+            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, "acceptedResumeTypes": [ "html", "text", "txt" ] });
         });
     });
 
@@ -38,11 +38,26 @@ describe('Controller: CareerPortalModalController', () => {
         it('should be defined.', () => {
             expect(vm.applyWithLinkedIn).toBeDefined();
         });
+        it('should call getUser on the LinkedInService and set the hasAttemptedLIApply flag to true.', () => {
+            spyOn(vm.LinkedInService, 'getUser').and.callThrough();
+            vm.applyWithLinkedIn();
+            expect(vm.LinkedInService.getUser).toHaveBeenCalled();
+            expect(vm.hasAttemptedLIApply).toBeTruthy();
+        });
     });
 
     describe('Function: closeModal(applyForm)', () => {
         it('should be defined.', () => {
             expect(vm.closeModal).toBeDefined();
+        });
+        it('should reset close the modal and clear all modal data.', () => {
+            vm.SharedData.modalState = 'open';
+            vm.showForm = false;
+            vm.hasAttemptedLIApply = true;
+            vm.closeModal();
+            expect(vm.SharedData.modalState).toBe('closed');
+            expect(vm.showForm).toBeTruthy();
+            expect(vm.hasAttemptedLIApply).toBeFalsy();
         });
     });
 
@@ -68,6 +83,13 @@ describe('Controller: CareerPortalModalController', () => {
         it('should be defined.', () => {
             expect(vm.getTooltipText).toBeDefined();
         });
+
+        it('should build out an unordered list of supported file types.', () => {
+            var tooltipHTML = vm.getTooltipText();
+
+            expect().toBeDefined();
+        });
+
     });
 
     describe('Function: formatResume(userProfile)', () => {
