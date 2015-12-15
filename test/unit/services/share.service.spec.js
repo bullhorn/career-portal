@@ -1,13 +1,12 @@
 // Mock the providers
-beforeEach(() => {
-    angular.mock.module(($provide) => {
-        $provide.constant('configuration', {someUrl: '/dummyValue'});
-        $provide.value('job', {});
-    });
-});
-
 describe('Service: ShareService', () => {
     beforeEach(angular.mock.module('CareerPortal'));
+
+    beforeEach(() => {
+        angular.mock.module(($provide) => {
+            $provide.constant('configuration', {someUrl: '/dummyValue'});
+        });
+    });
 
     let ShareService,
         job;

@@ -1,40 +1,4 @@
-// Mock the providers
-//describe('Directive: CareerPortalModal', () => {
-//    let vm,
-//        element,
-//        httpBackend;
-//
-//    beforeEach(() => {
-//        angular.mock.module(($provide) => {
-//            $provide.constant('configuration', {someUrl: '/dummyValue'});
-//            //$provide.value('job', {})
-//        });
-//    });
-//
-//    beforeEach(angular.mock.module('CareerPortal'));
-//
-//    beforeEach(inject(($compile, $rootScope, $httpBackend) => {
-//
-//        element = angular.element(`
-//            <career-portal-modal></career-portal-modal>
-//        `);
-//
-//        $compile(element)($rootScope.$new());
-//        $rootScope.$digest();
-//
-//
-//        vm = element.isolateScope().vm;
-//    }));
-//
-//
-//
-//
-//});
-
-
-
 describe('Directive: CareerPortalModal', () => {
-
     beforeEach(() => {
         angular.mock.module($provide => {
             $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, acceptedResumeTypes: [] });
