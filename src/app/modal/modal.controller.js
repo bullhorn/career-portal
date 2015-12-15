@@ -95,7 +95,13 @@ class CareerPortalModalController {
     }
 
     showSendButton (isFormValid) {
-        if (isFormValid || this.email) {
+        var resume = this.ApplyService.form.resumeInfo;
+
+        if (isFormValid && (resume || this.linkedInData.resume)) {
+            if (this.linkedInData.resume.length !== 0 || resume.type) {
+                return false;
+            }
+        } else if (this.email) {
             return false;
         }
         return true;
@@ -195,7 +201,7 @@ class CareerPortalModalController {
             isFileValid = true;
         } else if (resumeInfo) {
             isFileValid = this.validateResume(resumeInfo);
-        } else {
+        } else if (this.email !== '') {
             this.$window.open(this.ShareService.sendEmailLink(this.SearchService.currentDetailData, this.email), '_self');
             this.email = '';
             this.closeModal();

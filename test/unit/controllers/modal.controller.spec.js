@@ -4,9 +4,10 @@ describe('Controller: CareerPortalModalController', () => {
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, "acceptedResumeTypes": [ "html", "text", "txt" ] });
+            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, acceptedResumeTypes: [ "html", "text", "txt" ] });
         });
     });
+
 
     beforeEach(angular.mock.module('CareerPortal'));
 
@@ -83,11 +84,12 @@ describe('Controller: CareerPortalModalController', () => {
         it('should be defined.', () => {
             expect(vm.getTooltipText).toBeDefined();
         });
-
         it('should build out an unordered list of supported file types.', () => {
             var tooltipHTML = vm.getTooltipText();
-
-            expect().toBeDefined();
+            expect(tooltipHTML).toBe('<ul><li>html</li><li>text</li><li>txt</li></ul>');
+            vm.configuration.acceptedResumeTypes = ['html'];
+            tooltipHTML = vm.getTooltipText();
+            expect(tooltipHTML).toBe('<ul><li>html</li></ul>');
         });
 
     });
