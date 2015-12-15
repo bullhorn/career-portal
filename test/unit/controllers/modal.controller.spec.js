@@ -112,14 +112,14 @@ describe('Controller: CareerPortalModalController', () => {
         // function doesn't throw an undefined error
 
         it('should format a resume with all fields.', () => {
-            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe("John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n");
             expect(vm.linkedInData.resume).toBe("Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n");
         });
 
         it('should format a resume without the location field.', () => {
-            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
 
             expect(vm.linkedInData.header).toBe("John Stamos\nemail@bullhorn.com\nEducation:\n\n\n");
@@ -127,28 +127,28 @@ describe('Controller: CareerPortalModalController', () => {
         });
 
         it('should format a resume without the country code field.', () => {
-            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe("John Stamos\nemail@bullhorn.com\nGreater Boston Area, Education:\n\n\n");
             expect(vm.linkedInData.resume).toBe("Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n");
         });
 
         it('should format a resume without the  field.', () => {
-            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[]},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[]},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe("John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n");
             expect(vm.linkedInData.resume).toBe("Work Experience:\n\n\n\nSkills:\n*\n\n\n");
         });
 
         it('should format a resume without the positions field.', () => {
-            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"emailAddress":"email@bullhorn.com","firstName":"John","formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe("John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n");
             expect(vm.linkedInData.resume).toBe("Work Experience:\n\n\n\nSkills:\n*\n\n\n");
         });
 
         it('should format a resume without the email address and formatted name fields.', () => {
-            var mockResume = {"formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/krStamos","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=113601261&authType=name&authToken=CNuL&trk=api*a4135033*s4202543*"}};
+            var mockResume = {"formattedName":"John Stamos","lastName":"Stamos","location":{"country":{"code":"us"},"name":"Greater Boston Area"},"positions":{"_total":1,"values":[{"company":{"id":18144,"industry":"Computer Software","name":"Bullhorn","size":"501-1000 employees","type":"Privately Held"},"id":725128063,"isCurrent":true,"location":{"country":{"code":"us","name":"United States"},"name":"Greater Boston Area"},"startDate":{"month":10,"year":2015},"title":"Sr. Engineer"}]},"publicProfileUrl":"https://www.linkedin.com/in/stamosforreal","siteStandardProfileRequest":{"url":"https://www.linkedin.com/profile/view?id=datstamosthooo"}};
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe("John Stamos\n\nGreater Boston Area, US\n\n\nEducation:\n\n\n");
             expect(vm.linkedInData.resume).toBe("Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n");
