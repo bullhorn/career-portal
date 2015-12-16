@@ -68,13 +68,21 @@ gulp protractor:dist # Execute e2e tests with Protractor on build output
 Running and building with configuration
 
 ```
-gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]
+gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
 gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
 ```
 
 LinkedIn Integration
 The `LINKED_IN_CLIENT_ID` is defined by LinkedIn's developer portal (i.e. https://developer.linkedin.com). **Note** 
 that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for best results.
+
+In order to get data from the LinkedIn API, you will need to whitelist your local IP address (i.e. 127.0.0.1). 
+By default gulp starts a browser at `http://localhost:3000`. Change
+
+
+## Runtime vs. Buildtime Configurations
+
+
 
 ## Helpful Utilities
 

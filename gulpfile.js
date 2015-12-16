@@ -64,18 +64,6 @@ gulp.task('config:app', function () {
 
     // LinkedIn Integration
     if (argv.liClientId) {
-        // Add LinkedIn source to <head>
-        gulp.src('./src/index.html')
-            .pipe(inject(gulp.src(['./src/index.html']), {
-                starttag: '<!-- inject:integration:{{ext}} -->',
-                transform: function () {
-                    var html =  '<script type="text/javascript" src="//platform.linkedin.com/in.js">' + '\r\t'+
-                        'api_key: ' + argv.liClientId + '\r' +
-                        '</script>';
-                    return html;
-                }
-            }))
-            .pipe(gulp.dest('./src'));
         // Assign LinkedIn info to configuration object for use in NG
         appConfig.integrations.linkedin = {
             clientId: argv.liClientId
