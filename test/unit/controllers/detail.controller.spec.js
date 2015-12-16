@@ -4,7 +4,11 @@ describe('Controller: JobDetailController', () => {
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: { clientId: '' } } });
+            $provide.constant('configuration', {
+                someUrl: '/dummyValue',
+                service: {corpToken: 1, port: 1, swimlane: 1},
+                integrations: {linkedin: {clientId: ''}}
+            });
         });
     });
 
@@ -14,7 +18,7 @@ describe('Controller: JobDetailController', () => {
 
     beforeEach(inject(($controller, $injector) => {
         vm = $controller('JobDetailController', {
-            job: { publishedCategory : { id: 1 }, id: 1 }
+            job: {publishedCategory: {id: 1}, id: 1}
         });
 
         $log = $injector.get('$log');
@@ -123,7 +127,7 @@ describe('Controller: JobDetailController', () => {
             expect(vm.SearchService.loadJobDataByCategory).toHaveBeenCalled();
         });
         it('should not fail if the job is defined without a publishedCategory.', () => {
-            vm.job = { id: 1, publishedCategory: null };
+            vm.job = {id: 1, publishedCategory: null};
             spyOn(vm.SearchService, 'loadJobDataByCategory').and.callThrough();
             vm.loadRelatedJobs();
             expect(vm.SearchService.loadJobDataByCategory).toHaveBeenCalled();

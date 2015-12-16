@@ -1,11 +1,15 @@
 // Mock the providers
 describe('Controller: CareerPortalModalController', () => {
-    let vm,
-        IN;
+    let vm;
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: { clientId: '' } }, acceptedResumeTypes: [ 'html', 'text', 'txt' ] });
+            $provide.constant('configuration', {
+                someUrl: '/dummyValue',
+                service: {corpToken: 1, port: 1, swimlane: 1},
+                integrations: {linkedin: {clientId: ''}},
+                acceptedResumeTypes: ['html', 'text', 'txt']
+            });
         });
     });
 
@@ -41,7 +45,6 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.linkedInData.footer).toBeDefined();
     });
 
-
     describe('Function: applyWithLinkedIn()', () => {
         it('should be defined.', () => {
             expect(vm.applyWithLinkedIn).toBeDefined();
@@ -50,8 +53,9 @@ describe('Controller: CareerPortalModalController', () => {
             // TODO: verify this mock is valid @krsween
             spyOn(vm.LinkedInService, 'getUser').and.callFake(function () {
                 return {
-                    then: function () {}
-                }
+                    then: function () {
+                    }
+                };
             });
             vm.applyWithLinkedIn();
             expect(vm.LinkedInService.getUser).toHaveBeenCalled();
@@ -117,14 +121,63 @@ describe('Controller: CareerPortalModalController', () => {
         // function doesn't throw an undefined error
 
         it('should format a resume with all fields.', () => {
-            var mockResume = {'emailAddress':'email@bullhorn.com','firstName':'John','formattedName':'John Stamos','lastName':'Stamos','location':{'country':{'code':'us'},'name':'Greater Boston Area'},'positions':{'_total':1,'values':[{'company':{'id':18144,'industry':'Computer Software','name':'Bullhorn','size':'501-1000 employees','type':'Privately Held'},'id':725128063,'isCurrent':true,'location':{'country':{'code':'us','name':'United States'},'name':'Greater Boston Area'},'startDate':{'month':10,'year':2015},'title':'Sr. Engineer'}]},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n');
         });
 
         it('should format a resume without the location field.', () => {
-            var mockResume = {'emailAddress':'email@bullhorn.com','firstName':'John','formattedName':'John Stamos','lastName':'Stamos','positions':{'_total':1,'values':[{'company':{'id':18144,'industry':'Computer Software','name':'Bullhorn','size':'501-1000 employees','type':'Privately Held'},'id':725128063,'isCurrent':true,'location':{'country':{'code':'us','name':'United States'},'name':'Greater Boston Area'},'startDate':{'month':10,'year':2015},'title':'Sr. Engineer'}]},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
 
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nEducation:\n\n\n');
@@ -132,28 +185,93 @@ describe('Controller: CareerPortalModalController', () => {
         });
 
         it('should format a resume without the country code field.', () => {
-            var mockResume = {'emailAddress':'email@bullhorn.com','firstName':'John','formattedName':'John Stamos','lastName':'Stamos','location':{'name':'Greater Boston Area'},'positions':{'_total':1,'values':[{'company':{'id':18144,'industry':'Computer Software','name':'Bullhorn','size':'501-1000 employees','type':'Privately Held'},'id':725128063,'isCurrent':true,'location':{'country':{'code':'us','name':'United States'},'name':'Greater Boston Area'},'startDate':{'month':10,'year':2015},'title':'Sr. Engineer'}]},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, Education:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n');
         });
 
         it('should format a resume without the  field.', () => {
-            var mockResume = {'emailAddress':'email@bullhorn.com','firstName':'John','formattedName':'John Stamos','lastName':'Stamos','location':{'country':{'code':'us'},'name':'Greater Boston Area'},'positions':{'_total':1,'values':[]},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {'_total': 1, 'values': []},
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\n\n\n\nSkills:\n*\n\n\n');
         });
 
         it('should format a resume without the positions field.', () => {
-            var mockResume = {'emailAddress':'email@bullhorn.com','firstName':'John','formattedName':'John Stamos','lastName':'Stamos','location':{'country':{'code':'us'},'name':'Greater Boston Area'},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\n\n\n\nSkills:\n*\n\n\n');
         });
 
         it('should format a resume without the email address and formatted name fields.', () => {
-            var mockResume = {'formattedName':'John Stamos','lastName':'Stamos','location':{'country':{'code':'us'},'name':'Greater Boston Area'},'positions':{'_total':1,'values':[{'company':{'id':18144,'industry':'Computer Software','name':'Bullhorn','size':'501-1000 employees','type':'Privately Held'},'id':725128063,'isCurrent':true,'location':{'country':{'code':'us','name':'United States'},'name':'Greater Boston Area'},'startDate':{'month':10,'year':2015},'title':'Sr. Engineer'}]},'publicProfileUrl':'https://www.linkedin.com/in/stamosforreal','siteStandardProfileRequest':{'url':'https://www.linkedin.com/profile/view?id=datstamosthooo'}};
+            var mockResume = {
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\n\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n');
@@ -172,7 +290,7 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.submit).toBeDefined();
         });
         it('should open an email if the user hasn\'t uploaded a binary or has entered an email address.', () => {
-            let mockApplyForm = { $valid: false };
+            let mockApplyForm = {$valid: false};
             vm.hasAttemptedLIApply = false;
             vm.email = 'email@address.com';
             vm.SearchService.currentDetailData = 'details';
@@ -183,8 +301,7 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.$window.open).toHaveBeenCalledWith('mailto:email@address.com?subject=undefined&body=Check out this undefined job: http%3A%2F%2Flocalhost%3A9876%2Fcontext.html%0A', '_self');
         });
         xit('should create a binary from the linkedInData object when the user applies with LinkedIn.', () => {
-            let mockApplyForm = { $valid: false, $submitted: false },
-                mockBlob;
+            let mockApplyForm = {$valid: false, $submitted: false};
             vm.linkedInData = {
                 header: 'Header',
                 resume: 'Resume',
