@@ -95,7 +95,7 @@ class CareerPortalModalController {
         }
     }
 
-    enableSendButton (isFormValid) {
+    enableSendButton(isFormValid) {
         var resume = this.ApplyService.form.resumeInfo;
 
         if (isFormValid && (resume || this.linkedInData.resume)) {
@@ -139,6 +139,7 @@ class CareerPortalModalController {
         // Education Block
         this.linkedInData.header += 'Education:' + hardBreak;
         // Work Experience Block
+        this.linkedInData.resume = '';
         this.linkedInData.resume += 'Work Experience:' + lineBreak;
         // Positions
         if (userProfile.positions) {
@@ -180,11 +181,6 @@ class CareerPortalModalController {
     }
 
     applySuccess() {
-        // Reset form data
-        this.ApplyService.form.firstName = '';
-        this.ApplyService.form.lastName = '';
-        this.ApplyService.form.email = '';
-        this.ApplyService.form.phone = '';
         // Reset LinkedIn Data
         this.linkedInData.header = '';
         this.linkedInData.resume = '';
@@ -229,7 +225,7 @@ class CareerPortalModalController {
         }
     }
 
-    verifyLinkedInIntegration () {
+    verifyLinkedInIntegration() {
         var clientId = this.configuration.integrations.linkedin.clientId || '';
         if (clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length !== 14) {
             return false;
