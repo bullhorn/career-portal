@@ -95,7 +95,7 @@ class CareerPortalModalController {
         }
     }
 
-    enableSendButton (isFormValid) {
+    enableSendButton(isFormValid) {
         var resume = this.ApplyService.form.resumeInfo;
 
         if (isFormValid && (resume || this.linkedInData.resume)) {
@@ -229,7 +229,7 @@ class CareerPortalModalController {
         }
     }
 
-    verifyLinkedInIntegration () {
+    verifyLinkedInIntegration() {
         var clientId = this.configuration.integrations.linkedin.clientId || '';
         if (clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length !== 14) {
             return false;
