@@ -4,15 +4,21 @@ describe('Controller: JobDetailController', () => {
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' } });
+            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: { clientId: '' } } });
         });
     });
 
+    var $log;
+
     beforeEach(angular.mock.module('CareerPortal'));
-    beforeEach(inject(($controller) => {
+
+    beforeEach(inject(($controller, $injector) => {
         vm = $controller('JobDetailController', {
             job: { publishedCategory : { id: 1 }, id: 1 }
         });
+
+        $log = $injector.get('$log');
+
     }));
 
     it('should have all of its dependencies defined.', () => {
@@ -116,7 +122,18 @@ describe('Controller: JobDetailController', () => {
             vm.loadRelatedJobs();
             expect(vm.SearchService.loadJobDataByCategory).toHaveBeenCalled();
         });
-
+        it('should not fail if the job is defined without a publishedCategory.', () => {
+            vm.job = { id: 1, publishedCategory: null };
+            spyOn(vm.SearchService, 'loadJobDataByCategory').and.callThrough();
+            vm.loadRelatedJobs();
+            expect(vm.SearchService.loadJobDataByCategory).toHaveBeenCalled();
+        });
+        it('should fail if the job isn\'t defined.', () => {
+            vm.job = null;
+            spyOn(vm.$log, 'error').and.callThrough();
+            vm.loadRelatedJobs();
+            expect(vm.$log.error).toHaveBeenCalledWith('No job or category was provided.');
+        });
     });
 
     describe('Function: loadJobsWithCategory(categoryID)', () => {
@@ -141,15 +158,27 @@ describe('Controller: JobDetailController', () => {
     });
 
     describe('Function: verifyLinkedInIntegration()', () => {
-        it('should be defined.', () => {
-            expect(vm.verifyLinkedInIntegration).toBeDefined();
+        it('should return true if the clientId is defined and 14 characters.', () => {
+            vm.configuration.integrations.linkedin.clientId = '00000000000000';
+            expect(vm.verifyLinkedInIntegration()).toBeTruthy();
         });
-        it('should return false if LinkedIn is not integrated.', () => {
+        it('should return false if the clientId is defined and not 14 characters.', () => {
+            vm.configuration.integrations.linkedin.clientId = '11111';
             expect(vm.verifyLinkedInIntegration()).toBeFalsy();
         });
-        it('should return true if LinkedIn is integrated.', () => {
-            vm.configuration.integrations.linkedin = '123';
-            expect(vm.verifyLinkedInIntegration()).toBeTruthy();
+        it('should return false if the clientId is not defined.', () => {
+            vm.configuration.integrations.linkedin.clientId = '';
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
+        });
+
+        it('should return false if the clientId is null.', () => {
+            vm.configuration.integrations.linkedin.clientId = null;
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
+        });
+
+        it('should return false if the clientId is `[ CLIENTID HERE ]`.', () => {
+            vm.configuration.integrations.linkedin.clientId = '[ CLIENTID HERE ]';
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
         });
     });
 });

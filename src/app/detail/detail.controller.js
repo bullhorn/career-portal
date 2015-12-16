@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils, configuration) {
+    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils, configuration, $log) {
         'ngInject';
 
         // Dependencies
@@ -9,6 +9,7 @@ class JobDetailController {
         this.SharedData = SharedData;
         this.ShareService = ShareService;
         this.SearchService = SearchService;
+        this.$log = $log;
         this.job = job;
         this.isIOS = detectUtils.isIOS();
         this.configuration = configuration;
@@ -54,12 +55,21 @@ class JobDetailController {
     }
 
     loadRelatedJobs() {
-        let categoryId = this.job.publishedCategory.id,
-            jobId = this.job.id;
-        this.SearchService.loadJobDataByCategory(categoryId, jobId)
-            .then(data => {
-                this.relatedJobs = data;
-            });
+        let job = this.job || {},
+            category = job.publishedCategory || {},
+            categoryId = category.id ? category.id : '',
+            jobId = job.id;
+
+        if (categoryId || jobId) {
+            this.SearchService.loadJobDataByCategory(categoryId, jobId)
+                .then(data => {
+                    this.relatedJobs = data;
+                });
+        } else {
+            this.$log.error('No job or category was provided.');
+        }
+
+
     }
 
     loadJobsWithCategory (categoryID) {
@@ -72,7 +82,11 @@ class JobDetailController {
     }
 
     verifyLinkedInIntegration () {
-        return !!this.configuration.integrations.linkedin;
+        var clientId = this.configuration.integrations.linkedin.clientId || '';
+        if (clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length !== 14) {
+            return false;
+        }
+        return true;
     }
 }
 

@@ -13,7 +13,8 @@ describe('Directive: CareerPortalModal', () => {
         $rootScope,
         $httpBackend,
         $controller,
-        $scope;
+        $scope,
+        configuration;
 
     // Initialize the controller and a mock scope
     beforeEach(inject( ($injector) => {
@@ -22,11 +23,14 @@ describe('Directive: CareerPortalModal', () => {
         $compile = $injector.get('$compile');
         $rootScope = $injector.get('$rootScope');
         $controller = $injector.get('$controller');
+        // Configuration
+        configuration = $injector.get('configuration');
         // Create a scope
         $scope = $rootScope.$new();
         // Mock http requests
         $httpBackend.when('GET', 'res/en-US/common.json').respond({});
         $httpBackend.when('GET', 'res/en-US/modal.json').respond({});
+        $httpBackend.when('GET', './app.json').respond(configuration);
         // Mock Directive Element
         element = angular.element(`<career-portal-modal></career-portal-modal>`);
         $compile(element)($scope);
@@ -41,6 +45,5 @@ describe('Directive: CareerPortalModal', () => {
         $httpBackend.expectGET('res/en-US/common.json');
         $httpBackend.expectGET('res/en-US/modal.json');
         $httpBackend.flush();
-        //console.log(element);
     });
 });

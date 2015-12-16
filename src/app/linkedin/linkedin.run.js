@@ -5,7 +5,7 @@ function linkedInRun ($http, $log) {
             var liClientId = appConfig.data.integrations.linkedin.clientId,
                 script,
                 head;
-            if (liClientId !== '[ CLIENTID HERE ]' || liClientId.length === 14) {
+            if ((liClientId !== '[ CLIENTID HERE ]' || liClientId.length === 14) && liClientId !== '') {
                 script = document.createElement('script');
                 script.setAttribute('type', 'text/javascript');
                 script.setAttribute('src', '//platform.linkedin.com/in.js');

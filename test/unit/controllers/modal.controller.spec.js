@@ -1,13 +1,13 @@
 // Mock the providers
 describe('Controller: CareerPortalModalController', () => {
-    let vm;
+    let vm,
+        IN;
 
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, acceptedResumeTypes: [ 'html', 'text', 'txt' ] });
+            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: { clientId: '' } }, acceptedResumeTypes: [ 'html', 'text', 'txt' ] });
         });
     });
-
 
     beforeEach(angular.mock.module('CareerPortal'));
 
@@ -47,7 +47,12 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.applyWithLinkedIn).toBeDefined();
         });
         it('should call getUser on the LinkedInService and set the hasAttemptedLIApply flag to true.', () => {
-            spyOn(vm.LinkedInService, 'getUser').and.callThrough();
+            // TODO: verify this mock is valid @krsween
+            spyOn(vm.LinkedInService, 'getUser').and.callFake(function () {
+                return {
+                    then: function () {}
+                }
+            });
             vm.applyWithLinkedIn();
             expect(vm.LinkedInService.getUser).toHaveBeenCalled();
             expect(vm.hasAttemptedLIApply).toBeTruthy();
@@ -186,8 +191,6 @@ describe('Controller: CareerPortalModalController', () => {
                 footer: 'Footer'
             };
 
-            //mockBlob = new Blob([vm.linkedInData], {type: 'text/plain'});
-
             vm.hasAttemptedLIApply = true;
             vm.submit(mockApplyForm);
             expect(mockApplyForm.$submitted).toBeTruthy();
@@ -200,8 +203,25 @@ describe('Controller: CareerPortalModalController', () => {
     });
 
     describe('Function: verifyLinkedInIntegration()', () => {
-        it('should be defined.', () => {
-            expect(vm.verifyLinkedInIntegration).toBeDefined();
+        it('should return true if the clientId is defined and 14 characters.', () => {
+            vm.configuration.integrations.linkedin.clientId = '00000000000000';
+            expect(vm.verifyLinkedInIntegration()).toBeTruthy();
+        });
+        it('should return false if the clientId is defined and not 14 characters.', () => {
+            vm.configuration.integrations.linkedin.clientId = '11111';
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
+        });
+        it('should return false if the clientId is not defined.', () => {
+            vm.configuration.integrations.linkedin.clientId = '';
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
+        });
+        it('should return false if the clientId is null.', () => {
+            vm.configuration.integrations.linkedin.clientId = null;
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
+        });
+        it('should return false if the clientId is `[ CLIENTID HERE ]`.', () => {
+            vm.configuration.integrations.linkedin.clientId = '[ CLIENTID HERE ]';
+            expect(vm.verifyLinkedInIntegration()).toBeFalsy();
         });
     });
 

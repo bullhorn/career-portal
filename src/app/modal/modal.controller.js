@@ -230,7 +230,11 @@ class CareerPortalModalController {
     }
 
     verifyLinkedInIntegration () {
-        return (this.configuration.integrations.linkedin.clientId !== '[ CLIENTID HERE ]');
+        var clientId = this.configuration.integrations.linkedin.clientId || '';
+        if (clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length !== 14) {
+            return false;
+        }
+        return true;
     }
 
 }
