@@ -107,104 +107,243 @@
                 height: auto;
             }
 
-            > form.apply-form {
-                > div.form-field {
-                    margin: 1em 0;
+            section {
+                form.apply-form {
+                    > div.form-field {
+                        margin: 1em 0;
 
-                    @include desktop() {
-                        margin: 2em 0;
-                    }
+                        @include desktop() {
+                            margin: 2em 0;
+                        }
 
-                    > div.input {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
+                        > div.input {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
 
-                        > .required {
-                            color: $error;
+                            > .required {
+                                color: $error;
+                                font-size: 1.2em;
+                            }
+
+                            > input {
+                                flex: 1;
+                                color: lighten($dark-bg, 30%);
+
+                                &.ng-invalid {
+                                    &.ng-valid-required {
+                                        color: $error;
+                                    }
+                                }
+
+                                &[type="text"], &[type="email"] {
+                                    border: none;
+                                    border-bottom: 1px solid darken($light-bg, 15%);
+                                    transition: border-bottom 0.2s ease-in-out;
+                                    padding: 0.5em;
+
+                                    &:focus {
+                                        border-bottom: 1px solid $primary;
+                                    }
+                                }
+                            }
+                        }
+
+                        &.upload-container {
+                            border: 1px solid $primary;
+                            color: $primary;
+                            border-radius: 3px;
+                            background: transparent;
+                            text-align: center;
+                            position: relative;
+                            cursor: pointer;
                             font-size: 1.2em;
+                            margin-top: 1em;
+                            margin-bottom: 1.6em;
+                            height: 50px;
+
+                            > i {
+                                line-height: 50px;
+                                font-size: 1.3em;
+                                padding-right: 0.5em;
+
+                                &:before {
+                                    vertical-align: inherit;
+                                }
+                            }
+
+                            > span {
+                                line-height: 50px;
+                                vertical-align: top;
+                            }
+
+                            &.valid {
+                                border-color: $secondary;
+                                color: $secondary;
+                            }
                         }
 
-                        > input {
-                            flex: 1;
-                            color: lighten($dark-bg, 30%);
-
-                            &.ng-invalid {
-                                &.ng-valid-required {
-                                    color: $error;
-                                }
-                            }
-
-                            &[type="text"], &[type="email"] {
-                                border: none;
-                                border-bottom: 1px solid darken($light-bg, 15%);
-                                transition: border-bottom 0.2s ease-in-out;
-                                padding: 0.5em;
-
-                                &:focus {
-                                    border-bottom: 1px solid $primary;
-                                }
-                            }
+                        &:first-child {
+                            margin-top: 0;
                         }
                     }
 
-                    &.upload-container {
-                        border: 1px solid $primary;
-                        color: $primary;
-                        border-radius: 3px;
-                        background: transparent;
-                        text-align: center;
-                        position: relative;
-                        cursor: pointer;
-                        font-size: 1.2em;
-                        margin-top: 1em;
-                        margin-bottom: 1.6em;
-                        height: 50px;
+                    > div.upload-label {
+                        font-size: 1.1em;
+                        color: lighten($dark-bg, 30%);
 
                         > i {
-                            line-height: 50px;
-                            font-size: 1.3em;
-                            padding-right: 0.5em;
-
-                            &:before {
-                                vertical-align: inherit;
-                            }
+                            color: lighten($dark-bg, 20%);
                         }
 
-                        > span {
-                            line-height: 50px;
-                            vertical-align: top;
+                        > .error {
+                            margin-top: 0;
+                            float: right;
                         }
-
-                        &.valid {
-                            border-color: $secondary;
-                            color: $secondary;
-                        }
-                    }
-
-                    &:first-child {
-                        margin-top: 0;
                     }
                 }
 
-                > div.upload-label {
-                    font-size: 1.1em;
+                &.success {
+                    padding: 1em;
+                }
+
+                input {
                     color: lighten($dark-bg, 30%);
+                    width: 100%;
+                    margin-top: 1em;
+
+                    &.ng-invalid {
+                        &.ng-valid-required {
+                            color: $error;
+                        }
+                    }
+
+                    &[type="text"], &[type="email"] {
+                        border: none;
+                        border-bottom: 1px solid darken($light-bg, 15%);
+                        transition: border-bottom 0.2s ease-in-out;
+                        padding: 0.5em;
+
+                        &:focus {
+                            border-bottom: 1px solid $primary;
+                        }
+                    }
+                }
+
+                // Linked In Integration:
+                $linked-in-blue: #0077B5;
+
+
+                div.alert {
+                    $info-blue-font: #245C7E;
+                    $info-blue-bg: #D0E8F6;
+
+                    color: $info-blue-font;
+                    padding: 1em;
+                    margin: 1.5em 0 0;
+                    border-radius: .5em;
+
+                    &.info {
+                        border: solid thin darken($info-blue-bg, 10%);
+                        background-color: $info-blue-bg;
+                    }
+                }
+                textarea {
+                    width: 100%;
+                    resize: none;
+                    border: none;
+                    border-bottom: solid thin #CCC;
+                    padding: 0 .75em;
+
+                    color: #797c7e;
+
+                    &:focus,
+                    &:hover,
+                    &:active {
+                        outline: none;
+                    }
+
+                    &:focus {
+                        border-bottom-color: $primary;
+                    }
+                }
+
+                span.break {
+                    position: relative;
+                    border-bottom: solid lightgray thin;
+                    display: block;
+                    //height: 2em;
+                    margin: 2em 0;
+                    > span {
+                        position: absolute;
+                        top: -.5em;
+                        text-align: center;
+                        width: 6%;
+                        color: grey;
+                        left: 44%;
+                        background-color: white;
+                        display: block;
+                    }
+                }
+
+                button.btn-li-lg {
+                    display: block;
+
+                    border: none;
+                    border-radius: .25em;
+                    padding: 0;
+
+                    margin: auto;
+
+                    overflow: hidden;
+
+                    background: $linked-in-blue;
+                    color: white;
+
+                    text-align: left;
+
+                    -webkit-transition: background-color 250ms;
+                    -moz-transition: background-color 250ms;
+                    -ms-transition: background-color 250ms;
+                    -o-transition: background-color 250ms;
+                    transition: background-color 250ms;
+
+                    &:hover,
+                    &:active,
+                    &:focus {
+                        background-color: darken($linked-in-blue, 5%);
+                    }
+
+                    &.done,
+                    &.loading {
+                        background-color: transparentize($linked-in-blue, .25);
+                        color: rgba(255, 255, 255, .75);
+                        > i {
+                            border-right-color: lighten($linked-in-blue, 10%);
+                        }
+                    }
 
                     > i {
-                        color: lighten($dark-bg, 20%);
+                        font-size: 2.5em;
+                        padding: .15em .25em;
+                        margin: 0 .25em 0 0;
+                        display: inline-block;
+                        height: 100%;
+                        border-right: solid thin darken($linked-in-blue, 7%);
                     }
 
-                    > .error {
-                        margin-top: 0;
-                        float: right;
+                    > span {
+                        position: relative;
+                        top: -.4em;
+                        font-size: 1.1em;
+                        font-weight: 600;
+                        padding: 0 1.5em 0 0;
                     }
+
                 }
             }
 
-            &.success {
-                padding: 1em;
-            }
+
         }
 
         footer {
@@ -274,6 +413,10 @@
                     font-size: 1em;
                     width: 200px;
                     display: inline-block;
+                }
+
+                &.disabled {
+                    background-color: lightgray;
                 }
             }
         }
