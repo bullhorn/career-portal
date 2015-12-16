@@ -77,12 +77,16 @@ The `LINKED_IN_CLIENT_ID` is defined by LinkedIn's developer portal (i.e. https:
 that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for best results.
 
 In order to get data from the LinkedIn API, you will need to whitelist your local IP address (i.e. 127.0.0.1). 
-By default gulp starts a browser at `http://localhost:3000`. Change
+By default gulp starts a browser at `http://localhost:3000`. Since LinkedIn doesn't allow you to whitelist `localhost`,
+whitelist `127.0.0.1` (the IP address localhost points to) and change your browsers URL to that IP address.
 
 
 ## Runtime vs. Buildtime Configurations
 
-
+To maximize the flexibility of application configuration, all configuration-level integrations should derive their 
+dynamic variables from the app.json file. That file can then be loaded into the application. The LinkedIn integration
+requires a custom ClientID in order to access the LinkedIn API. This property is defined in the app.json and injected
+into the app in the linkedInRun (an ng-run function).
 
 ## Helpful Utilities
 
