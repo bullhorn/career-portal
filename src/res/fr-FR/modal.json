@@ -16,11 +16,19 @@
     "emailValidationFormat": "S'il vous plaît entrer une adresse email valide.",
     "phonePlaceholder": "Téléphone mobile (Facultatif)",
     "resumeFilePlaceholder": "Reprise fichier",
-    "resumeValidation": "S'il vous plaît télécharger votre CV .",
+    "resumeValidation": "S'il vous plaît de joindre votre CV.",
     "resumeInvalidFormat": "est pas un format de fichier pris en charge",
     "resumeToBig": "Fichier est trop grand .",
     "resumeToSmall": "Fichier est trop petit .",
     "minLabel": "min",
     "maxLabel": "max",
-    "supportedFileFormatsLabel": "Formats de fichiers pris en charge"
+    "supportedFileFormatsLabel": "Formats de fichiers pris en charge",
+    "sendButton": "Envoyer",
+    "headsUp": "La Tête Haute!",
+    "applyWithLI": "Appliquer avec LinkedIn",
+    "linkedInWarning": "Si le signe LinkedIn dans la page ne semble pas peu, s'il vous plaît assurez-vous que votre navigateur autorise les pop-ups. Cliquez",
+    "here": "ici",
+    "retry": "pour réessayer.",
+    "LIError": "LinkedIn Appliquer n'a pas été effectuée, CV n'a pas été fixé, à l'email était vide.",
+    "skills": "Compétences et Expérience professionnelle"
 }

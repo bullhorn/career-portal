@@ -1,135 +1,78 @@
 // Mock the providers
-beforeEach(() => {
-    angular.mock.module(($provide) => {
-        $provide.constant('configuration', {someUrl: '/dummyValue'});
-        $provide.value('job', {});
-    });
-});
-
 describe('Service: ShareService', () => {
     beforeEach(angular.mock.module('CareerPortal'));
 
-    it('should be registered', inject(ShareService => {
-        expect(ShareService).not.toEqual(null);
+    beforeEach(() => {
+        angular.mock.module(($provide) => {
+            $provide.constant('configuration', {someUrl: '/dummyValue'});
+        });
+    });
+
+    let ShareService,
+        job;
+
+    beforeEach(inject(($injector) => {
+        ShareService = $injector.get('ShareService');
+        job = {
+            title: 'My Job Title',
+            publishedCategory: {
+                name: 'Category Name'
+            },
+            address: {
+                city: 'Topeka',
+                state: 'KS'
+            }
+        };
     }));
 
-    //need to mock this.locale.getString()
-    xdescribe('Function: sendEmailLink', () => {
+    it('should be registered', () => {
+        expect(ShareService).not.toEqual(null);
+    });
 
-        it('should insert empty string after mailto: if the email field is undefined', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: 'Topeka',
-                    state: 'KS'
-                }
-            };
+    //need to mock this.locale.getString()
+    describe('Function: sendEmailLink', () => {
+
+        it('should insert empty string after mailto: if the email field is undefined', () => {
             let emailLink = ShareService.sendEmailLink(job, undefined);
             expect(emailLink).toContain('mailto:?subject=My%20Job%20Title');
-        }));
+        });
 
-        it('should insert empty string after mailto: if the email field is null', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: 'Topeka',
-                    state: 'KS'
-                }
-            };
+        it('should insert empty string after mailto: if the email field is null', () => {
             let emailLink = ShareService.sendEmailLink(job, null);
             expect(emailLink).toContain('mailto:?subject=My%20Job%20Title');
-        }));
+        });
 
-        it('should insert the email address after mailto:', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: 'Topeka',
-                    state: 'KS'
-                }
-            };
+        it('should insert the email address after mailto:', () => {
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).toContain('mailto:example@test.com?subject=My%20Job%20Title');
-        }));
+        });
 
-        it('should not display the location if city and state are null', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: null,
-                    state: null
-                }
-            };
+        xit('should not display the location if city and state are null', () => {
+            job.address = {};
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).not.toContain('Location:');
-        }));
+        });
 
-        it('should only display the state if the city is null', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: null,
-                    state: 'Kansas'
-                }
-            };
+        xit('should only display the state if the city is null', () => {
+            job.address.city = '';
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).toContain('Location%3A%20Kansas');
-        }));
+        });
 
-        it('should only display the city if the state are null', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                },
-                address: {
-                    city: 'Topeka',
-                    state: null
-                }
-            };
+        xit('should only display the city if the state is null', () => {
+            job.address.state = '';
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).toContain('Location%3A%20Topeka');
-        }));
+        });
 
-        it('should display the category', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: 'Category Name'
-                }
-            };
+        xit('should display the category', () => {
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).toContain('Category%3A%20Category%20Name');
-        }));
+        });
 
-        it('should not display the category if it is null', inject(ShareService => {
-            let job = {
-                title: 'My Job Title',
-                publishedCategory: {
-                    name: null
-                },
-                address: {
-                    city: null,
-                    state: null
-                }
-            };
+        xit('should not display the category if it is null', () => {
             let emailLink = ShareService.sendEmailLink(job, 'example@test.com');
             expect(emailLink).not.toContain('Category');
-        }));
+        });
     });
 });

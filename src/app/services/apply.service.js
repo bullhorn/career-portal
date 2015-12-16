@@ -58,7 +58,8 @@ class ApplyService {
                 email: () => encodeURIComponent(this.form.email),
                 phone: () => encodeURIComponent(this.form.phone || ''),
                 assemble: resume => {
-                    var url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + resume.name.substring(resume.name.lastIndexOf('.') + 1);
+                    var type = resume.name ? resume.name.substring(resume.name.lastIndexOf('.') + 1) : 'txt',
+                        url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + type;
                     if (window.location.href.indexOf('source=') > -1) {
                         var sourceRegex = /(source=)([A-Za-z0-9\-]+)?/;
                         var source = window.location.href.match(sourceRegex)[0];
@@ -67,40 +68,6 @@ class ApplyService {
                     return url;
                 }
             });
-    }
-
-    get storage() {
-        return {
-            hasLocalStorage: () => typeof Storage !== 'undefined',
-
-            getStoredForm: () => {
-                if (this.storage.hasLocalStorage()) {
-                    return {
-                        firstName: localStorage.getItem('firstName'),
-                        lastName: localStorage.getItem('lastName'),
-                        email: localStorage.getItem('email'),
-                        mobile: localStorage.getItem('mobile')
-                    };
-                }
-
-                return {};
-            },
-
-            store: () => {
-                if (this.storage.hasLocalStorage()) {
-                    localStorage.setItem('firstName', this.form.firstName);
-                    localStorage.setItem('lastName', this.form.lastName);
-                    localStorage.setItem('email', this.form.email);
-                    localStorage.setItem('mobile', this.form.mobile);
-                }
-            }
-        };
-    }
-
-    initializeModel() {
-        if (this.storage.hasLocalStorage()) {
-            this.form = this.storage.getStoredForm();
-        }
     }
 
     submit(jobID, successCallback, errorCallback) {
@@ -113,21 +80,21 @@ class ApplyService {
         var self = this;
         self.ajaxError = '';
 
-        this.storage.store();
-
         if (this.form.resumeInfo) {
             var form = new FormData();
+
             form.append('resume', this.form.resumeInfo);
             var applyUrl = this._applyUrl + '/' + jobID + '/raw' + this.requestParams.assemble(this.form.resumeInfo);
 
-            this.$http.post(applyUrl, form, {transformRequest: angular.identity, headers: {'Content-Type': undefined}})
+            this.$http.post(applyUrl, form, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
                 .success((data) => {
                     self.form.email = data.candidate.email;
                     self.form.firstName = data.candidate.firstName;
                     self.form.lastName = data.candidate.lastName;
                     self.form.phone = data.candidate.phone;
-
-                    self.storage.store();
 
                     self.ajaxError = '';
 
