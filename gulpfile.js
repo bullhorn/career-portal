@@ -81,7 +81,7 @@ gulp.task('config:app', function () {
             clientId: argv.liClientId
         };
     } else {
-        console.log(chalk.yellow('An argument for LinkedIn Client ID was not found. Supply your LinkedIn apps Client ID via the --liClientId flag if you want to use LinkedIn Apply.'));
+        //console.log(chalk.yellow('An argument for LinkedIn Client ID was not found. Supply your LinkedIn apps Client ID via the --liClientId flag if you want to use LinkedIn Apply.'));
     }
 
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
