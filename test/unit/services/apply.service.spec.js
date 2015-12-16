@@ -7,7 +7,11 @@ describe('Service: ApplyService', () => {
 
     beforeEach(() => {
         angular.mock.module(($provide) => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' } });
+            $provide.constant('configuration', {
+                someUrl: '/dummyValue',
+                service: {corpToken: 1, port: 1, swimlane: 1},
+                integrations: {linkedin: ''}
+            });
             //$provide.value('job', {});
         });
     });

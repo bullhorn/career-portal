@@ -2,8 +2,6 @@
 import routerConfig from './index.route';
 import localeConfig from './index.locale';
 
-import linkedInRun from './linkedin/linkedin.run';
-
 import JobListController from './list/list.controller';
 import JobDetailController from './detail/detail.controller';
 import CareerPortalModalController from './modal/modal.controller';
@@ -25,7 +23,6 @@ import OmitFiltersFilter from './filters/omitfilters.filter';
 import DisplayDateFilter from './filters/displayDate.filter';
 
 angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router', 'ngFileUpload', '720kb.tooltips', 'ng.deviceDetector', 'ng-fastclick', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'ngLocalize.Events'])
-    .run(linkedInRun)
     .constant('moment', moment)
     .constant('localeConf', {})
     .constant('localeSupported', [])
@@ -47,14 +44,15 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('SearchService', SearchService)
     .service('LinkedInService', LinkedInService)
     .service('CacheService', CacheService);
-    // Deferring the bootstrap to make sure we have loaded the config from app.json
-    deferredBootstrapper.bootstrap({
-        element: document.body,
-        module: 'CareerPortal',
-        resolve: {
-            configuration: function ($http) {
-                'ngInject';
-                return $http.get('./app.json');
-            }
+
+// Deferring the bootstrap to make sure we have loaded the config from app.json
+deferredBootstrapper.bootstrap({
+    element: document.body,
+    module: 'CareerPortal',
+    resolve: {
+        configuration: function ($http) {
+            'ngInject';
+            return $http.get('./app.json');
         }
-    });
+    }
+});

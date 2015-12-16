@@ -1,5 +1,4 @@
 class JobListController {
-
     constructor(SharedData, SearchService) {
         'ngInject';
 

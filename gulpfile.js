@@ -9,7 +9,6 @@ var fs = require('fs');
 var argv = require('yargs').argv;
 var dateFormat = require('dateformat');
 var chalk = require('chalk');
-var inject = require('gulp-inject');
 
 /**
  *  This will load all js or coffee files in the gulp directory

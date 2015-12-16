@@ -1,7 +1,12 @@
 describe('Directive: CareerPortalModal', () => {
     beforeEach(() => {
         angular.mock.module($provide => {
-            $provide.constant('configuration', { someUrl: '/dummyValue', service: { corpToken: 1, port: 1, swimlane: 1 }, integrations: { linkedin: '' }, acceptedResumeTypes: [] });
+            $provide.constant('configuration', {
+                someUrl: '/dummyValue',
+                service: {corpToken: 1, port: 1, swimlane: 1},
+                integrations: {linkedin: ''},
+                acceptedResumeTypes: []
+            });
         });
     });
 
@@ -17,7 +22,7 @@ describe('Directive: CareerPortalModal', () => {
         configuration;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject( ($injector) => {
+    beforeEach(inject(($injector) => {
         // Injected dependencies
         $httpBackend = $injector.get('$httpBackend');
         $compile = $injector.get('$compile');
