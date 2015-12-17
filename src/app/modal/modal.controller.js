@@ -126,7 +126,7 @@ class CareerPortalModalController {
             legal = 'This LinkedIn profile information was received on ' + friendlyDate + '. \n\nIt contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.\n\n';
 
         // First Name
-        this.linkedInData.header += (userProfile.formattedName || '') + lineBreak;
+        this.linkedInData.header = (userProfile.formattedName || '') + lineBreak;
         // Email Address
         this.linkedInData.header += (userProfile.emailAddress || '') + lineBreak;
         // Location
@@ -139,8 +139,7 @@ class CareerPortalModalController {
         // Education Block
         this.linkedInData.header += 'Education:' + hardBreak;
         // Work Experience Block
-        this.linkedInData.resume = '';
-        this.linkedInData.resume += 'Work Experience:' + lineBreak;
+        this.linkedInData.resume = 'Work Experience:' + lineBreak;
         // Positions
         if (userProfile.positions) {
             if (userProfile.positions.values && userProfile.positions.values.length) {
@@ -172,12 +171,11 @@ class CareerPortalModalController {
         // Skills
         this.linkedInData.resume += 'Skills:' + lineBreak + '*' + hardBreak;
         // LinkedIn Information
-        this.linkedInData.footer += hardBreak + 'LinkedIn Profile URL:' + lineBreak;
+        this.linkedInData.footer = hardBreak + 'LinkedIn Profile URL:' + lineBreak;
         this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';
         this.linkedInData.footer += userProfile.siteStandardProfileRequest.url + lineBreak || '';
         // Legal
         this.linkedInData.footer += hardBreak + legal;
-        //return resumeText;
     }
 
     applySuccess() {

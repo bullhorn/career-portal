@@ -1,4 +1,4 @@
-// Mock the providers
+/* global describe, beforeEach, expect, it, spyOn */
 describe('Controller: CareerPortalModalController', () => {
     let vm;
 
@@ -275,6 +275,41 @@ describe('Controller: CareerPortalModalController', () => {
             };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\n\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n');
+        });
+
+        it('should not duplicate data when called multiple times', () => {
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'}
+            };
+            vm.formatResume(mockResume);
+            vm.formatResume(mockResume);
+            vm.formatResume(mockResume);
+            vm.formatResume(mockResume);
+            expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\nEducation:\n\n\n');
             expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\n*\n\n\n');
         });
 
