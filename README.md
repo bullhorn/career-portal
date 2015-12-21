@@ -68,9 +68,30 @@ gulp protractor:dist # Execute e2e tests with Protractor on build output
 Running and building with configuration
 
 ```
-gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
-gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
+gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
+gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
 ```
+
+## LinkedIn Integration
+The `LINKED_IN_CLIENT_ID` is defined by LinkedIn's developer portal (i.e. https://developer.linkedin.com). **Note** 
+that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for best results.
+
+In order to get data from the LinkedIn API, you will need to whitelist your local IP address (i.e. 127.0.0.1). 
+By default gulp starts a browser at `http://localhost:3000`. Since LinkedIn doesn't allow you to whitelist `localhost`,
+whitelist `127.0.0.1` (the IP address localhost points to) and change your browsers URL to that IP address.
+
+#### iOS & Safari
+
+Because of a security setting in Safari on iOS, the https protocol that LinkedIn uses to access data will only work 
+with a site with the same (https) protocol. For this reason, when a user is on iOS **and** on Safari, the LinkedIn
+integration will not show. 
+
+## Runtime vs. Buildtime Configurations
+
+To maximize the flexibility of application configuration, all configuration-level integrations should derive their 
+dynamic variables from the app.json file. That file can then be loaded into the application. The LinkedIn integration
+requires a custom ClientID in order to access the LinkedIn API. This property is defined in the app.json and injected
+into the app in the linkedInRun (an ng-run function).
 
 ## Helpful Utilities
 

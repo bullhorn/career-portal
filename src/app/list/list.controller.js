@@ -7,6 +7,7 @@ class JobListController {
 
         // Set the view state
         this.SharedData.viewState = 'overview-closed';
+
     }
 
     loadMoreData() {

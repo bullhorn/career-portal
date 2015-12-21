@@ -1,23 +1,28 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, ShareService, SearchService, SharedData, job, detectUtils) {
+    constructor($window, $location, $log, ShareService, SearchService, SharedData, job, configuration, MobileDetection, VerifyLI) {
         'ngInject';
-
+        // NG Dependencies
         this.$window = $window;
         this.$location = $location;
+        this.$log = $log;
+
+        // Dependencies
         this.SharedData = SharedData;
         this.ShareService = ShareService;
         this.SearchService = SearchService;
         this.job = job;
-        this.isIOS = detectUtils.isIOS();
+        this.configuration = configuration;
+
+        // Variables
+        this.isIOSSafari = (MobileDetection.browserData.os.ios && MobileDetection.browserData.browser.safari);
         this.email = '';
-
-
-        // Load the related jobs
-        this.loadRelatedJobs();
-
-        // Set the view state
+        this.relatedJobs = [];
+        this.isLinkedInActive = VerifyLI.verified;
         this.SharedData.viewState = 'overview-open';
+
+        // Init functions
+        this.loadRelatedJobs();
     }
     /* jshint +W072 */
 
@@ -25,20 +30,20 @@ class JobDetailController {
         return this.ShareService.sendEmailLink(this.job, this.email);
     }
 
-    shareFacebook(job) {
-        return this.ShareService.facebook(job);
+    shareFacebook() {
+        this.ShareService.facebook(this.job);
     }
 
-    shareTwitter(job) {
-        return this.ShareService.twitter(job);
+    shareTwitter() {
+        this.ShareService.twitter(this.job);
     }
 
-    shareLinkedin(job) {
-        return this.ShareService.linkedin(job);
+    shareLinkedin() {
+        this.ShareService.linkedin(this.job);
     }
 
-    emailLink(job) {
-        return this.ShareService.emailLink(job);
+    emailLink() {
+        return this.ShareService.emailLink(this.job);
     }
 
     print() {
@@ -49,41 +54,28 @@ class JobDetailController {
         this.SharedData.modalState = 'open';
     }
 
-    openShare() {
-        this.open = this.open === false;
-
-        if (!this.open) {
-            this.share = 'share-open';
-        } else {
-            this.share = '';
-        }
-    }
-
-    addRelatedJobs() {
-        var controller = this;
-
-        return function (jobs) {
-            controller.relatedJobs = controller.relatedJobs.concat(jobs);
-        };
-    }
-
     loadRelatedJobs() {
-        this.relatedJobs = [];
+        let job = this.job || {},
+            category = job.publishedCategory || {},
+            categoryId = category.id ? category.id : '',
+            jobId = job.id;
 
-        if (this.job.publishedCategory) {
-            this.SearchService.loadJobDataByCategory(this.job.publishedCategory.id, this.addRelatedJobs(), undefined, this.job.id);
+        if (categoryId || jobId) {
+            this.SearchService.loadJobDataByCategory(categoryId, jobId)
+                .then(data => {
+                    this.relatedJobs = data;
+                });
+        } else {
+            this.$log.error('No job or category was provided.');
         }
     }
 
-    loadJobsWithCategory(categoryID) {
+    loadJobsWithCategory (categoryID) {
         this.SearchService.helper.emptyCurrentDataList();
         this.SearchService.helper.resetStartAndTotal();
         this.SearchService.helper.clearSearchParams();
-
         this.SearchService.searchParams.category.push(categoryID);
-
         this.SearchService.findJobs();
-
         this.$location.path('/jobs');
     }
 }

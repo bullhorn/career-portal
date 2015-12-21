@@ -43,7 +43,7 @@ class ShareService {
         }
 
         if (job.address) {
-            let location = '\n' + this.locale.getString('common.locationSectionHeading') + ': ';
+            var location = '\n' + this.locale.getString('common.locationSectionHeading') + ': ';
             if (job.address.city && job.address.state) {
                 body += location + job.address.city + ', ' + job.address.state + '\n';
             } else if (job.address.city) {
@@ -52,7 +52,6 @@ class ShareService {
                 body += location + job.address.state + '\n';
             }
         }
-
         return encodeURIComponent(body);
     }
 
@@ -60,7 +59,6 @@ class ShareService {
         if (url) {
             return 'Check out this ' + job.title + ' job: ' + encodeURIComponent(url);
         }
-
         return 'Check out this ' + job.title + ' job!';
     }
 

@@ -61,6 +61,14 @@ gulp.task('config:app', function () {
         appConfig.service.port = argv.port;
     }
 
+    // LinkedIn Integration
+    if (argv.liClientId) {
+        // Assign LinkedIn info to configuration object for use in NG
+        appConfig.integrations.linkedin = {
+            clientId: argv.liClientId
+        };
+    }
+
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
 
