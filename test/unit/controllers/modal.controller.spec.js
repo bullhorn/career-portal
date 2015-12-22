@@ -1,8 +1,7 @@
 /* global describe, beforeEach, expect, it, spyOn */
 describe('Controller: CareerPortalModalController', () => {
     let vm,
-        $controller,
-        $http;
+        $controller;
 
     beforeEach(() => {
         angular.mock.module($provide => {
@@ -19,8 +18,6 @@ describe('Controller: CareerPortalModalController', () => {
 
     beforeEach(inject(($injector) => {
         $controller = $injector.get('$controller');
-        $http = $injector.get('$http');
-
         vm = $controller('CareerPortalModalController');
     }));
 

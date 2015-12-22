@@ -78,13 +78,11 @@ that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for b
 
 In order to get data from the LinkedIn API, you will need to whitelist your local IP address (i.e. 127.0.0.1). 
 By default gulp starts a browser at `http://localhost:3000`. Since LinkedIn doesn't allow you to whitelist `localhost`,
-whitelist `127.0.0.1` (the IP address localhost points to) and change your browsers URL to that IP address.
+whitelist `http://127.0.0.1` (the IP address localhost points to) and change your browsers URL to that IP address.
 
 #### iOS & Safari
 
-Because of a security setting in Safari on iOS, the https protocol that LinkedIn uses to access data will only work 
-with a site with the same (https) protocol. For this reason, when a user is on iOS **and** on Safari, the LinkedIn
-integration will not show. 
+Because of a security setting in Safari on iOS, the https protocol that LinkedIn uses to access data will only work with a site with the same (https) protocol. For this reason, when a user is on iOS **and** on Safari—unless the host has SSL enabled (https)—the LinkedIn integration will not show. 
 
 ## Runtime vs. Buildtime Configurations
 
