@@ -1,6 +1,8 @@
 /* global describe, beforeEach, expect, it, spyOn */
 describe('Controller: CareerPortalModalController', () => {
-    let vm;
+    let vm,
+        $controller,
+        $http;
 
     beforeEach(() => {
         angular.mock.module($provide => {
@@ -15,7 +17,10 @@ describe('Controller: CareerPortalModalController', () => {
 
     beforeEach(angular.mock.module('CareerPortal'));
 
-    beforeEach(inject(($controller) => {
+    beforeEach(inject(($injector) => {
+        $controller = $injector.get('$controller');
+        $http = $injector.get('$http');
+
         vm = $controller('CareerPortalModalController');
     }));
 
@@ -114,6 +119,36 @@ describe('Controller: CareerPortalModalController', () => {
     describe('Function: formatResume(userProfile)', () => {
         it('should be defined.', () => {
             expect(vm.formatResume).toBeDefined();
+        });
+
+        beforeEach(() => {
+            // Mock out i18n stuff
+            spyOn(vm, '$filter').and.callFake(function () {
+                return function (string) {
+                    var localization = {
+                        'Jan': 'Jan',
+                        'Feb': 'Feb',
+                        'Mar': 'Mar',
+                        'Apr': 'Apr',
+                        'May': 'May',
+                        'Jun': 'Jun',
+                        'Jul': 'Jul',
+                        'Aug': 'Aug',
+                        'Sep': 'Sep',
+                        'Oct': 'Oct',
+                        'Nov': 'Nov',
+                        'Dec': 'Dec',
+                        'profileReceived': 'This LinkedIn resume information was received on',
+                        'legal': 'It contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.',
+                        'at': 'at',
+                        'workExperience': 'Work Experience:',
+                        'present': 'Present',
+                        'profileURL': 'LinkedIn Profile URL:'
+                    };
+                    string = string.replace('modal.', '');
+                    return localization[string];
+                };
+            });
         });
 
         // Begin a million cases... *sigh*

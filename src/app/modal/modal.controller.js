@@ -122,10 +122,23 @@ class CareerPortalModalController {
     formatResume(userProfile) {
         var lineBreak = '\n',
             hardBreak = '\n\n\n',
-            months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+            months = [
+                this.$filter('i18n')('modal.Jan'),
+                this.$filter('i18n')('modal.Feb'),
+                this.$filter('i18n')('modal.Mar'),
+                this.$filter('i18n')('modal.Apr'),
+                this.$filter('i18n')('modal.May'),
+                this.$filter('i18n')('modal.Jun'),
+                this.$filter('i18n')('modal.Jul'),
+                this.$filter('i18n')('modal.Aug'),
+                this.$filter('i18n')('modal.Sep'),
+                this.$filter('i18n')('modal.Oct'),
+                this.$filter('i18n')('modal.Nov'),
+                this.$filter('i18n')('modal.Dec')
+            ],
             today = new Date(),
-            friendlyDate = today.toLocaleDateString() + ' at ' + today.toLocaleTimeString(),
-            legal = 'This LinkedIn profile information was received on ' + friendlyDate + '. \n\nIt contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.\n\n';
+            friendlyDate = today.toLocaleDateString() + ' ' + this.$filter('i18n')('modal.at') + ' ' + today.toLocaleTimeString(),
+            legal = this.$filter('i18n')('modal.profileReceived') + ' ' + friendlyDate + '. \n\n' + this.$filter('i18n')('modal.legal') + '\n\n';
 
         // First Name
         this.linkedInData.header = (userProfile.formattedName || '') + lineBreak;
@@ -139,7 +152,7 @@ class CareerPortalModalController {
             }
         }
         // Work Experience Block
-        this.linkedInData.resume = 'Work Experience:' + lineBreak;
+        this.linkedInData.resume = this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
         if (userProfile.positions) {
             if (userProfile.positions.values && userProfile.positions.values.length) {
@@ -153,7 +166,7 @@ class CareerPortalModalController {
                     this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
                 } else {
                     if (userProfile.positions.values[0].isCurrent) {
-                        this.linkedInData.resume += 'Present';
+                        this.linkedInData.resume += this.$filter('i18n')('modal.present');
                     }
                 }
                 this.linkedInData.resume += lineBreak;
@@ -169,7 +182,7 @@ class CareerPortalModalController {
         }
         this.linkedInData.resume += hardBreak;
         // LinkedIn Information
-        this.linkedInData.footer = hardBreak + 'LinkedIn Profile URL:' + lineBreak;
+        this.linkedInData.footer = hardBreak + this.$filter('i18n')('modal.profileURL') + lineBreak;
         this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';
         this.linkedInData.footer += userProfile.siteStandardProfileRequest.url + lineBreak || '';
         // Legal
