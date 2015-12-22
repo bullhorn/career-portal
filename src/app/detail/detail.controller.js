@@ -13,12 +13,15 @@ class JobDetailController {
         this.SearchService = SearchService;
         this.job = job;
         this.configuration = configuration;
+        //this.MobileDetection = MobileDetection;
 
         // Variables
-        this.isIOSSafari = (MobileDetection.browserData.os.ios && MobileDetection.browserData.browser.safari);
+        this.isIOS = MobileDetection.browserData.os.ios;
+        this.isIOSSafari = (this.isIOS && MobileDetection.browserData.browser.safari);
+        this.isLinkedInEnabled = VerifyLI.verified;
+        this.protocol = $location.protocol();
         this.email = '';
         this.relatedJobs = [];
-        this.isLinkedInActive = VerifyLI.verified;
         this.SharedData.viewState = 'overview-open';
 
         // Init functions
@@ -68,6 +71,10 @@ class JobDetailController {
         } else {
             this.$log.error('No job or category was provided.');
         }
+    }
+
+    isMaskedDevice() {
+        return (this.isIOSSafari && this.protocol === 'http' || (!this.isLinkedInEnabled && this.isIOS));
     }
 
     loadJobsWithCategory (categoryID) {
