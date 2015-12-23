@@ -72,22 +72,30 @@ gulp --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]'
 gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_NAME]' --liClientId='[LINKED_IN_CLIENT_ID]'
 ```
 
-## LinkedIn Integration
-The `LINKED_IN_CLIENT_ID` is defined by LinkedIn's developer portal (i.e. https://developer.linkedin.com). **Note** 
-that the app needs to have `r_emailaddress` & `r_basicprofile` permissions for best results.
+## Apply with LinkedIn
 
-In order to get data from the LinkedIn API, you will need to whitelist your local IP address (i.e. 127.0.0.1). 
-By default gulp starts a browser at `http://localhost:3000`. Since LinkedIn doesn't allow you to whitelist `localhost`,
-whitelist `http://127.0.0.1` (the IP address localhost points to) and change your browsers URL to that IP address.
+**Bullhorn Career Portal** supports integrated LinkedIn profiles during the candidate application process via the
+[Apply with LinkedIn](https://developer.linkedin.com/docs/apply-with-linkedin) SDK. To enable this feature, **Bullhorn Career
+Portal** customers must [register as a LinkedIn integration partner](https://developer.linkedin.com/partner-programs/apply) and
+configure the `LINKED_IN_CLIENT_ID` in `app.json`. **Note** that the registered partner app needs to have `r_emailaddress` &
+`r_basicprofile` permissions for best results.
+
+Additionally, **Bullhorn Career Portal** customers need to whitelist development and production environment IP addresses and/or
+hostnames in order to successfully connect to the LinkedIn API. A common development environment, and the default environment configured by
+the **Bullhorn Career Portal** build system is `localhost`, at the loopback address of `127.0.0.1`. The build system starts
+an HTTP Server at `http://localhost:3000` when building/running locally. Since LinkedIn doesn't allow for `localhost` to be whitelisted,
+whitelist `http://127.0.0.1` instead, and point the browser to the raw IP address.
 
 #### iOS & Safari
 
-Unfortunately, LinkedIn's JS SDK is incompatible with iOS 5+ due to the way that Javascript is paused during cross-window communication processes. 
+Unfortunately, LinkedIn's JS SDK is incompatible with iOS 5+ due to the way that Javascript is paused during cross-window
+communication processes. Therefore, the Apply with LinkedIn feature is not supported in that runtime environment. Users will
+experience an apply workflow that simply excludes the Apply with LinkedIn capability.
 
 
 ## Runtime vs. Buildtime Configurations
 
-To maximize the flexibility of application configuration, all configuration-level integrations should derive their 
+To maximize the flexibility of application configuration, all configuration-level integrations should derive their
 dynamic variables from the app.json file. That file can then be loaded into the application. The LinkedIn integration
 requires a custom ClientID in order to access the LinkedIn API. This property is defined in the app.json and injected
 into the app in the linkedInRun (an ng-run function).
