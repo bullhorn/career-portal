@@ -82,7 +82,8 @@ whitelist `http://127.0.0.1` (the IP address localhost points to) and change you
 
 #### iOS & Safari
 
-Because of a security setting in Safari on iOS, the https protocol that LinkedIn uses to access data will only work with a site with the same (https) protocol. For this reason, when a user is on iOS **and** on Safari—unless the host has SSL enabled (https)—the LinkedIn integration will not show. 
+Unfortunately, LinkedIn's JS SDK is incompatible with iOS 5+ due to the way that Javascript is paused during cross-window communication processes. 
+
 
 ## Runtime vs. Buildtime Configurations
 

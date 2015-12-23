@@ -19,7 +19,7 @@ class JobDetailController {
         this.isIOS = MobileDetection.browserData.os.ios;
         this.isIOSSafari = (this.isIOS && MobileDetection.browserData.browser.safari);
         this.isLinkedInEnabled = VerifyLI.verified;
-        this.protocol = $location.protocol();
+        //this.protocol = $location.protocol();
         this.email = '';
         this.relatedJobs = [];
         this.SharedData.viewState = 'overview-open';
@@ -74,7 +74,7 @@ class JobDetailController {
     }
 
     isMaskedDevice() {
-        return (this.isIOSSafari && this.protocol === 'http' || (!this.isLinkedInEnabled && this.isIOS));
+        return (this.isIOSSafari || (!this.isLinkedInEnabled && this.isIOS));
     }
 
     loadJobsWithCategory (categoryID) {

@@ -41,7 +41,6 @@ describe('Controller: JobDetailController', () => {
         // Variables
         expect(vm.SharedData.viewState).toBe('overview-open');
         expect(vm.isIOSSafari).toBeDefined();
-        expect(vm.protocol).toBeDefined();
         expect(vm.email).toBeDefined();
         expect(vm.relatedJobs).toBeDefined();
 
@@ -149,24 +148,19 @@ describe('Controller: JobDetailController', () => {
     });
 
     describe('Function: isMaskedDevice()', () => {
-        it('should show the \'Apply\' button when the user is not on iOS.', () => {
-            vm.protocol = 'http';
+        it('should show the \'Apply\' button when the user is not on iOS and linkedIn is enabled.', () => {
+            vm.isLinkedInEnabled = true;
             vm.isIOSSafari = false;
             expect(vm.isMaskedDevice()).toBeFalsy();
         });
-        it('should not show the \'Apply\' button when the user is on iOS browsing using Safari on http.', () => {
-            vm.protocol = 'http';
+        it('should not show the \'Apply\' button when the user is on iOS browsing using Safari.', () => {
+            vm.isLinkedInEnabled = true;
             vm.isIOSSafari = true;
             expect(vm.isMaskedDevice()).toBeTruthy();
         });
-        it('should show the \'Apply\' button when the user is on iOS browsing using Safari on https.', () => {
-            vm.protocol = 'https';
-            vm.isIOSSafari = true;
-            expect(vm.isMaskedDevice()).toBeFalsy();
-        });
         it('should not show the \'Apply\' button when the user is on iOS and LinkedIn is disabled.', () => {
-            vm.protocol = 'https';
-            vm.isIOSSafari = false;
+            vm.isLinkedInEnabled = true;
+            vm.isIOSSafari = true;
             vm.isIOS = true;
             expect(vm.isMaskedDevice()).toBeTruthy();
         });

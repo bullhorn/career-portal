@@ -344,7 +344,7 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\n');
         });
 
-        it('should not return undefined when the industry is no set.', () => {
+        it('should not return undefined when the industry is not set.', () => {
             var mockResume = {
                 'emailAddress': 'email@bullhorn.com',
                 'firstName': 'John',
