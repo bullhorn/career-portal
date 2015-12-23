@@ -1,57 +1,67 @@
 <section class="job-detail">
+    <!-- APPLY CARD -->
     <div class="card apply" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
+        <!-- JOB PUBLICATION DATE -->
         <span class="card-date" data-ng-if="detail.job.dateLastPublished">{{'common.addedLabel' | i18n}} - {{detail.job.dateLastPublished | displayDate}}</span>
-
+        <!-- TITLE & CATEGORY -->
         <span class="card-title-category">
             <span class="card-title">{{::detail.job.title}}</span>
             <span class="card-category">{{::detail.job.publishedCategory.name}}</span>
         </span>
-
+        <!-- LOCATION -->
         <span class="card-location">
             {{::detail.job.address.city}}<span data-ng-if="::(detail.job.address.city && detail.job.address.state)">,&nbsp;</span>{{::detail.job.address.state}}
         </span>
-
+        <!-- SEPARATOR -->
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">|</span>
+        <!-- JOB TYPE -->
         <span class="card-type">{{::detail.job.employmentType}}</span>
-
-        <button class="apply" data-ng-click="detail.applyModal()" data-ng-if="!detail.isIOS">{{'detail.applyButton' | i18n}}</button>
-
+        <!-- APPLY BUTTON -->
+        <button class="apply" data-ng-if="!detail.isMaskedDevice()" data-ng-click="detail.applyModal()">{{'detail.applyButton' | i18n}}</button>
+        <!-- CONDITIONAL DIVIDER -->
         <hr data-ng-if="detail.relatedJobs.length !== 0"/>
-
+        <!-- RELATED JOBS -->
         <div class="related-jobs" data-ng-if="detail.relatedJobs.length !== 0">
+            <!-- JOB CATEGORY -->
             <h5>{{'detail.relatedLabel' | i18n}} {{::detail.job.publishedCategory.name}} {{'common.jobsLabel' | i18n}}</h5>
-
+            <!-- JOBS -->
             <div class="related-job" data-ng-repeat="job in detail.relatedJobs">
-                <a ng-href="#/jobs/{{::job.id}}">{{::job.title}}</a>
+                <a data-ng-href="#/jobs/{{::job.id}}">{{::job.title}}</a>
                 <span class="location">{{::job.address.city}}<span data-ng-if="::(job.address.city && job.address.state)">, </span>{{::job.address.state}}</span>
             </div>
         </div>
-
+        <!-- BREAK -->
         <hr/>
-
+        <!-- VIEW ALL JOBS IN CATEGORY LINK -->
         <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{'detail.viewAllJobsLabel' | i18n}}<i class="bhi-arrow-right"></i></a>
-        <div class='ios-upload-warning' data-ng-if="detail.isIOS">
+        <!-- iOS WARNING & COPY -->
+        <div class='ios-upload-warning' data-ng-if="detail.isMaskedDevice()">
             <div>{{'detail.iosUploadWarning' | i18n}}</div>
         </div>
+        <!-- SEND RESUME VIA EMAIL FORM -->
+        <div class='send' data-ng-if="detail.isMaskedDevice()">
+            <input class="email" type="text" data-ng-model="detail.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
+            <a class="send" data-ng-href="{{ detail.sendEmailLink() }}">{{ 'detail.sendButton' | i18n }}</a>
+        </div>
     </div>
-    <div class='send' data-ng-if="detail.isIOS">
-        <input class="email" type="text" data-ng-model="detail.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
-        <a class="send" data-ng-href="{{detail.sendEmailLink(detail.job, detail.email)}}">{{'detail.sendButton' | i18n}}</a>
-    </div>
+    <!-- DESCRIPTION CARD -->
     <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
+        <!-- JOB HEADING -->
         <div class="job-heading">
             <span class="fill"></span>
-
-            <div class="job-actions" data-ng-class="detail.share">
+            <!-- SOCIAL ACTIONS -->
+            <div class="job-actions" data-ng-class="{ 'share-open' : detail.open }">
                 <div class="share-outlets">
-                    <a data-ng-href="{{detail.emailLink(detail.job)}}"><i class="bhi-email"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareTwitter(detail.job);"><i class="bhi-twitter"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareFacebook(detail.job);"><i class="bhi-facebook"></i></a>
-                    <a href="javascript:;" data-ng-click="detail.shareLinkedin(detail.job);"><i class="bhi-linkedin"></i></a>
+                    <a data-ng-href="{{ detail.emailLink() }}"><i class="bhi-email"></i></a>
+                    <a href data-ng-click="detail.shareTwitter();"><i class="bhi-twitter"></i></a>
+                    <a href data-ng-click="detail.shareFacebook();"><i class="bhi-facebook"></i></a>
+                    <a href data-ng-click="detail.shareLinkedin();"><i class="bhi-linkedin"></i></a>
                 </div>
-                <button name="share" data-ng-click="detail.openShare();">
+                <!-- SHARE BUTTON -->
+                <button name="share" data-ng-click="detail.open = !detail.open;">
                     <i class="bhi-share"></i> {{'common.shareLabel' | i18n}}
                 </button>
+                <!-- PRINT BUTTON -->
                 <button name="print" data-ng-click="detail.print();">
                     <i class="bhi-print"></i> {{'common.printLabel' | i18n}}
                 </button>
@@ -59,13 +69,16 @@
 
             <h2>{{'detail.jobDescriptionHeading' | i18n}}</h2>
         </div>
+        <!-- JOB DETAILS -->
         <div class="job-details" data-ng-bind-html="detail.job.publicDescription"></div>
     </div>
+    <!-- NO DATA MESSAGE -->
     <div class="no-data-message" data-ng-if="!(detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen)">
+        <!-- NO DATA HEADING -->
         <h2>{{'common.noDataHeading' | i18n}}</h2>
-
+        <!-- JOB CLOSED -->
         <h3>{{'detail.jobClosedMessage' | i18n}}</h3>
-
+        <!-- OTHER JOBS -->
         <p>
             {{'detail.jobClosedOtherJobsLabel' | i18n}}
             <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)">{{'common.hereLabel' | i18n}}</a>

@@ -47,6 +47,7 @@ module.exports = function (config) {
             'karma-phantomjs-launcher',
             'karma-coverage',
             'karma-jasmine',
+            'karma-mocha-reporter',
             'karma-ng-html2js-preprocessor'
         ],
 
@@ -58,7 +59,7 @@ module.exports = function (config) {
             ]
         },
 
-        reporters: ['progress']
+        reporters: ['mocha']
     };
 
     // This is the default preprocessors configuration for a usage with Karma cli
