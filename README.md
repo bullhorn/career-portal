@@ -76,9 +76,10 @@ gulp serve --corpToken='[CORP_TOKEN]' --sl='[SWIMLANE]' --companyName='[COMPANY_
 
 **Bullhorn Career Portal** supports integrated LinkedIn profiles during the candidate application process via the
 [Apply with LinkedIn](https://developer.linkedin.com/docs/apply-with-linkedin) SDK. To enable this feature, **Bullhorn Career
-Portal** customers must [register as a LinkedIn integration partner](https://developer.linkedin.com/partner-programs/apply) and
-configure the `LINKED_IN_CLIENT_ID` in `app.json`. **Note** that the registered partner app needs to have `r_emailaddress` &
-`r_basicprofile` permissions for best results.
+Portal** customers must [register as a LinkedIn integration partner](https://developer.linkedin.com/partner-programs/apply),
+[create and configure a new LinkedIn partner application](https://www.linkedin.com/developer/apps/new) and provide a value for the
+`CLIENT_ID` token in `app.json`. **Note** that the registered partner app should  have `r_fullprofile`, `r_contactinfo` and
+`r_emailaddress` default application permissions for best results.
 
 Additionally, **Bullhorn Career Portal** customers need to whitelist development and production environment IP addresses and/or
 hostnames in order to successfully connect to the LinkedIn API. A common development environment, and the default environment configured by
