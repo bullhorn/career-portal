@@ -197,28 +197,37 @@ class CareerPortalModalController {
         this.linkedInData.resume += this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
         if (userProfile.positions) {
-            if (userProfile.positions.values && userProfile.positions.values.length) {
-                this.linkedInData.resume += (userProfile.positions.values[0].company.name || '') + ' ';
-                // Start Date
-                if (userProfile.positions.values[0].startDate) {
-                    this.linkedInData.resume += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
-                }
-                // End Date or 'Present'
-                if (userProfile.positions.values[0].endDate) {
-                    this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
-                } else {
-                    if (userProfile.positions.values[0].isCurrent) {
-                        this.linkedInData.resume += this.$filter('i18n')('modal.present');
+            var positions = userProfile.positions.values;
+            // Iterate through each position
+            if (positions && positions.length) {
+                for (var ii = 0; ii < positions.length; ii++) {
+                    // Add Employee section header
+                    this.linkedInData.resume += (positions[ii].company.name || '') + ' ';
+                    // Start Date
+                    if (positions[ii].startDate) {
+                        this.linkedInData.resume += months[positions[ii].startDate.month - 1] + ' ' + positions[ii].startDate.year + ' - ' || '';
                     }
-                }
-                this.linkedInData.resume += lineBreak;
-                // Title
-                this.linkedInData.resume += userProfile.positions.values[0].title + lineBreak || '';
-                // Industry
-                this.linkedInData.resume += userProfile.positions.values[0].company.industry ? userProfile.positions.values[0].company.industry + lineBreak : '';
-                if (userProfile.positions.values[0].location) {
-                    // Locale
-                    this.linkedInData.resume += userProfile.positions.values[0].location.name + lineBreak || '';
+                    // End Date or 'Present'
+                    if (positions[ii].endDate) {
+                        this.linkedInData.resume += months[positions[ii].endDate.month - 1] + ' ' + positions[ii].endDate.year || '';
+                    } else {
+                        if (positions[ii].isCurrent) { // jshint ignore:line
+                            this.linkedInData.resume += this.$filter('i18n')('modal.present');
+                        }
+                    }
+                    this.linkedInData.resume += lineBreak;
+                    // Title
+                    this.linkedInData.resume += positions[ii].title + lineBreak || '';
+                    // Industry
+                    this.linkedInData.resume += positions[ii].company.industry ? positions[ii].company.industry + lineBreak : '';
+                    if (positions[ii].location) {
+                        // Locale
+                        this.linkedInData.resume += positions[ii].location.name + lineBreak || '';
+                    }
+                    // Summary
+                    if (positions[ii].summary) {
+                        this.linkedInData.resume += positions[ii].summary + lineBreak || '';
+                    }
                 }
             }
         }

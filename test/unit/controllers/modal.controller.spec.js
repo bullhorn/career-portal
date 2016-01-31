@@ -463,7 +463,99 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.linkedInData.resume).toBe('Education:\nCollege 1 \nCollege 2 \n\n\nWork Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\n');
         });
 
-
+        it('should format a resume with two or more jobs in the position section.', () => {
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 3,
+                    'values': [
+                        {
+                            'company': {
+                                'id': 18144,
+                                'industry': 'Computer Software',
+                                'name': 'Bullhorn',
+                                'size': '501-1000 employees',
+                                'type': 'Privately Held'
+                            },
+                            'id': 55555555,
+                            'isCurrent': true,
+                            'startDate': {
+                                'month': 2,
+                                'year': 2015
+                            },
+                            'summary': 'Description of job 1.',
+                            'title': 'Software Development Manager'
+                        },
+                        {
+                            'company': {
+                                'id': 55555555,
+                                'industry': 'Wireless',
+                                'name': 'Bullhorn',
+                                'size': '10,001+ employees',
+                                'ticker': 'QCOM',
+                                'type': 'Public Company'
+                            },
+                            'endDate': {
+                                'month': 2,
+                                'year': 2015
+                            },
+                            'id': 55555555,
+                            'isCurrent': false,
+                            'startDate': {
+                                'month': 10,
+                                'year': 2009
+                            },
+                            'summary': 'Description of job 2',
+                            'title': 'Senior Staff Engineer'
+                        },
+                        {
+                            'company': {
+                                'id': 55555555,
+                                'industry': 'Telecommunications',
+                                'name': 'Company 3',
+                                'size': '51-200 employees',
+                                'ticker': '',
+                                'type': 'Privately Held'
+                            },
+                            'endDate': {
+                                'month': 9,
+                                'year': 2009
+                            },
+                            'id': 55555555,
+                            'isCurrent': false,
+                            'startDate': {
+                                'month': 8,
+                                'year': 2007
+                            },
+                            'summary': 'Description of job 3',
+                            'title': 'Software Engineer'
+                        }
+                    ]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'},
+                'educations': {
+                    '_total': 1,
+                    'values': [
+                        {
+                            'id': 99999999,
+                            'schoolName': 'College 1'
+                        },
+                        {
+                            'id': 88888888,
+                            'schoolName': 'College 2'
+                        }
+                    ]
+                }
+            };
+            vm.formatResume(mockResume);
+            expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Education:\nCollege 1 \nCollege 2 \n\n\nWork Experience:\nBullhorn Feb 2015 - Present\nSoftware Development Manager\nComputer Software\nDescription of job 1.\nBullhorn Oct 2009 - Feb 2015\nSenior Staff Engineer\nWireless\nDescription of job 2\nCompany 3 Aug 2007 - Sep 2009\nSoftware Engineer\nTelecommunications\nDescription of job 3\n\n\n\n');
+        });
 
     });
 
