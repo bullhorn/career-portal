@@ -119,6 +119,8 @@ class CareerPortalModalController {
         return tooltip;
     }
 
+    // TODO: offload to factory
+
     formatResume(userProfile) {
         var lineBreak = '\n',
             hardBreak = '\n\n\n',
@@ -151,8 +153,48 @@ class CareerPortalModalController {
                 this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
             }
         }
+        // Clear Instance of resume
+        this.linkedInData.resume = '';
+        // Education
+        if (userProfile.educations && userProfile.educations.values) {
+            var education = userProfile.educations.values;
+            this.linkedInData.resume += 'Education:' + lineBreak;
+            for (var i = 0; i < education.length; i++) {
+                // Add Degree Type
+                if (education[i].degree) {
+                    this.linkedInData.resume += education[i].degree + ' ';
+                }
+                // Add Field of Study Type
+                if (education[i].fieldOfStudy) {
+                    this.linkedInData.resume += education[i].fieldOfStudy + ' ';
+                }
+                // Add line break
+                if (education[i].degree || education[i].fieldOfStudy) {
+                    this.linkedInData.resume += lineBreak;
+                }
+                // Add School
+                if (education[i].schoolName) {
+                    this.linkedInData.resume += education[i].schoolName + ' ';
+                }
+                // Add Start Date
+                if (education[i].startDate) {
+                    this.linkedInData.resume += education[i].startDate.year + ' - ';
+                }
+                // Add End Date
+                if (education[i].endDate) {
+                    this.linkedInData.resume += education[i].endDate.year + ' ';
+                }
+                // Add line break
+                if ((education[i].schoolName || education[i].startDate || education[i].endDate) && education[i + 1]) {
+                    this.linkedInData.resume += lineBreak;
+                }
+            }
+            // Add line break
+            this.linkedInData.resume += hardBreak;
+        }
+
         // Work Experience Block
-        this.linkedInData.resume = this.$filter('i18n')('modal.workExperience') + lineBreak;
+        this.linkedInData.resume += this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
         if (userProfile.positions) {
             if (userProfile.positions.values && userProfile.positions.values.length) {
