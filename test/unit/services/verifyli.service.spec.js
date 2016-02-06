@@ -29,8 +29,14 @@ describe('Service: VerifyLI', () => {
             VerifyLI.configuration.integrations.linkedin.clientId = '00000000000000';
             expect(VerifyLI.verifyLinkedInIntegration()).toBeTruthy();
         });
-        it('should return false if the clientId is defined and not 14 characters.', () => {
-            VerifyLI.configuration.integrations.linkedin.clientId = '11111';
+
+        it('should return false if the clientId is defined less than 11 characters.', () => {
+            VerifyLI.configuration.integrations.linkedin.clientId = '11';
+            expect(VerifyLI.verifyLinkedInIntegration()).toBeFalsy();
+        });
+
+        it('should return false if the clientId is defined greater than 20 characters.', () => {
+            VerifyLI.configuration.integrations.linkedin.clientId = '123456789012345678901';
             expect(VerifyLI.verifyLinkedInIntegration()).toBeFalsy();
         });
         it('should return false if the clientId is not defined.', () => {
