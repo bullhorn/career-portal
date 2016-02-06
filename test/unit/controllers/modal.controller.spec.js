@@ -123,21 +123,12 @@ describe('Controller: CareerPortalModalController', () => {
             spyOn(vm, '$filter').and.callFake(function () {
                 return function (string) {
                     var localization = {
-                        'Jan': 'Jan',
-                        'Feb': 'Feb',
-                        'Mar': 'Mar',
-                        'Apr': 'Apr',
-                        'May': 'May',
-                        'Jun': 'Jun',
-                        'Jul': 'Jul',
-                        'Aug': 'Aug',
-                        'Sep': 'Sep',
-                        'Oct': 'Oct',
-                        'Nov': 'Nov',
-                        'Dec': 'Dec',
+                        'Months': 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec',
                         'profileReceived': 'This LinkedIn resume information was received on',
                         'legal': 'It contains confidential information and is intended only for use within the Bullhorn platform as a part of the Career Portal app.',
                         'at': 'at',
+                        'education': 'Education:',
+                        'skillHeading': 'Skills:',
                         'workExperience': 'Work Experience:',
                         'present': 'Present',
                         'profileURL': 'LinkedIn Profile URL:'
@@ -261,7 +252,7 @@ describe('Controller: CareerPortalModalController', () => {
             };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\n');
-            expect(vm.linkedInData.resume).toBe('Work Experience:\n\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Work Experience:\n');
         });
 
         it('should format a resume without the positions field.', () => {
@@ -276,7 +267,7 @@ describe('Controller: CareerPortalModalController', () => {
             };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\n');
-            expect(vm.linkedInData.resume).toBe('Work Experience:\n\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Work Experience:\n');
         });
 
         it('should format a resume without the email address and formatted name fields.', () => {
@@ -554,7 +545,62 @@ describe('Controller: CareerPortalModalController', () => {
             };
             vm.formatResume(mockResume);
             expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\n');
-            expect(vm.linkedInData.resume).toBe('Education:\nCollege 1 \nCollege 2 \n\n\nWork Experience:\nBullhorn Feb 2015 - Present\nSoftware Development Manager\nComputer Software\nDescription of job 1.\nBullhorn Oct 2009 - Feb 2015\nSenior Staff Engineer\nWireless\nDescription of job 2\nCompany 3 Aug 2007 - Sep 2009\nSoftware Engineer\nTelecommunications\nDescription of job 3\n\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Education:\nCollege 1 \nCollege 2 \n\n\nWork Experience:\nBullhorn Feb 2015 - Present\nSoftware Development Manager\nComputer Software\nDescription of job 1.\n\n\n\nBullhorn Oct 2009 - Feb 2015\nSenior Staff Engineer\nWireless\nDescription of job 2\n\n\n\nCompany 3 Aug 2007 - Sep 2009\nSoftware Engineer\nTelecommunications\nDescription of job 3\n\n\n\n');
+        });
+
+        it('should format a resume with multiple skills.', () => {
+            var mockResume = {
+                'emailAddress': 'email@bullhorn.com',
+                'firstName': 'John',
+                'formattedName': 'John Stamos',
+                'lastName': 'Stamos',
+                'location': {'country': {'code': 'us'}, 'name': 'Greater Boston Area'},
+                'positions': {
+                    '_total': 1,
+                    'values': [{
+                        'company': {
+                            'id': 18144,
+                            'industry': 'Computer Software',
+                            'name': 'Bullhorn',
+                            'size': '501-1000 employees',
+                            'type': 'Privately Held'
+                        },
+                        'id': 725128063,
+                        'isCurrent': true,
+                        'location': {'country': {'code': 'us', 'name': 'United States'}, 'name': 'Greater Boston Area'},
+                        'startDate': {'month': 10, 'year': 2015},
+                        'title': 'Sr. Engineer'
+                    }]
+                },
+                'publicProfileUrl': 'https://www.linkedin.com/in/stamosforreal',
+                'siteStandardProfileRequest': {'url': 'https://www.linkedin.com/profile/view?id=datstamosthooo'},
+                'skills': {
+                    '_total': 3,
+                    'values': [
+                        {
+                            'id': 1,
+                            'skill': {
+                                'name': 'Skill 1'
+                            }
+                        },
+                        {
+                            'id': 2,
+                            'skill': {
+                                'name': 'Skill 2'
+                            }
+                        },
+                        {
+                            'id': 3,
+                            'skill': {
+                                'name': 'Skill 3'
+                            }
+                        }
+                    ]
+                }
+            };
+            vm.formatResume(mockResume);
+            expect(vm.linkedInData.header).toBe('John Stamos\nemail@bullhorn.com\nGreater Boston Area, US\n\n\n');
+            expect(vm.linkedInData.resume).toBe('Work Experience:\nBullhorn Oct 2015 - Present\nSr. Engineer\nComputer Software\nGreater Boston Area\n\n\n\nSkills:\nSkill 1, Skill 2, Skill 3\n\n\n');
         });
 
     });

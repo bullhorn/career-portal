@@ -124,20 +124,7 @@ class CareerPortalModalController {
     formatResume(userProfile) {
         var lineBreak = '\n',
             hardBreak = '\n\n\n',
-            months = [
-                this.$filter('i18n')('modal.Jan'),
-                this.$filter('i18n')('modal.Feb'),
-                this.$filter('i18n')('modal.Mar'),
-                this.$filter('i18n')('modal.Apr'),
-                this.$filter('i18n')('modal.May'),
-                this.$filter('i18n')('modal.Jun'),
-                this.$filter('i18n')('modal.Jul'),
-                this.$filter('i18n')('modal.Aug'),
-                this.$filter('i18n')('modal.Sep'),
-                this.$filter('i18n')('modal.Oct'),
-                this.$filter('i18n')('modal.Nov'),
-                this.$filter('i18n')('modal.Dec')
-            ],
+            months = this.$filter('i18n')('modal.Months').split('_'),
             today = new Date(),
             friendlyDate = today.toLocaleDateString() + ' ' + this.$filter('i18n')('modal.at') + ' ' + today.toLocaleTimeString(),
             legal = this.$filter('i18n')('modal.profileReceived') + ' ' + friendlyDate + '. \n\n' + this.$filter('i18n')('modal.legal') + '\n\n';
@@ -158,7 +145,7 @@ class CareerPortalModalController {
         // Education
         if (userProfile.educations && userProfile.educations.values) {
             var education = userProfile.educations.values;
-            this.linkedInData.resume += 'Education:' + lineBreak;
+            this.linkedInData.resume += this.$filter('i18n')('modal.education') + lineBreak;
             for (var i = 0; i < education.length; i++) {
                 // Add Degree Type
                 if (education[i].degree) {
@@ -220,7 +207,7 @@ class CareerPortalModalController {
                     this.linkedInData.resume += positions[ii].title + lineBreak || '';
                     // Industry
                     this.linkedInData.resume += positions[ii].company.industry ? positions[ii].company.industry + lineBreak : '';
-                    if (positions[ii].location) {
+                    if (positions[ii].location && positions[ii].location.name) {
                         // Locale
                         this.linkedInData.resume += positions[ii].location.name + lineBreak || '';
                     }
@@ -228,10 +215,27 @@ class CareerPortalModalController {
                     if (positions[ii].summary) {
                         this.linkedInData.resume += positions[ii].summary + lineBreak || '';
                     }
+                    this.linkedInData.resume += hardBreak;
                 }
             }
         }
-        this.linkedInData.resume += hardBreak;
+
+        // Skills
+        if (userProfile.skills && userProfile.skills.values) {
+            this.linkedInData.resume +=  this.$filter('i18n')('modal.skillHeading') + lineBreak;
+            var skills = userProfile.skills.values;
+            for (var iii = 0; iii < skills.length; iii++) {
+                var newSkill = skills[iii].skill;
+                if (newSkill && newSkill.name) {
+                    this.linkedInData.resume += newSkill.name;
+                    if (skills[iii + 1]) {
+                        this.linkedInData.resume += ', ';
+                    }
+                }
+            }
+            this.linkedInData.resume += hardBreak;
+        }
+
         // LinkedIn Information
         this.linkedInData.footer = hardBreak + this.$filter('i18n')('modal.profileURL') + lineBreak;
         this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';

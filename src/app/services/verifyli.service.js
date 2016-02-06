@@ -7,10 +7,7 @@ class VerifyLI {
 
     verifyLinkedInIntegration () {
         var clientId = this.configuration.integrations.linkedin.clientId || '';
-        if (clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length !== 14) {
-            return false;
-        }
-        return true;
+        return !(clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length < 11 || clientId.length > 20);
     }
 
 }
