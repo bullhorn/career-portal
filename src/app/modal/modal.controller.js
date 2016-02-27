@@ -183,13 +183,13 @@ class CareerPortalModalController {
         // Work Experience Block
         this.linkedInData.resume += this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
-        if (userProfile.positions) {
+        if (userProfile.positions && userProfile.positions.values) {
             var positions = userProfile.positions.values;
             // Iterate through each position
             if (positions && positions.length) {
                 for (var ii = 0; ii < positions.length; ii++) {
                     // Add Employee section header
-                    this.linkedInData.resume += (positions[ii].company.name || '') + ' ';
+                    this.linkedInData.resume += ((positions[ii].company || {}).name || '') + ' ';
                     // Start Date
                     if (positions[ii].startDate) {
                         this.linkedInData.resume += months[positions[ii].startDate.month - 1] + ' ' + positions[ii].startDate.year + ' - ' || '';
