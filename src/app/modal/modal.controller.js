@@ -119,23 +119,12 @@ class CareerPortalModalController {
         return tooltip;
     }
 
+    // TODO: offload to factory
+
     formatResume(userProfile) {
         var lineBreak = '\n',
             hardBreak = '\n\n\n',
-            months = [
-                this.$filter('i18n')('modal.Jan'),
-                this.$filter('i18n')('modal.Feb'),
-                this.$filter('i18n')('modal.Mar'),
-                this.$filter('i18n')('modal.Apr'),
-                this.$filter('i18n')('modal.May'),
-                this.$filter('i18n')('modal.Jun'),
-                this.$filter('i18n')('modal.Jul'),
-                this.$filter('i18n')('modal.Aug'),
-                this.$filter('i18n')('modal.Sep'),
-                this.$filter('i18n')('modal.Oct'),
-                this.$filter('i18n')('modal.Nov'),
-                this.$filter('i18n')('modal.Dec')
-            ],
+            months = this.$filter('i18n')('modal.Months').split('_'),
             today = new Date(),
             friendlyDate = today.toLocaleDateString() + ' ' + this.$filter('i18n')('modal.at') + ' ' + today.toLocaleTimeString(),
             legal = this.$filter('i18n')('modal.profileReceived') + ' ' + friendlyDate + '. \n\n' + this.$filter('i18n')('modal.legal') + '\n\n';
@@ -151,36 +140,102 @@ class CareerPortalModalController {
                 this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
             }
         }
+        // Clear Instance of resume
+        this.linkedInData.resume = '';
+        // Education
+        if (userProfile.educations && userProfile.educations.values) {
+            var education = userProfile.educations.values;
+            this.linkedInData.resume += this.$filter('i18n')('modal.education') + lineBreak;
+            for (var i = 0; i < education.length; i++) {
+                // Add Degree Type
+                if (education[i].degree) {
+                    this.linkedInData.resume += education[i].degree + ' ';
+                }
+                // Add Field of Study Type
+                if (education[i].fieldOfStudy) {
+                    this.linkedInData.resume += education[i].fieldOfStudy + ' ';
+                }
+                // Add line break
+                if (education[i].degree || education[i].fieldOfStudy) {
+                    this.linkedInData.resume += lineBreak;
+                }
+                // Add School
+                if (education[i].schoolName) {
+                    this.linkedInData.resume += education[i].schoolName + ' ';
+                }
+                // Add Start Date
+                if (education[i].startDate) {
+                    this.linkedInData.resume += education[i].startDate.year + ' - ';
+                }
+                // Add End Date
+                if (education[i].endDate) {
+                    this.linkedInData.resume += education[i].endDate.year + ' ';
+                }
+                // Add line break
+                if ((education[i].schoolName || education[i].startDate || education[i].endDate) && education[i + 1]) {
+                    this.linkedInData.resume += lineBreak;
+                }
+            }
+            // Add line break
+            this.linkedInData.resume += hardBreak;
+        }
+
         // Work Experience Block
-        this.linkedInData.resume = this.$filter('i18n')('modal.workExperience') + lineBreak;
+        this.linkedInData.resume += this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
-        if (userProfile.positions) {
-            if (userProfile.positions.values && userProfile.positions.values.length) {
-                this.linkedInData.resume += (userProfile.positions.values[0].company.name || '') + ' ';
-                // Start Date
-                if (userProfile.positions.values[0].startDate) {
-                    this.linkedInData.resume += months[userProfile.positions.values[0].startDate.month - 1] + ' ' + userProfile.positions.values[0].startDate.year + ' - ' || '';
-                }
-                // End Date or 'Present'
-                if (userProfile.positions.values[0].endDate) {
-                    this.linkedInData.resume += months[userProfile.positions.values[0].endDate.month - 1] + ' ' + userProfile.positions.values[0].endDate.year || '';
-                } else {
-                    if (userProfile.positions.values[0].isCurrent) {
-                        this.linkedInData.resume += this.$filter('i18n')('modal.present');
+        if (userProfile.positions && userProfile.positions.values) {
+            var positions = userProfile.positions.values;
+            // Iterate through each position
+            if (positions && positions.length) {
+                for (var ii = 0; ii < positions.length; ii++) {
+                    // Add Employee section header
+                    this.linkedInData.resume += ((positions[ii].company || {}).name || '') + ' ';
+                    // Start Date
+                    if (positions[ii].startDate) {
+                        this.linkedInData.resume += months[positions[ii].startDate.month - 1] + ' ' + positions[ii].startDate.year + ' - ' || '';
                     }
-                }
-                this.linkedInData.resume += lineBreak;
-                // Title
-                this.linkedInData.resume += userProfile.positions.values[0].title + lineBreak || '';
-                // Industry
-                this.linkedInData.resume += userProfile.positions.values[0].company.industry ? userProfile.positions.values[0].company.industry + lineBreak : '';
-                if (userProfile.positions.values[0].location) {
-                    // Locale
-                    this.linkedInData.resume += userProfile.positions.values[0].location.name + lineBreak || '';
+                    // End Date or 'Present'
+                    if (positions[ii].endDate) {
+                        this.linkedInData.resume += months[positions[ii].endDate.month - 1] + ' ' + positions[ii].endDate.year || '';
+                    } else {
+                        if (positions[ii].isCurrent) { // jshint ignore:line
+                            this.linkedInData.resume += this.$filter('i18n')('modal.present');
+                        }
+                    }
+                    this.linkedInData.resume += lineBreak;
+                    // Title
+                    this.linkedInData.resume += positions[ii].title + lineBreak || '';
+                    // Industry
+                    this.linkedInData.resume += positions[ii].company.industry ? positions[ii].company.industry + lineBreak : '';
+                    if (positions[ii].location && positions[ii].location.name) {
+                        // Locale
+                        this.linkedInData.resume += positions[ii].location.name + lineBreak || '';
+                    }
+                    // Summary
+                    if (positions[ii].summary) {
+                        this.linkedInData.resume += positions[ii].summary + lineBreak || '';
+                    }
+                    this.linkedInData.resume += hardBreak;
                 }
             }
         }
-        this.linkedInData.resume += hardBreak;
+
+        // Skills
+        if (userProfile.skills && userProfile.skills.values) {
+            this.linkedInData.resume +=  this.$filter('i18n')('modal.skillHeading') + lineBreak;
+            var skills = userProfile.skills.values;
+            for (var iii = 0; iii < skills.length; iii++) {
+                var newSkill = skills[iii].skill;
+                if (newSkill && newSkill.name) {
+                    this.linkedInData.resume += newSkill.name;
+                    if (skills[iii + 1]) {
+                        this.linkedInData.resume += ', ';
+                    }
+                }
+            }
+            this.linkedInData.resume += hardBreak;
+        }
+
         // LinkedIn Information
         this.linkedInData.footer = hardBreak + this.$filter('i18n')('modal.profileURL') + lineBreak;
         this.linkedInData.footer += userProfile.publicProfileUrl + lineBreak || '';
