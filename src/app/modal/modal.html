@@ -3,24 +3,24 @@
         <!-- HEADER -->
         <header>
             <section data-ng-if="modal.showForm">
-                <h2>{{modal.SearchService.currentDetailData.title}}</h2>
+                <h2>{{ modal.SearchService.currentDetailData.title }}</h2>
                 <!-- CATEGORY -->
-                <span class="category">{{modal.SearchService.currentDetailData.publishedCategory.name}}</span>
+                <span class="category">{{ modal.SearchService.currentDetailData.publishedCategory.name }}</span>
                 <!-- LOCATION -->
                 <span class="location">
-                    {{::modal.SearchService.currentDetailData.address.city}}<span data-ng-if="::(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{::modal.SearchService.currentDetailData.address.state}}
+                    {{ modal.SearchService.currentDetailData.address.city }}<span data-ng-if="(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{ modal.SearchService.currentDetailData.address.state }}
                 </span>
                 <!-- SEPERATOR -->
                 <span class="separator" data-ng-show="::((modal.SearchService.currentDetailData.address.city || modal.SearchService.currentDetailData.address.state) && modal.SearchService.currentDetailData.employmentType)">|</span>
                 <!-- TYPE -->
-                <span class="type">{{::modal.SearchService.currentDetailData.employmentType}}</span>
+                <span class="type">{{ ::modal.SearchService.currentDetailData.employmentType }}</span>
                 <!-- CLOSE X -->
                 <i class="bhi-times close" data-ng-click="modal.closeModal(applyForm)"></i>
             </section>
             <!-- SUCCESS MESSAGE -->
             <section class="success" data-ng-if="!modal.showForm">
-                <h2>{{'modal.successHeading' | i18n}}</h2>
-                <h3>{{'modal.successSubHeading' | i18n}}</h3>
+                <h2>{{ 'modal.successHeading' | i18n }}</h2>
+                <h3>{{ 'modal.successSubHeading' | i18n }}</h3>
             </section>
         </header>
         <!-- MAIN CONTENT -->
@@ -32,19 +32,19 @@
                     <!-- LINKED IN APPLY BUTTON -->
                     <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply">
                         <i class="bhi-linkedin-o"></i>
-                        <span>{{ 'modal.applyWithLI' | i18n }}</span>
+                        <span>{{  'modal.applyWithLI' | i18n  }}</span>
                     </button>
                     <!-- LINKED IN INFO -->
                     <div class="alert info" data-ng-if="modal.hasAttemptedLIApply && !modal.LinkedInService.isUserLoaded()">
-                        <strong>{{ 'modal.headsUp' | i18n }}</strong> {{ 'modal.linkedInWarning' | i18n }}
-                        <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
+                        <strong>{{  'modal.headsUp' | i18n  }}</strong> {{  'modal.linkedInWarning' | i18n  }}
+                        <a data-ng-click="modal.applyWithLinkedIn()">{{  'modal.here' | i18n  }}</a> {{  'modal.retry' | i18n  }}
                     </div>
                     <!-- OR BREAK -->
                     <span class="break" data-ng-show="!modal.hasAttemptedLIApply">
                         <span>Or</span>
                     </span>
                     <!-- PROMOTE EMAIL UX -->
-                    <p data-ng-if="modal.isIOS && !modal.hasAttemptedLIApply"><strong>{{ 'modal.noLI' | i18n }}</strong> {{ 'modal.emailYourself' | i18n }}</p>
+                    <p data-ng-if="modal.isIOS && !modal.hasAttemptedLIApply"><strong>{{  'modal.noLI' | i18n  }}</strong> {{  'modal.emailYourself' | i18n  }}</p>
                 </div>
                 <!-- EMAIL JOB -->
                 <div data-ng-show="modal.isIOS && !modal.hasAttemptedLIApply">
@@ -61,7 +61,7 @@
                             <input type="text" name="firstName" value="" data-ng-model="modal.ApplyService.form.firstName" data-i18n-attr="{placeholder: 'modal.firstNamePlaceholder'}" required>
                         </div>
                         <span class="error" data-ng-show="applyForm.firstName.$dirty || applyForm.$submitted">
-                            <span data-ng-show="applyForm.firstName.$error.required">{{ 'modal.firstNameValidation' | i18n }}</span>
+                            <span data-ng-show="applyForm.firstName.$error.required">{{  'modal.firstNameValidation' | i18n  }}</span>
                         </span>
                     </div>
                     <!-- LAST NAME -->
@@ -71,7 +71,7 @@
                             <input type="text" name="lastName" value="" data-ng-model="modal.ApplyService.form.lastName" data-i18n-attr="{placeholder: 'modal.lastNamePlaceholder'}" required>
                         </div>
                         <span class="error" data-ng-show="applyForm.lastName.$dirty || applyForm.$submitted">
-                            <span data-ng-show="applyForm.lastName.$error.required">{{ 'modal.lastNameValidation' | i18n }}</span>
+                            <span data-ng-show="applyForm.lastName.$error.required">{{  'modal.lastNameValidation' | i18n  }}</span>
                         </span>
                     </div>
                     <!-- EMAIL -->
@@ -82,10 +82,10 @@
                         </div>
                         <span class="error" data-ng-show="applyForm.email.$dirty || applyForm.$submitted">
                             <span data-ng-show="applyForm.email.$error.required">
-                                {{ 'modal.emailValidationRequired' | i18n }}
+                                {{  'modal.emailValidationRequired' | i18n  }}
                             </span>
                             <span data-ng-show="applyForm.email.$error.email">
-                                {{ 'modal.emailValidationFormat' | i18n }}
+                                {{  'modal.emailValidationFormat' | i18n  }}
                             </span>
                         </span>
                     </div>
@@ -98,19 +98,19 @@
                     </div>
                     <!-- SKILLS & EXPERTISE -->
                     <div class="form-field" data-ng-if="modal.hasAttemptedLIApply">
-                        <textarea placeholder="{{ 'modal.skills' | i18n }}" name="resume-text" data-ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="10" data-ng-minlength="number"></textarea>
+                        <textarea placeholder="{{  'modal.skills' | i18n  }}" name="resume-text" data-ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="10" data-ng-minlength="number"></textarea>
                     </div>
                     <!-- UPLOAD LABEL -->
                     <div class="upload-label" data-ng-if="!modal.hasAttemptedLIApply" data-ng-hide="modal.isIOS">
                         <span class="field-label">
-                            {{ 'modal.resumeFilePlaceholder' | i18n }}
-                            <i class="bhi-question" data-ng-if="!modal.isIOS" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{ ::modal.getTooltipText() }}"></i>
+                            {{  'modal.resumeFilePlaceholder' | i18n  }}
+                            <i class="bhi-question" data-ng-if="!modal.isIOS" data-tooltips data-tooltip-class="accepted-formats" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-title="Supported File Formats" data-tooltip-html="{{  ::modal.getTooltipText()  }}"></i>
                         </span>
                         <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
-                            {{ modal.resumeUploadErrorMessage }}
+                            {{  modal.resumeUploadErrorMessage  }}
                         </span>
                         <span class="error" data-ng-show="applyForm.$submitted && !modal.ApplyService.form.resumeInfo">
-                            {{ 'modal.resumeValidation' | i18n }}
+                            {{  'modal.resumeValidation' | i18n  }}
                         </span>
                         <div class="clearfix"></div>
                     </div>
@@ -118,32 +118,32 @@
                     <div class="form-field upload-container" data-ngf-select data-ng-model="modal.ApplyService.form.resumeInfo" data-ngf-max-size="modal.configuration.maxUploadSize" data-ngf-multiple="false" data-ngf-accept="applyForm.$submitted=false; modal.validateResume($file);"  data-ng-if="!modal.hasAttemptedLIApply" data-ng-hide="modal.isIOS">
                         <i data-ng-show="!modal.ApplyService.form.resumeInfo.name" class="bhi-publish"></i>
                         <i data-ng-show="modal.ApplyService.form.resumeInfo.name" class="bhi-resume"></i>
-                        <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{ 'modal.uploadResumeFile' | i18n }}</span>
-                        <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{ modal.ApplyService.form.resumeInfo.name }}</span>
+                        <span class="upload-text" data-ng-show="!modal.ApplyService.form.resumeInfo.name">{{  'modal.uploadResumeFile' | i18n  }}</span>
+                        <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{  modal.ApplyService.form.resumeInfo.name  }}</span>
                     </div>
                     <!-- ERROR MESSAGE -->
                     <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
-                        <i class="bhi-caution"></i> <span>{{ modal.ApplyService.ajaxError }}</span>
+                        <i class="bhi-caution"></i> <span>{{  modal.ApplyService.ajaxError  }}</span>
                     </span>
                 </form>
             </section>
             <!-- FOOTER -->
             <footer data-ng-class="{'success':!modal.showForm}">
-                <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
+                <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{ 'modal.cancelButton' | i18n }}</button>
                 <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)" data-ng-disabled="modal.enableSendButton(applyForm.$valid)" data-ng-class="{ 'disabled': modal.enableSendButton(applyForm.$valid) }">
                     <span data-ng-if="!modal.isSubmitting">
-                        {{'modal.sendButton' | i18n}}
+                        {{ 'modal.sendButton' | i18n }}
                     </span>
                     <span data-ng-if="modal.isSubmitting">
                         <div class="loading">
-                            {{'modal.submittingButton' | i18n}}
+                            {{ 'modal.submittingButton' | i18n }}
                             <div class="loading-dot"></div>
                             <div class="loading-dot"></div>
                             <div class="loading-dot"></div>
                         </div>
                     </span>
                 </button>
-                <button data-ng-hide="modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
+                <button data-ng-hide="modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{ 'modal.okButton' | i18n }}</button>
             </footer>
         </div>
     </div>

@@ -18,6 +18,9 @@ function routerConfig($stateProvider, $urlRouterProvider) {
                     var deferred = $q.defer();
 
                     SearchService.loadJobData($stateParams.id, function (job) {
+                        // Unset details
+                        SearchService.currentDetailData = null;
+                        // Set details
                         SearchService.currentDetailData = job;
                         deferred.resolve(job);
                     }, function () {
