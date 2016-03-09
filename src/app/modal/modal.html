@@ -3,24 +3,24 @@
         <!-- HEADER -->
         <header>
             <section data-ng-if="modal.showForm">
-                <h2>{{modal.SearchService.currentDetailData.title}}</h2>
+                <h2>{{ modal.SearchService.currentDetailData.title }}</h2>
                 <!-- CATEGORY -->
-                <span class="category">{{modal.SearchService.currentDetailData.publishedCategory.name}}</span>
+                <span class="category">{{ modal.SearchService.currentDetailData.publishedCategory.name }}</span>
                 <!-- LOCATION -->
                 <span class="location">
-                    {{::modal.SearchService.currentDetailData.address.city}}<span data-ng-if="::(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{::modal.SearchService.currentDetailData.address.state}}
+                    {{ modal.SearchService.currentDetailData.address.city }}<span data-ng-if="(modal.SearchService.currentDetailData.address.city && modal.SearchService.currentDetailData.address.state)">,&nbsp;</span>{{ modal.SearchService.currentDetailData.address.state }}
                 </span>
                 <!-- SEPERATOR -->
                 <span class="separator" data-ng-show="::((modal.SearchService.currentDetailData.address.city || modal.SearchService.currentDetailData.address.state) && modal.SearchService.currentDetailData.employmentType)">|</span>
                 <!-- TYPE -->
-                <span class="type">{{::modal.SearchService.currentDetailData.employmentType}}</span>
+                <span class="type">{{ ::modal.SearchService.currentDetailData.employmentType }}</span>
                 <!-- CLOSE X -->
                 <i class="bhi-times close" data-ng-click="modal.closeModal(applyForm)"></i>
             </section>
             <!-- SUCCESS MESSAGE -->
             <section class="success" data-ng-if="!modal.showForm">
-                <h2>{{'modal.successHeading' | i18n}}</h2>
-                <h3>{{'modal.successSubHeading' | i18n}}</h3>
+                <h2>{{ 'modal.successHeading' | i18n }}</h2>
+                <h3>{{ 'modal.successSubHeading' | i18n }}</h3>
             </section>
         </header>
         <!-- MAIN CONTENT -->
@@ -129,21 +129,21 @@
             </section>
             <!-- FOOTER -->
             <footer data-ng-class="{'success':!modal.showForm}">
-                <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{'modal.cancelButton' | i18n}}</button>
+                <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{ 'modal.cancelButton' | i18n }}</button>
                 <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)" data-ng-disabled="modal.enableSendButton(applyForm.$valid)" data-ng-class="{ 'disabled': modal.enableSendButton(applyForm.$valid) }">
                     <span data-ng-if="!modal.isSubmitting">
-                        {{'modal.sendButton' | i18n}}
+                        {{ 'modal.sendButton' | i18n }}
                     </span>
                     <span data-ng-if="modal.isSubmitting">
                         <div class="loading">
-                            {{'modal.submittingButton' | i18n}}
+                            {{ 'modal.submittingButton' | i18n }}
                             <div class="loading-dot"></div>
                             <div class="loading-dot"></div>
                             <div class="loading-dot"></div>
                         </div>
                     </span>
                 </button>
-                <button data-ng-hide="modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{'modal.okButton' | i18n}}</button>
+                <button data-ng-hide="modal.showForm" name="ok" data-ng-click="modal.closeModal(applyForm)">{{ 'modal.okButton' | i18n }}</button>
             </footer>
         </div>
     </div>
