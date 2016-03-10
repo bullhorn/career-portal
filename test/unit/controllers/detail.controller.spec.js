@@ -58,6 +58,12 @@ describe('Controller: JobDetailController', () => {
         });
     });
 
+    describe('Function: checkSessionStorage()', () => {
+        it('should be defined.', () => {
+            expect(vm.checkSessionStorage).toBeDefined();
+        });
+    });
+
     describe('Function: shareFacebook()', () => {
         it('should be defined.', () => {
             expect(vm.shareFacebook).toBeDefined();

@@ -28,6 +28,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .constant('moment', moment)
     .constant('localeConf', {})
     .constant('localeSupported', [])
+    .constant('APPLIED_JOBS_KEY', 'APPLIED_JOBS_KEY')
     .config(routerConfig)
     .config(localeConfig)
     .directive('main', () => new Main())
