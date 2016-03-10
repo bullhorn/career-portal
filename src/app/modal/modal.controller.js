@@ -224,7 +224,7 @@ class CareerPortalModalController {
 
         // Skills
         if (userProfile.skills && userProfile.skills.values) {
-            this.linkedInData.resume +=  this.$filter('i18n')('modal.skillHeading') + lineBreak;
+            this.linkedInData.resume += this.$filter('i18n')('modal.skillHeading') + lineBreak;
             var skills = userProfile.skills.values;
             for (var iii = 0; iii < skills.length; iii++) {
                 var newSkill = skills[iii].skill;
@@ -258,7 +258,7 @@ class CareerPortalModalController {
         // Hide Form
         this.showForm = false;
         // Set the job id in session storage to make sure they can't apply to the same one during the same session
-        var alreadyAppliedJobs = sessionStorage.getItem('APPLIED_JOBS_KEY');
+        var alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
         if (alreadyAppliedJobs) {
             var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
             alreadyAppliedJobsArray.push(this.SearchService.currentDetailData.id);
