@@ -22,6 +22,7 @@ class JobDetailController {
         this.email = '';
         this.relatedJobs = [];
         this.SharedData.viewState = 'overview-open';
+        this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
 
         // Init functions
         this.loadRelatedJobs();
@@ -37,7 +38,7 @@ class JobDetailController {
 
     checkSessionStorage() {
         // Check session storage to see if this job was already applied to for this session
-        var alreadyAppliedJobs = sessionStorage.getItem(APPLIED_JOBS_KEY);
+        var alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
         if (alreadyAppliedJobs) {
             var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
             this.alreadyApplied = alreadyAppliedJobsArray.includes(this.job.id);
