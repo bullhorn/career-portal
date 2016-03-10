@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($window, $location, $log, ShareService, SearchService, SharedData, job, configuration, MobileDetection, VerifyLI) {
+    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$window = $window;
@@ -25,7 +25,25 @@ class JobDetailController {
 
         // Init functions
         this.loadRelatedJobs();
+
+        // Check session storage for already applied jobs
+        this.checkSessionStorage();
+
+        // Listen for ModalSuccess
+        $rootScope.$on('ModalSuccess', angular.bind(this, function () {
+            this.checkSessionStorage();
+        }));
     }
+
+    checkSessionStorage() {
+        // Check session storage to see if this job was already applied to for this session
+        var alreadyAppliedJobs = sessionStorage.getItem('APPLIED_JOBS_KEY');
+        if (alreadyAppliedJobs) {
+            var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
+            this.alreadyApplied = alreadyAppliedJobsArray.includes(this.job.id);
+        }
+    }
+
     /* jshint +W072 */
 
     sendEmailLink() {
@@ -76,7 +94,7 @@ class JobDetailController {
         return (this.isIOSSafari || (!this.isLinkedInEnabled && this.isIOS));
     }
 
-    loadJobsWithCategory (categoryID) {
+    loadJobsWithCategory(categoryID) {
         this.SearchService.helper.emptyCurrentDataList();
         this.SearchService.helper.resetStartAndTotal();
         this.SearchService.helper.clearSearchParams();

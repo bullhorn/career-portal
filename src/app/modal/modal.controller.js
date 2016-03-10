@@ -1,9 +1,10 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor($location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, MobileDetection, VerifyLI) {
+    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$location = $location;
+        this.$rootScope = $rootScope;
         this.$window = $window;
         this.$filter = $filter;
         this.$log = $log;
@@ -18,6 +19,7 @@ class CareerPortalModalController {
         this.locale = locale;
 
         // Variables
+        this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
         this.isLinkedInActive = VerifyLI.verified;
         this.isIOS = MobileDetection.browserData.os.ios;
         // Create a local variable to store user's email address for sendEmailLink
@@ -255,6 +257,17 @@ class CareerPortalModalController {
         this.ApplyService.form.resumeInfo = null;
         // Hide Form
         this.showForm = false;
+        // Set the job id in session storage to make sure they can't apply to the same one during the same session
+        var alreadyAppliedJobs = sessionStorage.getItem('APPLIED_JOBS_KEY');
+        if (alreadyAppliedJobs) {
+            var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
+            alreadyAppliedJobsArray.push(this.SearchService.currentDetailData.id);
+            sessionStorage.setItem(this.APPLIED_JOBS_KEY, JSON.stringify(alreadyAppliedJobsArray));
+        } else {
+            sessionStorage.setItem(this.APPLIED_JOBS_KEY, JSON.stringify([this.SearchService.currentDetailData.id]));
+        }
+        // Send a modal success message to update other views
+        this.$rootScope.$broadcast('ModalSuccess');
     }
 
     submit(applyForm) {
