@@ -17,6 +17,7 @@
         <!-- JOB TYPE -->
         <span class="card-type">{{::detail.job.employmentType}}</span>
         <!-- APPLY BUTTON -->
+        {{ detail.alreadyApplied }}
         <button class="apply" data-ng-if="!detail.isMaskedDevice()" data-ng-click="detail.applyModal()" data-ng-disabled="detail.alreadyApplied" data-ng-class="{ 'disabled': detail.alreadyApplied }">
             <span data-ng-if="!detail.alreadyApplied">{{'detail.applyButton' | i18n}}</span>
             <span data-ng-if="detail.alreadyApplied">{{'detail.alreadyApplied' | i18n}}</span>

@@ -23,6 +23,7 @@ class JobDetailController {
         this.relatedJobs = [];
         this.SharedData.viewState = 'overview-open';
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
+        this.alreadyApplied = false;
 
         // Init functions
         this.loadRelatedJobs();
