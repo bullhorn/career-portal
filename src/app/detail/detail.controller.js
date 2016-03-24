@@ -41,7 +41,7 @@ class JobDetailController {
         var alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
         if (alreadyAppliedJobs) {
             var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
-            this.alreadyApplied = alreadyAppliedJobsArray.includes(this.job.id);
+            this.alreadyApplied = (alreadyAppliedJobsArray.indexOf(this.job.id) !== -1);
         }
     }
 
