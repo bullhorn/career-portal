@@ -43,6 +43,8 @@ describe('Controller: JobDetailController', () => {
         expect(vm.isIOSSafari).toBeDefined();
         expect(vm.email).toBeDefined();
         expect(vm.relatedJobs).toBeDefined();
+        expect(vm.APPLIED_JOBS_KEY).toBeDefined();
+        expect(vm.alreadyApplied).toBeDefined();
 
     });
 
@@ -59,8 +61,30 @@ describe('Controller: JobDetailController', () => {
     });
 
     describe('Function: checkSessionStorage()', () => {
+
+        beforeAll(() => {
+            let mockAppliedJobs = [1];
+            sessionStorage.setItem('APPLIED_JOBS_KEY', JSON.stringify(mockAppliedJobs));
+        });
+
         it('should be defined.', () => {
             expect(vm.checkSessionStorage).toBeDefined();
+        });
+
+        it('should set the alreadyApplied boolean to true if a job has been applied to', () => {
+            vm.job = {
+                id: 1
+            };
+            vm.checkSessionStorage();
+            expect(vm.alreadyApplied).toBeTruthy();
+        });
+
+        it('should set the alreadyApplied boolean to false if a job has not been applied to', () => {
+            vm.job = {
+                id: 2
+            };
+            vm.checkSessionStorage();
+            expect(vm.alreadyApplied).toBeFalsy();
         });
     });
 
