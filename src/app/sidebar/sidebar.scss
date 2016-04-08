@@ -210,17 +210,11 @@ aside {
                 font-size: 1em;
             }
 
-            h4.bullhorn {
-                font-size: 1.6em;
-                color: $white;
-                font-weight: 300;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                margin-top: 5px;
-
-                span {
-                    color: #EE2C25;
-                }
+            .bullhorn {
+              display: block;
+              position: relative;
+              bottom: 20px;
+              margin: 0;
             }
         }
 
