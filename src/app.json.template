@@ -15,7 +15,7 @@
         "en-US",
         "fr-FR"
     ],
-    "minUploadSize": 30720,
+    "minUploadSize": 4096,
     "maxRelatedJobs": 5,
     "maxUploadSize": 5242880,
     "service": {

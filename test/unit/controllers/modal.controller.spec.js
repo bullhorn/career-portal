@@ -9,7 +9,9 @@ describe('Controller: CareerPortalModalController', () => {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
                 integrations: {linkedin: {clientId: ''}},
-                acceptedResumeTypes: ['html', 'text', 'txt']
+                acceptedResumeTypes: ['html', 'text', 'txt'],
+                minUploadSize: 4096,
+                maxUploadSize: 5242880
             });
         });
     });
@@ -84,6 +86,41 @@ describe('Controller: CareerPortalModalController', () => {
     describe('Function: validateResume(file)', () => {
         it('should be defined.', () => {
             expect(vm.validateResume).toBeDefined();
+        });
+
+        beforeEach(() => {
+            spyOn(vm, '$filter').and.callFake(function () {
+                return function (string) {
+                    var localization = {
+                        resumeToBig: 'Too Big',
+                        resumeToSmall: 'Too Small',
+                        maxLabel: 'max',
+                        minLabel: 'min',
+                        resumeInvalidFormat: 'INVALID'
+                    };
+                    string = string.replace('modal.', '');
+                    return localization[string];
+                };
+            });
+        });
+
+        it('should return false and set the error message for an invalid format', () => {
+            var validateResult = vm.validateResume({name: 'Test.pdf', size: 10});
+            expect(validateResult).toBe(false);
+            expect(vm.isSubmitting).toBe(false);
+            expect(vm.resumeUploadErrorMessage).toEqual('PDF INVALID');
+        });
+        it('should return false and set the error message for a file that is too big', () => {
+            var validateResult = vm.validateResume({name: 'Test.txt', size: 6000000});
+            expect(validateResult).toBe(false);
+            expect(vm.isSubmitting).toBe(false);
+            expect(vm.resumeUploadErrorMessage).toEqual('Too Big (max: 5MB)');
+        });
+        it('should return false and set the error message for a file that is too small', () => {
+            var validateResult = vm.validateResume({name: 'Test.txt', size: 50});
+            expect(validateResult).toBe(false);
+            expect(vm.isSubmitting).toBe(false);
+            expect(vm.resumeUploadErrorMessage).toEqual('Too Small (min: 4KB)');
         });
     });
 
