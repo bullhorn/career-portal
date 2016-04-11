@@ -5,6 +5,7 @@ import localeConfig from './index.locale';
 import JobListController from './list/list.controller';
 import JobDetailController from './detail/detail.controller';
 import CareerPortalModalController from './modal/modal.controller';
+import CareerPortalSidebarController from './sidebar/sidebar.controller';
 
 import Main from './main/main.directive';
 import CareerPortalSidebar from './sidebar/sidebar.directive';
@@ -37,6 +38,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .controller('JobListController', JobListController)
     .controller('JobDetailController', JobDetailController)
     .controller('CareerPortalModalController', CareerPortalModalController)
+    .controller('CareerPortalSidebarController', CareerPortalSidebarController)
     .filter('stripHtml', () => new StripHtmlFilter())
     .filter('omitFilters', () => new OmitFiltersFilter())
     .filter('displayDate', DisplayDateFilter)
