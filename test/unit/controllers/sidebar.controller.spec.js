@@ -15,7 +15,7 @@ describe('Controller: CareerPortalSidebarController', () => {
             someUrl: '/dummyValue',
             service: {corpToken: 1, port: 1, swimlane: 1},
             integrations: {linkedin: {clientId: ''}},
-            defaultGridState: 'list-view'
+            defaultGridState: 'grid-view'
         };
     });
     beforeEach(() => {
@@ -45,8 +45,8 @@ describe('Controller: CareerPortalSidebarController', () => {
         expect(vm.configuration).toBeDefined();
 
         // Variables
-        expect(vm.configuration.defaultGridState).toBe('list-view');
-        expect(vm.SharedData.gridState).toBe('list-view');
+        expect(vm.configuration.defaultGridState).toBe('grid-view');
+        expect(vm.SharedData.gridState).toBe('grid-view');
         expect(vm.locationLimitTo).toBe(8);
         expect(vm.categoryLimitTo).toBe(8);
     });
@@ -56,7 +56,7 @@ describe('Controller: CareerPortalSidebarController', () => {
             $scope: rootScope.$new(),
             configuration: defaultConfig
         });
-        expect(vm.SharedData.gridState).toBe('grid-view');
+        expect(vm.SharedData.gridState).toBe('list-view');
     });
     it('should handle invalid configuration for defaultGridState(null value)', () => {
         defaultConfig.defaultGridState = null;
@@ -64,7 +64,15 @@ describe('Controller: CareerPortalSidebarController', () => {
             $scope: rootScope.$new(),
             configuration: defaultConfig
         });
-        expect(vm.SharedData.gridState).toBe('grid-view');
+        expect(vm.SharedData.gridState).toBe('list-view');
+    });
+    it('should handle defaultGridState set to "list-view"', () => {
+        defaultConfig.defaultGridState = 'list-view';
+        vm = $controller('CareerPortalSidebarController', {
+            $scope: rootScope.$new(),
+            configuration: defaultConfig
+        });
+        expect(vm.SharedData.gridState).toBe('list-view');
     });
     describe('Function: updateLocationLimitTo(value)', () => {
         it('should update the location limit', () => {

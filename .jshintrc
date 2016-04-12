@@ -10,7 +10,7 @@
     "latedef": "nofunc",
     "laxbreak": true,
     "maxdepth": 4,
-    "maxparams": 6,
+    "maxparams": 5,
     "newcap": true,
     "noarg": true,
     "nonbsp": true,

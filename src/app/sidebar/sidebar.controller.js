@@ -1,12 +1,14 @@
 class CareerPortalSidebarController {
+    /*jshint -W072 */
     constructor($scope, SharedData, $location, SearchService, $timeout, configuration) {
+    /*jshint +W072 */
         'ngInject';
 
         this.SharedData = SharedData;
         this.$location = $location;
         this.$timeout = $timeout;
         this.SearchService = SearchService;
-        this.configuration = configuration;
+        this.configuration = configuration || {};
 
         this.locationLimitTo = 8;
         this.categoryLimitTo = 8;
@@ -15,11 +17,15 @@ class CareerPortalSidebarController {
         this.SearchService.getCountByLocation(this.setLocations());
         this.SearchService.getCountByCategory(this.setCategories());
 
-        // Set the grid state
-        if (this.configuration && this.configuration.defaultGridState === 'list-view') {
-            this.SharedData.gridState = 'list-view';
-        } else {
-            this.SharedData.gridState = 'grid-view';
+        // Set the grid state based on configurations
+        switch (this.configuration.defaultGridState) {
+            case 'grid-view':
+                this.SharedData.gridState = 'grid-view';
+                break;
+            case 'list-view':
+                /* falls through */
+            default:
+                this.SharedData.gridState = 'list-view';
         }
 
         $scope.$watchCollection(angular.bind(this, function () {

@@ -29,5 +29,5 @@
             "clientId": "[ CLIENTID HERE ]"
         }
     },
-    "defaultGridState": "grid-view"
+    "defaultGridState": "list-view"
 }
