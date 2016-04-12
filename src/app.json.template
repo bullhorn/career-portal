@@ -28,5 +28,6 @@
         "linkedin": {
             "clientId": "[ CLIENTID HERE ]"
         }
-    }
+    },
+    "defaultGridState": "list-view"
 }
