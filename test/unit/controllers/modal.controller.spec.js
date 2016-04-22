@@ -1,5 +1,5 @@
 /* global describe, beforeEach, expect, it, spyOn */
-describe('Controller: CareerPortalModalController', () => {
+fdescribe('Controller: CareerPortalModalController', () => {
     let vm,
         $controller;
 

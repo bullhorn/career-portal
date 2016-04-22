@@ -134,7 +134,8 @@ class CareerPortalModalController {
         // Email Address
         this.linkedInData.header += (userProfile.emailAddress || '') + lineBreak;
         // Location
-        if (userProfile.location && userProfile.location.name) {
+        if (this.checkNested(userProfile, 'location', 'name')) {
+        //if (userProfile.location && userProfile.location.name) {
             this.linkedInData.header += (userProfile.location.name || '') + ', ';
             if (userProfile.location.country) {
                 this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
@@ -143,7 +144,8 @@ class CareerPortalModalController {
         // Clear Instance of resume
         this.linkedInData.resume = '';
         // Education
-        if (userProfile.educations && userProfile.educations.values) {
+        if (this.checkNested(userProfile, 'educations', 'values')) {
+        //if (userProfile.educations && userProfile.educations.values) {
             var education = userProfile.educations.values;
             this.linkedInData.resume += this.$filter('i18n')('modal.education') + lineBreak;
             for (var i = 0; i < education.length; i++) {
@@ -183,7 +185,8 @@ class CareerPortalModalController {
         // Work Experience Block
         this.linkedInData.resume += this.$filter('i18n')('modal.workExperience') + lineBreak;
         // Positions
-        if (userProfile.positions && userProfile.positions.values) {
+        if (this.checkNested(userProfile, 'positions', 'values')) {
+        //if (userProfile.positions && userProfile.positions.values) {
             var positions = userProfile.positions.values;
             // Iterate through each position
             if (positions && positions.length) {
@@ -243,6 +246,20 @@ class CareerPortalModalController {
         // Legal
         this.linkedInData.footer += hardBreak + legal;
     }
+
+
+    checkNested(obj) {
+        // TODO: spread the `...args`
+        let args = Array.prototype.slice.call(arguments, 1);
+        for (let i = 0; i < args.length; i++) {
+            if (!obj || !obj.hasOwnProperty(args[i])) {
+                return false;
+            }
+            obj = obj[args[i]];
+        }
+        return true;
+    }
+
 
     applySuccess() {
         // Reset LinkedIn Data
