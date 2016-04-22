@@ -135,7 +135,6 @@ class CareerPortalModalController {
         this.linkedInData.header += (userProfile.emailAddress || '') + lineBreak;
         // Location
         if (this.checkNested(userProfile, 'location', 'name')) {
-        //if (userProfile.location && userProfile.location.name) {
             this.linkedInData.header += (userProfile.location.name || '') + ', ';
             if (userProfile.location.country) {
                 this.linkedInData.header += (userProfile.location.country.code.toUpperCase() || '') + hardBreak;
@@ -148,7 +147,7 @@ class CareerPortalModalController {
         //if (userProfile.educations && userProfile.educations.values) {
             var education = userProfile.educations.values;
             this.linkedInData.resume += this.$filter('i18n')('modal.education') + lineBreak;
-            for (var i = 0; i < education.length; i++) {
+            for (let i = 0; i < education.length; i++) {
                 // Add Degree Type
                 if (education[i].degree) {
                     this.linkedInData.resume += education[i].degree + ' ';
@@ -219,14 +218,14 @@ class CareerPortalModalController {
         }
 
         // Skills
-        if (userProfile.skills && userProfile.skills.values) {
+        if (this.checkNested(userProfile, 'skills', 'values')) {
             this.linkedInData.resume +=  this.$filter('i18n')('modal.skillHeading') + lineBreak;
             var skills = userProfile.skills.values;
-            for (var iii = 0; iii < skills.length; iii++) {
-                var newSkill = skills[iii].skill;
+            for (let i = 0; i < skills.length; i++) {
+                var newSkill = skills[i].skill;
                 if (newSkill && newSkill.name) {
                     this.linkedInData.resume += newSkill.name;
-                    if (skills[iii + 1]) {
+                    if (skills[i + 1]) {
                         this.linkedInData.resume += ', ';
                     }
                 }
