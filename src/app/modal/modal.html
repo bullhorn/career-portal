@@ -25,32 +25,6 @@
         </header>
         <!-- MAIN CONTENT -->
         <div class="main" data-ng-class="{'success':!modal.showForm}">
-            <!-- STATE 1: APPLY WITH LINKED IN || EMAIL JOB -->
-            <section data-ng-show="modal.showForm">
-                <!-- LINKED IN INTEGRATION (IF ACTIVATED) -->
-                <div data-ng-if="modal.isLinkedInActive">
-                    <!-- LINKED IN APPLY BUTTON -->
-                    <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply">
-                        <i class="bhi-linkedin-o"></i>
-                        <span>{{ 'modal.applyWithLI' | i18n }}</span>
-                    </button>
-                    <!-- LINKED IN INFO -->
-                    <div class="alert info" data-ng-if="modal.hasAttemptedLIApply && !modal.LinkedInService.isUserLoaded()">
-                        <strong>{{ 'modal.headsUp' | i18n }}</strong> {{ 'modal.linkedInWarning' | i18n }}
-                        <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
-                    </div>
-                    <!-- OR BREAK -->
-                    <span class="break" data-ng-show="!modal.hasAttemptedLIApply">
-                        <span>Or</span>
-                    </span>
-                    <!-- PROMOTE EMAIL UX -->
-                    <p data-ng-if="modal.isIOS && !modal.hasAttemptedLIApply"><strong>{{ 'modal.noLI' | i18n }}</strong> {{ 'modal.emailYourself' | i18n }}</p>
-                </div>
-                <!-- EMAIL JOB -->
-                <div data-ng-show="modal.isIOS && !modal.hasAttemptedLIApply">
-                    <input class="email" type="email" data-ng-model="modal.email" id="email" name="email" data-i18n-attr="{ placeholder: 'common.emailPlaceholder' }">
-                </div>
-            </section>
             <!-- APPLICANT FORM -->
             <section data-ng-show="(modal.isIOS && modal.hasAttemptedLIApply) || !modal.isIOS">
                 <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
@@ -98,7 +72,7 @@
                     </div>
                     <!-- SKILLS & EXPERTISE -->
                     <div class="form-field" data-ng-if="modal.hasAttemptedLIApply">
-                        <textarea placeholder="{{ 'modal.skills' | i18n }}" name="resume-text" data-ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="10" data-ng-minlength="number"></textarea>
+                        <textarea placeholder="{{ 'modal.skills' | i18n }}" name="resume-text" data-ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="5" data-ng-minlength="number"></textarea>
                     </div>
                     <!-- UPLOAD LABEL -->
                     <div class="upload-label" data-ng-if="!modal.hasAttemptedLIApply" data-ng-hide="modal.isIOS">

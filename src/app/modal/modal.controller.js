@@ -41,6 +41,7 @@ class CareerPortalModalController {
 
     applyWithLinkedIn() {
         this.hasAttemptedLIApply = true;
+        this.SharedData.modalState = 'open';
         this.LinkedInService.getUser()
             .then((linkedInUser) => {
                 this.ApplyService.form.firstName = linkedInUser.firstName || '';
