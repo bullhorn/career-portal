@@ -165,6 +165,118 @@ section.job-detail {
             height: 100%;
             order: 2;
         }
+        // Linked In Integration:
+                $linked-in-blue: #0077B5;
+
+
+                div.alert {
+                    $info-blue-font: #245C7E;
+                    $info-blue-bg: #D0E8F6;
+
+                    color: $info-blue-font;
+                    padding: 1em;
+                    margin: 1.5em 0 0;
+                    border-radius: .5em;
+
+                    &.info {
+                        border: solid thin darken($info-blue-bg, 10%);
+                        background-color: $info-blue-bg;
+                    }
+                }
+                textarea {
+                    width: 100%;
+                    resize: none;
+                    border: none;
+                    border-bottom: solid thin #CCC;
+                    padding: 0 .75em;
+
+                    color: #797c7e;
+
+                    &:focus,
+                    &:hover,
+                    &:active {
+                        outline: none;
+                    }
+
+                    &:focus {
+                        border-bottom-color: $primary;
+                    }
+                }
+
+                span.break {
+                    position: relative;
+                    border-bottom: solid lightgray thin;
+                    display: block;
+                    //height: 2em;
+                    margin: 2em 0;
+                    > span {
+                        position: absolute;
+                        top: -.5em;
+                        text-align: center;
+                        width: 6%;
+                        color: grey;
+                        left: 44%;
+                        background-color: white;
+                        display: block;
+                    }
+                }
+
+                button.btn-li-lg {
+                    display: block;
+                    width: 99%;
+                    border: none;
+                    border-radius: .25em;
+                    padding: 0;
+
+                    margin: auto;
+                    margin-top: 1.5em;
+
+                    overflow: hidden;
+
+                    background: $linked-in-blue;
+                    color: white;
+
+                    text-align: left;
+
+                    -webkit-transition: background-color 250ms;
+                    -moz-transition: background-color 250ms;
+                    -ms-transition: background-color 250ms;
+                    -o-transition: background-color 250ms;
+                    transition: background-color 250ms;
+
+                    &:hover,
+                    &:active,
+                    &:focus {
+                        background-color: darken($linked-in-blue, 5%);
+                    }
+
+                    &.done,
+                    &.loading {
+                        background-color: transparentize($linked-in-blue, .25);
+                        color: rgba(255, 255, 255, .75);
+                        > i {
+                            border-right-color: lighten($linked-in-blue, 10%);
+                        }
+                    }
+
+                    > i {
+                        font-size: 2.5em;
+                        padding: .15em .25em;
+                        margin: 0 .25em 0 0;
+                        display: inline-block;
+                        height: 100%;
+                        border-right: solid thin darken($linked-in-blue, 7%);
+                    }
+
+                    > span {
+                        position: relative;
+                        top: -.4em;
+                        font-size: 1.1em;
+                        font-weight: 600;
+                        padding: 0 1.5em 0 0;
+                    }
+
+                }
 
         > div.send {
             margin-top: 1em;
@@ -238,7 +350,6 @@ section.job-detail {
 
         > button.apply {
             cursor: pointer;
-            margin-top: 1.5em;
             width: 100%;
             border: none;
             background: $secondary;
