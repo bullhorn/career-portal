@@ -207,12 +207,14 @@ describe('Controller: CareerPortalSidebarController', () => {
     describe('Function: addOrRemoveLocation(location)', () => {
         beforeEach(() => {
             vm.searchJobs = () => {};
+            /* jshint ignore:start */
             location = {
                 address: {
                     city: 'MyCity',
                     state: 'MyState'
                 }
             };
+            /* jshint ignore:end */
         });
         it('should be defined', () => {
             expect(vm.addOrRemoveLocation).toBeDefined();
@@ -254,12 +256,14 @@ describe('Controller: CareerPortalSidebarController', () => {
     describe('Function: hasLocationFilter(location)', () => {
         beforeEach(() => {
             vm.searchJobs = () => {};
+            /* jshint ignore:start */
             location = {
                 address: {
                     city: 'MyCity',
                     state: 'MyState'
                 }
             };
+            /* jshint ignore:end */
         });
         it('should be defined', () => {
             expect(vm.hasLocationFilter).toBeDefined();
