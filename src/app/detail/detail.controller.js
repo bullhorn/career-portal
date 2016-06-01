@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
+    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, VerifyLI, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$window = $window;
@@ -13,11 +13,8 @@ class JobDetailController {
         this.SearchService = SearchService;
         this.job = job;
         this.configuration = configuration;
-        //this.MobileDetection = MobileDetection;
 
         // Variables
-        this.isIOS = MobileDetection.browserData.os.ios;
-        this.isIOSSafari = (this.isIOS && MobileDetection.browserData.browser.safari);
         this.isLinkedInEnabled = VerifyLI.verified;
         this.email = '';
         this.relatedJobs = [];
@@ -44,12 +41,6 @@ class JobDetailController {
             var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
             this.alreadyApplied = (alreadyAppliedJobsArray.indexOf(this.job.id) !== -1);
         }
-    }
-
-    /* jshint +W072 */
-
-    sendEmailLink() {
-        return this.ShareService.sendEmailLink(this.job, this.email);
     }
 
     shareFacebook() {
@@ -90,10 +81,6 @@ class JobDetailController {
         } else {
             this.$log.error('No job or category was provided.');
         }
-    }
-
-    isMaskedDevice() {
-        return (this.isIOSSafari || (!this.isLinkedInEnabled && this.isIOS));
     }
 
     loadJobsWithCategory(categoryID) {

@@ -17,7 +17,7 @@
         <!-- JOB TYPE -->
         <span class="card-type">{{::detail.job.employmentType}}</span>
         <!-- APPLY BUTTON -->
-        <button class="apply" data-ng-if="!detail.isMaskedDevice()" data-ng-click="detail.applyModal()" data-ng-disabled="detail.alreadyApplied" data-ng-class="{ 'disabled': detail.alreadyApplied }">
+        <button class="apply" data-ng-click="detail.applyModal()" data-ng-disabled="detail.alreadyApplied" data-ng-class="{ 'disabled': detail.alreadyApplied }">
             <span data-ng-if="!detail.alreadyApplied">{{'detail.applyButton' | i18n}}</span>
             <span data-ng-if="detail.alreadyApplied">{{'detail.alreadyApplied' | i18n}}</span>
         </button>
@@ -37,15 +37,6 @@
         <hr/>
         <!-- VIEW ALL JOBS IN CATEGORY LINK -->
         <a href data-ng-click="detail.loadJobsWithCategory(detail.job.publishedCategory.id)" class="category-filter">{{'detail.viewAllJobsLabel' | i18n}}<i class="bhi-arrow-right"></i></a>
-        <!-- iOS WARNING & COPY -->
-        <div class='ios-upload-warning' data-ng-if="detail.isMaskedDevice()">
-            <div>{{'detail.iosUploadWarning' | i18n}}</div>
-        </div>
-        <!-- SEND RESUME VIA EMAIL FORM -->
-        <div class='send' data-ng-if="detail.isMaskedDevice()">
-            <input class="email" type="text" data-ng-model="detail.email" id="email" name="email" data-i18n-attr="{placeholder: 'common.emailPlaceholder'}">
-            <a class="send" data-ng-href="{{ detail.sendEmailLink() }}">{{ 'detail.sendButton' | i18n }}</a>
-        </div>
     </div>
     <!-- DESCRIPTION CARD -->
     <div class="card description" data-ng-if="detail.job.isPublic && !detail.job.isDeleted && detail.job.isOpen">
