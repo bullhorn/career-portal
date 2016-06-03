@@ -165,44 +165,9 @@ section.job-detail {
             height: 100%;
             order: 2;
         }
-        // Linked In Integration:
+        // Linked In Button:
                 $linked-in-blue: #0077B5;
-
-
-                div.alert {
-                    $info-blue-font: #245C7E;
-                    $info-blue-bg: #D0E8F6;
-
-                    color: $info-blue-font;
-                    padding: 1em;
-                    margin: 1.5em 0 0;
-                    border-radius: .5em;
-
-                    &.info {
-                        border: solid thin darken($info-blue-bg, 10%);
-                        background-color: $info-blue-bg;
-                    }
-                }
-                textarea {
-                    width: 100%;
-                    resize: none;
-                    border: none;
-                    border-bottom: solid thin #CCC;
-                    padding: 0 .75em;
-
-                    color: #797c7e;
-
-                    &:focus,
-                    &:hover,
-                    &:active {
-                        outline: none;
-                    }
-
-                    &:focus {
-                        border-bottom-color: $primary;
-                    }
-                }
-
+        
                 span.break {
                     position: relative;
                     border-bottom: solid lightgray thin;
@@ -215,7 +180,7 @@ section.job-detail {
                         text-align: center;
                         width: 6%;
                         color: grey;
-                        left: 44%;
+                        left: 46%;
                         background-color: white;
                         display: block;
                     }
