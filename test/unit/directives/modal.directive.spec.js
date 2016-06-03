@@ -42,6 +42,10 @@ describe('Directive: CareerPortalModal', () => {
     }));
 
     afterEach(() => {
+        $httpBackend.flush();
+    });
+
+    it('should render the modal HTML.', () => {
         $scope.$digest();
         expect(element[0].innerHTML).toContain('modal');
         expect(element[0].innerHTML).toContain('category');
@@ -50,11 +54,5 @@ describe('Directive: CareerPortalModal', () => {
         expect(element[0].innerHTML).toContain('main');
         expect(element[0].innerHTML).toContain('applyForm');
         expect(element[0].innerHTML).toContain('footer');
-    });
-
-    it('should render the modal HTML.', () => {
-        $httpBackend.expectGET('res/en-US/common.json');
-        $httpBackend.expectGET('res/en-US/modal.json');
-        $httpBackend.flush();
     });
 });
