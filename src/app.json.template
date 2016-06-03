@@ -9,7 +9,7 @@
         "rtf",
         "odt"
     ],
-    "companyName": "Charles Barnes' Test Career Portal",
+    "companyName": "[ COMPANY NAME HERE ]",
     "defaultLocale": "en-US",
     "supportedLocales": [
         "en-US",
@@ -20,13 +20,13 @@
     "maxUploadSize": 5242880,
     "service": {
         "batchSize": 500,
-        "corpToken": "9TTMP",
+        "corpToken": "[ CORP TOKEN HERE ]",
         "port": null,
-        "swimlane": "2"
+        "swimlane": "[ SWIMLANE HERE ]"
     },
     "integrations": {
         "linkedin": {
-            "clientId": "77l9na69f3562h"
+            "clientId": "[ CLIENTID HERE ]"
         }
     },
     "defaultGridState": "list-view"
