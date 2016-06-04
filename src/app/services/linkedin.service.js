@@ -1,11 +1,12 @@
 class LinkedInService {
-    constructor($q, configuration, $window) {
+    constructor($q, configuration, $window, SharedData) {
         'ngInject';
         this.$q = $q;
         this.$window = $window;
 
         this.userIsLoaded = false;
         this.configuration = configuration;
+        this.SharedData = SharedData;
     }
 
     /**
@@ -25,6 +26,8 @@ class LinkedInService {
                 // Set a callback function on the window for LinkedIn to call after the API is initialized
                 this.$window.linkedInApiOnLoadCallback = () => {
                     this.getUser(def);
+                    // Opens Modal when API information is loaded.
+                    this.SharedData.modalState = 'open';
                 };
 
                 if (!isAbort) {

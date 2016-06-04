@@ -165,9 +165,25 @@ section.job-detail {
             height: 100%;
             order: 2;
         }
-        // Linked In Button:
+        // Linked In Integration
                 $linked-in-blue: #0077B5;
-        
+                //Linked In Alert
+                div.alert {
+                    $info-blue-font: #245C7E;
+                    $info-blue-bg: #D0E8F6;
+
+                    color: $info-blue-font;
+                    padding: 1em;
+                    margin: 1.5em 0 0;
+                    border-radius: .5em;
+                    margin-bottom: 1.5em;
+
+                    &.info {
+                        border: solid thin darken($info-blue-bg, 10%);
+                        background-color: $info-blue-bg;
+                    }
+                }
+                //Or Break
                 span.break {
                     position: relative;
                     border-bottom: solid lightgray thin;
@@ -185,7 +201,7 @@ section.job-detail {
                         display: block;
                     }
                 }
-
+                // Linked In Button
                 button.btn-li-lg {
                     display: block;
                     width: 99%;
