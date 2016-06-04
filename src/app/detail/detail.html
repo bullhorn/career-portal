@@ -21,7 +21,7 @@
             <!-- LINKED IN INTEGRATION (IF ACTIVATED) -->
             <div data-ng-if="modal.isLinkedInActive">
                 <!-- LINKED IN APPLY BUTTON -->
-                <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply" >
+                <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply && !detail.alreadyApplied && !detail.isMaskedDevice()" >
                     <i class="bhi-linkedin-o"></i>
                     <span>{{ 'modal.applyWithLI' | i18n }}</span>
                 </button>
@@ -31,7 +31,7 @@
                     <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
                 </div>
                 <!-- OR BREAK -->
-                <span class="break" data-ng-show="!modal.hasAttemptedLIApply">
+                <span class="break" data-ng-show="!modal.hasAttemptedLIApply && !detail.alreadyApplied && !detail.isMaskedDevice()">
                     <span>Or</span>
                 </span>
         <!-- PROMOTE EMAIL UX -->

@@ -25,11 +25,6 @@
         </header>
         <!-- MAIN CONTENT -->
         <div class="main" data-ng-class="{'success':!modal.showForm}">
-            <!-- LINKED IN ALERT 
-            <div class="alert info" data-ng-if="modal.hasAttemptedLIApply && !modal.LinkedInService.isUserLoaded()">
-                <strong>{{ 'modal.headsUp' | i18n }}</strong> {{ 'modal.linkedInWarning' | i18n }}
-                <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
-            </div>-->
             <!-- APPLICANT FORM -->
             <section data-ng-show="(modal.isIOS && modal.hasAttemptedLIApply) || !modal.isIOS">
                 <form name="applyForm" class="apply-form" novalidate data-ng-show="modal.showForm">
