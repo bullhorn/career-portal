@@ -41,7 +41,7 @@ class CareerPortalModalController {
 
     applyWithLinkedIn() {
         this.hasAttemptedLIApply = true;
-        this.SharedData.modalState = 'open';
+       // this.SharedData.modalState = 'open';
         this.LinkedInService.getUser()
             .then((linkedInUser) => {
                 this.ApplyService.form.firstName = linkedInUser.firstName || '';
@@ -50,6 +50,9 @@ class CareerPortalModalController {
                 this.ApplyService.form.phone = linkedInUser.phoneNumbers ? linkedInUser.phoneNumbers.values[0].phoneNumber : '';
                 this.ApplyService.form.resumeInfo = this.formatResume(linkedInUser);
             });
+                if (this.LinkedInService.userIsLoaded === true) {
+            this.SharedData.modalState = 'open';
+        }
     }
 
     closeModal(applyForm) {
