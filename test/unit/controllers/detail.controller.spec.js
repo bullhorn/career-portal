@@ -40,24 +40,11 @@ describe('Controller: JobDetailController', () => {
 
         // Variables
         expect(vm.SharedData.viewState).toBe('overview-open');
-        expect(vm.isIOSSafari).toBeDefined();
         expect(vm.email).toBeDefined();
         expect(vm.relatedJobs).toBeDefined();
         expect(vm.APPLIED_JOBS_KEY).toBeDefined();
         expect(vm.alreadyApplied).toBeDefined();
 
-    });
-
-    // TODO: splitting hairs, but wouldn't getEmailLink be a better name?
-    describe('Function: sendEmailLink()', () => {
-        it('should be defined.', () => {
-            expect(vm.sendEmailLink).toBeDefined();
-        });
-        it('should call the ShareService.sendEmailLink method.', () => {
-            spyOn(vm.ShareService, 'sendEmailLink').and.callThrough();
-            vm.sendEmailLink();
-            expect(vm.ShareService.sendEmailLink).toHaveBeenCalled();
-        });
     });
 
     describe('Function: checkSessionStorage()', () => {
@@ -174,25 +161,6 @@ describe('Controller: JobDetailController', () => {
             spyOn(vm.$log, 'error').and.callThrough();
             vm.loadRelatedJobs();
             expect(vm.$log.error).toHaveBeenCalledWith('No job or category was provided.');
-        });
-    });
-
-    describe('Function: isMaskedDevice()', () => {
-        it('should show the \'Apply\' button when the user is not on iOS and linkedIn is enabled.', () => {
-            vm.isLinkedInEnabled = true;
-            vm.isIOSSafari = false;
-            expect(vm.isMaskedDevice()).toBeFalsy();
-        });
-        it('should not show the \'Apply\' button when the user is on iOS browsing using Safari.', () => {
-            vm.isLinkedInEnabled = true;
-            vm.isIOSSafari = true;
-            expect(vm.isMaskedDevice()).toBeTruthy();
-        });
-        it('should not show the \'Apply\' button when the user is on iOS and LinkedIn is disabled.', () => {
-            vm.isLinkedInEnabled = true;
-            vm.isIOSSafari = true;
-            vm.isIOS = true;
-            expect(vm.isMaskedDevice()).toBeTruthy();
         });
     });
 
