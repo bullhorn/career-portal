@@ -21,7 +21,7 @@ class CareerPortalModalController {
         // Variables
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
         this.isLinkedInActive = VerifyLI.verified;
-        this.isIOS = MobileDetection.browserData.os.ios;
+        this.isIOSSafari = (MobileDetection.browserData.os.ios && MobileDetection.browserData.browser.safari);
         // Create a local variable to store user's email address for sendEmailLink
         this.email = '';
         // Boolean to indicate if the user has attempted to apply via LinkedIn
@@ -36,9 +36,6 @@ class CareerPortalModalController {
         // Load directive with modal closed by default
         this.closeModal();
     }
-
-    /* jshint +W072 */
-
     applyWithLinkedIn() {
         this.hasAttemptedLIApply = true;
         this.LinkedInService.getUser()
