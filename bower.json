@@ -14,8 +14,7 @@
         "moment": "~2.10.6",
         "ng-fastclick": "~1.0.1",
         "ng-file-upload": "~6.0.4",
-        "normalize.css": "~3.0.3",
-        "roboto-fontface": "~0.4.3"
+        "normalize.css": "~3.0.3"
     },
     "devDependencies": {
         "angular-mocks": "~1.4.3"
