@@ -17,7 +17,7 @@
                 <span class="card-separator" data-ng-show="::((job.address.city || job.address.state) && job.employmentType)">|</span>
                 <span class="card-type">{{::job.employmentType}}</span>
 
-                <span class="card-description">{{::job.publicDescription | stripHtml}}</span>
+                <span class="card-description">{{::job.publicDescription | stripDescHtml}}</span>
 
                 <i class="bhi-arrow-right"></i>
             </a>

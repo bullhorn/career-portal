@@ -22,6 +22,7 @@ import VerifyLI from './services/verifyli.service';
 import CacheService from './services/cache.service';
 
 import StripHtmlFilter from './filters/striphtml.filter';
+import StripDescHtmlFilter from './filters/stripdeschtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
 import DisplayDateFilter from './filters/displayDate.filter';
 
@@ -41,6 +42,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .controller('CareerPortalModalController', CareerPortalModalController)
     .controller('CareerPortalSidebarController', CareerPortalSidebarController)
     .filter('stripHtml', () => new StripHtmlFilter())
+    .filter('stripDescHtml', () => new StripDescHtmlFilter())
     .filter('omitFilters', () => new OmitFiltersFilter())
     .filter('displayDate', DisplayDateFilter)
     .factory('SharedData', () => new SharedData())
