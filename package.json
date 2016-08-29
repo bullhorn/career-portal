@@ -3,7 +3,7 @@
   "version": "1.6.0",
   "scripts": {
     "loc": "sloc src/ --format json > ./reports/sloc.json",
-    "pregalaxy": "npm run lint:save && npm run loc",
+    "pregalaxy": "npm run loc",
     "galaxy": "galaxy analyze"
   },
   "devDependencies": {
