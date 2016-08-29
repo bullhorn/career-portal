@@ -1,6 +1,11 @@
 {
   "name": "CareerPortal",
   "version": "1.6.0",
+  "scripts": {
+    "loc": "sloc src/ --format json > ./reports/sloc.json",
+    "pregalaxy": "npm run lint:save && npm run loc",
+    "galaxy": "galaxy analyze"
+  },
   "devDependencies": {
     "babel-core": "~5.8.23",
     "babel-loader": "~5.3.2",
@@ -9,6 +14,7 @@
     "chalk": "~1.1.1",
     "dateformat": "^1.0.11",
     "del": "~2.0.1",
+    "galaxy-parser": "^1.0.4",
     "gulp": "~3.9.0",
     "gulp-angular-templatecache": "~1.7.0",
     "gulp-autoprefixer": "~3.0.1",
@@ -60,5 +66,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/bullhorn/career-portal.git"
+  },
+  "galaxy": {
+    "display": "Career Portal",
+    "type": "javascript",
+    "goal": 80,
+    "threshold": 0.1,
+    "locations": {
+      "sloc": "/reports/sloc.json",
+      "lcov": "/reports/lcov/lcov.info"
+    }
   }
 }
