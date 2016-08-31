@@ -127,6 +127,27 @@ class CareerPortalModalController {
         return tooltip;
     }
 
+    getEEOCTooltipText(eeocSection) {
+        var tooltip;
+        if (this.configuration.eeoc[eeocSection]) {
+            tooltip = this.configuration.eeoc[eeocSection].tooltip.html;
+        } else {
+            tooltip = this.configuration.eeoc.tooltip.html;
+        }
+        return tooltip.replace(/\{companyName\}/g, this.configuration.companyName);
+    }
+
+    getEEOCEthnicityTooltipText() {
+        var tooltip = '<ul>';
+        this.configuration.eeoc.ethnicity.options.forEach(function (option) {
+            if (option.info) {
+                tooltip += '<li>' + option.label + ': ' + option.info + '</li>';
+            }
+        });
+        tooltip += '</ul>';
+        return tooltip;
+    }
+
     formatResume(userProfile) {
         var lineBreak = '\n',
             hardBreak = '\n\n\n',

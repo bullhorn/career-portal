@@ -50,7 +50,7 @@
             }
 
             > section {
-                
+
                 > h2 {
                     font-size: 1.8em;
                     margin: 0.5em 0 0.2em;
@@ -128,7 +128,11 @@
                                 font-size: 1.2em;
                             }
 
-                            > input {
+                            > label {
+                                width: 53%;
+                            }
+
+                            > input, select {
                                 flex: 1;
                                 color: lighten($dark-bg, 30%);
 
@@ -148,6 +152,10 @@
                                         border-bottom: 1px solid $primary;
                                     }
                                 }
+                            }
+
+                            > select {
+                                overflow: hidden;
                             }
                         }
 
@@ -232,7 +240,7 @@
                     }
                 }
 
-                
+
                 // Linked In Skills and expertise:
                 textarea {
                     width: 100%;
