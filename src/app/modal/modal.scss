@@ -9,6 +9,8 @@
     background: rgba(0, 0, 0, .7);
     z-index: $modal-z-index;
 
+    overflow-y: auto;
+
     > div.modal {
         display: block;
         margin: auto;
