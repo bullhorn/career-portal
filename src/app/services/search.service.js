@@ -15,7 +15,7 @@ class SearchService {
     }
 
     static get _fields() {
-        return SearchService._.fields || (SearchService._.fields = 'id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted');
+        return SearchService._.fields || (SearchService._.fields = 'id,title,companyName,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted');
     }
 
     static get _sort() {
@@ -66,8 +66,11 @@ class SearchService {
                         this.searchParams.category.length = 0;
                     } else if (specificParam === 'text') {
                         this.searchParams.textSearch = '';
+                    } else if (specificParam === 'companyName') {
+                        this.searchParams.companyNameSearch = '';
                     } else {
                         this.searchParams.textSearch = '';
+                        this.searchParams.companyNameSearch = '';
                         this.searchParams.category.length = 0;
                         this.searchParams.location.length = 0;
                     }
@@ -160,6 +163,12 @@ class SearchService {
 
                     return '';
                 },
+                companyName: () => {
+                    if (this.searchParams.companyNameSearch) {
+                        return ' AND (companyName:' + this.searchParams.companyNameSearch + ')';
+                    }
+                    return '';
+                },
                 query: (isSearch, additionalQuery, fields) => {
                     var query = `(isOpen${isSearch ? ':1' : '=true'})`;
 
@@ -169,6 +178,7 @@ class SearchService {
 
                     if (isSearch) {
                         query += this.requestParams.text();
+                        query += this.requestParams.companyName();
                     }
 
                     query += this.requestParams.publishedCategory(isSearch, fields);
@@ -227,6 +237,7 @@ class SearchService {
     get searchParams() {
         return this._.searchParams || (this._.searchParams = {
                 textSearch: '',
+                companyNameSearch: '',
                 location: [],
                 category: [],
                 sort: '',
