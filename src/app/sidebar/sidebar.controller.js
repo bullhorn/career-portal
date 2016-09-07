@@ -104,25 +104,34 @@ class CareerPortalSidebarController {
     }
 
     updateFilterCounts() {
-        var controller = this;
-
-        if (this.locations) {
-            this.SearchService.getCountByLocation(function (locations) {
-                controller.updateCountsByIntersection(controller.locations, locations, function () {
-                    return this.address.city + ',' + this.address.state;
-                });
-            });
-        }
-
-        if (this.categories) {
-            this.SearchService.getCountByCategory(function (categories) {
-                controller.updateCountsByIntersection(controller.categories, categories, function () {
-                    return !this.publishedCategory ? null : this.publishedCategory.id;
-                }, function () {
-                    return !this.publishedCategory ? null : this.publishedCategory.name;
-                });
-            });
-        }
+        // <old>
+        // var controller = this;
+        //
+        // if (this.locations) {
+        //     this.SearchService.getCountByLocation(function (locations) {
+        //         controller.updateCountsByIntersection(controller.locations, locations, function () {
+        //             return this.address.city + ',' + this.address.state;
+        //         });
+        //     });
+        // }
+        //
+        // if (this.categories) {
+        //     this.SearchService.getCountByCategory(function (categories) {
+        //         controller.updateCountsByIntersection(controller.categories, categories, function () {
+        //             return !this.publishedCategory ? null : this.publishedCategory.id;
+        //         }, function () {
+        //             return !this.publishedCategory ? null : this.publishedCategory.name;
+        //         });
+        //     });
+        // }
+        // </old>
+        // <new>
+        // TODO we're tracking the repeat elements in the template by their unique identifiers (city,state for location and id for category)
+        // TODO this allows us to always pull fresh location/category counts and re-render the UI without excessively triggering the ng-repeat
+        // TODO suspect the above code was a solution for not explicitly tracking elements in the repeating portions of the template
+        this.SearchService.getCountByLocation(this.setLocations());
+        this.SearchService.getCountByCategory(this.setCategories());
+        // </new>
     }
 
     updateFilterCountsAnonymous() {

@@ -1,9 +1,22 @@
 class SearchService {
-    constructor($http, configuration, $q) {
+    constructor($http, configuration, $q, $location) {
         'ngInject';
         this.$http = $http;
         this.configuration = configuration;
         this.$q = $q;
+
+        var searchObj = $location.search();
+
+        if (searchObj.defaultCategory) {
+            // The default category is the ID of a category in Bullhorn. Its not clear at this point how a client would
+            // know what the potential category IDs are. Perhaps they'd be supplied to them? If not, we might need to
+            // change this to support receiving the category by name.
+            this.searchParams.category.push(parseInt(searchObj.defaultCategory, 10));
+        }
+
+        if (searchObj.defaultLocation && searchObj.defaultLocation.indexOf(':') !== -1) {
+            this.searchParams.location.push(searchObj.defaultLocation.split(':').join('|'));
+        }
     }
 
     static get _() {
@@ -15,7 +28,7 @@ class SearchService {
     }
 
     static get _fields() {
-        return SearchService._.fields || (SearchService._.fields = 'id,title,companyName,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted');
+        return SearchService._.fields || (SearchService._.fields = 'id,title,clientCorporation(name),publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted');
     }
 
     static get _sort() {
@@ -163,9 +176,11 @@ class SearchService {
 
                     return '';
                 },
+                // Example of adding some custom filtering. Currently this receives input from a text control on the
+                // front-end (similar to the above text search)
                 companyName: () => {
                     if (this.searchParams.companyNameSearch) {
-                        return ' AND (companyName:' + this.searchParams.companyNameSearch + ')';
+                        return ' AND (clientCorporation.name:' + this.searchParams.companyNameSearch + '*)';
                     }
                     return '';
                 },

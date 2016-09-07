@@ -36,7 +36,8 @@
                 </button>
             </div>
 
-            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo | orderBy:'location.address.city'">
+            <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's location list - R.D. -->
+            <div class="filter-item slide-down-item" data-ng-repeat="location in filteredLocations = (sidebar.locations | omitFilters:'location':sidebar.SearchService.searchParams.location) | limitTo:sidebar.locationLimitTo | orderBy:'location.address.city' track by location.address.city + ',' + location.address.state">
                 <input type="checkbox" id="{{::location.address.city}},{{::location.address.state}}" data-ng-checked="sidebar.hasLocationFilter(location)" data-ng-click="sidebar.addOrRemoveLocation(location)">
                 <label for="{{::location.address.city}},{{::location.address.state}}">{{::location.address.city}},&nbsp;{{::location.address.state}}</label>
                 <span>{{location.idCount}}</span>
@@ -57,7 +58,8 @@
                 </button>
             </div>
 
-            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo">
+            <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's category list - R.D. -->
+            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo track by category.id">
                 <input type="checkbox" id="{{::category.publishedCategory.id}}" data-ng-checked="sidebar.hasCategoryFilter(category)" data-ng-click="sidebar.addOrRemoveCategory(category)">
                 <label for="{{::category.publishedCategory.id}}">{{::category.publishedCategory.name}}</label>
                 <span>{{category.idCount}}</span>
