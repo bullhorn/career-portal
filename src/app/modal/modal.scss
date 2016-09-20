@@ -292,6 +292,14 @@
                 position: relative;
             }
 
+            @include phone() {
+                position: relative;
+            }
+
+            @include small-phone() {
+                position: relative;
+            }
+
             &.success {
                 text-align: right;
                 padding-top: 0;
