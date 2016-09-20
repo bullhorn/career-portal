@@ -108,7 +108,7 @@
                         </span>
                     </div>
                     <div class="form-field">
-                        <div class="input">
+                        <div class="input eeoc">
                             <label for="eeoc-gender">{{ ::modal.configuration.eeoc.gender.label }}</label>
                             <select id="eeoc-gender" data-ng-model="modal.ApplyService.form.gender" required>
                                 <option data-ng-repeat="gender in ::modal.configuration.eeoc.gender.options" value="{{ gender.value }}">{{ gender.label }}</option>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="form-field">
-                        <div class="input">
+                        <div class="input eeoc">
                             <label for="eeoc-ethnicity">
                                 {{ ::modal.configuration.eeoc.ethnicity.label }}
                                 <i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCEthnicityTooltipText() }}"></i>
@@ -129,15 +129,20 @@
                     </div>
                     <div class="eeoc-label">
                         <span class="eeoc-label-header">
-                            <h4>{{ ::modal.configuration.eeoc.header2 }}</h4>
+                            <h4>
+                                {{ ::modal.configuration.eeoc.header2 }}
+                                <i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText('veteran') }}"></i>
+                            </h4>
                         </span>
                     </div>
                     <div class="form-field">
-                        <div class="input">
+                        <div class="input eeoc">
+                            <!--
                             <label for="eeoc-veteran">
                                 {{ ::modal.configuration.eeoc.veteran.label }}
                                 <i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText('veteran') }}"></i>
                             </label>
+                            -->
                             <select id="eeoc-veteran" data-ng-model="modal.ApplyService.form.veteran" required>
                                 <option data-ng-repeat="veteran in ::modal.configuration.eeoc.veteran.options" value="{{ veteran.value }}">{{ veteran.label }}</option>
                             </select>
@@ -152,8 +157,10 @@
                         </span>
                     </div>
                     <div class="form-field">
-                        <div class="input">
+                        <div class="input eeoc">
+                            <!--
                             <label for="eeoc-disability">{{ ::modal.configuration.eeoc.disability.label }}</label>
+                            -->
                             <select id="eeoc-disability" data-ng-model="modal.ApplyService.form.disability" required>
                                 <option data-ng-repeat="disability in ::modal.configuration.eeoc.disability.options" value="{{ disability.value }}">{{ disability.label }}</option>
                             </select>

@@ -130,13 +130,10 @@
                                 font-size: 1.2em;
                             }
 
-                            > label {
-                                width: 53%;
-                            }
-
                             > input, select {
                                 flex: 1;
                                 color: lighten($dark-bg, 30%);
+                                padding: 0.5em;
 
                                 &.ng-invalid {
                                     &.ng-valid-required {
@@ -148,7 +145,7 @@
                                     border: none;
                                     border-bottom: 1px solid darken($light-bg, 15%);
                                     transition: border-bottom 0.2s ease-in-out;
-                                    padding: 0.5em;
+                                    //padding: 0.5em;
 
                                     &:focus {
                                         border-bottom: 1px solid $primary;
@@ -156,8 +153,12 @@
                                 }
                             }
 
-                            > select {
-                                overflow: hidden;
+                            &.eeoc {
+                                flex-direction: column;
+                            }
+
+                            > label {
+                                margin-bottom: 0.5em;
                             }
                         }
 
@@ -217,6 +218,11 @@
 
                 &.success {
                     padding: 1em;
+                }
+
+                select {
+                    width: 100%;
+                    overflow: hidden;
                 }
 
                 input {
