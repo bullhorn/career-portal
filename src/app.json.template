@@ -31,6 +31,7 @@
     },
     "defaultGridState": "list-view",
     "eeoc": {
+        "enabled": true,
         "header1": "Voluntary Self-Identification Form for Race, Gender and Ethnicity",
         "header2": "Voluntary Self-Identification Form for Veteran Applicants",
         "header3": "Voluntary Self-Identification of Disability",

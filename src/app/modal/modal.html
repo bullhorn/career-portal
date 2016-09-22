@@ -99,11 +99,11 @@
                     <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
                         <i class="bhi-caution"></i> <span>{{ modal.ApplyService.ajaxError }}</span>
                     </span>
+                    <div id="eeoc-fields" data-ng-show="modal.configuration.eeoc.enabled">
                     <div class="eeoc-label">
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header1 }}
-                                <!--<i class="bhi-question" data-tooltips data-tooltip-class="eeoc-tooltip" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText() }}"></i>-->
                                 <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'header'" />
                             </h4>
                             <div class="eeoc-info short" ng-show="eeoc_info == 'header'" ng-hide="eeoc_info != 'header'">
@@ -124,7 +124,6 @@
                         <div class="input eeoc">
                             <label for="eeoc-ethnicity">
                                 {{ ::modal.configuration.eeoc.ethnicity.label }}
-                                <!--<i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCEthnicityTooltipText() }}"></i>-->
                                 <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'ethnicity'" />
                             </label>
                             <div class="eeoc-info short" ng-show="eeoc_info == 'ethnicity'" ng-hide="eeoc_info != 'ethnicity'">
@@ -141,7 +140,6 @@
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header2 }}
-                                <!--<i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText('veteran') }}"></i>-->
                                 <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'veteran'" />
                             </h4>
                             <div class="eeoc-info" ng-show="eeoc_info == 'veteran'" ng-hide="eeoc_info != 'veteran'">
@@ -152,12 +150,6 @@
                     </div>
                     <div class="form-field">
                         <div class="input eeoc">
-                            <!--
-                            <label for="eeoc-veteran">
-                                {{ ::modal.configuration.eeoc.veteran.label }}
-                                <i class="bhi-question" data-tooltips data-tooltip-class="eeoc-purpose" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText('veteran') }}"></i>
-                            </label>
-                            -->
                             <select id="eeoc-veteran" data-ng-model="modal.ApplyService.form.veteran" required>
                                 <option data-ng-repeat="veteran in ::modal.configuration.eeoc.veteran.options" value="{{ veteran.value }}">{{ veteran.label }}</option>
                             </select>
@@ -167,7 +159,6 @@
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header3 }}
-                                <!--<i class="bhi-question" data-tooltips data-tooltip-class="eeoc-tooltip" data-tooltip-show-trigger="mouseenter" data-tooltip-hide-trigger="mouseleave" data-tooltip-side="right" data-tooltip-html="{{ ::modal.getEEOCTooltipText('disability') }}"></i>-->
                                 <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'disability'" />
                             </h4>
                             <div class="eeoc-info" ng-show="eeoc_info == 'disability'" ng-hide="eeoc_info != 'disability'">
@@ -178,13 +169,11 @@
                     </div>
                     <div class="form-field">
                         <div class="input eeoc">
-                            <!--
-                            <label for="eeoc-disability">{{ ::modal.configuration.eeoc.disability.label }}</label>
-                            -->
                             <select id="eeoc-disability" data-ng-model="modal.ApplyService.form.disability" required>
                                 <option data-ng-repeat="disability in ::modal.configuration.eeoc.disability.options" value="{{ disability.value }}">{{ disability.label }}</option>
                             </select>
                         </div>
+                    </div>
                     </div>
                     <div class="clearfix"><br/></div>
                 </form>

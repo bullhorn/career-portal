@@ -114,15 +114,16 @@
             section {
 
                 div.eeoc-info {
-                    position: fixed;
+
                     display: block;
                     background: $white;
                     border: grey;
                     padding: 1em;
                     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
-                    left: 37%;
-                    top: 15%;
-                    width: 25%;
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
                     z-index: $modal-z-index + 10;
 
                     > ul {
@@ -145,14 +146,14 @@
                 }
 
                 form.apply-form {
-                    > div.form-field {
+                    div.form-field {
                         margin: 1em 0;
 
                         @include desktop() {
                             margin: 2em 0;
                         }
 
-                        > div.input {
+                        div.input {
                             display: flex;
                             flex-direction: row;
                             align-items: center;
@@ -162,7 +163,7 @@
                                 font-size: 1.2em;
                             }
 
-                            > input, select {
+                            input, select {
                                 flex: 1;
                                 color: lighten($dark-bg, 30%);
                                 padding: 0.5em;
