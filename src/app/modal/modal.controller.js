@@ -129,22 +129,27 @@ class CareerPortalModalController {
 
     getEEOCTooltipText(eeocSection) {
         var tooltip;
-        if (this.configuration.eeoc[eeocSection]) {
+        if (this.configuration.eeoc && this.configuration.eeoc[eeocSection]) {
             tooltip = this.configuration.eeoc[eeocSection].tooltip.html;
-        } else {
+        } else if (this.configuration.eeoc) {
             tooltip = this.configuration.eeoc.tooltip.html;
+        } else {
+            tooltip = '';
         }
         return tooltip.replace(/\{companyName\}/g, this.configuration.companyName);
     }
 
     getEEOCEthnicityTooltipText() {
-        var tooltip = '<ul>';
-        this.configuration.eeoc.ethnicity.options.forEach(function (option) {
-            if (option.info) {
-                tooltip += '<li>' + option.label + ': ' + option.info + '</li>';
-            }
-        });
-        tooltip += '</ul>';
+        var tooltip = '';
+        if (this.configuration.eeoc) {
+            tooltip = '<ul>';
+            this.configuration.eeoc.ethnicity.options.forEach(function (option) {
+                if (option.info) {
+                    tooltip += '<li>' + option.label + ': ' + option.info + '</li>';
+                }
+            });
+            tooltip += '</ul>';
+        }
         return tooltip;
     }
 

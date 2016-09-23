@@ -104,10 +104,10 @@
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header1 }}
-                                <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'header'" />
+                                <a class="bhi-question" data-ng-model="eeoc_info" data-ng-click="eeoc_info = 'header'" />
                             </h4>
-                            <div class="eeoc-info short" ng-show="eeoc_info == 'header'" ng-hide="eeoc_info != 'header'">
-                                <div class="eeoc-info-closer"><i class="bhi-close" ng-click="eeoc_info = false" /></div>
+                            <div class="eeoc-info short" data-ng-show="eeoc_info == 'header'" data-ng-hide="eeoc_info != 'header'">
+                                <div class="eeoc-info-closer"><i class="bhi-close" data-ng-click="eeoc_info = false" /></div>
                                 <div data-ng-bind-html="modal.getEEOCTooltipText()"></div>
                             </div>
                         </span>
@@ -124,10 +124,10 @@
                         <div class="input eeoc">
                             <label for="eeoc-ethnicity">
                                 {{ ::modal.configuration.eeoc.ethnicity.label }}
-                                <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'ethnicity'" />
+                                <a class="bhi-question" data-ng-model="eeoc_info" data-ng-click="eeoc_info = 'ethnicity'" />
                             </label>
-                            <div class="eeoc-info short" ng-show="eeoc_info == 'ethnicity'" ng-hide="eeoc_info != 'ethnicity'">
-                                <div class="eeoc-info-closer"><i class="bhi-close" ng-click="eeoc_info = false" /></div>
+                            <div class="eeoc-info short" data-ng-show="eeoc_info == 'ethnicity'" data-ng-hide="eeoc_info != 'ethnicity'">
+                                <div class="eeoc-info-closer"><i class="bhi-close" data-ng-click="eeoc_info = false" /></div>
                                 <div data-ng-bind-html="modal.getEEOCEthnicityTooltipText()"></div>
                             </div>
                             <!-- TODO Need to dynamically determine the size -->
@@ -140,10 +140,10 @@
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header2 }}
-                                <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'veteran'" />
+                                <a class="bhi-question" data-ng-model="eeoc_info" data-ng-click="eeoc_info = 'veteran'" />
                             </h4>
-                            <div class="eeoc-info" ng-show="eeoc_info == 'veteran'" ng-hide="eeoc_info != 'veteran'">
-                                <div class="eeoc-info-closer"><i class="bhi-close" ng-click="eeoc_info = false" /></div>
+                            <div class="eeoc-info" data-ng-show="eeoc_info == 'veteran'" data-ng-hide="eeoc_info != 'veteran'">
+                                <div class="eeoc-info-closer"><i class="bhi-close" data-ng-click="eeoc_info = false" /></div>
                                 <div data-ng-bind-html="modal.getEEOCTooltipText('veteran')"></div>
                             </div>
                         </span>
@@ -159,10 +159,10 @@
                         <span class="eeoc-label-header">
                             <h4>
                                 {{ ::modal.configuration.eeoc.header3 }}
-                                <a class="bhi-question" ng-model="eeoc_info" ng-click="eeoc_info = 'disability'" />
+                                <a class="bhi-question" data-ng-model="eeoc_info" data-ng-click="eeoc_info = 'disability'" />
                             </h4>
-                            <div class="eeoc-info" ng-show="eeoc_info == 'disability'" ng-hide="eeoc_info != 'disability'">
-                                <div class="eeoc-info-closer"><i class="bhi-close" ng-click="eeoc_info = false" /></div>
+                            <div class="eeoc-info" data-ng-show="eeoc_info == 'disability'" data-ng-hide="eeoc_info != 'disability'">
+                                <div class="eeoc-info-closer"><i class="bhi-close" data-ng-click="eeoc_info = false" /></div>
                                 <div data-ng-bind-html="modal.getEEOCTooltipText('disability')"></div>
                             </div>
                         </span>
