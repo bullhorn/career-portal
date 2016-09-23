@@ -4,9 +4,9 @@ class EeocService {
 
         'ngInject';
 
-        this.genderRaceEthnicity = !!configuration.eeoc && !!configuration.eeoc.genderRaceEthnicity;
-        this.veteran = !!configuration.eeoc && !!configuration.eeoc.veteran;
-        this.disability = !!configuration.eeoc && !!configuration.eeoc.disability;
+        this.genderRaceEthnicity = !!configuration.eeoc && configuration.eeoc.genderRaceEthnicity === true;
+        this.veteran = !!configuration.eeoc && configuration.eeoc.veteran === true;
+        this.disability = !!configuration.eeoc && configuration.eeoc.disability === true;
     }
 
     isGenderRaceEthnicityEnabled() {
