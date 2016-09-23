@@ -38,6 +38,7 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.ShareService).toBeDefined();
         expect(vm.ApplyService).toBeDefined();
         expect(vm.LinkedInService).toBeDefined();
+        expect(vm.EeocService).toBeDefined();
         expect(vm.locale).toBeDefined();
 
         // Variables

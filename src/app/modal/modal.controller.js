@@ -1,6 +1,6 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
+    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, EeocService, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$location = $location;
@@ -16,6 +16,7 @@ class CareerPortalModalController {
         this.ShareService = ShareService;
         this.ApplyService = ApplyService;
         this.LinkedInService = LinkedInService;
+        this.EeocService = EeocService;
         this.locale = locale;
 
         // Variables

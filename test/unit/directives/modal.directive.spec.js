@@ -34,6 +34,7 @@ describe('Directive: CareerPortalModal', () => {
         $scope = $rootScope.$new();
         // Mock http requests
         $httpBackend.when('GET', 'res/en-US/common.json').respond({});
+        $httpBackend.when('GET', 'res/en-US/eeoc.json').respond({});
         $httpBackend.when('GET', 'res/en-US/modal.json').respond({});
         $httpBackend.when('GET', './app.json').respond(configuration);
         // Mock Directive Element

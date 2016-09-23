@@ -20,6 +20,7 @@ import SharedData from './services/shared.factory';
 import LinkedInService from './services/linkedin.service';
 import VerifyLI from './services/verifyli.service';
 import CacheService from './services/cache.service';
+import EeocService from './services/eeoc.service';
 
 import StripHtmlFilter from './filters/striphtml.filter';
 import OmitFiltersFilter from './filters/omitfilters.filter';
@@ -50,7 +51,8 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('LinkedInService', LinkedInService)
     .service('MobileDetection', MobileDetection)
     .service('VerifyLI', VerifyLI)
-    .service('CacheService', CacheService);
+    .service('CacheService', CacheService)
+    .service('EeocService', EeocService);
 
 // Deferring the bootstrap to make sure we have loaded the config from app.json
 deferredBootstrapper.bootstrap({
