@@ -61,7 +61,7 @@
             </div>
 
             <!-- Added 'track by' clause to prevent excessive flickering when updating the sidebar's category list - R.D. -->
-            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo track by category.id">
+            <div class="filter-item slide-down-item" data-ng-repeat="category in filteredCategories = (sidebar.categories | omitFilters:'category':sidebar.SearchService.searchParams.category) | limitTo:sidebar.categoryLimitTo track by category.publishedCategory.id">
                 <input type="checkbox" id="{{::category.publishedCategory.id}}" data-ng-checked="sidebar.hasCategoryFilter(category)" data-ng-click="sidebar.addOrRemoveCategory(category)">
                 <label for="{{::category.publishedCategory.id}}">{{::category.publishedCategory.name}}</label>
                 <span>{{category.idCount}}</span>
