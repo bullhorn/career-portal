@@ -69,6 +69,11 @@ gulp.task('config:app', function () {
         };
     }
 
+    // EEOC fields on apply form
+    appConfig.eeoc.genderRaceEthnicity = (argv.eeocGenderRaceEthnicity === 'true' || argv.eeocGRE === 'true');
+    appConfig.eeoc.veteran = (argv.eeocVeteran === 'true' || argv.eeocV === 'true');
+    appConfig.eeoc.disability = (argv.eeocDisability === 'true' || argv.eeocD === 'true');
+
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
 
