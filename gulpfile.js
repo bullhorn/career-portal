@@ -70,6 +70,7 @@ gulp.task('config:app', function () {
     }
 
     // EEOC fields on apply form
+    appConfig.eeoc = appConfig.eeoc || {};
     appConfig.eeoc.genderRaceEthnicity = (argv.eeocGenderRaceEthnicity === 'true' || argv.eeocGRE === 'true');
     appConfig.eeoc.veteran = (argv.eeocVeteran === 'true' || argv.eeocV === 'true');
     appConfig.eeoc.disability = (argv.eeocDisability === 'true' || argv.eeocD === 'true');
