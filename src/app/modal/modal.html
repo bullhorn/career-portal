@@ -118,7 +118,7 @@
                             <div class="form-field">
                                 <div class="input eeoc">
                                     <label for="eeoc-gender">{{ 'eeoc.genderLabel' | i18n }}</label>
-                                    <select id="eeoc-gender" data-ng-model="modal.ApplyService.form.gender" required>
+                                    <select id="eeoc-gender" data-ng-model="modal.ApplyService.form.gender" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled()">
                                         <option value="U">{{ 'eeoc.genderUnknown' | i18n }}</option>
                                         <option value="M">{{ 'eeoc.genderMale' | i18n }}</option>
                                         <option value="F">{{ 'eeoc.genderFemale' | i18n }}</option>
@@ -145,36 +145,27 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <!-- <select id="eeoc-ethnicity" data-ng-model="modal.ApplyService.form.ethnicity" size="7" multiple required>
-                                        <option value="HL">{{ 'eeoc.raceEthnicityHL' | i18n }}</option>
-                                        <option value="WH">{{ 'eeoc.raceEthnicityWH' | i18n }}</option>
-                                        <option value="BL">{{ 'eeoc.raceEthnicityBL' | i18n }}</option>
-                                        <option value="AS">{{ 'eeoc.raceEthnicityAS' | i18n }}</option>
-                                        <option value="NP">{{ 'eeoc.raceEthnicityNP' | i18n }}</option>
-                                        <option value="IA">{{ 'eeoc.raceEthnicityIA' | i18n }}</option>
-                                        <option value="DN">{{ 'eeoc.raceEthnicityDN' | i18n }}</option>
-                                    </select> -->
-                                    <fieldset id="eeoc-ethnicity"  class="checkboxgroup" data-ng-model="modal.ApplyService.form.ethnicity" multiple required>
+                                    <fieldset id="eeoc-ethnicity" class="checkboxgroup">
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-HL" type="checkbox" value="HL"></input><label for="eeoc-eth-HL">{{ 'eeoc.raceEthnicityHL' | i18n }}</label>
+                                            <input id="eeoc-eth-HL" type="checkbox" value="HL" data-ng-model="modal.EeocService.selectedEthnicities['HL']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-HL">{{ 'eeoc.raceEthnicityHL' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-WH" type="checkbox" value="WH"></input><label for="eeoc-eth-WH">{{ 'eeoc.raceEthnicityWH' | i18n }}</label>
+                                            <input id="eeoc-eth-WH" type="checkbox" value="WH" data-ng-model="modal.EeocService.selectedEthnicities['WH']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-WH">{{ 'eeoc.raceEthnicityWH' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-BL" type="checkbox" value="BL"></input><label for="eeoc-eth-BL">{{ 'eeoc.raceEthnicityBL' | i18n }}</label>
+                                            <input id="eeoc-eth-BL" type="checkbox" value="BL" data-ng-model="modal.EeocService.selectedEthnicities['BL']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-BL">{{ 'eeoc.raceEthnicityBL' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-AS" type="checkbox" value="AS"></input><label for="eeoc-eth-AS">{{ 'eeoc.raceEthnicityAS' | i18n }}</label>
+                                            <input id="eeoc-eth-AS" type="checkbox" value="AS" data-ng-model="modal.EeocService.selectedEthnicities['AS']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-AS">{{ 'eeoc.raceEthnicityAS' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-NP" type="checkbox" value="NP"></input><label for="eeoc-eth-NP">{{ 'eeoc.raceEthnicityNP' | i18n }}</label>
+                                            <input id="eeoc-eth-NP" type="checkbox" value="NP" data-ng-model="modal.EeocService.selectedEthnicities['NP']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-NP">{{ 'eeoc.raceEthnicityNP' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-IA" type="checkbox" value="IA"></input><label for="eeoc-eth-IA">{{ 'eeoc.raceEthnicityIA' | i18n }}</label>
+                                            <input id="eeoc-eth-IA" type="checkbox" value="IA" data-ng-model="modal.EeocService.selectedEthnicities['IA']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-IA">{{ 'eeoc.raceEthnicityIA' | i18n }}</label>
                                         </div>
                                         <div class="eeoc-checkbox">
-                                            <input id="eeoc-eth-DN" type="checkbox" value="DN"></input><label for="eeoc-eth-DN">{{ 'eeoc.raceEthnicityDN' | i18n }}</label>
+                                            <input id="eeoc-eth-DN" type="checkbox" value="DN" data-ng-model="modal.EeocService.selectedEthnicities['DN']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-DN">{{ 'eeoc.raceEthnicityDN' | i18n }}</label>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -198,7 +189,7 @@
                             <div class="form-field">
                                 <div class="input eeoc">
                                     <label for="eeoc-veteran">{{ 'eeoc.veteranLabel' | i18n }}</label>
-                                    <select id="eeoc-veteran" data-ng-model="modal.ApplyService.form.veteran" required>
+                                    <select id="eeoc-veteran" data-ng-model="modal.ApplyService.form.veteran" data-ng-required="modal.EeocService.isVeteranEnabled()">
                                         <option value="P">{{ 'eeoc.veteranP' | i18n }}</option>
                                         <option value="V">{{ 'eeoc.veteranV' | i18n }}</option>
                                         <option value="N">{{ 'eeoc.veteranN' | i18n }}</option>
@@ -225,7 +216,7 @@
                             <div class="form-field">
                                 <div class="input eeoc">
                                     <label for="eeoc-disability">{{ 'eeoc.disabilityLabel' | i18n }}</label>
-                                    <select id="eeoc-disability" data-ng-model="modal.ApplyService.form.disability" required>
+                                    <select id="eeoc-disability" data-ng-model="modal.ApplyService.form.disability" data-ng-required="modal.EeocService.isDisabilityEnabled()">
                                         <option value="Y">{{ 'eeoc.disabilityY' | i18n }}</option>
                                         <option value="N">{{ 'eeoc.disabilityN' | i18n }}</option>
                                         <option value="U">{{ 'eeoc.disabilityU' | i18n }}</option>
