@@ -29,6 +29,15 @@
                 max-width: 500px !important;
             }
         }
+        
+        @media screen and (max-height: 700px) and (min-width: 992px){
+            margin: 0px auto;
+            -ms-transform: scale(.85); /* IE 9 */
+            -webkit-transform: scale(.85); /* Safari */
+            transform: scale(.85); /* Firefox, Opera, Chrome */
+            
+        }
+
 
         &.success {
             height: auto;
