@@ -6,7 +6,7 @@
  *  of the tasks
  */
 
-var gutil = require('gulp-util');
+let gutil = require('gulp-util');
 
 /**
  *  The main paths of your project handle these with care
