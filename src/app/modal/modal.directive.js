@@ -1,10 +1,7 @@
-
-
 class CareerPortalModal {
     constructor() {
         'ngInject';
-
-        let directive = {
+        return {
             restrict: 'E',
             templateUrl: 'app/modal/modal.html',
             scope: false,
@@ -13,8 +10,6 @@ class CareerPortalModal {
             bindToController: true,
             replace: true
         };
-
-        return directive;
     }
 }
 

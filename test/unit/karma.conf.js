@@ -1,4 +1,5 @@
 'use strict';
+require('phantomjs-polyfill');
 
 var path = require('path');
 var conf = require('../../build/conf');
@@ -29,8 +30,10 @@ module.exports = function (config) {
         files: listFiles(),
 
         singleRun: true,
+        // singleRun: false,
 
         autoWatch: false,
+        // autoWatch: true,
 
         ngHtml2JsPreprocessor: {
             stripPrefix: conf.paths.src + '/',
@@ -41,7 +44,10 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
-        browsers: ['PhantomJS'],
+        browsers: [
+            // 'Chrome'
+            'PhantomJS'
+        ],
 
         plugins: [
             'karma-phantomjs-launcher',
