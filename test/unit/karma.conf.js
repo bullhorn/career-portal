@@ -42,7 +42,7 @@ module.exports = function (config) {
 
         logLevel: 'WARN',
 
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'phantomjs-shim'],
 
         browsers: [
             // 'Chrome'
@@ -54,7 +54,8 @@ module.exports = function (config) {
             'karma-coverage',
             'karma-jasmine',
             'karma-mocha-reporter',
-            'karma-ng-html2js-preprocessor'
+            'karma-ng-html2js-preprocessor',
+            'karma-phantomjs-shim'
         ],
 
         coverageReporter: {
