@@ -1,10 +1,10 @@
 'use strict';
 
-let path = require('path');
-let gulp = require('gulp');
-let conf = require('./conf');
+var path = require('path');
+var gulp = require('gulp');
+var conf = require('./conf');
 
-let browserSync = require('browser-sync');
+var browserSync = require('browser-sync');
 
 function isOnlyChange(event) {
     return event.type === 'changed';

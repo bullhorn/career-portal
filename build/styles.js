@@ -1,27 +1,27 @@
 'use strict';
 
-let path = require('path');
-let gulp = require('gulp');
-let conf = require('./conf');
+var path = require('path');
+var gulp = require('gulp');
+var conf = require('./conf');
 
-let browserSync = require('browser-sync');
+var browserSync = require('browser-sync');
 
-let $ = require('gulp-load-plugins')();
+var $ = require('gulp-load-plugins')();
 
-let wiredep = require('wiredep').stream;
-let _ = require('lodash');
+var wiredep = require('wiredep').stream;
+var _ = require('lodash');
 
 gulp.task('styles', function () {
-    let sassOptions = {
+    var sassOptions = {
         style: 'expanded'
     };
 
-    let injectFiles = gulp.src([
+    var injectFiles = gulp.src([
         path.join(conf.paths.src, '/app/**/*.scss'),
         path.join('!' + conf.paths.src, '/app/index.scss')
     ], {read: false});
 
-    let injectOptions = {
+    var injectOptions = {
         transform: function (filePath) {
             filePath = filePath.replace(conf.paths.src + '/app/', '');
             return '@import "' + filePath + '";';
