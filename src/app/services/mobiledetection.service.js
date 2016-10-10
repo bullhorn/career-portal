@@ -6,7 +6,7 @@ class MobileDetection {
     }
 
     getDeviceInfo() {
-        var ua = this.$window.navigator.userAgent,
+        let ua = this.$window.navigator.userAgent,
             operatingSystemRegex = {
                 MAC: {and:[/\bMac OS\b/,{not:/Windows Phone/}]},
                 IOS: {and: [{or: [/\biPad\b/, /\biPhone\b/, /\biPod\b/]}, {not: /Windows Phone/}]}
