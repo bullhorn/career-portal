@@ -1,5 +1,4 @@
 'use strict';
-require('phantomjs-polyfill');
 
 var path = require('path');
 var conf = require('../../build/conf');
