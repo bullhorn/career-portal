@@ -50,7 +50,6 @@
     "karma-mocha-reporter": "^2.2.0",
     "karma-ng-html2js-preprocessor": "~1.0.0",
     "karma-phantomjs-launcher": "~1.0.2",
-    "karma-phantomjs-shim": "1.4.0",
     "lodash": "^4.16.4",
     "main-bower-files": "~2.13.1",
     "ng-annotate-loader": "0.2.0",
