@@ -34,7 +34,14 @@ function runTests(singleRun, done) {
         singleRun: singleRun,
         autoWatch: !singleRun,
         reporters: reporters,
-        preprocessors: preprocessors
+        preprocessors: preprocessors,
+        coverageReporter: {
+            dir: path.join('../coverage'),
+            reporters: [
+                { type: 'html', subdir: 'html' },
+                { type: 'lcov', subdir: '.' }
+            ]
+        }
     };
 
     var server = new karma.Server(localConfig, function (failCount) {
