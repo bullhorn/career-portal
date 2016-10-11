@@ -1,10 +1,10 @@
 'use strict';
 
-let path = require('path');
-let gulp = require('gulp');
-let conf = require('./conf');
+var path = require('path');
+var gulp = require('gulp');
+var conf = require('./conf');
 
-let $ = require('gulp-load-plugins')({
+var $ = require('gulp-load-plugins')({
     pattern: [
         'gulp-filter',
         'gulp-inject',
@@ -41,23 +41,23 @@ gulp.task('partials', function () {
         .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
 });
 
-let wiredep = require('wiredep').stream;
+var wiredep = require('wiredep').stream;
 
 
 
 
 gulp.task('html', ['inject', 'partials'], function () {
-    let partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
-    let partialsInjectOptions = {
+    var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
+    var partialsInjectOptions = {
         starttag: '<!-- inject:partials -->',
         ignorePath: path.join(conf.paths.tmp, '/partials'),
         addRootSlash: false
     };
 
-    let htmlFilter = $.filter('*.html', { restore: true });
-    let jsFilter = $.filter('**/*.js', { restore: true });
-    let cssFilter = $.filter('**/*.css', { restore: true });
-    // let assets;
+    var htmlFilter = $.filter('*.html', { restore: true });
+    var jsFilter = $.filter('**/*.js', { restore: true });
+    var cssFilter = $.filter('**/*.css', { restore: true });
+    // var assets;
 
     return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
         .pipe($.inject(partialsInjectFile, partialsInjectOptions))
@@ -98,7 +98,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('other', ['config:app'], function () {
-    let fileFilter = $.filter(function (file) {
+    var fileFilter = $.filter(function (file) {
         return file.stat.isFile();
     });
 

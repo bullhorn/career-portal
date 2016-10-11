@@ -1,27 +1,27 @@
 'use strict';
 
-let path = require('path');
-let gulp = require('gulp');
-let conf = require('./conf');
+var path = require('path');
+var gulp = require('gulp');
+var conf = require('./conf');
 
-let browserSync = require('browser-sync');
-let browserSyncSpa = require('browser-sync-spa');
+var browserSync = require('browser-sync');
+var browserSyncSpa = require('browser-sync-spa');
 
-let util = require('util');
+var util = require('util');
 
-let proxyMiddleware = require('http-proxy-middleware');
+var proxyMiddleware = require('http-proxy-middleware');
 
 function browserSyncInit(baseDir, browser) {
     browser = browser === undefined ? 'default' : browser;
 
-    let routes = null;
+    var routes = null;
     if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
         routes = {
             '/lib': 'lib'
         };
     }
 
-    let server = {
+    var server = {
         baseDir: baseDir,
         routes: routes
     };
