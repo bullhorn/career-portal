@@ -5,7 +5,23 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
-    pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+    pattern: [
+        'gulp-filter',
+        'gulp-inject',
+        'gulp-flatten',
+        'gulp-angular-templatecache',
+        'gulp-restore',
+        'main-bower-files',
+        'uglify-save-license',
+        'gulp-uglify',
+        'del',
+        'gulp-size',
+        'gulp-rev-replace',
+        'gulp-rev',
+        'gulp-useref',
+        'gulp-minify-css',
+        'gulp-minify-html'
+    ]
 });
 
 gulp.task('partials', function () {
@@ -25,6 +41,11 @@ gulp.task('partials', function () {
         .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
 });
 
+var wiredep = require('wiredep').stream;
+
+
+
+
 gulp.task('html', ['inject', 'partials'], function () {
     var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
     var partialsInjectOptions = {
@@ -33,27 +54,21 @@ gulp.task('html', ['inject', 'partials'], function () {
         addRootSlash: false
     };
 
-    var htmlFilter = $.filter('*.html', {restore: true});
-    var jsFilter = $.filter('**/*.js', {restore: true});
-    var cssFilter = $.filter('**/*.css', {restore: true});
-    var assets;
+    var htmlFilter = $.filter('*.html', { restore: true });
+    var jsFilter = $.filter('**/*.js', { restore: true });
+    var cssFilter = $.filter('**/*.css', { restore: true });
+    // var assets;
 
     return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
         .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-        .pipe(assets = $.useref.assets())
-        .pipe($.rev())
+        .pipe($.useref({ searchPath: ['.src'] }))
         .pipe(jsFilter)
-        .pipe($.sourcemaps.init())
-        .pipe($.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
-        .pipe($.sourcemaps.write('maps'))
+        .pipe($.uglify())
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
-        .pipe($.sourcemaps.init())
-        .pipe($.minifyCss({processImport: false}))
-        .pipe($.sourcemaps.write('maps'))
+        .pipe($.minifyCss({cache: true}))
         .pipe(cssFilter.restore)
-        .pipe(assets.restore())
-        .pipe($.useref())
+        .pipe($.rev())
         .pipe($.revReplace())
         .pipe(htmlFilter)
         .pipe($.minifyHtml({
