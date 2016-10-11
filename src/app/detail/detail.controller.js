@@ -36,9 +36,9 @@ class JobDetailController {
 
     checkSessionStorage() {
         // Check session storage to see if this job was already applied to for this session
-        var alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
+        let alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
         if (alreadyAppliedJobs) {
-            var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
+            let alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
             this.alreadyApplied = (alreadyAppliedJobsArray.indexOf(this.job.id) !== -1);
         }
     }
