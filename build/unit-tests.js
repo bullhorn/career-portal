@@ -1,22 +1,22 @@
 'use strict';
 
-var path = require('path');
-var gulp = require('gulp');
-var conf = require('./conf');
+let path = require('path');
+let gulp = require('gulp');
+let conf = require('./conf');
 
-var karma = require('karma');
+let karma = require('karma');
 
-var pathSrcHtml = [
+let pathSrcHtml = [
     path.join('../../' + conf.paths.src, '/**/*.html')
 ];
 
-var pathSrcJs = [
+let pathSrcJs = [
     path.join('../../' + conf.paths.tmp, '/serve/app/index.module.js')
 ];
 
 function runTests(singleRun, done) {
-    var reporters = ['mocha'];
-    var preprocessors = {};
+    let reporters = ['mocha'];
+    let preprocessors = {};
 
     pathSrcHtml.forEach(function (path) {
         preprocessors[path] = ['ng-html2js'];
@@ -29,7 +29,7 @@ function runTests(singleRun, done) {
         reporters.push('coverage')
     }
 
-    var localConfig = {
+    let localConfig = {
         configFile: path.join(__dirname, '/../test/unit/karma.conf.js'),
         singleRun: singleRun,
         autoWatch: !singleRun,
@@ -37,7 +37,7 @@ function runTests(singleRun, done) {
         preprocessors: preprocessors
     };
 
-    var server = new karma.Server(localConfig, function (failCount) {
+    let server = new karma.Server(localConfig, function (failCount) {
         done(failCount ? new Error("Failed " + failCount + " tests.") : null);
     });
 

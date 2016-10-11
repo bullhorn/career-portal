@@ -1,16 +1,16 @@
 'use strict';
 
-var path = require('path');
-var gulp = require('gulp');
-var conf = require('./conf');
+let path = require('path');
+let gulp = require('gulp');
+let conf = require('./conf');
 
-var browserSync = require('browser-sync');
-var webpack = require('webpack-stream');
+let browserSync = require('browser-sync');
+let webpack = require('webpack-stream');
 
-var $ = require('gulp-load-plugins')();
+let $ = require('gulp-load-plugins')();
 
 function webpackWrapper(watch, test, callback) {
-    var webpackOptions = {
+    let webpackOptions = {
         watch: watch,
         module: {
             preLoaders: [
@@ -35,7 +35,7 @@ function webpackWrapper(watch, test, callback) {
         webpackOptions.devtool = 'inline-source-map';
     }
 
-    var webpackChangeHandler = function (err, stats) {
+    let webpackChangeHandler = function (err, stats) {
         if (err) {
             conf.errorHandler('Webpack')(err);
         }
@@ -52,7 +52,7 @@ function webpackWrapper(watch, test, callback) {
         }
     };
 
-    var sources = [path.join(conf.paths.src, '/app/index.module.js')];
+    let sources = [path.join(conf.paths.src, '/app/index.module.js')];
 
     if (test) {
         sources.push(path.join(conf.paths.karma, '/**/*.spec.js'));

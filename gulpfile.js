@@ -1,14 +1,14 @@
 'use strict';
 
-var gulp = require('gulp');
-var wrench = require('wrench');
-var babel = require('gulp-babel');
-var runSequence = require('run-sequence');
-var exec = require('child_process').exec;
-var fs = require('fs-extra');
-var argv = require('yargs').argv;
-var dateFormat = require('dateformat');
-var chalk = require('chalk');
+let gulp = require('gulp');
+let wrench = require('wrench');
+let babel = require('gulp-babel');
+let runSequence = require('run-sequence');
+let exec = require('child_process').exec;
+let fs = require('fs-extra');
+let argv = require('yargs').argv;
+let dateFormat = require('dateformat');
+let chalk = require('chalk');
 
 /**
  *  This will load all js files in the gulp directory
@@ -40,7 +40,7 @@ gulp.task('travis:build', function (done) {
 });
 
 gulp.task('config:app', function () {
-    var appConfig = JSON.parse(fs.readFileSync('./src/app.json.template'));
+    let appConfig = JSON.parse(fs.readFileSync('./src/app.json.template'));
 
     if (argv.corp || argv.corpToken) {
         appConfig.service.corpToken = argv.corp || argv.corpToken;
@@ -76,8 +76,8 @@ gulp.task('config:app', function () {
 });
 
 gulp.task('version', function () {
-    var pkg = JSON.parse(fs.readFileSync('./package.json'));
-    var data = '';
+    let pkg = JSON.parse(fs.readFileSync('./package.json'));
+    let data = '';
 
     data += 'Project Name: ' + pkg.name + '\r\n';
     data += 'Build Date: ' + dateFormat(new Date(), 'dddd, mmmm dS, yyyy, h:MM:ss TT') + '\r\n';
