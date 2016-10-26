@@ -6,7 +6,7 @@ class VerifyLI {
     }
 
     verifyLinkedInIntegration () {
-        var clientId = this.configuration.integrations.linkedin.clientId || '';
+        let clientId = this.configuration.integrations.linkedin.clientId || '';
         return !(clientId === '' || clientId === '[ CLIENTID HERE ]' || clientId.length < 11 || clientId.length > 20);
     }
 

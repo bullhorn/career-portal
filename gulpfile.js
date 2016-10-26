@@ -5,20 +5,23 @@ var wrench = require('wrench');
 var babel = require('gulp-babel');
 var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
-var fs = require('fs');
+var fs = require('fs-extra');
 var argv = require('yargs').argv;
 var dateFormat = require('dateformat');
 var chalk = require('chalk');
 
 /**
- *  This will load all js or coffee files in the gulp directory
+ *  This will load all js files in the gulp directory
  *  in order to load all gulp tasks
  */
-wrench.readdirSyncRecursive('./build').filter(function (file) {
-    return (/\.(js)$/i).test(file);
-}).map(function (file) {
-    require('./build/' + file);
-});
+// TODO: 'wrench' is deprecated
+wrench.readdirSyncRecursive('./build')
+    .filter(function (file) {
+        return (/\.(js)$/i).test(file);
+    })
+    .map(function (file) {
+        require('./build/' + file);
+    });
 
 /**
  *  Default task clean temporaries directories and launch the

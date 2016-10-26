@@ -102,12 +102,12 @@ class SearchService {
                 publishedCategory: (isSearch, fields) => {
                     if ('publishedCategory(id,name)' !== fields) {
                         if (this.searchParams.category.length > 0) {
-                            var equals = isSearch ? ':' : '=';
+                            let equals = isSearch ? ':' : '=';
 
-                            var fragment = ' AND (';
-                            var first = true;
+                            let fragment = ' AND (';
+                            let first = true;
 
-                            for (var i = 0; i < this.searchParams.category.length; i++) {
+                            for (let i = 0; i < this.searchParams.category.length; i++) {
                                 if (!first) {
                                     fragment += ' OR ';
                                 } else {
@@ -126,23 +126,23 @@ class SearchService {
                 location: (isSearch, fields) => {
                     if ('address(city,state)' !== fields) {
                         if (this.searchParams.location.length > 0) {
-                            var delimiter = isSearch ? '"' : '\'';
-                            var equals = isSearch ? ':' : '=';
+                            let delimiter = isSearch ? '"' : '\'';
+                            let equals = isSearch ? ':' : '=';
 
-                            var fragment = ' AND (';
-                            var first = true;
+                            let fragment = ' AND (';
+                            let first = true;
 
-                            for (var j = 0; j < this.searchParams.location.length; j++) {
+                            for (let j = 0; j < this.searchParams.location.length; j++) {
                                 if (!first) {
                                     fragment += ' OR ';
                                 } else {
                                     first = false;
                                 }
 
-                                var location = this.searchParams.location[j];
+                                let location = this.searchParams.location[j];
 
-                                var city = isSearch ? location.split('|')[0] : location.split('|')[0].replace(/'/g, '\'\'');
-                                var state = location.split('|')[1];
+                                let city = isSearch ? location.split('|')[0] : location.split('|')[0].replace(/'/g, '\'\'');
+                                let state = location.split('|')[1];
 
                                 fragment += '(address.city' + equals + delimiter + city + delimiter + ' AND address.state' + equals + delimiter + state + delimiter + ')';
                             }
@@ -161,7 +161,7 @@ class SearchService {
                     return '';
                 },
                 query: (isSearch, additionalQuery, fields) => {
-                    var query = `(isOpen${isSearch ? ':1' : '=true'})`;
+                    let query = `(isOpen${isSearch ? ':1' : '=true'})`;
 
                     if (additionalQuery) {
                         query += ` AND (${additionalQuery})`;
@@ -177,20 +177,20 @@ class SearchService {
                     return query;
                 },
                 whereIDs: (jobs, isSearch) => {
-                    var getValue = isSearch ? (job) => 'id:' + job.id : (job) => job.id;
-                    var join = isSearch ? ' OR ' : ',';
-                    var prefix = isSearch ? '' : 'id IN ';
+                    let getValue = isSearch ? (job) => 'id:' + job.id : (job) => job.id;
+                    let join = isSearch ? ' OR ' : ',';
+                    let prefix = isSearch ? '' : 'id IN ';
 
-                    var values = [];
+                    let values = [];
 
-                    for (var i = 0; i < jobs.length; i++) {
+                    for (let i = 0; i < jobs.length; i++) {
                         values.push(getValue(jobs[i]));
                     }
 
                     return prefix + '(' + values.join(join) + ')';
                 },
                 relatedJobs: (publishedCategoryID, idToExclude) => {
-                    var query = `(isOpen=true) AND publishedCategory.id=${publishedCategoryID}`;
+                    let query = `(isOpen=true) AND publishedCategory.id=${publishedCategoryID}`;
 
                     if (idToExclude && parseInt(idToExclude) > 0) {
                         query += ' AND id <>' + idToExclude;
@@ -202,7 +202,7 @@ class SearchService {
                     return 'id=' + jobID;
                 },
                 assembleForSearchWhereIDs: (jobs) => {
-                    var where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
+                    let where = this.requestParams.query(true, this.requestParams.whereIDs(jobs, true));
 
                     return '?start=0&query=' + where + '&fields=id&count=' + SearchService._count;
                 },
@@ -273,12 +273,12 @@ class SearchService {
         errorCallback = errorCallback || function () {
             };
 
-        var totalRecords = [];
-        var start = 0;
+        let totalRecords = [];
+        let start = 0;
 
-        var controller = this;
+        let controller = this;
 
-        var callbackIfNoMore = (data) => {
+        let callbackIfNoMore = (data) => {
             if (data.data.length) {
                 controller.getCountWhereIDs(fields, orderByFields, start, controller.configuration.service.batchSize, data.data, (counts) => {
                     totalRecords = totalRecords.concat(counts.data);
@@ -328,16 +328,16 @@ class SearchService {
             this.helper.resetStartAndTotal();
         }
 
-        var controller = this;
+        let controller = this;
 
-        var allJobs = [];
-        var start = this.requestParams.start();
-        var count = this.requestParams.count();
+        let allJobs = [];
+        let start = this.requestParams.start();
+        let count = this.requestParams.count();
 
         this.helper.hasMore = false;
         this.helper.isSearching = true;
 
-        var doneFinding = (jobs) => {
+        let doneFinding = (jobs) => {
             controller.helper.isSearching = false;
             controller.helper.updateStart();
 
@@ -348,11 +348,11 @@ class SearchService {
             }
         };
 
-        var callbackIfNoMore = (data) => {
+        let callbackIfNoMore = (data) => {
             if (data.data.length) {
                 controller.searchWhereIDs(data.data, (jobs) => {
-                    for (var i = 0; i < data.data.length; i++) {
-                        for (var i2 = 0; i2 < jobs.length; i2++) {
+                    for (let i = 0; i < data.data.length; i++) {
+                        for (let i2 = 0; i2 < jobs.length; i2++) {
                             if (jobs[i2].id === data.data[i].id) {
                                 allJobs.push(data.data[i]);
                             }

@@ -46,7 +46,7 @@ class CareerPortalSidebarController {
     }
 
     setLocations() {
-        var controller = this;
+        let controller = this;
 
         return function (locations) {
             controller.locations = locations.filter(function (location) {
@@ -56,7 +56,7 @@ class CareerPortalSidebarController {
     }
 
     setCategories() {
-        var controller = this;
+        let controller = this;
 
         return function (categories) {
             controller.categories = categories.filter(function (category) {
@@ -71,7 +71,7 @@ class CareerPortalSidebarController {
         }
 
         angular.forEach(oldCounts, function (oldCount) {
-            var found = false;
+            let found = false;
 
             angular.forEach(newCounts, function (newCount) {
                 if (getID.call(oldCount) === getID.call(newCount)) {
@@ -87,16 +87,16 @@ class CareerPortalSidebarController {
         });
 
         oldCounts.sort(function (count1, count2) {
-            var name1 = getLabel.call(count1);
-            var name2 = getLabel.call(count2);
+            let name1 = getLabel.call(count1);
+            let name2 = getLabel.call(count2);
 
             if (name1 < name2) {
                 return -1;
             } else if (name1 > name2) {
                 return 1;
             } else {
-                var idCount1 = count1.idCount;
-                var idCount2 = count2.idCount;
+                let idCount1 = count1.idCount;
+                let idCount2 = count2.idCount;
 
                 return idCount2 - idCount1;
             }
@@ -104,7 +104,7 @@ class CareerPortalSidebarController {
     }
 
     updateFilterCounts() {
-        var controller = this;
+        let controller = this;
 
         if (this.locations) {
             this.SearchService.getCountByLocation(function (locations) {
@@ -126,7 +126,7 @@ class CareerPortalSidebarController {
     }
 
     updateFilterCountsAnonymous() {
-        var controller = this;
+        let controller = this;
 
         return function () {
             controller.updateFilterCounts();
@@ -168,29 +168,29 @@ class CareerPortalSidebarController {
     }
 
     addOrRemoveLocation(location) {
-        var key = location.address.city + '|' + location.address.state;
+        let key = location.address.city + '|' + location.address.state;
         if (!this.hasLocationFilter(location)) {
             this.SearchService.searchParams.location.push(key);
         } else {
-            var index = this.SearchService.searchParams.location.indexOf(key);
+            let index = this.SearchService.searchParams.location.indexOf(key);
             this.SearchService.searchParams.location.splice(index, 1);
         }
         this.searchJobs();
     }
 
     addOrRemoveCategory(category) {
-        var key = category.publishedCategory.id;
+        let key = category.publishedCategory.id;
         if (!this.hasCategoryFilter(category)) {
             this.SearchService.searchParams.category.push(key);
         } else {
-            var index = this.SearchService.searchParams.category.indexOf(key);
+            let index = this.SearchService.searchParams.category.indexOf(key);
             this.SearchService.searchParams.category.splice(index, 1);
         }
         this.searchJobs();
     }
 
     hasLocationFilter(location) {
-        var key = location.address.city + '|' + location.address.state;
+        let key = location.address.city + '|' + location.address.state;
         return this.SearchService.searchParams.location.indexOf(key) !== -1;
     }
 

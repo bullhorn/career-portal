@@ -14,7 +14,7 @@ class LinkedInService {
      * @param {Promise} def - promise to be resolved when the user is returned from the API
      */
     loadAndInitializeApi(def) {
-        var script = document.createElement('script'),
+        let script = document.createElement('script'),
             prior = document.getElementsByTagName('script')[0];
         script.async = 1;
         prior.parentNode.insertBefore(script, prior);
@@ -43,7 +43,7 @@ class LinkedInService {
     }
 
     getUser(deferred) {
-        var def = deferred || this.$q.defer();
+        let def = deferred || this.$q.defer();
         // Authenticate user
         if (typeof IN !== 'undefined') {
 
