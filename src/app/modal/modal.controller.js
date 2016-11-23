@@ -71,7 +71,7 @@ class CareerPortalModalController {
         }
 
         // First check the type
-        var fileArray = file.name.split('.'),
+        let fileArray = file.name.split('.'),
             fileExtension = fileArray[fileArray.length - 1];
 
         if (this.configuration.acceptedResumeTypes.indexOf((fileExtension || '').toLowerCase()) === -1) {
@@ -100,14 +100,14 @@ class CareerPortalModalController {
     }
 
     updateUploadClass(valid) {
-        var $uploadContainer = document.querySelector('.upload-container');
+        let $uploadContainer = document.querySelector('.upload-container');
         if ($uploadContainer) {
             $uploadContainer.classList.toggle('valid', valid);
         }
     }
 
     enableSendButton(isFormValid) {
-        var resume = this.ApplyService.form.resumeInfo;
+        let resume = this.ApplyService.form.resumeInfo;
 
         if (isFormValid && (resume || this.linkedInData.resume)) {
             if (this.linkedInData.resume.length !== 0 || resume.type) {
@@ -120,7 +120,7 @@ class CareerPortalModalController {
     }
 
     getTooltipText() {
-        var tooltip = '<ul>';
+        let tooltip = '<ul>';
         this.configuration.acceptedResumeTypes.forEach(function (type) {
             tooltip += '<li>' + type + '</li>';
         });
@@ -155,7 +155,7 @@ class CareerPortalModalController {
     }
 
     formatResume(userProfile) {
-        var lineBreak = '\n',
+        let lineBreak = '\n',
             hardBreak = '\n\n\n',
             months = this.$filter('i18n')('modal.Months').split('_'),
             today = new Date(),
@@ -178,7 +178,7 @@ class CareerPortalModalController {
         // Education
         if (this.checkNested(userProfile, 'educations', 'values')) {
             //if (userProfile.educations && userProfile.educations.values) {
-            var education = userProfile.educations.values;
+            let education = userProfile.educations.values;
             this.linkedInData.resume += this.$filter('i18n')('modal.education') + lineBreak;
             for (let i = 0; i < education.length; i++) {
                 // Add Degree Type
@@ -253,9 +253,9 @@ class CareerPortalModalController {
         // Skills
         if (this.checkNested(userProfile, 'skills', 'values')) {
             this.linkedInData.resume +=  this.$filter('i18n')('modal.skillHeading') + lineBreak;
-            var skills = userProfile.skills.values;
+            let skills = userProfile.skills.values;
             for (let i = 0; i < skills.length; i++) {
-                var newSkill = skills[i].skill;
+                let newSkill = skills[i].skill;
                 if (newSkill && newSkill.name) {
                     this.linkedInData.resume += newSkill.name;
                     if (skills[i + 1]) {
@@ -297,9 +297,9 @@ class CareerPortalModalController {
         // Hide Form
         this.showForm = false;
         // Set the job id in session storage to make sure they can't apply to the same one during the same session
-        var alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
+        let alreadyAppliedJobs = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
         if (alreadyAppliedJobs) {
-            var alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
+            let alreadyAppliedJobsArray = JSON.parse(alreadyAppliedJobs);
             alreadyAppliedJobsArray.push(this.SearchService.currentDetailData.id);
             sessionStorage.setItem(this.APPLIED_JOBS_KEY, JSON.stringify(alreadyAppliedJobsArray));
         } else {
@@ -310,7 +310,7 @@ class CareerPortalModalController {
     }
 
     submit(applyForm) {
-        var isFileValid = false,
+        let isFileValid = false,
             resumeInfo = this.ApplyService.form.resumeInfo,
             resumeText = this.linkedInData.header + this.linkedInData.resume + this.linkedInData.footer,
             controller;

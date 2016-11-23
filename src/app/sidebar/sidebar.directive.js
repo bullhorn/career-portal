@@ -1,8 +1,7 @@
 class CareerPortalSidebar {
     constructor() {
         'ngInject';
-
-        let directive = {
+        return {
             restrict: 'E',
             templateUrl: 'app/sidebar/sidebar.html',
             scope: false,
@@ -11,8 +10,6 @@ class CareerPortalSidebar {
             bindToController: true,
             replace: true
         };
-
-        return directive;
     }
 }
 

@@ -15,7 +15,7 @@ function routerConfig($stateProvider, $urlRouterProvider) {
             controllerAs: 'detail',
             resolve: {
                 job: function (SearchService, $stateParams, $q, $location) {
-                    var deferred = $q.defer();
+                    let deferred = $q.defer();
 
                     SearchService.loadJobData($stateParams.id, function (job) {
                         // Unset details

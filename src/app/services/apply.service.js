@@ -66,11 +66,12 @@ class ApplyService {
                 veteran: () => encodeURIComponent(this.form.veteran),
                 disability: () => encodeURIComponent(this.form.disability),
                 assemble: resume => {
-                    var type = resume.name ? resume.name.substring(resume.name.lastIndexOf('.') + 1) : 'txt',
+                    let type = resume.name ? resume.name.substring(resume.name.lastIndexOf('.') + 1) : 'txt',
                         url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&gender=' + this.requestParams.gender() + '&ethnicity=' + this.requestParams.ethnicity() + '&veteran=' + this.requestParams.veteran() + '&disability=' + this.requestParams.disability() + '&format=' + type;
+
                     if (window.location.href.indexOf('source=') > -1) {
-                        var sourceRegex = /(source=)([A-Za-z0-9\-]+)?/;
-                        var source = window.location.href.match(sourceRegex)[0];
+                        let sourceRegex = /(source=)([A-Za-z0-9\-]+)?/;
+                        let source = window.location.href.match(sourceRegex)[0];
                         url += '&' + source;
                     }
                     return url;
@@ -85,12 +86,12 @@ class ApplyService {
         errorCallback = errorCallback || function () {
             };
 
-        var self = this,
+        let self = this,
             applyUrl;
         self.ajaxError = '';
 
         if (this.form.resumeInfo) {
-            var form = new FormData();
+            let form = new FormData();
 
             if (this.form.resumeInfo.toString().indexOf('Blob') !== -1) {
                 // Resume binary is a blob

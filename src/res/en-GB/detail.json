@@ -1,0 +1,10 @@
+{
+    "jobDescriptionHeading": "Vancancy Description",
+    "applyButton": "Apply",
+    "alreadyApplied": "Already Applied",
+    "sendButton": "Send",
+    "relatedLabel": "Related",
+    "viewAllJobsLabel": "View all vacancies in this category",
+    "jobClosedMessage": "Looks like this vacancy has closed.",
+    "jobClosedOtherJobsLabel": "You can find some similar vacancies"
+}

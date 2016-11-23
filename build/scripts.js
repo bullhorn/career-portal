@@ -13,12 +13,20 @@ function webpackWrapper(watch, test, callback) {
     var webpackOptions = {
         watch: watch,
         module: {
-            preLoaders: [{
-                test: /\.js$/,
-                exclude: /node_modules|templateCacheHtml.js/,
-                loaders: ['jshint-loader', 'jscs-loader']
-            }],
-            loaders: [{test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate', 'babel-loader']}]
+            preLoaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules|templateCacheHtml.js/,
+                    loaders: ['jshint-loader', 'jscs-loader']
+                }
+            ],
+            loaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loaders: ['ng-annotate', 'babel-loader']
+                }
+            ]
         },
         output: {filename: 'index.module.js'}
     };

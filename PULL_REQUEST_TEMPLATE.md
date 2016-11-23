@@ -1,20 +1,12 @@
 INSERT SHORT DESCRIPTION EXPLAINING THE HIGH-LEVEL REASON FOR THE NEW PULL REQUEST HERE.
 
-## Additions
-
--
-
-## Removals
+## Additions / Removals
 
 -
 
 ## Testing
 
 -
-
-## Review
-
-- @user
 
 ## Screenshots
 

@@ -33,7 +33,7 @@ class ShareService {
     }
 
     additionalEmailInfo(job) {
-        var body = '\n';
+        let body = '\n';
         if (job.title) {
             body += '\nTitle: ' + this.locale.getString('common.jobsLabel');
         }
@@ -43,7 +43,7 @@ class ShareService {
         }
 
         if (job.address) {
-            var location = '\n' + this.locale.getString('common.locationSectionHeading') + ': ';
+            let location = '\n' + this.locale.getString('common.locationSectionHeading') + ': ';
             if (job.address.city && job.address.state) {
                 body += location + job.address.city + ', ' + job.address.state + '\n';
             } else if (job.address.city) {

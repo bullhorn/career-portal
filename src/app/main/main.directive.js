@@ -1,13 +1,12 @@
 class MainController {
     constructor(SharedData) {
         'ngInject';
-
         this.SharedData = SharedData;
     }
 
     closeFilters() {
-        var $portalCanvas = document.querySelector('.portal-canvas');
-        var $mask = document.querySelector('#mask');
+        let $portalCanvas = document.querySelector('.portal-canvas');
+        let $mask = document.querySelector('#mask');
 
         if ($portalCanvas) {
             $portalCanvas.classList.remove('show-nav');
@@ -22,8 +21,7 @@ class MainController {
 class Main {
     constructor() {
         'ngInject';
-
-        let directive = {
+        return {
             restrict: 'E',
             templateUrl: 'app/main/main.html',
             scope: false,
@@ -32,9 +30,8 @@ class Main {
             bindToController: true,
             replace: true
         };
-
-        return directive;
     }
 }
 
 export default Main;
+

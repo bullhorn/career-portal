@@ -6,7 +6,7 @@ class OmitFilters {
             }
 
             return collection.filter(function (element) {
-                var isChecked = false;
+                let isChecked = false;
                 if (type === 'location') {
                     isChecked = params ? params.indexOf(element.address.city + '|' + element.address.state) >= 0 : false;
                 } else {
