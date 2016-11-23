@@ -16,22 +16,17 @@ class EeocService {
     }
 
     isEthnicityChecked() {
-
         var checked = this.getCheckedEthnicities();
-
         return checked.length > 0;
     }
 
     getCheckedEthnicities() {
-
         var checked = [];
-
         angular.forEach(this.selectedEthnicities, function (value, key) {
             if (!!value) {
                 checked.push(key);
             }
         });
-
         return checked;
     }
 
