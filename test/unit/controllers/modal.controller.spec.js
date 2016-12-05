@@ -137,6 +137,56 @@ describe('Controller: CareerPortalModalController', () => {
         });
     });
 
+    describe('Function: getEEOCTooltipText(eeocSection)', () => {
+        it('should be defined.', () => {
+            expect(vm.getEEOCTooltipText).toBeDefined();
+        });
+        it('should return empty string if eeoc is not in configuration.', () => {
+            vm.configuration.eeoc = '';
+            expect(vm.getEEOCTooltipText('test')).toEqual('');
+        });
+        it('should return eeoc.tooltip.html if eeoc is in configuration, but section passed in does not exist in configuration.', () => {
+            vm.configuration.eeoc = {
+                'tooltip': {
+                    'html': '<h1>hi</h1>'
+                }
+            };
+            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
+        });
+        it('should return eeoc[section].tooltip.html if section passed in does exist in configuration.', () => {
+            vm.configuration.eeoc = {
+                'test': {
+                    'tooltip': {
+                        'html': '<h1>hi</h1>'
+                    }
+                }
+            };
+            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
+        });
+    });
+
+    describe('Function: getEEOCEthnicityTooltipText()', () => {
+        it('should be defined.', () => {
+            expect(vm.getEEOCEthnicityTooltipText).toBeDefined();
+        });
+        it('should return empty string if eeoc is not in configuration.', () => {
+            vm.configuration.eeoc = '';
+            expect(vm.getEEOCEthnicityTooltipText()).toEqual('');
+        });
+        it('should return a list of configured ethinicities\' label and info.', () => {
+            vm.configuration.eeoc = {
+                'ethnicity': {
+                    'options': [{
+                        'info': 'info',
+                        'label': 'label'
+                    }]
+                }
+            };
+            let expectedTooltip = '<ul><li>label: info</li></ul>';
+            expect(vm.getEEOCEthnicityTooltipText()).toEqual(expectedTooltip);
+        });
+    });
+
     describe('Function: getTooltipText()', () => {
         it('should be defined.', () => {
             expect(vm.getTooltipText).toBeDefined();
