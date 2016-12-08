@@ -119,7 +119,6 @@
                                 <div class="input eeoc">
                                     <label for="eeoc-gender">{{ 'eeoc.genderLabel' | i18n }}</label>
                                     <select id="eeoc-gender" data-ng-model="modal.ApplyService.form.gender" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled()">
-                                        <option value="U">{{ 'eeoc.genderUnknown' | i18n }}</option>
                                         <option value="M">{{ 'eeoc.genderMale' | i18n }}</option>
                                         <option value="F">{{ 'eeoc.genderFemale' | i18n }}</option>
                                         <option value="D">{{ 'eeoc.genderNonIdent' | i18n }}</option>
@@ -219,7 +218,6 @@
                                     <select id="eeoc-disability" data-ng-model="modal.ApplyService.form.disability" data-ng-required="modal.EeocService.isDisabilityEnabled()">
                                         <option value="Y">{{ 'eeoc.disabilityY' | i18n }}</option>
                                         <option value="N">{{ 'eeoc.disabilityN' | i18n }}</option>
-                                        <option value="U">{{ 'eeoc.disabilityU' | i18n }}</option>
                                         <option value="D">{{ 'eeoc.disabilityD' | i18n }}</option>
                                     </select>
                                 </div>
