@@ -62,6 +62,11 @@ class CareerPortalModalController {
         if (applyForm) {
             applyForm.$setPristine();
         }
+        let modal = document.getElementById('modal-container');
+        if (modal) {
+            modal.scrollTop = 0;
+        }
+
     }
 
     validateResume(file) {

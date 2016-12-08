@@ -82,6 +82,18 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.showForm).toBeTruthy();
             expect(vm.hasAttemptedLIApply).toBeFalsy();
         });
+        it('should reset the scroll position.', () => {
+            let dummyModal = document.createElement('div');
+            spyOn(document, 'getElementById').and.callFake(() => {
+                return dummyModal;
+            });
+            let modal = document.getElementById('modal-container');
+            modal.scrollTop = 999;
+
+            vm.closeModal();
+
+            expect(modal.scrollTop).toEqual(0);
+        });
     });
 
     describe('Function: validateResume(file)', () => {
