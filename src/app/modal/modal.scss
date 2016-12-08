@@ -117,7 +117,7 @@
             }
 
             section {
-                div.eeoc-info {
+                div.tooltip-info {
                     top: 0;
                     left: 0;
                     width: 100%;
@@ -125,7 +125,7 @@
                     background: rgba(#000, .4);
                     z-index: $modal-z-index + 10;
 
-                    .eeoc-modal {
+                    .tooltip-modal {
                         display: block;
                         width: 100%;
                         max-width: 33em;
@@ -147,7 +147,7 @@
                             margin-left: -1.5em !important;
                         }
 
-                        > div.eeoc-info-closer {
+                        > div.tooltip-info-closer {
                             position: absolute;
                             top: 0;
                             right: 0;
@@ -161,6 +161,7 @@
                                 line-height: 46px;
                                 font-size: 1.2em;
                                 display: block;
+                                cursor: pointer;
                             }
                         }
                     }
