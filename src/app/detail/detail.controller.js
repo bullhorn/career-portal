@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, VerifyLI, APPLIED_JOBS_KEY) {
+    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, VerifyLI, APPLIED_JOBS_KEY, MobileDetection) {
         'ngInject';
         // NG Dependencies
         this.$window = $window;
@@ -15,13 +15,12 @@ class JobDetailController {
         this.configuration = configuration;
 
         // Variables
-        this.isLinkedInEnabled = VerifyLI.verified;
+        this.isLinkedInEnabled = VerifyLI.verified && !(MobileDetection.browserData.os.ios && MobileDetection.browserData.browser.safari);
         this.email = '';
         this.relatedJobs = [];
         this.SharedData.viewState = 'overview-open';
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
         this.alreadyApplied = false;
-
         // Init functions
         this.loadRelatedJobs();
 
