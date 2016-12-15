@@ -1,6 +1,6 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, MobileDetection, VerifyLI, APPLIED_JOBS_KEY) {
+    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, VerifyLI, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$location = $location;
@@ -21,7 +21,6 @@ class CareerPortalModalController {
         // Variables
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
         this.isLinkedInActive = VerifyLI.verified;
-        this.isIOSSafari = (MobileDetection.browserData.os.ios && MobileDetection.browserData.browser.safari);
         // Create a local variable to store user's email address for sendEmailLink
         this.email = '';
         // Boolean to indicate if the user has attempted to apply via LinkedIn
