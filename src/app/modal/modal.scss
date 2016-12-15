@@ -8,6 +8,7 @@
     left: 0;
     background: rgba(0, 0, 0, .7);
     z-index: $modal-z-index;
+    overflow-y: auto;
 
     > div.modal {
         display: block;
@@ -15,11 +16,10 @@
         height: 100%;
         width: 100%;
         background: $white;
-        box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
         overflow: hidden;
         position: relative;
         pointer-events: auto;
-
         @include tablet() {
             max-width: 500px;
             margin: 80px auto;
@@ -53,13 +53,11 @@
             height: auto;
             position: relative;
             text-align: left;
-
             @include tablet() {
                 padding: 1em 3em 2em 2em;
             }
 
             > section {
-                
                 > h2 {
                     font-size: 1.8em;
                     margin: 0.5em 0 0.2em;
@@ -84,8 +82,10 @@
                         margin-bottom: 1.2em;
                     }
 
-                    &.location, &.separator, &.type {
-                        color: #3D5668
+                    &.location,
+                    &.separator,
+                    &.type {
+                        color: #3D5668;
                     }
                 }
 
@@ -96,7 +96,6 @@
                     cursor: pointer;
                     color: lighten($primary, 15%);
                     font-size: 2em;
-
                     @include tablet() {
                         display: none;
                     }
@@ -112,22 +111,70 @@
             padding: 1em;
             overflow: auto;
             height: calc(100% - 60px - 120px);
-
             @include tablet() {
-                padding: 2em 2em;
+                padding: 2em;
                 height: auto;
             }
 
             section {
-                form.apply-form {
-                    > div.form-field {
-                        margin: 1em 0;
+                div.tooltip-info {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(#000, .4);
+                    z-index: $modal-z-index + 10;
 
+                    .tooltip-modal {
+                        display: block;
+                        width: 100%;
+                        max-width: 33em;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 2em 3em 2em 2em;
+                        background: $white;
+                        border: grey;
+                        border-radius: 3px;
+                        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+
+                        & > p {
+                            margin: 0;
+                        }
+
+                        & > ul {
+                            margin-left: -1.5em !important;
+                        }
+
+                        > div.tooltip-info-closer {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            height: 46px;
+                            width: 46px;
+
+                            > i {
+                                height: 100%;
+                                width: 100%;
+                                text-align: center;
+                                line-height: 46px;
+                                font-size: 1.2em;
+                                display: block;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                form.apply-form {
+                    div.form-field {
+                        margin: 1em 0;
                         @include desktop() {
                             margin: 2em 0;
                         }
 
-                        > div.input {
+                        div.input {
                             display: flex;
                             flex-direction: row;
                             align-items: center;
@@ -137,9 +184,10 @@
                                 font-size: 1.2em;
                             }
 
-                            > input {
-                                flex: 1;
+                            input,
+                            select {
                                 color: lighten($dark-bg, 30%);
+                                padding: 0.5em;
 
                                 &.ng-invalid {
                                     &.ng-valid-required {
@@ -147,14 +195,63 @@
                                     }
                                 }
 
-                                &[type="text"], &[type="email"] {
+                                &[type="email"],
+                                &[type="text"] {
                                     border: none;
                                     border-bottom: 1px solid darken($light-bg, 15%);
                                     transition: border-bottom 0.2s ease-in-out;
-                                    padding: 0.5em;
-
+                                    //padding: 0.5em;
                                     &:focus {
                                         border-bottom: 1px solid $primary;
+                                    }
+                                }
+                            }
+
+                            &.eeoc {
+                                flex-direction: column;
+
+                                > label {
+                                    margin-bottom: 0.5em;
+                                    text-align: left;
+                                    width: 100%;
+                                    font-size: 1.1em;
+                                    color: rgb(121, 124, 126);
+                                }
+
+                                select {
+                                    border-color: #adafb0;
+                                    border-radius: 4px;
+
+                                    &:focus {
+                                        outline: none;
+                                    }
+                                }
+
+                                fieldset {
+                                    width: 100%;
+                                    border-radius: 3px;
+                                    border-color: rgba(#000, .1);
+                                }
+
+                                .eeoc-checkbox {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    height: 36px;
+
+                                    input[type="checkbox"] {
+                                        margin-top: 0;
+                                        flex-shrink: 0;
+                                        width: initial;
+                                        height: 36px;
+                                    }
+
+                                    label {
+                                        height: 36px;
+                                        line-height: 36px;
+                                        padding-left: 10px;
+                                        flex: 1;
+                                        width: 100%;
                                     }
                                 }
                             }
@@ -218,6 +315,11 @@
                     padding: 1em;
                 }
 
+                select {
+                    width: 100%;
+                    overflow: hidden;
+                }
+
                 input {
                     color: lighten($dark-bg, 30%);
                     width: 100%;
@@ -229,7 +331,8 @@
                         }
                     }
 
-                    &[type="text"], &[type="email"] {
+                    &[type="email"],
+                    &[type="text"] {
                         border: none;
                         border-bottom: 1px solid darken($light-bg, 15%);
                         transition: border-bottom 0.2s ease-in-out;
@@ -240,21 +343,18 @@
                         }
                     }
                 }
-
-                
                 // Linked In Skills and expertise:
                 textarea {
                     width: 100%;
                     resize: none;
                     border: none;
                     border-bottom: solid thin #CCC;
-                    padding: 0 .75em;
-
+                    padding: 0 0.75em;
                     color: #797c7e;
 
+                    &:active,
                     &:focus,
-                    &:hover,
-                    &:active {
+                    &:hover {
                         outline: none;
                     }
 
@@ -262,12 +362,7 @@
                         border-bottom-color: $primary;
                     }
                 }
-
-
-
             }
-
-
         }
 
         footer {
@@ -277,11 +372,15 @@
             bottom: 0;
             left: 0;
             height: 50px;
-
             display: flex;
             flex-flow: row nowrap;
-
             @include tablet() {
+                position: relative;
+            }
+            @include phone() {
+                position: relative;
+            }
+            @include small-phone() {
                 position: relative;
             }
 
@@ -307,12 +406,12 @@
                 font-weight: 700;
                 flex: 1;
 
-                &[name="cancel"], &[name="ok"] {
+                &[name="cancel"],
+                &[name="ok"] {
                     color: $cancel;
                     background: transparent;
                     font-weight: 600;
                     display: none;
-
                     @include tablet() {
                         display: inline-block;
                     }
@@ -382,25 +481,25 @@
         animation: loading 1.5s ease-in-out infinite;
     }
 
-    .loading-dot:nth-child(4n + 1) {
-    }
+    .loading-dot:nth-child(4n + 1) {}
 
     .loading-dot:nth-child(4n + 2) {
-        animation-delay: .3s;
+        animation-delay: 0.3s;
     }
 
     .loading-dot:nth-child(4n + 3) {
-        animation-delay: .6s;
+        animation-delay: 0.6s;
     }
 }
-
 @keyframes loading {
     0% {
         opacity: 1;
     }
+
     50% {
-        opacity: .2;
+        opacity: 0.2;
     }
+
     100% {
         opacity: 1;
     }

@@ -29,5 +29,10 @@
             "clientId": "[ CLIENTID HERE ]"
         }
     },
-    "defaultGridState": "list-view"
+    "defaultGridState": "list-view",
+    "eeoc": {
+        "genderRaceEthnicity": false,
+        "veteran": false,
+        "disability": false
+    }
 }

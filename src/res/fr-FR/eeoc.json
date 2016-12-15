@@ -1,0 +1,38 @@
+{
+    "genderRaceEthnicityHeader": "Formulaire d'auto-identification volontaire pour la race, le sexe et l'origine ethnique",
+    "genderRaceEthnicityHelp": "<strong>Déclaration d'intention:</strong> En tant qu'entrepreneur du gouvernement,% 1 est tenu d'inviter les candidats à s'identifier eux-mêmes à leur sexe, leur race et leur appartenance ethnique. Cette auto-identification est volontaire et votre décision de le compléter n'aura aucun effet sur votre emploi ou entraînera un traitement indésirable. Ces renseignements seront conservés dans la base de données du personnel de la société utilisée uniquement pour être utilisée dans les rapports gouvernementaux requis; Il ne sera pas conservé dans les dossiers des employés.",
+    "genderLabel": "Le genre",
+    "genderMale": "Mâle",
+    "genderFemale": "Femelle",
+    "genderNonIdent": "Je ne veux pas d'auto-identification",
+
+    "raceEthnicityLabel": "Ethnicité / Race (Sélectionnez toutes les réponses pertinentes)",
+    "raceEthnicityHL": "Hispanique ou Latino",
+    "raceEthnicityHLHelp": "Personnes de culture cubaine, mexicaine, portoricaine, sud ou centrale, ou autre culture ou région espagnole indépendamment de la race.",
+    "raceEthnicityWH": "Blanc",
+    "raceEthnicityWHHelp": "Personnes ayant des origines dans l'un des peuples originaux de l'Europe, du Moyen-Orient ou de l'Afrique du Nord.",
+    "raceEthnicityBL": "Noir ou Afro-Américain",
+    "raceEthnicityBLHelp": "Personnes ayant des origines dans l'un des groupes raciaux noirs de l'Afrique.",
+    "raceEthnicityAS": "Asiatique",
+    "raceEthnicityASHelp": "Personnes ayant des origines dans l'un des peuples originaux de l'Extrême-Orient, de l'Asie du Sud-Est ou du sous-continent indien, y compris par exemple le Cambodge, la Chine, l'Inde, le Japon, la Corée, la Malaisie, le Pakistan, les Philippines, la Thaïlande et le Vietnam.",
+    "raceEthnicityNP": "Native Hawaiian ou des îles du Pacifique",
+    "raceEthnicityNPHelp": "Personnes ayant des origines dans l'un des peuples de Hawaï, de Guam, de Samoa ou d'autres îles du Pacifique.",
+    "raceEthnicityIA": "Indien d'Amérique ou Alaskan Native",
+    "raceEthnicityIAHelp": "Personnes ayant des origines dans l'un des peuples originaux de l'Amérique du Nord et du Sud (y compris l'Amérique centrale), et qui maintiennent l'affiliation tribale ou l'attachement de la communauté.",
+    "raceEthnicityDN": "I do not wish to self-identify",
+
+    "veteranHeader": "Formulaire d'auto-identification volontaire pour les anciens combattants",
+    "veteranLabel": "Statut Vétéran",
+    "veteranHelp": "<p><strong>Déclaration d'intention:</strong> %1 est un entrepreneur gouvernemental assujetti à la Loi sur l'aide à la réadaptation des anciens combattants de l'ère du Vietnam de 1974, telle que modifiée par la Loi de 2002 sur les emplois pour anciens combattants, 38 États-Unis. 4212 (VEVRAA), qui exige que les entrepreneurs du gouvernement prennent des mesures positives pour employer et avancer dans l'emploi: 1) les anciens combattants handicapés; (2) anciens combattants séparés; (3) anciens combattants en temps de guerre en service actif ou badges de campagne; Et (4) anciens combattants de la médaille du service des forces armées.</p><p><strong>Définitions:</strong></p><ul><li>Vétéran handicapé</li><li>Actif Duty Wartime ou campagne Badge Ancien combattant</li><li>Médaille du service des forces armées</li><li>Vétéran récemment séparé</li><li>Vétéran protégé</li></ul><p>Si vous croyez appartenir à l'une des catégories d'anciens combattants protégés énumérés ci-dessus, veuillez indiquer en cochant la case appropriée ci-dessous. En tant qu'entrepreneur du gouvernement, {companyName} Demande ces informations afin de mesurer l'efficacité des efforts de sensibilisation et de recrutement positif qu'il entreprend en vertu de VEVRAA. La soumission de ces renseignements est volontaire et le refus de la fournir ne vous exposera pas à un traitement défavorable. Les informations fournies ne seront utilisées que de manière non incompatible avec VEVRAA. {companyName} Est un employeur de l'EEO et ne fait pas de discrimination à l'embauche d'un individu en raison de sa race, sa couleur, son sexe, son origine nationale, son ascendance, sa religion, son handicap physique ou mental, son âge, son statut d'ancien combattant, son orientation sexuelle, , La grossesse, la citoyenneté ou tout autre facteur protégé par des lois anti-discrimination.</p>",
+    "veteranP": "Vétéran protégé",
+    "veteranV": "Vétéran",
+    "veteranN": "Non-Vétéran",
+    "veteranD": "Refuser de répondre à",
+
+    "disabilityHeader": "Auto-identification volontaire du handicap",
+    "disabilityLabel": "Statut d'invalidité",
+    "disabilityHelp": "<p>[Formulaire CC-305, OMB Numéro de contrôle 1250-0005, Expiration 31/1/2017]</p><p><strong>Pourquoi est-ce qu'on vous demande de remplir ce formulaire?</strong><br/>En tant qu'entrepreneur du gouvernement, %1 Est nécessaire pour toucher, embaucher et offrir des chances égales aux personnes handicapées qualifiées. Pour aider à mesurer {companyName} Vous demandez de nous dire si vous avez un handicap ou si vous avez déjà eu un handicap. Remplir ce formulaire est facultatif et toute réponse que vous donnez sera tenue privée et ne sera pas utilisée contre vous d'aucune façon.</p><p><strong>Comment puis-je savoir si j'ai un handicap?</strong><br/>Vous êtes considéré comme ayant une déficience si vous avez une déficience physique ou mentale ou une affection médicale qui limite substantiellement une activité importante de la vie ou si vous avez des antécédents ou des antécédents d'une telle affection ou d'une condition médicale. Les personnes handicapées comprennent, sans s'y limiter: cécité, surdité, cancer, diabète, épilepsie, autisme, paralysie cérébrale, VIH / sida, schizophrénie, dystrophie musculaire, trouble bipolaire, dépression majeure, sclérose en plaques, membres manquants ou membres partiellement absents, - trouble de stress traumatique, trouble obsessionnel compulsif, déficiences nécessitant l'utilisation d'un fauteuil roulant ou déficience intellectuelle.</p>",
+    "disabilityY": "Invalidité",
+    "disabilityN": "Pas de handicap",
+    "disabilityD": "Je ne veux pas d'auto-identification"
+}

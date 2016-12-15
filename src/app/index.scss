@@ -83,6 +83,7 @@ button {
 a {
     color: $primary;
     text-decoration: none;
+    cursor: pointer;
 
     &:visited, &:focus, &:active {
         color: $primary;

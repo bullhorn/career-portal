@@ -1,0 +1,38 @@
+{
+    "genderRaceEthnicityHeader": "Voluntary Self-Identification Form for Race, Gender and Ethnicity",
+    "genderRaceEthnicityHelp": "<strong>Statement of Purpose:</strong> As a government contractor, %1 is required to invite applicants to self-identify their gender, race and ethnicity. This self-identification is voluntary and your decision to complete it will not in any way affect your employment or result in adverse treatment. This information will be maintained in the company's personnel database used solely for use in required government reporting; it will not be kept in employee personnel files.",
+    "genderLabel": "Gender",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderNonIdent": "I do not wish to self-identify",
+
+    "raceEthnicityLabel": "Ethnicity / Race (Select all that apply)",
+    "raceEthnicityHL": "Hispanic or Latino",
+    "raceEthnicityHLHelp": "Persons of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or region regardless of race.",
+    "raceEthnicityWH": "White",
+    "raceEthnicityWHHelp": "Persons having origins in any of the original peoples of Europe, the Middle East or North Africa.",
+    "raceEthnicityBL": "Black or African American",
+    "raceEthnicityBLHelp": "Persons having origins in any of the Black racial groups of Africa.",
+    "raceEthnicityAS": "Asian",
+    "raceEthnicityASHelp": "Persons having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian Subcontinent, including for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand and Vietnam.",
+    "raceEthnicityNP": "Native Hawaiian or Pacific Islander",
+    "raceEthnicityNPHelp": "Persons having origins in any of the peoples of Hawaii, Guam, Samoa, or other Pacific Islands.",
+    "raceEthnicityIA": "American Indian or Alaskan Native",
+    "raceEthnicityIAHelp": "Persons having origins in any of the original peoples of North and South America, (including Central America), and who maintain tribal affiliation or community attachment.",
+    "raceEthnicityDN": "I do not wish to self-identify",
+
+    "veteranHeader": "Voluntary Self-Identification Form for Veteran Applicants",
+    "veteranLabel": "Veteran Status",
+    "veteranHelp": "<p><strong>Statement of Purpose:</strong> %1 is a government contractor subject to the Vietnam Era Veterans' Readjustment Assistance Act of 1974, as amended by the Jobs for Veterans Act of 2002, 38 U.S.C. 4212 (VEVRAA), which requires Government contractors to take affirmative action to employ and advance in employment: (1) disabled veterans; (2) recently separated veterans; (3) active duty wartime or campaign badge veterans; and (4) Armed Forces service medal veterans.</p><p><strong>Definitions:</strong></p><ul><li>Disabled Veteran</li><li>Active Duty Wartime or Campaign Badge Veteran</li><li>Armed Forces Service Medal Veteran</li><li>Recently Separated Veteran</li><li>Protected Veteran</li></ul><p>If you believe you belong to any of the categories of protected veterans listed above, please indicate by checking the appropriate box below. As a Government contractor, {companyName} requests this information in order to measure the effectiveness of the outreach and positive recruitment efforts it undertakes pursuant to VEVRAA. Submission of this information is voluntary, and refusal to provide it will not subject you to any adverse treatment. The information provided will be used only in ways that are not inconsistent with VEVRAA. {companyName} is an EEO employer and does not discriminate in hiring against any individual on the basis of race, color, gender, national origin, ancestry, religion, physical or mental disability, age, veteran status, sexual orientation, gender identity or expression, marital status, pregnancy, citizenship, or any other factor protected by anti-discrimination laws.</p>",
+    "veteranP": "Protected Veteran",
+    "veteranV": "Veteran",
+    "veteranN": "Non-Veteran",
+    "veteranD": "Decline to Answer",
+
+    "disabilityHeader": "Voluntary Self-Identification of Disability",
+    "disabilityLabel": "Disability Status",
+    "disabilityHelp": "<p>[Form CC-305, OMB Control Number 1250-0005, Expires 1/31/2017]</p><p><strong>Why Are You Being Asked to Complete This Form?</strong><br/>As a government contractor, %1 is required to reach out to, hire, and provide equal opportunity to qualified people with disabilities. To help measure how well {companyName} is doing, it is asking you to tell us if you have a disability or if you ever had a disability. Completing this form is voluntary, and any answer you give will be kept private and will not be used against you in any way.</p><p><strong>How Do I know if I have a Disability?</strong><br/>You are considered to have a disability if you have a physical or mental impairment or medical condition that substantially limits a major life activity, or if you have a history or record of such an impairment or medical condition. Disabilities include, but are not limited to: blindness, deafness, cancer, diabetes, epilepsy, autism, cerebral palsy, HIV/AIDS, schizophrenia, muscular dystrophy, bipolar disorder, major depression, multiple sclerosis, missing limbs or partially missing limbs, post-traumatic stress disorder, obsessive compulsive disorder, impairments requiring the use of a wheelchair, or an intellectual disability.</p>",
+    "disabilityY": "Disability",
+    "disabilityN": "No Disability",
+    "disabilityD": "I do not wish to self-identify"
+}

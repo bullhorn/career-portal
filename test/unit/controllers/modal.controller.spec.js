@@ -38,6 +38,7 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.ShareService).toBeDefined();
         expect(vm.ApplyService).toBeDefined();
         expect(vm.LinkedInService).toBeDefined();
+        expect(vm.EeocService).toBeDefined();
         expect(vm.locale).toBeDefined();
 
         // Variables
@@ -79,6 +80,18 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.SharedData.modalState).toBe('closed');
             expect(vm.showForm).toBeTruthy();
             expect(vm.hasAttemptedLIApply).toBeFalsy();
+        });
+        it('should reset the scroll position.', () => {
+            let dummyModal = document.createElement('div');
+            spyOn(document, 'getElementById').and.callFake(() => {
+                return dummyModal;
+            });
+            let modal = document.getElementById('modal-container');
+            modal.scrollTop = 999;
+
+            vm.closeModal();
+
+            expect(modal.scrollTop).toEqual(0);
         });
     });
 
@@ -132,6 +145,56 @@ describe('Controller: CareerPortalModalController', () => {
     describe('Function: enableSendButton()', () => {
         it('should be defined.', () => {
             expect(vm.enableSendButton).toBeDefined();
+        });
+    });
+
+    describe('Function: getEEOCTooltipText(eeocSection)', () => {
+        it('should be defined.', () => {
+            expect(vm.getEEOCTooltipText).toBeDefined();
+        });
+        it('should return empty string if eeoc is not in configuration.', () => {
+            vm.configuration.eeoc = '';
+            expect(vm.getEEOCTooltipText('test')).toEqual('');
+        });
+        it('should return eeoc.tooltip.html if eeoc is in configuration, but section passed in does not exist in configuration.', () => {
+            vm.configuration.eeoc = {
+                'tooltip': {
+                    'html': '<h1>hi</h1>'
+                }
+            };
+            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
+        });
+        it('should return eeoc[section].tooltip.html if section passed in does exist in configuration.', () => {
+            vm.configuration.eeoc = {
+                'test': {
+                    'tooltip': {
+                        'html': '<h1>hi</h1>'
+                    }
+                }
+            };
+            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
+        });
+    });
+
+    describe('Function: getEEOCEthnicityTooltipText()', () => {
+        it('should be defined.', () => {
+            expect(vm.getEEOCEthnicityTooltipText).toBeDefined();
+        });
+        it('should return empty string if eeoc is not in configuration.', () => {
+            vm.configuration.eeoc = '';
+            expect(vm.getEEOCEthnicityTooltipText()).toEqual('');
+        });
+        it('should return a list of configured ethinicities\' label and info.', () => {
+            vm.configuration.eeoc = {
+                'ethnicity': {
+                    'options': [{
+                        'info': 'info',
+                        'label': 'label'
+                    }]
+                }
+            };
+            let expectedTooltip = '<ul><li>label: info</li></ul>';
+            expect(vm.getEEOCEthnicityTooltipText()).toEqual(expectedTooltip);
         });
     });
 

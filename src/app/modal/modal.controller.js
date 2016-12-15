@@ -1,6 +1,6 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, VerifyLI, APPLIED_JOBS_KEY) {
+    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, VerifyLI, APPLIED_JOBS_KEY, EeocService) {
         'ngInject';
         // NG Dependencies
         this.$location = $location;
@@ -16,6 +16,7 @@ class CareerPortalModalController {
         this.ShareService = ShareService;
         this.ApplyService = ApplyService;
         this.LinkedInService = LinkedInService;
+        this.EeocService = EeocService;
         this.locale = locale;
 
         // Variables
@@ -60,6 +61,11 @@ class CareerPortalModalController {
         if (applyForm) {
             applyForm.$setPristine();
         }
+        let modal = document.getElementById('modal-container');
+        if (modal) {
+            modal.scrollTop = 0;
+        }
+
     }
 
     validateResume(file) {
@@ -123,6 +129,32 @@ class CareerPortalModalController {
             tooltip += '<li>' + type + '</li>';
         });
         tooltip += '</ul>';
+        return tooltip;
+    }
+
+    getEEOCTooltipText(eeocSection) {
+        var tooltip;
+        if (this.configuration.eeoc && this.configuration.eeoc[eeocSection]) {
+            tooltip = this.configuration.eeoc[eeocSection].tooltip.html;
+        } else if (this.configuration.eeoc) {
+            tooltip = this.configuration.eeoc.tooltip.html;
+        } else {
+            tooltip = '';
+        }
+        return tooltip.replace(/\{companyName\}/g, this.configuration.companyName);
+    }
+
+    getEEOCEthnicityTooltipText() {
+        var tooltip = '';
+        if (this.configuration.eeoc) {
+            tooltip = '<ul>';
+            this.configuration.eeoc.ethnicity.options.forEach(function (option) {
+                if (option.info) {
+                    tooltip += '<li>' + option.label + ': ' + option.info + '</li>';
+                }
+            });
+            tooltip += '</ul>';
+        }
         return tooltip;
     }
 

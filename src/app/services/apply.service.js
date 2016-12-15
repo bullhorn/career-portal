@@ -28,6 +28,10 @@ class ApplyService {
                 lastName: '',
                 email: '',
                 phone: '',
+                gender: '',
+                ethnicity: '',
+                veteran: '',
+                disability: '',
                 resumeInfo: {}
             });
     }
@@ -57,9 +61,14 @@ class ApplyService {
                 lastName: () => encodeURIComponent(this.form.lastName),
                 email: () => encodeURIComponent(this.form.email),
                 phone: () => encodeURIComponent(this.form.phone || ''),
+                gender: () => encodeURIComponent(this.form.gender),
+                ethnicity: () => encodeURIComponent(this.form.ethnicity),
+                veteran: () => encodeURIComponent(this.form.veteran),
+                disability: () => encodeURIComponent(this.form.disability),
                 assemble: resume => {
                     let type = resume.name ? resume.name.substring(resume.name.lastIndexOf('.') + 1) : 'txt',
-                        url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&format=' + type;
+                        url = '?externalID=Resume&type=Resume&firstName=' + this.requestParams.firstName() + '&lastName=' + this.requestParams.lastName() + '&email=' + this.requestParams.email() + '&phone=' + this.requestParams.phone() + '&gender=' + this.requestParams.gender() + '&ethnicity=' + this.requestParams.ethnicity() + '&veteran=' + this.requestParams.veteran() + '&disability=' + this.requestParams.disability() + '&format=' + type;
+
                     if (window.location.href.indexOf('source=') > -1) {
                         let sourceRegex = /(source=)([A-Za-z0-9\-]+)?/;
                         let source = window.location.href.match(sourceRegex)[0];
