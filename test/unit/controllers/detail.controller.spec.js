@@ -39,6 +39,7 @@ describe('Controller: JobDetailController', () => {
         expect(vm.configuration).toBeDefined();
 
         // Variables
+        expect(vm.isLinkedInEnabled).toBeDefined();
         expect(vm.SharedData.viewState).toBe('overview-open');
         expect(vm.email).toBeDefined();
         expect(vm.relatedJobs).toBeDefined();

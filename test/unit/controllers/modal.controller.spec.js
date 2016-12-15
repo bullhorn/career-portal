@@ -42,7 +42,6 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.locale).toBeDefined();
 
         // Variables
-        expect(vm.isIOSSafari).toBeDefined();
         expect(vm.email).toBeDefined();
         expect(vm.hasAttemptedLIApply).toBeFalsy();
         expect(vm.linkedInData.header).toBeDefined();
