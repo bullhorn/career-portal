@@ -20,7 +20,7 @@
                 <span class="card-separator" data-ng-show="::((job.address.city || job.address.state) && job.employmentType)">|</span>
                 <span class="card-type">{{::job.employmentType}}</span>
                 <!-- DESCRIPTION -->
-                <span class="card-description" ng-bind-html="job.publicDescription"></span>
+                <span class="card-description">{{ ::job.publicDescription | stripHtml }}</span>
                 <!-- CTA -->
                 <i class="bhi-arrow-right"></i>
             </a>
