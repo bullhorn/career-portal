@@ -16,8 +16,6 @@ var $ = require('gulp-load-plugins')({
         'gulp-uglify',
         'del',
         'gulp-size',
-        'gulp-rev-replace',
-        'gulp-rev',
         'gulp-useref',
         'gulp-minify-css',
         'gulp-minify-html'
@@ -43,9 +41,6 @@ gulp.task('partials', function () {
 
 var wiredep = require('wiredep').stream;
 
-
-
-
 gulp.task('html', ['inject', 'partials'], function () {
     var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
     var partialsInjectOptions = {
@@ -68,8 +63,6 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe(cssFilter)
         .pipe($.minifyCss({cache: true}))
         .pipe(cssFilter.restore)
-        .pipe($.rev())
-        .pipe($.revReplace())
         .pipe(htmlFilter)
         .pipe($.minifyHtml({
             empty: true,
