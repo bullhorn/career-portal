@@ -29,13 +29,13 @@
                 max-width: 500px !important;
             }
         }
-        
+
         @media screen and (max-height: 700px) and (min-width: 992px){
-            margin: 0px auto;
+            margin: 0 auto;
             -ms-transform: scale(.85); /* IE 9 */
             -webkit-transform: scale(.85); /* Safari */
             transform: scale(.85); /* Firefox, Opera, Chrome */
-            
+
         }
 
 
@@ -138,6 +138,7 @@
                         border: grey;
                         border-radius: 3px;
                         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+                        z-index: 999;
 
                         & > p {
                             margin: 0;
