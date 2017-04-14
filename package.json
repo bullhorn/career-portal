@@ -1,6 +1,6 @@
 {
   "name": "CareerPortal",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "loc": "sloc src/ --format json > ./reports/sloc.json",
     "pregalaxy": "npm run loc",

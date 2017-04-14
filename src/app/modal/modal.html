@@ -130,7 +130,7 @@
                         <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{ modal.ApplyService.form.resumeInfo.name }}</span>
                     </div>
                     <!-- ERROR MESSAGE -->
-                    <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
+                    <span class="error submit-error" data-ng-if="!modal.isSubmitting && modal.ApplyService.ajaxError">
                         <i class="bhi-caution"></i> <span>{{ modal.ApplyService.ajaxError }}</span>
                     </span>
                     <div id="eeoc-fields">
