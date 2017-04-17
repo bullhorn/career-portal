@@ -74,17 +74,45 @@
                     <div class="form-field" data-ng-if="modal.hasAttemptedLIApply">
                         <textarea placeholder="{{ 'modal.skills' | i18n }}" name="resume-text" data-ng-model="modal.linkedInData.resume" id="resume-text" cols="30" rows="5" data-ng-minlength="number"></textarea>
                     </div>
+                    <!-- TOOLTIP -->
+                    <div class="tooltip-info" data-ng-show="!modal.isToolTipHidden">
+                        <div class="tooltip-modal">
+                            <div class="tooltip-info-closer">
+                                <i class="bhi-close" data-ng-click="modal.hideTooltip()"></i>
+                            </div>
+                            <!-- FILE TYPE TOOL TIP -->
+                            <div data-ng-if="modal.currentToolTip === 0">
+                                <strong>{{ 'modal.supportedFileFormatsLabel' | i18n }}</strong>
+                                <ul>
+                                    <li data-ng-repeat="type in modal.configuration.acceptedResumeTypes">
+                                        {{ type }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- EEOC GENDER, RACE, &, ETHNICITY -->
+                            <div data-ng-if="modal.currentToolTip === 1" data-i18n="eeoc.genderRaceEthnicityHelp" data-companyName="{{ modal.configuration.companyName }}"></div>
+                            <!-- ETHNICITY -->
+                            <div data-ng-if="modal.currentToolTip === 2">
+                                <ul>
+                                    <li>{{ 'eeoc.raceEthnicityHL' | i18n }}: {{ 'eeoc.raceEthnicityHLHelp' | i18n }}</li>
+                                    <li>{{ 'eeoc.raceEthnicityWH' | i18n }}: {{ 'eeoc.raceEthnicityWHHelp' | i18n }}</li>
+                                    <li>{{ 'eeoc.raceEthnicityBL' | i18n }}: {{ 'eeoc.raceEthnicityBLHelp' | i18n }}</li>
+                                    <li>{{ 'eeoc.raceEthnicityAS' | i18n }}: {{ 'eeoc.raceEthnicityASHelp' | i18n }}</li>
+                                    <li>{{ 'eeoc.raceEthnicityNP' | i18n }}: {{ 'eeoc.raceEthnicityNPHelp' | i18n }}</li>
+                                    <li>{{ 'eeoc.raceEthnicityIA' | i18n }}: {{ 'eeoc.raceEthnicityIAHelp' | i18n }}</li>
+                                </ul>
+                            </div>
+                            <!-- PROTECTED VETERAN -->
+                            <div data-ng-if="modal.currentToolTip === 3" data-i18n="eeoc.veteranHelp" data-companyName="{{ modal.configuration.companyName }}"></div>
+                            <!-- DISABILITY -->
+                            <p data-ng-if="modal.currentToolTip === 4" data-i18n="eeoc.disabilityHelp" data-companyName="{{ modal.configuration.companyName }}"></p>
+                        </div>
+                    </div>
                     <!-- UPLOAD LABEL -->
                     <div class="upload-label" data-ng-if="!modal.hasAttemptedLIApply">
                         <span class="field-label">
                             {{ 'modal.resumeFilePlaceholder' | i18n }}
-                            <a class="bhi-question" data-ng-model="tooltip_info" data-ng-click="tooltip_info = 'tooltip'" />
-                            <div class="tooltip-info" data-ng-show="tooltip_info == 'tooltip'" data-ng-hide="tooltip_info != 'tooltip'">
-                                <div class="tooltip-modal">
-                                    <div class="tooltip-info-closer"><i class="bhi-close" data-ng-click="tooltip_info = false" /></div>
-                                    <p data-i18n="<strong>{{'modal.supportedFileFormatsLabel' | i18n}}</strong> {{modal.getTooltipText()}}"></p>
-                                </div>
-                            </div>
+                            <a data-ng-click="modal.showTooltip(0)"><i class="bhi-question"></i></a>
                         </span>
                         <span class="error" data-ng-show="!applyForm.$submitted && modal.resumeUploadErrorMessage">
                             {{ modal.resumeUploadErrorMessage }}
@@ -102,7 +130,7 @@
                         <span class="upload-text" data-ng-show="modal.ApplyService.form.resumeInfo.name">{{ modal.ApplyService.form.resumeInfo.name }}</span>
                     </div>
                     <!-- ERROR MESSAGE -->
-                    <span class="error submit-error" data-ng-show="applyForm.$submitted && modal.ApplyService.ajaxError">
+                    <span class="error submit-error" data-ng-if="!modal.isSubmitting && modal.ApplyService.ajaxError">
                         <i class="bhi-caution"></i> <span>{{ modal.ApplyService.ajaxError }}</span>
                     </span>
                     <div id="eeoc-fields">
@@ -111,14 +139,8 @@
                                 <span class="eeoc-label-header">
                                     <h4>
                                         {{ 'eeoc.genderRaceEthnicityHeader' | i18n }}
-                                        <a class="bhi-question" data-ng-model="tooltip_info" data-ng-click="tooltip_info = 'genderRaceEthnicity'" />
+                                        <a data-ng-click="modal.showTooltip(1)"><i class="bhi-question"></i></a>
                                     </h4>
-                                    <div class="tooltip-info" data-ng-show="tooltip_info == 'genderRaceEthnicity'" data-ng-hide="tooltip_info != 'genderRaceEthnicity'">
-                                        <div class="tooltip-modal">
-                                            <div class="tooltip-info-closer"><i class="bhi-close" data-ng-click="tooltip_info = false" /></div>
-                                            <p data-i18n="eeoc.genderRaceEthnicityHelp" data-companyName="{{ modal.configuration.companyName }}"></p>
-                                        </div>
-                                    </div>
                                 </span>
                             </div>
                             <div class="form-field">
@@ -135,21 +157,8 @@
                                 <div class="input eeoc">
                                     <label for="eeoc-ethnicity">
                                         {{ 'eeoc.raceEthnicityLabel' | i18n }}
-                                        <a class="bhi-question" data-ng-model="tooltip_info" data-ng-click="tooltip_info = 'raceEthnicity'" />
+                                        <a data-ng-click="modal.showTooltip(2)"><i class="bhi-question"></i></a>
                                     </label>
-                                    <div class="tooltip-info short" data-ng-show="tooltip_info == 'raceEthnicity'" data-ng-hide="tooltip_info != 'raceEthnicity'">
-                                        <div class="tooltip-modal">
-                                            <div class="tooltip-info-closer"><i class="bhi-close" data-ng-click="tooltip_info = false" /></div>
-                                            <ul>
-                                                <li>{{ 'eeoc.raceEthnicityHL' | i18n }}: {{ 'eeoc.raceEthnicityHLHelp' | i18n }}</li>
-                                                <li>{{ 'eeoc.raceEthnicityWH' | i18n }}: {{ 'eeoc.raceEthnicityWHHelp' | i18n }}</li>
-                                                <li>{{ 'eeoc.raceEthnicityBL' | i18n }}: {{ 'eeoc.raceEthnicityBLHelp' | i18n }}</li>
-                                                <li>{{ 'eeoc.raceEthnicityAS' | i18n }}: {{ 'eeoc.raceEthnicityASHelp' | i18n }}</li>
-                                                <li>{{ 'eeoc.raceEthnicityNP' | i18n }}: {{ 'eeoc.raceEthnicityNPHelp' | i18n }}</li>
-                                                <li>{{ 'eeoc.raceEthnicityIA' | i18n }}: {{ 'eeoc.raceEthnicityIAHelp' | i18n }}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <fieldset id="eeoc-ethnicity" class="checkboxgroup">
                                         <div class="eeoc-checkbox">
                                             <input id="eeoc-eth-HL" type="checkbox" value="HL" data-ng-model="modal.EeocService.selectedEthnicities['HL']" data-ng-required="modal.EeocService.isGenderRaceEthnicityEnabled() && !modal.EeocService.isEthnicityChecked()" data-ng-click="modal.ApplyService.form.ethnicity = modal.EeocService.getCheckedEthnicities()" /><label for="eeoc-eth-HL">{{ 'eeoc.raceEthnicityHL' | i18n }}</label>
@@ -181,14 +190,8 @@
                                 <span class="eeoc-label-header">
                                     <h4>
                                         {{ 'eeoc.veteranHeader' | i18n }}
-                                        <a class="bhi-question" data-ng-model="tooltip_info" data-ng-click="tooltip_info = 'veteran'" />
+                                        <a data-ng-click="modal.showTooltip(3)"><i class="bhi-question"></i></a>
                                     </h4>
-                                    <div class="tooltip-info" data-ng-show="tooltip_info == 'veteran'" data-ng-hide="tooltip_info != 'veteran'">
-                                        <div class="tooltip-modal">
-                                            <div class="tooltip-info-closer"><i class="bhi-close" data-ng-click="tooltip_info = false" /></div>
-                                            <p data-i18n="eeoc.veteranHelp" data-companyName="{{ modal.configuration.companyName }}"></p>
-                                        </div>
-                                    </div>
                                 </span>
                             </div>
                             <div class="form-field">
@@ -208,14 +211,8 @@
                                 <span class="eeoc-label-header">
                                     <h4>
                                         {{ 'eeoc.disabilityHeader' | i18n }}
-                                        <a class="bhi-question" data-ng-model="tooltip_info" data-ng-click="tooltip_info = 'disability'" />
+                                        <a data-ng-click="modal.showTooltip(4)"><i class="bhi-question"></i></a>
                                     </h4>
-                                    <div class="tooltip-info" data-ng-show="tooltip_info == 'disability'" data-ng-hide="tooltip_info != 'disability'">
-                                        <div class="tooltip-modal">
-                                            <div class="tooltip-info-closer"><i class="bhi-close" data-ng-click="tooltip_info = false" /></div>
-                                            <p data-i18n="eeoc.disabilityHelp" data-companyName="{{ modal.configuration.companyName }}"></p>
-                                        </div>
-                                    </div>
                                 </span>
                             </div>
                             <div class="form-field">

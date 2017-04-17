@@ -20,6 +20,8 @@ class CareerPortalModalController {
         this.locale = locale;
 
         // Variables
+        this.isToolTipHidden = true;
+        this.currentToolTip = 0;
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
         this.isLinkedInActive = VerifyLI.verified;
         // Create a local variable to store user's email address for sendEmailLink
@@ -123,39 +125,20 @@ class CareerPortalModalController {
         return true;
     }
 
-    getTooltipText() {
-        let tooltip = '<ul>';
-        this.configuration.acceptedResumeTypes.forEach(function (type) {
-            tooltip += '<li>' + type + '</li>';
-        });
-        tooltip += '</ul>';
-        return tooltip;
+    showTooltip(toolTipType) {
+        // 0: FileTypes
+        // 1: EEOC Gender, Race, Ethnicity
+        // 2: EEOC  Race/Ethnicity
+        // 3: EEOC Veteran
+        // 4: EEOC Disability
+        if (toolTipType) {
+            this.isToolTipHidden = false;
+            this.currentToolTip = toolTipType;
+        }
     }
 
-    getEEOCTooltipText(eeocSection) {
-        var tooltip;
-        if (this.configuration.eeoc && this.configuration.eeoc[eeocSection]) {
-            tooltip = this.configuration.eeoc[eeocSection].tooltip.html;
-        } else if (this.configuration.eeoc) {
-            tooltip = this.configuration.eeoc.tooltip.html;
-        } else {
-            tooltip = '';
-        }
-        return tooltip.replace(/\{companyName\}/g, this.configuration.companyName);
-    }
-
-    getEEOCEthnicityTooltipText() {
-        var tooltip = '';
-        if (this.configuration.eeoc) {
-            tooltip = '<ul>';
-            this.configuration.eeoc.ethnicity.options.forEach(function (option) {
-                if (option.info) {
-                    tooltip += '<li>' + option.label + ': ' + option.info + '</li>';
-                }
-            });
-            tooltip += '</ul>';
-        }
-        return tooltip;
+    hideTooltip() {
+        this.isToolTipHidden = true;
     }
 
     formatResume(userProfile) {

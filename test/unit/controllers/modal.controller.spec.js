@@ -1,5 +1,5 @@
 /* global describe, beforeEach, expect, it, spyOn */
-describe('Controller: CareerPortalModalController', () => {
+fdescribe('Controller: CareerPortalModalController', () => {
     let vm,
         $controller;
 
@@ -148,68 +148,33 @@ describe('Controller: CareerPortalModalController', () => {
         });
     });
 
-    describe('Function: getEEOCTooltipText(eeocSection)', () => {
-        it('should be defined.', () => {
-            expect(vm.getEEOCTooltipText).toBeDefined();
+    describe('Function: showTooltip(toolTipType)', () => {
+        it('should set the current currentToolTip variable to the current tooltip.', () => {
+            expect(vm.showTooltip).toBeDefined();
+            expect(vm.isToolTipHidden).toBe(true);
+            expect(vm.currentToolTip).toBe(0);
+            vm.showTooltip(1);
+            expect(vm.isToolTipHidden).toBe(false);
+            expect(vm.currentToolTip).toBe(1);
         });
-        it('should return empty string if eeoc is not in configuration.', () => {
-            vm.configuration.eeoc = '';
-            expect(vm.getEEOCTooltipText('test')).toEqual('');
-        });
-        it('should return eeoc.tooltip.html if eeoc is in configuration, but section passed in does not exist in configuration.', () => {
-            vm.configuration.eeoc = {
-                'tooltip': {
-                    'html': '<h1>hi</h1>'
-                }
-            };
-            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
-        });
-        it('should return eeoc[section].tooltip.html if section passed in does exist in configuration.', () => {
-            vm.configuration.eeoc = {
-                'test': {
-                    'tooltip': {
-                        'html': '<h1>hi</h1>'
-                    }
-                }
-            };
-            expect(vm.getEEOCTooltipText('test')).toEqual('<h1>hi</h1>');
+        it('should do nothing if a new tool tip isn\'t defined as an argument.', () => {
+            expect(vm.showTooltip).toBeDefined();
+            expect(vm.isToolTipHidden).toBe(true);
+            expect(vm.currentToolTip).toBe(0);
+            vm.showTooltip();
+            expect(vm.isToolTipHidden).toBe(true);
+            expect(vm.currentToolTip).toBe(0);
         });
     });
 
-    describe('Function: getEEOCEthnicityTooltipText()', () => {
-        it('should be defined.', () => {
-            expect(vm.getEEOCEthnicityTooltipText).toBeDefined();
+    describe('Function: hideTooltip()', () => {
+        it('should hide the tooltip.', () => {
+            expect(vm.hideTooltip).toBeDefined();
+            vm.isToolTipHidden = false;
+            expect(vm.isToolTipHidden).toBe(false);
+            vm.hideTooltip();
+            expect(vm.isToolTipHidden).toBe(true);
         });
-        it('should return empty string if eeoc is not in configuration.', () => {
-            vm.configuration.eeoc = '';
-            expect(vm.getEEOCEthnicityTooltipText()).toEqual('');
-        });
-        it('should return a list of configured ethinicities\' label and info.', () => {
-            vm.configuration.eeoc = {
-                'ethnicity': {
-                    'options': [{
-                        'info': 'info',
-                        'label': 'label'
-                    }]
-                }
-            };
-            let expectedTooltip = '<ul><li>label: info</li></ul>';
-            expect(vm.getEEOCEthnicityTooltipText()).toEqual(expectedTooltip);
-        });
-    });
-
-    describe('Function: getTooltipText()', () => {
-        it('should be defined.', () => {
-            expect(vm.getTooltipText).toBeDefined();
-        });
-        it('should build out an unordered list of supported file types.', () => {
-            var tooltipHTML = vm.getTooltipText();
-            expect(tooltipHTML).toBe('<ul><li>html</li><li>text</li><li>txt</li></ul>');
-            vm.configuration.acceptedResumeTypes = ['html'];
-            tooltipHTML = vm.getTooltipText();
-            expect(tooltipHTML).toBe('<ul><li>html</li></ul>');
-        });
-
     });
 
     describe('Function: formatResume(userProfile)', () => {
