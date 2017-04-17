@@ -86,12 +86,6 @@ the **Bullhorn Career Portal** build system is `localhost`, at the loopback addr
 an HTTP Server at `http://localhost:3000` when building/running locally. Since LinkedIn doesn't allow for `localhost` to be whitelisted,
 whitelist `http://127.0.0.1` instead, and point the browser to the raw IP address.
 
-#### iOS & Safari
-
-Unfortunately, LinkedIn's JS SDK is incompatible with iOS 5+ due to the way that Javascript is paused during cross-window
-communication processes. Therefore, the Apply with LinkedIn feature is not supported in that runtime environment. Users will
-experience an apply workflow that simply excludes the Apply with LinkedIn capability.
-
 
 ## Runtime vs. Buildtime Configurations
 
