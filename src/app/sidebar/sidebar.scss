@@ -9,6 +9,7 @@ aside {
     color: $white;
     flex-direction: column;
     transition: all 0.2s ease-in-out;
+    z-index: 125;
 
     @include tablet() {
         width: $sidebar-width;
