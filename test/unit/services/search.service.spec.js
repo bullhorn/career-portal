@@ -72,6 +72,12 @@ describe('Service: SearchService', () => {
         });
     });
 
+    describe('Function: recursiveSearchForJobs()', () => {
+        it('should be defined.', () => {
+            expect(SearchService.recursiveSearchForJobs).toBeDefined();
+        });
+    });
+
     describe('Function: getCountBy()', () => {
         it('should be defined.', () => {
             expect(SearchService.getCountBy).toBeDefined();
