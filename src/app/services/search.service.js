@@ -312,19 +312,6 @@ class SearchService {
         });
     }
 
-    recursiveQueryForIDs(callbackIfNoMore, start, count, errorCallback) {
-        errorCallback = errorCallback || (() => {
-            });
-
-        this
-            .$http({
-                method: 'GET',
-                url: this._queryUrl + this.requestParams.assembleForQueryForIDs(start, count)
-            })
-            .success(callbackIfNoMore)
-            .error(errorCallback);
-    }
-
     recursiveSearchForJobs(callbackIfNoMore, start, count, errorCallback) {
         errorCallback = errorCallback || (() => {
             });

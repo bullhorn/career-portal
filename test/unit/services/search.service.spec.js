@@ -90,12 +90,6 @@ describe('Service: SearchService', () => {
         });
     });
 
-    describe('Function: recursiveQueryForIDs()', () => {
-        it('should be defined.', () => {
-            expect(SearchService.recursiveQueryForIDs).toBeDefined();
-        });
-    });
-
     describe('Function: findJobs()', () => {
         it('should be defined.', () => {
             expect(SearchService.findJobs).toBeDefined();
