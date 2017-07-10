@@ -72,6 +72,12 @@ describe('Service: SearchService', () => {
         });
     });
 
+    describe('Function: recursiveSearchForJobs()', () => {
+        it('should be defined.', () => {
+            expect(SearchService.recursiveSearchForJobs).toBeDefined();
+        });
+    });
+
     describe('Function: getCountBy()', () => {
         it('should be defined.', () => {
             expect(SearchService.getCountBy).toBeDefined();
@@ -81,12 +87,6 @@ describe('Service: SearchService', () => {
     describe('Function: searchWhereIDs()', () => {
         it('should be defined.', () => {
             expect(SearchService.searchWhereIDs).toBeDefined();
-        });
-    });
-
-    describe('Function: recursiveQueryForIDs()', () => {
-        it('should be defined.', () => {
-            expect(SearchService.recursiveQueryForIDs).toBeDefined();
         });
     });
 

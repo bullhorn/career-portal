@@ -209,6 +209,9 @@ class SearchService {
                 assembleForQueryForIDs: (start, count) => {
                     return '?where=' + this.requestParams.query(false) + '&fields=' + SearchService._fields + '&count=' + count + '&orderBy=' + SearchService._sort + '&start=' + start;
                 },
+                assembleForSearchForJobs: (start, count) => {
+                    return '?query=' + this.requestParams.query(true) + '&fields=' + SearchService._fields + '&count=' + count + '&sort=' + SearchService._sort + '&start=' + start;
+                },
                 assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
                     return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)&count=' + count + '&orderBy=+' + orderByFields + ',-count.id&start=' + start;
                 },
@@ -309,14 +312,14 @@ class SearchService {
         });
     }
 
-    recursiveQueryForIDs(callbackIfNoMore, start, count, errorCallback) {
+    recursiveSearchForJobs(callbackIfNoMore, start, count, errorCallback) {
         errorCallback = errorCallback || (() => {
             });
 
         this
             .$http({
                 method: 'GET',
-                url: this._queryUrl + this.requestParams.assembleForQueryForIDs(start, count)
+                url: this._searchUrl + this.requestParams.assembleForSearchForJobs(start, count)
             })
             .success(callbackIfNoMore)
             .error(errorCallback);
@@ -350,32 +353,26 @@ class SearchService {
 
         let callbackIfNoMore = (data) => {
             if (data.data.length) {
-                controller.searchWhereIDs(data.data, (jobs) => {
-                    for (let i = 0; i < data.data.length; i++) {
-                        for (let i2 = 0; i2 < jobs.length; i2++) {
-                            if (jobs[i2].id === data.data[i].id) {
-                                allJobs.push(data.data[i]);
-                            }
-                        }
-                    }
+                for (let i = 0; i < data.data.length; i++) {
+                    allJobs.push(data.data[i]);
+                }
 
-                    if (data.count < count) {
-                        doneFinding(allJobs);
-                    } else if (allJobs.length >= controller.requestParams.count()) {
-                        this.helper.hasMore = true;
-                        doneFinding(allJobs);
-                    } else {
-                        controller.helper.updateStart(count);
-                        start = controller.requestParams.start();
-                        controller.recursiveQueryForIDs(callbackIfNoMore, start, count);
-                    }
-                });
+                if (data.count < count) {
+                    doneFinding(allJobs);
+                } else if (allJobs.length >= controller.requestParams.count()) {
+                    this.helper.hasMore = true;
+                    doneFinding(allJobs);
+                } else {
+                    controller.helper.updateStart(count);
+                    start = controller.requestParams.start();
+                    controller.recursiveSearchForJobs(callbackIfNoMore, start, count);
+                }
             } else {
                 doneFinding(allJobs);
             }
         };
 
-        this.recursiveQueryForIDs(callbackIfNoMore, start, count);
+        this.recursiveSearchForJobs(callbackIfNoMore, start, count);
     }
 
     loadJobData(jobID, callback, errorCallback) {
