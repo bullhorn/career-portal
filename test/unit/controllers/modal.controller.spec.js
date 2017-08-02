@@ -165,6 +165,15 @@ describe('Controller: CareerPortalModalController', () => {
             expect(vm.isToolTipHidden).toBe(true);
             expect(vm.currentToolTip).toBe(0);
         });
+        it('should be able to set the tooltip to 0.', () => {
+            expect(vm.showTooltip).toBeDefined();
+            expect(vm.isToolTipHidden).toBe(true);
+            expect(vm.currentToolTip).toBe(0);
+            vm.showTooltip(1);
+            vm.showTooltip(0);
+            expect(vm.isToolTipHidden).toBe(false);
+            expect(vm.currentToolTip).toBe(0);
+        });
     });
 
     describe('Function: hideTooltip()', () => {
