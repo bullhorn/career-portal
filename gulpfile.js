@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var wrench = require('wrench');
 var babel = require('gulp-babel');
 var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
@@ -9,18 +8,18 @@ var fs = require('fs-extra');
 var argv = require('yargs').argv;
 var dateFormat = require('dateformat');
 var chalk = require('chalk');
+var klawSync = require('klaw-sync')
 
 /**
  *  This will load all js files in the gulp directory
  *  in order to load all gulp tasks
  */
-// TODO: 'wrench' is deprecated
-wrench.readdirSyncRecursive('./build')
+klawSync('./build')
     .filter(function (file) {
-        return (/\.(js)$/i).test(file);
+        return (/\.(js)$/i).test(file.path);
     })
     .map(function (file) {
-        require('./build/' + file);
+        require(file.path);
     });
 
 /**
