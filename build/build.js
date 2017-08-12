@@ -121,7 +121,7 @@ gulp.task('clean', function () {
     $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/'), conf.paths.zip]);
 });
 
-gulp.task('compress', function (cb) {
+gulp.task('uglify', function (cb) {
     pump([
         gulp.src('dist/scripts/*.js'),
         $.uglify(),
