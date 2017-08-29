@@ -27,16 +27,16 @@ wrench.readdirSyncRecursive('./build')
  *  Default task clean temporaries directories and launch the
  *  main optimization build task
  */
-gulp.task('default', ['clean'], function () {
-    gulp.start('build');
+gulp.task('default', ['clean'], function (done) {
+    runSequence('build', 'uglify', 'minify', done);
 });
 
 gulp.task('jenkins:build', function (done) {
-    runSequence('clean', 'test', 'build', 'version', 'report:plato', done);
+    runSequence('clean', 'test', 'build', 'uglify', 'minify', 'version', 'report:plato', done);
 });
 
 gulp.task('travis:build', function (done) {
-    runSequence('clean', 'test', 'build', done);
+    runSequence('clean', 'test', 'build', 'uglify', 'minify', done);
 });
 
 gulp.task('config:app', function () {

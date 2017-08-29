@@ -15,6 +15,7 @@ var $ = require('gulp-load-plugins')({
         'main-bower-files',
         'uglify-save-license',
         'gulp-uglify',
+        'gulp-cssnano',
         'del',
         'gulp-size',
         'gulp-useref',
@@ -129,4 +130,12 @@ gulp.task('uglify', function (cb) {
     ], cb);
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'uglify']);
+gulp.task('minify', function (cb) {
+    pump([
+        gulp.src('dist/styles/*.css'),
+        $.cssnano(),
+        gulp.dest('dist/styles')
+    ], cb);
+});
+
+gulp.task('build', ['html', 'fonts', 'other']);
