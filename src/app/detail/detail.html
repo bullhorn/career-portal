@@ -13,7 +13,7 @@
             {{::detail.job.address.city}}<span data-ng-if="::(detail.job.address.city && detail.job.address.state)">,&nbsp;</span>{{::detail.job.address.state}}
         </span>
         <!-- SEPARATOR -->
-        <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)"> | </span>
+        <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">&nbsp;|&nbsp;</span>
         <!-- JOB TYPE -->
         <span class="card-type">{{::detail.job.employmentType}}</span>
         <!-- APPLY WITH LINKED IN || EMAIL JOB -->
