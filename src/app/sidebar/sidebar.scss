@@ -206,6 +206,7 @@ aside {
         > section.credits {
             margin-top: 4em;
             color: lighten($dark-bg, 30%);
+            display:none;
 
             span.powered-by {
                 font-size: 1em;
