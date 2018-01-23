@@ -161,7 +161,7 @@ class SearchService {
                     return '';
                 },
                 query: (isSearch, additionalQuery, fields) => {
-                    let query = `(isOpen${isSearch ? ':1' : '=true'})`;
+                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})`;
 
                     if (additionalQuery) {
                         query += ` AND (${additionalQuery})`;
