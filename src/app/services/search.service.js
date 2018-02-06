@@ -168,7 +168,7 @@ class SearchService {
                     }
 
                     if (isSearch) {
-                        query += this.requestParams.text();
+                        query += encodeURIComponent(this.requestParams.text());
                     }
 
                     query += this.requestParams.publishedCategory(isSearch, fields);
