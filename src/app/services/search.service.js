@@ -161,14 +161,14 @@ class SearchService {
                     return '';
                 },
                 query: (isSearch, additionalQuery, fields) => {
-                    let query = `(isOpen${isSearch ? ':1' : '=true'})`;
+                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})`;
 
                     if (additionalQuery) {
                         query += ` AND (${additionalQuery})`;
                     }
 
                     if (isSearch) {
-                        query += this.requestParams.text();
+                        query += encodeURIComponent(this.requestParams.text());
                     }
 
                     query += this.requestParams.publishedCategory(isSearch, fields);
