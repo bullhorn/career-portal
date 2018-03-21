@@ -17,7 +17,7 @@ var $ = require('gulp-load-plugins')({
         'del',
         'gulp-size',
         'gulp-useref',
-        'gulp-minify-css',
+        'gulp-clean-css',
         'gulp-minify-html'
     ]
 });
@@ -61,7 +61,7 @@ gulp.task('html', ['inject', 'partials'], function () {
         .pipe($.uglify())
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
-        .pipe($.minifyCss({cache: true}))
+        .pipe($.cleanCss({cache: true}))
         .pipe(cssFilter.restore)
         .pipe(htmlFilter)
         .pipe($.minifyHtml({
