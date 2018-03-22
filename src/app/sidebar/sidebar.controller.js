@@ -168,7 +168,7 @@ class CareerPortalSidebarController {
     }
 
     addOrRemoveLocation(location) {
-        let key = location.address.city + '|' + location.address.state;
+        let key = location.address.city.trim() + '|' + location.address.state.trim();
         if (!this.hasLocationFilter(location)) {
             this.SearchService.searchParams.location.push(key);
         } else {
@@ -190,7 +190,7 @@ class CareerPortalSidebarController {
     }
 
     hasLocationFilter(location) {
-        let key = location.address.city + '|' + location.address.state;
+        let key = location.address.city.trim() + '|' + location.address.state.trim();
         return this.SearchService.searchParams.location.indexOf(key) !== -1;
     }
 
