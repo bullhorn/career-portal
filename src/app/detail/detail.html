@@ -15,7 +15,7 @@
         <!-- SEPARATOR -->
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">&nbsp;|&nbsp;</span>
         <!-- JOB TYPE -->
-        <span class="card-type">{{::detail.job.employmentType}}</span>
+        <span class="card-type">{{::detail.job.employmentType.toString()}}</span>
         <!-- APPLY WITH LINKED IN || EMAIL JOB -->
         <section data-ng-show="modal.showForm" ng-if="detail.isLinkedInEnabled">
             <!-- LINKED IN INTEGRATION (IF ACTIVATED) -->
