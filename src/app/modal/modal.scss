@@ -217,6 +217,10 @@
                                     width: 100%;
                                     font-size: 1.1em;
                                     color: rgb(121, 124, 126);
+                                    > .required {
+                                        color: $error;
+                                        font-size: 1.2em;
+                                    }
                                 }
 
                                 select {
