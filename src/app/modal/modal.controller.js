@@ -131,7 +131,7 @@ class CareerPortalModalController {
         // 2: EEOC  Race/Ethnicity
         // 3: EEOC Veteran
         // 4: EEOC Disability
-        if (toolTipType) {
+        if (toolTipType || toolTipType === 0) {
             this.isToolTipHidden = false;
             this.currentToolTip = toolTipType;
         }
