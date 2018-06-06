@@ -99,7 +99,7 @@ gulp.task('fonts', function () {
     return gulp.src($.mainBowerFiles())
         .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
         .pipe($.flatten())
-        .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/roboto/')));
+        .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
 gulp.task('other', ['config:app'], function () {
