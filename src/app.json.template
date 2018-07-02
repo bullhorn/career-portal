@@ -29,7 +29,7 @@
             "clientId": "[ CLIENTID HERE ]"
         }
     },
-    "filter": {
+    "criteria": {
         "field": "[ FILTER FIELD HERE]",
         "values": [
             "[FILTER VALUE HERE]"

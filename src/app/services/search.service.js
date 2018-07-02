@@ -161,7 +161,7 @@ class SearchService {
                     return '';
                 },
                 query: (isSearch, additionalQuery, fields) => {
-                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})${this.configFilter(isSearch)}`;
+                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})${this.jobCriteria(isSearch)}`;
 
                     if (additionalQuery) {
                         query += ` AND (${additionalQuery})`;
@@ -412,9 +412,9 @@ class SearchService {
         return deferred.promise;
     }
 
-    configFilter(isSearch) {
-        let field = this.configuration.filter.field;
-        let values = this.configuration.filter.values;
+    jobCriteria(isSearch) {
+        let field = this.configuration.criteria.field;
+        let values = this.configuration.criteria.values;
         let query = '';
         let delimiter = isSearch ? '"' : '\'';
         let equals = isSearch ? ':' : '=';
