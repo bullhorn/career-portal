@@ -30,9 +30,9 @@
         }
     },
     "criteria": {
-        "field": "[ FILTER FIELD HERE]",
+        "field": "[ FILTER FIELD HERE ]",
         "values": [
-            "[FILTER VALUE HERE]"
+            "[ FILTER VALUE HERE ]"
         ]
     },
     "defaultGridState": "list-view",
