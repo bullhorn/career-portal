@@ -5,7 +5,16 @@ describe('Service: SearchService', () => {
 
     beforeEach(() => {
         angular.mock.module(($provide) => {
-            $provide.constant('configuration', {someUrl: '/dummyValue'});
+            $provide.value('configuration',
+            {
+                someUrl: '/dummyValue',
+                criteria: {
+                    field: '[ FILTER FIELD HERE ]',
+                    values: [
+                        '[ FILTER VALUE HERE ]'
+                    ]
+                }
+            });
             //$provide.value('job', {});
         });
     });
@@ -105,6 +114,54 @@ describe('Service: SearchService', () => {
     describe('Function: loadJobDataByCategory()', () => {
         it('should be defined.', () => {
             expect(SearchService.loadJobDataByCategory).toBeDefined();
+        });
+    });
+
+    describe('Function: jobCriteria()', () => {
+        it('should return string for search', () => {
+            SearchService.configuration = {
+                criteria: {
+                    field: 'employmentType',
+                    values: [
+                        'blah'
+                    ]
+                },
+            };
+            expect(SearchService.jobCriteria(true)).toBe(' AND (employmentType:"blah")');
+        });
+        it('should return longer string for search', () => {
+            SearchService.configuration = {
+                criteria: {
+                    field: 'employmentType',
+                    values: [
+                        'blah',
+                        'blahy'
+                    ]
+                },
+            };
+            expect(SearchService.jobCriteria(true)).toBe(' AND (employmentType:"blah" OR employmentType:"blahy")');
+        });
+        it('should return blank string if no config is set', () => {
+            SearchService.configuration = {
+                criteria: {
+                    field: '[ FILTER FIELD HERE ]',
+                    values: [
+                        '[ FILTER VALUE HERE ]'
+                    ]
+                },
+            };
+            expect(SearchService.jobCriteria(true)).toBe('');
+        });
+        it('should return differently if not a search', () => {
+            SearchService.configuration = {
+                criteria: {
+                    field: 'employmentType',
+                    values: [
+                        'blah'
+                    ]
+                },
+            };
+            expect(SearchService.jobCriteria(false)).toBe(' AND (employmentType=\'blah\')');
         });
     });
 });
