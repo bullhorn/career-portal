@@ -14,7 +14,7 @@
 
 ## Contribute
 
-There are many ways to **[contribute](https://github.com/bullhorn/career-portal/blob/master/CONTRIBUTING.md)** to Bullhorn Career Portal.
+There are many ways to **[contribute](https://gist.github.com/MarcDiethelm/7303312)** to Bullhorn Career Portal.
 * **[Submit bugs](https://github.com/bullhorn/career-portal/issues)** and help us verify fixes as they are checked in.
 * Review **[source code changes](https://github.com/bullhorn/career-portal/pulls)**.
 * **[Contribute bug fixes](https://github.com/bullhorn/career-portal/blob/master/CONTRIBUTING.md)**.
