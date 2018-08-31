@@ -72,11 +72,29 @@ gulp.task('config:app', function () {
     }
 
     // EEOC fields on apply form
-    appConfig.eeoc = appConfig.eeoc || {};
-    appConfig.eeoc.genderRaceEthnicity = (argv.eeocAll === 'true' || argv.eeocGenderRaceEthnicity === 'true' || argv.eeocGRE === 'true');
-    appConfig.eeoc.veteran = (argv.eeocAll === 'true' || argv.eeocVeteran === 'true' || argv.eeocV === 'true');
-    appConfig.eeoc.disability = (argv.eeocAll === 'true' || argv.eeocDisability === 'true' || argv.eeocD === 'true');
+    if (argv.eeocAll) {
+        appConfig.eeoc.genderRaceEthnicity = argv.eeocAll;
+    } else if (argv.eeocGenderRaceEthnicity) {
+        appConfig.eeoc.genderRaceEthnicity = argv.eeocGenderRaceEthnicity;
+    } else if (argv.eeocGRE) {
+        appConfig.eeoc.genderRaceEthnicity = argv.eeocGRE;
+    }
 
+    if (argv.eeocAll) {
+        appConfig.eeoc.veteran = argv.eeocAll;
+    } else if (argv.eeocVeteran) {
+        appConfig.eeoc.veteran = argv.eeocVeteran;
+    } else if (argv.eeocV) {
+        appConfig.eeoc.veteran = argv.eeocV;
+    }
+
+    if (argv.eeocAll) {
+        appConfig.eeoc.disability = argv.eeocAll;
+    } else if (argv.eeocDisability) {
+        appConfig.eeoc.disability = argv.eeocDisability;
+    } else if (argv.eeocD) {
+        appConfig.eeoc.disability = argv.eeocD;
+    }
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
 
