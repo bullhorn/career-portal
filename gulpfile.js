@@ -73,9 +73,9 @@ gulp.task('config:app', function () {
 
     // EEOC fields on apply form
     appConfig.eeoc = appConfig.eeoc || {};
-    appConfig.eeoc.genderRaceEthnicity = argv.eeocAll === 'true' || argv.eeocGenderRaceEthnicity === 'true' || argv.eeocGRE === 'true';
-    appConfig.eeoc.veteran = argv.eeocAll === 'true' || argv.eeocVeteran === 'true' || argv.eeocV === 'true';
-    appConfig.eeoc.disability = argv.eeocAll === 'true' || argv.eeocDisability === 'true' || argv.eeocD === 'true';
+    appConfig.eeoc.genderRaceEthnicity = (argv.eeocAll === 'true' || argv.eeocGenderRaceEthnicity === 'true' || argv.eeocGRE === 'true');
+    appConfig.eeoc.veteran = (argv.eeocAll === 'true' || argv.eeocVeteran === 'true' || argv.eeocV === 'true');
+    appConfig.eeoc.disability = (argv.eeocAll === 'true' || argv.eeocDisability === 'true' || argv.eeocD === 'true');
 
     fs.writeFileSync('src/app.json', JSON.stringify(appConfig, null, 4));
 });
