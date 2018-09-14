@@ -29,6 +29,12 @@
             "clientId": "[ CLIENTID HERE ]"
         }
     },
+    "additionalJobCriteria": {
+        "field": "[ FILTER FIELD HERE ]",
+        "values": [
+            "[ FILTER VALUE HERE ]"
+        ]
+    },
     "defaultGridState": "list-view",
     "eeoc": {
         "genderRaceEthnicity": false,

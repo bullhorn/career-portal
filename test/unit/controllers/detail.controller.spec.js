@@ -7,7 +7,13 @@ describe('Controller: JobDetailController', () => {
             $provide.constant('configuration', {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
-                integrations: {linkedin: {clientId: ''}}
+                integrations: {linkedin: {clientId: ''}},
+                additionalJobCriteria: {
+                    field: '[ FILTER FIELD HERE ]',
+                    values: [
+                        '[ FILTER VALUE HERE ]'
+                    ]
+                }
             });
         });
     });

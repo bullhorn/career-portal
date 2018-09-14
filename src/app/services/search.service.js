@@ -161,7 +161,7 @@ class SearchService {
                     return '';
                 },
                 query: (isSearch, additionalQuery, fields) => {
-                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})`;
+                    let query = `(isOpen${isSearch ? ':1' : '=true'} AND isDeleted${isSearch ? ':0' : '=false'})${this.jobCriteria(isSearch)}`;
 
                     if (additionalQuery) {
                         query += ` AND (${additionalQuery})`;
@@ -410,6 +410,28 @@ class SearchService {
         });
 
         return deferred.promise;
+    }
+
+    jobCriteria(isSearch) {
+        let field = this.configuration.additionalJobCriteria.field;
+        let values = this.configuration.additionalJobCriteria.values;
+        let query = '';
+        let delimiter = isSearch ? '"' : '\'';
+        let equals = isSearch ? ':' : '=';
+
+
+        if (field && values.length > 0 && field !== '[ FILTER FIELD HERE ]' && values[0] !== '[ FILTER VALUE HERE ]') {
+            for (let i = 0; i < values.length; i++) {
+                if (i > 0) {
+                    query += ` OR `;
+                } else {
+                    query += ' AND (';
+                }
+                query += `${field}${equals}${delimiter}${values[i]}${delimiter}`;
+            }
+            query += ')';
+        }
+        return query;
     }
 }
 

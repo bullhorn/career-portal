@@ -15,7 +15,13 @@ describe('Controller: CareerPortalSidebarController', () => {
             someUrl: '/dummyValue',
             service: {corpToken: 1, port: 1, swimlane: 1},
             integrations: {linkedin: {clientId: ''}},
-            defaultGridState: 'grid-view'
+            defaultGridState: 'grid-view',
+            additionalJobCriteria: {
+                field: '[ FILTER FIELD HERE ]',
+                values: [
+                    '[ FILTER VALUE HERE ]'
+                ]
+            }
         };
     });
     beforeEach(() => {
