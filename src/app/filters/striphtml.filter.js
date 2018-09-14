@@ -1,3 +1,5 @@
+var he = require('he');
+
 class StripHtml {
     constructor() {
         return function (input) {
@@ -21,26 +23,7 @@ class StripHtml {
                             }
                             /* jshint +W073 */
                         } else {
-                            switch (entity) {
-                                case 'quot':
-                                    ch = String.fromCharCode(0x0022);
-                                    break;
-                                case 'amp':
-                                    ch = String.fromCharCode(0x0026);
-                                    break;
-                                case 'lt':
-                                    ch = String.fromCharCode(0x003c);
-                                    break;
-                                case 'gt':
-                                    ch = String.fromCharCode(0x003e);
-                                    break;
-                                case 'nbsp':
-                                    ch = String.fromCharCode(0x00a0);
-                                    break;
-                                default:
-                                    ch = '';
-                                    break;
-                            }
+                            ch = he.decode('&' + entity + ';');
                         }
                         i = semicolonIndex;
                     }
