@@ -413,8 +413,8 @@ class SearchService {
     }
 
     jobCriteria(isSearch) {
-        let field = this.configuration.criteria.field;
-        let values = this.configuration.criteria.values;
+        let field = this.configuration.additionalJobCriteria.field;
+        let values = this.configuration.additionalJobCriteria.values;
         let query = '';
         let delimiter = isSearch ? '"' : '\'';
         let equals = isSearch ? ':' : '=';

@@ -29,7 +29,7 @@
             "clientId": "[ CLIENTID HERE ]"
         }
     },
-    "criteria": {
+    "additionalJobCriteria": {
         "field": "[ FILTER FIELD HERE ]",
         "values": [
             "[ FILTER VALUE HERE ]"
@@ -37,8 +37,8 @@
     },
     "defaultGridState": "list-view",
     "eeoc": {
-        "genderRaceEthnicity": false,
-        "veteran": false,
-        "disability": false
+        "genderRaceEthnicity": true,
+        "veteran": true,
+        "disability": true
     }
 }

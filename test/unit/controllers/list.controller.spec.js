@@ -8,7 +8,7 @@ describe('Controller: JobListController', () => {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
                 integrations: {linkedin: ''},
-                criteria: {
+                additionalJobCriteria: {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
                         '[ FILTER VALUE HERE ]'

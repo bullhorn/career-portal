@@ -8,7 +8,7 @@ describe('Service: SearchService', () => {
             $provide.value('configuration',
             {
                 someUrl: '/dummyValue',
-                criteria: {
+                additionalJobCriteria: {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
                         '[ FILTER VALUE HERE ]'
@@ -120,7 +120,7 @@ describe('Service: SearchService', () => {
     describe('Function: jobCriteria()', () => {
         it('should return string for search', () => {
             SearchService.configuration = {
-                criteria: {
+                additionalJobCriteria: {
                     field: 'employmentType',
                     values: [
                         'blah'
@@ -131,7 +131,7 @@ describe('Service: SearchService', () => {
         });
         it('should return longer string for search', () => {
             SearchService.configuration = {
-                criteria: {
+                additionalJobCriteria: {
                     field: 'employmentType',
                     values: [
                         'blah',
@@ -143,7 +143,7 @@ describe('Service: SearchService', () => {
         });
         it('should return blank string if no config is set', () => {
             SearchService.configuration = {
-                criteria: {
+                additionalJobCriteria: {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
                         '[ FILTER VALUE HERE ]'
@@ -154,7 +154,7 @@ describe('Service: SearchService', () => {
         });
         it('should return differently if not a search', () => {
             SearchService.configuration = {
-                criteria: {
+                additionalJobCriteria: {
                     field: 'employmentType',
                     values: [
                         'blah'
