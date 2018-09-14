@@ -37,8 +37,8 @@
     },
     "defaultGridState": "list-view",
     "eeoc": {
-        "genderRaceEthnicity": true,
-        "veteran": true,
-        "disability": true
+        "genderRaceEthnicity": false,
+        "veteran": false,
+        "disability": false
     }
 }
