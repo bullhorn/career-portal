@@ -39,6 +39,7 @@ header.app {
     > button.toggle-filters {
         display: inline-block;
         z-index: $header-z-index + 1;
+        color: $white;
 
         > .badge {
             position: absolute;
@@ -66,6 +67,7 @@ header.app {
         > button.toggle-filters {
             > .close {
                 display: block;
+                color: $white;
             }
 
             > .open, > .badge {
