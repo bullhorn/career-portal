@@ -37,8 +37,9 @@ class CareerPortalModalController {
 
         this.consentValue = false || !configuration.privacyConsent.consentCheckbox;
 
+        configuration.privacyConsent.privacyStatementParagraphs = configuration.privacyConsent.privacyStatementParagraphs.join('<br/><br/>')
         this.privacyConsent = configuration.privacyConsent;
-
+        
         this.tooltipStyle = {top: '50%'};
 
         // Load directive with modal closed by default

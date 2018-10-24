@@ -43,7 +43,10 @@
     },
     "privacyConsent": {
         "consentCheckbox": false,
-        "privacyStatement": "[PRIVACY POLICY TEXT HERE]",
+        "privacyStatementParagraphs": [
+            "[FIRST PARAGRAPH]",
+            "[SECOND PARAGRAPH]"
+        ],
         "privacyPolicyUrl": "",
         "usePrivacyPolicyUrl": false
     }
