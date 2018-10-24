@@ -242,8 +242,8 @@
                     <div ng-show="modal.privacyConsent.consentCheckbox" class="consent-checkbox-section">
                         <span class="required">*</span>
                         <input id="consent-checkbox" class="consent-checkbox" type="checkbox" ng-model="modal.consentValue"/>
-                        <label for="consent-checkbox" class="consent-checkbox-label">By checking this box you're agreeing to our 
-                            <a data-ng-click="modal.showTooltip(5)" ng-href="{{modal.privacyConsent.privacyPolicyUrl}}">Privacy Policy</a></label>
+                        <label for="consent-checkbox" class="consent-checkbox-label">{{ 'modal.byChecking' | i18n }}
+                            <a data-ng-click="modal.showTooltip(5)" ng-href="{{modal.privacyConsent.privacyPolicyUrl}}">{{ 'modal.privacyPolicy' | i18n }}</a></label>
                     </div>
                     <div class="clearfix"><br/></div>
                 </form>
