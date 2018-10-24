@@ -35,6 +35,8 @@ class CareerPortalModalController {
             footer: ''
         };
 
+        this.consentValue;
+
         // Load directive with modal closed by default
         this.closeModal();
     }
@@ -112,14 +114,14 @@ class CareerPortalModalController {
         }
     }
 
-    enableSendButton(isFormValid) {
+    disableSendButton(isFormValid) {
         let resume = this.ApplyService.form.resumeInfo;
 
-        if (isFormValid && (resume || this.linkedInData.resume)) {
+        if (isFormValid && (resume || this.linkedInData.resume) && this.consentValue) {
             if (this.linkedInData.resume.length !== 0 || resume.type) {
                 return false;
             }
-        } else if (this.email) {
+        } else if (this.email && this.consentValue) {
             return false;
         }
         return true;

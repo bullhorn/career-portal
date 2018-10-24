@@ -224,11 +224,10 @@
                                 }
 
                                 select {
-                                    border-color: #adafb0;
-                                    border-radius: 4px;
-
+                                    border-color: #cecece;
                                     &:focus {
                                         outline: none;
+                                        border-color: #5198DE;
                                     }
                                 }
 
@@ -346,6 +345,9 @@
                         &:focus {
                             border-bottom: 1px solid $primary;
                         }
+                    }
+                    &.consent-checkbox {
+                        width: 40px;
                     }
                 }
                 // Linked In Skills and expertise:
