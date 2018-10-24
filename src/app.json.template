@@ -40,5 +40,11 @@
         "genderRaceEthnicity": false,
         "veteran": false,
         "disability": false
+    },
+    "privacyConsent": {
+        "consentCheckbox": false,
+        "privacyStatement": "[PRIVACY POLICY TEXT HERE]",
+        "privacyPolicyUrl": "[PRIVACY POLICY URL HERE]",
+        "usePrivacyPolicyUrl": false
     }
 }

@@ -9,6 +9,11 @@
     background: rgba(0, 0, 0, .7);
     z-index: $modal-z-index;
     overflow-y: auto;
+    .required {
+        color: $error;
+        font-size: 1.2em;
+    }
+
 
     > div.modal {
         display: block;
@@ -180,10 +185,6 @@
                             flex-direction: row;
                             align-items: center;
 
-                            > .required {
-                                color: $error;
-                                font-size: 1.2em;
-                            }
 
                             input,
                             select {
@@ -217,10 +218,7 @@
                                     width: 100%;
                                     font-size: 1.1em;
                                     color: rgb(121, 124, 126);
-                                    > .required {
-                                        color: $error;
-                                        font-size: 1.2em;
-                                    }
+
                                 }
 
                                 select {
@@ -349,6 +347,10 @@
                     &.consent-checkbox {
                         width: 40px;
                     }
+                }
+                .consent-checkbox-label{
+                    color: #3D5668;
+                    font-weight: 500;
                 }
                 // Linked In Skills and expertise:
                 textarea {

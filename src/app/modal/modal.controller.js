@@ -35,7 +35,7 @@ class CareerPortalModalController {
             footer: ''
         };
 
-        this.consentValue;
+        this.consentValue = false;
 
         // Load directive with modal closed by default
         this.closeModal();
@@ -133,6 +133,7 @@ class CareerPortalModalController {
         // 2: EEOC  Race/Ethnicity
         // 3: EEOC Veteran
         // 4: EEOC Disability
+        // 5: Privacy Policy
         if (toolTipType || toolTipType === 0) {
             this.isToolTipHidden = false;
             this.currentToolTip = toolTipType;
