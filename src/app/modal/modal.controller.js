@@ -39,9 +39,7 @@ class CareerPortalModalController {
 
         this.privacyConsent = configuration.privacyConsent;
 
-        this.tooltipStyle = {
-            top: '50%'
-        }
+        this.tooltipStyle = {top: '50%'};
 
         // Load directive with modal closed by default
         this.closeModal();
@@ -140,7 +138,7 @@ class CareerPortalModalController {
         // 3: EEOC Veteran
         // 4: EEOC Disability
         // 5: Privacy Policy
-        if ((toolTipType || toolTipType === 0) && (toolTipType !== 5 || ( toolTipType === 5 && !this.privacyConsent.usePrivacyPolicyUrl))) {
+        if ((toolTipType || toolTipType === 0) && (toolTipType !== 5 || (toolTipType === 5 && !this.privacyConsent.usePrivacyPolicyUrl))) {
             this.isToolTipHidden = false;
             let percentage = '50%';
             switch (toolTipType) {
@@ -154,7 +152,7 @@ class CareerPortalModalController {
                     break;
             }
 
-            this.tooltipStyle = { top: percentage };
+            this.tooltipStyle = {top: percentage};
             this.currentToolTip = toolTipType;
         }
     }
