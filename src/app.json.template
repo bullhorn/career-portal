@@ -44,7 +44,7 @@
     "privacyConsent": {
         "consentCheckbox": false,
         "privacyStatement": "[PRIVACY POLICY TEXT HERE]",
-        "privacyPolicyUrl": "[PRIVACY POLICY URL HERE]",
+        "privacyPolicyUrl": "",
         "usePrivacyPolicyUrl": false
     }
 }
