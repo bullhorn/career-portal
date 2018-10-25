@@ -17,8 +17,6 @@ import MobileDetection from './services/mobiledetection.service';
 import ShareService from './services/share.service';
 import ApplyService from './services/apply.service';
 import SharedData from './services/shared.factory';
-import LinkedInService from './services/linkedin.service';
-import VerifyLI from './services/verifyli.service';
 import CacheService from './services/cache.service';
 import EeocService from './services/eeoc.service';
 
@@ -48,9 +46,7 @@ angular.module('CareerPortal', ['ngAnimate', 'ngTouch', 'ngSanitize', 'ui.router
     .service('ShareService', ShareService)
     .service('ApplyService', ApplyService)
     .service('SearchService', SearchService)
-    .service('LinkedInService', LinkedInService)
     .service('MobileDetection', MobileDetection)
-    .service('VerifyLI', VerifyLI)
     .service('CacheService', CacheService)
     .service('EeocService', EeocService);
 
