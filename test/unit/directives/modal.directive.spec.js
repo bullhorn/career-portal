@@ -4,7 +4,6 @@ describe('Directive: CareerPortalModal', () => {
             $provide.constant('configuration', {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
-                integrations: {linkedin: ''},
                 acceptedResumeTypes: [],
                 privacyConsent: {
                     consentCheckbox: true,
@@ -18,8 +17,8 @@ describe('Directive: CareerPortalModal', () => {
             });
         });
     });
-
     // load the controller's module
+
     beforeEach(angular.mock.module('CareerPortal'));
 
     let $compile,

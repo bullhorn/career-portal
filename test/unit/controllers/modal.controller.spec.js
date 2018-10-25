@@ -8,7 +8,6 @@ describe('Controller: CareerPortalModalController', () => {
             $provide.constant('configuration', {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
-                integrations: {linkedin: {clientId: ''}},
                 acceptedResumeTypes: ['html', 'text', 'txt'],
                 minUploadSize: 4096,
                 maxUploadSize: 5242880,
@@ -46,7 +45,6 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.SearchService).toBeDefined();
         expect(vm.ShareService).toBeDefined();
         expect(vm.ApplyService).toBeDefined();
-        expect(vm.LinkedInService).toBeDefined();
         expect(vm.EeocService).toBeDefined();
         expect(vm.locale).toBeDefined();
 
@@ -56,25 +54,6 @@ describe('Controller: CareerPortalModalController', () => {
         expect(vm.linkedInData.header).toBeDefined();
         expect(vm.linkedInData.resume).toBeDefined();
         expect(vm.linkedInData.footer).toBeDefined();
-    });
-
-
-    describe('Function: applyWithLinkedIn()', () => {
-        it('should be defined.', () => {
-            expect(vm.applyWithLinkedIn).toBeDefined();
-        });
-        it('should call getUser on the LinkedInService and set the hasAttemptedLIApply flag to true.', () => {
-            // TODO: verify this mock is valid @krsween
-            spyOn(vm.LinkedInService, 'getUser').and.callFake(function () {
-                return {
-                    then: function () {
-                    }
-                };
-            });
-            vm.applyWithLinkedIn();
-            expect(vm.LinkedInService.getUser).toHaveBeenCalled();
-            expect(vm.hasAttemptedLIApply).toBeTruthy();
-        });
     });
 
     describe('Function: closeModal(applyForm)', () => {

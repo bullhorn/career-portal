@@ -16,32 +16,6 @@
         <span class="card-separator" data-ng-show="::((detail.job.address.city || detail.job.address.state) && detail.job.employmentType)">&nbsp;|&nbsp;</span>
         <!-- JOB TYPE -->
         <span class="card-type">{{::detail.job.employmentType.toString()}}</span>
-        <!-- APPLY WITH LINKED IN || EMAIL JOB -->
-        <section data-ng-show="modal.showForm" ng-if="detail.isLinkedInEnabled">
-            <!-- LINKED IN INTEGRATION (IF ACTIVATED) -->
-            <div data-ng-if="modal.isLinkedInActive">
-                <!-- LINKED IN APPLY BUTTON -->
-                <button class="btn-li-lg" data-ng-click="modal.applyWithLinkedIn()" data-ng-if="!modal.hasAttemptedLIApply && !detail.alreadyApplied" >
-                    <i class="bhi-linkedin-o"></i>
-                    <span>{{ 'modal.applyWithLI' | i18n }}</span>
-                </button>
-                <!-- LINKED IN ALERT INFO -->
-                <div class="alert info" data-ng-if="modal.hasAttemptedLIApply && !modal.LinkedInService.isUserLoaded()">
-                    <strong>{{ 'modal.headsUp' | i18n }}</strong> {{ 'modal.linkedInWarning' | i18n }}
-                    <a data-ng-click="modal.applyWithLinkedIn()">{{ 'modal.here' | i18n }}</a> {{ 'modal.retry' | i18n }}
-                </div>
-                <!-- OR BREAK -->
-                <span class="break" data-ng-show="!modal.hasAttemptedLIApply && !detail.alreadyApplied">
-                    <span>Or</span>
-                </span>
-                <!-- PROMOTE EMAIL UX -->
-                <p data-ng-if="modal.isIOS && !modal.hasAttemptedLIApply"><strong>{{ 'modal.noLI' | i18n }}</strong> {{ 'modal.emailYourself' | i18n }}</p>
-            </div>
-            <!-- EMAIL JOB -->
-            <div data-ng-show="modal.isIOS && !modal.hasAttemptedLIApply">
-                 <input class="email" type="email" data-ng-model="modal.email" id="email" name="email" data-i18n-attr="{ placeholder: 'common.emailPlaceholder' }">
-             </div>
-        </section>
         <!-- APPLY BUTTON -->
         <button class="apply" data-ng-click="detail.applyModal()" data-ng-disabled="detail.alreadyApplied" data-ng-class="{ 'disabled': detail.alreadyApplied }">
             <span data-ng-if="!detail.alreadyApplied">{{'detail.applyButton' | i18n}}</span>

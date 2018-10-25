@@ -1,6 +1,6 @@
 class CareerPortalModalController {
     /* jshint -W072 */
-    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, LinkedInService, ShareService, VerifyLI, APPLIED_JOBS_KEY, EeocService) {
+    constructor($rootScope, $location, $window, $filter, $log, SharedData, SearchService, ApplyService, configuration, locale, ShareService, APPLIED_JOBS_KEY, EeocService) {
         'ngInject';
         // NG Dependencies
         this.$location = $location;
@@ -15,7 +15,6 @@ class CareerPortalModalController {
         this.SearchService = SearchService;
         this.ShareService = ShareService;
         this.ApplyService = ApplyService;
-        this.LinkedInService = LinkedInService;
         this.EeocService = EeocService;
         this.locale = locale;
 
@@ -23,7 +22,6 @@ class CareerPortalModalController {
         this.isToolTipHidden = true;
         this.currentToolTip = 0;
         this.APPLIED_JOBS_KEY = APPLIED_JOBS_KEY;
-        this.isLinkedInActive = VerifyLI.verified;
         // Create a local variable to store user's email address for sendEmailLink
         this.email = '';
         // Boolean to indicate if the user has attempted to apply via LinkedIn
@@ -44,21 +42,6 @@ class CareerPortalModalController {
 
         // Load directive with modal closed by default
         this.closeModal();
-    }
-    applyWithLinkedIn() {
-        this.hasAttemptedLIApply = true;
-       // this.SharedData.modalState = 'open';
-        this.LinkedInService.getUser()
-            .then((linkedInUser) => {
-                this.ApplyService.form.firstName = linkedInUser.firstName || '';
-                this.ApplyService.form.lastName = linkedInUser.lastName || '';
-                this.ApplyService.form.email = linkedInUser.emailAddress || '';
-                this.ApplyService.form.phone = linkedInUser.phoneNumbers ? linkedInUser.phoneNumbers.values[0].phoneNumber : '';
-                this.ApplyService.form.resumeInfo = this.formatResume(linkedInUser);
-            });
-                if (this.LinkedInService.userIsLoaded === true) {
-            this.SharedData.modalState = 'open';
-        }
     }
 
     closeModal(applyForm) {

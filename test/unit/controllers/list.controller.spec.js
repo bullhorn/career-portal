@@ -7,7 +7,6 @@ describe('Controller: JobListController', () => {
             $provide.constant('configuration', {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
-                integrations: {linkedin: ''},
                 additionalJobCriteria: {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
