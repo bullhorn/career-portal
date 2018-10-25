@@ -63,14 +63,6 @@ gulp.task('config:app', function () {
         appConfig.service.port = argv.port;
     }
 
-    // LinkedIn Integration
-    if (argv.liClientId) {
-        // Assign LinkedIn info to configuration object for use in NG
-        appConfig.integrations.linkedin = {
-            clientId: argv.liClientId
-        };
-    }
-
     // EEOC fields on apply form
     if (argv.eeocAll) {
         appConfig.eeoc.genderRaceEthnicity = argv.eeocAll;

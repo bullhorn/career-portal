@@ -24,11 +24,6 @@
         "port": null,
         "swimlane": "[ SWIMLANE HERE ]"
     },
-    "integrations": {
-        "linkedin": {
-            "clientId": "[ CLIENTID HERE ]"
-        }
-    },
     "additionalJobCriteria": {
         "field": "[ FILTER FIELD HERE ]",
         "values": [
