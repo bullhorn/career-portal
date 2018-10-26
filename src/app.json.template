@@ -28,7 +28,8 @@
         "field": "[ FILTER FIELD HERE ]",
         "values": [
             "[ FILTER VALUE HERE ]"
-        ]
+        ],
+        "sort": "-dateLastPublished"
     },
     "defaultGridState": "list-view",
     "eeoc": {

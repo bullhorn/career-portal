@@ -12,7 +12,8 @@ describe('Service: SearchService', () => {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
                         '[ FILTER VALUE HERE ]'
-                    ]
+                    ],
+                    sort: "-dateLastPublished"
                 }
             });
             //$provide.value('job', {});
@@ -124,7 +125,8 @@ describe('Service: SearchService', () => {
                     field: 'employmentType',
                     values: [
                         'blah'
-                    ]
+                    ],
+                    sort: "-dateLastPublished"
                 },
             };
             expect(SearchService.jobCriteria(true)).toBe(' AND (employmentType:"blah")');
@@ -136,7 +138,8 @@ describe('Service: SearchService', () => {
                     values: [
                         'blah',
                         'blahy'
-                    ]
+                    ],
+                    sort: "-dateLastPublished"
                 },
             };
             expect(SearchService.jobCriteria(true)).toBe(' AND (employmentType:"blah" OR employmentType:"blahy")');
@@ -147,7 +150,8 @@ describe('Service: SearchService', () => {
                     field: '[ FILTER FIELD HERE ]',
                     values: [
                         '[ FILTER VALUE HERE ]'
-                    ]
+                    ],
+                    sort: "-dateLastPublished"
                 },
             };
             expect(SearchService.jobCriteria(true)).toBe('');
@@ -158,7 +162,8 @@ describe('Service: SearchService', () => {
                     field: 'employmentType',
                     values: [
                         'blah'
-                    ]
+                    ],
+                    sort: "-dateLastPublished"
                 },
             };
             expect(SearchService.jobCriteria(false)).toBe(' AND (employmentType=\'blah\')');
