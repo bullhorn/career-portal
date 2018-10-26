@@ -33,6 +33,13 @@ class CareerPortalModalController {
             footer: ''
         };
 
+        this.consentValue = false || !configuration.privacyConsent.consentCheckbox;
+
+        configuration.privacyConsent.privacyStatementParagraphs = configuration.privacyConsent.privacyStatementParagraphs.join('<br/><br/>');
+        this.privacyConsent = configuration.privacyConsent;
+
+        this.tooltipStyle = {top: '50%'};
+
         // Load directive with modal closed by default
         this.closeModal();
     }
@@ -95,14 +102,14 @@ class CareerPortalModalController {
         }
     }
 
-    enableSendButton(isFormValid) {
+    disableSendButton(isFormValid) {
         let resume = this.ApplyService.form.resumeInfo;
 
-        if (isFormValid && (resume || this.linkedInData.resume)) {
+        if (isFormValid && (resume || this.linkedInData.resume) && this.consentValue) {
             if (this.linkedInData.resume.length !== 0 || resume.type) {
                 return false;
             }
-        } else if (this.email) {
+        } else if (this.email && this.consentValue) {
             return false;
         }
         return true;
@@ -114,8 +121,28 @@ class CareerPortalModalController {
         // 2: EEOC  Race/Ethnicity
         // 3: EEOC Veteran
         // 4: EEOC Disability
-        if (toolTipType || toolTipType === 0) {
+        // 5: Privacy Policy
+        if ((toolTipType || toolTipType === 0) && (toolTipType !== 5 || (toolTipType === 5 && !this.privacyConsent.usePrivacyPolicyUrl))) {
             this.isToolTipHidden = false;
+            let percentage = '50%';
+            switch (toolTipType) {
+                case 5:
+                if (this.EeocService.isVeteranEnabled() && this.EeocService.isGenderRaceEthnicityEnabled() && this.EeocService.getCheckedEthnicities()) {
+                    percentage = '75%';
+                } else if (this.EeocService.isVeteranEnabled() || this.EeocService.isGenderRaceEthnicityEnabled() || this.EeocService.getCheckedEthnicities()) {
+                    percentage = '55%';
+                } else {
+                    percentage = '45%';
+                }
+                    break;
+                case 4:
+                percentage = '65%';
+                    break;
+                default:
+                    break;
+            }
+
+            this.tooltipStyle = {top: percentage};
             this.currentToolTip = toolTipType;
         }
     }

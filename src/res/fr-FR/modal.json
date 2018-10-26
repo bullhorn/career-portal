@@ -41,5 +41,7 @@
     "education": "Éducation:",
     "skillHeading": "Compétences",
     "present": "Présent",
-    "profileURL": "LinkedIn Profil URL:"
+    "profileURL": "LinkedIn Profil URL:",
+    "byChecking": "En cochant cette case, vous acceptez notre",
+    "privacyPolicy": "politique de confidentialité"
 }

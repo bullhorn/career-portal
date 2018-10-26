@@ -35,5 +35,14 @@
         "genderRaceEthnicity": false,
         "veteran": false,
         "disability": false
+    },
+    "privacyConsent": {
+        "consentCheckbox": false,
+        "privacyStatementParagraphs": [
+            "[FIRST PARAGRAPH]",
+            "[SECOND PARAGRAPH]"
+        ],
+        "privacyPolicyUrl": "",
+        "usePrivacyPolicyUrl": false
     }
 }

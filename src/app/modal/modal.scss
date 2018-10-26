@@ -9,6 +9,11 @@
     background: rgba(0, 0, 0, .7);
     z-index: $modal-z-index;
     overflow-y: auto;
+    .required {
+        color: $error;
+        font-size: 1.2em;
+    }
+
 
     > div.modal {
         display: block;
@@ -139,6 +144,8 @@
                         border-radius: 3px;
                         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
                         z-index: 999;
+                        overflow-y: auto;
+                        max-height: 550px;
 
                         & > p {
                             margin: 0;
@@ -180,10 +187,6 @@
                             flex-direction: row;
                             align-items: center;
 
-                            > .required {
-                                color: $error;
-                                font-size: 1.2em;
-                            }
 
                             input,
                             select {
@@ -217,18 +220,14 @@
                                     width: 100%;
                                     font-size: 1.1em;
                                     color: rgb(121, 124, 126);
-                                    > .required {
-                                        color: $error;
-                                        font-size: 1.2em;
-                                    }
+
                                 }
 
                                 select {
-                                    border-color: #adafb0;
-                                    border-radius: 4px;
-
+                                    border-color: #cecece;
                                     &:focus {
                                         outline: none;
+                                        border-color: #5198DE;
                                     }
                                 }
 
@@ -347,6 +346,13 @@
                             border-bottom: 1px solid $primary;
                         }
                     }
+                    &.consent-checkbox {
+                        width: 40px;
+                    }
+                }
+                .consent-checkbox-label{
+                    color: #3D5668;
+                    font-weight: 500;
                 }
                 // Linked In Skills and expertise:
                 textarea {

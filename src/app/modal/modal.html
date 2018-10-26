@@ -72,7 +72,7 @@
                     </div>
                     <!-- TOOLTIP -->
                     <div class="tooltip-info" data-ng-show="!modal.isToolTipHidden">
-                        <div class="tooltip-modal">
+                        <div ng-style="modal.tooltipStyle" class="tooltip-modal">
                             <div class="tooltip-info-closer">
                                 <i class="bhi-close" data-ng-click="modal.hideTooltip()"></i>
                             </div>
@@ -102,6 +102,7 @@
                             <div data-ng-if="modal.currentToolTip === 3" data-i18n="eeoc.veteranHelp" data-companyName="{{ modal.configuration.companyName }}" data-companyName2="{{ modal.configuration.companyName }}" data-companyName3="{{ modal.configuration.companyName }}"></div>
                             <!-- DISABILITY -->
                             <p data-ng-if="modal.currentToolTip === 4" data-i18n="eeoc.disabilityHelp" data-companyName="{{ modal.configuration.companyName }}" data-companyName2="{{ modal.configuration.companyName }}"></p>
+                            <p data-ng-if="modal.currentToolTip === 5" ng-bind-html="modal.privacyConsent.privacyStatementParagraphs" ></p>
                         </div>
                     </div>
                     <!-- UPLOAD LABEL -->
@@ -233,13 +234,20 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div ng-show="modal.privacyConsent.consentCheckbox" class="consent-checkbox-section">
+                        <span class="required">*</span>
+                        <input id="consent-checkbox" class="consent-checkbox" type="checkbox" ng-model="modal.consentValue"/>
+                        <label for="consent-checkbox" class="consent-checkbox-label">{{ 'modal.byChecking' | i18n }}
+                            <a data-ng-click="modal.showTooltip(5)" ng-href="{{modal.privacyConsent.privacyPolicyUrl}}">{{ 'modal.privacyPolicy' | i18n }}</a></label>
+                    </div>
                     <div class="clearfix"><br/></div>
                 </form>
             </section>
             <!-- FOOTER -->
             <footer data-ng-class="{'success':!modal.showForm}">
                 <button data-ng-show="modal.showForm" name="cancel" data-ng-click="modal.closeModal(applyForm)">{{ 'modal.cancelButton' | i18n }}</button>
-                <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)" data-ng-disabled="modal.isSubmitting || modal.enableSendButton(applyForm.$valid)" data-ng-class="{ 'disabled': modal.enableSendButton(applyForm.$valid) }">
+                <button data-ng-show="modal.showForm" name="submit" data-ng-click="modal.submit(applyForm)" data-ng-disabled="modal.isSubmitting || modal.disableSendButton(applyForm.$valid)" data-ng-class="{ 'disabled': modal.disableSendButton(applyForm.$valid) }">
                     <span data-ng-if="!modal.isSubmitting">
                         {{ 'modal.sendButton' | i18n }}
                     </span>

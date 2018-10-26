@@ -10,7 +10,16 @@ describe('Controller: CareerPortalModalController', () => {
                 service: {corpToken: 1, port: 1, swimlane: 1},
                 acceptedResumeTypes: ['html', 'text', 'txt'],
                 minUploadSize: 4096,
-                maxUploadSize: 5242880
+                maxUploadSize: 5242880,
+                privacyConsent: {
+                    consentCheckbox: false,
+                    privacyStatementParagraphs: [
+                        "[FIRST PARAGRAPH]",
+                        "[SECOND PARAGRAPH]"
+                    ],
+                    privacyPolicyUrl: '',
+                    usePrivacyPolicyUrl: false,
+                }
             });
         });
     });
@@ -121,9 +130,9 @@ describe('Controller: CareerPortalModalController', () => {
         });
     });
 
-    describe('Function: enableSendButton()', () => {
+    describe('Function: disableSendButton()', () => {
         it('should be defined.', () => {
-            expect(vm.enableSendButton).toBeDefined();
+            expect(vm.disableSendButton).toBeDefined();
         });
     });
 

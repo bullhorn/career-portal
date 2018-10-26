@@ -1,6 +1,6 @@
 class JobDetailController {
     /* jshint -W072 */
-    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, APPLIED_JOBS_KEY, MobileDetection) {
+    constructor($rootScope, $window, $location, $log, ShareService, SearchService, SharedData, job, configuration, APPLIED_JOBS_KEY) {
         'ngInject';
         // NG Dependencies
         this.$window = $window;
