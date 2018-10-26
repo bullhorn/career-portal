@@ -18,10 +18,6 @@ class SearchService {
         return SearchService._.fields || (SearchService._.fields = 'id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted');
     }
 
-    static get _sort() {
-        return SearchService._.sort || (SearchService._.sort = '-dateLastPublished');
-    }
-
     get _() {
         return this.__ || (this.__ = Object.create(null));
     }
@@ -96,7 +92,7 @@ class SearchService {
 
     get requestParams() {
         return this._.requestParams || (this._.requestParams = {
-                sort: () => this.searchParams.sort || SearchService._sort,
+                sort: () => this.searchParams.sort || this.configuration.additionalJobCriteria.sort,
                 count: () => this.searchParams.count || SearchService._count,
                 start: () => this.searchParams.start || 0,
                 publishedCategory: (isSearch, fields) => {
@@ -207,10 +203,10 @@ class SearchService {
                     return '?start=0&query=' + where + '&fields=id&count=' + SearchService._count;
                 },
                 assembleForQueryForIDs: (start, count) => {
-                    return '?where=' + this.requestParams.query(false) + '&fields=' + SearchService._fields + '&count=' + count + '&orderBy=' + SearchService._sort + '&start=' + start;
+                    return '?where=' + this.requestParams.query(false) + '&fields=' + SearchService._fields + '&count=' + count + '&orderBy=' + this.configuration.additionalJobCriteria.sort + '&start=' + start;
                 },
                 assembleForSearchForJobs: (start, count) => {
-                    return '?query=' + this.requestParams.query(true) + '&fields=' + SearchService._fields + '&count=' + count + '&sort=' + SearchService._sort + '&start=' + start;
+                    return '?query=' + this.requestParams.query(true) + '&fields=' + SearchService._fields + '&count=' + count + '&sort=' + this.configuration.additionalJobCriteria.sort + '&start=' + start;
                 },
                 assembleForGroupByWhereIDs: (fields, orderByFields, start, count, jobs) => {
                     return '?where=' + this.requestParams.whereIDs(jobs, false) + '&groupBy=' + fields + '&fields=' + fields + ',count(id)&count=' + count + '&orderBy=+' + orderByFields + ',-count.id&start=' + start;
