@@ -144,7 +144,13 @@ class CareerPortalModalController {
             let percentage = '50%';
             switch (toolTipType) {
                 case 5:
-                percentage = '85%';
+                if(this.EeocService.isVeteranEnabled() && this.EeocService.isGenderRaceEthnicityEnabled() && this.EeocService.getCheckedEthnicities()) {
+                    percentage = '75%';
+                } else if(this.EeocService.isVeteranEnabled() || this.EeocService.isGenderRaceEthnicityEnabled() || this.EeocService.getCheckedEthnicities()){ 
+                    percentage = '55%'
+                } else { 
+                    percentage = '45%'
+                }
                     break;
                 case 4:
                 percentage = '65%';
