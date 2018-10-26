@@ -35,9 +35,9 @@ class CareerPortalModalController {
 
         this.consentValue = false || !configuration.privacyConsent.consentCheckbox;
 
-        configuration.privacyConsent.privacyStatementParagraphs = configuration.privacyConsent.privacyStatementParagraphs.join('<br/><br/>')
+        configuration.privacyConsent.privacyStatementParagraphs = configuration.privacyConsent.privacyStatementParagraphs.join('<br/><br/>');
         this.privacyConsent = configuration.privacyConsent;
-        
+
         this.tooltipStyle = {top: '50%'};
 
         // Load directive with modal closed by default
@@ -127,12 +127,12 @@ class CareerPortalModalController {
             let percentage = '50%';
             switch (toolTipType) {
                 case 5:
-                if(this.EeocService.isVeteranEnabled() && this.EeocService.isGenderRaceEthnicityEnabled() && this.EeocService.getCheckedEthnicities()) {
+                if (this.EeocService.isVeteranEnabled() && this.EeocService.isGenderRaceEthnicityEnabled() && this.EeocService.getCheckedEthnicities()) {
                     percentage = '75%';
-                } else if(this.EeocService.isVeteranEnabled() || this.EeocService.isGenderRaceEthnicityEnabled() || this.EeocService.getCheckedEthnicities()){ 
-                    percentage = '55%'
-                } else { 
-                    percentage = '45%'
+                } else if (this.EeocService.isVeteranEnabled() || this.EeocService.isGenderRaceEthnicityEnabled() || this.EeocService.getCheckedEthnicities()) {
+                    percentage = '55%';
+                } else {
+                    percentage = '45%';
                 }
                     break;
                 case 4:
