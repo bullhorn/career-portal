@@ -144,6 +144,8 @@
                         border-radius: 3px;
                         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
                         z-index: 999;
+                        overflow-y: auto;
+                        max-height: 550px;
 
                         & > p {
                             margin: 0;
