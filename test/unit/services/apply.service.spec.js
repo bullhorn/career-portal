@@ -10,7 +10,6 @@ describe('Service: ApplyService', () => {
             $provide.constant('configuration', {
                 someUrl: '/dummyValue',
                 service: {corpToken: 1, port: 1, swimlane: 1},
-                integrations: {linkedin: ''}
             });
             //$provide.value('job', {});
         });
