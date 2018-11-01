@@ -57,9 +57,9 @@ class ShareService {
 
     description(job, url) {
         if (url) {
-            return 'Check out this ' + job.title + ' job: ' + encodeURIComponent(url);
+            return 'Check out this ' + encodeURIComponent(job.title) + ' job: ' + encodeURIComponent(url);
         }
-        return 'Check out this ' + job.title + ' job!';
+        return 'Check out this ' + encodeURIComponent(job.title) + ' job!';
     }
 
     emailLink(job) {
