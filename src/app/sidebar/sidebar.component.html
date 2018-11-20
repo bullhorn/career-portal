@@ -1,0 +1,29 @@
+<div class="header">
+    <header title="Filter" icon="circle" theme="background" condensed="true">
+        <div class="entity-header" novo-title></div>
+        <utils>
+            <util-action (click)="closeSidebar()" icon="times"></util-action>
+        </utils>
+    </header>
+<novo-search placeholder="Keyword Search" alwaysOpen="true" [(ngModel)]="keyword" (ngModelChange)="searchOnDelay()"></novo-search>
+</div>
+<novo-loading *ngIf="loading"></novo-loading>
+<ng-container *ngIf="!loading">
+  <div class="filters">
+
+  </div>
+  <novo-form *ngIf="sidebarForm" layout="vertical" [form]="sidebarForm">
+      <div class="novo-form-row" *ngFor="let row of controls">
+          <novo-control [control]="row" [form]="sidebarForm"></novo-control>
+      </div>
+  </novo-form>
+  <button *ngIf="filterUrl" icon="list-o" theme="dialogue" ngxClipboard [cbContent]="filterUrl">Copy This Search</button>
+  <button *ngIf="filterUrl"  theme="dialogue" (click)="clearForm()">Clear This Search</button>
+</ng-container>
+
+<section class="credits">
+    <span class="powered-by">Powered By</span>
+    <a target="_blank" href="http://www.bullhorn.com/">
+        <img class="bullhorn" src="assets/logo.svg">
+    </a>
+</section>

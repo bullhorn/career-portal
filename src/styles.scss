@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import "novo-elements";
+
+novo-loading {
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+novo-file-input {
+  width: 100%;
+}
+
+novo-search {
+  padding: 17px;
+  border-bottom: 1px solid #d9dadc;
+  > input[data-automation-id="novo-search-input"] {
+    padding: 6px 10px;
+    font-size: 1.3em;
+  }
+  button[theme][theme="fab"] {
+    width: 34px;
+    height: 34px;
+    .flex-wrapper {
+      i {
+        font-size: 1.2em;
+        line-height: 14px;
+      }
+    }
+  }
+  &.active {
+    max-width: 700px;
+    button[theme="fab"] {
+      width: 34px;
+      height: 34px;
+    }
+  }
+}
+
+app-job-details novo-card header{
+  padding: 10px 20px 10px 20px !important;
+  background-color: #BB5566;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-weight: 500;
+  min-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  color: white;
+  i {
+    font-size: 1em;
+  }
+  h3 {
+    font-weight: 500 !important;
+  }
+}
+
+.header{
+  >header {
+    h1 {
+      color: #D9DADC;
+    }
+  }
+}
+
+.job-details {
+  p {
+    max-width: 100em;
+  }
+}

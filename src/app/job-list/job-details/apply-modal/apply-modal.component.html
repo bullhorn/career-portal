@@ -1,0 +1,22 @@
+<novo-modal>
+    <header class="apply-modal-header" [title]="job.title" theme="candidate" >
+      <utils>
+        <util-action icon="times" (click)="close()"></util-action>
+      </utils>
+    </header>
+    <section *ngIf="!loading">
+      <novo-form [form]="form">
+          <div *ngFor="let control of formControls" class="novo-form-row">
+            <novo-control [form]="form" [control]="control"></novo-control>
+          </div>
+          <div *ngIf="eeocControls.length">
+            <h2>Voluntary Self-Identification Form for Race, Gender and Ethnicity</h2>
+            <div *ngFor="let control of eeocControls" class="novo-form-row">
+              <novo-control [form]="form" [control]="control"></novo-control>
+            </div>
+          </div>
+      </novo-form>
+    </section>
+    <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">Cancel</button>
+    <button theme="primary" icon="check" [disabled]="!form.valid || applying" (click)="save()" data-automation-id="create-modal-save">Apply</button>
+  </novo-modal>

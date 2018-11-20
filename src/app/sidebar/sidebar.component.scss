@@ -1,0 +1,45 @@
+:host {
+  background-color: #F4F4F4;
+  novo-form {
+    margin-top: 30px;
+    padding-right: 20px;
+  }
+  > section.credits {
+    border-top: 1px solid #d9dadc;
+    padding: 27px 0 0 20px;
+
+    span.powered-by {
+        font-size: 1em;
+    }
+
+    .bullhorn {
+      display: block;
+      position: relative;
+      bottom: 20px;
+      margin: 0;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    position: absolute;
+    left: -80%;
+    transition: all 0.2s ease-in-out;
+    &.active{
+      position: initial;
+      left: 0;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .header{
+      >header {
+        border-bottom: 1px solid #d9dadc;
+        color: #bb5566;
+        h1 {
+          color: #D9DADC;
+        }
+        util-action {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+<novo-loading *ngIf="loading"></novo-loading>
+<header [title]="title" theme="company">
+  <utils>
+      <util-action icon="flag"></util-action>
+      <util-action icon="refresh" (click)="getJob()"></util-action>
+      <util-action icon="times" routerLink="/"></util-action>
+  </utils>
+  <!-- Waiting for new novo-elements version
+  <novo-icon theme="job" raised="true">job</novo-icon>
+  <div class="entity-header" novo-title>
+    <span class="id">123456</span>
+    <header-spacer></header-spacer>
+    <span class="name">Steve Jobs</span>
+    <header-spacer></header-spacer>
+    <span class="links">
+        <button theme="icon" [icon]="'google'"></button>
+        <button theme="icon" [icon]="'linkedin-f'"></button>
+        <button theme="icon" [icon]="'location'"></button>
+    </span>
+    </div>
+-->
+</header>
+
+<div>
+<div class="job-info">
+    <div class='job-description-card'>
+        <div *ngIf="!loading" >
+          <header [title]="job.title" theme="job" condensed="true">
+              <utils>
+                  <util-action icon="email" (click)="emailLink()" *ngIf="showShareButtons"></util-action>
+                  <util-action icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></util-action>
+                  <util-action icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></util-action>
+                  <util-action icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></util-action>
+                  <util-action icon="share" (click)="toggleShareButtons()"></util-action>
+                  <util-action icon="print" (click)="print()"></util-action>
+              </utils>
+              <div class="job-date">
+                  <i class="bhi-clock"></i>
+                  <div class="subtitleText" data-automation-id="bbo-assignments-title">{{ job.dateLastPublished | date: 'mediumDate'}}</div>
+              </div>
+          </header>
+          <div class="job-details" [innerHTML]="job.publicDescription"></div>
+          <footer>
+            <ng-container *ngIf="applyWithLinkedin">
+              <button theme="primary" icon="linkedin-f">Apply With Linkedin</button>
+              <span> OR </span>
+            </ng-container>
+            <button theme="primary" icon="upload" *ngIf="!alreadyApplied" (click)="apply()">Apply with Resume</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
+          </footer>
+        </div>
+    </div>
+    
+</div>
+<div class="related-jobs">
+    <novo-card *ngFor="let relatedJob of relatedJobs" icon="job" [title]="relatedJob.title" (click)="getJob(relatedJob.id)" [routerLink]="'/job/' + relatedJob.id">
+        <div class="location">
+            <i class="bhi-location"></i>  
+            <span class="location-text">{{relatedJob.address.city}}, {{relatedJob.address.state}}</span>
+        </div>
+        <div class="published-date">
+            <i class="bhi-clock-arrow"></i>  
+            <span class="published-date-text">{{ relatedJob.dateLastPublished | date: 'mediumDate'}}</span>
+        </div>
+</novo-card>
+
+</div>
+</div>
