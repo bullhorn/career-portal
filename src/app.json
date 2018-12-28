@@ -24,9 +24,9 @@
     },
     "service": {
         "batchSize": 500,
-        "corpToken": "18g",
+        "corpToken": "28DJK9",
         "port": 443,
-        "swimlane": "2",
+        "swimlane": "9",
         "fields": "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted",
         "filterFields": [
             { 
