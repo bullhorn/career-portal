@@ -1,11 +1,11 @@
-<header [title]="title" icon="company" theme="company" condensed="false">
+<header [title]="title" icon="company" theme="company" condensed="true">
         <div class="entity-header" novo-title></div>
         <utils>
             <util-action *ngIf="!sidebarVisible" (click)="openSidebar()" icon="filter"></util-action>
         </utils>
 </header>
 <novo-loading *ngIf="loading"></novo-loading>
-<novo-list theme="navigation" direction="vertical" *ngIf="!loading && jobs.length > 0">
+<novo-list theme="background" direction="vertical" *ngIf="!loading && jobs.length > 0">
 <ng-container *ngFor="let job of jobs">
     <novo-list-item [routerLink]="'job/' + job.id" >
         <item-header>

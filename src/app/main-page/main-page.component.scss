@@ -9,38 +9,13 @@
     min-width: 250px;
     overflow-x: hidden;
     overflow-y: auto;
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 1px 1px 6px #2F384F;
-        background-color: #2F384F;
-    }
-    &::-webkit-scrollbar-track {
-        -webkit-box-shadow: none;
-        border-radius: 2px;
-        background-color: #F4F4F4;
-    }
   }
   .list {
     width: 80%;
     flex-grow: 1000;
     overflow-y: auto;
     height: 100vh;
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 1px 1px 6px #F4F4F4;
-        background-color: #F4F4F4;
-    }
-    &::-webkit-scrollbar-track {
-        -webkit-box-shadow: none;
-        border-radius: 2px;
-        background-color: #2F384F;
-    }
+
   }
 
 }

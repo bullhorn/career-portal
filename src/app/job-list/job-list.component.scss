@@ -7,6 +7,21 @@ item-end {
 novo-list {
   overflow: auto;
   min-height: 61.3vh;
+  novo-list-item  {
+    item-content {
+      span, b {
+        color: rgba(67, 67, 67, 0.65);
+      }
+      .bhi-next {
+        color: #3399DD;
+      }
+    }
+    item-header {
+      item-title {
+          color: #434343;
+      }
+    }
+  }
 }
 @media only screen and (min-width: 768px) {
   :host{

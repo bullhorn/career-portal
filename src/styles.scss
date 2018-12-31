@@ -13,6 +13,16 @@ novo-file-input {
   width: 100%;
 }
 
+app-job-list {
+  novo-list-item  {
+    border-bottom: 1px solid #d6d6d6 !important;
+    div.list-item >item-header item-title { 
+      >h6 {
+        color: #434343;
+      }
+    }
+  }
+}
 novo-search {
   padding: 17px;
   border-bottom: 1px solid #d9dadc;
@@ -71,5 +81,11 @@ app-job-details novo-card header{
 .job-details {
   p {
     max-width: 100em;
+  }
+}
+
+app-sidebar {
+  label {
+    color: #fff !important;
   }
 }
