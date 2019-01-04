@@ -16,24 +16,29 @@ novo-file-input {
 app-job-list {
   novo-list-item  {
     border-bottom: 1px solid #d6d6d6 !important;
-    div.list-item >item-header item-title { 
-      >h6 {
-        color: #434343;
+
+    div.list-item {
+      item-content i{
+       color: #474747;
+      }
+      >item-header item-title { 
+        >h6 {
+          color: #474747;
+        }
       }
     }
   }
 }
 novo-search {
   padding: 17px;
-  border-bottom: 1px solid #d9dadc;
+  border-bottom: 1px solid #3d464d;
   > input[data-automation-id="novo-search-input"] {
-    padding: 6px 10px;
+    padding: 8px 10px;
     font-size: 1.3em;
   }
   button[theme][theme="fab"] {
     width: 34px;
-    height: 34px;
-    .flex-wrapper {
+    height: 38px;    .flex-wrapper {
       i {
         font-size: 1.2em;
         line-height: 14px;
@@ -44,8 +49,7 @@ novo-search {
     max-width: 700px;
     button[theme="fab"] {
       width: 34px;
-      height: 34px;
-    }
+      height: 38px;    }
   }
 }
 

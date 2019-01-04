@@ -19,6 +19,7 @@ import { JobDetailsComponent } from './job-list/job-details/job-details.componen
 import { ApplyModalComponent } from './job-list/job-details/apply-modal/apply-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ErrorModalComponent } from './error-modal/error-modal/error-modal.component';
+import { StripHtmlPipe } from './utils/stripHtml.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -38,6 +39,7 @@ export function initSettings(settings: SettingsService): any {
     JobDetailsComponent,
     ApplyModalComponent,
     ErrorModalComponent,
+    StripHtmlPipe,
 ],
   entryComponents: [
     ApplyModalComponent,
