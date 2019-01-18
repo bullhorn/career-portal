@@ -45,5 +45,6 @@
         ],
         "privacyPolicyUrl": "",
         "usePrivacyPolicyUrl": false
-    }
+    },
+    "jobXmlEnabled": false
 }
