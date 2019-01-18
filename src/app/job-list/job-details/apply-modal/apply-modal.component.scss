@@ -1,3 +1,17 @@
 :host {
   min-width: 600px;
+
+  .job-details {
+    padding: 0px 0px 5px 15px;
+    .separator {
+      padding: 0px 5px;
+    }
+  }
+  novo-form {
+    padding: 10px 0px;
+
+    .eeoc-form h2 {
+      padding-bottom: 10px;
+    }
+  }
 }

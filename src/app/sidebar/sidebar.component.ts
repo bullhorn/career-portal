@@ -71,7 +71,7 @@ export class SidebarComponent implements OnInit {
 
   public clearForm(): void {
     for (let filter in this.filterForm) {
-      this.filterForm[filter].splice(0, this.filterForm[filter].length);
+      this.filterForm[filter]= [];
     }
     this.filter.emit(this.filterForm);
     this.buildCopyUrl();
@@ -195,7 +195,7 @@ export class SidebarComponent implements OnInit {
 
   private updateForm(): void {
     this.updatedFilterOptions.forEach(function (value: any): void {
-      if (this.filterForm[value.key] === undefined || value.options.length !== this.filterForm[value.key].length) {
+      if (!this.filterForm[value.key] || value.options.length !== this.filterForm[value.key].length) {
         this.sidebarForm.controls[value.key].config.options = value.options;
       }
     }.bind(this));

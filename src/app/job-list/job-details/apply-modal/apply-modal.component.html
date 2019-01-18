@@ -3,13 +3,19 @@
       <utils>
         <util-action icon="times" (click)="close()"></util-action>
       </utils>
+      <div class="job-details">{{ job.publishedCategory.name }}</div>
+      <div class="job-details">{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{ job.address.state }}
+        <span class="separator" *ngIf="(job.address.city || job.address.state) && job.employmentType">|</span>
+        <!-- TYPE -->
+        <span class="type">{{ job.employmentType }}</span>
+      </div>
     </header>
     <section *ngIf="!loading">
       <novo-form [form]="form">
           <div *ngFor="let control of formControls" class="novo-form-row">
             <novo-control [form]="form" [control]="control"></novo-control>
           </div>
-          <div *ngIf="eeocControls.length">
+          <div class="eeoc-form" *ngIf="eeocControls.length">
             <h2>Voluntary Self-Identification Form for Race, Gender and Ethnicity</h2>
             <div *ngFor="let control of eeocControls" class="novo-form-row">
               <novo-control [form]="form" [control]="control"></novo-control>

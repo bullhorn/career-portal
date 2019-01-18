@@ -7,6 +7,12 @@
       min-width: 70vw;
       .job-description-card {
         width: 100%;
+        header {
+          padding-bottom: 10px;
+        }
+        .job-description-text {
+          padding: 20px;
+        }
       }
     }
       .job-details-card {
@@ -24,19 +30,25 @@
         vertical-align: center;
       }
     }
-    .job-date {
-      padding-left: 16px;
-      padding-bottom: 10px;
+    .job-header-details {
+      padding-left: 20px;
+      padding-bottom: 5px;
       .subtitleText {
         margin: auto 5px;
         display: inline-block;
+      }
+      .separator {
+        padding: 0px 5px;
       }
     }
     .related-jobs{
       background-color: #F4F4F4;
       min-width: 30vw;
       padding: 30px;
-      
+      novo-card {
+        padding: 10px;
+        cursor: pointer;
+
         .published-date {
           padding: 5px 2px 2px 2px;
           >.published-date-text{
@@ -44,11 +56,16 @@
           }
         }
         .location {
-          padding: 0px 2px 2px 2px;
+          padding: 5px 2px 2px 2px;
           >.location-text{
             padding-left: 2px;
           }
         }
+        i {
+          font-size: 1.2em;
+        }
+      }
+
     }
     .job-details {
       width: 70vw;

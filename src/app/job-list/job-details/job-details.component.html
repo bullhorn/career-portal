@@ -22,47 +22,53 @@
 </header>
 
 <div>
-<div class="job-info">
-    <div class='job-description-card'>
-        <div *ngIf="!loading" >
-          <header [title]="job.title" theme="job" condensed="true">
-              <utils>
-                  <util-action icon="email" (click)="emailLink()" *ngIf="showShareButtons"></util-action>
-                  <util-action icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></util-action>
-                  <util-action icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></util-action>
-                  <util-action icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></util-action>
-                  <util-action icon="share" (click)="toggleShareButtons()"></util-action>
-                  <util-action icon="print" (click)="print()"></util-action>
-              </utils>
-              <div class="job-date">
-                  <i class="bhi-clock"></i>
-                  <div class="subtitleText" data-automation-id="bbo-assignments-title">{{ job.dateLastPublished | date: 'mediumDate'}}</div>
-              </div>
-          </header>
-          <div class="job-details" [innerHTML]="job.publicDescription"></div>
-          <footer>
-            <ng-container *ngIf="applyWithLinkedin">
-              <button theme="primary" icon="linkedin-f">Apply With Linkedin</button>
-              <span> OR </span>
-            </ng-container>
-            <button theme="primary" icon="upload" *ngIf="!alreadyApplied" (click)="apply()">Apply with Resume</button>
-            <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
-          </footer>
-        </div>
-    </div>
-    
-</div>
-<div class="related-jobs">
-    <novo-card *ngFor="let relatedJob of relatedJobs" icon="job" [title]="relatedJob.title" (click)="getJob(relatedJob.id)" [routerLink]="'/job/' + relatedJob.id">
-        <div class="location">
-            <i class="bhi-location"></i>  
-            <span class="location-text">{{relatedJob.address.city}}, {{relatedJob.address.state}}</span>
-        </div>
-        <div class="published-date">
-            <i class="bhi-clock-arrow"></i>  
-            <span class="published-date-text">{{ relatedJob.dateLastPublished | date: 'mediumDate'}}</span>
-        </div>
-</novo-card>
+  <div class="job-info">
+      <div class='job-description-card'>
+          <div *ngIf="!loading" >
+            <header [title]="job.title" theme="job" condensed="true">
+                <utils>
+                    <util-action icon="email" (click)="emailLink()" *ngIf="showShareButtons"></util-action>
+                    <util-action icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></util-action>
+                    <util-action icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></util-action>
+                    <util-action icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></util-action>
+                    <util-action icon="share" (click)="toggleShareButtons()"></util-action>
+                    <util-action icon="print" (click)="print()"></util-action>
+                </utils>
+                <div class="job-header-details">{{ job.publishedCategory.name }}</div>
+                <div class="job-header-details">{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{ job.address.state }}
+                  <span class="separator" *ngIf="(job.address.city || job.address.state) && job.employmentType">|</span>
+                  <!-- TYPE -->
+                  <span class="type">{{ job.employmentType }}</span>
+                </div>
+                <div class="job-header-details">
+                    <i class="bhi-clock"></i>
+                    <div class="subtitleText" data-automation-id="bbo-assignments-title">{{ job.dateLastPublished | date: 'mediumDate'}}</div>
+                </div>
+            </header>
+            <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
+            <footer>
+              <ng-container *ngIf="applyWithLinkedin">
+                <button theme="primary" icon="linkedin-f">Apply With Linkedin</button>
+                <span> OR </span>
+              </ng-container>
+              <button theme="primary" icon="upload" *ngIf="!alreadyApplied" (click)="apply()">Apply with Resume</button>
+              <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
+            </footer>
+          </div>
+      </div>
 
-</div>
+  </div>
+  <div class="related-jobs">
+      <novo-card *ngFor="let relatedJob of relatedJobs" icon="job" [title]="relatedJob.title" (click)="getJob(relatedJob.id)" [routerLink]="'/job/' + relatedJob.id">
+          <div class="location">
+              <i class="bhi-location"></i>
+              <span class="location-text">{{relatedJob.address.city}}, {{relatedJob.address.state}}</span>
+          </div>
+          <div class="published-date">
+              <i class="bhi-clock-arrow"></i>
+              <span class="published-date-text">{{ relatedJob.dateLastPublished | date: 'mediumDate'}}</span>
+          </div>
+      </novo-card>
+
+  </div>
 </div>
