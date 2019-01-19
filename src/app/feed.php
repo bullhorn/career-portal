@@ -36,20 +36,19 @@ class DataSource {
     public function getJobData() {
         $url = 'https://public-rest'.$this->getSwimlane().
             '.bullhornstaffing.com/rest-services/'.$this->getCorpToken().
-            'query=(isOpen:1%20AND%20isDeleted:0) '.
+            '/search/JobOrder?query=(isOpen:1%20AND%20isDeleted:0)'.
             $this->getQuery().
             '&fields=id,title,address(city,state,zip),employmentType,dateLastPublished,publicDescription&count=500&sort=-dateLastPublished&start=0';
-        error_log($url);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPGET, 1);
-        return curl_exec($ch)->data;
+        return json_decode(curl_exec($ch))->data;
     }
 
     public function setConfigOptions() {
-        $config = json_decode(file_get_contents(__DIR__	."/app.json"));
-        $this->swimlane = $config->swimlane;
-        $this->corpToken = $config->corpToken;
+        $config =  json_decode(file_get_contents('http://'.$_SERVER['HTTP_HOST'].str_replace('feed.php','app.json',$_SERVER['REQUEST_URI'])));
+        $this->swimlane = $config->service->swimlane;
+        $this->corpToken = $config->service->corpToken;
         $this->xmlEnabled = $config->jobXmlEnabled;
         $this->filterField = $config->additionalJobCriteria->field;
         $this->filterValues = $config->additionalJobCriteria->values;
@@ -71,6 +70,10 @@ class DataSource {
         return $this->corpToken;
     }
 
+    /**
+     * getQuery
+     * @return string
+     */
     private function getQuery() {
         if ($this->filterField == true && count($this->filterValues) > 0 && $this->filterField !== '[ FILTER FIELD HERE ]' && $this->filterValues[0] !== '[ FILTER VALUE HERE ]') {
             $query = ' AND (';
@@ -78,7 +81,9 @@ class DataSource {
                 $query .= ' OR ';
                 $query .= $this->filterValues.':"'.$value.'"';
             }
+            return $query;
         }
+        return '';
     }
 }
 
@@ -89,20 +94,36 @@ $data = $dataClass->getJobData();
 
 $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $timestamp = time();
-$output = '<rss version="2.0"><channel><title> Job Opportunities </title><link>' .$url.'</link><pubDate>'.date('D, d M Y H:i:s e', $timestamp).'</pubDate><ttl>5</ttl>';
+$output = '<rss version="2.0"><channel><title> Job Opportunities </title><link>' .$url.'</link><pubDate>'.date('D, d M Y H:i:s T', $timestamp).'</pubDate><ttl>5</ttl>';
 
 foreach($data as $job) {
-    $properties = [
+    $properties = array(
       'title'=>'title',
       'employmentType'=>'jobType',
       'publicDescription'=>'description',
       'address'=>'address',
       'dateLastPublished' => 'date',
       'url' => 'link',
-    ];
+    );
     $output .= '<item>';
-    foreach($properties as $key => $value){
-        $output .= '<'.$value.'>'.$job[$key].'</'.$value.'>';
+    foreach($properties as $key => $value) {
+        switch ($key) {
+            case 'address':
+                $output .= '<city>'.htmlspecialchars($job->$key->city).'</city>';
+                $output .= '<state>'.htmlspecialchars($job->$key->state).'</state>';
+                $output .= '<zip>'.htmlspecialchars($job->$key->zip).'</zip>';
+                break;
+            case 'url':
+                $output .= '<'.$value.'>'.htmlspecialchars(str_replace('feed.php','#/jobs/'.$job->id,$url)).'</'.$value.'>';
+                break;
+            default:
+                $fieldValue = $job->$key;
+                if(is_array($fieldValue)) {
+                    $fieldValue = $fieldValue[0];
+                }
+                $output .= '<'.$value.'>'.htmlspecialchars($fieldValue).'</'.$value.'>';
+                break;
+        }
     }
     $output .= '</item>';
 
