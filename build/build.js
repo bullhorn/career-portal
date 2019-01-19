@@ -97,7 +97,7 @@ gulp.task('other', ['config:app'], function () {
 
     return gulp.src([
         path.join(conf.paths.src, '/**/*'),
-        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,template}'),
+        path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss,template,php}'),
         path.join('!' + conf.paths.src, '/web.config')
     ])
         .pipe(fileFilter)

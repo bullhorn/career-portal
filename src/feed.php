@@ -34,15 +34,18 @@ class DataSource {
      * @return array
      */
     public function getJobData() {
-        $url = 'https://public-rest'.$this->getSwimlane().
+        if(xmlEnabled) {
+            $url = 'https://public-rest'.$this->getSwimlane().
             '.bullhornstaffing.com/rest-services/'.$this->getCorpToken().
             '/search/JobOrder?query=(isOpen:1%20AND%20isDeleted:0)'.
             $this->getQuery().
             '&fields=id,title,address(city,state,zip),employmentType,dateLastPublished,publicDescription&count=500&sort=-dateLastPublished&start=0';
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPGET, 1);
-        return json_decode(curl_exec($ch))->data;
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, 1);
+            return json_decode(curl_exec($ch))->data;
+        }
+        return [];
     }
 
     public function setConfigOptions() {
