@@ -49,7 +49,7 @@ class DataSource {
     }
 
     public function setConfigOptions() {
-        $config =  json_decode(file_get_contents('http://'.$_SERVER['HTTP_HOST'].str_replace('feed.php','app.json',$_SERVER['REQUEST_URI'])));
+        $config =  json_decode(file_get_contents('http://'.$_SERVER['HTTP_HOST'].str_replace('feed','app.json',$_SERVER['REQUEST_URI'])));
         $this->swimlane = $config->service->swimlane;
         $this->corpToken = $config->service->corpToken;
         $this->xmlEnabled = $config->jobXmlEnabled;
@@ -117,7 +117,10 @@ foreach($data as $job) {
                 $output .= '<zip>'.htmlspecialchars($job->$key->zip).'</zip>';
                 break;
             case 'url':
-                $output .= '<'.$value.'>'.htmlspecialchars(str_replace('feed.php','#/jobs/'.$job->id,$url)).'</'.$value.'>';
+                $output .= '<'.$value.'>'.htmlspecialchars(str_replace('feed','#/jobs'.$job->id,$url)).'</'.$value.'>';
+                break;
+            case 'dateLastPublished':
+                $output .= '<'.$value.'>'.htmlspecialchars(date('D, d M Y H:i:s T', $job->$key/1000)).'</'.$value.'>';
                 break;
             default:
                 $fieldValue = $job->$key;
@@ -135,4 +138,4 @@ foreach($data as $job) {
 
 $output .= '</channel></rss>';
 
-echo $output;
+echo $output.$url;

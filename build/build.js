@@ -41,6 +41,16 @@ gulp.task('partials', function () {
 
 var wiredep = require('wiredep').stream;
 
+gulp.task('php', function () {
+    var fileFilter = $.filter('**/*.php', { restore: true });
+    return gulp.src([
+        path.join(conf.paths.src, '/**/*'),
+        path.join('!' + conf.paths.src, '/**/*.{php}')
+    ])
+    .pipe(fileFilter)
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/feed/')));
+});
+
 gulp.task('html', ['inject', 'partials'], function () {
     var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
     var partialsInjectOptions = {
@@ -108,4 +118,4 @@ gulp.task('clean', function () {
     $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/'), conf.paths.zip]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['html', 'fonts', 'other', 'php']);
