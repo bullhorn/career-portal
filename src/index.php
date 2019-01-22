@@ -20,6 +20,8 @@ class DataSource {
     private $filterField;
     /** @var array $filterValues */
     private $filterValues;
+    /** @var string $companyName */
+    private $companyName;
 
 
     /**
@@ -52,9 +54,19 @@ class DataSource {
         $config =  json_decode(file_get_contents('http://'.$_SERVER['HTTP_HOST'].str_replace('feed/','app.json',$_SERVER['REQUEST_URI'])));
         $this->swimlane = $config->service->swimlane;
         $this->corpToken = $config->service->corpToken;
-        $this->xmlEnabled = $config->jobXmlEnabled;
+        $this->xmlEnabled = $config->jobRssEnabled;
         $this->filterField = $config->additionalJobCriteria->field;
         $this->filterValues = $config->additionalJobCriteria->values;
+        $this->filterValues = $config->additionalJobCriteria->values;
+        $this->companyName = $config->companyName;
+    }
+
+    /**
+     * getCompanyName
+     * @return string
+     */
+    public function getCompanyName() {
+        return $this->companyName;
     }
 
     /**
@@ -91,13 +103,13 @@ class DataSource {
 }
 
 
-$dataClass = new DataSource();
-$data = $dataClass->getJobData();
+$dataSource = new DataSource();
+$data = $dataSource->getJobData();
 
 
 $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 $timestamp = time();
-$output = '<rss version="2.0"><channel><title> Job Opportunities </title><link>' .$url.'</link><pubDate>'.date('D, d M Y H:i:s T', $timestamp).'</pubDate><ttl>5</ttl>';
+$output = '<rss version="2.0"><channel><title>'.$dataSource->getCompanyName().' Job Opportunities</title><link>' .$url.'</link><pubDate>'.date('D, d M Y H:i:s T', $timestamp).'</pubDate><ttl>5</ttl>';
 
 foreach($data as $job) {
     $properties = array(
@@ -105,7 +117,7 @@ foreach($data as $job) {
       'employmentType'=>'jobType',
       'publicDescription'=>'description',
       'address'=>'address',
-      'dateLastPublished' => 'date',
+      'dateLastPublished' => 'pubDate',
       'url' => 'link',
     );
     $output .= '<item>';
