@@ -4,25 +4,6 @@ item-end {
   }
 }
 
-novo-list {
-  overflow: auto;
-  min-height: 61.3vh;
-  novo-list-item  {
-    item-content {
-      span, b {
-        color: rgba(67, 67, 67, 0.65);
-      }
-      .bhi-next {
-        color: #3399DD;
-      }
-    }
-    item-header {
-      item-title {
-          color: #434343;
-      }
-    }
-  }
-}
 @media only screen and (min-width: 768px) {
   :host{
     >header {
@@ -31,22 +12,4 @@ novo-list {
       }
     }
   }
-}
-
-.empty-list {
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999999;
-  font-size: 1.7em;
-  i {
-    margin-right: 15px;
-  }
-}
-
-.load-more-button {
-  padding: 10px 0;
-  background-color: rgb(47, 56, 79);
-  text-align: center;
 }

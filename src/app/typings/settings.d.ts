@@ -6,10 +6,11 @@ interface ISettings {
   minUploadSize: number,
   maxRelatedJobs: number,
   maxUploadSize: number,
-  service: IServiceSettings
+  service: IServiceSettings,
   integrations: IIntegrationSettings,
   defaultGridState: string,
   darkTheme: boolean,
+  theme: IThemeInfo,
   eeoc: IEeoc
 }
 
@@ -27,6 +28,11 @@ interface IIntegrationSettings {
 
 interface ILinkedinSettings {
   clientId: string
+}
+
+interface IThemeInfo {
+  themeName: string;
+  options?: any;
 }
 
 interface IEeoc {

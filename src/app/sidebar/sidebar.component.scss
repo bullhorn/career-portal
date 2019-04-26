@@ -1,5 +1,5 @@
 :host {
-  background-color: #2F383F;
+  background-color: var(--darkest-bg);
   novo-form {
     margin-top: 30px;
     padding-right: 20px;
@@ -30,9 +30,9 @@
   @media only screen and (min-width: 768px) {
     .header{
       >header {
-        color: #bb5566;
+        color: var(--job-header);
         h1 {
-          color: #D9DADC;
+          color: var(--primary-light);
         }
         util-action {
           display: none;

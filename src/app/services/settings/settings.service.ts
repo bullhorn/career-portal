@@ -14,6 +14,7 @@ export class SettingsService {
   private service: IServiceSettings;
   private integrations: IIntegrationSettings;
   private defaultGridState: string;
+  private themetheme: IThemeInfo;
   private eeoc: IEeoc;
   private darkTheme: boolean;
 

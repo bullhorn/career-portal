@@ -14,24 +14,37 @@ novo-file-input {
 }
 
 app-job-list {
-  novo-list-item  {
-    border-bottom: 1px solid #d6d6d6 !important;
 
-    div.list-item {
-      item-content i{
-       color: #474747;
-      }
-      >item-header item-title { 
-        >h6 {
-          color: #474747;
+  novo-list {
+    overflow: auto;
+    min-height: 61.3vh;
+    novo-list-item  {
+      border-bottom: 1px solid var(--primary-dark) !important;
+      div.list-item {
+        item-content{
+          i{
+            color: var(--primary-dark);
+          }
+          span, b {
+            color: rgba(67, 67, 67, 0.65);
+          }
+          .bhi-next {
+            color: var(--main-header);
+          }
+        }
+        >item-header item-title {
+          >h6 {
+            color: var(--primary-dark);
+          }
         }
       }
     }
   }
+
 }
 novo-search {
   padding: 17px;
-  border-bottom: 1px solid #3d464d;
+  border-bottom: 1px solid var(--dark-bg);
   > input[data-automation-id="novo-search-input"] {
     padding: 8px 10px;
     font-size: 1.3em;
@@ -55,7 +68,7 @@ novo-search {
 
 app-job-details novo-card header{
   padding: 10px 20px 10px 20px !important;
-  background-color: #BB5566;
+  background-color: var(--job-header);
   margin: 0;
   padding: 0;
   display: inline-block;
@@ -77,7 +90,7 @@ app-job-details novo-card header{
 .header{
   >header {
     h1 {
-      color: #D9DADC;
+      color: var(--primary-light);
     }
   }
 }
@@ -86,6 +99,24 @@ app-job-details novo-card header{
   p {
     max-width: 100em;
   }
+}
+
+.empty-list {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-bg);
+  font-size: 1.7em;
+  i {
+    margin-right: 15px;
+  }
+}
+
+.load-more-button {
+  padding: 10px 0;
+  background-color: rgb(47, 56, 79);
+  text-align: center;
 }
 
 app-sidebar {

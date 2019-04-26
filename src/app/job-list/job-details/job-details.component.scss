@@ -42,7 +42,7 @@
       }
     }
     .related-jobs{
-      background-color: #F4F4F4;
+      background-color: var(--light-bg);
       min-width: 30vw;
       padding: 30px;
       novo-card {
@@ -76,7 +76,7 @@
       }
     }
     footer {
-      background: #F4F4F4;
+      background: var(--light-bg);
       height: 59px;
       padding: 10px;
       position: fixed;
