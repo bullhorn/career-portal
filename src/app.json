@@ -1,77 +1,66 @@
 {
-    "acceptedResumeTypes": [
-        "html",
-        "text",
-        "txt",
-        "pdf",
-        "doc",
-        "docx",
-        "rtf",
-        "odt"
+  "acceptedResumeTypes": [
+    "html",
+    "text",
+    "txt",
+    "pdf",
+    "doc",
+    "docx",
+    "rtf",
+    "odt"
+  ],
+  "companyName": "Test SL2 Career Portal",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+    "en-US",
+    "fr-FR"
+  ],
+  "minUploadSize": 4096,
+  "maxRelatedJobs": 5,
+  "maxUploadSize": 5242880,
+  "service": {
+    "batchSize": 500,
+    "corpToken": "520R3D",
+    "port": null,
+    "swimlane": "99",
+    "fields": [
+      "id",
+      "title",
+      "publishedCategory(id,name)",
+      "address(city,state)",
+      "employmentType",
+      "dateLastPublished",
+      "publicDescription",
+      "isOpen",
+      "isPublic",
+      "isDeleted"
+    ]
+  },
+  "additionalJobCriteria": {
+    "field": "[ FILTER FIELD HERE ]",
+    "values": [
+      "[ FILTER VALUE HERE ]"
     ],
-    "companyName": "Demo-company",
-    "defaultLocale": "en-US",
-    "supportedLocales": [
-        "en-US",
-        "fr-FR"
-    ],
-    "minUploadSize": 4096,
-    "maxRelatedJobs": 5,
-    "maxUploadSize": 5242880,
-    "defaultFilter": {
-        "field": "",
-        "value": ""
-    },
-    "service": {
-        "batchSize": 500,
-        "corpToken": "28DJK9",
-        "port": 443,
-        "swimlane": "9",
-        "fields": "id,title,publishedCategory(id,name),address(city,state),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted",
-        "filterFields": [
-            { 
-                "field": "publishedCategory", 
-                "label": "name", 
-                "value": "id" ,
-                "valueType": "number",
-                "fieldLabel": "category"
-            },
-            {
-                "field": "address(city)",
-                "label": "city",
-                "value": "city",
-                "valueType": "string",
-                "fieldLabel": "City"
-            },
-            {
-                "field": "address(state)",
-                "label": "state",
-                "value": "state",
-                "valueType": "string",
-                "fieldLabel": "State"
-            },
-            {
-                "field": "employmentType",
-                "label": "employmentType",
-                "value": "employmentType",
-                "valueType": "string",
-                "fieldLabel": "Employment Type"
-            }
-        ]
-    },
-    "integrations": {
-        "linkedin": {
-            "clientId": ""
-        },
-        "googleAnalytics": {
-            "trackingId": "UA-114837554-1"
-        }
-    },
-    "defaultGridState": "list-view",
-    "darkTheme": false,
-    "eeoc": {
-        "genderRaceEthnicity": true,
-        "veteran": true,
-        "disability": true
+    "sort": "-dateLastPublished"
+  },
+  "integrations": {
+    "googleAnalytics": {
+        "trackingId": "UA-114837554-1"
     }
+},
+  "eeoc": {
+    "genderRaceEthnicity": false,
+    "veteran": false,
+    "disability": false
+  },
+  "privacyConsent": {
+    "consentCheckbox": true,
+    "privacyStatementParagraphs": [
+      "[FIRST PARAGRAPH]",
+      "[SECOND PARAGRAPH]"
+    ],
+    "privacyPolicyUrl": "https://privacy.google.com/",
+    "usePrivacyPolicyUrl": true
+  },
+  "jobRssEnabled": true
 }

@@ -22,7 +22,7 @@ export class JobListComponent implements OnChanges {
   private start: number = 0;
 
   constructor(private http: SearchService, private settings: SettingsService) {
-    this.title = this.settings.getSetting('companyName');
+    this.title = SettingsService.settings.companyName;
    }
 
   public ngOnChanges(changes: SimpleChanges): any {

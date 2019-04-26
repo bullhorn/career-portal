@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ApplyService {
 
-  public constructor(private http: HttpClient, public settings: SettingsService) { 
-   
+  public constructor(private http: HttpClient, public settings: SettingsService) {
+
   }
   get baseUrl(): string {
-    let service: IServiceSettings = this.settings.getSetting('service');
+    let service: IServiceSettings = SettingsService.settings.service;
     let port: number = service.port ? service.port : 443;
     let scheme: string = `http${ service.port === 443  ? 's' : '' }`;
 
@@ -30,7 +30,7 @@ export class ApplyService {
     }
 
     let applyParams: any = this.assembleParams(params);
-    return this.http.post(`${this.baseUrl}/${id}/raw?${applyParams}`, body); 
+    return this.http.post(`${this.baseUrl}/${id}/raw?${applyParams}`, body);
   }
 
   private assembleParams(data: any): string {

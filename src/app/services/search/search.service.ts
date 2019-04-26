@@ -9,7 +9,7 @@ export class SearchService {
   public constructor(private http: HttpClient, public settings: SettingsService) {  }
 
   get baseUrl(): string {
-    let service: IServiceSettings = this.settings.getSetting('service');
+    let service: IServiceSettings = SettingsService.settings.service;
     let port: number = service.port ? service.port : 443;
     let scheme: string = `http${ service.port === 443  ? 's' : '' }`;
 
@@ -26,7 +26,7 @@ export class SearchService {
       defaultFilter = '';
     }
     params.where = `(isOpen=true) AND (isDeleted=false)${defaultFilter}${this.parseFilter(filter, false)}`;
-    params.fields = this.settings.getSetting('service').fields;
+    params.fields = SettingsService.settings.service.fields;
     params.count = count;
     params.sort = '-dateLastPublished';
 
@@ -39,7 +39,7 @@ export class SearchService {
   }
 
   public openJob(id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${parseInt(id)})&fields=${this.settings.getSetting('service').fields}`); // tslint:disable-line
+    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${parseInt(id)})&fields=${SettingsService.settings.service.fields}`);
   }
 
   public getCurrentJobIds(filter: any, start: number): Observable<any> {
@@ -63,7 +63,7 @@ export class SearchService {
     }
     let queryString: string = queryArray.join('&');
 
-    return this.http.get(`${this.baseUrl}/search/JobOrder?${queryString}`); // tslint:disable-line
+    return this.http.get(`${this.baseUrl}/search/JobOrder?${queryString}`);
   }
 
   public getAvailableFilterOptions(ids: number[], field: string): Observable<any> {
@@ -74,7 +74,7 @@ export class SearchService {
     params.fields = `${field},count(id)`;
     params.groupBy = field;
     params.sort = 'id';
-    params.orderBy = '-count.id';
+    params.orderBy = SettingsService.settings.additionalJobCriteria.sort;
 
     for (let key in params) {
       queryArray.push(`${key}=${params[key]}`);
@@ -130,16 +130,26 @@ export class SearchService {
     return query ? query : '';
   }
 
-  private handleFilterFields(): string {
-    let fields: any = '';
-    this.settings.getSetting('service').filterFields.forEach((filterField: any) => {
-      if (filterField.label === filterField.value) {
-        fields += `${filterField.label},`;
-      } else {
-       fields += `${filterField.field}(${filterField.label},${filterField.value}),`;
+  private formatAdditionalCriteria(isSearch: boolean): string {
+  let field: string =  SettingsService.settings.additionalJobCriteria.field;
+  let values: string[] = SettingsService.settings.additionalJobCriteria.values;
+  let query: string = '';
+  let delimiter: '"' | '\'' = isSearch ? '"' : '\'';
+  let equals: ':' | '=' = isSearch ? ':' : '=';
+
+  if (field && values.length > 0 && field !== '[ FILTER FIELD HERE ]' && values[0] !== '[ FILTER VALUE HERE ]') {
+      for (let i = 0; i < values.length; i++) {
+          if (i > 0) {
+              query += ` OR `;
+          } else {
+              query += ' AND (';
+          }
+          query += `${field}${equals}${delimiter}${values[i]}${delimiter}`;
       }
-    });
-    return fields;
+      query += ')';
+  }
+  return query;
+
   }
 
 }
