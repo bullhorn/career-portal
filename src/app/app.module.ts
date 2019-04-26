@@ -46,7 +46,7 @@ export function initSettings(settings: SettingsService): any {
     ErrorModalComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     NovoElementsModule,
     NovoListModule,

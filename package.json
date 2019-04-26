@@ -8,7 +8,11 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run career-portal-ng5:server:production"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +29,8 @@
     "@angular/router": "^7.1.2",
     "@bullhorn/bullhorn-icons": "2.3.0",
     "@bullhorn/dragula": "1.0.1",
+    "@nguniversal/express-engine": "^7.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "0.0.0",
     "ace-builds": "1.3.1",
     "angular2-text-mask": "^9.0.0",
     "angular2-universal": "^2.1.0-rc.1",
@@ -64,8 +70,10 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
+    "ts-loader": "^5.2.0",
     "ts-node": "~4.1.0",
     "tslint": "^5.11.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "webpack-cli": "^3.1.0"
   }
 }
