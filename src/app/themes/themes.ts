@@ -1,11 +1,13 @@
 export const themeDefault: IThemeInfo = {
   themeName: 'default',
   options:
-  [['main-header', '#3399dd'],
-  ['job-header', '#bb5566'],
-  ['primary-dark', '#474747'],
-  ['primary-light', '#D9DADC'],
-  ['darkest-bg', '#2F383F'],
-  ['dark-bg', '#2F383F'],
-  ['light-bg', '#F4F4F4']],
+  [
+    { name: 'main-header', value: '#3399dd' },
+    { name: 'job-header', value: '#bb5566'},
+    { name: 'primary-dark', value: '#474747'},
+    { name: 'primary-light', value: '#D9DADC'},
+    { name: 'darkest-bg', value: '#2F383F'},
+    { name: 'dark-bg', value: '#2F383F'},
+    { name: 'light-bg', value: '#F4F4F4'},
+    ],
 };

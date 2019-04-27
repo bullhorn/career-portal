@@ -25,24 +25,33 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const themeConfig: IThemeInfo = this.settings.getSetting('theme');
-
-    let themeOptions: any;
-    if (themeConfig && themeConfig.themeName === 'custom' && themeConfig.options) {
-      themeOptions = new Map(themeConfig.options);
-    } else if (!themeConfig || (themeConfig.themeName === 'custom' && !themeConfig.options) || (themeConfig && themeConfig.themeName === 'default')) {
-      themeOptions = new Map(themeDefault.options);
-    } else {
-      themeOptions = new Map(themeDefault.options);
-    }
-
-    Array.from(themeOptions.entries()).forEach(([name, value]) => {
-      document.body.style.setProperty(`--${name}`, value);
-    });
-
+    this.setTheme();
   }
 
   public action(): void {
 
+  }
+
+  public setTheme(): void {
+    const themeConfig: IThemeInfo = this.settings.getSetting('theme');
+
+    let themeOptions: {name: string, value: string}[];
+    if (themeConfig && themeConfig.themeName === 'custom' && themeConfig.options) {
+      themeOptions = themeConfig.options;
+    } else if (!themeConfig || (themeConfig.themeName === 'custom' && !themeConfig.options) || (themeConfig && themeConfig.themeName === 'default')) {
+      themeOptions = themeDefault.options;
+    } else {
+      themeOptions = themeDefault.options;
+    }
+    // push defaults if there is a missing style
+    themeDefault.options.forEach((defaultOption: {name: string, value: string}) => {
+      if (!themeOptions.find((option: {name: string, value: string}) => option.name === defaultOption.name)) {
+        themeOptions.push(defaultOption);
+      }
+    });
+
+    themeOptions.forEach((option: {name: string, value: string}) => {
+      document.body.style.setProperty(`--${option.name}`, option.value);
+    });
   }
 }
