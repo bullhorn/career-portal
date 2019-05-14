@@ -7,6 +7,9 @@ import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 
 import * as express from 'express';
 import { join } from 'path';
+import { createWindow } from 'domino';
+import { readFileSync } from 'fs';
+import * as path from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -16,6 +19,10 @@ const app: any = express();
 
 const PORT: string | number = process.env.PORT || 4000;
 const DIST_FOLDER: string = join(process.cwd(), 'dist/browser');
+const template: any = readFileSync(path.join(join(DIST_FOLDER, 'index.html'))).toString();
+const win: Window = createWindow(template);
+global['window'] = win;
+global['document'] = win.document;
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
