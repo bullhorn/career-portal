@@ -71,7 +71,7 @@ export class SidebarComponent implements OnInit {
 
   public clearForm(): void {
     for (let filter in this.filterForm) {
-      this.filterForm[filter]= [];
+      this.filterForm[filter] = [];
     }
     this.filter.emit(this.filterForm);
     this.buildCopyUrl();
@@ -117,80 +117,6 @@ export class SidebarComponent implements OnInit {
       this.updatedFilterOptions = [];
     }
     this.idLoopCount = 0;
-    this.settings.getSetting('service').filterFields.forEach((filterField: any) => {
-
-      if (filterField.label === filterField.value) {
-        this.service.getAvailableFilterOptions(this.idList, filterField.field).subscribe((response: any) => {
-          this.parseFilterOptionsOnSuccess(response.data, filterField);
-        });
-      } else {
-        this.service.getAvailableFilterOptions(this.idList, `${filterField.field}(${filterField.label},${filterField.value})`).subscribe((response: any) => {
-          this.parseFilterOptionsOnSuccess(response.data, filterField);
-        });
-      }
-    });
-  }
-
-  private parseFilterOptionsOnSuccess(data: any, field: any): void {
-    let options: any[] = [];
-    let key: string;
-    if (field.value !== field.label) {
-      options = data.reduce((reducedOptions: any, result: any) => {
-        if (result[field.field] && result[field.field] !== null) {
-          reducedOptions.push({value: result[field.field][field.value], label: `${result[field.field][field.label]} [${result.idCount}]`});
-        }
-        return reducedOptions;
-      }, []);
-      key = `${field.field}.${field.value}`;
-    } else if (field.field.indexOf('(') > -1) {
-      options = data.reduce((reducedOptions: any, result: any) => {
-        if (result[field.field.split(/[()]/g)[0]][field.label]) {
-          reducedOptions.push({value: result[field.field.split(/[()]/g)[0]][field.value], label: `${result[field.field.split(/[()]/g)[0]][field.label]}  [${result.idCount}]`});
-        }
-        return reducedOptions;
-      }, []);
-      key = field.field;
-    } else {
-      options = data.reduce((reducedOptions: any, result: any) => {
-        if (result[field.value]) {
-          reducedOptions.push({value: `${result[field.value]}`, label: `${result[field.value]} [${result.idCount}]`});
-        }
-        return reducedOptions;
-      }, []);
-      key = field.field;
-    }
-
-    this.defaultFilters[key] = this.filterForm[key];
-
-    if (this.isFormSet) {
-      this.updatedFilterOptions.push(
-        {
-          key: key,
-          options: options,
-        },
-      );
-
-      if (this.settings.getSetting('service').filterFields.length === this.updatedFilterOptions.length) {
-        this.updateForm();
-      }
-
-    } else {
-      this.filterOptions.push(
-        {
-          key: key,
-          config: {options: options},
-          label: field.fieldLabel,
-          multiple: true,
-          interactions: [
-            {event: 'change', script: this.updateFilterOptions, invokeOnInit: false},
-          ],
-        },
-      );
-
-      if (this.settings.getSetting('service').filterFields.length === this.filterOptions.length) {
-        this.setupForm();
-      }
-    }
   }
 
   private updateForm(): void {
