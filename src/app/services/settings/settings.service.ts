@@ -24,9 +24,9 @@ export class SettingsService {
   }
 
   public load(): Promise<any> {
-    let request: Promise<any> = this.http.get(APP_CONFIG_URL).toPromise();   
+    let request: Promise<any> = this.http.get('http://localhost:4000/app.json').toPromise();
     request.then(this.parseConfig.bind(this));
-    
+
     return request;
   }
 
