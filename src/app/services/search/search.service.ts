@@ -11,9 +11,9 @@ export class SearchService {
   get baseUrl(): string {
     let service: IServiceSettings = SettingsService.settings.service;
     let port: number = service.port ? service.port : 443;
-    let scheme: string = `http${ service.port === 443  ? 's' : '' }`;
+    let scheme: string = `http${ port === 443  ? 's' : '' }`;
 
-    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${service.port}/rest-services/${service.corpToken}`;
+    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}`;
   }
 
   public getjobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
@@ -35,7 +35,7 @@ export class SearchService {
     return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${parseInt(id)})&fields=${SettingsService.settings.service.fields}`);
   }
 
-  public getCurrentJobIds(filter: any, start: number): Observable<any> {
+  public getCurrentJobIds(filter: any): Observable<any> {
     let queryArray: string[] = [];
     let params: any = {};
 
@@ -43,7 +43,6 @@ export class SearchService {
     params.count = `500`;
     params.fields = 'id';
     params.sort = 'id';
-    params.start = start;
 
     for (let key in params) {
       queryArray.push(`${key}=${params[key]}`);

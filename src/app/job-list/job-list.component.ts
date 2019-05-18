@@ -21,8 +21,7 @@ export class JobListComponent implements OnChanges {
   public moreAvailable: boolean = true;
   private start: number = 0;
 
-  constructor(private http: SearchService, private settings: SettingsService) {
-    this.title = SettingsService.settings.companyName;
+  constructor(private http: SearchService) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {

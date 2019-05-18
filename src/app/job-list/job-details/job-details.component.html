@@ -1,26 +1,4 @@
 <novo-loading *ngIf="loading"></novo-loading>
-<header [title]="title" theme="company">
-  <utils>
-      <util-action icon="flag"></util-action>
-      <util-action icon="refresh" (click)="getJob()"></util-action>
-      <util-action icon="times" routerLink="/"></util-action>
-  </utils>
-  <!-- Waiting for new novo-elements version
-  <novo-icon theme="job" raised="true">job</novo-icon>
-  <div class="entity-header" novo-title>
-    <span class="id">123456</span>
-    <header-spacer></header-spacer>
-    <span class="name">Steve Jobs</span>
-    <header-spacer></header-spacer>
-    <span class="links">
-        <button theme="icon" [icon]="'google'"></button>
-        <button theme="icon" [icon]="'linkedin-f'"></button>
-        <button theme="icon" [icon]="'location'"></button>
-    </span>
-    </div>
--->
-</header>
-
 <div>
   <div class="job-info">
       <div class='job-description-card'>

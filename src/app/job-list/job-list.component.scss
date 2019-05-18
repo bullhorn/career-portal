@@ -1,27 +1,53 @@
-item-end {
-  .mid-card {
-    padding: 0 4px 0 4px;
+:host {
+  
+  div.open-positions {
+      font-weight: 600;
+      font-size: 1.5em;
+      margin: 30px 34px 22px 35px
   }
 }
 
 novo-list {
   overflow: auto;
   min-height: 61.3vh;
-  novo-list-item  {
-    item-content {
-      span, b {
-        color: rgba(67, 67, 67, 0.65);
-      }
-      .bhi-next {
-        color: #3399DD;
-      }
+  .job-card {
+    margin: 12px 35px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, .1);
+    padding-bottom: 10px;
+    .description {
+      display: inline-block;
+      word-wrap: break-word;
+      overflow: hidden;
+      max-height: 3.6em;
+      line-height: 1.8em;
+      padding: 0px 15px 15px 15px;
     }
-    item-header {
-      item-title {
-          color: #434343;
+    novo-list-item  {
+      item-content {
+        span, b {
+          color: rgba(67, 67, 67, 0.65);
+        }
+        .bhi-next {
+          color: #3399DD;
+        }
+      }
+      item-header {
+        item-title {
+            color: #4a89dc;
+        }
+      }
+      item-header-end {
+        .mid-card {
+          color: #0B344F;
+          padding: 10px 10px;
+          margin: 5px;
+          background-color: #f4f4f4;
+          border-radius: 8px;
+        }
       }
     }
   }
+
 }
 @media only screen and (min-width: 768px) {
   :host{

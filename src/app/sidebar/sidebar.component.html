@@ -1,10 +1,4 @@
 <div class="header">
-    <header title="Filters" theme="dark" condensed="true">
-        <div class="entity-header" novo-title></div>
-        <utils>
-            <util-action (click)="closeSidebar()" icon="times"></util-action>
-        </utils>
-    </header>
 <novo-search placeholder="Keyword Search" alwaysOpen="true" [(ngModel)]="keyword" (ngModelChange)="searchOnDelay()"></novo-search>
 </div>
 <novo-loading *ngIf="loading"></novo-loading>
@@ -17,7 +11,6 @@
           <novo-control [control]="row" [form]="sidebarForm"></novo-control>
       </div>
   </novo-form>
-  <button *ngIf="filterUrl" icon="list-o" theme="dialogue" ngxClipboard [cbContent]="filterUrl">Copy This Search</button>
   <button *ngIf="filterUrl"  theme="dialogue" (click)="clearForm()">Clear This Search</button>
 </ng-container>
 

@@ -8,7 +8,7 @@ import { SettingsService } from './services/settings/settings.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title: string = 'app';
+  public title: string = SettingsService.settings.companyName;
 
   constructor(private router: Router) {
     let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
