@@ -19,7 +19,8 @@ interface IServiceSettings {
   corpToken: string;
   port: number|null;
   swimlane: number;
-  fields: string;
+  fields: string[];
+  keywordSearchFields: string[];
 }
 
 interface IIntegrationSettings {

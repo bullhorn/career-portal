@@ -10,7 +10,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 })
 export class JobListComponent implements OnChanges {
   @Input() public filter: any;
-  @Input() public filterUpdate: number;
+  @Input() public filterCount: number;
   @Input() public sidebarVisible: boolean = false;
   @ViewChild(JobDetailsComponent) public jobDetails: JobDetailsComponent;
   @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();

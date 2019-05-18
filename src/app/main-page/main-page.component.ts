@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main-page',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent {
 
-  public filterNumber: number = 1;
+  public filterCount: number = 1;
   public listFilter: any = {};
   public displaySidebar: boolean = false;
 
@@ -15,7 +15,7 @@ export class MainPageComponent {
 
   public onSidebarFilter(filter: any): void {
     this.listFilter = filter;
-    this.filterNumber++;
+    this.filterCount++;
   }
 
   public toggleSidebar(value: boolean): void {

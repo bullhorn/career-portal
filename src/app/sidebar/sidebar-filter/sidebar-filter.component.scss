@@ -1,0 +1,11 @@
+:host {
+  .filter-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 25px;
+    color: #2f384f;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+}

@@ -94,7 +94,16 @@ app-job-details novo-card header{
 }
 
 app-sidebar {
-  label {
-    color: #fff !important;
+  novo-check-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 20em;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    label {
+      color: #2F384F !important;
+      font-weight: 600;
+    }
   }
 }

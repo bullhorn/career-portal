@@ -34,6 +34,10 @@
       "isOpen",
       "isPublic",
       "isDeleted"
+    ],
+    "keywordSearchFields": [
+      "publicDescription",
+      "title"
     ]
   },
   "additionalJobCriteria": {

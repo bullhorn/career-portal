@@ -1,20 +1,17 @@
-import { Component, Output, OnInit, ViewChild, EventEmitter, ChangeDetectorRef, HostBinding, Input } from '@angular/core';
-import { SearchService } from '../services/search/search.service';
+import { Component, Output, EventEmitter, HostBinding, Input } from '@angular/core';
 import { SettingsService } from '../services/settings/settings.service';
-import { JobListComponent } from '../job-list/job-list.component';
-import { NovoFormGroup, FormUtils, CheckListControl, PickerControl, FieldInteractionApi } from 'novo-elements';
-import { FormGroup } from '@angular/forms';
+import { NovoFormGroup } from 'novo-elements';
+import { SearchService } from '../services/search/search.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
-  @Output() public filter: EventEmitter<any> = new EventEmitter();
+  @Output() public newFilter: EventEmitter<any> = new EventEmitter();
   @HostBinding('class.active') @Input() public display: boolean = false;
-  @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();
 
   public filterUrl: any;
   public controls: any[] = [];
@@ -23,55 +20,44 @@ export class SidebarComponent implements OnInit {
   public keyword: string = '';
   public timeout: any;
   public loading: boolean = false;
-  private filterForm: any = {};
-  private idList: any[] = [];
-  private idLoopCount: number = 0;
-  private isFormSet: boolean = false;
+  public filter: object = {};
 
-  constructor(private service: SearchService, private settings: SettingsService, private ref: ChangeDetectorRef, private formUtils: FormUtils) { this.interactionSetup(); }
-
-  public ngOnInit(): void {
-  }
-
-  public interactionSetup(): void {
-    this.updateFilterOptions = (API: FieldInteractionApi): void => {
-      this.updateFilter(API.getActiveKey(), API.getActiveValue());
-      this.ref.markForCheck();
-    };
-  }
+  constructor(private searchService: SearchService) {}
 
   public searchOnDelay(): void {
+    const keywordSearchFields: string[] = SettingsService.settings.service.keywordSearchFields;
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
 
     this.timeout = setTimeout(() => {
-      this.filterForm['keyword'] = this.keyword;
-      this.service.getCurrentJobIds(this.filterForm).subscribe((response: any) => {
-        let ids: any = response.data.map((result: any) => { return result.id; });
-        this.updateFilter('id', ids.toString());
+      let searchString: string = '';
+      keywordSearchFields.forEach((field: string, index: number) => {
+        if (index > 0) {
+          searchString += ' OR ';
+        }
+        searchString += `${field}{?^^equals}${this.keyword}*`;
       });
+      delete this.filter['ids'];
+      this.filter['keyword'] = searchString;
+      this.searchService.getCurrentJobIds(this.filter, []).subscribe(this.handleJobIdsOnSuccess.bind(this));
     }, 250);
   }
 
-  public updateFilter(field: string, data: any): void {
-    if (typeof data === 'string' && data === '') {
-      data = [];
+  public updateFilter(field: string, httpFormatedFilter: string | string[]): void {
+    delete this.filter['keyword'];
+    this.filter[field] = httpFormatedFilter;
+    let filter: object = {};
+    Object.assign(filter, this.filter);
+    this.filter = filter; // triggering angular change detection
+    this.newFilter.emit(this.filter);
+  }
+
+  private handleJobIdsOnSuccess(res: any): void {
+    let resultIds: number[] = res.data.map((result: any) => { return result.id; });
+    if (resultIds.length === 0) {
+      resultIds.push(-1);
     }
-    this.filterForm[field] = data;
-    this.filter.emit(this.filterForm);
+    this.updateFilter('ids', `id IN (${resultIds.toString()})`);
   }
-
-  public clearForm(): void {
-    for (let filter in this.filterForm) {
-      this.filterForm[filter] = [];
-    }
-    this.filter.emit(this.filterForm);
-  }
-
-  public closeSidebar(): void {
-    this.display = false;
-    this.displaySidebar.emit(false);
-  }
-
 }

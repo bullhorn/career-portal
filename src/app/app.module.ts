@@ -12,6 +12,7 @@ import { SearchService } from './services/search/search.service';
 import { ShareService } from './services/share/share.service';
 import { ApplyService } from './services/apply/apply.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarFilterComponent } from './sidebar/sidebar-filter/sidebar-filter.component';
 
 import { NovoListModule, NovoElementsModule, NovoHeaderModule, NovoModalModule, NovoModalService, FieldInteractionApi, NovoToastService,  } from 'novo-elements';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -40,6 +41,7 @@ export function initSettings(settings: SettingsService): any {
     ApplyModalComponent,
     ErrorModalComponent,
     StripHtmlPipe,
+    SidebarFilterComponent,
 ],
   entryComponents: [
     ApplyModalComponent,

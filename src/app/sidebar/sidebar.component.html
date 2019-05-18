@@ -4,13 +4,9 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <ng-container *ngIf="!loading">
   <div class="filters">
-
+    <app-sidebar-filter field="publishedCategory(id,name)" title="Category" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" ></app-sidebar-filter>
+    <app-sidebar-filter field="address(city,state)" title="Location" [filter]="filter" (checkboxFilter)="updateFilter('address', $event)"></app-sidebar-filter>
   </div>
-  <novo-form *ngIf="sidebarForm" layout="vertical" [form]="sidebarForm">
-      <div class="novo-form-row" *ngFor="let row of controls">
-          <novo-control [control]="row" [form]="sidebarForm"></novo-control>
-      </div>
-  </novo-form>
   <button *ngIf="filterUrl"  theme="dialogue" (click)="clearForm()">Clear This Search</button>
 </ng-container>
 
