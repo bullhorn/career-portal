@@ -39,7 +39,9 @@ export class SidebarComponent {
         searchString += `${field}{?^^equals}${this.keyword}*`;
       });
       delete this.filter['ids'];
-      this.filter['keyword'] = searchString;
+      if (this.keyword) {
+        this.filter['keyword'] = searchString;
+      }
       this.searchService.getCurrentJobIds(this.filter, []).subscribe(this.handleJobIdsOnSuccess.bind(this));
     }, 250);
   }

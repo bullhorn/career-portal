@@ -32,9 +32,8 @@ export class SidebarFilterComponent implements OnChanges {
       default:
         break;
     }
-    if (!this.lastSetValue || (changes.filter.currentValue && changes.filter.currentValue[this.fieldName] && changes.filter.currentValue[this.fieldName] === changes.filter.previousValue[this.fieldName] && changes.filter.currentValue[this.fieldName] === this.lastSetValue)) {
-      // this.getFilterOptions();
-
+    if (changes.filter.firstChange) {
+      this.getFilterOptions();
     }
   }
 
@@ -64,9 +63,12 @@ export class SidebarFilterComponent implements OnChanges {
           };
         });
         interaction = (API: FieldInteractionApi) => {
-          let values: string[] = API.getActiveValue().map((value: {city: string, state: string}) => {
-            return `address.city{?^^equals}{?^^delimiter}${value.city}{?^^delimiter} AND address.state{?^^equals}{?^^delimiter}${value.state}{?^^delimiter}`;
-          });
+          let values: string[] = [];
+          if (API.getActiveValue()) {
+            values = API.getActiveValue().map((value: { city: string, state: string }) => {
+              return `address.city{?^^equals}{?^^delimiter}${value.city}{?^^delimiter} AND address.state{?^^equals}{?^^delimiter}${value.state}{?^^delimiter}`;
+            }); 
+          }
           this.lastSetValue = values;
           this.checkboxFilter.emit(values);
         };
@@ -79,9 +81,12 @@ export class SidebarFilterComponent implements OnChanges {
           };
         });
         interaction = (API: FieldInteractionApi) => {
-          let values: string[] = API.getActiveValue().map((value: number) => {
+          let values: string[] = [];
+          if (API.getActiveValue()) {
+          values = API.getActiveValue().map((value: number) => {
             return `publishedCategory.id{?^^equals}${value}`;
           });
+          }
           this.lastSetValue = values;
           this.checkboxFilter.emit(values);
         };
