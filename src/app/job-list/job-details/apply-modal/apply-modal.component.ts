@@ -134,8 +134,8 @@ export class ApplyModalComponent implements OnInit {
     this.resume = new FileControl({
       key: 'resume',
       required: true,
-      tooltip: `Accepted Resume types are ${SettingsService.settings.acceptedResumeTypes.toString()}`,
       hidden: false,
+      description: `Accepted Resume types are ${SettingsService.settings.acceptedResumeTypes.toString()}`,
     });
 
     this.formControls = [this.firstName, this.lastName, this.email, this.phoneNumber, this.resume];
