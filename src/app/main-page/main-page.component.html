@@ -1,5 +1,5 @@
 <div class="frame">
-    <app-sidebar (newFilter)="onSidebarFilter($event)" [display]="displaySidebar" (displaySidebar)="toggleSidebar($event)"></app-sidebar>
+    <app-sidebar (newFilter)="onSidebarFilter($event)" [display]="displaySidebar" (toggleSidebar)="toggleSidebar($event)" [ngStyle]="sidebarCss"></app-sidebar>
     <div class="list">
         <app-job-list [filterCount]="filterCount" [filter]="listFilter" [sidebarVisible]="displaySidebar" (displaySidebar)="toggleSidebar($event)" ></app-job-list>
     </div>

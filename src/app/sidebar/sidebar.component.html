@@ -1,4 +1,7 @@
 <div class="header">
+  <div class="close-filter-container">
+    <button theme="icon" (click)="hideSidebar()" icon="times"></button>
+  </div>
 <novo-search placeholder="Keyword Search" alwaysOpen="true" [(ngModel)]="keyword" (ngModelChange)="searchOnDelay()"></novo-search>
 </div>
 <novo-loading *ngIf="loading"></novo-loading>

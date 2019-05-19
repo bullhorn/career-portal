@@ -5,6 +5,9 @@
       font-size: 1.5em;
       margin: 30px 34px 22px 35px
   }
+  div.mobile-filter-container {
+    margin: 30px 34px 22px 35px
+  }
 }
 
 novo-list {
@@ -51,10 +54,8 @@ novo-list {
 }
 @media only screen and (min-width: 768px) {
   :host{
-    >header {
-      util-action {
-        display: none;
-      }
+    .mobile-filter-container {
+      display: none;
     }
   }
 }

@@ -11,6 +11,7 @@ import { SearchService } from '../services/search/search.service';
 export class SidebarComponent {
 
   @Output() public newFilter: EventEmitter<any> = new EventEmitter();
+  @Output() public toggleSidebar: EventEmitter<boolean> = new EventEmitter();
   @HostBinding('class.active') @Input() public display: boolean = false;
 
   public filterUrl: any;
@@ -53,6 +54,10 @@ export class SidebarComponent {
     Object.assign(filter, this.filter);
     this.filter = filter; // triggering angular change detection
     this.newFilter.emit(this.filter);
+  }
+
+  public hideSidebar(): void {
+    this.toggleSidebar.emit(false);
   }
 
   private handleJobIdsOnSuccess(res: any): void {

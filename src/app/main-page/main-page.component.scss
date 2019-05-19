@@ -17,4 +17,12 @@
     height: calc(100vh - 55px);
   }
 
+@media only screen and (min-width: 768px) {
+  app-sidebar {
+    position: unset !important;
+    width: 30% !important;
+    max-width: 300px !important;
+  }
+}
+
 }

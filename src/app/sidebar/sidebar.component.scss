@@ -31,15 +31,23 @@
   }
   @media only screen and (min-width: 768px) {
     .header{
+      .close-filter-container{
+        display: none;
+      }
       >header {
         color: #bb5566;
         h1 {
           color: #D9DADC;
         }
-        util-action {
-          display: none;
-        }
+
       }
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  :host{
+    .mobile-filter-container {
+      display: none;
     }
   }
 }

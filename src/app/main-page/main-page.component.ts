@@ -10,6 +10,7 @@ export class MainPageComponent {
   public filterCount: number = 1;
   public listFilter: any = {};
   public displaySidebar: boolean = false;
+  public sidebarCss: object = {};
 
   constructor() { }
 
@@ -20,6 +21,16 @@ export class MainPageComponent {
 
   public toggleSidebar(value: boolean): void {
     this.displaySidebar = value;
+    if (value) {
+      this.sidebarCss = {
+        position: 'absolute',
+        width: '60%',
+        'max-width': 'unset',
+      };
+    } else {
+      this.sidebarCss = {};
+    }
+
   }
 
 }
