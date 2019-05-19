@@ -18,8 +18,9 @@
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
-            <button icon="share" theme="dialogue" (click)="toggleShareButtons()">Share this Post</button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()">Share this Post</button>
             <button theme="icon" icon="print" (click)="print()"></button>
         </div>
     </div>
 </div>
+<app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>

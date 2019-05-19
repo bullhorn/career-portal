@@ -1,6 +1,9 @@
 interface ISettings {
   acceptedResumeTypes: string[];
   companyName: string;
+  companyLogoPath: string;
+  companyUrl: string;
+  careersUrl: string;
   defaultLocale: string;
   supportedLocales: string[];
   minUploadSize: number;

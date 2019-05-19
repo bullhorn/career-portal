@@ -10,6 +10,9 @@
     "odt"
   ],
   "companyName": "Test SL2 Career Portal",
+  "companyLogoPath": "",
+  "companyUrl": "",
+  "careersUrl": "http://localhost:4000/",
   "defaultLocale": "en-US",
   "supportedLocales": [
     "en-US",
@@ -27,13 +30,16 @@
       "id",
       "title",
       "publishedCategory(id,name)",
-      "address(city,state)",
+      "address(city,state,countryName)",
       "employmentType",
       "dateLastPublished",
       "publicDescription",
       "isOpen",
       "isPublic",
-      "isDeleted"
+      "isDeleted",
+      "publishedZip",
+      "salary",
+      "salaryUnit"
     ],
     "keywordSearchFields": [
       "publicDescription",

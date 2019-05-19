@@ -28,6 +28,7 @@
     "@angular/platform-server": "^7.1.2",
     "@angular/router": "^7.1.2",
     "@bullhorn/bullhorn-icons": "2.3.0",
+    "@bullhorn/bullhorn-types": "^1.9.0",
     "@bullhorn/dragula": "1.0.1",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",

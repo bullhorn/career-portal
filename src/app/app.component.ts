@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(private router: Router) {
     let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
-    if (trackingId) {
+    if (trackingId && !SettingsService.isServer) {
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationEnd) {
           (<any>window).ga('create', trackingId, 'auto');

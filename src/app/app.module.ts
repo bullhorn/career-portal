@@ -21,6 +21,8 @@ import { ApplyModalComponent } from './job-list/job-details/apply-modal/apply-mo
 import { ClipboardModule } from 'ngx-clipboard';
 import { ErrorModalComponent } from './error-modal/error-modal/error-modal.component';
 import { StripHtmlPipe } from './utils/stripHtml.pipe';
+import { StructuredSeoComponent } from './structured-seo/structured-seo.component';
+import { DatePipe } from '@angular/common';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -32,23 +34,24 @@ export function initSettings(settings: SettingsService): any {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    JobListComponent,
-    SidebarComponent,
-    MainPageComponent,
-    JobDetailsComponent,
-    ApplyModalComponent,
-    ErrorModalComponent,
-    StripHtmlPipe,
-    SidebarFilterComponent,
-],
-  entryComponents: [
-    ApplyModalComponent,
-    ErrorModalComponent,
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+   declarations: [
+      AppComponent,
+      JobListComponent,
+      SidebarComponent,
+      MainPageComponent,
+      JobDetailsComponent,
+      ApplyModalComponent,
+      ErrorModalComponent,
+      StripHtmlPipe,
+      SidebarFilterComponent,
+      StructuredSeoComponent,
+   ],
+   entryComponents: [
+      ApplyModalComponent,
+      ErrorModalComponent,
+   ],
+   imports: [
+     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     NovoElementsModule,
     NovoListModule,
@@ -71,6 +74,7 @@ export function initSettings(settings: SettingsService): any {
     NovoToastService,
     ApplyService,
     AnalyticsService,
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })
