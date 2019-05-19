@@ -4,7 +4,7 @@ import { SettingsService } from '../settings/settings.service';
 @Injectable()
 export class AnalyticsService {
 private trackingId: string;
-constructor(private settings: SettingsService) {this.trackingId = this.settings.getSetting('integrations').googleAnalytics.trackingId; }
+constructor(private settings: SettingsService) {this.trackingId = SettingsService.settings.integrations.googleAnalytics.trackingId; }
 
   public trackEvent(action: string): void {
     if (this.trackingId) {

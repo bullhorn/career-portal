@@ -1,7 +1,7 @@
 <div class="frame">
-    <app-sidebar (filter)="onSidebarFilter($event)" [display]="displaySidebar" (displaySidebar)="toggleSidebar($event)"></app-sidebar>
+    <app-sidebar (newFilter)="onSidebarFilter($event)" [display]="displaySidebar" (displaySidebar)="toggleSidebar($event)"></app-sidebar>
     <div class="list">
-        <app-job-list [filterUpdate]="filterNumber" [filter]="listFilter" [sidebarVisible]="displaySidebar" (displaySidebar)="toggleSidebar($event)" ></app-job-list>
+        <app-job-list [filterCount]="filterCount" [filter]="listFilter" [sidebarVisible]="displaySidebar" (displaySidebar)="toggleSidebar($event)" ></app-job-list>
     </div>
 </div>
 

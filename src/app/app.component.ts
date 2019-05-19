@@ -8,10 +8,10 @@ import { SettingsService } from './services/settings/settings.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public title: string = 'app';
+  public title: string = SettingsService.settings.companyName;
 
-  constructor(private router: Router, private settings: SettingsService) { 
-    let trackingId: string = this.settings.getSetting('integrations').googleAnalytics.trackingId;
+  constructor(private router: Router) {
+    let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
     if (trackingId) {
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationEnd) {
@@ -19,7 +19,7 @@ export class AppComponent {
           (<any>window).ga('set', 'page', event.urlAfterRedirects);
           (<any>window).ga('send', 'pageview');
         }
-      }); 
+      });
     }
   }
 

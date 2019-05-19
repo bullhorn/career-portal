@@ -1,5 +1,5 @@
 :host {
-  background-color: #2F383F;
+  background-color: #F4F4F4;
   novo-form {
     margin-top: 30px;
     padding-right: 20px;
@@ -8,7 +8,9 @@
     padding: 27px 0 0 20px;
 
     span.powered-by {
-        font-size: 1em;
+      font-size: 1em;
+      font-weight: 600;
+      color: #202945;
     }
 
     .bullhorn {

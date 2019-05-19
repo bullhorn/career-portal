@@ -9,21 +9,25 @@ novo-loading {
   width: 100%;
 }
 
+body {
+  overflow: hidden;
+}
+
 novo-file-input {
   width: 100%;
 }
 
 app-job-list {
-  novo-list-item  {
-    border-bottom: 1px solid #d6d6d6 !important;
+  novo-list>div>novo-list-item   {
+    border-bottom: unset;
 
     div.list-item {
       item-content i{
-       color: #474747;
+       color: #4a89dc;
       }
       >item-header item-title { 
         >h6 {
-          color: #474747;
+          color: #4a89dc;
         }
       }
     }
@@ -31,25 +35,26 @@ app-job-list {
 }
 novo-search {
   padding: 17px;
-  border-bottom: 1px solid #3d464d;
   > input[data-automation-id="novo-search-input"] {
     padding: 8px 10px;
-    font-size: 1.3em;
+    font-size: 1em;
   }
-  button[theme][theme="fab"] {
-    width: 34px;
-    height: 38px;    .flex-wrapper {
+  button[theme="fab"][icon="bhi-search"] {
+    width: 40px;
+    height: 33px;
+    min-height: unset;
+    padding: 0;
+
+    .flex-wrapper {
       i {
-        font-size: 1.2em;
+        font-size: 1em;
         line-height: 14px;
+        padding: 0px;
       }
     }
   }
   &.active {
     max-width: 700px;
-    button[theme="fab"] {
-      width: 34px;
-      height: 38px;    }
   }
 }
 
@@ -89,7 +94,16 @@ app-job-details novo-card header{
 }
 
 app-sidebar {
-  label {
-    color: #fff !important;
+  novo-check-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 20em;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    label {
+      color: #2F384F !important;
+      font-weight: 600;
+    }
   }
 }

@@ -19,7 +19,6 @@ export class JobDetailsComponent implements OnInit {
   public source: string;
   public loading: boolean = true;
   public title: string;
-  public applyWithLinkedin: any;
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
@@ -30,8 +29,8 @@ export class JobDetailsComponent implements OnInit {
     private shareService: ShareService,
     private route: ActivatedRoute,
     private router: Router,
-    private settings: SettingsService, 
-    private analytics: AnalyticsService, 
+    private settings: SettingsService,
+    private analytics: AnalyticsService,
     private modalService: NovoModalService,
     private viewContainerRef: ViewContainerRef,
   ) {
@@ -39,8 +38,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.title = this.settings.getSetting('companyName');
-    this.applyWithLinkedin = this.settings.getSetting('integrations').linkedin.clientId ? this.settings.getSetting('integrations').linkedin.clientId : false;
+    this.title = SettingsService.settings.companyName;
     this.id = this.route.snapshot.paramMap.get('id');
     this.source = this.route.snapshot.queryParams.source;
     this.analytics.trackEvent(`Open Job: ${this.id}`);
@@ -63,7 +61,7 @@ export class JobDetailsComponent implements OnInit {
 
   public getRelatedJobs(): any {
     if (this.job && this.job.publishedCategory) {
-      this.service.getjobs({ 'publishedCategory.id': [this.job.publishedCategory.id]}, {} , this.settings.getSetting('maxRelatedJobs')).subscribe((res: any) => { this.relatedJobs = res.data; });
+      this.service.getjobs({ 'publishedCategory.id': [this.job.publishedCategory.id]}, {} , SettingsService.settings.service.batchSize).subscribe((res: any) => { this.relatedJobs = res.data; });
     }
   }
 

@@ -1,57 +1,28 @@
-<header [title]="title" icon="company" theme="company" condensed="true">
-        <div class="entity-header" novo-title></div>
-        <utils>
-            <util-action *ngIf="!sidebarVisible" (click)="openSidebar()" icon="filter"></util-action>
-        </utils>
-</header>
 <novo-loading *ngIf="loading"></novo-loading>
-<novo-list theme="background" direction="vertical" *ngIf="!loading && jobs.length > 0">
-<ng-container *ngFor="let job of jobs">
-    <novo-list-item [routerLink]="'job/' + job.id" >
+<div class="open-positions">
+<span class="open-positions-text">Open Positions ({{jobs.length}})</span>
+</div>
+<novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
+
+<div *ngFor="let job of jobs" class="job-card" [routerLink]="'job/' + job.id" >
+    <novo-list-item>
         <item-header>
-            <item-avatar icon="job"></item-avatar>
             <item-title>{{ job.title }}</item-title>
         </item-header>
-        <item-content direction="horizontal">
-                <span>
-                    <i class="bhi-location"></i>
-                    {{ job.address.city }}, {{ job.address.state }}
-                </span>
-        </item-content>
-        <item-content direction="vertical">
-            <span>
-                <i class="bhi-clock"></i>
-                Added {{ job.dateLastPublished | date: 'mediumDate'}}
+        <item-header-end>
+            <span class="mid-card">
+                <i class="bhi-location"></i>
+                {{ job.address.city }}, {{ job.address.state }}
             </span>
-        </item-content>
-        <!--<item-content direction="vertical">
-            <span>
-                <i class="bhi-clock"></i>
-                {{ job.publicDescription | stripHtml}}
+            <span class="mid-card">
+                {{ job.dateLastPublished | date: 'mediumDate'}}
             </span>
-        </item-content> -->
-        <item-end>
-                <item-content direction="horizontal">
-                        <span class="mid-card">
-                            <b>
-                                {{ job.publishedCategory?.name }}
-                            </b>
-                        </span>
-                        <b>|</b>
-                        <span class="mid-card">
-                            <b>
-                                {{ job.employmentType }}
-                            </b>
-                        </span>
-                </item-content>
-                <item-content direction="vertical">
-                    <span>
-                            <i class="bhi-next"></i>
-                    </span>
-                </item-content>
-        </item-end>
+        </item-header-end>
     </novo-list-item>
-</ng-container>
+    <span class="description">
+        {{ job.publicDescription | stripHtml}}
+    </span>
+</div>
 
 </novo-list>
 <div class="load-more-button" *ngIf="!loading && moreAvailable">

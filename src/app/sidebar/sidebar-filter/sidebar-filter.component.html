@@ -1,0 +1,8 @@
+<div class="filter-header">
+  <span>Filter by {{title}}</span>
+</div>
+<novo-form [form]="form" *ngIf="!loading">
+  <div class="novo-form-row">
+    <novo-control [form]="form" [control]="control"></novo-control>
+  </div>
+</novo-form>

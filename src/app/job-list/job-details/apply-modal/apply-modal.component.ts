@@ -30,11 +30,11 @@ export class ApplyModalComponent implements OnInit {
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(private formUtils: FormUtils,
-    public params: NovoModalParams, 
-    private modalRef: NovoModalRef, 
-    private settings: SettingsService, 
-    private applyService: ApplyService, 
-    private analytics: AnalyticsService, 
+    public params: NovoModalParams,
+    private modalRef: NovoModalRef,
+    private settings: SettingsService,
+    private applyService: ApplyService,
+    private analytics: AnalyticsService,
     private toaster: NovoToastService ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
 
   public ngOnInit(): void {
@@ -93,11 +93,11 @@ export class ApplyModalComponent implements OnInit {
         placeholder: 'Select all that apply',
         config: {
           options: [
-            { value: 'Hispanic or Latino', label: 'Hispanic or Latino' }, 
-            { value: 'White', label: 'White'}, 
+            { value: 'Hispanic or Latino', label: 'Hispanic or Latino' },
+            { value: 'White', label: 'White'},
             { value: 'Black or African American', label: 'Black or African American'},
-            { value: 'Asian', label: 'Asian' }, 
-            { value: 'Native Hawaiian or Pacific Islander', label: 'Native Hawaiian or Pacific Islander'}, 
+            { value: 'Asian', label: 'Asian' },
+            { value: 'Native Hawaiian or Pacific Islander', label: 'Native Hawaiian or Pacific Islander'},
             { value: 'American Indian or Alaskan Native', label: 'American Indian or Alaskan Native'},
             { value: 'Unknown', label: 'I do not wish to self-identify'},
           ],
@@ -111,8 +111,8 @@ export class ApplyModalComponent implements OnInit {
         required: false,
         hidden: false,
         options: [
-          { value: 'Protected Veteran', label: 'Protected Veteran' }, 
-          { value: 'Veteran', label: 'Veteran'}, 
+          { value: 'Protected Veteran', label: 'Protected Veteran' },
+          { value: 'Veteran', label: 'Veteran'},
           { value: 'Non-Veteran', label: 'Non-Veteran'},
           { value: 'Unknown', label: 'Decline to Answer'},
         ],
@@ -125,7 +125,7 @@ export class ApplyModalComponent implements OnInit {
         required: false,
         hidden: false,
         options: [
-          { value: 'Disability', label: 'Disability' }, 
+          { value: 'Disability', label: 'Disability' },
           { value: 'No Disability', label: 'No Disability'},
           { value: 'Unknown', label: 'I do not wish to self-identify'},
         ],
@@ -134,13 +134,13 @@ export class ApplyModalComponent implements OnInit {
     this.resume = new FileControl({
       key: 'resume',
       required: true,
-      tooltip: `Accepted Resume types are ${this.settings.getSetting('acceptedResumeTypes').toString()}`,
       hidden: false,
+      description: `Accepted Resume types are ${SettingsService.settings.acceptedResumeTypes.toString()}`,
     });
 
     this.formControls = [this.firstName, this.lastName, this.email, this.phoneNumber, this.resume];
 
-    let eeoc: any = this.settings.getSetting('eeoc');
+    let eeoc: any = SettingsService.settings.eeoc;
     for (let field in eeoc) {
       if (eeoc[field]) {
         this.eeocControls.push(...this[field]);

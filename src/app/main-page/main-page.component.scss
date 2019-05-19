@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: row;
   app-sidebar {
-    width: 20%;        
+    width: 30%;        
     flex-grow: 0;
-    height: 100vh;
+    height: calc(100vh - 55px);    
     max-width: 300px;
     min-width: 250px;
     overflow-x: hidden;
@@ -14,8 +14,7 @@
     width: 80%;
     flex-grow: 1000;
     overflow-y: auto;
-    height: 100vh;
-
+    height: calc(100vh - 55px);
   }
 
 }

@@ -1,23 +1,12 @@
 <div class="header">
-    <header title="Filters" theme="dark" condensed="true">
-        <div class="entity-header" novo-title></div>
-        <utils>
-            <util-action (click)="closeSidebar()" icon="times"></util-action>
-        </utils>
-    </header>
 <novo-search placeholder="Keyword Search" alwaysOpen="true" [(ngModel)]="keyword" (ngModelChange)="searchOnDelay()"></novo-search>
 </div>
 <novo-loading *ngIf="loading"></novo-loading>
 <ng-container *ngIf="!loading">
   <div class="filters">
-
+    <app-sidebar-filter field="publishedCategory(id,name)" title="Category" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" ></app-sidebar-filter>
+    <app-sidebar-filter field="address(city,state)" title="Location" [filter]="filter" (checkboxFilter)="updateFilter('address', $event)"></app-sidebar-filter>
   </div>
-  <novo-form *ngIf="sidebarForm" layout="vertical" [form]="sidebarForm">
-      <div class="novo-form-row" *ngFor="let row of controls">
-          <novo-control [control]="row" [form]="sidebarForm"></novo-control>
-      </div>
-  </novo-form>
-  <button *ngIf="filterUrl" icon="list-o" theme="dialogue" ngxClipboard [cbContent]="filterUrl">Copy This Search</button>
   <button *ngIf="filterUrl"  theme="dialogue" (click)="clearForm()">Clear This Search</button>
 </ng-container>
 

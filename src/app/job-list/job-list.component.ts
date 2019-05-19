@@ -10,7 +10,7 @@ import { JobDetailsComponent } from './job-details/job-details.component';
 })
 export class JobListComponent implements OnChanges {
   @Input() public filter: any;
-  @Input() public filterUpdate: number;
+  @Input() public filterCount: number;
   @Input() public sidebarVisible: boolean = false;
   @ViewChild(JobDetailsComponent) public jobDetails: JobDetailsComponent;
   @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();
@@ -21,8 +21,7 @@ export class JobListComponent implements OnChanges {
   public moreAvailable: boolean = true;
   private start: number = 0;
 
-  constructor(private http: SearchService, private settings: SettingsService) {
-    this.title = this.settings.getSetting('companyName');
+  constructor(private http: SearchService) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {
