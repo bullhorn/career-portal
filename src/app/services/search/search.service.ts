@@ -22,6 +22,7 @@ export class SearchService {
     params.fields = SettingsService.settings.service.fields;
     params.count = count;
     params.sort = '-dateLastPublished';
+    params.showTotalMatched = true;
 
     for (let key in params) {
       queryArray.push(`${key}=${params[key]}`);

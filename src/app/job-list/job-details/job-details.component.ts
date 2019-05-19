@@ -7,6 +7,8 @@ import { AnalyticsService } from '../../services/analytics/analytics.service';
 import { ApplyModalComponent } from './apply-modal/apply-modal.component';
 import { ShareService } from '../../services/share/share.service';
 import { ErrorModalComponent } from '../../error-modal/error-modal/error-modal.component';
+import { Title, Meta } from '@angular/platform-browser';
+import { JobBoardPost } from '@bullhorn/bullhorn-types';
 
 @Component({
   selector: 'app-job-details',
@@ -14,11 +16,10 @@ import { ErrorModalComponent } from '../../error-modal/error-modal/error-modal.c
   styleUrls: ['./job-details.component.scss'],
 })
 export class JobDetailsComponent implements OnInit {
-  public job: any;
+  public job: JobBoardPost | any;
   public id: string;
   public source: string;
   public loading: boolean = true;
-  public title: string;
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
@@ -29,17 +30,17 @@ export class JobDetailsComponent implements OnInit {
     private shareService: ShareService,
     private route: ActivatedRoute,
     private router: Router,
-    private settings: SettingsService,
     private analytics: AnalyticsService,
     private modalService: NovoModalService,
     private viewContainerRef: ViewContainerRef,
+    private titleService: Title,
+    private meta: Meta,
   ) {
     this.modalService.parentViewContainer = this.viewContainerRef;
   }
 
   public ngOnInit(): void {
     this.loading = true;
-    this.title = SettingsService.settings.companyName;
     this.id = this.route.snapshot.paramMap.get('id');
     this.source = this.route.snapshot.queryParams.source;
     this.analytics.trackEvent(`Open Job: ${this.id}`);
@@ -108,6 +109,12 @@ export class JobDetailsComponent implements OnInit {
     if (res.data.length > 0) {
       this.job = res.data[ 0 ];
       this.loading = false;
+      this.titleService.setTitle(this.job.title);
+      this.meta.updateTag({ name: 'og:title', content: this.job.title});
+      this.meta.updateTag({ name: 'titter:title', content: this.job.title});
+      this.meta.updateTag({ name: 'og:description', content: this.job.publicDescription});
+      this.meta.updateTag({ name: 'twitter:description', content: this.job.publicDescription});
+      this.meta.updateTag({ name: 'description', content: this.job.publicDescription});
     } else {
       this.modalService.open(ErrorModalComponent, {
         title: 'Error',

@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { SearchService } from '../services/search/search.service';
+import { Title } from '@angular/platform-browser';
+import { SettingsService } from '../services/settings/settings.service';
 
 @Component({
   selector: 'app-job-list',
@@ -16,9 +18,10 @@ export class JobListComponent implements OnChanges {
   public title: string;
   public loading: boolean = true;
   public moreAvailable: boolean = true;
+  public total: number | '' = '';
   private start: number = 0;
 
-  constructor(private http: SearchService) {
+  constructor(private http: SearchService, private titleService: Title) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {
@@ -27,6 +30,7 @@ export class JobListComponent implements OnChanges {
 
   public getData(loadMore: boolean = false): void {
     this.start = loadMore ? (this.start + 30) : 0;
+    this.titleService.setTitle(`${SettingsService.settings.companyName} - Careers`);
     this.http.getjobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this));
   }
 
@@ -44,6 +48,7 @@ export class JobListComponent implements OnChanges {
     } else {
       this.jobs = res.data;
     }
+    this.total = res.total;
     this.moreAvailable = (res.count === 30);
     this.loading = false;
   }
