@@ -1,52 +1,25 @@
 <novo-loading *ngIf="loading"></novo-loading>
-<div>
-  <div class="job-info">
-      <div class='job-description-card'>
-          <div *ngIf="!loading" >
-            <header [title]="job.title" theme="job" condensed="true">
-                <utils>
-                    <util-action icon="email" (click)="emailLink()" *ngIf="showShareButtons"></util-action>
-                    <util-action icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></util-action>
-                    <util-action icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></util-action>
-                    <util-action icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></util-action>
-                    <util-action icon="share" (click)="toggleShareButtons()"></util-action>
-                    <util-action icon="print" (click)="print()"></util-action>
-                </utils>
-                <div class="job-header-details">{{ job.publishedCategory.name }}</div>
-                <div class="job-header-details">{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{ job.address.state }}
-                  <span class="separator" *ngIf="(job.address.city || job.address.state) && job.employmentType">|</span>
-                  <!-- TYPE -->
-                  <span class="type">{{ job.employmentType }}</span>
-                </div>
-                <div class="job-header-details">
-                    <i class="bhi-clock"></i>
-                    <div class="subtitleText" data-automation-id="bbo-assignments-title">{{ job.dateLastPublished | date: 'mediumDate'}}</div>
-                </div>
-            </header>
-            <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
-            <footer>
-              <ng-container *ngIf="applyWithLinkedin">
-                <button theme="primary" icon="linkedin-f">Apply With Linkedin</button>
-                <span> OR </span>
-              </ng-container>
-              <button theme="primary" icon="upload" *ngIf="!alreadyApplied" (click)="apply()">Apply with Resume</button>
-              <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
-            </footer>
-          </div>
-      </div>
-
-  </div>
-  <div class="related-jobs">
-      <novo-card *ngFor="let relatedJob of relatedJobs" icon="job" [title]="relatedJob.title" (click)="getJob(relatedJob.id)" [routerLink]="'/job/' + relatedJob.id">
-          <div class="location">
-              <i class="bhi-location"></i>
-              <span class="location-text">{{relatedJob.address.city}}, {{relatedJob.address.state}}</span>
-          </div>
-          <div class="published-date">
-              <i class="bhi-clock-arrow"></i>
-              <span class="published-date-text">{{ relatedJob.dateLastPublished | date: 'mediumDate'}}</span>
-          </div>
-      </novo-card>
-
-  </div>
+<div class="background" *ngIf="!loading">
+    <div class="job-container">
+        <div class="job-header">
+            <span class="job-title">{{job.title}}</span>
+            <div class="job-info-container">
+                <span class="job-info"><i class="bhi-location"></i>{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{
+                    job.address.state }}</span>
+                <span class="job-info">{{ job.employmentType }}</span>
+                <span class="job-info">{{ job.dateLastPublished | date: 'mediumDate'}}</span>
+            </div>
+        </div>
+        <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
+        <div class="share">
+            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">Apply Now</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
+            <button theme="icon" icon="email" (click)="emailLink()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
+            <button icon="share" theme="dialogue" (click)="toggleShareButtons()">Share this Post</button>
+            <button theme="icon" icon="print" (click)="print()"></button>
+        </div>
+    </div>
 </div>
