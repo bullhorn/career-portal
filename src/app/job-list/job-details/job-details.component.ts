@@ -38,25 +38,23 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.loading = true;
     this.title = SettingsService.settings.companyName;
     this.id = this.route.snapshot.paramMap.get('id');
     this.source = this.route.snapshot.queryParams.source;
     this.analytics.trackEvent(`Open Job: ${this.id}`);
-    this.getJob();
+    this.checkSessionStorage();
+    this.setJob();
   }
 
   public checkSessionStorage(): void {
-    let alreadyAppliedJobs: any = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
-    if (alreadyAppliedJobs) {
-      let alreadyAppliedJobsArray: any = JSON.parse(alreadyAppliedJobs);
-      this.alreadyApplied = (alreadyAppliedJobsArray.indexOf(parseInt(this.id)) !== -1);  // tslint:disable-line
+    if (!SettingsService.isServer) {
+      let alreadyAppliedJobs: any = sessionStorage.getItem(this.APPLIED_JOBS_KEY);
+      if (alreadyAppliedJobs) {
+        let alreadyAppliedJobsArray: any = JSON.parse(alreadyAppliedJobs);
+        this.alreadyApplied = (alreadyAppliedJobsArray.indexOf(parseInt(this.id)) !== -1);  // tslint:disable-line
+      }
     }
-  }
-
-  public getJob(id?: number): void {
-    this.loading = true;
-    this.checkSessionStorage();
-    this.service.openJob(id ? id : this.id).subscribe(this.onSuccess.bind(this));
   }
 
   public getRelatedJobs(): any {
@@ -70,7 +68,7 @@ export class JobDetailsComponent implements OnInit {
       job: this.job,
       source: this.source,
       viewContainer: this.viewContainerRef,
-    }).onClosed.then(this.getJob.bind(this));
+    }).onClosed.then(this.checkSessionStorage.bind(this));
   }
 
   public toggleShareButtons(): void {
@@ -105,10 +103,10 @@ export class JobDetailsComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  private onSuccess(res: any): void {
+  private setJob(): void {
+    let res: any = this.route.snapshot.data.message;
     if (res.data.length > 0) {
       this.job = res.data[ 0 ];
-      this.getRelatedJobs();
       this.loading = false;
     } else {
       this.modalService.open(ErrorModalComponent, {

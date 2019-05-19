@@ -23,10 +23,11 @@ import { ErrorModalComponent } from './error-modal/error-modal/error-modal.compo
 import { StripHtmlPipe } from './utils/stripHtml.pipe';
 import { StructuredSeoComponent } from './structured-seo/structured-seo.component';
 import { DatePipe } from '@angular/common';
+import { JobResolver } from './job.resolver';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'job/:id', component: JobDetailsComponent },
+  { path: 'job/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
 ];
 
 export function initSettings(settings: SettingsService): any {
@@ -75,6 +76,7 @@ export function initSettings(settings: SettingsService): any {
     ApplyService,
     AnalyticsService,
     DatePipe,
+    JobResolver,
   ],
   bootstrap: [AppComponent],
 })

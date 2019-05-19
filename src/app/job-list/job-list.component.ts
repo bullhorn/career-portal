@@ -1,7 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild, Output, EventEmitter } from '@angular/core';
 import { SearchService } from '../services/search/search.service';
-import { SettingsService } from '../services/settings/settings.service';
-import { JobDetailsComponent } from './job-details/job-details.component';
 
 @Component({
   selector: 'app-job-list',
@@ -12,7 +10,6 @@ export class JobListComponent implements OnChanges {
   @Input() public filter: any;
   @Input() public filterCount: number;
   @Input() public sidebarVisible: boolean = false;
-  @ViewChild(JobDetailsComponent) public jobDetails: JobDetailsComponent;
   @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();
 
   public jobs: any[] = [];
