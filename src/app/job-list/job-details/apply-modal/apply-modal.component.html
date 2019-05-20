@@ -11,7 +11,7 @@
       </div>
     </header>
     <section *ngIf="!loading">
-      <novo-form [form]="form">
+      <novo-form [form]="form" layout="vertical">
           <div *ngFor="let control of formControls" class="novo-form-row">
             <novo-control [form]="form" [control]="control"></novo-control>
           </div>

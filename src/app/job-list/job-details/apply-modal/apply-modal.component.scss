@@ -1,6 +1,5 @@
 :host {
   min-width: 600px;
-
   .job-details {
     padding: 0px 0px 5px 15px;
     .separator {
@@ -13,5 +12,16 @@
     .eeoc-form h2 {
       padding-bottom: 10px;
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  :host {
+      max-width: 100vw;
+      min-width: unset;
+      align-self: start;
+      novo-form {
+        max-height: 64vh;
+      }
   }
 }

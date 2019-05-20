@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { SearchService } from '../services/search/search.service';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { SettingsService } from '../services/settings/settings.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class JobListComponent implements OnChanges {
   public total: number | '' = '';
   private start: number = 0;
 
-  constructor(private http: SearchService, private titleService: Title) {
+  constructor(private http: SearchService, private titleService: Title, private meta: Meta) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {
@@ -31,6 +31,10 @@ export class JobListComponent implements OnChanges {
   public getData(loadMore: boolean = false): void {
     this.start = loadMore ? (this.start + 30) : 0;
     this.titleService.setTitle(`${SettingsService.settings.companyName} - Careers`);
+    let description: string = 'View our careers';
+    this.meta.updateTag({ name: 'og:description', content: description });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({ name: 'description', content: description });
     this.http.getjobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this));
   }
 
