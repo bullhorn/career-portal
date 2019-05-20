@@ -42,7 +42,7 @@ novo-list {
       }
       item-header-end {
         flex-wrap: wrap;
-        display: flex;
+        display: block;
         .mid-card {
           color: #0B344F;
           padding: 10px 10px;
@@ -81,6 +81,7 @@ novo-list {
       novo-list-item {
         flex-direction: column;
         item-header-end {
+          display: flex;
           .mid-card {
             margin-top: 5px;
           }
