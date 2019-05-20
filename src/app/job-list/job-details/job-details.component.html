@@ -18,7 +18,7 @@
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
-            <button theme="dialogue" icon="share" (click)="toggleShareButtons()">Share this Post</button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">Share this Post</button>
             <button theme="icon" icon="print" (click)="print()"></button>
         </div>
     </div>

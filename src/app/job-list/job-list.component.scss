@@ -41,12 +41,18 @@ novo-list {
         }
       }
       item-header-end {
+        flex-wrap: wrap;
+        display: flex;
         .mid-card {
           color: #0B344F;
           padding: 10px 10px;
-          margin: 5px;
+          margin-right: 5px;
           background-color: #f4f4f4;
           border-radius: 8px;
+          align-self: center;
+          i {
+            font-size: 1em;
+          }
         }
       }
     }
@@ -58,6 +64,30 @@ novo-list {
     .mobile-filter-container {
       display: none;
     }
+  }
+}
+@media only screen and (max-width: 768px) {
+  :host{
+    div.open-positions {
+      font-weight: 600;
+      font-size: 1.5em;
+      margin: 30px 34px 22px 15px
+    }
+    div.mobile-filter-container {
+      margin: 30px 34px 22px 15px
+    }
+    div.job-card{
+      margin: 12px 15px;
+      novo-list-item {
+        flex-direction: column;
+        item-header-end {
+          .mid-card {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+
   }
 }
 

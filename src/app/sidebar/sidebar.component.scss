@@ -43,11 +43,8 @@
       }
     }
   }
-}
-@media only screen and (min-width: 768px) {
-  :host{
-    .mobile-filter-container {
-      display: none;
-    }
+  .close-filter-container {
+    flex-direction: row-reverse;
+    display: flex;
   }
 }

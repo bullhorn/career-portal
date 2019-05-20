@@ -13,12 +13,19 @@
     .job-header {
       div.job-info-container {
         margin: 30px 0px;
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
         .job-info {
           color: #0B344F;
           padding: 10px 10px;
           margin: 5px;
           background-color: #f4f4f4;
           border-radius: 8px;
+          align-self: center;
+          i {
+            font-size: 1em;
+          }
         }
       }
       .job-title {
@@ -33,6 +40,13 @@
       }
     }
   }
+}
 
+@media only screen and (max-width: 768px) {
+  :host{
+    .background>.job-container {
+      margin: 0%;
+    }
+  }
 
 }
