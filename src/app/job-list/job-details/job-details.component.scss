@@ -2,10 +2,14 @@
   overflow-x: hidden;
   background-color: #F4F4F4;
   max-height: calc(100vh - 55px);
+  height: calc(100vh - 55px);
   .job-container {
     margin: 0% 10%;
     padding: 5%;
     background-color: #FFFFFF;
+    .job-description-text {
+      word-break: break-word;
+    }
     .job-header {
       div.job-info-container {
         margin: 30px 0px;
@@ -25,7 +29,7 @@
     .share {
       display: flex;
       button {
-        margin-right: 20px; 
+        margin-right: 20px;
       }
     }
   }
