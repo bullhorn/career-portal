@@ -9,6 +9,7 @@
     min-width: 250px;
     overflow-x: hidden;
     overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 7px 0px;
   }
   .list {
     width: 80%;
@@ -22,6 +23,7 @@
     position: unset !important;
     width: 30% !important;
     max-width: 300px !important;
+    box-shadow: unset;
   }
 }
 

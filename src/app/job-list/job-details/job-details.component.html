@@ -1,12 +1,17 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <div class="background" *ngIf="!loading">
     <div class="job-container">
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">Back</button>
         <div class="job-header">
             <span class="job-title">{{job.title}}</span>
             <div class="job-info-container">
-                <span class="job-info"><i class="bhi-location"></i>{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{
+                <span class="job-info" *ngIf="job.address.city && job.address.state"><i class="bhi-location"></i>{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{
                     job.address.state }}</span>
-                <span class="job-info">{{ job.employmentType }}</span>
+                <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip">
+                    <span class="job-info">
+                        {{ job[chip] }}
+                    </span>
+                </ng-container>
                 <span class="job-info">{{ job.dateLastPublished | date: 'mediumDate'}}</span>
             </div>
         </div>
@@ -18,7 +23,7 @@
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
-            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">Share this Post</button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">Share this post</button>
             <button theme="icon" icon="print" (click)="print()"></button>
         </div>
     </div>

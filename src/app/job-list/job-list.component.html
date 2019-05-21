@@ -1,6 +1,6 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <div class="mobile-filter-container">
-<button theme="secondary" (click)="openSidebar()" icon="filter">Filter</button>
+<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">Filter</button>
 
 </div>
 <div class="open-positions">
@@ -8,18 +8,23 @@
 </div>
 <novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
 
-<div *ngFor="let job of jobs" class="job-card" [routerLink]="'job/' + job.id" >
+<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" >
     <novo-list-item>
         <item-header>
-            <item-title>{{ job.title }}</item-title>
+            <item-title><a [href]="'jobs/' + job.id" [routerLink]="'jobs/' + job.id">{{ job.title }}</a></item-title>
         </item-header>
         <item-header-end>
-            <span class="mid-card">
+            <span class="mid-card" *ngIf="job.address.city || job.address.state">
                 <i class="bhi-location"></i>
-                {{ job.address.city }}, {{ job.address.state }}
+                {{ job.address.city }} <span *ngIf="job.address.city && job.address.state">,&nbsp;</span> {{ job.address.state }}
             </span>
+            <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip">
+                <span class="mid-card">
+                    {{ job[chip] }}
+                </span>
+            </ng-container>
             <span class="mid-card">
-                {{ job.dateLastPublished | date: 'mediumDate'}}
+                {{ job.dateLastPublished | date: 'mediumDate' }}
             </span>
         </item-header-end>
     </novo-list-item>

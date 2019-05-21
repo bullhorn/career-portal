@@ -7,6 +7,9 @@
     margin: 0% 10%;
     padding: 5%;
     background-color: #FFFFFF;
+    >button[theme="dialogue"] {
+      margin: -10px -15px 20px -15px;
+    }
     .job-description-text {
       word-break: break-word;
     }

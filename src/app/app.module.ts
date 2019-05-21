@@ -27,7 +27,7 @@ import { JobResolver } from './job.resolver';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'job/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
+  { path: 'jobs/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
 ];
 
 export function initSettings(settings: SettingsService): any {
@@ -52,7 +52,7 @@ export function initSettings(settings: SettingsService): any {
       ErrorModalComponent,
    ],
    imports: [
-     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     NovoElementsModule,
     NovoListModule,
@@ -62,7 +62,7 @@ export function initSettings(settings: SettingsService): any {
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
-    { enableTracing: false, useHash: false }, // <-- debugging purposes only
+    { enableTracing: false, useHash: true },
   ),
   ],
   providers: [

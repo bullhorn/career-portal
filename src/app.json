@@ -41,6 +41,9 @@
       "salary",
       "salaryUnit"
     ],
+    "jobInfoChips": [
+      "employmentType"
+    ],
     "keywordSearchFields": [
       "publicDescription",
       "title"
