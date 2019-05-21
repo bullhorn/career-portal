@@ -17,9 +17,6 @@ export class SettingsService {
 
   public load(): Promise<any> {
     let settingPath: string = APP_CONFIG_URL;
-    if (SettingsService.isServer) {
-      settingPath = `${URL_ROOT}/${APP_CONFIG_URL}`;
-    }
     let request: Promise<any> = this.http.get(settingPath).toPromise();
     request.then(this.setConfig.bind(this));
 
