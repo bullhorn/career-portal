@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
 
 const APP_CONFIG_URL: any = './app.json';
-const URL_ROOT: any = 'http://localhost:4000/';
 
 @Injectable()
 export class SettingsService {
@@ -16,8 +15,7 @@ export class SettingsService {
   }
 
   public load(): Promise<any> {
-    let settingPath: string = APP_CONFIG_URL;
-    let request: Promise<any> = this.http.get(settingPath).toPromise();
+    let request: Promise<any> = this.http.get(APP_CONFIG_URL).toPromise();
     request.then(this.setConfig.bind(this));
 
     return request;

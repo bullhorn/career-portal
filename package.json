@@ -5,14 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "ng build --prod && ng run career-portal-ng5:server:production"
+    "build:client-and-server-bundles": "ng build --build-optimizer --prod --base-href / && ng run career-portal:server:production"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +50,7 @@
     "roboto-fontface": "^0.9.0",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.0.0-rc.0",
+    "string-replace-webpack-plugin": "^0.1.3",
     "text-mask-addons": "^3.8.0",
     "zone.js": "^0.8.26"
   },

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "career-portal-ng5": {
+    "career-portal": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -56,18 +56,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "career-portal-ng5:build"
+            "browserTarget": "career-portal:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "career-portal-ng5:build:production"
+              "browserTarget": "career-portal:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "career-portal-ng5:build"
+            "browserTarget": "career-portal:build"
           }
         },
         "test": {
@@ -122,7 +122,7 @@
         }
       }
     },
-    "career-portal-ng5-e2e": {
+    "career-portal-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -131,7 +131,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "career-portal-ng5:serve"
+            "devServerTarget": "career-portal:serve"
           }
         },
         "lint": {
@@ -148,7 +148,7 @@
       }
     }
   },
-  "defaultProject": "career-portal-ng5",
+  "defaultProject": "career-portal",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

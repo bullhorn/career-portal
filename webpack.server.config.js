@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const StringReplacePlugin = require("string-replace-webpack-plugin");
 
 module.exports = {
   mode: 'none',
@@ -28,6 +29,19 @@ module.exports = {
         test: /(\\|\/)@angular(\\|\/)core(\\|\/).+\.js$/,
         parser: { system: true },
       },
+      {
+        test: /.*/,
+        loader: StringReplacePlugin.replace({
+          replacements: [
+            {
+              pattern: /useHash: true$/,
+              replacement: function (match, p1, offset, string) {
+                return 'useHash: false';
+              }
+            }
+          ]
+        })
+      }
     ]
   },
   plugins: [
@@ -42,6 +56,7 @@ module.exports = {
       /(.+)?express(\\|\/)(.+)?/,
       path.join(__dirname, 'src'),
       {}
-    )
+    ),
+    new StringReplacePlugin()
   ]
 };
