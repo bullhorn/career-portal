@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class SearchService {
@@ -56,6 +56,7 @@ export class SearchService {
   public getAvailableFilterOptions(ids: number[], field: string): Observable<any> {
     let params: any = {};
     let queryArray: string[] = [];
+    if (ids.length > 0) {
     params.where = `id IN (${ids.toString()})`;
     params.count = `500`;
     params.fields = `${field},count(id)`;
@@ -67,7 +68,10 @@ export class SearchService {
     }
     let queryString: string = queryArray.join('&');
 
-    return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`); // tslint:disable-line
+      return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`); // tslint:disable-line
+    } else {
+      return of({count: 0, start: 0, data: []});
+    }
   }
 
   private formatAdditionalCriteria(isSearch: boolean): string {

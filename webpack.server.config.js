@@ -2,7 +2,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const StringReplacePlugin = require("string-replace-webpack-plugin");
 
 module.exports = {
   mode: 'none',
@@ -28,19 +27,6 @@ module.exports = {
         // Removing this will cause deprecation warnings to appear.
         test: /(\\|\/)@angular(\\|\/)core(\\|\/).+\.js$/,
         parser: { system: true },
-      },
-      {
-        test: /.*/,
-        loader: StringReplacePlugin.replace({
-          replacements: [
-            {
-              pattern: /useHash: true$/,
-              replacement: function (match, p1, offset, string) {
-                return 'useHash: false';
-              }
-            }
-          ]
-        })
       }
     ]
   },
@@ -56,7 +42,6 @@ module.exports = {
       /(.+)?express(\\|\/)(.+)?/,
       path.join(__dirname, 'src'),
       {}
-    ),
-    new StringReplacePlugin()
+    )
   ]
 };

@@ -33,15 +33,20 @@ export class SidebarComponent {
 
     this.timeout = setTimeout(() => {
       let searchString: string = '';
+      if (this.keyword.trim()) {
+
       keywordSearchFields.forEach((field: string, index: number) => {
         if (index > 0) {
           searchString += ' OR ';
         }
-        searchString += `${field}{?^^equals}${this.keyword}*`;
+        searchString += `${field}{?^^equals}${this.keyword.trim() ? this.keyword.trim() + '*' : ''}`;
       });
+      }
       delete this.filter['ids'];
-      if (this.keyword) {
+      if (searchString) {
         this.filter['keyword'] = searchString;
+      } else {
+        delete this.filter['keyword'];
       }
       this.searchService.getCurrentJobIds(this.filter, []).subscribe(this.handleJobIdsOnSuccess.bind(this));
     }, 250);
@@ -61,10 +66,10 @@ export class SidebarComponent {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    let resultIds: number[] = res.data.map((result: any) => { return result.id; });
+    let resultIds: string[] = res.data.map((result: any) => { return `id{?^^equals}${result.id}`; });
     if (resultIds.length === 0) {
-      resultIds.push(-1);
+      resultIds.push(`id{?^^equals}${-1}`);
     }
-    this.updateFilter('ids', `id IN (${resultIds.toString()})`);
+    this.updateFilter('ids', resultIds);
   }
 }
