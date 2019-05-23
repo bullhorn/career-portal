@@ -9,10 +9,10 @@
     "rtf",
     "odt"
   ],
-  "companyName": "Test SL2 Career Portal",
-  "companyLogoPath": "",
-  "companyUrl": "",
-  "careersUrl": "http://localhost:4000/",
+  "companyName": "Test Career Portal",
+  "companyLogoPath": "http://charlesabarnes.com/assets/android-icon-192x192.png",
+  "companyUrl": "http://server.charlesabarnes.com",
+  "careersUrl": "http://server.charlesabarnes.com:4000",
   "defaultLocale": "en-US",
   "supportedLocales": [
     "en-US",

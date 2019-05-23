@@ -21,7 +21,7 @@ export class SearchService {
     params.where = `(isOpen=true) AND (isDeleted=false)${this.formatAdditionalCriteria(false)}${this.formatFilter(filter, false)}`;
     params.fields = SettingsService.settings.service.fields;
     params.count = count;
-    params.sort = '-dateLastPublished';
+    params.sort = SettingsService.settings.additionalJobCriteria.sort;
     params.showTotalMatched = true;
 
     for (let key in params) {
