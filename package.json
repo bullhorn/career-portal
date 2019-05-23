@@ -12,7 +12,7 @@
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "ng build --build-optimizer --prod --base-href / && ng run career-portal:server:production"
+    "build:client-and-server-bundles": "ng build --prod --base-href / && ng run career-portal:server:production"
   },
   "private": true,
   "dependencies": {
