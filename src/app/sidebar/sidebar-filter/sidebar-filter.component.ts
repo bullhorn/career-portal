@@ -16,8 +16,8 @@ export class SidebarFilterComponent implements OnChanges {
   public control: CheckListControl;
   public form: NovoFormGroup;
   public viewAllOptions: boolean = false;
-  public lastSetValue: string[]; 
-  public options: any[]; 
+  public lastSetValue: string[];
+  public options: any[];
   public fieldName: string;
 
   constructor(private service: SearchService, private formUtils: FormUtils) { }
@@ -39,7 +39,7 @@ export class SidebarFilterComponent implements OnChanges {
   }
 
   private getFilterOptions(): void {
-    this.loading = true; 
+    this.loading = true;
     this.service.getCurrentJobIds(this.filter, [this.fieldName]).subscribe(this.handleJobIdsOnSuccess.bind(this));
   }
 
@@ -71,7 +71,7 @@ export class SidebarFilterComponent implements OnChanges {
           if (API.getActiveValue()) {
             values = API.getActiveValue().map((value: string ) => {
               return `address.city{?^^equals}{?^^delimiter}${value}{?^^delimiter}`;
-            }); 
+            });
           }
           this.checkboxFilter.emit(values);
         };
@@ -91,7 +91,7 @@ export class SidebarFilterComponent implements OnChanges {
           if (API.getActiveValue()) {
             values = API.getActiveValue().map((value: string ) => {
               return `address.state{?^^equals}{?^^delimiter}${value}{?^^delimiter}`;
-            }); 
+            });
           }
           this.checkboxFilter.emit(values);
         };
@@ -117,7 +117,7 @@ export class SidebarFilterComponent implements OnChanges {
       default:
         break;
     }
-  
+
     this.control = new CheckListControl({
       key: 'checklist',
       options: this.options,

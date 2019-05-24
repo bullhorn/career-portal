@@ -8,8 +8,8 @@
 <ng-container *ngIf="!loading">
   <div class="filters">
     <app-sidebar-filter field="publishedCategory(id,name)" title="Category" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" ></app-sidebar-filter>
-    <app-sidebar-filter field="address(state)" title="State" [filter]="filter" (checkboxFilter)="updateFilter('address', $event)"></app-sidebar-filter>
-    <app-sidebar-filter field="address(city)" title="City" [filter]="filter" (checkboxFilter)="updateFilter('address', $event)"></app-sidebar-filter>
+    <app-sidebar-filter field="address(state)" title="State" [filter]="filter" (checkboxFilter)="updateFilter('address(state)', $event)"></app-sidebar-filter>
+    <app-sidebar-filter field="address(city)" title="City" [filter]="filter" (checkboxFilter)="updateFilter('address(city)', $event)"></app-sidebar-filter>
   </div>
   <button *ngIf="filterUrl"  theme="dialogue" (click)="clearForm()">Clear This Search</button>
 </ng-container>
