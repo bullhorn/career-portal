@@ -4,15 +4,16 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node dist/server",
+    "serve": "ng serve",
     "build": "ng build --prod --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
-    "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "ng build --prod --base-href / && ng run career-portal:server:production"
+    "build:client-and-server-bundles": "ng build --prod --base-href / && ng run career-portal:server:production",
+    "postinstall": "npm run build:ssr"
   },
   "private": true,
   "dependencies": {
