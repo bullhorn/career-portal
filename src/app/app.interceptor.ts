@@ -12,7 +12,7 @@ export class AppInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler): any {
     let serverReq: HttpRequest<any> = req;
     if (this.request && req.url.includes('./app.json') && SettingsService.isServer) {
-      let newUrl: string = `http://localhost:59379`;
+      let newUrl: string = `http://localhost:4000`;
       if (!req.url.startsWith('/')) {
         newUrl += '/';
       }
