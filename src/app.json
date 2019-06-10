@@ -11,8 +11,8 @@
   ],
   "companyName": "Test Career Portal",
   "companyLogoPath": "https://www.bullhorn.com/wp-content/uploads/2016/08/BH16_logo_orange_blue_stacked-e1545239175762.png",
-  "companyUrl": "http://server.charlesabarnes.com",
-  "careersUrl": "http://server.charlesabarnes.com:4000",
+  "companyUrl": "https://bh-career-portal.herokuapp.com",
+  "careersUrl": "https://bh-career-portal.herokuapp.com",
   "defaultLocale": "en-US",
   "supportedLocales": [
     "en-US",
@@ -23,9 +23,9 @@
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "1UGDY1",
+    "corpToken": "AZXPG",
     "port": null,
-    "swimlane": "32",
+    "swimlane": "9",
     "fields": [
       "id",
       "title",
