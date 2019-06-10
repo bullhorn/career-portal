@@ -11,8 +11,14 @@ export class AppInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler): any {
     let serverReq: HttpRequest<any> = req;
+    let port: string = '80';
+    let host: string = 'localhost';
+    if (SettingsService.isServer && this.request.path === '/' && this.request.headers.host.indexOf(':') !== -1 ) {
+      port = this.request.headers.host.split(':')[1];
+      host = this.request.headers.host.split(':')[0];
+    }
     if (this.request && req.url.includes('./app.json') && SettingsService.isServer) {
-      let newUrl: string = `http://localhost:4000`;
+      let newUrl: string = `http://${host}:${port}`;
       if (!req.url.startsWith('/')) {
         newUrl += '/';
       }
