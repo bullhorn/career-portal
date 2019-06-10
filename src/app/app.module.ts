@@ -62,7 +62,7 @@ export function initSettings(settings: SettingsService): any {
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
-    { enableTracing: false, useHash: true },
+    { enableTracing: false, useHash: false },
   ),
   ],
   providers: [
