@@ -30,20 +30,23 @@ const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main'
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
 let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
 
-appConfig.service.swimlane = process.env.BULLHORN_SWIMLANE;
-appConfig.service.corpToken = process.env.BULLHORN_CORP_TOKEN;
-appConfig.careersUrl = process.env.HOSTED_ENDPOINT;
-appConfig.companyName = process.env.COMPANY_NAME;
-appConfig.companyUrl = process.env.COMPANY_WEBSITE;
-appConfig.companyLogoPath = process.env.COMPANY_LOGO_URL;
-appConfig.integrations.googleAnalytics.trackingId = process.env.GOOGLE_ANALYTICS_TRACKING_ID;
+if (process.env.COMPANY_NAME) {
+  appConfig.service.swimlane = process.env.BULLHORN_SWIMLANE;
+  appConfig.service.corpToken = process.env.BULLHORN_CORP_TOKEN;
+  appConfig.careersUrl = process.env.HOSTED_ENDPOINT;
+  appConfig.companyName = process.env.COMPANY_NAME;
+  appConfig.companyUrl = process.env.COMPANY_WEBSITE;
+  appConfig.companyLogoPath = process.env.COMPANY_LOGO_URL;
+  appConfig.integrations.googleAnalytics.trackingId = process.env.GOOGLE_ANALYTICS_TRACKING_ID;
 
-writeFile(path.resolve('static', 'version.json'), appConfig, (err: any) => {
-  if (err) {
-    // tslint:disable-next-line: no-console
-    console.error('Failed to write config file:', err.message);
-  }
-});
+  writeFile(path.resolve('static', 'version.json'), appConfig, (err: any) => {
+    if (err) {
+      // tslint:disable-next-line: no-console
+      console.error('Failed to write config file:', err.message);
+    }
+  });
+}
+
 app.engine('html', ngExpressEngine({
   bootstrap: AppServerModuleNgFactory,
   providers: [
@@ -68,5 +71,6 @@ app.get('*', (req: any, res: any) => {
 
 // Start up the Node server
 app.listen(PORT, () => {
+  // tslint:disable-next-line: no-console
   console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
