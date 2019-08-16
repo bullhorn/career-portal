@@ -25,7 +25,7 @@ app-job-list {
       item-content i{
        color: #4a89dc;
       }
-      >item-header item-title { 
+      >item-header item-title {
         >h6 {
           color: #4a89dc;
         }
@@ -101,6 +101,18 @@ app-sidebar {
     flex-wrap: nowrap;
     overflow-y: auto;
     overflow-x: hidden;
+    &::-webkit-scrollbar {
+      background-color:#fff;
+      height:4px;
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color:#fff
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color:#babac0;
+      border-radius:4px;
+    }
     label {
       color: #2F384F !important;
       font-weight: 600;

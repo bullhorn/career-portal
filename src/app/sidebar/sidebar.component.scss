@@ -1,5 +1,17 @@
 :host {
   background-color: #F4F4F4;
+  &::-webkit-scrollbar {
+    background-color:#fff;
+    height:4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color:#fff
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color:#babac0;
+    border-radius:4px;
+  }
   novo-form {
     margin-top: 30px;
     padding-right: 20px;
