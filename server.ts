@@ -28,9 +28,9 @@ global['document'] = win.document;
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
 
 if (process.env.COMPANY_NAME) {
+  let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
   appConfig.service.swimlane = process.env.BULLHORN_SWIMLANE;
   appConfig.service.corpToken = process.env.BULLHORN_CORP_TOKEN;
   appConfig.careersUrl = process.env.HOSTED_ENDPOINT;
