@@ -12,9 +12,9 @@ export class ApplyService {
   get baseUrl(): string {
     let service: IServiceSettings = SettingsService.settings.service;
     let port: number = service.port ? service.port : 443;
-    let scheme: string = `http${ service.port === 443  ? 's' : '' }`;
+    let scheme: string = `http${ port === 443  ? 's' : '' }`;
 
-    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${service.port}/rest-services/${service.corpToken}/apply`;
+    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}/apply`;
   }
 
   public apply(id: number, params: any): Observable<any> {
