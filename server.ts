@@ -39,7 +39,7 @@ if (process.env.COMPANY_NAME) {
   appConfig.companyLogoPath = process.env.COMPANY_LOGO_URL;
   appConfig.integrations.googleAnalytics.trackingId = process.env.GOOGLE_ANALYTICS_TRACKING_ID;
 
-  writeFile(path.resolve(DIST_FOLDER, 'app.json'), appConfig.toString(), (err: any) => {
+  writeFile(path.resolve(DIST_FOLDER, 'app.json'), JSON.stringify(appConfig), (err: any) => {
     if (err) {
       // tslint:disable-next-line: no-console
       console.error('Failed to write config file:', err.message);
