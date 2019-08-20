@@ -51,8 +51,8 @@ npm install
 Use one of the following to build and test:
 
 ```
-npm start            # Launch a local version of the career portal (frontend only).
-npm serve            # Launch a local server with server side rendering portal.
+npm serve            # Launch a local version of the career portal (frontend only).
+npm start            # Launch a local server with server side rendering portal.
 npm run build        # Build an optimized version of Career Portal in `/dist`
 npm run build:ssr    # Build a package for use with server side rendering
 ```

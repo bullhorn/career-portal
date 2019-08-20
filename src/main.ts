@@ -16,6 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let chomskySubscription: any = TranslateService.use(USER_LOCALE).subscribe(() => {
     chomskySubscription.unsubscribe();
     platformBrowserDynamic().bootstrapModule(AppModule)
-    .catch((err: any) => console.log(err));
-  });// tslint:disable-line
+      .catch((err: any) => console.log(err)); // tslint:disable-line
+  });
 });
