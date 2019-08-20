@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChomskyModule } from 'chomsky';
 
 import { AppComponent } from './app.component';
 import { JobListComponent } from './job-list/job-list.component';
@@ -60,6 +61,7 @@ export function initSettings(settings: SettingsService): any {
     NovoModalModule,
     ClipboardModule,
     FormsModule,
+    ChomskyModule,
     RouterModule.forRoot(
       appRoutes,
     { enableTracing: false, useHash: false },

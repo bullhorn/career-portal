@@ -24,7 +24,12 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/app.json"
+              "src/app.json",
+              {
+                "glob": "**/*",
+                "input": "src/static/i18n/",
+                "output": "/i18n/"
+              }
             ],
             "styles": [
               "src/styles.scss",

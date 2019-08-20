@@ -1,7 +1,7 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <div class="background" *ngIf="!loading">
     <div class="job-container">
-        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">Back</button>
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate}}</button>
         <div class="job-header">
             <span class="job-title">{{job.title}}</span>
             <div class="job-info-container">
@@ -17,13 +17,13 @@
         </div>
         <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
         <div class="share">
-            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">Apply Now</button>
-            <button theme="primary" *ngIf="alreadyApplied" disabled="true">Already Applied</button>
+            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">{{ 'APPLY_NOW' | translate }}</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true">{{ 'ALREADY_APPLIED' | translate }}</button>
             <button theme="icon" icon="email" (click)="emailLink()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
-            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">Share this post</button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">{{ 'SHARE_POST' | translate }}</button>
             <button theme="icon" icon="print" (click)="print()"></button>
         </div>
     </div>

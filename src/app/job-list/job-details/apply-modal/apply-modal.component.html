@@ -16,13 +16,13 @@
             <novo-control [form]="form" [control]="control"></novo-control>
           </div>
           <div class="eeoc-form" *ngIf="eeocControls.length">
-            <h2>Voluntary Self-Identification Form for Race, Gender and Ethnicity</h2>
+            <h2>{{ 'EEOC_FORM_DESCRIPTION' | translate }}</h2>
             <div *ngFor="let control of eeocControls" class="novo-form-row">
               <novo-control [form]="form" [control]="control"></novo-control>
             </div>
           </div>
       </novo-form>
     </section>
-    <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">Cancel</button>
-    <button theme="primary" icon="check" [disabled]="!form.valid || applying" (click)="save()" data-automation-id="create-modal-save">Apply</button>
+    <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">{{ 'CANCEL' | translate}}</button>
+    <button theme="primary" icon="check" [disabled]="!form.valid || applying" (click)="save()" data-automation-id="create-modal-save"> {{ 'APPLY' | translate}} </button>
   </novo-modal>

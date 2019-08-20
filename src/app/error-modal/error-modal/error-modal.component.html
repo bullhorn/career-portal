@@ -1,5 +1,5 @@
 <novo-notification type="error" data-automation-id="error-modal">
   <h1>{{ params['title'] }}</h1>
   <h2>{{ params['message'] }}</h2>
-  <button theme="primary" (click)="close()" data-automation-id="error-modal-confirm" icon="check">Okay</button>
+  <button theme="primary" (click)="close()" data-automation-id="error-modal-confirm" icon="check">{{ 'OKAY' | translate}}</button>
 </novo-notification>
