@@ -32,8 +32,8 @@ export class SearchService {
     return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`);
   }
 
-  public openJob(id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${parseInt(id)})&fields=${SettingsService.settings.service.fields}`);
+  public openJob(id: string | number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${id})&fields=${SettingsService.settings.service.fields}`);
   }
 
   public getCurrentJobIds(filter: any, ignoreFields: string[]): Observable<any> {

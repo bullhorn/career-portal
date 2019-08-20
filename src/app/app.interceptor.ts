@@ -13,13 +13,13 @@ export class AppInterceptor implements HttpInterceptor {
     let serverReq: HttpRequest<any> = req;
     let port: string = '80';
     let host: string = 'localhost';
-    if (SettingsService.isServer && this.request.path === '/' && this.request.headers.host.indexOf(':') !== -1 ) {
-      port = this.request.headers.host.split(':')[1];
-      host = this.request.headers.host.split(':')[0];
-    } else if (SettingsService.isServer && this.request.path === '/') {
-      host = this.request.headers.host;
-    }
     if (this.request && req.url.includes('./app.json') && SettingsService.isServer) {
+      if (SettingsService.isServer && this.request.headers.host.indexOf(':') !== -1 ) {
+        port = this.request.headers.host.split(':')[1];
+        host = this.request.headers.host.split(':')[0];
+      } else if (SettingsService.isServer && this.request.path === '/') {
+        host = this.request.headers.host;
+      }
       let newUrl: string = `http://${host}:${port}`;
       if (!req.url.startsWith('/')) {
         newUrl += '/';
