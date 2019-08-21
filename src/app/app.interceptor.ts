@@ -19,6 +19,9 @@ export class AppInterceptor implements HttpInterceptor {
         host = this.request.headers.host.split(':')[0];
       } else if (SettingsService.isServer && this.request.path === '/') {
         host = this.request.headers.host;
+      } else if (SettingsService.isServer && this.request.headers.host) {
+        host = this.request.headers.host;
+        port = '';
       }
       let newUrl: string = `http://${host}:${port}`;
       if (!req.url.startsWith('/')) {
