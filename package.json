@@ -20,6 +20,7 @@
     "del": "^3.0.0",
     "fs-extra": "^4.0.1 ",
     "galaxy-parser": "^1.0.4",
+    "group-array": "0.3.3",
     "gulp": "~3.9.1",
     "gulp-angular-templatecache": "~2.0.0",
     "gulp-autoprefixer": "~4.0.0",
