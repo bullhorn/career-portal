@@ -29,11 +29,6 @@ export class AppInterceptor implements HttpInterceptor {
       }
       newUrl += 'app.json';
       serverReq = req.clone({ url: newUrl });
-      console.log(newUrl);
-      console.log(this.request.headers.host);
-      console.log(req.url);
-      console.log('-------------------------');
-      console.log(this.request.headers);
     }
 
     return next.handle(serverReq);
