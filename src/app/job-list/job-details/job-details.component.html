@@ -1,4 +1,5 @@
 <novo-loading *ngIf="loading"></novo-loading>
+<app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
 <div class="background" *ngIf="!loading">
     <div class="job-container">
         <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate}}</button>
@@ -28,4 +29,3 @@
         </div>
     </div>
 </div>
-<app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>

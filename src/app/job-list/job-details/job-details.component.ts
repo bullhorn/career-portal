@@ -10,6 +10,7 @@ import { ErrorModalComponent } from '../../error-modal/error-modal/error-modal.c
 import { Title, Meta } from '@angular/platform-browser';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import { ServerResponseService } from '../../services/server-response/server-response.service';
+import { TranslateService } from 'chomsky';
 
 @Component({
   selector: 'app-job-details',
@@ -110,8 +111,7 @@ export class JobDetailsComponent implements OnInit {
   private setJob(): void {
     let res: any = this.route.snapshot.data.message;
     if (res.data && res.data.length > 0) {
-      this.job = res.data[ 0 ];
-      this.loading = false;
+      this.job = res.data[0];
       this.titleService.setTitle(this.job.title);
       this.meta.updateTag({ name: 'og:title', content: this.job.title });
       this.meta.updateTag({ name: 'titter:title', content: this.job.title });
@@ -120,11 +120,12 @@ export class JobDetailsComponent implements OnInit {
       this.meta.updateTag({ name: 'og:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'twitter:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'description', content: this.job.publicDescription});
+      this.loading = false;
     } else {
       this.serverResponse.setNotFound();
       this.modalService.open(ErrorModalComponent, {
-        title: 'Error',
-        message: 'Oops! The job you are looking for is no longer here. Click okay to return to the job list.',
+        title: TranslateService.translate('ERROR'),
+        message: TranslateService.translate('MISSING_JOB_ERROR'),
       }).onClosed.then(this.goToJobList.bind(this));
     }
   }

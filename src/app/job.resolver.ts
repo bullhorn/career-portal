@@ -18,7 +18,7 @@ export class JobResolver implements Resolve<any> {
       this.serverResponse.setNotFound();
       console.error('invalid job id'); // tslint:disable-line
       return of({jobs: []});
-    }
+    },
     ));
   }
 }
