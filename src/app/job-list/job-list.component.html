@@ -8,7 +8,7 @@
 </div>
 <novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
 
-<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" >
+<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" (click)="loadJob(job.id)">
     <novo-list-item>
         <item-header>
             <item-title><a [href]="'jobs/' + job.id" [routerLink]="'jobs/' + job.id">{{ job.title }}</a></item-title>

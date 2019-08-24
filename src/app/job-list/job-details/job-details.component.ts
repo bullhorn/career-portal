@@ -9,6 +9,7 @@ import { ShareService } from '../../services/share/share.service';
 import { ErrorModalComponent } from '../../error-modal/error-modal/error-modal.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
+import { ServerResponseService } from '../../services/server-response/server-response.service';
 
 @Component({
   selector: 'app-job-details',
@@ -36,6 +37,7 @@ export class JobDetailsComponent implements OnInit {
     private viewContainerRef: ViewContainerRef,
     private titleService: Title,
     private meta: Meta,
+    private serverResponse: ServerResponseService,
   ) {
     this.modalService.parentViewContainer = this.viewContainerRef;
   }
@@ -107,7 +109,7 @@ export class JobDetailsComponent implements OnInit {
 
   private setJob(): void {
     let res: any = this.route.snapshot.data.message;
-    if (res.data.length > 0) {
+    if (res.data && res.data.length > 0) {
       this.job = res.data[ 0 ];
       this.loading = false;
       this.titleService.setTitle(this.job.title);
@@ -119,6 +121,7 @@ export class JobDetailsComponent implements OnInit {
       this.meta.updateTag({ name: 'twitter:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'description', content: this.job.publicDescription});
     } else {
+      this.serverResponse.setNotFound();
       this.modalService.open(ErrorModalComponent, {
         title: 'Error',
         message: 'Oops! The job you are looking for is no longer here. Click okay to return to the job list.',

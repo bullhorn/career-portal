@@ -50,10 +50,7 @@ export class StructuredSeoComponent implements OnChanges {
     let s: any = this._renderer2.createElement('script');
     s.type = `application/ld+json`;
     s.text = JSON.stringify(jsonObject);
-
-    if (SettingsService.isServer) {
-      this._renderer2.appendChild(this._document.body, s);
-    }
+    this._renderer2.appendChild(this._document.body, s);
   }
 
 }

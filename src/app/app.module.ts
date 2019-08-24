@@ -25,6 +25,7 @@ import { StripHtmlPipe } from './utils/stripHtml.pipe';
 import { StructuredSeoComponent } from './structured-seo/structured-seo.component';
 import { DatePipe } from '@angular/common';
 import { JobResolver } from './job.resolver';
+import { ServerResponseService } from './services/server-response/server-response.service';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -79,6 +80,7 @@ export function initSettings(settings: SettingsService): any {
     AnalyticsService,
     DatePipe,
     JobResolver,
+    ServerResponseService,
   ],
   bootstrap: [AppComponent],
 })

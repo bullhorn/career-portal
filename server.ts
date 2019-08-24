@@ -10,6 +10,7 @@ import { join } from 'path';
 import { createWindow } from 'domino';
 import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
+import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -47,12 +48,22 @@ if (process.env.COMPANY_NAME) {
   });
 }
 
-app.engine('html', ngExpressEngine({
-  bootstrap: AppServerModuleNgFactory,
-  providers: [
-    provideModuleMap(LAZY_MODULE_MAP),
-  ],
-}));
+app.engine('html', (_: any, options: any, callback: any) => {
+  ngExpressEngine({
+    bootstrap: AppServerModuleNgFactory,
+    providers: [
+      provideModuleMap(LAZY_MODULE_MAP),
+      {
+        provide: REQUEST,
+        useValue: options.req,
+      },
+      {
+        provide: RESPONSE,
+        useValue: options.req.res,
+      },
+    ],
+  })(_, options, callback); },
+);
 
 app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
@@ -66,7 +77,7 @@ app.get('*.*', express.static(DIST_FOLDER, {
 
 // All regular routes use the Universal engine
 app.get('*', (req: any, res: any) => {
-  res.render('index', { req });
+  res.render('index', { req, res });
 });
 
 // Start up the Node server

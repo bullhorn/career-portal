@@ -1,13 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~novo-elements/novo-elements";
 
-app-job-list novo-loading {
+app-job-list {
+  novo-loading {
   position: absolute;
   top: 50%;
   align-items: center;
   justify-content: center;
   width: 100%;
-}
+  }
+} 
 
 body {
   overflow: hidden;
@@ -117,5 +119,15 @@ app-sidebar {
       color: #2F384F !important;
       font-weight: 600;
     }
+  }
+}
+
+app-main-page {
+  >novo-loading {
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   }
 }

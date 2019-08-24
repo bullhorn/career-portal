@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from
 import { SearchService } from '../services/search/search.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { SettingsService } from '../services/settings/settings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-list',
@@ -13,16 +14,17 @@ export class JobListComponent implements OnChanges {
   @Input() public filterCount: number;
   @Input() public sidebarVisible: boolean = false;
   @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();
+  @Output() public showLoading: EventEmitter<boolean> = new EventEmitter();
 
   public jobs: any[] = [];
   public title: string;
-  public loading: boolean = true;
+  public _loading: boolean = true;
   public moreAvailable: boolean = true;
   public total: number | '' = '';
   public jobInfoChips: string[] = SettingsService.settings.service.jobInfoChips;
   private start: number = 0;
 
-  constructor(private http: SearchService, private titleService: Title, private meta: Meta) {
+  constructor(private http: SearchService, private titleService: Title, private meta: Meta, private router: Router) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {
@@ -45,6 +47,20 @@ export class JobListComponent implements OnChanges {
 
   public openSidebar(): void {
     this.displaySidebar.emit(true);
+  }
+
+  public loadJob(jobId: number): void {
+    this.router.navigate([`jobs/${jobId}`]);
+    this.loading = true;
+  }
+
+  get loading(): boolean {
+    return this._loading;
+  }
+
+  set loading(value: boolean) {
+    this.showLoading.emit(value);
+    this._loading = value;
   }
 
   private onSuccess(res: any): void {

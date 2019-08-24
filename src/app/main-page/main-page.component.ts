@@ -10,6 +10,7 @@ export class MainPageComponent {
   public filterCount: number = 1;
   public listFilter: any = {};
   public displaySidebar: boolean = false;
+  public loading: boolean = true;
   public sidebarCss: object = {};
 
   constructor() { }
@@ -30,7 +31,10 @@ export class MainPageComponent {
     } else {
       this.sidebarCss = {};
     }
+  }
 
+  public handleListLoad(loading: boolean): void {
+    this.loading = loading;
   }
 
 }
