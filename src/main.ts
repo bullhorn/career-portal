@@ -9,7 +9,7 @@ if (environment.production) {
   enableProdMode();
 }
 
-const USER_LOCALE: string = 'en-US';
+const USER_LOCALE: string = 'english';
 
 document.addEventListener('DOMContentLoaded', () => {
 

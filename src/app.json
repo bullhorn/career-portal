@@ -13,11 +13,7 @@
   "companyLogoPath": "https://www.bullhorn.com/wp-content/uploads/2016/08/BH16_logo_orange_blue_stacked-e1545239175762.png",
   "companyUrl": "https://bh-career-portal.herokuapp.com",
   "careersUrl": "https://bh-career-portal.herokuapp.com",
-  "defaultLocale": "en-US",
-  "supportedLocales": [
-    "en-US",
-    "fr-FR"
-  ],
+  "language": "french",
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
   "maxUploadSize": 5242880,
@@ -46,7 +42,7 @@
     ],
     "keywordSearchFields": [
       "publicDescription",
-      "title"
+      "title" 
     ]
   },
   "additionalJobCriteria": {

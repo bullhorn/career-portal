@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SettingsService } from './services/settings/settings.service';
+import { TranslateService } from 'chomsky';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent {
   public title: string = SettingsService.settings.companyName;
 
   constructor(private router: Router) {
+    TranslateService.use(SettingsService.settings.language).subscribe();
     let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
     if (trackingId && !SettingsService.isServer) {
       this.router.events.subscribe((event: any) => {
