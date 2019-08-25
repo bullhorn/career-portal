@@ -26,6 +26,7 @@ import { StructuredSeoComponent } from './structured-seo/structured-seo.componen
 import { DatePipe } from '@angular/common';
 import { JobResolver } from './job.resolver';
 import { ServerResponseService } from './services/server-response/server-response.service';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -65,7 +66,7 @@ export function initSettings(settings: SettingsService): any {
     ChomskyModule,
     RouterModule.forRoot(
       appRoutes,
-    { enableTracing: false, useHash: false },
+      { enableTracing: false, useHash: environment.useHash },
   ),
   ],
   providers: [
