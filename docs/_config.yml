@@ -1,0 +1,4 @@
+theme: jekyll-theme-slate
+title: Bullhorn Career Portal
+description: A Bullhorn Platform SDK app that allows candidates to search for and apply to jobs.
+show_downloads: false

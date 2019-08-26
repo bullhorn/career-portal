@@ -55,6 +55,9 @@
   "integrations": {
     "googleAnalytics": {
         "trackingId": "UA-114837554-1"
+    },
+    "googleSiteVerification": {
+        "verificationCode": ""
     }
 },
   "eeoc": {

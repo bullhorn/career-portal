@@ -40,6 +40,7 @@ if (process.env.COMPANY_NAME) {
   appConfig.companyUrl = process.env.COMPANY_WEBSITE;
   appConfig.companyLogoPath = process.env.COMPANY_LOGO_URL;
   appConfig.integrations.googleAnalytics.trackingId = process.env.GOOGLE_ANALYTICS_TRACKING_ID;
+  appConfig.integrations.googleSiteVerification.verificationCode = process.env.GOOGLE_VERIFICATION_CODE;
 
   writeFile(path.resolve(DIST_FOLDER, 'app.json'), JSON.stringify(appConfig), (err: any) => {
     if (err) {

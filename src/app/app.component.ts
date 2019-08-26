@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SettingsService } from './services/settings/settings.service';
 import { TranslateService } from 'chomsky';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { TranslateService } from 'chomsky';
 export class AppComponent {
   public title: string = SettingsService.settings.companyName;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private meta: Meta) {
+    this.meta.updateTag({ name: 'google-site-verification', content: SettingsService.settings.integrations.googleSiteVerification.verificationCode });
     TranslateService.use(SettingsService.settings.language).subscribe();
     let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
     if (trackingId && !SettingsService.isServer) {

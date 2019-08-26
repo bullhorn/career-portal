@@ -29,10 +29,14 @@ interface IServiceSettings {
 
 interface IIntegrationSettings {
   googleAnalytics: IGoogleAnalyticsSettings;
+  googleSiteVerification: IGoogleSearchSettings;
 }
 
 interface IGoogleAnalyticsSettings {
   trackingId: string;
+}
+interface IGoogleSearchSettings {
+  verificationCode: string;
 }
 
 interface IEeoc {
