@@ -4,6 +4,7 @@ import { enableProdMode } from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 // Import module map for lazy loading
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
+(global as any).XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 import * as express from 'express';
 import { join } from 'path';
