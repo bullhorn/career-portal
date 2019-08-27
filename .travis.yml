@@ -3,7 +3,7 @@ sudo: required
 dist: trusty
 
 node_js:
-  - 10
+  - '10'
 
 cache:
   directories:
@@ -17,6 +17,7 @@ install:
   - npm install
 
 script:
+  - npm run lint
   - npm run build:ssr
 
 notifications:

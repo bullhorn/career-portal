@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SearchService } from '../../services/search/search.service';
 import { CheckListControl, FormUtils, NovoFormGroup, FieldInteractionApi } from 'novo-elements';
 
@@ -46,10 +46,6 @@ export class SidebarFilterComponent implements OnChanges {
   private handleJobIdsOnSuccess(res: any): void {
     let resultIds: number[] = res.data.map((result: any) => { return result.id; });
     this.service.getAvailableFilterOptions(resultIds, this.field).subscribe(this.setFieldOptionsOnSuccess.bind(this));
-
-  }
-
-  private setupInteractions(): void {
 
   }
 

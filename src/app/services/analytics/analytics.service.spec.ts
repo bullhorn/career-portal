@@ -6,7 +6,7 @@ import { AnalyticsService } from './analytics.service';
 describe('Service: Analytics', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AnalyticsService]
+      providers: [AnalyticsService],
     });
   });
 

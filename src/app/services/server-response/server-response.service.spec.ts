@@ -1,12 +1,12 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { ServerResponseService } from './server-response.service';
 
 describe('Service: ServerResponse', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ServerResponseService]
+      providers: [ServerResponseService],
     });
   });
 

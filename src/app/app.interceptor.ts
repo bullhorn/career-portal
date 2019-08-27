@@ -1,5 +1,5 @@
 import { Injectable, Inject, Optional } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Request } from 'express';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { SettingsService } from './services/settings/settings.service';

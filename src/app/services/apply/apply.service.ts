@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
 import { Observable } from 'rxjs';
 
@@ -18,11 +18,6 @@ export class ApplyService {
   }
 
   public apply(id: number, params: any): Observable<any> {
-    const httpOptions: any = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-      }),
-    };
     let body: FormData = new FormData();
     for (let key in params) {
       if (!params.hasOwnProperty(key)) { continue; }

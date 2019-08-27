@@ -8,7 +8,7 @@ describe('ErrorModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorModalComponent ]
+      declarations: [ ErrorModalComponent ],
     })
     .compileComponents();
   }));

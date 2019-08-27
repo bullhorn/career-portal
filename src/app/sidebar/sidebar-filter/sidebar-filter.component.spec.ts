@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { SidebarFilterComponent } from './sidebar-filter.component';
 
@@ -11,7 +9,7 @@ describe('SidebarFilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarFilterComponent ]
+      declarations: [ SidebarFilterComponent ],
     })
     .compileComponents();
   }));

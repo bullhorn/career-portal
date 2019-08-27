@@ -11,7 +11,7 @@ describe('StructuredSeoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StructuredSeoComponent ]
+      declarations: [ StructuredSeoComponent ],
     })
     .compileComponents();
   }));

@@ -1,7 +1,7 @@
 import { Component, Input, HostBinding, OnChanges, Renderer2, Inject } from '@angular/core';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import { SettingsService } from '../services/settings/settings.service';
-import { SafeHtml, DomSanitizer, DOCUMENT } from '@angular/platform-browser';
+import { SafeHtml, DOCUMENT } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
 export class StructuredSeoComponent implements OnChanges {
   @Input() public jobData: JobBoardPost;
   @HostBinding('innerHTML') public html: SafeHtml;
-  constructor(private sanitizer: DomSanitizer, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document: Document, private datePipe: DatePipe) { }
+  constructor(private _renderer2: Renderer2, @Inject(DOCUMENT) private _document: Document, private datePipe: DatePipe) { }
 
   public ngOnChanges(): void {
     let jsonObject: object = {

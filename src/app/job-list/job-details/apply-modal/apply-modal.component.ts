@@ -32,7 +32,6 @@ export class ApplyModalComponent implements OnInit {
   constructor(private formUtils: FormUtils,
     public params: NovoModalParams,
     private modalRef: NovoModalRef,
-    private settings: SettingsService,
     private applyService: ApplyService,
     private analytics: AnalyticsService,
     private toaster: NovoToastService ) { this.toaster.parentViewContainer = this.params['viewContainer']; }

@@ -4,13 +4,13 @@ import { NovoModalRef, NovoModalParams } from 'novo-elements';
 @Component({
   selector: 'error-modal',
   templateUrl: './error-modal.component.html',
-  styleUrls: ['./error-modal.component.scss']
+  styleUrls: ['./error-modal.component.scss'],
 })
 export class ErrorModalComponent implements OnInit {
 
   constructor(public params: NovoModalParams, private modalRef: NovoModalRef) { }
 
-  ngOnInit() {
+  public ngOnInit(): any {
   }
 
   public close(): void {

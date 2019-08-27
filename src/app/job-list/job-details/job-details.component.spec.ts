@@ -11,7 +11,7 @@ describe('JobDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JobDetailsComponent ]
+      declarations: [ JobDetailsComponent ],
     })
     .compileComponents();
   }));
