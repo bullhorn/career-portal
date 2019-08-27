@@ -45,6 +45,7 @@
     "date-fns": "^1.30.1",
     "express": "^4.16.2",
     "he": "^1.2.0",
+    "jsontoxml": "^1.0.1",
     "ngx-clipboard": "^10.0.0",
     "novo-elements": "github:bullhorn/novo-elements-snapshot",
     "post-robot": "^8.0.29",

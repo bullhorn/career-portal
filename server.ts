@@ -12,6 +12,7 @@ import { createWindow } from 'domino';
 import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
+import { generateSitemap } from './generateXml';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -30,9 +31,9 @@ global['document'] = win.document;
 const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
+let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
 
 if (process.env.COMPANY_NAME) {
-  let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
   appConfig.service.swimlane = process.env.BULLHORN_SWIMLANE;
   appConfig.service.corpToken = process.env.BULLHORN_CORP_TOKEN;
   appConfig.careersUrl = process.env.HOSTED_ENDPOINT;
@@ -76,6 +77,12 @@ app.set('views', DIST_FOLDER);
 app.get('*.*', express.static(DIST_FOLDER, {
   maxAge: '1y',
 }));
+
+app.get('/sitemap', (req: any, res: any) => {
+  res.type('application/xml');
+  res.contentType('application/xml');
+  generateSitemap(appConfig, res)
+  });
 
 // All regular routes use the Universal engine
 app.get('*', (req: any, res: any) => {
