@@ -1,6 +1,6 @@
 import { get } from 'https';
 import { IncomingMessage } from 'http';
-import { JobBoardPost } from '@bullhorn/bullhorn-types';
+import { JobBoardPost, Strings } from '@bullhorn/bullhorn-types';
 import * as jsonxml from 'jsontoxml';
 
 export function generateSitemap(appConfig: ISettings, res: any): any {
@@ -92,11 +92,11 @@ function getQuery(appConfig: ISettings): string {
   return query;
 }
 
-function escapeHtml(text) {
+function escapeHtml(text: any): string  {
   return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
