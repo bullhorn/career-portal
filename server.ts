@@ -12,7 +12,7 @@ import { createWindow } from 'domino';
 import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
-import { generateSitemap } from './generateXml';
+import { generateSitemap, generateRss } from './generateXml';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -82,7 +82,13 @@ app.get('/sitemap', (req: any, res: any) => {
   res.type('application/xml');
   res.contentType('application/xml');
   generateSitemap(appConfig, res)
-  });
+});
+
+app.get('/feed', (req: any, res: any) => {
+  res.type('application/xml');
+  res.contentType('application/xml');
+  generateRss(appConfig, res);
+});
 
 // All regular routes use the Universal engine
 app.get('*', (req: any, res: any) => {
