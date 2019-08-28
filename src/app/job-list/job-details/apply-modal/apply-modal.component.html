@@ -21,6 +21,12 @@
               <novo-control [form]="form" [control]="control"></novo-control>
             </div>
           </div>
+        <div class="consent-form">
+          <div class="novo-form-row">
+            <novo-control [form]="form" [control]="consentControl"></novo-control>
+            <label class="consent-checkbox-label">By checking this box you're agreeing to our <a (click)="viewPrivacyPolicy()">Privacy Policy</a></label>
+          </div>
+        </div>
       </novo-form>
     </section>
     <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">{{ 'CANCEL' | translate}}</button>

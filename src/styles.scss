@@ -131,3 +131,20 @@ app-main-page {
   width: 100%;
   }
 }
+
+app-apply-modal {
+  novo-form {
+    form {
+      div.consent-form{
+        novo-control.checkbox {
+          div.field-message.checkbox.error-hidden {
+            display: none;
+          }
+          div.field-message.checkbox.error-shown {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
