@@ -164,11 +164,11 @@ export class ApplyModalComponent implements OnInit {
       key: 'consent',
       required: true,
       hidden: false,
+      description: 'By checking this box you\'re agreeing to ourPrivacy Policy',
       interactions: [
         {
           event: 'change',
           script: (FAPI: FieldInteractionApi) => {
-            console.log(this.privacyPolicyURL);
             if(!FAPI.getValue('consent')) {
               FAPI.markAsInvalid('consent');
             }
