@@ -21,10 +21,12 @@
               <novo-control [form]="form" [control]="control"></novo-control>
             </div>
           </div>
-        <div class="consent-form">
+        <div *ngIf="consentCheckbox" class="consent-form">
           <div class="novo-form-row">
             <novo-control [form]="form" [control]="consentControl"></novo-control>
-            <label class="consent-checkbox-label">By checking this box you're agreeing to our <a (click)="viewPrivacyPolicy()">Privacy Policy</a></label>
+            <label *ngIf="usePrivacyPolicyUrl" class="consent-checkbox-label">By checking this box you're agreeing to our <a (click)="viewPrivacyPolicy()">Privacy Policy</a></label>
+            <label *ngIf="!usePrivacyPolicyUrl" class="consent-checkbox-label">By checking this box you're agreeing to our<span class="hover" *ngIf="!usePrivacyPolicyUrl"
+                  [popover]=privacyStatementParagraphs popoverPlacement="top-left" [popoverOnHover]="true"> Privacy Policy</span></label>
           </div>
         </div>
       </novo-form>

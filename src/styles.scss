@@ -148,7 +148,10 @@ app-apply-modal {
         }
         label.consent-checkbox-label {
           float: right;
-          padding: 2em 10.5em 0 0;
+          padding: 2em 11em 0 0;
+          span {
+            color: #276ecc;
+          }
         }
       }
     }

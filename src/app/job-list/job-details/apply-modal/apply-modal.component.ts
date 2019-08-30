@@ -40,6 +40,9 @@ export class ApplyModalComponent implements OnInit {
   public consentControl: any;
   public applying: boolean = false;
   public privacyPolicyURL: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
+  public consentCheckbox: boolean = SettingsService.settings.privacyConsent.consentCheckbox;
+  public usePrivacyPolicyUrl: boolean = SettingsService.settings.privacyConsent.usePrivacyPolicyUrl;
+  public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join("\r\n");
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(private formUtils: FormUtils,
@@ -160,7 +163,7 @@ export class ApplyModalComponent implements OnInit {
       }
     }
 
-    this.consentControl = new CheckboxControl( {
+    this.consentControl = new CheckboxControl({
       key: 'consent',
       required: true,
       hidden: false,
@@ -169,7 +172,7 @@ export class ApplyModalComponent implements OnInit {
         {
           event: 'change',
           script: (FAPI: FieldInteractionApi) => {
-            if(!FAPI.getValue('consent')) {
+            if (!FAPI.getValue('consent')) {
               FAPI.markAsInvalid('consent');
             }
           },
