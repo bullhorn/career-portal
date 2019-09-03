@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { NovoFormGroup, FormUtils, NovoModalRef, NovoModalParams, TextBoxControl, FileControl, PickerControl, SelectControl, NovoToastService } from 'novo-elements';
+import {
+  NovoFormGroup,
+  FormUtils,
+  NovoModalRef,
+  NovoModalParams,
+  TextBoxControl,
+  FileControl,
+  PickerControl,
+  SelectControl,
+  NovoToastService,
+  CheckboxControl, FieldInteractionApi
+} from 'novo-elements';
 import { SettingsService } from '../../../services/settings/settings.service';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
 import { ApplyService } from '../../../services/apply/apply.service';
@@ -26,15 +37,21 @@ export class ApplyModalComponent implements OnInit {
   public hasError: boolean = false;
   public formControls: any[] = [this.firstName, this.lastName, this.email, this.phoneNumber];
   public eeocControls: any = [];
+  public consentControl: any;
   public applying: boolean = false;
+  public privacyPolicyURL: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
+  public consentCheckbox: boolean = SettingsService.settings.privacyConsent.consentCheckbox;
+  public usePrivacyPolicyUrl: boolean = SettingsService.settings.privacyConsent.usePrivacyPolicyUrl;
+  public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join("\r\n");
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(private formUtils: FormUtils,
-    public params: NovoModalParams,
-    private modalRef: NovoModalRef,
-    private applyService: ApplyService,
-    private analytics: AnalyticsService,
-    private toaster: NovoToastService ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
+              public params: NovoModalParams,
+              private modalRef: NovoModalRef,
+              private settings: SettingsService,
+              private applyService: ApplyService,
+              private analytics: AnalyticsService,
+              private toaster: NovoToastService ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
 
   public ngOnInit(): void {
     this.job = this.params['job'];
@@ -146,7 +163,24 @@ export class ApplyModalComponent implements OnInit {
       }
     }
 
-    this.form = this.formUtils.toFormGroup([...this.formControls, ...this.eeocControls]);
+    this.consentControl = new CheckboxControl({
+      key: 'consent',
+      required: true,
+      hidden: false,
+      description: 'By checking this box you\'re agreeing to ourPrivacy Policy',
+      interactions: [
+        {
+          event: 'change',
+          script: (FAPI: FieldInteractionApi) => {
+            if (!FAPI.getValue('consent')) {
+              FAPI.markAsInvalid('consent');
+            }
+          },
+        }
+      ],
+    });
+
+    this.form = this.formUtils.toFormGroup([...this.formControls, ...this.eeocControls, this.consentControl]);
     this.loading = false;
   }
 
@@ -163,6 +197,10 @@ export class ApplyModalComponent implements OnInit {
       value.source = this.source;
       this.applyService.apply(this.job.id, value).subscribe(this.applyOnSuccess.bind(this), this.applyOnFailure.bind(this) );
     }
+  }
+
+  public viewPrivacyPolicy(): void {
+    window.open(this.privacyPolicyURL);
   }
 
   private applyOnSuccess(res: any): void {

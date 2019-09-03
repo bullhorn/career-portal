@@ -9,7 +9,7 @@ app-job-list {
   justify-content: center;
   width: 100%;
   }
-} 
+}
 
 body {
   overflow: hidden;
@@ -129,5 +129,31 @@ app-main-page {
   align-items: center;
   justify-content: center;
   width: 100%;
+  }
+}
+
+app-apply-modal {
+  novo-form {
+    form {
+      div.consent-form{
+        novo-control.checkbox {
+          width: 5%;
+          float: left;
+          div.field-message.checkbox.error-hidden {
+            display: none;
+          }
+          div.field-message.checkbox.error-shown {
+            display: none;
+          }
+        }
+        label.consent-checkbox-label {
+          float: right;
+          padding: 2em 10em 0 0;
+          span {
+            color: #276ecc;
+          }
+        }
+      }
+    }
   }
 }
