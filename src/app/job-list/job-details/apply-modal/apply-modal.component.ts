@@ -9,7 +9,8 @@ import {
   PickerControl,
   SelectControl,
   NovoToastService,
-  CheckboxControl, FieldInteractionApi
+  CheckboxControl,
+  FieldInteractionApi,
 } from 'novo-elements';
 import { SettingsService } from '../../../services/settings/settings.service';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
@@ -42,7 +43,7 @@ export class ApplyModalComponent implements OnInit {
   public privacyPolicyURL: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
   public consentCheckbox: boolean = SettingsService.settings.privacyConsent.consentCheckbox;
   public usePrivacyPolicyUrl: boolean = SettingsService.settings.privacyConsent.usePrivacyPolicyUrl;
-  public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join("\r\n");
+  public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join('\r\n');
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(private formUtils: FormUtils,
@@ -176,7 +177,7 @@ export class ApplyModalComponent implements OnInit {
               FAPI.markAsInvalid('consent');
             }
           },
-        }
+        },
       ],
     });
 
