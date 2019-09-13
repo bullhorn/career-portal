@@ -33,6 +33,8 @@
 npm-debug.log
 testem.log
 /typings
+.tmp/
+.sass-cache/
 
 # e2e
 /e2e/*.js
