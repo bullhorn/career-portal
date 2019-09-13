@@ -1,0 +1,159 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~novo-elements/novo-elements";
+
+app-job-list {
+  novo-loading {
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  }
+}
+
+body {
+  overflow: hidden;
+}
+
+novo-file-input {
+  width: 100%;
+}
+
+app-job-list {
+  novo-list>div>novo-list-item   {
+    border-bottom: unset;
+
+    div.list-item {
+      item-content i{
+       color: #4a89dc;
+      }
+      >item-header item-title {
+        >h6 {
+          color: #4a89dc;
+        }
+      }
+    }
+  }
+}
+novo-search {
+  padding: 17px;
+  > input[data-automation-id="novo-search-input"] {
+    padding: 8px 10px;
+    font-size: 1em;
+  }
+  button[theme="fab"][icon="bhi-search"] {
+    width: 40px;
+    height: 33px;
+    min-height: unset;
+    padding: 0;
+
+    .flex-wrapper {
+      i {
+        font-size: 1em;
+        line-height: 14px;
+        padding: 0px;
+      }
+    }
+  }
+  &.active {
+    max-width: 700px;
+  }
+}
+
+app-job-details novo-card header{
+  padding: 10px 20px 10px 20px !important;
+  background-color: #BB5566;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-weight: 500;
+  min-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  color: white;
+  i {
+    font-size: 1em;
+  }
+  h3 {
+    font-weight: 500 !important;
+  }
+}
+
+.header{
+  >header {
+    h1 {
+      color: #D9DADC;
+    }
+  }
+}
+
+.job-details {
+  p {
+    max-width: 100em;
+  }
+}
+
+app-sidebar {
+  novo-check-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 20em;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      background-color:#fff;
+      height:4px;
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color:#fff
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color:#babac0;
+      border-radius:4px;
+    }
+    label {
+      color: #2F384F !important;
+      font-weight: 600;
+    }
+  }
+}
+
+app-main-page {
+  >novo-loading {
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  }
+}
+
+app-apply-modal {
+  novo-form {
+    form {
+      div.consent-form{
+        display: flex;
+        novo-control.checkbox {
+          width: 50px;
+          div.field-message.checkbox.error-hidden {
+            display: none;
+          }
+          div.field-message.checkbox.error-shown {
+            display: none;
+          }
+        }
+        label.consent-checkbox-label {
+          float: right;
+          padding: 2em 0 0 0;
+          span {
+            color: #276ecc;
+          }
+        }
+      }
+    }
+  }
+}

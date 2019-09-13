@@ -1,46 +1,34 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>Career Portal</title>
+<head>
+  <meta charset="utf-8">
+  <title>Career Portal</title>
+  <base href="/">
 
-        <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-        <!-- bower:css -->
-        <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-        <!-- endbower -->
-        <!-- endbuild -->
-
-        <!-- build:css({.tmp/serve,src}) styles/app.css -->
-        <!-- inject:css -->
-        <!-- css files will be automatically insert here -->
-        <!-- endinject -->
-        <!-- endbuild -->
-    </head>
-    <body>
-
-        <!-- Main Application Tag (Angular2 Ready :)) -->
-        <main></main>
-
-
-
-        <!-- build:js(src) scripts/vendor.js -->
-        <!-- bower:js -->
-        <!-- run `gulp inject` to automatically populate bower script dependencies -->
-        <!-- endbower -->
-        <script src="../lib/ng-file-upload/ng-file-upload.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp/serve,.tmp/partials}) scripts/app.js -->
-        <!-- inject:js -->
-        <!-- js files will be automatically insert here -->
-        <!-- endinject -->
-
-        <!-- inject:partials -->
-        <!-- angular templates will be automatically converted in js and inserted here -->
-        <!-- endinject -->
-        <!-- endbuild -->
-    </body>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root><novo-loading style="position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;display: flex;justify-content: center;align-items: center;">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </novo-loading>
+</app-root>
+<script>
+  (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+</script>
+</body>
 </html>

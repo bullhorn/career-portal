@@ -1,0 +1,30 @@
+.frame {
+  display: flex;
+  flex-direction: row;
+  app-sidebar {
+    width: 30%;        
+    flex-grow: 0;
+    height: calc(100vh - 55px);    
+    max-width: 300px;
+    min-width: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 7px 0px;
+  }
+  .list {
+    width: 80%;
+    flex-grow: 1000;
+    overflow-y: auto;
+    height: calc(100vh - 55px);
+  }
+
+@media only screen and (min-width: 768px) {
+  app-sidebar {
+    position: unset !important;
+    width: 30% !important;
+    max-width: 300px !important;
+    box-shadow: unset;
+  }
+}
+
+}

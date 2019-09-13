@@ -1,0 +1,35 @@
+<novo-modal>
+    <header class="apply-modal-header" [title]="job.title" theme="neutral" >
+      <utils>
+        <util-action icon="times" (click)="close()"></util-action>
+      </utils>
+      <div class="job-details">{{ job.publishedCategory.name }}</div>
+      <div class="job-details">{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{ job.address.state }}
+        <span class="separator" *ngIf="(job.address.city || job.address.state) && job.employmentType">|</span>
+        <!-- TYPE -->
+        <span class="type">{{ job.employmentType }}</span>
+      </div>
+    </header>
+    <section *ngIf="!loading">
+      <novo-form [form]="form" layout="vertical">
+          <div *ngFor="let control of formControls" class="novo-form-row">
+            <novo-control [form]="form" [control]="control"></novo-control>
+          </div>
+          <div class="eeoc-form" *ngIf="eeocControls.length">
+            <h2>{{ 'EEOC_FORM_DESCRIPTION' | translate }}</h2>
+            <div *ngFor="let control of eeocControls" class="novo-form-row">
+              <novo-control [form]="form" [control]="control"></novo-control>
+            </div>
+          </div>
+          <div *ngIf="consentCheckbox" class="consent-form novo-form-row">
+            <novo-control [form]="form" [control]="consentControl"></novo-control>
+            <label *ngIf="usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}} <a (click)="viewPrivacyPolicy()">{{ 'PRIVACY_POLICY' | translate}}</a></label>
+            <label *ngIf="!usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}}<span class="hover" *ngIf="!usePrivacyPolicyUrl"
+                  [popover]="privacyStatementParagraphs" popoverPlacement="top-left" [popoverOnHover]="true"> {{ 'PRIVACY_POLICY' | translate}}</span></label>
+          </div>
+      </novo-form>
+      <span class="error">{{ 'ERROR_WHILE_APPLYING' | translate}}</span>
+    </section>
+    <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">{{ 'CANCEL' | translate}}</button>
+    <button theme="primary" icon="check" [disabled]="!form.valid" (click)="save()" data-automation-id="create-modal-save" [loading]="applying" > {{ 'APPLY' | translate}} </button>
+  </novo-modal>

@@ -1,0 +1,62 @@
+:host {
+  background-color: #F4F4F4;
+  &::-webkit-scrollbar {
+    background-color:#fff;
+    height:4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color:#fff
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color:#babac0;
+    border-radius:4px;
+  }
+  novo-form {
+    margin-top: 30px;
+    padding-right: 20px;
+  }
+  > section.credits {
+    padding: 27px 0 0 20px;
+
+    span.powered-by {
+      font-size: 1em;
+      font-weight: 600;
+      color: #202945;
+    }
+
+    .bullhorn {
+      display: block;
+      position: relative;
+      bottom: 20px;
+      margin: 0;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    position: absolute;
+    left: -80%;
+    transition: all 0.2s ease-in-out;
+    &.active{
+      position: initial;
+      left: 0;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .header{
+      .close-filter-container{
+        display: none;
+      }
+      >header {
+        color: #bb5566;
+        h1 {
+          color: #D9DADC;
+        }
+
+      }
+    }
+  }
+  .close-filter-container {
+    flex-direction: row-reverse;
+    display: flex;
+  }
+}

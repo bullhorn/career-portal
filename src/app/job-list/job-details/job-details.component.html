@@ -1,0 +1,31 @@
+<novo-loading *ngIf="loading"></novo-loading>
+<app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
+<div class="background" *ngIf="!loading">
+    <div class="job-container">
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate}}</button>
+        <div class="job-header">
+            <span class="job-title">{{job.title}}</span>
+            <div class="job-info-container">
+                <span class="job-info" *ngIf="job.address.city && job.address.state"><i class="bhi-location"></i>{{ job.address.city }}<span *ngIf="job.address.city && job.address.state">,&nbsp;</span>{{
+                    job.address.state }}</span>
+                <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip">
+                    <span class="job-info">
+                        {{ job[chip] }}
+                    </span>
+                </ng-container>
+                <span class="job-info">{{ job.dateLastPublished | date: 'mediumDate'}}</span>
+            </div>
+        </div>
+        <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
+        <div class="share">
+            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">{{ 'APPLY_NOW' | translate }}</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true">{{ 'ALREADY_APPLIED' | translate }}</button>
+            <button theme="icon" icon="email" (click)="emailLink()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
+            <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">{{ 'SHARE_POST' | translate }}</button>
+            <button theme="icon" icon="print" (click)="print()"></button>
+        </div>
+    </div>
+</div>

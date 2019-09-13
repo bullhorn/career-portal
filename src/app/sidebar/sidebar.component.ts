@@ -1,0 +1,75 @@
+import { Component, Output, EventEmitter, HostBinding, Input } from '@angular/core';
+import { SettingsService } from '../services/settings/settings.service';
+import { NovoFormGroup } from 'novo-elements';
+import { SearchService } from '../services/search/search.service';
+
+@Component({
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
+})
+export class SidebarComponent {
+
+  @Output() public newFilter: EventEmitter<any> = new EventEmitter();
+  @Output() public toggleSidebar: EventEmitter<boolean> = new EventEmitter();
+  @HostBinding('class.active') @Input() public display: boolean = false;
+
+  public filterUrl: any;
+  public controls: any[] = [];
+  public updateFilterOptions: Function;
+  public sidebarForm: NovoFormGroup;
+  public keyword: string = '';
+  public timeout: any;
+  public loading: boolean = false;
+  public filter: object = {};
+
+  constructor(private searchService: SearchService) {}
+
+  public searchOnDelay(): void {
+    const keywordSearchFields: string[] = SettingsService.settings.service.keywordSearchFields;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+
+    this.timeout = setTimeout(() => {
+      let searchString: string = '';
+      if (this.keyword.trim()) {
+
+      keywordSearchFields.forEach((field: string, index: number) => {
+        if (index > 0) {
+          searchString += ' OR ';
+        }
+        searchString += `${field}{?^^equals}${this.keyword.trim() ? this.keyword.trim() + '*' : ''}`;
+      });
+      }
+      delete this.filter['ids'];
+      if (searchString) {
+        this.filter['keyword'] = searchString;
+      } else {
+        delete this.filter['keyword'];
+      }
+      this.searchService.getCurrentJobIds(this.filter, []).subscribe(this.handleJobIdsOnSuccess.bind(this));
+    }, 250);
+  }
+
+  public updateFilter(field: string, httpFormatedFilter: string | string[]): void {
+    delete this.filter['keyword'];
+    this.filter[field] = httpFormatedFilter;
+    let filter: object = {};
+    Object.assign(filter, this.filter);
+    this.filter = filter; // triggering angular change detection
+    this.newFilter.emit(this.filter);
+  }
+
+  public hideSidebar(): void {
+    this.toggleSidebar.emit(false);
+  }
+
+  private handleJobIdsOnSuccess(res: any): void {
+    let resultIds: string[] = res.data.map((result: any) => { return `id{?^^equals}${result.id}`; });
+    if (resultIds.length === 0) {
+      resultIds.push(`id{?^^equals}${-1}`);
+    }
+    this.updateFilter('ids', resultIds);
+  }
+}

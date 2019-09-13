@@ -1,0 +1,77 @@
+{
+  "acceptedResumeTypes": [
+    "html",
+    "text",
+    "txt",
+    "pdf",
+    "doc",
+    "docx",
+    "rtf",
+    "odt"
+  ],
+  "companyName": "[ COMPANY NAME HERE ]",
+  "companyLogoPath": "",
+  "companyUrl": "",
+  "careersUrl": "",
+  "language": "english",
+  "minUploadSize": 4096,
+  "maxRelatedJobs": 5,
+  "maxUploadSize": 5242880,
+  "service": {
+    "batchSize": 500,
+    "corpToken": "[ SWIMLANE HERE ]",
+    "port": null,
+    "swimlane": "[ SWIMLANE HERE ]",
+    "fields": [
+      "id",
+      "title",
+      "publishedCategory(id,name)",
+      "address(city,state,countryName)",
+      "employmentType",
+      "dateLastPublished",
+      "publicDescription",
+      "isOpen",
+      "isPublic",
+      "isDeleted",
+      "publishedZip",
+      "salary",
+      "salaryUnit"
+    ],
+    "jobInfoChips": [
+      "employmentType"
+    ],
+    "keywordSearchFields": [
+      "publicDescription",
+      "title"
+    ]
+  },
+  "additionalJobCriteria": {
+    "field": "[ FILTER FIELD HERE ]",
+    "values": [
+      "[ FILTER VALUE HERE ]"
+    ],
+    "sort": "-dateLastPublished"
+  },
+  "integrations": {
+    "googleAnalytics": {
+        "trackingId": ""
+    },
+    "googleSiteVerification": {
+        "verificationCode": ""
+    }
+},
+  "eeoc": {
+    "genderRaceEthnicity": false,
+    "veteran": false,
+    "disability": false
+  },
+  "privacyConsent": {
+    "consentCheckbox": false,
+    "privacyStatementParagraphs": [
+      "[FIRST PARAGRAPH]",
+      "[SECOND PARAGRAPH]"
+    ],
+    "privacyPolicyUrl": "",
+    "usePrivacyPolicyUrl": false
+  }
+}

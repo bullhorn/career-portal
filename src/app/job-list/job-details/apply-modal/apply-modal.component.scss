@@ -1,0 +1,31 @@
+:host {
+  min-width: 600px;
+  .job-details {
+    padding: 0px 0px 5px 15px;
+    .separator {
+      padding: 0px 5px;
+    }
+  }
+  novo-form {
+    padding: 10px 0px;
+
+    .eeoc-form h2 {
+      padding-bottom: 10px;
+    }
+  }
+  span.error {
+    color: #DA4453;
+    font-weight: 800;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  :host {
+      max-width: 100vw;
+      min-width: unset;
+      align-self: start;
+      novo-form {
+        max-height: 64vh;
+      }
+  }
+}

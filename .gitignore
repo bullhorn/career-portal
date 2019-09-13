@@ -1,20 +1,45 @@
-# Package/Dependencies
-lib/
-node_modules/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Config Files
-src/app.json
+# compiled output
+/dist
+/dist-server
+/tmp
+/out-tsc
 
-# Build Output
-dist/
-reports/
+# dependencies
+/node_modules
 
-# Transient Build Output
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
 .tmp/
 .sass-cache/
 
-# Others
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
 .DS_Store
-.idea
-.vs/
-.settings/
+Thumbs.db

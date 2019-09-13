@@ -1,0 +1,41 @@
+{
+  "name": "Career Portal",
+  "description": "A Bullhorn Platform SDK app that allows candidates to search for and apply to jobs.",
+  "repository": "https://github.com/bullhorn/career-portal",
+  "logo": "http://www.bullhorn.com/wp-content/uploads/2016/08/BH16_logo_orange_blue_stacked.png",
+  "keywords": ["bullhorn", "career-portal", "jobs", "angular", "express"],
+  "env": {
+    "BULLHORN_SWIMLANE": {
+      "description": "What is your company's Bullhorn Swimlane?",
+      "required": "true"
+    },
+    "BULLHORN_CORP_TOKEN": {
+      "description": "What is your company's Corp Token?",
+      "required": "true"
+    },
+    "HOSTED_ENDPOINT": {
+      "description": "Where is this site hosted?",
+      "required": "true"
+    },
+    "COMPANY_NAME": {
+      "description": "What is your company name?",
+      "required": "true"
+    },
+    "COMPANY_WEBSITE": {
+      "description": "What is your company website?",
+      "required": "true"
+    },
+    "COMPANY_LOGO_URL": {
+      "description": "Url for you companies logo?",
+      "required": "true"
+    },
+    "GOOGLE_VERIFICATION_CODE": {
+      "description": "HTML tag Verification Code from https://www.google.com/webmasters/verification/verification",
+      "required": "true"
+    },
+    "GOOGLE_ANALYTICS_TRACKING_ID": {
+      "description": "Google Analytics Tracking ID",
+      "required": "false"
+    }
+  }
+}
