@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "node dist/server",
     "serve": "ng serve --configuration=static",
-    "build": "build:ssr",
+    "build": "npm run build:ssr",
     "build:static": "ng build --prod --configuration=static --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
