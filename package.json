@@ -6,15 +6,15 @@
     "ng": "ng",
     "start": "node dist/server",
     "serve": "ng serve --configuration=static",
-    "build": "ng build --prod --configuration=static --aot --build-optimizer",
+    "build": "build:ssr",
+    "build:static": "ng build --prod --configuration=static --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
-    "build:client-and-server-bundles": "ng build --prod --configuration=dynamic && ng run career-portal:server:dynamic",
-    "postinstall": "npm run build:ssr"
-  },
+    "build:client-and-server-bundles": "ng build --prod --configuration=dynamic && ng run career-portal:server:dynamic"
+    },
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.1.2",
