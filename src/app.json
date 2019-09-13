@@ -9,19 +9,19 @@
     "rtf",
     "odt"
   ],
-  "companyName": "Test Career Portal",
-  "companyLogoPath": "https://www.bullhorn.com/wp-content/uploads/2016/08/BH16_logo_orange_blue_stacked-e1545239175762.png",
-  "companyUrl": "https://bh-career-portal.herokuapp.com",
-  "careersUrl": "https://bh-career-portal.herokuapp.com",
-  "language": "french",
+  "companyName": "[ COMPANY NAME HERE ]",
+  "companyLogoPath": "",
+  "companyUrl": "",
+  "careersUrl": "",
+  "language": "english",
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "AZXPG",
+    "corpToken": "[ SWIMLANE HERE ]",
     "port": null,
-    "swimlane": "9",
+    "swimlane": "[ SWIMLANE HERE ]",
     "fields": [
       "id",
       "title",
@@ -42,7 +42,7 @@
     ],
     "keywordSearchFields": [
       "publicDescription",
-      "title" 
+      "title"
     ]
   },
   "additionalJobCriteria": {
@@ -54,7 +54,7 @@
   },
   "integrations": {
     "googleAnalytics": {
-        "trackingId": "UA-114837554-1"
+        "trackingId": ""
     },
     "googleSiteVerification": {
         "verificationCode": ""
@@ -66,13 +66,12 @@
     "disability": false
   },
   "privacyConsent": {
-    "consentCheckbox": true,
+    "consentCheckbox": false,
     "privacyStatementParagraphs": [
       "[FIRST PARAGRAPH]",
       "[SECOND PARAGRAPH]"
     ],
-    "privacyPolicyUrl": "https://privacy.google.com/",
-    "usePrivacyPolicyUrl": true
-  },
-  "jobRssEnabled": true
+    "privacyPolicyUrl": "",
+    "usePrivacyPolicyUrl": false
+  }
 }

@@ -17,15 +17,9 @@ export class ApplyService {
     return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}/apply`;
   }
 
-  public apply(id: number, params: any): Observable<any> {
-    let body: FormData = new FormData();
-    for (let key in params) {
-      if (!params.hasOwnProperty(key)) { continue; }
-      body.append(key, params[key]);
-    }
-
+  public apply(id: number, params: any, formData: FormData): Observable<any> {
     let applyParams: any = this.assembleParams(params);
-    return this.http.post(`${this.baseUrl}/${id}/raw?${applyParams}`, body);
+    return this.http.post(`${this.baseUrl}/${id}/raw?${applyParams}`, formData);
   }
 
   private assembleParams(data: any): string {
@@ -36,11 +30,7 @@ export class ApplyService {
       if (!data.hasOwnProperty(key)) { continue; }
       if (!data[key]) { continue; }
       let value: any = data[key];
-      if (key !== 'resume') {
-        params.push(`${key}=${value}`);
-      } else {
-        params.push(`format=${ value.name ? value.name.substring(value.name.lastIndexOf('.') + 1) : 'txt'}`);
-      }
+      params.push(`${key}=${value}`);
     }
     return params.join('&');
   }

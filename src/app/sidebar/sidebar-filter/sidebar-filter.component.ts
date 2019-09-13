@@ -93,7 +93,11 @@ export class SidebarFilterComponent implements OnChanges {
         };
         break;
       case 'publishedCategory(id,name)':
-        this.options = res.data.map((result: ICategoryListResponse) => {
+        this.options = res.data
+        .filter((unfilteredResult: ICategoryListResponse) => {
+          return !!unfilteredResult.publishedCategory;
+        })
+        .map((result: ICategoryListResponse) => {
           return {
             value: result.publishedCategory.id,
             label: `${result.publishedCategory.name} (${result.idCount})`,

@@ -21,16 +21,15 @@
               <novo-control [form]="form" [control]="control"></novo-control>
             </div>
           </div>
-        <div *ngIf="consentCheckbox" class="consent-form">
-          <div class="novo-form-row">
+          <div *ngIf="consentCheckbox" class="consent-form novo-form-row">
             <novo-control [form]="form" [control]="consentControl"></novo-control>
-            <label *ngIf="usePrivacyPolicyUrl" class="consent-checkbox-label">By checking this box you're agreeing to our <a (click)="viewPrivacyPolicy()">Privacy Policy</a></label>
-            <label *ngIf="!usePrivacyPolicyUrl" class="consent-checkbox-label">By checking this box you're agreeing to our<span class="hover" *ngIf="!usePrivacyPolicyUrl"
-                  [popover]=privacyStatementParagraphs popoverPlacement="top-left" [popoverOnHover]="true"> Privacy Policy</span></label>
+            <label *ngIf="usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}} <a (click)="viewPrivacyPolicy()">{{ 'PRIVACY_POLICY' | translate}}</a></label>
+            <label *ngIf="!usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}}<span class="hover" *ngIf="!usePrivacyPolicyUrl"
+                  [popover]="privacyStatementParagraphs" popoverPlacement="top-left" [popoverOnHover]="true"> {{ 'PRIVACY_POLICY' | translate}}</span></label>
           </div>
-        </div>
       </novo-form>
+      <span class="error">{{ 'ERROR_WHILE_APPLYING' | translate}}</span>
     </section>
     <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">{{ 'CANCEL' | translate}}</button>
-    <button theme="primary" icon="check" [disabled]="!form.valid || applying" (click)="save()" data-automation-id="create-modal-save"> {{ 'APPLY' | translate}} </button>
+    <button theme="primary" icon="check" [disabled]="!form.valid" (click)="save()" data-automation-id="create-modal-save" [loading]="applying" > {{ 'APPLY' | translate}} </button>
   </novo-modal>

@@ -12,6 +12,7 @@ import {
   CheckboxControl,
   FieldInteractionApi,
 } from 'novo-elements';
+import { TranslateService } from 'chomsky';
 import { SettingsService } from '../../../services/settings/settings.service';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
 import { ApplyService } from '../../../services/apply/apply.service';
@@ -61,21 +62,21 @@ export class ApplyModalComponent implements OnInit {
   public setupForm(): void {
     this.firstName = new TextBoxControl({
       key: 'firstName',
-      label: 'First Name',
+      label: TranslateService.translate('FIRST_NAME'),
       required: true,
       hidden: false,
       value: '',
     });
     this.lastName = new TextBoxControl({
       key: 'lastName',
-      label: 'Last Name',
+      label: TranslateService.translate('LAST_NAME'),
       required: true,
       hidden: false,
       value: '',
     });
     this.email = new TextBoxControl({
       key: 'email',
-      label: 'Email',
+      label: TranslateService.translate('EMAIL'),
       type: 'email',
       required: true,
       hidden: false,
@@ -83,7 +84,7 @@ export class ApplyModalComponent implements OnInit {
     });
     this.phoneNumber = new TextBoxControl({
       key: 'phone',
-      label: 'Mobile Phone',
+      label: TranslateService.translate('PHONE'),
       type: 'tel',
       required: false,
       hidden: false,
@@ -93,7 +94,7 @@ export class ApplyModalComponent implements OnInit {
       new SelectControl({
         key: 'gender',
         label: 'Gender',
-        required: false,
+        required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         options: [
           { value: 'Male', label: 'Male' },
@@ -103,7 +104,7 @@ export class ApplyModalComponent implements OnInit {
       }), new PickerControl({
         key: 'raceEthnicity',
         label: 'Ethnicity / Race',
-        required: false,
+        required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         multiple: true,
         placeholder: 'Select all that apply',
@@ -124,7 +125,7 @@ export class ApplyModalComponent implements OnInit {
       new SelectControl({
         key: 'veteran',
         label: 'Veteran Status',
-        required: false,
+        required: SettingsService.settings.eeoc.veteran,
         hidden: false,
         options: [
           { value: 'Protected Veteran', label: 'Protected Veteran' },
@@ -138,7 +139,7 @@ export class ApplyModalComponent implements OnInit {
       new SelectControl({
         key: 'disability',
         label: 'Disability Status',
-        required: false,
+        required: SettingsService.settings.eeoc.disability,
         hidden: false,
         options: [
           { value: 'Disability', label: 'Disability' },
@@ -151,7 +152,7 @@ export class ApplyModalComponent implements OnInit {
       key: 'resume',
       required: true,
       hidden: false,
-      description: `Accepted Resume types are ${SettingsService.settings.acceptedResumeTypes.toString()}`,
+      description: `${TranslateService.translate('ACCEPTED_RESUME')} ${SettingsService.settings.acceptedResumeTypes.toString()}`,
     });
 
     this.formControls = [this.firstName, this.lastName, this.email, this.phoneNumber, this.resume];
@@ -165,7 +166,7 @@ export class ApplyModalComponent implements OnInit {
 
     this.consentControl = new CheckboxControl({
       key: 'consent',
-      required: true,
+      required: SettingsService.settings.privacyConsent.consentCheckbox,
       hidden: false,
       description: 'By checking this box you\'re agreeing to ourPrivacy Policy',
       interactions: [
@@ -192,10 +193,33 @@ export class ApplyModalComponent implements OnInit {
     if (this.form.valid) {
       this.applying = true;
       this.analytics.trackEvent(`Apply to Job: ${this.job.id}`);
-      let value: any = this.form.value;
-      value.resume = value.resume[0].file;
-      value.source = this.source;
-      this.applyService.apply(this.job.id, value).subscribe(this.applyOnSuccess.bind(this), this.applyOnFailure.bind(this) );
+      let requestParams: any = {
+        firstName: encodeURIComponent(this.form.value.firstName),
+        lastName: encodeURIComponent(this.form.value.lastName),
+        email: encodeURIComponent(this.form.value.email),
+        phone: encodeURIComponent(this.form.value.phone || ''),
+        format: this.form.value.resume[0].name.substring(this.form.value.resume[0].name.lastIndexOf('.') + 1),
+      };
+
+      if (this.form.value.gender) {
+        requestParams.gender = encodeURIComponent(this.form.value.gender);
+      }
+      if (this.form.value.ethnicity) {
+        requestParams.ethnicity = encodeURIComponent(this.form.value.ethnicity);
+      }
+      if (this.form.value.veteran) {
+        requestParams.veteran = encodeURIComponent(this.form.value.veteran);
+      }
+      if (this.form.value.disability) {
+        requestParams.disability = encodeURIComponent(this.form.value.disability);
+      }
+      if (this.source) {
+        requestParams.source = this.source;
+      }
+
+      let formData: FormData = new FormData();
+      formData.append('resume', this.form.value.resume[0].file);
+      this.applyService.apply(this.job.id, requestParams, formData).subscribe(this.applyOnSuccess.bind(this), this.applyOnFailure.bind(this) );
     }
   }
 
@@ -207,8 +231,8 @@ export class ApplyModalComponent implements OnInit {
     let toastOptions: any = {
       theme: 'success',
       icon: 'check',
-      title: 'Success!',
-      message: 'You will be contacted by a recruiter shortly',
+      title: TranslateService.translate('THANK_YOU'),
+      message: TranslateService.translate('YOU_WILL_BE_CONTACTED'),
       position: 'growlTopRight',
       hideDelay: 3000,
     };
@@ -227,5 +251,6 @@ export class ApplyModalComponent implements OnInit {
 
   private applyOnFailure(res: any): void {
     this.hasError = true;
+    this.applying = false;
   }
 }
