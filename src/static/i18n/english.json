@@ -21,5 +21,6 @@
   "LAST_NAME": "Last Name",
   "EMAIL": "Email",
   "PHONE": "Mobile Phone",
-  "ACCEPTED_RESUME": "Accepted Resume types are"
+  "ACCEPTED_RESUME": "Accepted Resume types are",
+  "ERROR_WHILE_APPLYING": "There was an error while applying, please try again."
 }
