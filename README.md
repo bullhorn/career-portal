@@ -10,7 +10,7 @@
 
 * **Install With Heroku**
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bullhorn/career-portal/tree/f/ng7)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bullhorn/career-portal)
 
 ## Contribute
 
