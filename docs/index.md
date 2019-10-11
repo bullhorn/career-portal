@@ -16,7 +16,6 @@ When installing the career portal you have two options, each with their own requ
 
  1. [Dynamic](/dynamic-install.md) (Preferred) 		 
 	 - Enables Functionality of Google for Jobs
- 2.  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/bullhorn/career-portal/tree/f/ng7)
  3. [Static](/static-install.md) (Direct Upgrade from Previous Versions)
  4. [Wordpress Plugin](/Using-the-Bullhorn-Career-Portal-on-Wordpress.md)
   

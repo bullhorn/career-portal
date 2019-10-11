@@ -69,6 +69,5 @@ Using PM2, navigate to the `server` sub directory, then set the port that you wo
 
 ### Other Options for Installing the portal dynamically
 
-* **[Using Heroku](https://heroku.com/deploy?template=https://github.com/bullhorn/career-portal/tree/f/ng7)**
 
 
