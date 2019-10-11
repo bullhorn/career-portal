@@ -14,9 +14,9 @@
 ### Installing 
 When installing the career portal you have two options, each with their own requirements.
 
- 1. [Dynamic](/dynamic-install.md) (Preferred) 		 
+ 1. [Advanced](/advanced-install.md)
 	 - Enables Functionality of Google for Jobs
- 3. [Static](/static-install.md) (Direct Upgrade from Previous Versions)
+ 3. [Basic](/basic-install.md) (Direct Upgrade from Previous Versions)
  4. [Wordpress Plugin](/Using-the-Bullhorn-Career-Portal-on-Wordpress.md)
   
 
