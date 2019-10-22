@@ -22,5 +22,6 @@
   "EMAIL": "Email",
   "PHONE": "Mobile Phone",
   "ACCEPTED_RESUME": "Accepted Resume types are",
-  "ERROR_WHILE_APPLYING": "There was an error while applying, please try again."
+  "ERROR_WHILE_APPLYING": "There was an error while applying, please try again.",
+  "ERROR_HAS_OCCURED": "An error has occurred while loading. Please refresh the page and try again."
 }

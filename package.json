@@ -14,7 +14,7 @@
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "ng build --prod --configuration=dynamic && ng run career-portal:server:dynamic"
-    },
+  },
   "private": true,
   "engines": {
     "node": "10.3.0"
@@ -50,7 +50,7 @@
     "he": "^1.2.0",
     "jsontoxml": "^1.0.1",
     "ngx-clipboard": "^10.0.0",
-    "novo-elements": "github:bullhorn/novo-elements-snapshot",
+    "novo-elements": "3.14.0",
     "post-robot": "^8.0.29",
     "preboot": "^6.0.0-beta.2",
     "roboto-fontface": "^0.9.0",

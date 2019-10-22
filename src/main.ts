@@ -12,10 +12,25 @@ if (environment.production) {
 const USER_LOCALE: string = 'english';
 
 document.addEventListener('DOMContentLoaded', () => {
+  platformBrowserDynamic().bootstrapModule(AppModule);
 
   let chomskySubscription: any = TranslateService.use(USER_LOCALE).subscribe(() => {
     chomskySubscription.unsubscribe();
     platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch((err: any) => console.log(err)); // tslint:disable-line
+      .catch(
+        (err: any) => {
+          console.log(err); // tslint:disable-line
+          const errorMsgElement: any = document.querySelector('novo-loading');
+          let message: string = 'Application initialization failed, please check your app.json file';
+          if (err) {
+              if (err.message) {
+                  message = message + ': ' + err.message;
+              } else {
+                  message = message + ': ' + err;
+              }
+          }
+          errorMsgElement.textContent = message;
+        },
+        );
   });
 });

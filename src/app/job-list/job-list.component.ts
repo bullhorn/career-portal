@@ -15,6 +15,7 @@ export class JobListComponent implements OnChanges {
   @Input() public sidebarVisible: boolean = false;
   @Output() public displaySidebar: EventEmitter<any> = new EventEmitter();
   @Output() public showLoading: EventEmitter<boolean> = new EventEmitter();
+  @Output() public showError: EventEmitter<boolean> = new EventEmitter();
 
   public jobs: any[] = [];
   public title: string;
@@ -38,7 +39,7 @@ export class JobListComponent implements OnChanges {
     this.meta.updateTag({ name: 'og:description', content: description });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.meta.updateTag({ name: 'description', content: description });
-    this.http.getjobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this));
+    this.http.getjobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this), this.onFailure.bind(this));
   }
 
   public loadMore(): void {
@@ -72,6 +73,14 @@ export class JobListComponent implements OnChanges {
     this.total = res.total;
     this.moreAvailable = (res.count === 30);
     this.loading = false;
+  }
+
+  private onFailure(res: any): void {
+    this.loading = false;
+    this.jobs = [];
+    this.total = 0;
+    this.moreAvailable = false;
+    this.showError.emit(true);
   }
 
 }

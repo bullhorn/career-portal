@@ -19,9 +19,9 @@
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "[ SWIMLANE HERE ]",
+    "corpToken": "1VCNF4",
     "port": null,
-    "swimlane": "[ SWIMLANE HERE ]",
+    "swimlane": "91",
     "fields": [
       "id",
       "title",
@@ -61,9 +61,9 @@
     }
 },
   "eeoc": {
-    "genderRaceEthnicity": false,
-    "veteran": false,
-    "disability": false
+    "genderRaceEthnicity": true,
+    "veteran": true,
+    "disability": true
   },
   "privacyConsent": {
     "consentCheckbox": false,

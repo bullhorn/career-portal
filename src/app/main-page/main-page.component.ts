@@ -11,6 +11,7 @@ export class MainPageComponent {
   public listFilter: any = {};
   public displaySidebar: boolean = false;
   public loading: boolean = true;
+  public error: boolean = false;
   public sidebarCss: object = {};
 
   constructor() { }
@@ -35,6 +36,10 @@ export class MainPageComponent {
 
   public handleListLoad(loading: boolean): void {
     this.loading = loading;
+  }
+
+  public handleError(showError: boolean): void {
+    this.error = showError;
   }
 
 }

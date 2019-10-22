@@ -97,12 +97,12 @@ export class ApplyModalComponent implements OnInit {
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         options: [
-          { value: 'Male', label: 'Male' },
-          { value: 'Female', label: 'Female'},
-          { value: 'Unknown', label: 'I do not wish to self-identify'},
+          { value: 'M', label: 'Male' },
+          { value: 'F', label: 'Female'},
+          { value: 'D', label: 'I do not wish to self-identify'},
         ],
       }), new PickerControl({
-        key: 'raceEthnicity',
+        key: 'ethnicity',
         label: 'Ethnicity / Race',
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
@@ -110,13 +110,13 @@ export class ApplyModalComponent implements OnInit {
         placeholder: 'Select all that apply',
         config: {
           options: [
-            { value: 'Hispanic or Latino', label: 'Hispanic or Latino' },
-            { value: 'White', label: 'White'},
-            { value: 'Black or African American', label: 'Black or African American'},
-            { value: 'Asian', label: 'Asian' },
-            { value: 'Native Hawaiian or Pacific Islander', label: 'Native Hawaiian or Pacific Islander'},
-            { value: 'American Indian or Alaskan Native', label: 'American Indian or Alaskan Native'},
-            { value: 'Unknown', label: 'I do not wish to self-identify'},
+            { value: 'HL', label: 'Hispanic or Latino' },
+            { value: 'WH', label: 'White'},
+            { value: 'BL', label: 'Black or African American'},
+            { value: 'AS', label: 'Asian' },
+            { value: 'NP', label: 'Native Hawaiian or Pacific Islander'},
+            { value: 'IA', label: 'American Indian or Alaskan Native'},
+            { value: 'DN', label: 'I do not wish to self-identify'},
           ],
         },
       }),
@@ -128,10 +128,10 @@ export class ApplyModalComponent implements OnInit {
         required: SettingsService.settings.eeoc.veteran,
         hidden: false,
         options: [
-          { value: 'Protected Veteran', label: 'Protected Veteran' },
-          { value: 'Veteran', label: 'Veteran'},
-          { value: 'Non-Veteran', label: 'Non-Veteran'},
-          { value: 'Unknown', label: 'Decline to Answer'},
+          { value: 'P', label: 'Protected Veteran' },
+          { value: 'V', label: 'Veteran'},
+          { value: 'N', label: 'Non-Veteran'},
+          { value: 'D', label: 'Decline to Answer'},
         ],
       }),
     ];
@@ -142,9 +142,9 @@ export class ApplyModalComponent implements OnInit {
         required: SettingsService.settings.eeoc.disability,
         hidden: false,
         options: [
-          { value: 'Disability', label: 'Disability' },
-          { value: 'No Disability', label: 'No Disability'},
-          { value: 'Unknown', label: 'I do not wish to self-identify'},
+          { value: 'Y', label: 'Disability' },
+          { value: 'N', label: 'No Disability'},
+          { value: 'D', label: 'I do not wish to self-identify'},
         ],
       }),
     ];
@@ -168,7 +168,7 @@ export class ApplyModalComponent implements OnInit {
       key: 'consent',
       required: SettingsService.settings.privacyConsent.consentCheckbox,
       hidden: false,
-      description: 'By checking this box you\'re agreeing to ourPrivacy Policy',
+      description: 'By checking this box you\'re agreeing to our Privacy Policy',
       interactions: [
         {
           event: 'change',

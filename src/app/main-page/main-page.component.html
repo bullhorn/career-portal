@@ -1,8 +1,12 @@
-<novo-loading *ngIf="loading"></novo-loading>
-<div class="frame" [ngStyle]="{display: loading ? 'none': 'flex'}">
+<novo-loading *ngIf="loading && !error"></novo-loading>
+<div class="error-state" *ngIf="error">
+  <i class="bhi-caution"></i>
+  <span>{{ 'ERROR_HAS_OCCURED' | translate }}</span>
+</div>
+<div class="frame" [ngStyle]="{display: loading || error ? 'none': 'flex'}">
     <app-sidebar (newFilter)="onSidebarFilter($event)" [display]="displaySidebar" (toggleSidebar)="toggleSidebar($event)" [ngStyle]="sidebarCss"></app-sidebar>
     <div class="list">
-        <app-job-list [filterCount]="filterCount" [filter]="listFilter" [sidebarVisible]="displaySidebar" (displaySidebar)="toggleSidebar($event)" (showLoading)="handleListLoad($event)"></app-job-list>
+        <app-job-list [filterCount]="filterCount" [filter]="listFilter" [sidebarVisible]="displaySidebar" (displaySidebar)="toggleSidebar($event)" (showLoading)="handleListLoad($event)" (showError)="handleError($event)"></app-job-list>
     </div>
 </div>
 
