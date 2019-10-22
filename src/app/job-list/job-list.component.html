@@ -19,7 +19,7 @@
                 {{ job.address.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job.address.state }}
             </span>
             <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip.type || 'string'">
-                <span class="mid-card" *ngIf="job[chip] || job[chip.field]">
+                <span class="mid-card" *ngIf="job[chip]">
                     <ng-container *ngSwitchCase="'string'">
                         {{ job[chip.field] || job[chip] }}
                     </ng-container>

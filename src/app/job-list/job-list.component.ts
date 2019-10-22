@@ -21,7 +21,7 @@ export class JobListComponent implements OnChanges {
   public title: string;
   public _loading: boolean = true;
   public moreAvailable: boolean = true;
-  public total: number | '' = '';
+  public total: number | '...' = '...';
   public jobInfoChips: [string|JobChipField]  = SettingsService.settings.service.jobInfoChips;
   private start: number = 0;
 
