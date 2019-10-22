@@ -24,7 +24,7 @@ export class SettingsService {
   public async setConfig(data: ISettings): Promise<any> {
     SettingsService.settings = data;
     if (SettingsService.urlRoot) {
-      TranslateService.setLocation(`${SettingsService.urlRoot}i18n`);
+      TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
     }
     await TranslateService.use('english').toPromise();
 

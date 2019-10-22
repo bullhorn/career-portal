@@ -27,7 +27,6 @@ export class AppInterceptor implements HttpInterceptor {
       if (!req.url.startsWith('/')) {
         newUrl += '/';
       }
-      console.log(newUrl);
       SettingsService.urlRoot = newUrl;
       newUrl += 'app.json';
       serverReq = req.clone({ url: newUrl });

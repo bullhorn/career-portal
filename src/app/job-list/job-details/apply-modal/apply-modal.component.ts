@@ -186,6 +186,7 @@ export class ApplyModalComponent implements OnInit {
   }
 
   public close(): void {
+    this.analytics.trackEvent(`Close apply form without applying for job ${this.job.id}`);
     this.modalRef.close(undefined);
   }
 

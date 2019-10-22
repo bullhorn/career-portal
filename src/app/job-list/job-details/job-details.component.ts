@@ -69,6 +69,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public apply(): void {
+    this.analytics.trackEvent(`Open Apply Form ${this.job.id}`);
     this.modalService.open(ApplyModalComponent, {
       job: this.job,
       source: this.source,

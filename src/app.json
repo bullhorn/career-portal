@@ -58,7 +58,7 @@
   },
   "integrations": {
     "googleAnalytics": {
-        "trackingId": ""
+        "trackingId": "UA-88348393-3"
     },
     "googleSiteVerification": {
         "verificationCode": ""
