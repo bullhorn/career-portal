@@ -12,8 +12,6 @@ if (environment.production) {
 const USER_LOCALE: string = 'english';
 
 document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule);
-
   let chomskySubscription: any = TranslateService.use(USER_LOCALE).subscribe(() => {
     chomskySubscription.unsubscribe();
     platformBrowserDynamic().bootstrapModule(AppModule)

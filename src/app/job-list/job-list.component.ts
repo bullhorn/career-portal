@@ -22,7 +22,7 @@ export class JobListComponent implements OnChanges {
   public _loading: boolean = true;
   public moreAvailable: boolean = true;
   public total: number | '' = '';
-  public jobInfoChips: string[] = SettingsService.settings.service.jobInfoChips;
+  public jobInfoChips: [string|JobChipField]  = SettingsService.settings.service.jobInfoChips;
   private start: number = 0;
 
   constructor(private http: SearchService, private titleService: Title, private meta: Meta, private router: Router) {

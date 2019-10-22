@@ -38,7 +38,11 @@
       "salaryUnit"
     ],
     "jobInfoChips": [
-      "employmentType"
+      "employmentType",
+      {
+        "type": "mediumDate",
+        "field": "dateLastPublished"
+      }
     ],
     "keywordSearchFields": [
       "publicDescription",

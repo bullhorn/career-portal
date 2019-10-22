@@ -25,7 +25,7 @@ export class JobDetailsComponent implements OnInit {
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
-  public jobInfoChips: string[] = SettingsService.settings.service.jobInfoChips;
+  public jobInfoChips: [string|JobChipField] = SettingsService.settings.service.jobInfoChips;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(
