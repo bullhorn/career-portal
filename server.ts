@@ -81,13 +81,13 @@ app.get('*.*', express.static(DIST_FOLDER, {
 app.get('/sitemap', (req: any, res: any) => {
   res.type('application/xml');
   res.contentType('application/xml');
-  generateSitemap(appConfig, res)
+  generateSitemap(appConfig, res, req);
 });
 
 app.get('/feed', (req: any, res: any) => {
   res.type('application/xml');
   res.contentType('application/xml');
-  generateRss(appConfig, res);
+  generateRss(appConfig, res, req);
 });
 
 // All regular routes use the Universal engine

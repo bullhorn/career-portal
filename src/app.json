@@ -13,7 +13,11 @@
   "companyLogoPath": "",
   "companyUrl": "",
   "careersUrl": "",
-  "language": "english",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+      "en-US",
+      "fr-FR"
+  ],
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
   "maxUploadSize": 5242880,

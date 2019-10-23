@@ -15,8 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router, private meta: Meta, private ref: ViewContainerRef, private toastService: NovoToastService, private modalService: NovoModalService) {
 
-    this.meta.updateTag({ name: 'google-site-verification', content: SettingsService.settings.integrations.googleSiteVerification.verificationCode });
-    TranslateService.use(SettingsService.settings.language).subscribe();
+    if (SettingsService.settings.integrations.googleSiteVerification) {
+      this.meta.updateTag({ name: 'google-site-verification', content: SettingsService.settings.integrations.googleSiteVerification.verificationCode });
+    }
     let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
     if (trackingId && !SettingsService.isServer) {
       this.router.events.subscribe((event: any) => {

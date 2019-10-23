@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http';
 import { JobBoardPost, Strings } from '@bullhorn/bullhorn-types';
 import * as jsonxml from 'jsontoxml';
 
-export function generateSitemap(appConfig: ISettings, res: any): any {
+export function generateSitemap(appConfig: ISettings, res: any, req: any): any {
   let sitemapUrls: { name: 'url', children: [{ name: 'loc', text: string }, { name: 'lastmod', text: string }] }[] = [];
   let jobsUrl: string = `https://public-rest${appConfig.service.swimlane}.bullhornstaffing.com/rest-services/${appConfig.service.corpToken}/search/JobOrder?query=(isOpen:1%20AND%20isDeleted:0)${getQuery(appConfig)}&fields=id,title,address(city,state,zip),employmentType,dateLastPublished,publicDescription&count=500&sort=-dateLastPublished&start=0`;
   let body: string = '';
@@ -20,8 +20,8 @@ export function generateSitemap(appConfig: ISettings, res: any): any {
         sitemapUrls.push({
           name: 'url',
           children: [
-            { name: 'loc', text: `${appConfig.careersUrl}${appConfig.careersUrl.endsWith('/') ? '' : '/'}jobs/${job.id}` },
-            { name: 'lastmod', text: `${postDate.getFullYear()}-${postDate.getMonth() + 1}-${postDate.getDate()}` },
+            { name: 'loc', text: `${req.hostname}${req.originalUrl.replace('/sitemap', '/jobs')}/${job.id}` },
+            { name: 'lastmod', text: `${req.protocol}://${postDate.getFullYear()}-${postDate.getMonth() + 1}-${postDate.getDate()}` },
           ],
         });
       });
@@ -33,7 +33,7 @@ export function generateSitemap(appConfig: ISettings, res: any): any {
 
 }
 
-export function generateRss(appConfig: ISettings, res: any): any {
+export function generateRss(appConfig: ISettings, res: any, req: any): any {
   let jobListings: any = { children: [], title: `${appConfig.companyName} Job Opportunities`, link: `${appConfig.careersUrl}${appConfig.careersUrl.endsWith('/') ? '' : '/'}feed/`, pubDate: new Date().toUTCString(), ttl: 5};
   let jobsUrl: string = `https://public-rest${appConfig.service.swimlane}.bullhornstaffing.com/rest-services/${appConfig.service.corpToken}/search/JobOrder?query=(isOpen:1%20AND%20isDeleted:0)${getQuery(appConfig)}&fields=id,title,address(city,state,zip),employmentType,dateLastPublished,publicDescription&count=500&sort=-dateLastPublished&start=0`;
   let body: string = '';
@@ -56,7 +56,7 @@ export function generateRss(appConfig: ISettings, res: any): any {
             { name: 'state', text: job.address.state },
             { name: 'zip', text: job.address.zip },
             { name: 'pubDate', text: postDate.toUTCString() },
-            { name: 'link', text: `${appConfig.careersUrl}${appConfig.careersUrl.endsWith('/') ? '' : '/'}${job.id}` },
+            { name: 'link', text: `${req.protocol}://${req.hostname}${req.originalUrl.replace('/feed', '/jobs')}/${job.id}`},
           ],
         });
       });

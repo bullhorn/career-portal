@@ -26,7 +26,7 @@ export class SettingsService {
     if (SettingsService.urlRoot) {
       TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
     }
-    await TranslateService.use('english').toPromise();
+    await TranslateService.use('en-US').toPromise();
 
   }
 
