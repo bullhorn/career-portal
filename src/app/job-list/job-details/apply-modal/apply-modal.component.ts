@@ -185,8 +185,12 @@ export class ApplyModalComponent implements OnInit {
     this.loading = false;
   }
 
-  public close(): void {
-    this.analytics.trackEvent(`Close apply form without applying for job ${this.job.id}`);
+  public close(applied: boolean = false): void {
+    if (applied) {
+      this.analytics.trackEvent(`Success applying to job ${this.job.id}`);
+    } else {
+      this.analytics.trackEvent(`Close apply form without applying for job ${this.job.id}`);
+    }
     this.modalRef.close(undefined);
   }
 
@@ -247,7 +251,7 @@ export class ApplyModalComponent implements OnInit {
       sessionStorage.setItem(this.APPLIED_JOBS_KEY, JSON.stringify([this.job.id]));
     }
     this.applying = false;
-    this.close();
+    this.close(true);
   }
 
   private applyOnFailure(res: any): void {

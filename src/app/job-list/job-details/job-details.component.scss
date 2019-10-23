@@ -54,3 +54,15 @@
   }
 
 }
+
+novo-loading {
+  padding: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}

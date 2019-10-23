@@ -16,7 +16,7 @@ export function generateSitemap(appConfig: ISettings, res: any): any {
     response.on('end', function (): any {
       let jobs: JobBoardPost[] = JSON.parse(body).data;
       jobs.forEach((job: JobBoardPost) => {
-        let postDate: Date = new Date(job.dateLastPublished); 
+        let postDate: Date = new Date(job.dateLastPublished);
         sitemapUrls.push({
           name: 'url',
           children: [
@@ -25,7 +25,7 @@ export function generateSitemap(appConfig: ISettings, res: any): any {
           ],
         });
       });
-      
+
       res.send(`<?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> ${jsonxml(sitemapUrls)}</urlset>`);
     });
@@ -93,6 +93,9 @@ function getQuery(appConfig: ISettings): string {
 }
 
 function escapeHtml(text: any): string  {
+  if (!text) {
+    return '';
+  }
   return text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
