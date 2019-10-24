@@ -22,5 +22,6 @@
   "EMAIL": "Email",
   "PHONE": "Numéro de téléphone",
   "ACCEPTED_RESUME": "Les types de CV acceptés sont",
-  "ERROR_WHILE_APPLYING": "Une erreur s'est produite lors de l'application, veuillez réessayer."
+  "ERROR_WHILE_APPLYING": "Une erreur s'est produite lors de l'application, veuillez réessayer.",
+  "ERROR_HAS_OCCURED": "Une erreur est survenue lors du chargement. Veuillez actualiser la page et réessayer."
 }

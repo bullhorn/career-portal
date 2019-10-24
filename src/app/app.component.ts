@@ -1,7 +1,6 @@
 import { Component, ViewContainerRef, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SettingsService } from './services/settings/settings.service';
-import { TranslateService } from 'chomsky';
 import { Meta } from '@angular/platform-browser';
 import { NovoToastService, NovoModalService } from 'novo-elements';
 
