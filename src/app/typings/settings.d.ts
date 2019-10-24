@@ -4,7 +4,7 @@ interface ISettings {
   companyLogoPath: string;
   companyUrl: string;
   careersUrl: string;
-  language: string;
+  defaultLocale: string,
   supportedLocales: string[];
   minUploadSize: number;
   maxRelatedJobs: number;

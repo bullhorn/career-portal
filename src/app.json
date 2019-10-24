@@ -62,12 +62,12 @@
   },
   "integrations": {
     "googleAnalytics": {
-        "trackingId": "UA-88348393-3"
+      "trackingId": "UA-88348393-3"
     },
     "googleSiteVerification": {
-        "verificationCode": ""
+      "verificationCode": ""
     }
-},
+  },
   "eeoc": {
     "genderRaceEthnicity": true,
     "veteran": true,
