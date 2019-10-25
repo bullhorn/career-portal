@@ -1,6 +1,6 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <div class="mobile-filter-container">
-<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">Filter</button>
+<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">{{ 'FILTER' | translate }}</button>
 
 </div>
 <div class="open-positions">
@@ -45,6 +45,9 @@
             </ng-container>
         </item-header-end>
     </novo-list-item>
+    <span class="category" *ngIf="job.publishedCategory">
+        {{ job.publishedCategory?.name }}
+    </span>
     <span class="description">
         {{ job.publicDescription | stripHtml}}
     </span>

@@ -34,7 +34,14 @@ export class SettingsService {
         SettingsService.settings[option] = {};
       }
     });
-    
+    const validTokenRegex: RegExp = /[^A-Za-z0-9]/;
+    if (validTokenRegex.test(SettingsService.settings.service.corpToken)) {
+      throw new Error('Invalid Corp Token');
+    }
+    const validSwimlaneRegex: RegExp = /[^0-9]/;
+    if (validSwimlaneRegex.test(SettingsService.settings.service.swimlane.toString())) {
+      throw new Error('Invalid Swimlane');
+    }
     if (SettingsService.urlRoot) {
       TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
     }

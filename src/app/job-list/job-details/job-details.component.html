@@ -5,6 +5,10 @@
         <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate}}</button>
         <div class="job-header">
             <span class="job-title">{{job.title}}</span>
+            <br/>
+            <span class="category">
+                {{ job.publishedCategory?.name }}
+            </span>
             <div class="job-info-container">
                 <span class="job-info" *ngIf="job.address.city && job.address.state"><i class="bhi-location"></i>{{ job.address?.city }}<span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span>{{
                     job.address?.state }}</span>

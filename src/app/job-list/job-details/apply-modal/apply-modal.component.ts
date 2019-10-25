@@ -93,30 +93,30 @@ export class ApplyModalComponent implements OnInit {
     this.genderRaceEthnicity = [
       new SelectControl({
         key: 'gender',
-        label: 'Gender',
+        label: TranslateService.translate('EEOC.GENDER_LABEL'),
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         options: [
-          { value: 'M', label: 'Male' },
-          { value: 'F', label: 'Female'},
-          { value: 'D', label: 'I do not wish to self-identify'},
+          { value: 'M', label: TranslateService.translate('EEOC.GENDER_MALE') },
+          { value: 'F', label: TranslateService.translate('EEOC.GENDER_FEMALE')},
+          { value: 'D', label: TranslateService.translate('EEOC.GENDER_ND')},
         ],
       }), new PickerControl({
         key: 'ethnicity',
-        label: 'Ethnicity / Race',
+        label: TranslateService.translate('EEOC.RACE_ETHNICITY_LABEL'),
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         multiple: true,
-        placeholder: 'Select all that apply',
+        placeholder: TranslateService.translate('EEOC.SELECT_ALL'),
         config: {
           options: [
-            { value: 'HL', label: 'Hispanic or Latino' },
-            { value: 'WH', label: 'White'},
-            { value: 'BL', label: 'Black or African American'},
-            { value: 'AS', label: 'Asian' },
-            { value: 'NP', label: 'Native Hawaiian or Pacific Islander'},
-            { value: 'IA', label: 'American Indian or Alaskan Native'},
-            { value: 'DN', label: 'I do not wish to self-identify'},
+            { value: 'HL', label: TranslateService.translate('EEOC.RACE_ETHNICTY_HL') },
+            { value: 'WH', label: TranslateService.translate('EEOC.RACE_ETHNICTY_WH')},
+            { value: 'BL', label: TranslateService.translate('EEOC.RACE_ETHNICTY_BL')},
+            { value: 'AS', label: TranslateService.translate('EEOC.RACE_ETHNICTY_AS') },
+            { value: 'NP', label: TranslateService.translate('EEOC.RACE_ETHNICTY_NP')},
+            { value: 'IA', label: TranslateService.translate('EEOC.RACE_ETHNICTY_IA')},
+            { value: 'DN', label: TranslateService.translate('EEOC.RACE_ETHNICTY_DN')},
           ],
         },
       }),
@@ -124,27 +124,29 @@ export class ApplyModalComponent implements OnInit {
     this.veteran = [
       new SelectControl({
         key: 'veteran',
-        label: 'Veteran Status',
+        label: TranslateService.translate('EEOC.VETERAN_LABEL'),
+        description: TranslateService.translate('EEOC.VETERAN_DESCRIPTION'),
         required: SettingsService.settings.eeoc.veteran,
         hidden: false,
         options: [
-          { value: 'P', label: 'Protected Veteran' },
-          { value: 'V', label: 'Veteran'},
-          { value: 'N', label: 'Non-Veteran'},
-          { value: 'D', label: 'Decline to Answer'},
+          { value: 'P', label: TranslateService.translate('EEOC.VETERAN_P') },
+          { value: 'V', label: TranslateService.translate('EEOC.VETERAN_V')},
+          { value: 'N', label: TranslateService.translate('EEOC.VETERAN_N')},
+          { value: 'D', label: TranslateService.translate('EEOC.VETERAN_D')},
         ],
       }),
     ];
     this.disability = [
       new SelectControl({
         key: 'disability',
-        label: 'Disability Status',
+        label: TranslateService.translate('EEOC.DISABILITY_LABEL'),
+        description: TranslateService.translate('EEOC.DISABILITY_DESCRIPTION'),
         required: SettingsService.settings.eeoc.disability,
         hidden: false,
         options: [
-          { value: 'Y', label: 'Disability' },
-          { value: 'N', label: 'No Disability'},
-          { value: 'D', label: 'I do not wish to self-identify'},
+          { value: 'Y', label: TranslateService.translate('EEOC.DISABILITY_Y') },
+          { value: 'N', label: TranslateService.translate('EEOC.DISABILITY_N')},
+          { value: 'D', label: TranslateService.translate('EEOC.DISABILITY_D')},
         ],
       }),
     ];
@@ -168,7 +170,6 @@ export class ApplyModalComponent implements OnInit {
       key: 'consent',
       required: SettingsService.settings.privacyConsent.consentCheckbox,
       hidden: false,
-      description: 'By checking this box you\'re agreeing to our Privacy Policy',
       interactions: [
         {
           event: 'change',

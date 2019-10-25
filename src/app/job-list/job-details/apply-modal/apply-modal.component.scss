@@ -25,7 +25,12 @@
       min-width: unset;
       align-self: start;
       novo-form {
-        max-height: 64vh;
+        max-height: calc(100vh - 113px);
+      }
+      section {
+        max-height: calc(100vh - 180px);
+        height: calc(100vh - 180px);
+        width: 100vw;
       }
   }
 }
