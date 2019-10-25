@@ -3,7 +3,7 @@
       <utils>
         <util-action icon="times" (click)="close()"></util-action>
       </utils>
-      <div class="job-details">{{ job.publishedCategory?.name }}</div>
+      <div class="job-details" *ngIf="job.publishedCategory && showCategory">{{ job.publishedCategory?.name }}</div>
       <div class="job-details">{{ job.address.city }}<span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span>{{ job.address.state }}
         <span class="separator" *ngIf="(job.address?.city || job.address?.state) && job.employmentType">|</span>
         <!-- TYPE -->

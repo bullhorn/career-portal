@@ -45,6 +45,7 @@ export class ApplyModalComponent implements OnInit {
   public consentCheckbox: boolean = SettingsService.settings.privacyConsent.consentCheckbox;
   public usePrivacyPolicyUrl: boolean = SettingsService.settings.privacyConsent.usePrivacyPolicyUrl;
   public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join('\r\n');
+  public showCategory: boolean  = SettingsService.settings.service.showCategory;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(private formUtils: FormUtils,

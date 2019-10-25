@@ -24,9 +24,9 @@
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "1VCNF4",
+    "corpToken": "[ CORP TOKEN HERE ]",
     "port": null,
-    "swimlane": "91",
+    "swimlane": "[ SWIMLANE HERE ]",
     "fields": [
       "id",
       "title",
@@ -49,6 +49,7 @@
         "field": "dateLastPublished"
       }
     ],
+    "showCategory": true,
     "keywordSearchFields": [
       "publicDescription",
       "title"
@@ -63,7 +64,7 @@
   },
   "integrations": {
     "googleAnalytics": {
-      "trackingId": "UA-88348393-3"
+      "trackingId": ""
     },
     "googleSiteVerification": {
       "verificationCode": ""

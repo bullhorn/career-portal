@@ -24,6 +24,7 @@ interface IServiceSettings {
   swimlane: number;
   fields: string[];
   jobInfoChips: [string | JobChipField];
+  showCategory: boolean;
   keywordSearchFields: string[];
 }
 

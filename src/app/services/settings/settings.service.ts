@@ -35,11 +35,11 @@ export class SettingsService {
       }
     });
     const validTokenRegex: RegExp = /[^A-Za-z0-9]/;
-    if (validTokenRegex.test(SettingsService.settings.service.corpToken)) {
+    if (!SettingsService.settings.service.corpToken || validTokenRegex.test(SettingsService.settings.service.corpToken)) {
       throw new Error('Invalid Corp Token');
     }
     const validSwimlaneRegex: RegExp = /[^0-9]/;
-    if (validSwimlaneRegex.test(SettingsService.settings.service.swimlane.toString())) {
+    if (!SettingsService.settings.service.swimlane || validSwimlaneRegex.test(SettingsService.settings.service.swimlane.toString())) {
       throw new Error('Invalid Swimlane');
     }
     if (SettingsService.urlRoot) {
