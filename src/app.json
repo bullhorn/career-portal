@@ -60,7 +60,8 @@
     "values": [
       "[ FILTER VALUE HERE ]"
     ],
-    "sort": "-dateLastPublished"
+    "sort": "-dateLastPublished",
+    "featuredCategories": []
   },
   "integrations": {
     "googleAnalytics": {

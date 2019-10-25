@@ -8,12 +8,13 @@
 </div>
 <novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
 
-<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" (click)="loadJob(job.id)">
+<div *ngFor="let job of jobs" class="job-card" [routerLink]="'jobs/' + job.id" (click)="loadJob(job.id)" [ngClass]="{'featured': isFeatured(job.publishedCategory)}">
     <novo-list-item>
         <item-header>
             <item-title><a [href]="'jobs/' + job.id" [routerLink]="'jobs/' + job.id">{{ job.title }}</a></item-title>
         </item-header>
         <item-header-end>
+            <span class="featured-text" *ngIf="isFeatured(job.publishedCategory)">{{ "FEATURED_JOB" | translate }}</span>
             <span class="mid-card" *ngIf="job.address.city || job.address.state">
                 <i class="bhi-location"></i>
                 {{ job.address.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job.address.state }}

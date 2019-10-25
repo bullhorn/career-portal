@@ -57,6 +57,15 @@ export class JobListComponent implements OnChanges {
     this.loading = true;
   }
 
+  public isFeatured(category: { id: number, name: string }): boolean {
+    let featuredCategories: [string | number] = SettingsService.settings.additionalJobCriteria.featuredCategories;
+    if (featuredCategories && featuredCategories.length) {
+      return featuredCategories.findIndex((item: any) => String(item) === String(category.id)) !== -1 || featuredCategories.indexOf(category.name) !== -1;
+    } else {
+      return false;
+    }
+  }
+
   get loading(): boolean {
     return this._loading;
   }

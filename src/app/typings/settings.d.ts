@@ -57,6 +57,7 @@ interface IAdditionalJobCriteria {
   values: string[];
   field: string;
   sort: string;
+  featuredCategories: [string | number];
 }
 interface JobChipField {
   type: string;
