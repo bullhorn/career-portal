@@ -13,7 +13,7 @@ export class AppInterceptor implements HttpInterceptor {
     let serverReq: HttpRequest<any> = req;
     let port: string = '80';
     let host: string = 'localhost';
-    if (this.request && req.url.includes('./app.json') && SettingsService.isServer) {
+    if (this.request && req.url.includes('app.json')) {
       if (SettingsService.isServer && this.request.headers.host.indexOf(':') !== -1 ) {
         port = this.request.headers.host.split(':')[1];
         host = this.request.headers.host.split(':')[0];
@@ -27,6 +27,7 @@ export class AppInterceptor implements HttpInterceptor {
       if (!req.url.startsWith('/')) {
         newUrl += '/';
       }
+      SettingsService.urlRoot = newUrl;
       newUrl += 'app.json';
       serverReq = req.clone({ url: newUrl });
     }

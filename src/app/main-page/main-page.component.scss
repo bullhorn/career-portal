@@ -1,10 +1,13 @@
+@import "../../styles.scss";
+
 .frame {
   display: flex;
   flex-direction: row;
+
   app-sidebar {
-    width: 30%;        
+    width: 30%;
     flex-grow: 0;
-    height: calc(100vh - 55px);    
+    height: calc(100vh - 55px);
     max-width: 300px;
     min-width: 250px;
     overflow-x: hidden;
@@ -18,13 +21,32 @@
     height: calc(100vh - 55px);
   }
 
-@media only screen and (min-width: 768px) {
-  app-sidebar {
-    position: unset !important;
-    width: 30% !important;
-    max-width: 300px !important;
-    box-shadow: unset;
+  @media only screen and (min-width: 768px) {
+    app-sidebar {
+      position: unset !important;
+      width: 30% !important;
+      max-width: 300px !important;
+      box-shadow: unset;
+    }
   }
-}
 
+}
+div.error-state {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  i {
+    font-size: 6em;
+    margin-bottom: .3em;
+    &.bhi-caution {
+      color: $negative;
+    }
+  }
+  span {
+    font-size: 1.4em;
+  }
 }

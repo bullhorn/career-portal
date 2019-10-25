@@ -43,6 +43,15 @@
         margin-right: 20px;
       }
     }
+    .category {
+      font-weight: 600;
+      display: inline-block;
+      font-size: 1.3em;
+      word-wrap: break-word;
+      overflow: hidden;
+      color: #4a89dc;
+      padding-top: 15px;
+    }
   }
 }
 
@@ -53,4 +62,16 @@
     }
   }
 
+}
+
+novo-loading {
+  padding: 20px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
 }

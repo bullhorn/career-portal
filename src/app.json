@@ -13,13 +13,18 @@
   "companyLogoPath": "",
   "companyUrl": "",
   "careersUrl": "",
-  "language": "english",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+      "en-US",
+      "en-GB",
+      "fr-FR"
+  ],
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "[ SWIMLANE HERE ]",
+    "corpToken": "[ CORP TOKEN HERE ]",
     "port": null,
     "swimlane": "[ SWIMLANE HERE ]",
     "fields": [
@@ -38,8 +43,13 @@
       "salaryUnit"
     ],
     "jobInfoChips": [
-      "employmentType"
+      "employmentType",
+      {
+        "type": "mediumDate",
+        "field": "dateLastPublished"
+      }
     ],
+    "showCategory": true,
     "keywordSearchFields": [
       "publicDescription",
       "title"
@@ -54,12 +64,12 @@
   },
   "integrations": {
     "googleAnalytics": {
-        "trackingId": ""
+      "trackingId": ""
     },
     "googleSiteVerification": {
-        "verificationCode": ""
+      "verificationCode": ""
     }
-},
+  },
   "eeoc": {
     "genderRaceEthnicity": false,
     "veteran": false,

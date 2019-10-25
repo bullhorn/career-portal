@@ -25,7 +25,8 @@ export class JobDetailsComponent implements OnInit {
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
-  public jobInfoChips: string[] = SettingsService.settings.service.jobInfoChips;
+  public jobInfoChips: [string|JobChipField] = SettingsService.settings.service.jobInfoChips;
+  public showCategory: boolean  = SettingsService.settings.service.showCategory;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(
@@ -69,6 +70,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public apply(): void {
+    this.analytics.trackEvent(`Open Apply Form ${this.job.id}`);
     this.modalService.open(ApplyModalComponent, {
       job: this.job,
       source: this.source,
@@ -116,7 +118,7 @@ export class JobDetailsComponent implements OnInit {
       this.meta.updateTag({ name: 'og:title', content: this.job.title });
       this.meta.updateTag({ name: 'titter:title', content: this.job.title });
       this.meta.updateTag({ name: 'og:image', content: SettingsService.settings.companyLogoPath });
-      this.meta.updateTag({ name: 'og:url', content: `${SettingsService.settings.careersUrl}${this.router.url}` });
+      this.meta.updateTag({ name: 'og:url', content: `${SettingsService.urlRoot}${this.router.url}` });
       this.meta.updateTag({ name: 'og:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'twitter:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'description', content: this.job.publicDescription});

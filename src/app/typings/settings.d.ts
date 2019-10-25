@@ -4,7 +4,7 @@ interface ISettings {
   companyLogoPath: string;
   companyUrl: string;
   careersUrl: string;
-  language: string;
+  defaultLocale: string,
   supportedLocales: string[];
   minUploadSize: number;
   maxRelatedJobs: number;
@@ -23,7 +23,8 @@ interface IServiceSettings {
   port: number|null;
   swimlane: number;
   fields: string[];
-  jobInfoChips: string[];
+  jobInfoChips: [string | JobChipField];
+  showCategory: boolean;
   keywordSearchFields: string[];
 }
 
@@ -56,4 +57,8 @@ interface IAdditionalJobCriteria {
   values: string[];
   field: string;
   sort: string;
+}
+interface JobChipField {
+  type: string;
+  field: string;
 }

@@ -26,6 +26,18 @@ novo-list {
       padding: 0px 15px 15px 15px;
       width: 100%;
     }
+    .category {
+      padding: 0px 15px 10px 15px;
+      font-weight: 600;
+      display: inline-block;
+      word-wrap: break-word;
+      overflow: hidden;
+        @media only screen and (max-width: 768px) {
+          display: none;
+        }
+        @media only screen and (min-width: 768px) {
+        }
+    }
     novo-list-item  {
       item-content {
         span, b {
@@ -106,6 +118,6 @@ novo-list {
 
 .load-more-button {
   padding: 10px 0;
-  background-color: rgb(47, 56, 79);
+  background-color: #4f5361;
   text-align: center;
 }

@@ -14,7 +14,7 @@ import { ShareService } from './services/share/share.service';
 import { ApplyService } from './services/apply/apply.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SidebarFilterComponent } from './sidebar/sidebar-filter/sidebar-filter.component';
-
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 import { NovoListModule, NovoElementsModule, NovoHeaderModule, NovoModalModule, NovoModalService, FieldInteractionApi, NovoToastService,  } from 'novo-elements';
 import { MainPageComponent } from './main-page/main-page.component';
 import { JobDetailsComponent } from './job-list/job-details/job-details.component';
@@ -60,6 +60,7 @@ export function initSettings(settings: SettingsService): any {
     NovoElementsModule,
     NovoListModule,
     NovoHeaderModule,
+    BrowserTransferStateModule,
     NovoModalModule,
     ClipboardModule,
     FormsModule,

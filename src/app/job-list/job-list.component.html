@@ -1,6 +1,6 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <div class="mobile-filter-container">
-<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">Filter</button>
+<button theme="secondary" (click)="openSidebar()" icon="filter" side="left">{{ 'FILTER' | translate }}</button>
 
 </div>
 <div class="open-positions">
@@ -16,18 +16,38 @@
         <item-header-end>
             <span class="mid-card" *ngIf="job.address.city || job.address.state">
                 <i class="bhi-location"></i>
-                {{ job.address.city }} <span *ngIf="job.address.city && job.address.state">,&nbsp;</span> {{ job.address.state }}
+                {{ job.address.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job.address.state }}
             </span>
-            <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip">
-                <span class="mid-card">
-                    {{ job[chip] }}
+            <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip.type || 'string'">
+                <span class="mid-card" *ngIf="job[chip] || job[chip?.field]">
+                    <ng-container *ngSwitchCase="'string'">
+                        {{ job[chip?.field] || job[chip] }}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'mediumDate'">
+                        {{ job[chip?.field] | date: 'mediumDate'}}
+                    </ng-container>
+                    <ng-container  *ngSwitchCase="'dateTime'">
+                        {{ job[chip?.field] | date: 'medium'}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'USD'">
+                        {{ job[chip?.field] | currency: 'USD'}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'GBP'">
+                        {{ job[chip?.field] | currency: 'GBP'}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'EUR'">
+                        {{ job[chip?.field] | currency: 'EUR'}}
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        {{ job[chip?.field] || job[chip] }}
+                    </ng-container>
                 </span>
             </ng-container>
-            <span class="mid-card">
-                {{ job.dateLastPublished | date: 'mediumDate' }}
-            </span>
         </item-header-end>
     </novo-list-item>
+    <span class="category" *ngIf="job.publishedCategory && showCategory">
+        {{ job.publishedCategory?.name }}
+    </span>
     <span class="description">
         {{ job.publicDescription | stripHtml}}
     </span>
