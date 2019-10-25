@@ -24,9 +24,9 @@
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "1VCNF4",
+    "corpToken": "[ CORP TOKEN HERE ]",
     "port": null,
-    "swimlane": "91",
+    "swimlane": "[ SWIMLANE HERE ]",
     "fields": [
       "id",
       "title",
