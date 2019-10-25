@@ -26,6 +26,15 @@ export class SettingsService {
 
   public async setConfig(data: ISettings): Promise<any> {
     SettingsService.settings = data;
+
+    let objectConfigOptions: string[] = ['service', 'additionalJobCriteria', 'integrations', 'eeoc', 'privacyConsent'];
+
+    objectConfigOptions.forEach((option: string) => {
+      if (!SettingsService.settings[option]) {
+        SettingsService.settings[option] = {};
+      }
+    });
+    
     if (SettingsService.urlRoot) {
       TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
     }

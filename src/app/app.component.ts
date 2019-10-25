@@ -17,7 +17,10 @@ export class AppComponent implements OnInit {
     if (SettingsService.settings.integrations.googleSiteVerification) {
       this.meta.updateTag({ name: 'google-site-verification', content: SettingsService.settings.integrations.googleSiteVerification.verificationCode });
     }
-    let trackingId: string = SettingsService.settings.integrations.googleAnalytics.trackingId;
+    let trackingId: string = '';
+    if (SettingsService.settings.integrations.googleAnalytics) {
+      trackingId = SettingsService.settings.integrations.googleAnalytics.trackingId;
+    }
     if (trackingId && !SettingsService.isServer) {
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationEnd) {

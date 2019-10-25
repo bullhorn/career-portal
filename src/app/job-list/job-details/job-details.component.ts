@@ -117,7 +117,7 @@ export class JobDetailsComponent implements OnInit {
       this.meta.updateTag({ name: 'og:title', content: this.job.title });
       this.meta.updateTag({ name: 'titter:title', content: this.job.title });
       this.meta.updateTag({ name: 'og:image', content: SettingsService.settings.companyLogoPath });
-      this.meta.updateTag({ name: 'og:url', content: `${SettingsService.settings.careersUrl}${this.router.url}` });
+      this.meta.updateTag({ name: 'og:url', content: `${SettingsService.urlRoot}${this.router.url}` });
       this.meta.updateTag({ name: 'og:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'twitter:description', content: this.job.publicDescription});
       this.meta.updateTag({ name: 'description', content: this.job.publicDescription});
