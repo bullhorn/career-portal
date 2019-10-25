@@ -50,7 +50,7 @@ Use one of the following to build and test:
 npm run serve           # Launch a local version of the career portal (frontend only).
 npm start               # Launch a local server with server side rendering portal.
 npm run build:static    # Build an optimized version of Career Portal in `/dist`
-npm run build:          # Build a package for use with server side rendering
+npm run build          # Build a package for use with server side rendering
 ```
 
 

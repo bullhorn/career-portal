@@ -1,6 +1,6 @@
 import { get } from 'https';
 import { IncomingMessage } from 'http';
-import { JobBoardPost, Strings } from '@bullhorn/bullhorn-types';
+import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import * as jsonxml from 'jsontoxml';
 
 export function generateSitemap(appConfig: ISettings, res: any, req: any): any {
@@ -20,8 +20,8 @@ export function generateSitemap(appConfig: ISettings, res: any, req: any): any {
         sitemapUrls.push({
           name: 'url',
           children: [
-            { name: 'loc', text: `${req.hostname}${req.originalUrl.replace('/sitemap', '/jobs')}/${job.id}` },
-            { name: 'lastmod', text: `${req.protocol}://${postDate.getFullYear()}-${postDate.getMonth() + 1}-${postDate.getDate()}` },
+            { name: 'loc', text: `${req.protocol}://${req.hostname}${req.originalUrl.replace('/sitemap', '/jobs')}/${job.id}` },
+            { name: 'lastmod', text: `${postDate.getFullYear()}-${postDate.getMonth() + 1}-${postDate.getDate()}` },
           ],
         });
       });
