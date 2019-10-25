@@ -16,6 +16,7 @@
   "defaultLocale": "en-US",
   "supportedLocales": [
       "en-US",
+      "en-GB",
       "fr-FR"
   ],
   "minUploadSize": 4096,
