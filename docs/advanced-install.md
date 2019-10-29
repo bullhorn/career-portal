@@ -35,16 +35,17 @@ Locate and update the following values:
 
 *_This information must be obtained from Bullhorn Customer Support by creating a support ticket using the Bullhorn Resource Center. To create a support ticket, log into Bullhorn and navigate to Menu --> Support --> Bullhorn Resource Center._
 
- To localize your Bullhorn Career Portal to a language and date format matching your region, change the value of the `language` configuration key to one of the following:
+Your Bullhorn Career Portal automatically identifies the locale for the user and translates the content on the career portal to match.  If the user has multiple locales set in their browser, the locale chosen will be the first available option under `supportedLocales`.  If none of the user's locales match, it will fall back to the option under `defaultLocale`.  The following locales are available by default:
 
-* `english`
-* `french`
+* en-US - English (United States)
+* en-GB - English (United Kingdom)
+* fr-FR - French (France)
 
 If you require support for a locale not listed here, please submit a **[GitHub issue](https://github.com/bullhorn/career-portal/issues)**.
 
 **Voluntary EEOC/OFCCP data collection**
 
-With the v2.0.0 release, you can elect to solicit self-identification data from your candidates by setting various EEOC parameters ("genderRaceEthnicity," "veteran," "disability") to TRUE in the app.json file. If displayed, these fields will be required, but the respondent can select "I choose not to self identify." We recommend you check the eeoc.json values in the res/en-US folder to ensure they match the values in your Bullhorn field maps.
+With the v2.0.0 release, you can elect to solicit self-identification data from your candidates by setting various EEOC parameters ("genderRaceEthnicity," "veteran," "disability") to TRUE in the app.json file. If displayed, these fields will be required, but the respondent can select "I choose not to self identify." 
 
 ### Check your app.json file
 
