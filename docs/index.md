@@ -17,7 +17,7 @@
 ### Using Advanced hosting
 
 - Renders your site server side to save on processing on your candidate's computer
-- [Generates jsonld metadata for use with Google and other search engines](/search-engine-indexing)
+- [Generates jsonld metadata for use with Google and other search engines](/search-engine-indexing.md)
 - Enables richer job sharing on social media.
 - Generates an XML sitemap in addition to an XML feed for use with external job aggregate sites
 
