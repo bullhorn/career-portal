@@ -5,7 +5,21 @@
 
 **[Bullhorn Career Portal](http://www.bullhorn.com)** is the next-generation way to share jobs and source candidates from your Bullhorn ATS/CRM instance. Download, configure and host your own career portal, or fork the source code and make it your own.
 
-  
+## Features
+
+### Using Basic Static Host
+
+- [Google Analytics to track your candidates' actions.](/google-analytics-details.md)
+- Extremely simple apply form that can be filled out in less than 30 seconds
+- Directly integrates with Bullhorn
+- [Easily update what fields display on your jobs](/job-details.md)
+
+### Using Advanced hosting
+
+- Renders your site server side to save on processing on your candidate's computer
+- [Generates jsonld metadata for use with Google and other search engines](/search-engine-indexing)
+- Enables richer job sharing on social media.
+- Generates an XML sitemap in addition to an XML feed for use with external job aggregate sites
 
 ## Configuring & Deploying
 
