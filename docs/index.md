@@ -5,7 +5,11 @@
 
 **[Bullhorn Career Portal](http://www.bullhorn.com)** is the next-generation way to share jobs and source candidates from your Bullhorn ATS/CRM instance. Download, configure and host your own career portal, or fork the source code and make it your own.
 
+![release page](assets/media/homePage.png)
+
 ## Features
+
+The Bullhorn Career Portal is open source and extremely simple to [customize](/customizing.md), but includes several out of the box features that allows you to change what data is displayed on your jobs.  
 
 ### Using Basic Static Host
 
