@@ -24,6 +24,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
+              "src/static/custom.css",
               "src/app.json",
               {
                 "glob": "**/*",
