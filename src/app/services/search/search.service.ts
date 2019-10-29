@@ -61,8 +61,20 @@ export class SearchService {
     params.count = `500`;
     params.fields = `${field},count(id)`;
     params.groupBy = field;
-    params.orderBy = `-count.id`;
-
+    switch (field) {
+      case 'publishedCategory(id,name)':
+        params.orderBy = 'publishedCategory.name';
+        break;
+      case 'address(state)':
+        params.orderBy = 'address.state';
+        break;
+      case 'address(city)':
+        params.orderBy = 'address.city';
+        break;
+      default:
+        params.orderBy = '-count.id';
+        break;
+    }
     for (let key in params) {
       queryArray.push(`${key}=${params[key]}`);
     }
