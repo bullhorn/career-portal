@@ -26,6 +26,7 @@
               "src/favicon.ico",
               "src/static/custom.css",
               "src/app.json",
+              "src/version.txt",
               {
                 "glob": "**/*",
                 "input": "src/static/i18n/",
