@@ -31,6 +31,7 @@ import { environment } from '../environments/environment';
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'jobs/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
+  { path: 'jobs', component: MainPageComponent },
 ];
 
 export function initSettings(settings: SettingsService): any {
