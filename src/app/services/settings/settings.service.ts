@@ -34,6 +34,40 @@ export class SettingsService {
         SettingsService.settings[option] = {};
       }
     });
+    if (!SettingsService.settings.service.fields || SettingsService.settings.service.fields.length === 0) {
+      SettingsService.settings.service.fields = [
+        'id',
+        'title',
+        'publishedCategory(id,name)',
+        'address(city,state,countryName)',
+        'employmentType',
+        'dateLastPublished',
+        'publicDescription',
+        'isOpen',
+        'isPublic',
+        'isDeleted',
+        'publishedZip',
+        'salary',
+        'salaryUnit',
+      ];
+    }
+
+    if (!SettingsService.settings.service.jobInfoChips) {
+      SettingsService.settings.service.jobInfoChips = [
+        'employmentType',
+        {
+          type: 'mediumDate',
+          field: 'dateLastPublished',
+        },
+      ];
+    }
+
+    if (!SettingsService.settings.service.keywordSearchFields || SettingsService.settings.service.keywordSearchFields.length === 0) {
+      SettingsService.settings.service.keywordSearchFields = [
+        'publicDescription',
+        'title',
+      ];
+    }
     const validTokenRegex: RegExp = /[^A-Za-z0-9]/;
     if (!SettingsService.settings.service.corpToken || validTokenRegex.test(SettingsService.settings.service.corpToken)) {
       throw new Error('Invalid Corp Token');

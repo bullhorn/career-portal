@@ -23,7 +23,7 @@ interface IServiceSettings {
   port: number|null;
   swimlane: number;
   fields: string[];
-  jobInfoChips: [string | JobChipField];
+  jobInfoChips: [string | JobChipField] | any;
   showCategory: boolean;
   keywordSearchFields: string[];
 }
