@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const JenkinsBuildNumber = process.argv['ji'] || 'UNKNOWN';
-const CommitHash = process.argv['gi'] || 'UNKNOWN';
+const JenkinsBuildNumber = process.argv['BUILD_NUMBER'] || 'UNKNOWN';
+const CommitHash = process.argv['GIT_COMMIT'] || 'UNKNOWN';
 const now = new Date();
 
 let data = `
