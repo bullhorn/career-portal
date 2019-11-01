@@ -43,7 +43,7 @@
             "[FIRST PARAGRAPH]",
             "[SECOND PARAGRAPH]"
         ],
-        "privacyPolicyUrl": "",
+        "privacyPolicyUrl": "./assets/privacy-policy.html",
         "usePrivacyPolicyUrl": false
     }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "CareerPortal",
+  "name": "career-portal",
   "version": "2.0.1",
   "dependencies": {
     "angular": "~1.5.8",

@@ -2,6 +2,7 @@
    sass dependencies when defined in the bower.json of your dependencies */
 // bower:scss
 // endbower
+@import './animations.scss';
 
 $white: #FFFFFF;
 $primary: #5198DE;
@@ -188,3 +189,9 @@ div.no-data-message {
         transition: opacity 0.3s;
     }
 }
+
+@import './detail/detail.scss';
+@import './header/header.scss';
+@import './main/main.scss';
+@import './modal/modal.scss';
+@import './list/list.scss';

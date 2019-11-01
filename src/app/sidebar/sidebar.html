@@ -75,6 +75,11 @@
             </span>
         </section>
 
+        <section>
+            <div ng-show="sidebar.configuration.privacyConsent.sidebarLink" class="consent-checkbox-section">
+                <a data-ng-href="{{modal.privacyConsent.privacyPolicyUrl}}"  target="_blank">{{ 'modal.privacyPolicy' | i18n }}</a>
+            </div>
+        </section>
         <section class="credits">
             <span class="powered-by">{{'sidebar.poweredByText' | i18n}}</span>
             <a target="_blank" href="http://www.bullhorn.com/">
