@@ -39,6 +39,7 @@
     },
     "privacyConsent": {
         "consentCheckbox": false,
+        "sidebarLink": false,
         "privacyStatementParagraphs": [
             "[FIRST PARAGRAPH]",
             "[SECOND PARAGRAPH]"
