@@ -46,12 +46,12 @@
             },
             "static": {
               "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "extractCss": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": false,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": ".",
@@ -59,17 +59,21 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.static.ts"
+                },
+                {
+                  "replace": "src/app.json",
+                  "with": "src/app.json.template"
                 }
               ]
             },
             "dynamic": {
               "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
-              "extractCss": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": false,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": "/",
@@ -77,6 +81,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dynamic.ts"
+                },
+                {
+                  "replace": "src/app.json",
+                  "with": "src/app.json.template"
                 }
               ]
             }
