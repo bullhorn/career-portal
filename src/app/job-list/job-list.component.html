@@ -14,9 +14,9 @@
             <item-title><a [href]="'jobs/' + job.id" [routerLink]="'jobs/' + job.id">{{ job.title }}</a></item-title>
         </item-header>
         <item-header-end>
-            <span class="mid-card" *ngIf="job.address.city || job.address.state">
+            <span class="mid-card" *ngIf="job?.address?.city || job?.address?.state">
                 <i class="bhi-location"></i>
-                {{ job.address.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job.address.state }}
+                {{ job?.address?.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job?.address?.state }}
             </span>
             <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip.type || 'string'">
                 <span class="mid-card" *ngIf="job[chip] || job[chip?.field]">

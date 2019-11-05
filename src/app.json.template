@@ -75,13 +75,9 @@
     "veteran": false,
     "disability": false
   },
-  "privacyConsent": {
+  "privacyConsent": {ed
     "consentCheckbox": false,
-    "privacyStatementParagraphs": [
-      "[FIRST PARAGRAPH]",
-      "[SECOND PARAGRAPH]"
-    ],
-    "privacyPolicyUrl": "",
-    "usePrivacyPolicyUrl": false
+    "sidebarLink": false,
+    "privacyPolicyUrl": "/privacy",
   }
 }

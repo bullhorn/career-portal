@@ -32,6 +32,5 @@ The portal is configurable without modifying code. The options are found in the 
 | veteran | Adds the prompt to ask for veteran status on the apply popup. |
 | disability | Adds the prompt to ask about disability on the apply popup. |
 | consentCheckbox | Enables whether or not a checkbox that states consent of the privacy policy restricts applying to the career portal or not |
-| privacyStatementParagraphs | An array where you separate the paragraphs in the consent tooltip. |
 | privacyPolicyUrl | Url for the privacy policy link. |
 | usePrivacyPolicyUrl | Enables or disables use of the privacy policy url when the linked is clicked. When disabled and the consent checkbox is enabled, when the link is clicked a tooltip opens |

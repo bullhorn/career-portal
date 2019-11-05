@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, HostBinding, Input } from '@angular/co
 import { SettingsService } from '../services/settings/settings.service';
 import { NovoFormGroup } from 'novo-elements';
 import { SearchService } from '../services/search/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,8 +23,9 @@ export class SidebarComponent {
   public timeout: any;
   public loading: boolean = false;
   public filter: object = {};
+  public showPrivacyPolicy: boolean = SettingsService.settings.privacyConsent.sidebarLink;
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private router: Router) {}
 
   public searchOnDelay(): void {
     const keywordSearchFields: string[] = SettingsService.settings.service.keywordSearchFields;
@@ -63,6 +65,15 @@ export class SidebarComponent {
 
   public hideSidebar(): void {
     this.toggleSidebar.emit(false);
+  }
+
+  public viewPrivacyPolicy(): void {
+    const url: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
+    if (url === '/privacy') {
+      this.router.navigate([url]);
+    } else {
+      window.open(url);
+    }
   }
 
   private handleJobIdsOnSuccess(res: any): void {

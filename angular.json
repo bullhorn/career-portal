@@ -25,6 +25,7 @@
               "src/assets",
               "src/favicon.ico",
               "src/static/custom.css",
+              "src/static/privacy-policy.html",
               "src/app.json",
               "src/version.txt",
               {

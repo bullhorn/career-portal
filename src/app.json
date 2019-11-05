@@ -77,11 +77,7 @@
   },
   "privacyConsent": {
     "consentCheckbox": false,
-    "privacyStatementParagraphs": [
-      "[FIRST PARAGRAPH]",
-      "[SECOND PARAGRAPH]"
-    ],
-    "privacyPolicyUrl": "",
-    "usePrivacyPolicyUrl": false
+    "sidebarLink": true,
+    "privacyPolicyUrl": "/privacy"
   }
 }
