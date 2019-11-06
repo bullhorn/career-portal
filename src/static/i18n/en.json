@@ -25,6 +25,9 @@
   "ERROR_HAS_OCCURED": "An error has occurred while loading. Please refresh the page and try again.",
   "PAGE_DESCRIPTION": "View our careers",
   "FILTER": "Filter",
+  "CITY": "City",
+  "STATE": "State",
+  "CATEGORY": "Category",
   "EEOC" : {
     "EEOC_FORM_DESCRIPTION": "Voluntary Self-Identification Form for Race, Gender and Ethnicity",
     "GENDER_LABEL": "Gender",

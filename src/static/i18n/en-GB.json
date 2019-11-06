@@ -1,4 +1,5 @@
 {
   "NO_MATCHING_JOBS": "No matching vacancies",
-  "MISSING_JOB_ERROR": "Oops! The vacancy you are looking for is no longer here. Click okay to return to the vacancy list."
+  "MISSING_JOB_ERROR": "Oops! The vacancy you are looking for is no longer here. Click okay to return to the vacancy list.",
+  "STATE": "County"
 }

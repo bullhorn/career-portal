@@ -25,6 +25,9 @@
   "ERROR_HAS_OCCURED": "Une erreur est survenue lors du chargement. Veuillez actualiser la page et réessayer.",
   "PAGE_DESCRITION": "Voir nos carrières",
   "FILTER": "Filtre",
+  "CITY": "Ville",
+  "STATE": "État / Région",
+  "CATEGORY": "Catégorie",
   "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Formulaire volontaire d'auto-identification pour la race, le sexe et l'origine ethnique",
     "GENDER_LABEL": "Le genre",

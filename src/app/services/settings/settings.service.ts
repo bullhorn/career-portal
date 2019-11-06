@@ -93,7 +93,7 @@ export class SettingsService {
       }
       this.transferState.set(LANGUAGE_KEY, language);
     } else {
-      language = this.transferState.get(LANGUAGE_KEY, navigator.language);
+      language = this.transferState.get(LANGUAGE_KEY, undefined);
       if (!language) {
         language = SettingsService.settings.supportedLocales.filter((locale: string) => {
           return navigator.language === locale;
