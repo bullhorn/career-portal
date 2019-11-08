@@ -21,7 +21,7 @@ interface IServiceSettings {
   batchSize: number;
   corpToken: string;
   port: number|null;
-  swimlane: number;
+  swimlane: number | string;
   fields: string[];
   jobInfoChips: [string | JobChipField] | any;
   showCategory: boolean;
