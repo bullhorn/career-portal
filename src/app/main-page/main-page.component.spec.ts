@@ -1,28 +1,24 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { TestBed, inject } from '@angular/core/testing';
 import { MainPageComponent } from './main-page.component';
 
-describe('MainPageComponent', () => {
+describe('JobListComponent', () => {
   let component: MainPageComponent;
-  let fixture: ComponentFixture<MainPageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ],
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [ MainPageComponent ],
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(inject([MainPageComponent], (_component: any) => {
+    component = _component;
+
+  }));
+
+  describe('app component', () => {
+    it('should be truthy', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });

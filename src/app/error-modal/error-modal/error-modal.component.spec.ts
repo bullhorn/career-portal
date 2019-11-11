@@ -1,25 +1,30 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
 import { ErrorModalComponent } from './error-modal.component';
+import { NovoElementsModule, NovoModalModule, NovoModalParams, NovoModalRef } from 'novo-elements';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ChomskyModule, TranslateService } from 'chomsky';
+import { BrowserModule } from '@angular/platform-browser';
 
-describe('ErrorModalComponent', () => {
+describe('JobListComponent', () => {
   let component: ErrorModalComponent;
-  let fixture: ComponentFixture<ErrorModalComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ErrorModalComponent ],
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [ ErrorModalComponent, NovoModalParams, NovoModalRef ],
+      imports: [ChomskyModule, RouterTestingModule, NovoElementsModule, BrowserModule, HttpClientModule],
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(inject([ErrorModalComponent], (_component: any) => {
+    component = _component;
+
+  }));
+
+  describe('app component', () => {
+    it('should be truthy', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });

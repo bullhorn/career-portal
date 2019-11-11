@@ -1,28 +1,32 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { By, BrowserModule } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ApplyModalComponent } from './apply-modal.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NovoElementsModule } from 'novo-elements';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ChomskyModule } from 'chomsky';
 
 describe('ApplyModalComponent', () => {
   let component: ApplyModalComponent;
-  let fixture: ComponentFixture<ApplyModalComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ApplyModalComponent ],
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplyModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [ ApplyModalComponent ],
+      imports: [ChomskyModule, RouterTestingModule, NovoElementsModule, BrowserModule, HttpClientModule],
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(inject([ApplyModalComponent], (_component: any) => {
+    component = _component;
+
+  }));
+
+  describe('app component', () => {
+    it('should be truthy', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });

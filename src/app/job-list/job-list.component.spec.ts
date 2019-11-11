@@ -1,28 +1,24 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { TestBed, inject } from '@angular/core/testing';
 import { JobListComponent } from './job-list.component';
 
 describe('JobListComponent', () => {
   let component: JobListComponent;
-  let fixture: ComponentFixture<JobListComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ JobListComponent ],
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JobListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      providers: [ JobListComponent ],
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  beforeEach(inject([JobListComponent], (_component: any) => {
+    component = _component;
+
+  }));
+
+  describe('app component', () => {
+    it('should be truthy', () => {
+      expect(component).toBeTruthy();
+    });
   });
 });
