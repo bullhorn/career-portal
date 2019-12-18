@@ -27,11 +27,13 @@ import { DatePipe } from '@angular/common';
 import { JobResolver } from './job.resolver';
 import { ServerResponseService } from './services/server-response/server-response.service';
 import { environment } from '../environments/environment';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'jobs/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
   { path: 'jobs', component: MainPageComponent },
+  { path: 'privacy', component: PrivacyPolicyComponent },
 ];
 
 export function initSettings(settings: SettingsService): any {
@@ -50,6 +52,7 @@ export function initSettings(settings: SettingsService): any {
       StripHtmlPipe,
       SidebarFilterComponent,
       StructuredSeoComponent,
+      PrivacyPolicyComponent,
    ],
    entryComponents: [
       ApplyModalComponent,

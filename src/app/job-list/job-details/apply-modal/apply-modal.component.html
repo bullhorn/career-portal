@@ -23,9 +23,7 @@
           </div>
           <div *ngIf="consentCheckbox" class="consent-form novo-form-row">
             <novo-control [form]="form" [control]="consentControl"></novo-control>
-            <label *ngIf="usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}} <a (click)="viewPrivacyPolicy()">{{ 'PRIVACY_POLICY' | translate}}</a></label>
-            <label *ngIf="!usePrivacyPolicyUrl" class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}}<span class="hover" *ngIf="!usePrivacyPolicyUrl"
-                  [popover]="privacyStatementParagraphs" popoverPlacement="top-left" [popoverOnHover]="true"> {{ 'PRIVACY_POLICY' | translate}}</span></label>
+            <label class="consent-checkbox-label">{{ 'BY_CHECKING_THIS_BOX' | translate}} <a (click)="viewPrivacyPolicy()">{{ 'PRIVACY_POLICY' | translate}}</a></label>
           </div>
       </novo-form>
       <span *ngIf="hasError" class="error">{{ 'ERROR_WHILE_APPLYING' | translate}}</span>

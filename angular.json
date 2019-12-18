@@ -25,6 +25,7 @@
               "src/assets",
               "src/favicon.ico",
               "src/static/custom.css",
+              "src/static/privacy-policy.html",
               "src/app.json",
               "src/version.txt",
               {
@@ -36,7 +37,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bullhorn-icons/fonts/Bullhorn-Glyphicons.css",
-              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
+              "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss"
             ],
             "scripts": []
           },
@@ -46,12 +47,12 @@
             },
             "static": {
               "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
+              "outputHashing": "none",
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": ".",
@@ -59,17 +60,21 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.static.ts"
+                },
+                {
+                  "replace": "src/app.json",
+                  "with": "src/app.json.template"
                 }
               ]
             },
             "dynamic": {
               "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": true,
+              "outputHashing": "none",
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": "/",
@@ -77,6 +82,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dynamic.ts"
+                },
+                {
+                  "replace": "src/app.json",
+                  "with": "src/app.json.template"
                 }
               ]
             }

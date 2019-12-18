@@ -48,9 +48,8 @@ interface IEeoc {
 
 interface IPrivacyConsent {
   consentCheckbox: boolean;
-  privacyStatementParagraphs: string[];
+  sidebarLink: boolean;
   privacyPolicyUrl: string;
-  usePrivacyPolicyUrl: boolean;
 }
 
 interface IAdditionalJobCriteria {

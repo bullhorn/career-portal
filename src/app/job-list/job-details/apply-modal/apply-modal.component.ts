@@ -16,6 +16,7 @@ import { TranslateService } from 'chomsky';
 import { SettingsService } from '../../../services/settings/settings.service';
 import { AnalyticsService } from '../../../services/analytics/analytics.service';
 import { ApplyService } from '../../../services/apply/apply.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apply-modal',
@@ -41,10 +42,7 @@ export class ApplyModalComponent implements OnInit {
   public eeocControls: any = [];
   public consentControl: any;
   public applying: boolean = false;
-  public privacyPolicyURL: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
   public consentCheckbox: boolean = SettingsService.settings.privacyConsent.consentCheckbox;
-  public usePrivacyPolicyUrl: boolean = SettingsService.settings.privacyConsent.usePrivacyPolicyUrl;
-  public privacyStatementParagraphs: string = SettingsService.settings.privacyConsent.privacyStatementParagraphs.join('\r\n');
   public showCategory: boolean  = SettingsService.settings.service.showCategory;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
@@ -53,7 +51,8 @@ export class ApplyModalComponent implements OnInit {
               private modalRef: NovoModalRef,
               private applyService: ApplyService,
               private analytics: AnalyticsService,
-              private toaster: NovoToastService ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
+              private toaster: NovoToastService,
+              private router: Router ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
 
   public ngOnInit(): void {
     this.job = this.params['job'];
@@ -231,8 +230,12 @@ export class ApplyModalComponent implements OnInit {
   }
 
   public viewPrivacyPolicy(): void {
-    window.open(this.privacyPolicyURL);
-  }
+    const url: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
+    if (url === '/privacy') {
+      this.router.navigate([url]);
+    } else {
+      window.open(url);
+    }  }
 
   private applyOnSuccess(res: any): void {
     let toastOptions: any = {
