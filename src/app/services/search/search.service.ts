@@ -18,7 +18,7 @@ export class SearchService {
 
   public getjobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
     let queryArray: string[] = [];
-    params.where = `(isOpen=true) AND (isDeleted=false)${this.formatAdditionalCriteria(false)}${this.formatFilter(filter, false)}`;
+    params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true)}`;
     params.fields = SettingsService.settings.service.fields;
     params.count = count;
     params.sort = SettingsService.settings.additionalJobCriteria.sort;
@@ -29,7 +29,7 @@ export class SearchService {
     }
     let queryString: string = queryArray.join('&');
 
-    return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`);
+    return this.http.get(`${this.baseUrl}/search/JobOrder?${queryString}`);
   }
 
   public openJob(id: string | number): Observable<any> {
@@ -119,7 +119,7 @@ export class SearchService {
         }
       }
     }
-    
+
     return additionalFilter.replace(/{\?\^\^equals}/g, isSearch ? ':' : '=').replace(/{\?\^\^delimiter}/g, isSearch ? '"' : '\'');
   }
 

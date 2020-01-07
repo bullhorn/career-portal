@@ -79,7 +79,7 @@ export class SidebarComponent {
   private handleJobIdsOnSuccess(res: any): void {
     let resultIds: string[] = res.data.map((result: any) => { return `id{?^^equals}${result.id}`; });
     if (resultIds.length === 0) {
-      resultIds.push(`id{?^^equals}${-1}`);
+      resultIds.push(`id{?^^equals}${0}`);
     }
     this.updateFilter('ids', resultIds);
   }
