@@ -1,8 +1,8 @@
 import { Component, Input, HostBinding, OnChanges, Renderer2, Inject } from '@angular/core';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import { SettingsService } from '../services/settings/settings.service';
-import { SafeHtml, DOCUMENT } from '@angular/platform-browser';
-import { DatePipe } from '@angular/common';
+import { SafeHtml } from '@angular/platform-browser';
+import { DatePipe, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-structured-seo',
