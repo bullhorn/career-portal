@@ -21,7 +21,7 @@ export function generateSitemap(appConfig: ISettings, res: any, req: any): any {
           name: 'url',
           children: [
             { name: 'loc', text: `${req.protocol}://${req.hostname}${req.originalUrl.replace('/sitemap', '/jobs')}/${job.id}` },
-            { name: 'lastmod', text: `${postDate.getFullYear()}-${postDate.getMonth() + 1}-${postDate.getDate()}` },
+            { name: 'lastmod', text: `${postDate.getFullYear()}-${('0' + (postDate.getMonth() + 1)).slice(-2)}-${('0' + postDate.getDate()).slice(-2)}` },
           ],
         });
       });
