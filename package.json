@@ -15,6 +15,42 @@
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "ng build --prod --configuration=dynamic && ng run career-portal:server:dynamic"
   },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupJest.ts"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/projects/novo-elements/tsconfig.spec.json",
+        "diagnostics": true,
+        "stringifyContentPathRegex": "\\.html$",
+        "astTransformers": [
+          "jest-preset-angular/build/InlineFilesTransformer",
+          "jest-preset-angular/build/StripStylesTransformer"
+        ]
+      }
+    },
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary",
+      "html"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "novo-elements/setupJest.ts"
+    ],
+    "testURL": "http://localhost"
+  },
+  "lint-staged": {
+    "*.{ts,json,scss,css,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "private": true,
   "engines": {
     "node": "10.3.0"
@@ -49,8 +85,7 @@
     "express": "^4.16.2",
     "he": "^1.2.0",
     "jsontoxml": "^1.0.1",
-    "ngx-clipboard": "^10.0.0",
-    "novo-elements": "3.14.0",
+    "novo-elements": "4.3.9",
     "post-robot": "^8.0.29",
     "preboot": "^6.0.0-beta.2",
     "roboto-fontface": "^0.9.0",
@@ -62,26 +97,24 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.11.4",
-    "@angular/cli": "^7.1.2",
-    "@angular/compiler-cli": "^7.1.2",
-    "@angular/language-service": "^7.1.2",
+    "@angular-devkit/build-angular": "~0.803.18",
+    "@angular-devkit/build-ng-packagr": "~0.803.17",
+    "@angular/cli": "^8.3.17",
+    "@angular/compiler-cli": "~8.2.13",
+    "@angular/language-service": "~8.2.13",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "~6.0.60",
-    "codelyzer": "^4.0.1",
-    "jasmine-core": "~2.8.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~2.0.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "^1.2.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
+    "@types/node": "^10.12.18",
+    "codelyzer": "^5.0.1",
+    "jasmine-core": "~3.5.0",
+    "jest": "~26.4.2",
+    "jest-preset-angular": "~8.3.1",
+    "lint-staged": "^8.1.0",
     "protractor": "~5.1.2",
     "ts-loader": "^5.2.0",
     "ts-node": "~4.1.0",
     "tslint": "^5.11.0",
     "typescript": "~3.1.6",
-    "webpack-cli": "^3.1.0"
+    "webpack": "^4.41.2"
   }
 }
