@@ -2,9 +2,9 @@
 <app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
 <div class="background" *ngIf="!loading">
     <div class="job-container">
-        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate}}</button>
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate }}</button>
         <div class="job-header">
-            <span class="job-title">{{job.title}}</span>
+            <span class="job-title">{{ job.title }}</span>
             <br/>
             <span class="category" *ngIf="job.publishedCategory && showCategory">
                 {{ job.publishedCategory?.name }}
@@ -20,19 +20,19 @@
                                 {{ job[chip?.field] || job[chip] }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'mediumDate'">
-                                {{ job[chip?.field] | date: 'mediumDate'}}
+                                {{ job[chip?.field] | date: 'mediumDate' }}}
                             </ng-container>
                             <ng-container  *ngSwitchCase="'dateTime'">
-                                {{ job[chip?.field] | date: 'medium'}}
+                                {{ job[chip?.field] | date: 'medium' }}}
                             </ng-container>
                             <ng-container *ngSwitchCase="'USD'">
-                                {{ job[chip?.field] | currency: 'USD'}}
+                                {{ job[chip?.field] | currency: 'USD' }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'GBP'">
-                                {{ job[chip?.field] | currency: 'GBP'}}
+                                {{ job[chip?.field] | currency: 'GBP' }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'EUR'">
-                                {{ job[chip?.field] | currency: 'EUR'}}
+                                {{ job[chip?.field] | currency: 'EUR' }}
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 {{ job[chip?.field] || job[chip] }}

@@ -4,7 +4,7 @@
 
 </div>
 <div class="open-positions">
-    <span class="open-positions-text">{{ 'OPEN_POSITIONS' | translate }} ({{total}})</span>
+    <span class="open-positions-text">{{ 'OPEN_POSITIONS' | translate }} ({{ total }})</span>
 </div>
 <novo-list direction="vertical" *ngIf="!loading && jobs.length > 0">
 
@@ -24,19 +24,19 @@
                         {{ job[chip?.field] || job[chip] }}
                     </ng-container>
                     <ng-container *ngSwitchCase="'mediumDate'">
-                        {{ job[chip?.field] | date: 'mediumDate'}}
+                        {{ job[chip?.field] | date: 'mediumDate' }}
                     </ng-container>
                     <ng-container  *ngSwitchCase="'dateTime'">
-                        {{ job[chip?.field] | date: 'medium'}}
+                        {{ job[chip?.field] | date: 'medium' }}
                     </ng-container>
                     <ng-container *ngSwitchCase="'USD'">
-                        {{ job[chip?.field] | currency: 'USD'}}
+                        {{ job[chip?.field] | currency: 'USD' }}
                     </ng-container>
                     <ng-container *ngSwitchCase="'GBP'">
-                        {{ job[chip?.field] | currency: 'GBP'}}
+                        {{ job[chip?.field] | currency: 'GBP' }}
                     </ng-container>
                     <ng-container *ngSwitchCase="'EUR'">
-                        {{ job[chip?.field] | currency: 'EUR'}}
+                        {{ job[chip?.field] | currency: 'EUR' }}
                     </ng-container>
                     <ng-container *ngSwitchDefault>
                         {{ job[chip?.field] || job[chip] }}
@@ -49,7 +49,7 @@
         {{ job.publishedCategory?.name }}
     </span>
     <span class="description">
-        {{ job.publicDescription | stripHtml}}
+        {{ job.publicDescription | stripHtml }}
     </span>
 </div>
 

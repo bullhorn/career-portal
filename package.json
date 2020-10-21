@@ -10,6 +10,7 @@
     "build:static": "ng build --prod --configuration=static --aot --build-optimizer",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:fix": "npm run ng -- lint --typeCheck --format stylish --fix",
     "e2e": "ng e2e",
     "compile:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
