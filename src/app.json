@@ -17,7 +17,15 @@
   "supportedLocales": [
       "en-US",
       "en-GB",
-      "fr-FR"
+      "en",
+      "fr-FR",
+      "fr",
+      "es",
+      "de",
+      "it",
+      "nl",
+      "ru",
+      "zh-CN"
   ],
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
