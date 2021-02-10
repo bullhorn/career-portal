@@ -21,7 +21,6 @@ export class StructuredSeoComponent implements OnChanges {
       'title': this.jobData.title,
       'description': this.jobData.publicDescription,
       'datePosted': this.datePipe.transform(this.jobData.dateLastPublished, 'long'),
-      'employmentType': this.jobData.employmentType,
       'hiringOrganization': {
         '@type': 'Organization',
         'name': SettingsService.settings.companyName,
@@ -34,8 +33,7 @@ export class StructuredSeoComponent implements OnChanges {
           '@type': 'PostalAddress',
           'addressLocality': this.jobData.address.city,
           'addressRegion': this.jobData.address.state,
-          'postalCode': this.jobData.publishedZip,
-          'addressCountry': this.jobData.address.countryName,
+          'postalCode': this.jobData.address.zip,
         },
       },
       'baseSalary': {
@@ -50,7 +48,9 @@ export class StructuredSeoComponent implements OnChanges {
     let s: any = this._renderer2.createElement('script');
     s.type = `application/ld+json`;
     s.text = JSON.stringify(jsonObject);
-    this._renderer2.appendChild(this._document.body, s);
+    if (SettingsService.isServer) {
+      this._renderer2.appendChild(this._document.body, s);
+    }
   }
 
 }
