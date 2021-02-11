@@ -6,10 +6,8 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x]
-
     steps:
       - uses: actions/checkout@v1
-
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -24,8 +22,7 @@ jobs:
       - name: Install Dependencies
         run: sudo apt-get install expect libnotify-bin
       - name: Install
-        run: |
-          npm ci
+        run: npm ci
       - name: Lint
         run: npm run lint
       - name: Build
