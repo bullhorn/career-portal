@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Feature Requests & Implementation Questions
+    url: https://github.com/bullhorn/career-portal/discussions
+    about: Please leverage the Discussions tab
+  - name: Bullhorn Support
+    url: https://www.bullhorn.com/technical-support/
+    about: If you have issues with the API
