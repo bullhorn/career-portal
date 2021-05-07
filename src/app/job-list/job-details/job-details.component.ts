@@ -25,7 +25,7 @@ export class JobDetailsComponent implements OnInit {
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
-  public jobInfoChips: [string|JobChipField] = SettingsService.settings.service.jobInfoChips;
+  public jobInfoChips: [string|any] = SettingsService.settings.service.jobInfoChips;
   public showCategory: boolean  = SettingsService.settings.service.showCategory;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
@@ -106,7 +106,7 @@ export class JobDetailsComponent implements OnInit {
     window.print();
   }
 
-  private goToJobList(): void {
+  public goToJobList(): void {
     this.router.navigate(['/']);
   }
 
