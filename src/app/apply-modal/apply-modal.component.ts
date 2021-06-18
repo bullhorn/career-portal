@@ -13,9 +13,9 @@ import {
   FieldInteractionApi,
 } from 'novo-elements';
 import { TranslateService } from 'chomsky';
-import { SettingsService } from '../../../services/settings/settings.service';
-import { AnalyticsService } from '../../../services/analytics/analytics.service';
-import { ApplyService } from '../../../services/apply/apply.service';
+import { SettingsService } from '../services/settings/settings.service';
+import { AnalyticsService } from '../services/analytics/analytics.service';
+import { ApplyService } from '../services/apply/apply.service';
 import { Router } from '@angular/router';
 
 @Component({

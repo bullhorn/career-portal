@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SearchService } from '../../services/search/search.service';
+import { SearchService } from '../services/search/search.service';
 import { NovoModalService } from 'novo-elements';
-import { SettingsService } from '../../services/settings/settings.service';
-import { AnalyticsService } from '../../services/analytics/analytics.service';
-import { ApplyModalComponent } from './apply-modal/apply-modal.component';
-import { ShareService } from '../../services/share/share.service';
-import { ErrorModalComponent } from '../../error-modal/error-modal/error-modal.component';
+import { SettingsService } from '../services/settings/settings.service';
+import { AnalyticsService } from '../services/analytics/analytics.service';
+import { ApplyModalComponent } from '../apply-modal/apply-modal.component';
+import { ShareService } from '../services/share/share.service';
+import { ErrorModalComponent } from '../error-modal/error-modal/error-modal.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
-import { ServerResponseService } from '../../services/server-response/server-response.service';
+import { ServerResponseService } from '../services/server-response/server-response.service';
 import { TranslateService } from 'chomsky';
 
 @Component({
@@ -27,6 +27,7 @@ export class JobDetailsComponent implements OnInit {
   public alreadyApplied: boolean = false;
   public jobInfoChips: [string|any] = SettingsService.settings.service.jobInfoChips;
   public showCategory: boolean  = SettingsService.settings.service.showCategory;
+  public isSafariAgent: boolean = false;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';
 
   constructor(
@@ -45,6 +46,7 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.isSafariAgent = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
     this.loading = true;
     this.id = this.route.snapshot.paramMap.get('id');
     this.source = this.route.snapshot.queryParams.source;

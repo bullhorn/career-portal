@@ -17,10 +17,10 @@ import { SidebarFilterComponent } from './sidebar/sidebar-filter/sidebar-filter.
 import { BrowserTransferStateModule } from '@angular/platform-browser';
 import { NovoListModule, NovoElementsModule, NovoHeaderModule, NovoModalModule, NovoModalService, FieldInteractionApi, NovoToastService,  } from 'novo-elements';
 import { MainPageComponent } from './main-page/main-page.component';
-import { JobDetailsComponent } from './job-list/job-details/job-details.component';
-import { ApplyModalComponent } from './job-list/job-details/apply-modal/apply-modal.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
+import { ApplyModalComponent } from './apply-modal/apply-modal.component';
 import { ClipboardModule } from 'ngx-clipboard';
-import { ErrorModalComponent } from './error-modal/error-modal/error-modal.component';
+import { ErrorModalComponent } from './error-modal/error-modal.component';
 import { StripHtmlPipe } from './utils/stripHtml.pipe';
 import { StructuredSeoComponent } from './structured-seo/structured-seo.component';
 import { DatePipe } from '@angular/common';
