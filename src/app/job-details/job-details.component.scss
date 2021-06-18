@@ -7,6 +7,11 @@
     margin: 0% 10%;
     padding: 5%;
     background-color: #FFFFFF;
+    &.safari-scroll {
+      height: 100%;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
     >button[theme="dialogue"] {
       margin: -10px -15px 20px -15px;
     }

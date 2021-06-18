@@ -1,7 +1,7 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
 <div class="background" *ngIf="!loading">
-    <div class="job-container">
+    <div class="job-container" [ngClass]="{'safari-scroll': isSafariAgent}">
         <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate }}</button>
         <div class="job-header">
             <span class="job-title">{{ job.title }}</span>
@@ -12,7 +12,7 @@
             <div class="job-info-container">
                 <span class="job-info" *ngIf="job.address.city || job.address.state">
                     <i class="bhi-location"></i>
-                    {{ job.address.city }} <span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span> {{ job.address.state }}
+                    {{ job.address.city }}<span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span>{{ job.address.state }}
                 </span>
                     <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip.type || 'string'">
                         <span class="job-info" *ngIf="job[chip] || job[chip?.field]">

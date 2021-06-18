@@ -6,7 +6,7 @@ import { SettingsService } from '../services/settings/settings.service';
 import { AnalyticsService } from '../services/analytics/analytics.service';
 import { ApplyModalComponent } from '../apply-modal/apply-modal.component';
 import { ShareService } from '../services/share/share.service';
-import { ErrorModalComponent } from '../error-modal/error-modal/error-modal.component';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import { ServerResponseService } from '../services/server-response/server-response.service';
@@ -46,7 +46,9 @@ export class JobDetailsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.isSafariAgent = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
+    if (!SettingsService.isServer) {
+      this.isSafariAgent = navigator.userAgent.indexOf('Safari') !== -1 && navigator.userAgent.indexOf('Chrome') === -1;
+    }
     this.loading = true;
     this.id = this.route.snapshot.paramMap.get('id');
     this.source = this.route.snapshot.queryParams.source;
