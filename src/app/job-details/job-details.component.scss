@@ -11,10 +11,6 @@
       height: 100%;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-      .share {
-        margin-bottom: 100px;
-      }
-
     }
     >button[theme="dialogue"] {
       margin: -10px -15px 20px -15px;
@@ -48,6 +44,7 @@
     .share {
       display: flex;
       margin-top: 50px;
+      margin-bottom: 100px;
       button {
         margin-right: 20px;
       }
