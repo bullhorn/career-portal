@@ -163,6 +163,13 @@ app-apply-modal {
       }
     }
   }
+  novo-modal > footer, novo-notification > footer {
+    flex-flow: column-reverse !important;
+    button {
+      width: 90%;
+      margin: 0px 0 25px 0 !important;
+    }
+  }
 }
 
 
