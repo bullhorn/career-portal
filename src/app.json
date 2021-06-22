@@ -79,12 +79,12 @@
     }
   },
   "eeoc": {
-    "genderRaceEthnicity": false,
-    "veteran": false,
-    "disability": false
+    "genderRaceEthnicity": true,
+    "veteran": true,
+    "disability": true
   },
   "privacyConsent": {
-    "consentCheckbox": false,
+    "consentCheckbox": true,
     "sidebarLink": true,
     "privacyPolicyUrl": "/privacy"
   }
