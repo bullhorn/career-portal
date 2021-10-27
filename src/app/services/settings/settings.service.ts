@@ -72,8 +72,8 @@ export class SettingsService {
     if (!SettingsService.settings.service.corpToken || validTokenRegex.test(SettingsService.settings.service.corpToken)) {
       throw new Error('Invalid Corp Token');
     }
-    const validSwimlaneRegex: RegExp = /[^0-9]/;
-    if (!SettingsService.settings.service.swimlane || validSwimlaneRegex.test(SettingsService.settings.service.swimlane.toString())) {
+    
+    if (!SettingsService.settings.service.swimlane) {
       throw new Error('Invalid Swimlane');
     }
     if (SettingsService.urlRoot) {
