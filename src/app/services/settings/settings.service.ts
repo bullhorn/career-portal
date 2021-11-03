@@ -13,6 +13,7 @@ export class SettingsService {
 
   public static settings: ISettings;
   public static isServer: boolean;
+  public static isIos: boolean;
   public static urlRoot: string;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: string, @Optional() @Inject(REQUEST) protected request: Request, private transferState: TransferState) {
@@ -72,7 +73,7 @@ export class SettingsService {
     if (!SettingsService.settings.service.corpToken || validTokenRegex.test(SettingsService.settings.service.corpToken)) {
       throw new Error('Invalid Corp Token');
     }
-    
+
     if (!SettingsService.settings.service.swimlane) {
       throw new Error('Invalid Swimlane');
     }
@@ -80,6 +81,10 @@ export class SettingsService {
       TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
     }
     await TranslateService.use(this.getPreferredLanguage()).toPromise();
+
+    if (!SettingsService.isServer) {
+      SettingsService.isIos = !!navigator.userAgent && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    }
 
   }
 

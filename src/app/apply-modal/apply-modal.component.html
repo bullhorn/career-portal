@@ -10,7 +10,7 @@
         <span class="type">{{ job.employmentType }}</span>
       </div>
     </header>
-    <section *ngIf="!loading">
+    <section *ngIf="!loading" [ngClass]="{ ios: isIos }">
       <novo-form [form]="form" layout="vertical">
           <div *ngFor="let control of formControls" class="novo-form-row">
             <novo-control [form]="form" [control]="control"></novo-control>
