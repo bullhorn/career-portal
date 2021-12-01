@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
 import { Observable } from 'rxjs';
+import { IServiceSettings } from '../../typings/settings';
 
 @Injectable()
 export class ApplyService {

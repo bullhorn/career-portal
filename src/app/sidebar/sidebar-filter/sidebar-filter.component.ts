@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SearchService } from '../../services/search/search.service';
 import { CheckListControl, FormUtils, NovoFormGroup, FieldInteractionApi } from 'novo-elements';
+import { IAddressListResponse, ICategoryListResponse } from '../../../typings';
 
 @Component({
   selector: 'app-sidebar-filter',

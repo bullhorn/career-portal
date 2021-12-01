@@ -4,7 +4,7 @@ interface NodeModule {
   id: string;
 }
 
-interface ICategoryListResponse {
+export interface ICategoryListResponse {
   idCount: number,
   publishedCategory: { id: number, name: string };
 }

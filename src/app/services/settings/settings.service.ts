@@ -4,6 +4,7 @@ import { isPlatformServer } from '@angular/common';
 import { TranslateService } from 'chomsky';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { ISettings } from '../../typings/settings';
 
 const APP_CONFIG_URL: any = './app.json';
 const LANGUAGE_KEY: any = makeStateKey<string>('language');

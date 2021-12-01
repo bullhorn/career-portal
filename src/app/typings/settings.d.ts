@@ -1,4 +1,4 @@
-interface ISettings {
+export interface ISettings {
   acceptedResumeTypes: string[];
   companyName: string;
   companyLogoPath: string;
