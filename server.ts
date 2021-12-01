@@ -11,7 +11,6 @@ import { join } from 'path';
 import { createWindow } from 'domino';
 import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
-import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 import { generateSitemap, generateRss } from './generateXml';
 import { ISettings } from 'src/app/typings/settings';
 
@@ -57,14 +56,6 @@ app.engine('html', (_: any, options: any, callback: any) => {
     bootstrap: AppServerModuleNgFactory,
     providers: [
       provideModuleMap(LAZY_MODULE_MAP),
-      {
-        provide: REQUEST,
-        useValue: options.req,
-      },
-      {
-        provide: RESPONSE,
-        useValue: options.req.res,
-      },
     ],
   })(_, options, callback); },
 );
