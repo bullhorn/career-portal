@@ -3,7 +3,7 @@ import { SearchService } from '../services/search/search.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { SettingsService } from '../services/settings/settings.service';
 import { Router } from '@angular/router';
-import { TranslateService } from 'chomsky';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-job-list',
@@ -27,7 +27,7 @@ export class JobListComponent implements OnChanges {
   public showCategory: boolean  = SettingsService.settings.service.showCategory;
   private start: number = 0;
 
-  constructor(private http: SearchService, private titleService: Title, private meta: Meta, private router: Router) {
+  constructor(private http: SearchService, private titleService: Title, private meta: Meta, private router: Router, private translate: TranslateService) {
    }
 
   public ngOnChanges(changes: SimpleChanges): any {
@@ -37,7 +37,7 @@ export class JobListComponent implements OnChanges {
   public getData(loadMore: boolean = false): void {
     this.start = loadMore ? (this.start + 30) : 0;
     this.titleService.setTitle(`${SettingsService.settings.companyName} - Careers`);
-    let description: string = TranslateService.translate('PAGE_DESCRIPTION');
+    let description: string = this.translate.instant('PAGE_DESCRIPTION');
     this.meta.updateTag({ name: 'og:description', content: description });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.meta.updateTag({ name: 'description', content: description });

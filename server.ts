@@ -12,7 +12,9 @@ import { createWindow } from 'domino';
 import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
 import { generateSitemap, generateRss } from './generateXml';
-import { ISettings } from 'src/app/typings/settings';
+import { ISettings } from './src/app/typings/settings';
+import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
+import { AppServerModule } from './src/main.server';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -26,9 +28,8 @@ const template: any = readFileSync(path.join(join(DIST_FOLDER, 'index.html'))).t
 const win: Window = createWindow(template);
 (<any> global['window']) = win;
 global['document'] = win.document;
+global['navigator'] = win.navigator;
 
-// * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require('./dist/server/main');
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
 let appConfig: ISettings = JSON.parse(readFileSync(path.join(join(DIST_FOLDER, 'app.json'))).toString());
@@ -53,9 +54,16 @@ if (process.env.COMPANY_NAME) {
 
 app.engine('html', (_: any, options: any, callback: any) => {
   ngExpressEngine({
-    bootstrap: AppServerModuleNgFactory,
+    bootstrap: AppServerModule,
     providers: [
-      provideModuleMap(LAZY_MODULE_MAP),
+      {
+        provide: REQUEST,
+        useValue: options.req,
+      },
+      {
+        provide: RESPONSE,
+        useValue: options.req.res,
+      },
     ],
   })(_, options, callback); },
 );

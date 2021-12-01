@@ -10,7 +10,7 @@ import { ErrorModalComponent } from '../error-modal/error-modal.component';
 import { Title, Meta } from '@angular/platform-browser';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import { ServerResponseService } from '../services/server-response/server-response.service';
-import { TranslateService } from 'chomsky';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-job-details',
@@ -41,6 +41,7 @@ export class JobDetailsComponent implements OnInit {
     private titleService: Title,
     private meta: Meta,
     private serverResponse: ServerResponseService,
+    private translate: TranslateService,
   ) {
     this.modalService.parentViewContainer = this.viewContainerRef;
   }
@@ -130,8 +131,8 @@ export class JobDetailsComponent implements OnInit {
     } else {
       this.serverResponse.setNotFound();
       this.modalService.open(ErrorModalComponent, {
-        title: TranslateService.translate('ERROR'),
-        message: TranslateService.translate('MISSING_JOB_ERROR'),
+        title: this.translate.instant('ERROR'),
+        message: this.translate.instant('MISSING_JOB_ERROR'),
       }).onClosed.then(this.goToJobList.bind(this));
     }
   }

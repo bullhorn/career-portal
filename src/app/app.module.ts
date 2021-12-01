@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChomskyModule } from 'chomsky';
-
 import { AppComponent } from './app.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { SettingsService } from './services/settings/settings.service';
@@ -27,6 +25,8 @@ import { JobResolver } from './job.resolver';
 import { ServerResponseService } from './services/server-response/server-response.service';
 import { environment } from '../environments/environment';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslationLoader } from './services/localization/loader';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -66,7 +66,12 @@ export function initSettings(settings: SettingsService): any {
     BrowserTransferStateModule,
     NovoModalModule,
     FormsModule,
-    ChomskyModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: TranslationLoader,
+      }
+    }),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false, useHash: environment.useHash },

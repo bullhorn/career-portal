@@ -1,10 +1,11 @@
 import { Injectable, Inject, PLATFORM_ID, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
-import { TranslateService } from 'chomsky';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { ISettings } from '../../typings/settings';
+import { TranslateService } from '@ngx-translate/core';
+import { Request } from 'express';
 
 const APP_CONFIG_URL: any = './app.json';
 const LANGUAGE_KEY: any = makeStateKey<string>('language');
@@ -17,7 +18,7 @@ export class SettingsService {
   public static isIos: boolean;
   public static urlRoot: string;
 
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: string, @Optional() @Inject(REQUEST) protected request: Request, private transferState: TransferState) {
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: string, @Optional() @Inject(REQUEST) protected request: Request, private transferState: TransferState, private translate: TranslateService) {
     SettingsService.isServer = isPlatformServer(platformId);
   }
 
@@ -78,10 +79,7 @@ export class SettingsService {
     if (!SettingsService.settings.service.swimlane) {
       throw new Error('Invalid Swimlane');
     }
-    if (SettingsService.urlRoot) {
-      TranslateService.setLocation(`${SettingsService.urlRoot}i18n/`);
-    }
-    await TranslateService.use(this.getPreferredLanguage()).toPromise();
+    await this.translate.use(this.getPreferredLanguage()).toPromise();
 
     if (!SettingsService.isServer) {
       SettingsService.isIos = !!navigator.userAgent && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -93,7 +91,7 @@ export class SettingsService {
     let supportedLanguages: string[] = SettingsService.settings.supportedLocales;
     let language: string = SettingsService.settings.defaultLocale;
     if (SettingsService.isServer) {
-      language = this.request['acceptsLanguages'](supportedLanguages);
+      language = <string> this.request['acceptsLanguages'](supportedLanguages);
       if (!language) {
         language = SettingsService.settings.defaultLocale;
       }

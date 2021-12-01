@@ -12,11 +12,11 @@ import {
   CheckboxControl,
   FieldInteractionApi,
 } from 'novo-elements';
-import { TranslateService } from 'chomsky';
 import { SettingsService } from '../services/settings/settings.service';
 import { AnalyticsService } from '../services/analytics/analytics.service';
 import { ApplyService } from '../services/apply/apply.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-apply-modal',
@@ -53,7 +53,9 @@ export class ApplyModalComponent implements OnInit {
               private applyService: ApplyService,
               private analytics: AnalyticsService,
               private toaster: NovoToastService,
-              private router: Router ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
+              private router: Router,
+              private translate: TranslateService
+               ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
 
   public ngOnInit(): void {
     this.job = this.params['job'];
@@ -63,21 +65,21 @@ export class ApplyModalComponent implements OnInit {
   public setupForm(): void {
     this.firstName = new TextBoxControl({
       key: 'firstName',
-      label: TranslateService.translate('FIRST_NAME'),
+      label: this.translate.instant('FIRST_NAME'),
       required: true,
       hidden: false,
       value: '',
     });
     this.lastName = new TextBoxControl({
       key: 'lastName',
-      label: TranslateService.translate('LAST_NAME'),
+      label: this.translate.instant('LAST_NAME'),
       required: true,
       hidden: false,
       value: '',
     });
     this.email = new TextBoxControl({
       key: 'email',
-      label: TranslateService.translate('EMAIL'),
+      label: this.translate.instant('EMAIL'),
       type: 'email',
       required: true,
       hidden: false,
@@ -85,7 +87,7 @@ export class ApplyModalComponent implements OnInit {
     });
     this.phoneNumber = new TextBoxControl({
       key: 'phone',
-      label: TranslateService.translate('PHONE'),
+      label: this.translate.instant('PHONE'),
       type: 'tel',
       required: false,
       hidden: false,
@@ -94,30 +96,30 @@ export class ApplyModalComponent implements OnInit {
     this.genderRaceEthnicity = [
       new SelectControl({
         key: 'gender',
-        label: TranslateService.translate('EEOC.GENDER_LABEL'),
+        label: this.translate.instant('EEOC.GENDER_LABEL'),
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         options: [
-          { value: 'M', label: TranslateService.translate('EEOC.GENDER_MALE') },
-          { value: 'F', label: TranslateService.translate('EEOC.GENDER_FEMALE')},
-          { value: 'D', label: TranslateService.translate('EEOC.GENDER_ND')},
+          { value: 'M', label: this.translate.instant('EEOC.GENDER_MALE') },
+          { value: 'F', label: this.translate.instant('EEOC.GENDER_FEMALE')},
+          { value: 'D', label: this.translate.instant('EEOC.GENDER_ND')},
         ],
       }), new PickerControl({
         key: 'ethnicity',
-        label: TranslateService.translate('EEOC.RACE_ETHNICITY_LABEL'),
+        label: this.translate.instant('EEOC.RACE_ETHNICITY_LABEL'),
         required: SettingsService.settings.eeoc.genderRaceEthnicity,
         hidden: false,
         multiple: true,
-        placeholder: TranslateService.translate('EEOC.SELECT_ALL'),
+        placeholder: this.translate.instant('EEOC.SELECT_ALL'),
         config: {
           options: [
-            { value: 'HL', label: TranslateService.translate('EEOC.RACE_ETHNICITY_HL') },
-            { value: 'WH', label: TranslateService.translate('EEOC.RACE_ETHNICITY_WH') },
-            { value: 'BL', label: TranslateService.translate('EEOC.RACE_ETHNICITY_BL') },
-            { value: 'AS', label: TranslateService.translate('EEOC.RACE_ETHNICITY_AS') },
-            { value: 'NP', label: TranslateService.translate('EEOC.RACE_ETHNICITY_NP') },
-            { value: 'IA', label: TranslateService.translate('EEOC.RACE_ETHNICITY_IA') },
-            { value: 'DN', label: TranslateService.translate('EEOC.RACE_ETHNICITY_DN') },
+            { value: 'HL', label: this.translate.instant('EEOC.RACE_ETHNICITY_HL') },
+            { value: 'WH', label: this.translate.instant('EEOC.RACE_ETHNICITY_WH') },
+            { value: 'BL', label: this.translate.instant('EEOC.RACE_ETHNICITY_BL') },
+            { value: 'AS', label: this.translate.instant('EEOC.RACE_ETHNICITY_AS') },
+            { value: 'NP', label: this.translate.instant('EEOC.RACE_ETHNICITY_NP') },
+            { value: 'IA', label: this.translate.instant('EEOC.RACE_ETHNICITY_IA') },
+            { value: 'DN', label: this.translate.instant('EEOC.RACE_ETHNICITY_DN') },
           ],
         },
       }),
@@ -125,29 +127,29 @@ export class ApplyModalComponent implements OnInit {
     this.veteran = [
       new SelectControl({
         key: 'veteran',
-        label: TranslateService.translate('EEOC.VETERAN_LABEL'),
-        description: TranslateService.translate('EEOC.VETERAN_DESCRIPTION'),
+        label: this.translate.instant('EEOC.VETERAN_LABEL'),
+        description: this.translate.instant('EEOC.VETERAN_DESCRIPTION'),
         required: SettingsService.settings.eeoc.veteran,
         hidden: false,
         options: [
-          { value: 'P', label: TranslateService.translate('EEOC.VETERAN_P') },
-          { value: 'V', label: TranslateService.translate('EEOC.VETERAN_V')},
-          { value: 'N', label: TranslateService.translate('EEOC.VETERAN_N')},
-          { value: 'D', label: TranslateService.translate('EEOC.VETERAN_D')},
+          { value: 'P', label: this.translate.instant('EEOC.VETERAN_P') },
+          { value: 'V', label: this.translate.instant('EEOC.VETERAN_V')},
+          { value: 'N', label: this.translate.instant('EEOC.VETERAN_N')},
+          { value: 'D', label: this.translate.instant('EEOC.VETERAN_D')},
         ],
       }),
     ];
     this.disability = [
       new SelectControl({
         key: 'disability',
-        label: TranslateService.translate('EEOC.DISABILITY_LABEL'),
-        description: TranslateService.translate('EEOC.DISABILITY_DESCRIPTION'),
+        label: this.translate.instant('EEOC.DISABILITY_LABEL'),
+        description: this.translate.instant('EEOC.DISABILITY_DESCRIPTION'),
         required: SettingsService.settings.eeoc.disability,
         hidden: false,
         options: [
-          { value: 'Y', label: TranslateService.translate('EEOC.DISABILITY_Y') },
-          { value: 'N', label: TranslateService.translate('EEOC.DISABILITY_N')},
-          { value: 'D', label: TranslateService.translate('EEOC.DISABILITY_D')},
+          { value: 'Y', label: this.translate.instant('EEOC.DISABILITY_Y') },
+          { value: 'N', label: this.translate.instant('EEOC.DISABILITY_N')},
+          { value: 'D', label: this.translate.instant('EEOC.DISABILITY_D')},
         ],
       }),
     ];
@@ -155,7 +157,7 @@ export class ApplyModalComponent implements OnInit {
       key: 'resume',
       required: true,
       hidden: false,
-      description: `${TranslateService.translate('ACCEPTED_RESUME')} ${SettingsService.settings.acceptedResumeTypes.toString()}`,
+      description: `${this.translate.instant('ACCEPTED_RESUME')} ${SettingsService.settings.acceptedResumeTypes.toString()}`,
     });
 
     this.formControls = [this.firstName, this.lastName, this.email, this.phoneNumber, this.resume];
@@ -242,8 +244,8 @@ export class ApplyModalComponent implements OnInit {
     let toastOptions: any = {
       theme: 'success',
       icon: 'check',
-      title: TranslateService.translate('THANK_YOU'),
-      message: TranslateService.translate('YOU_WILL_BE_CONTACTED'),
+      title: this.translate.instant('THANK_YOU'),
+      message: this.translate.instant('YOU_WILL_BE_CONTACTED'),
       position: 'growlTopRight',
       hideDelay: 3000,
     };
