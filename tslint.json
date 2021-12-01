@@ -23,6 +23,9 @@
     "curly": true,
     "eofline": true,
     "forin": false,
+    "deprecation": {
+      "severity": "warning"
+    },
     "indent": [
       true,
       "spaces"
@@ -118,8 +121,6 @@
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": false,
     "no-unused-expression": true,
-    "no-unused-variable": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [

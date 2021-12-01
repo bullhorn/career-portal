@@ -38,7 +38,7 @@ export class ApplyModalComponent implements OnInit {
   public resume: FileControl;
   public loading: boolean = true;
   public hasError: boolean = false;
-  public formControls: any[] = [this.firstName, this.lastName, this.email, this.phoneNumber];
+  public formControls: any[] = [];
   public eeocControls: any = [];
   public consentControl: any;
   public applying: boolean = false;

@@ -38,7 +38,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bullhorn-icons/fonts/Bullhorn-Glyphicons.css",
-              "node_modules/roboto-fontface/css/roboto/sass/roboto-fontface.scss"
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
             ],
             "scripts": []
           },
