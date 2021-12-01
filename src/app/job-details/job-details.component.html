@@ -2,7 +2,7 @@
 <app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
 <div class="background" *ngIf="!loading">
     <div class="job-container" [ngClass]="{'safari-scroll': isSafariAgent}">
-        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK' | translate }}</button>
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK'   | translate }}</button>
         <div class="job-header">
             <span class="job-title">{{ job.title }}</span>
             <br/>
@@ -20,19 +20,19 @@
                                 {{ job[chip?.field] || job[chip] }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'mediumDate'">
-                                {{ job[chip?.field] | date: 'mediumDate' }}
+                                {{ job[chip?.field ] | date: 'mediumDate' }}
                             </ng-container>
                             <ng-container  *ngSwitchCase="'dateTime'">
-                                {{ job[chip?.field] | date: 'medium' }}
+                                {{ job[chip?.field ] | date: 'medium' }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'USD'">
-                                {{ job[chip?.field] | currency: 'USD' }}
+                                {{ job[chip?.field ] | currency: 'USD' }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'GBP'">
-                                {{ job[chip?.field] | currency: 'GBP' }}
+                                {{ job[chip?.field ] | currency: 'GBP' }}
                             </ng-container>
                             <ng-container *ngSwitchCase="'EUR'">
-                                {{ job[chip?.field] | currency: 'EUR' }}
+                                {{ job[chip?.field ] | currency: 'EUR' }}
                             </ng-container>
                             <ng-container *ngSwitchDefault>
                                 {{ job[chip?.field] || job[chip] }}
@@ -43,13 +43,13 @@
         </div>
         <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
         <div class="share">
-            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">{{ 'APPLY_NOW' | translate }}</button>
-            <button theme="primary" *ngIf="alreadyApplied" disabled="true">{{ 'ALREADY_APPLIED' | translate }}</button>
+            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">{{ 'APPLY_NOW'   | translate }}</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true">{{ 'ALREADY_APPLIED'   | translate }}</button>
             <button theme="icon" icon="email" (click)="emailLink()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="linkedin" (click)="shareLinkedin()" *ngIf="showShareButtons"></button>
-            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">{{ 'SHARE_POST' | translate }}</button>
+            <button theme="dialogue" icon="share" (click)="toggleShareButtons()" *ngIf="!showShareButtons">{{ 'SHARE_POST'   | translate }}</button>
             <button theme="icon" icon="print" (click)="print()"></button>
         </div>
     </div>

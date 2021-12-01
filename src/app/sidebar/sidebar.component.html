@@ -7,13 +7,13 @@
 <novo-loading *ngIf="loading"></novo-loading>
 <ng-container *ngIf="!loading">
   <div class="filters">
-    <app-sidebar-filter field="publishedCategory(id,name)" title="{{ 'CATEGORY' | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" ></app-sidebar-filter>
-    <app-sidebar-filter field="address(state)" title="{{ 'STATE' | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(state)', $event)"></app-sidebar-filter>
-    <app-sidebar-filter field="address(city)" title="{{ 'CITY' | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(city)', $event)"></app-sidebar-filter>
+    <app-sidebar-filter field="publishedCategory(id,name)" title="{{ 'CATEGORY'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" ></app-sidebar-filter>
+    <app-sidebar-filter field="address(state)" title="{{ 'STATE'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(state)', $event)"></app-sidebar-filter>
+    <app-sidebar-filter field="address(city)" title="{{ 'CITY'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(city)', $event)"></app-sidebar-filter>
   </div>
 </ng-container>
 
-<a *ngIf="showPrivacyPolicy" (click)="viewPrivacyPolicy()" class="privacy-policy-link">{{ 'PRIVACY_POLICY' | translate }}</a>
+<a *ngIf="showPrivacyPolicy" (click)="viewPrivacyPolicy()" class="privacy-policy-link">{{ 'PRIVACY_POLICY'   | translate }}</a>
 
 <section class="credits">
     <span class="powered-by">Powered By</span>

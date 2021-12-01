@@ -1,7 +1,7 @@
 <novo-loading *ngIf="loading && !error"></novo-loading>
 <div class="error-state" *ngIf="error">
   <i class="bhi-caution"></i>
-  <span>{{ 'ERROR_HAS_OCCURED' | translate }}</span>
+  <span>{{ 'ERROR_HAS_OCCURED'   | translate }}</span>
 </div>
 <div class="frame" [ngStyle]="{display: loading || error ? 'none': 'flex'}">
     <app-sidebar (newFilter)="onSidebarFilter($event)" [display]="displaySidebar" (toggleSidebar)="toggleSidebar($event)" [ngStyle]="sidebarCss"></app-sidebar>

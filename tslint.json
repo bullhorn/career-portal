@@ -212,7 +212,7 @@
       "camelCase"
     ],
     "angular-whitespace": [
-      true, "check-interpolation", "check-pipe"
+      true, "check-interpolation"
     ],
     "template-banana-in-box": true,
     "template-no-negated-async": true
