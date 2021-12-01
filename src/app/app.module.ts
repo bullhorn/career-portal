@@ -19,7 +19,6 @@ import { NovoListModule, NovoElementsModule, NovoHeaderModule, NovoModalModule, 
 import { MainPageComponent } from './main-page/main-page.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
 import { ApplyModalComponent } from './apply-modal/apply-modal.component';
-import { ClipboardModule } from 'ngx-clipboard';
 import { ErrorModalComponent } from './error-modal/error-modal.component';
 import { StripHtmlPipe } from './utils/stripHtml.pipe';
 import { StructuredSeoComponent } from './structured-seo/structured-seo.component';
@@ -66,7 +65,6 @@ export function initSettings(settings: SettingsService): any {
     NovoHeaderModule,
     BrowserTransferStateModule,
     NovoModalModule,
-    ClipboardModule,
     FormsModule,
     ChomskyModule,
     RouterModule.forRoot(
