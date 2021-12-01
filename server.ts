@@ -13,6 +13,7 @@ import { readFileSync, writeFile } from 'fs';
 import * as path from 'path';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
 import { generateSitemap, generateRss } from './generateXml';
+import { ISettings } from 'src/app/typings/settings';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -24,7 +25,7 @@ const PORT: string | number = process.env.PORT || 4000;
 const DIST_FOLDER: string = join(process.cwd(), 'dist/browser');
 const template: any = readFileSync(path.join(join(DIST_FOLDER, 'index.html'))).toString();
 const win: Window = createWindow(template);
-global['window'] = win;
+(<any> global['window']) = win;
 global['document'] = win.document;
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack

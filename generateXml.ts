@@ -2,6 +2,7 @@ import { get } from 'https';
 import { IncomingMessage } from 'http';
 import { JobBoardPost } from '@bullhorn/bullhorn-types';
 import * as jsonxml from 'jsontoxml';
+import { ISettings } from 'src/app/typings/settings';
 
 export function generateSitemap(appConfig: ISettings, res: any, req: any): any {
   let sitemapUrls: { name: 'url', children: [{ name: 'loc', text: string }, { name: 'lastmod', text: string }] }[] = [];
