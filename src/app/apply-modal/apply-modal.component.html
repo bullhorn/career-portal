@@ -16,7 +16,7 @@
             <novo-control [form]="form" [control]="control"></novo-control>
           </div>
           <div class="eeoc-form" *ngIf="eeocControls.length">
-            <novo-fieldset-header title="{{ 'EEOC.EEOC_FORM_DESCRIPTION' | translate }}"></novo-fieldset-header>
+            <novo-fieldset-header [title]="{{ 'EEOC.EEOC_FORM_DESCRIPTION' | translate }}"></novo-fieldset-header>
             <div *ngFor="let control of eeocControls" class="novo-form-row">
               <novo-control [form]="form" [control]="control"></novo-control>
             </div>
