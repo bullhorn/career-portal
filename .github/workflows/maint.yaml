@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [14.15.1]
     steps:
       - uses: actions/checkout@v1
       - name: Cache node modules
