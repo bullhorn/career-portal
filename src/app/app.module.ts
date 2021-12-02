@@ -70,7 +70,7 @@ export function initSettings(settings: SettingsService): any {
       loader: {
         provide: TranslateLoader,
         useClass: TranslationLoader,
-      }
+      },
     }),
     RouterModule.forRoot(
       appRoutes,

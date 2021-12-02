@@ -12,7 +12,7 @@ import { DatePipe, DOCUMENT } from '@angular/common';
 export class StructuredSeoComponent implements OnChanges {
   @Input() public jobData: JobBoardPost;
   @HostBinding('innerHTML') public html: SafeHtml;
-  constructor(private _renderer2: Renderer2, @Inject(DOCUMENT) private _document: Document, private datePipe: DatePipe) { }
+  constructor(private _renderer2: Renderer2, private datePipe: DatePipe) { }
 
   public ngOnChanges(): void {
     let jsonObject: object = {
@@ -49,7 +49,6 @@ export class StructuredSeoComponent implements OnChanges {
     s.type = `application/ld+json`;
     s.text = JSON.stringify(jsonObject);
     if (SettingsService.isServer) {
-      this._renderer2.appendChild(this._document.body, s);
     }
   }
 
