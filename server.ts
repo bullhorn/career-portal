@@ -2,12 +2,35 @@ import 'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, writeFile } from 'fs';
 import { createWindow } from 'domino';
+import { ISettings } from './src/app/typings/settings';
+import { generateRss, generateSitemap } from './generateXml';
+
+const DIST_FOLDER: string = join(process.cwd(), 'dist/browser');
+let appConfig: ISettings = JSON.parse(readFileSync(join(DIST_FOLDER, 'app.json')).toString());
+
+if (process.env.COMPANY_NAME) {
+  appConfig.service.swimlane = process.env.BULLHORN_SWIMLANE;
+  appConfig.service.corpToken = process.env.BULLHORN_CORP_TOKEN;
+  appConfig.careersUrl = process.env.HOSTED_ENDPOINT;
+  appConfig.companyName = process.env.COMPANY_NAME;
+  appConfig.companyUrl = process.env.COMPANY_WEBSITE;
+  appConfig.companyLogoPath = process.env.COMPANY_LOGO_URL;
+  appConfig.integrations.googleAnalytics.trackingId = process.env.GOOGLE_ANALYTICS_TRACKING_ID;
+  appConfig.integrations.googleSiteVerification.verificationCode = process.env.GOOGLE_VERIFICATION_CODE;
+
+  writeFile(resolve(DIST_FOLDER, 'app.json'), JSON.stringify(appConfig), (err: any) => {
+    if (err) {
+      // tslint:disable-next-line: no-console
+      console.error('Failed to write config file:', err.message);
+    }
+  });
+}
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -34,6 +57,18 @@ export function app(): express.Express {
     maxAge: '1y',
   }));
 
+  server.get('/sitemap', (req: any, res: any) => {
+    res.type('application/xml');
+    res.contentType('application/xml');
+    generateSitemap(appConfig, res, req);
+  });
+
+  server.get('/feed', (req: any, res: any) => {
+    res.type('application/xml');
+    res.contentType('application/xml');
+    generateRss(appConfig, res, req);
+  });
+
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
@@ -48,6 +83,7 @@ function run(): void {
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
+    // tslint:disable-next-line: no-console
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }

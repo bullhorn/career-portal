@@ -24,7 +24,7 @@ export class SettingsService {
     SettingsService.isServer = isPlatformServer(platformId);
   }
 
-  public async load(): Promise<any> {
+  public async load(): Promise<void> {
     let data: any | ISettings;
     if (SettingsService.isServer) {
       const assetsFolder: string = join(
@@ -38,7 +38,7 @@ export class SettingsService {
     } else {
       data = await this.http.get(APP_CONFIG_URL).toPromise();
     }
-    return this.setConfig(data);
+    await this.setConfig(data);
   }
 
   public async setConfig(data: ISettings): Promise<any> {

@@ -107,6 +107,21 @@
                   "with": "src/app.json.template"
                 }
               ]
+            },
+            "dynamicDev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "baseHref": "/",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
             }
           }
         },
@@ -172,6 +187,10 @@
           "configurations": {
             "production": {
               "browserTarget": "career-portal:build:production",
+              "serverTarget": "career-portal:server:production"
+            },
+            "dynamic": {
+              "browserTarget": "career-portal:build:dynamicDev",
               "serverTarget": "career-portal:server:production"
             }
           }

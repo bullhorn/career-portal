@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslationLoader } from './services/localization/loader';
+import { from } from 'rxjs';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
   { path: 'privacy', component: PrivacyPolicyComponent },
 ];
 
-export function initSettings(settings: SettingsService): any {
+export function initSettings(settings: SettingsService): () => Promise<void> {
   return () => settings.load();
 }
 
@@ -74,7 +75,11 @@ export function initSettings(settings: SettingsService): any {
     }),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, useHash: environment.useHash, initialNavigation: 'enabled' },
+      {
+        enableTracing: false,
+        useHash: environment.useHash,
+        initialNavigation: 'legacy_enabled',
+      },
     ),
   ],
   providers: [

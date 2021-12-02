@@ -12,7 +12,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev:ssr": "ng run career-portal:serve-ssr",
+    "dev:ssr": "ng run career-portal:serve-ssr --configuration=dynamic",
     "serve:ssr": "node dist/career-portal/server/main.js",
     "build:ssr": "ng build --configuration=dynamic && ng run career-portal:server:production",
     "prerender": "ng run career-portal:prerender"

@@ -10,11 +10,11 @@ export class SearchService {
   public constructor(private http: HttpClient, public settings: SettingsService) {  }
 
   get baseUrl(): string {
-    let service: IServiceSettings = SettingsService.settings.service;
-    let port: number = service.port ? service.port : 443;
+    let service: IServiceSettings = SettingsService.settings?.service;
+    let port: number = service?.port ? service.port : 443;
     let scheme: string = `http${ port === 443  ? 's' : '' }`;
 
-    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}`;
+    return `${scheme}://public-rest${service?.swimlane}.bullhornstaffing.com:${port}/rest-services/${service?.corpToken}`;
   }
 
   public getjobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
