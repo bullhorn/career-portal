@@ -74,8 +74,8 @@ export function initSettings(settings: SettingsService): any {
     }),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, useHash: environment.useHash },
-  ),
+      { enableTracing: false, useHash: environment.useHash, initialNavigation: 'enabled' },
+    ),
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initSettings, deps: [SettingsService], multi: true },

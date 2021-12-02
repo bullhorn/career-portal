@@ -13,6 +13,7 @@ export class AppInterceptor implements HttpInterceptor {
     let serverReq: HttpRequest<any> = req;
     let port: string = '80';
     let host: string = 'localhost';
+    console.log('heya');
     if (this.request && req.url.includes('app.json')) {
       if (SettingsService.isServer && this.request.headers.host.indexOf(':') !== -1 ) {
         port = this.request.headers.host.split(':')[1];
@@ -30,8 +31,9 @@ export class AppInterceptor implements HttpInterceptor {
       SettingsService.urlRoot = newUrl;
       newUrl += 'app.json';
       serverReq = req.clone({ url: newUrl });
+      console.log('heya2');
     }
-
+    console.log('heya3');
     return next.handle(serverReq);
   }
 }

@@ -6,6 +6,8 @@ import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { ISettings } from '../../typings/settings';
 import { TranslateService } from '@ngx-translate/core';
 import { Request } from 'express';
+import * as fs from 'fs';
+import { join } from 'path';
 
 const APP_CONFIG_URL: any = './app.json';
 const LANGUAGE_KEY: any = makeStateKey<string>('language');
@@ -23,7 +25,19 @@ export class SettingsService {
   }
 
   public async load(): Promise<any> {
-    let data: any | ISettings = await this.http.get(APP_CONFIG_URL).toPromise();
+    let data: any | ISettings;
+    if (SettingsService.isServer) {
+      const assetsFolder: string = join(
+        process.cwd(),
+        'dist',
+        'career-portal',
+        'browser',
+      );
+
+      data = JSON.parse(fs.readFileSync(`${assetsFolder}/app.json`, 'utf8'));
+    } else {
+      data = await this.http.get(APP_CONFIG_URL).toPromise();
+    }
     return this.setConfig(data);
   }
 
