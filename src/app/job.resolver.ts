@@ -15,7 +15,6 @@ export class JobResolver implements Resolve<any> {
 
   public async resolve(route: ActivatedRouteSnapshot): Promise<any> {
 
-    console.log('server whatup');
     if (!SettingsService.loaded) {
       await this.settingsService.load();
     }
