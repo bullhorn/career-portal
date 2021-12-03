@@ -2,7 +2,7 @@ import { Injectable, Inject, PLATFORM_ID, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
+import { TransferState, makeStateKey, StateKey } from '@angular/platform-browser';
 import { ISettings } from '../../typings/settings';
 import { TranslateService } from '@ngx-translate/core';
 import { Request } from 'express';
@@ -19,6 +19,7 @@ export class SettingsService {
   public static isServer: boolean;
   public static isIos: boolean;
   public static urlRoot: string;
+  public static loaded: boolean = false;
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) platformId: string, @Optional() @Inject(REQUEST) protected request: Request, private transferState: TransferState, private translate: TranslateService) {
     SettingsService.isServer = isPlatformServer(platformId);
@@ -26,6 +27,7 @@ export class SettingsService {
 
   public async load(): Promise<void> {
     let data: any | ISettings;
+    const configKey: StateKey<number> = makeStateKey<number>('app-config');
     if (SettingsService.isServer) {
       const assetsFolder: string = join(
         process.cwd(),
@@ -34,11 +36,17 @@ export class SettingsService {
         'browser',
       );
 
-      data = JSON.parse(fs.readFileSync(`${assetsFolder}/app.json`, 'utf8'));
+      data = JSON.parse(fs.readFileSync(join(assetsFolder, 'app.json'), 'utf8'));
+      this.transferState.set(configKey, data);
     } else {
-      data = await this.http.get(APP_CONFIG_URL).toPromise();
+      data = this.transferState.get(configKey, null);
+      if (data) {
+        data = await this.http.get(APP_CONFIG_URL).toPromise();
+      }
+      this.http.get(APP_CONFIG_URL).toPromise();  // Always retrieve in console for support folks
     }
     await this.setConfig(data);
+    SettingsService.loaded = true;
   }
 
   public async setConfig(data: ISettings): Promise<any> {

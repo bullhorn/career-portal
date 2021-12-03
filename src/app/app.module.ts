@@ -78,7 +78,7 @@ export function initSettings(settings: SettingsService): () => Promise<void> {
       {
         enableTracing: false,
         useHash: environment.useHash,
-        initialNavigation: 'legacy_enabled',
+        initialNavigation: 'enabled',
       },
     ),
   ],

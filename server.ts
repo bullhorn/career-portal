@@ -11,7 +11,7 @@ import { createWindow } from 'domino';
 import { ISettings } from './src/app/typings/settings';
 import { generateRss, generateSitemap } from './generateXml';
 
-const DIST_FOLDER: string = join(process.cwd(), 'dist/browser');
+const DIST_FOLDER: string = join(process.cwd(), 'dist/career-portal/browser');
 let appConfig: ISettings = JSON.parse(readFileSync(join(DIST_FOLDER, 'app.json')).toString());
 
 if (process.env.COMPANY_NAME) {
