@@ -31,7 +31,7 @@ export class ServerResponseService {
       const current: string = this.getHeader(key);
       if (!current) {
         return this.setHeader(key, value);
-      } 
+      }
 
       const newValue: any = [...current.split(delimiter), value]
         .filter((el: any, i: any, a: any) => i === a.indexOf(el))
@@ -61,6 +61,7 @@ export class ServerResponseService {
 
   public setNotFound(message: string = 'not found'): this {
     if (SettingsService.isServer) {
+      console.log('really testing now');
       this.response.status(404);
       this.response.statusMessage = message;
     }

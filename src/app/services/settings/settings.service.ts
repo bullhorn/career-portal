@@ -40,7 +40,7 @@ export class SettingsService {
       this.transferState.set(configKey, data);
     } else {
       data = this.transferState.get(configKey, null);
-      if (data) {
+      if (!data) {
         data = await this.http.get(APP_CONFIG_URL).toPromise();
       }
       this.http.get(APP_CONFIG_URL).toPromise();  // Always retrieve in console for support folks
