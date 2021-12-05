@@ -78,7 +78,6 @@
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "protractor": "~7.0.0",
     "ts-loader": "^5.2.0",
     "ts-node": "~4.1.0",
     "tslint": "~6.1.0",
