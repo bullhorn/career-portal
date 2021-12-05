@@ -61,7 +61,6 @@ export class ServerResponseService {
 
   public setNotFound(message: string = 'not found'): this {
     if (SettingsService.isServer) {
-      console.log('really testing now');
       this.response.status(404);
       this.response.statusMessage = message;
     }
