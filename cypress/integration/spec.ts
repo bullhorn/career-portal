@@ -10,9 +10,11 @@ describe('Job List', () => {
     cy.get('app-sidebar [data-automation-id="category"] novo-check-list>div.check-box-group').each(($el, index, $list)=>{
       if (index < 10) {
         const automationId = $el.attr('data-automation-id');
-        expect(!!automationId).eq(true, 'empty category in list');
+        expect(!!automationId).eq(true, 'empty category in list')      ;
+        $
         $el.trigger('click');
-        
+      } else {
+        return false;
       }
     })
   })
