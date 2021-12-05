@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "serve:ssr",
+    "start": "node dist/career-portal/server/main.js",
     "serve": "ng serve --configuration=static",
     "build": "npm run build:ssr",
     "build:static": "ng build --configuration=static --aot --build-optimizer",
