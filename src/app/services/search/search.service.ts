@@ -10,11 +10,11 @@ export class SearchService {
   public constructor(private http: HttpClient, public settings: SettingsService) {  }
 
   get baseUrl(): string {
-    let service: IServiceSettings = SettingsService.settings.service;
-    let port: number = service.port ? service.port : 443;
+    let service: IServiceSettings = SettingsService.settings?.service;
+    let port: number = service?.port ? service.port : 443;
     let scheme: string = `http${ port === 443  ? 's' : '' }`;
 
-    return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}`;
+    return `${scheme}://public-rest${service?.swimlane}.bullhornstaffing.com:${port}/rest-services/${service?.corpToken}`;
   }
 
   public getjobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
@@ -34,7 +34,7 @@ export class SearchService {
   }
 
   public openJob(id: string | number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${id})&fields=${SettingsService.settings.service.fields}`);
+    return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${id})&fields=${SettingsService.settings?.service?.fields}`);
   }
 
   public getCurrentJobIds(filter: any, ignoreFields: string[]): Observable<any> {

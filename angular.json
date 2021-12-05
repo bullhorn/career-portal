@@ -12,7 +12,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "dist/browser",
+            "outputPath": "dist/career-portal/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -107,6 +107,21 @@
                   "with": "src/app.json.template"
                 }
               ]
+            },
+            "dynamicDev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "baseHref": "/",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
             }
           }
         },
@@ -155,38 +170,59 @@
           "options": {
             "tsConfig": [
               "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "src/tsconfig.spec.json",
+              "src/tsconfig.server.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
         },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "career-portal:build",
+            "serverTarget": "career-portal:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "career-portal:build:production",
+              "serverTarget": "career-portal:server:production"
+            },
+            "dynamic": {
+              "browserTarget": "career-portal:build:dynamicDev",
+              "serverTarget": "career-portal:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "career-portal:build:production",
+            "serverTarget": "career-portal:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/server",
-            "main": "src/main.server.ts",
+            "outputPath": "dist/career-portal/server",
+            "main": "server.ts",
             "tsConfig": "src/tsconfig.server.json"
           },
           "configurations": {
-            "static": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.static.ts"
-                }
-              ],
-              "optimization": true
-            },
-            "dynamic": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dynamic.ts"
-                }
-              ],
-              "optimization": true
+            "production": {
+              "sourceMap": false,
+              "optimization": true,
+              "fileReplacements": [ {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.dynamic.ts"
+              }]
             }
           }
         }

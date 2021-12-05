@@ -1,4 +1,3 @@
-@import "~novo-elements/styles/global/variables";
 
 .frame {
   display: flex;
@@ -43,7 +42,7 @@ div.error-state {
     font-size: 6em;
     margin-bottom: .3em;
     &.bhi-caution {
-      color: $negative;
+      color: #DA4453;
     }
   }
   span {

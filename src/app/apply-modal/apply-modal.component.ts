@@ -54,7 +54,7 @@ export class ApplyModalComponent implements OnInit {
               private analytics: AnalyticsService,
               private toaster: NovoToastService,
               private router: Router,
-              private translate: TranslateService
+              private translate: TranslateService,
                ) { this.toaster.parentViewContainer = this.params['viewContainer']; }
 
   public ngOnInit(): void {

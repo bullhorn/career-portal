@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { JobListComponent } from './job-list/job-list.component';
 import { SettingsService } from './services/settings/settings.service';
@@ -23,19 +22,12 @@ import { StructuredSeoComponent } from './structured-seo/structured-seo.componen
 import { DatePipe } from '@angular/common';
 import { JobResolver } from './job.resolver';
 import { ServerResponseService } from './services/server-response/server-response.service';
-import { environment } from '../environments/environment';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslationLoader } from './services/localization/loader';
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'jobs/:id', component: JobDetailsComponent, resolve: { message: JobResolver } },
-  { path: 'jobs', component: MainPageComponent },
-  { path: 'privacy', component: PrivacyPolicyComponent },
-];
-
-export function initSettings(settings: SettingsService): any {
+export function initSettings(settings: SettingsService): () => Promise<void> {
   return () => settings.load();
 }
 
@@ -59,6 +51,7 @@ export function initSettings(settings: SettingsService): any {
    ],
    imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    AppRoutingModule,
     HttpClientModule,
     NovoElementsModule,
     NovoListModule,
@@ -70,12 +63,8 @@ export function initSettings(settings: SettingsService): any {
       loader: {
         provide: TranslateLoader,
         useClass: TranslationLoader,
-      }
+      },
     }),
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false, useHash: environment.useHash },
-  ),
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initSettings, deps: [SettingsService], multi: true },

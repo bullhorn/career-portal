@@ -1,25 +1,21 @@
-import { NgModule } from '@angular/core';
-import { ServerModule } from '@angular/platform-server';
-import { ServerTransferStateModule } from '@angular/platform-server';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
 
-import { AppModule } from './app.module';
+import { AppModule, initSettings } from './app.module';
 import { AppComponent } from './app.component';
-import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppInterceptor } from './app.interceptor';
+import { ServerTranslationLoader } from './services/localization/server-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TransferState } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
-    ModuleMapLoaderModule,
     ServerTransferStateModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AppInterceptor,
-    multi: true,
-  }],
   bootstrap: [AppComponent],
+  providers: [
+    { provide: TranslateLoader, useClass: ServerTranslationLoader, deps: [TransferState]},
+  ],
 })
 export class AppServerModule {}

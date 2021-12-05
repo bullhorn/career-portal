@@ -31,7 +31,7 @@ export class ServerResponseService {
       const current: string = this.getHeader(key);
       if (!current) {
         return this.setHeader(key, value);
-      } 
+      }
 
       const newValue: any = [...current.split(delimiter), value]
         .filter((el: any, i: any, a: any) => i === a.indexOf(el))

@@ -10,19 +10,19 @@ if (environment.production) {
 
 document.addEventListener('DOMContentLoaded', () => {
   platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(
-    (err: any) => {
-      console.log(err); // tslint:disable-line
-      const errorMsgElement: any = document.querySelector('novo-loading');
-      let message: string = 'Application initialization failed, please check your app.json file';
-      if (err) {
-          if (err.message) {
-              message = message + ': ' + err.message;
-          } else {
-              message = message + ': ' + err;
-          }
-      }
-      errorMsgElement.textContent = message;
-    },
-    );
+.catch(
+ (err: any) => {
+   console.log(err); // tslint:disable-line
+   const errorMsgElement: any = document.querySelector('novo-loading');
+   let message: string = 'Application initialization failed, please check your app.json file';
+   if (err) {
+       if (err.message) {
+           message = message + ': ' + err.message;
+       } else {
+           message = message + ': ' + err;
+       }
+   }
+   errorMsgElement.textContent = message;
+ },
+ );
 });
