@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/server",
+    "start": "serve:ssr",
     "serve": "ng serve --configuration=static",
     "build": "npm run build:ssr",
     "build:static": "ng build --configuration=static --aot --build-optimizer",

@@ -5,5 +5,5 @@
 
 export const environment: any = {
   production: false,
-  useHash: false,
+  useHash: true,
 };
