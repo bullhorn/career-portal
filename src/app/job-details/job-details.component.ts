@@ -25,7 +25,6 @@ export class JobDetailsComponent implements OnInit {
   public relatedJobs: any;
   public showShareButtons: boolean = false;
   public alreadyApplied: boolean = false;
-  public jobInfoChips: [string|any] = SettingsService.settings.service.jobInfoChips;
   public showCategory: boolean  = SettingsService.settings.service.showCategory;
   public isSafariAgent: boolean = false;
   private APPLIED_JOBS_KEY: string = 'APPLIED_JOBS_KEY';

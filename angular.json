@@ -171,7 +171,8 @@
             "tsConfig": [
               "src/tsconfig.app.json",
               "src/tsconfig.spec.json",
-              "src/tsconfig.server.json"
+              "src/tsconfig.server.json",
+              "cypress/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -219,16 +220,48 @@
             "production": {
               "sourceMap": false,
               "optimization": true,
-              "fileReplacements": [ {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.dynamic.ts"
-              }]
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dynamic.ts"
+                }
+              ]
+            }
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "career-portal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "career-portal:serve:static"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "career-portal:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "career-portal:serve:production"
             }
           }
         }
       }
-    },
-
+    }
   },
   "defaultProject": "career-portal",
   "schematics": {
