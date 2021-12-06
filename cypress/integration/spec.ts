@@ -3,7 +3,7 @@ describe('Job List', () => {
     cy.visit('/');
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
-    })
+    });
   })
   it('Filter Categories', () => {
     cy.intercept({
@@ -49,18 +49,18 @@ describe('Job List', () => {
       } else {
         return false;
       }
-    })
+    });
   })
   it('Filter States', () => {
     cy.visit('/');
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
-    })
+    });
   })
   it('Filter Cities', () => {
     cy.visit('/');
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
-    })
+    });
   })
 })
