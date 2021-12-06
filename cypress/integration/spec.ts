@@ -4,7 +4,7 @@ describe('Job List', () => {
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     });
-  })
+  });
   it('Filter Categories', () => {
     cy.intercept({
       hostname: 'public-rest91.bullhornstaffing.com',
@@ -13,8 +13,8 @@ describe('Job List', () => {
       query: {
         fields: 'publishedCategory(id,name),count(id)',
         orderBy: 'publishedCategory.name',
-        count: '500'
-      }
+        count: '500',
+      },
     }).as('getCategories');
     cy.visit('/');
     cy.wait('@getCategories', {timeout: 30000});
@@ -31,7 +31,7 @@ describe('Job List', () => {
           query: {
             fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
             count: '30',
-          }
+          },
         }).as('getJobs');
 
         cy.get(`[data-automation-id="${automationId}"]`).first().click();
@@ -50,17 +50,17 @@ describe('Job List', () => {
         return false;
       }
     });
-  })
+  });
   it('Filter States', () => {
     cy.visit('/');
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     });
-  })
+  });
   it('Filter Cities', () => {
     cy.visit('/');
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     });
-  })
-})
+  });
+});
