@@ -1,0 +1,18 @@
+on:
+  push:
+  schedule:
+    - cron:  '30 5,17 * * *'
+name: Test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.15.1]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run tests
+        uses: cypress-io/github-action@v1
+        with:
+          command: npm run e2e:ci
