@@ -1,7 +1,7 @@
 describe('Job List', () => {
   it('Visits the initial project page', () => {
-    cy.visit('/')
-    cy.get('novo-list>div.job-card').each(($el, index, $list)=>{
+    cy.visit('/');
+    cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     })
   })
@@ -19,7 +19,7 @@ describe('Job List', () => {
     cy.visit('/');
     cy.wait('@getCategories', {timeout: 30000});
 
-    cy.get('app-sidebar [data-automation-id="category"] novo-check-list>div.check-box-group').each(($el, index, $list)=>{
+    cy.get('app-sidebar [data-automation-id="category"] novo-check-list>div.check-box-group').each(($el, index, $list) => {
       if (index < 10) {
         const automationId = $el.attr('data-automation-id');
         expect(!!automationId).eq(true, 'empty category in list of categories');
@@ -37,11 +37,11 @@ describe('Job List', () => {
         cy.get(`[data-automation-id="${automationId}"]`).first().click();
         cy.wait('@getCategories', {timeout: 30000});
         cy.wait('@getJobs', {timeout: 30000});
-        cy.get('novo-list>div.job-card').each(($el, index, $list)=>{
+        cy.get('novo-list>div.job-card').each(($jobEl, jobIndex, $jobList) => {
           const categoryCountRegex = /\(([^)]+)\)/;
           const count = parseInt(categoryCountRegex.exec(automationId)[1]);
-          expect($list.length, 'The correct number of results for the specified category is not showing').equals(count);
-          cy.get('span.category').should('include.text', automationId.replace(` (${count})`, ''))
+          expect($jobList.length, 'The correct number of results for the specified category is not showing').equals(count);
+          cy.get('span.category').should('include.text', automationId.replace(` (${count})`, ''));
         });
         cy.get('.bhi-checkbox-filled').click();
         cy.wait('@getCategories', {timeout: 30000});
@@ -52,14 +52,14 @@ describe('Job List', () => {
     })
   })
   it('Filter States', () => {
-    cy.visit('/')
-    cy.get('novo-list>div.job-card').each(($el, index, $list)=>{
+    cy.visit('/');
+    cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     })
   })
   it('Filter Cities', () => {
-    cy.visit('/')
-    cy.get('novo-list>div.job-card').each(($el, index, $list)=>{
+    cy.visit('/');
+    cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     })
   })
