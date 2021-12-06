@@ -1,6 +1,6 @@
 describe('Job Detail', () => {
   it('Should be able to open the apply modal and apply to the job', () => {
-    cy.clearCookies()
+    cy.clearCookies();
     cy.visit('/');
     let jobInformation;
     cy.intercept({
@@ -9,7 +9,7 @@ describe('Job Detail', () => {
       pathname: '/rest-services/1VCNF4/query/JobBoardPost',
       query: {
         fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
-        where: '*id=*'
+        where: '*id=*',
       },
     }).as('jobResponse');
     cy.get('novo-list>div.job-card').first().click();
