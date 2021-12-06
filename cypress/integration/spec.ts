@@ -41,6 +41,7 @@ describe('Job List', () => {
           const categoryCountRegex = /\(([^)]+)\)/;
           const count = parseInt(categoryCountRegex.exec(automationId)[1]);
           expect($list.length, 'The correct number of results for the specified category is not showing').equals(count);
+          cy.get('span.category').should('include.text', automationId.replace(` (${count})`, ''))
         });
         cy.get('.bhi-checkbox-filled').click();
         cy.wait('@getCategories', {timeout: 30000});
