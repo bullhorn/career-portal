@@ -4,7 +4,7 @@ on:
     - cron:  '30 5,17 * * *'
 name: Test
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:

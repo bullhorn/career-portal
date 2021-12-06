@@ -11,7 +11,7 @@ describe('InfoChipsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoChipsComponent ]
+      declarations: [ InfoChipsComponent ],
     })
     .compileComponents();
   }));
