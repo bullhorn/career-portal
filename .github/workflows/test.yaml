@@ -13,6 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run tests
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         with:
-          command: npm run e2e:ci
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 120
