@@ -45,7 +45,7 @@ describe('Job List', () => {
         });
         cy.get('.bhi-checkbox-filled').click();
         cy.wait('@getCategories', {timeout: 30000});
-        cy.wait(3000);
+        cy.wait(1000);
       } else {
         return false;
       }
@@ -62,5 +62,10 @@ describe('Job List', () => {
     cy.get('novo-list>div.job-card').each(($el, index, $list) => {
       expect($list.length).greaterThan(5);
     });
+  });
+  it('Clicking a job should open it', () => {
+    cy.visit('/');
+    cy.get('novo-list>div.job-card').first().click();
+    cy.url().should('include', '/jobs/');
   });
 });

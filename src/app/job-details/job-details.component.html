@@ -2,7 +2,7 @@
 <app-structured-seo *ngIf="!loading" [jobData]="job"></app-structured-seo>
 <div class="background" *ngIf="!loading">
     <div class="job-container" [ngClass]="{'safari-scroll': isSafariAgent}">
-        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left">{{ 'BACK'   | translate }}</button>
+        <button theme="dialogue" (click)="goToJobList()" icon="previous" side="left" data-automation-id="back-button">{{ 'BACK'   | translate }}</button>
         <div class="job-header">
             <span class="job-title">{{ job.title }}</span>
             <br/>
@@ -15,8 +15,8 @@
         </div>
         <div class="job-description-text" [innerHTML]="job.publicDescription"></div>
         <div class="share">
-            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()">{{ 'APPLY_NOW'   | translate }}</button>
-            <button theme="primary" *ngIf="alreadyApplied" disabled="true">{{ 'ALREADY_APPLIED'   | translate }}</button>
+            <button theme="primary" *ngIf="!alreadyApplied" (click)="apply()" data-automation-id="apply-button">{{ 'APPLY_NOW'   | translate }}</button>
+            <button theme="primary" *ngIf="alreadyApplied" disabled="true" data-automation-id="applied-button">{{ 'ALREADY_APPLIED'   | translate }}</button>
             <button theme="icon" icon="email" (click)="emailLink()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="twitter" (click)="shareTwitter()" *ngIf="showShareButtons"></button>
             <button theme="icon" icon="facebook" (click)="shareFacebook()" *ngIf="showShareButtons"></button>
