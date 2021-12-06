@@ -1,9 +1,9 @@
-<span class="chip" *ngIf="job.address.city || job.address.state">
+<span class="chip" *ngIf="job.address.city || job.address.state" data-automation-id="chip-address">
   <i class="bhi-location"></i>
   {{ job.address.city }}<span *ngIf="job.address?.city && job.address?.state">,&nbsp;</span>{{ job.address.state }}
 </span>
 <ng-container *ngFor="let chip of jobInfoChips" [ngSwitch]="chip.type || 'string'">
-  <span class="chip" *ngIf="job[chip] || job[chip?.field]">
+  <span class="chip" *ngIf="job[chip] || job[chip?.field]" [attr.data-automation-id]="'chip-' + chip?.field || chip">
       <ng-container *ngSwitchCase="'string'">
           {{ job[chip?.field] || job[chip] }}
       </ng-container>
