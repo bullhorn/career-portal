@@ -79,6 +79,11 @@
                   "input": "src/configuration/static",
                   "output": "/",
                   "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
                 }
               ],
               "fileReplacements": [
@@ -115,6 +120,11 @@
                   "input": "src/configuration/qa",
                   "output": "/",
                   "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
                 }
               ],
               "fileReplacements": [
@@ -151,6 +161,11 @@
                   "input": "src/configuration/dynamic",
                   "output": "/",
                   "glob": "app.json"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/static/i18n/",
+                  "output": "/i18n/"
                 }
               ],
               "fileReplacements": [
