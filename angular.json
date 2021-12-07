@@ -243,8 +243,6 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "watch": true,
-            "headless": false,
             "devServerTarget": "career-portal:serve"
           },
           "configurations": {
