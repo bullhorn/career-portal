@@ -62,8 +62,27 @@ describe('Job List', () => {
     });
   });
   it('Clicking a job should open it', () => {
+    cy.intercept({
+      method: 'GET',
+      pathname: '/rest-services/*/search/JobOrder',
+      query: {
+        fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
+        count: '30',
+      },
+    }).as('getJobs');
+    cy.intercept({
+      method: 'GET',
+      pathname: '/rest-services/*/query/JobBoardPost',
+      query: {
+        fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
+        where: '*id=*',
+      },
+    }).as('jobResponse');
     cy.visit('/');
+    cy.wait('@getJobs', {timeout: 30000});
+
     cy.get('novo-list>div.job-card').first().click();
+    cy.wait('@jobResponse', {timeout: 30000});
     cy.url().should('include', '/jobs/');
   });
 });

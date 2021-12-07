@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+
+  angular:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '4680:80'
+  cypress:
+    build:
+      context: .
+      dockerfile: cypress.Dockerfile
+    depends_on:
+      - angular
+    network_mode: 'host'

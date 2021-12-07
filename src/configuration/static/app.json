@@ -1,0 +1,91 @@
+{
+  "acceptedResumeTypes": [
+    "html",
+    "text",
+    "txt",
+    "pdf",
+    "doc",
+    "docx",
+    "rtf",
+    "odt"
+  ],
+  "companyName": "[ COMPANY NAME HERE ]",
+  "companyLogoPath": "",
+  "companyUrl": "",
+  "careersUrl": "",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+      "en-US",
+      "en-GB",
+      "en",
+      "fr-FR",
+      "fr",
+      "es",
+      "de",
+      "it",
+      "nl",
+      "ru",
+      "zh-CN"
+  ],
+  "minUploadSize": 4096,
+  "maxRelatedJobs": 5,
+  "maxUploadSize": 5242880,
+  "service": {
+    "batchSize": 500,
+    "corpToken": "[ CORP TOKEN HERE ]",
+    "port": null,
+    "swimlane": "[ SWIMLANE HERE ]",
+    "fields": [
+      "id",
+      "title",
+      "publishedCategory(id,name)",
+      "address(city,state,zip)",
+      "employmentType",
+      "dateLastPublished",
+      "publicDescription",
+      "isOpen",
+      "isPublic",
+      "isDeleted",
+      "publishedZip",
+      "salary",
+      "salaryUnit"
+    ],
+    "jobInfoChips": [
+      "employmentType",
+      {
+        "type": "mediumDate",
+        "field": "dateLastPublished"
+      }
+    ],
+    "showCategory": true,
+    "keywordSearchFields": [
+      "publicDescription",
+      "title"
+    ]
+  },
+  "additionalJobCriteria": {
+    "field": "[ FILTER FIELD HERE ]",
+    "values": [
+      "[ FILTER VALUE HERE ]"
+    ],
+    "sort": "-dateLastPublished"
+  },
+  "integrations": {
+    "googleAnalytics": {
+      "trackingId": ""
+    },
+    "googleSiteVerification": {
+      "verificationCode": ""
+    }
+  },
+  "eeoc": {
+    "genderRaceEthnicity": false,
+    "veteran": false,
+    "disability": false
+  },
+  "privacyConsent": {
+    "consentCheckbox": false,
+    "sidebarLink": false,
+    "privacyPolicyUrl": "/privacy"
+  }
+}

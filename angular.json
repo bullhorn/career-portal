@@ -69,14 +69,22 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": ".",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/static",
+                  "output": "/",
+                  "glob": "app.json"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.static.ts"
-                },
-                {
-                  "replace": "src/app.json",
-                  "with": "src/app.json.template"
                 }
               ]
             },
@@ -97,14 +105,22 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": ".",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/qa",
+                  "output": "/",
+                  "glob": "app.json"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.static.ts"
-                },
-                {
-                  "replace": "src/app.json",
-                  "with": "src/app.qa.json"
                 }
               ]
             },
@@ -125,14 +141,22 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "baseHref": "/",
+              "assets": [
+                "src/assets",
+                "src/favicon.ico",
+                "src/static/custom.css",
+                "src/static/privacy-policy.html",
+                "src/version.txt",
+                {
+                  "input": "src/configuration/dynamic",
+                  "output": "/",
+                  "glob": "app.json"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dynamic.ts"
-                },
-                {
-                  "replace": "src/app.json",
-                  "with": "src/app.json.template"
                 }
               ]
             },
