@@ -7,7 +7,6 @@ describe('Job List', () => {
   });
   it('Filter Categories', () => {
     cy.intercept({
-      hostname: 'public-rest91.bullhornstaffing.com',
       method: 'GET',
       pathname: '/rest-services/1VCNF4/query/JobBoardPost',
       query: {
@@ -25,7 +24,6 @@ describe('Job List', () => {
         expect(!!automationId).eq(true, 'empty category in list of categories');
 
         cy.intercept({
-          hostname: 'public-rest91.bullhornstaffing.com',
           method: 'GET',
           pathname: '/rest-services/1VCNF4/search/JobOrder',
           query: {

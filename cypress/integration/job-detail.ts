@@ -1,10 +1,17 @@
 describe('Job Detail', () => {
   it('Should be able to open the apply modal and apply to the job', () => {
     cy.clearCookies();
+    cy.intercept({
+      method: 'GET',
+      pathname: '/rest-services/1VCNF4/search/JobOrder',
+      query: {
+        fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
+        count: '30',
+      },
+    }).as('getJobs');
     cy.visit('/');
     let jobInformation;
     cy.intercept({
-      hostname: 'public-rest91.bullhornstaffing.com',
       method: 'GET',
       pathname: '/rest-services/1VCNF4/query/JobBoardPost',
       query: {
@@ -12,6 +19,8 @@ describe('Job Detail', () => {
         where: '*id=*',
       },
     }).as('jobResponse');
+    
+    cy.wait('@getJobs');
     cy.get('novo-list>div.job-card').first().click();
     cy.url().should('include', '/jobs/');
     cy.wait('@jobResponse');
@@ -40,7 +49,6 @@ describe('Job Detail', () => {
     cy.get('[data-automation-id="resume"] input').attachFile('fakeResume.pdf');
 
     cy.intercept({
-      hostname: 'public-rest91.bullhornstaffing.com',
       method: 'POST',
       pathname: '/rest-services/1VCNF4/apply/12540/raw',
     }).as('applyResponse');
