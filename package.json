@@ -12,6 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng run career-portal:cypress-run",
+    "e2e:ci:qa": "ng run career-portal:cypress-run --configuration=qa",
     "dev:ssr": "ng run career-portal:serve-ssr --configuration=dynamic",
     "serve:ssr": "node dist/career-portal/server/main.js",
     "build:ssr": "ng build --configuration=dynamic && ng run career-portal:server:production",

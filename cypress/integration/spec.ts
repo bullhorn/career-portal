@@ -8,7 +8,7 @@ describe('Job List', () => {
   it('Filter Categories', () => {
     cy.intercept({
       method: 'GET',
-      pathname: '/rest-services/1VCNF4/query/JobBoardPost',
+      pathname: '/rest-services/*/query/JobBoardPost',
       query: {
         fields: 'publishedCategory(id,name),count(id)',
         orderBy: 'publishedCategory.name',
@@ -19,20 +19,20 @@ describe('Job List', () => {
     cy.wait('@getCategories', {timeout: 30000});
 
     cy.get('app-sidebar [data-automation-id="category"] novo-check-list>div.check-box-group').each(($el, index, $list) => {
-      if (index < 10) {
+      if (index < 5) {
         const automationId = $el.attr('data-automation-id');
         expect(!!automationId).eq(true, 'empty category in list of categories');
 
         cy.intercept({
           method: 'GET',
-          pathname: '/rest-services/1VCNF4/search/JobOrder',
+          pathname: '/rest-services/*/search/JobOrder',
           query: {
             fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
             count: '30',
           },
         }).as('getJobs');
 
-        cy.get(`[data-automation-id="${automationId}"]`).first().click();
+        cy.get(`[data-automation-id="${CSS.escape(automationId)}"]`).first().click();
         cy.wait('@getCategories', {timeout: 30000});
         cy.wait('@getJobs', {timeout: 30000});
         cy.get('novo-list>div.job-card').each(($jobEl, jobIndex, $jobList) => {

@@ -80,6 +80,34 @@
                 }
               ]
             },
+            "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": ".",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.static.ts"
+                },
+                {
+                  "replace": "src/app.json",
+                  "with": "src/app.qa.json"
+                }
+              ]
+            },
             "dynamic": {
               "budgets": [
                 {
@@ -136,6 +164,9 @@
             },
             "static": {
               "browserTarget": "career-portal:build:dev"
+            },
+            "qa": {
+              "browserTarget": "career-portal:build:qa"
             }
           }
         },
@@ -212,11 +243,16 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
+            "watch": true,
+            "headless": false,
             "devServerTarget": "career-portal:serve"
           },
           "configurations": {
             "production": {
               "devServerTarget": "career-portal:serve:static"
+            },
+            "qa": {
+              "devServerTarget": "career-portal:serve:qa"
             }
           }
         },

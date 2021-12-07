@@ -3,9 +3,8 @@ describe('Job Detail', () => {
     cy.clearCookies();
     cy.intercept({
       method: 'GET',
-      pathname: '/rest-services/1VCNF4/search/JobOrder',
+      pathname: '/rest-services/*/search/JobOrder',
       query: {
-        fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
         count: '30',
       },
     }).as('getJobs');
@@ -13,13 +12,13 @@ describe('Job Detail', () => {
     let jobInformation;
     cy.intercept({
       method: 'GET',
-      pathname: '/rest-services/1VCNF4/query/JobBoardPost',
+      pathname: '/rest-services/*/query/JobBoardPost',
       query: {
         fields: 'id,title,publishedCategory(id,name),address(city,state,zip),employmentType,dateLastPublished,publicDescription,isOpen,isPublic,isDeleted,publishedZip,salary,salaryUnit',
         where: '*id=*',
       },
     }).as('jobResponse');
-    
+
     cy.wait('@getJobs');
     cy.get('novo-list>div.job-card').first().click();
     cy.url().should('include', '/jobs/');
@@ -50,11 +49,11 @@ describe('Job Detail', () => {
 
     cy.intercept({
       method: 'POST',
-      pathname: '/rest-services/1VCNF4/apply/12540/raw',
+      pathname: '/rest-services/*/apply/**',
     }).as('applyResponse');
     cy.get('[data-automation-id="apply-modal-save"]').click();
 
-    cy.wait('@applyResponse');
+    cy.wait('@applyResponse', {timeout: 30000});
 
     cy.get('[data-automation-id="applied-button"]').should('be.visible');
     cy.get('[data-automation-id="back-button"]').click();
