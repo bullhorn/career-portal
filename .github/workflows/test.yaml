@@ -1,0 +1,20 @@
+on:
+  push:
+  schedule:
+    - cron:  '30 5,17 * * *'
+name: Test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.15.1]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run serve
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 120

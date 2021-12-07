@@ -9,17 +9,19 @@
     "build": "npm run build:ssr",
     "build:static": "ng build --configuration=static --aot --build-optimizer",
     "postinstall": "ngcc",
-    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "e2e:ci": "ng run career-portal:cypress-run",
     "dev:ssr": "ng run career-portal:serve-ssr --configuration=dynamic",
     "serve:ssr": "node dist/career-portal/server/main.js",
     "build:ssr": "ng build --configuration=dynamic && ng run career-portal:server:production",
-    "prerender": "ng run career-portal:prerender"
+    "prerender": "ng run career-portal:prerender",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "engines": {
-    "node": "14.15.1"
+    "node": "16.13.1"
   },
   "browser": {
     "fs": false,
@@ -70,15 +72,17 @@
     "@angular/cli": "^10.2.3",
     "@angular/compiler-cli": "^10.2.5",
     "@angular/language-service": "^10.2.5",
+    "@cypress/schematic": "^1.6.0",
     "@nguniversal/builders": "^10.1.0",
     "@types/express": "^4.17.0",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "cypress": "latest",
+    "cypress-file-upload": "^5.0.8",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "protractor": "~7.0.0",
     "ts-loader": "^5.2.0",
     "ts-node": "~4.1.0",
     "tslint": "~6.1.0",

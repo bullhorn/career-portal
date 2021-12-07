@@ -29,5 +29,5 @@
       <span *ngIf="hasError" class="error">{{ 'ERROR_WHILE_APPLYING'  | translate }}</span>
     </section>
     <button theme="standard" (click)="close()" data-automation-id="create-modal-cancel">{{ 'CANCEL'  | translate }}</button>
-    <button theme="primary" icon="check" [disabled]="!form.valid" (click)="save()" data-automation-id="create-modal-save" [loading]="applying" > {{ 'APPLY'  | translate }} </button>
+    <button theme="primary" icon="check" [disabled]="!form.valid" (click)="save()" data-automation-id="apply-modal-save" [loading]="applying" > {{ 'APPLY'  | translate }} </button>
   </novo-modal>
