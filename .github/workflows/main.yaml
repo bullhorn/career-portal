@@ -34,6 +34,6 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: build-artifact
-          path: dist
+          path: dist/career-portal/browser
 
 
