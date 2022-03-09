@@ -25,5 +25,15 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-      - name: Build
+      - name: Build SSR
         run: npm run build:ssr
+      - name: Build Static
+        run: |
+          node version.js
+          npm run build:static
+      - uses: actions/upload-artifact@master
+        with:
+          name: build-artifact
+          path: dist/browser
+
+
