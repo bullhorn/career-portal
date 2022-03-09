@@ -2,17 +2,17 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const JenkinsBuildNumber = process.argv['BUILD_NUMBER'] || 'UNKNOWN';
-const CommitHash = process.argv['GIT_COMMIT'] || 'UNKNOWN';
+const JenkinsBuildNumber = process.argv['GITHUB_RUN_NUMBER'] || 'UNKNOWN';
+const CommitHash = process.argv['GITHUB_SHA'] || 'UNKNOWN';
 const now = new Date();
 
 let data = `
 _________                                           __________                   __           .__
-\_   ___ \ _____   _______   ____    ____  _______  \______   \  ____  _______ _/  |_ _____   |  |
-/    \  \/ \__  \  \_  __ \_/ __ \ _/ __ \ \_  __ \  |     ___/ /  _ \ \_  __ \\   __\\__  \  |  |
-\     \____ / __ \_ |  | \/\  ___/ \  ___/  |  | \/  |    |    (  <_> ) |  | \/ |  |   / __ \_|  |__
- \______  /(____  / |__|    \___  > \___  > |__|     |____|     \____/  |__|    |__|  (____  /|____/
-        \/      \/              \/      \/                                                 \/
+\\_   ___ \\ _____   _______   ____    ____  _______  \\______   \\  ____  _______ _/  |_ _____   |  |
+/    \\  \\/ \\__  \\  \\_  __ \\_/ __ \\ _/ __ \\ \\_  __ \\  |     ___/ /  _ \\ \\_  __ \\   __\\__  \\  |  |
+\\     \\____ / __ \\_ |  | \\/\\  ___/ \\  ___/  |  | \\/  |    |    (  <_> ) |  | \\/ |  |   / __ \\_|  |__
+ \\______  /(____  / |__|    \\___  > \\___  > |__|     |____|     \\____/  |__|    |__|  (____  /|____/
+        \\/      \\/              \\/      \\/                                                 \\/
 
 Date: ${now.toUTCString()}
 Career Portal Version: ${require('./package.json').version}
