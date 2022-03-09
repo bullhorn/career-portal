@@ -21,7 +21,6 @@ Build Information:
   Commit: ${CommitHash}
 Dependency Information:
   NovoElements: ${require('./node_modules/novo-elements/package.json').version}
-  Chomsky: ${require('./node_modules/chomsky/package.json').version}
 `;
 
 console.log('Writing Version.txt');
