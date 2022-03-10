@@ -6,7 +6,7 @@ Before you begin, please familiarize yourself with [contributing to a GitHub pro
 In order to be merged, a merge request must:
  - tested according to a test plan locally
  - be reviewed by a repo maintainer
- - build must be passing in Jenkins
+ - build must be passing
  - any relevant unit tests are updated
 
  ## Suggested IDEs
