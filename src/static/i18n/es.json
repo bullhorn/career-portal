@@ -28,7 +28,8 @@
   "CITY": "Municipio",
   "STATE": "Estado/Provincia",
   "CATEGORY": "Categoría",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "Idioma preferido",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Formulario de autoidentificación voluntaria para raza, género y etnia",
     "GENDER_LABEL": "Género",
     "GENDER_MALE": "Masculino",

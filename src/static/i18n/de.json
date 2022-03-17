@@ -28,7 +28,8 @@
   "CITY": "Stadt",
   "STATE": "Bundesland",
   "CATEGORY": "Berufsfeld",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "Bevorzugte Sprache",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Voluntary Self-Identification Form for Race, Gender and Ethnicity",
     "GENDER_LABEL": "Geschlecht",
     "GENDER_MALE": "Männlich",

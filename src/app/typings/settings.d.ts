@@ -4,7 +4,7 @@ export interface ISettings {
   companyLogoPath: string;
   companyUrl: string;
   careersUrl: string;
-  defaultLocale: string,
+  defaultLocale: string;
   supportedLocales: string[];
   minUploadSize: number;
   maxRelatedJobs: number;
@@ -15,12 +15,13 @@ export interface ISettings {
   darkTheme: boolean;
   eeoc: IEeoc;
   privacyConsent: IPrivacyConsent;
+  languageDropdownOptions: ILanguageDropdownOptions;
 }
 
 interface IServiceSettings {
   batchSize: number;
   corpToken: string;
-  port: number|null;
+  port: number | null;
   swimlane: number | string;
   fields: string[];
   jobInfoChips: [string | JobChipField] | any;
@@ -60,4 +61,12 @@ interface IAdditionalJobCriteria {
 interface JobChipField {
   type: string;
   field: string;
+}
+interface ILanguageDropdownOptions {
+  enabled: boolean;
+  choices: IAdditionalLanguageOption[];
+}
+interface IAdditionalLanguageOption {
+  name: string;
+  localeCode: string;
 }

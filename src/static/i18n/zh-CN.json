@@ -28,7 +28,8 @@
   "CITY": "城市",
   "STATE": "状态",
   "CATEGORY": "类别",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "首選語言",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "种族、性别和民族自愿自我认定表",
     "GENDER_LABEL": "性别",
     "GENDER_MALE": "男",

@@ -28,7 +28,8 @@
   "CITY": "City",
   "STATE": "State",
   "CATEGORY": "Category",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "Preferred Language",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Voluntary Self-Identification Form for Race, Gender and Ethnicity",
     "GENDER_LABEL": "Gender",
     "GENDER_MALE": "Male",
