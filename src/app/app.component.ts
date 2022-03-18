@@ -1,13 +1,13 @@
-import { Component, ViewContainerRef, OnInit } from "@angular/core";
-import { Router, NavigationEnd } from "@angular/router";
-import { SettingsService } from "./services/settings/settings.service";
-import { Meta } from "@angular/platform-browser";
-import { NovoToastService, NovoModalService } from "novo-elements";
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { SettingsService } from './services/settings/settings.service';
+import { Meta } from '@angular/platform-browser';
+import { NovoToastService, NovoModalService } from 'novo-elements';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public title: string = SettingsService.settings.companyName;
@@ -17,17 +17,17 @@ export class AppComponent implements OnInit {
     private meta: Meta,
     private ref: ViewContainerRef,
     private toastService: NovoToastService,
-    private modalService: NovoModalService
+    private modalService: NovoModalService,
   ) {
     if (SettingsService.settings.integrations.googleSiteVerification) {
       this.meta.updateTag({
-        name: "google-site-verification",
+        name: 'google-site-verification',
         content:
           SettingsService.settings.integrations.googleSiteVerification
             .verificationCode,
       });
     }
-    let trackingId: string = "";
+    let trackingId: string = '';
     if (SettingsService.settings.integrations.googleAnalytics) {
       trackingId =
         SettingsService.settings.integrations.googleAnalytics.trackingId;
@@ -35,9 +35,9 @@ export class AppComponent implements OnInit {
     if (trackingId && !SettingsService.isServer) {
       this.router.events.subscribe((event: any) => {
         if (event instanceof NavigationEnd) {
-          (<any>window).ga("create", trackingId, "auto");
-          (<any>window).ga("set", "page", event.urlAfterRedirects);
-          (<any>window).ga("send", "pageview");
+          (<any>window).ga('create', trackingId, 'auto');
+          (<any>window).ga('set', 'page', event.urlAfterRedirects);
+          (<any>window).ga('send', 'pageview');
         }
       });
     }
