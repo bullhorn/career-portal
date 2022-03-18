@@ -15,18 +15,55 @@
   "careersUrl": "",
   "defaultLocale": "en-US",
   "supportedLocales": [
-      "en-US",
-      "en-GB",
-      "en",
-      "fr-FR",
-      "fr",
-      "es",
-      "de",
-      "it",
-      "nl",
-      "ru",
-      "zh-CN"
+    "en-US",
+    "en-GB",
+    "en",
+    "fr-FR",
+    "fr",
+    "es",
+    "de",
+    "it",
+    "nl",
+    "ru",
+    "zh-CN"
   ],
+  "languageDropdownOptions": {
+    "enabled": false,
+    "choices": [
+      {
+        "localeCode": "en",
+        "name": "English"
+      },
+      {
+        "localeCode": "fr",
+        "name": "French"
+      },
+      {
+        "localeCode": "es",
+        "name": "Spanish"
+      },
+      {
+        "localeCode": "de",
+        "name": "German"
+      },
+      {
+        "localeCode": "it",
+        "name": "Italian"
+      },
+      {
+        "localeCode": "nl",
+        "name": "Dutch"
+      },
+      {
+        "localeCode": "ru",
+        "name": "Russian"
+      },
+      {
+        "localeCode": "zh-CN",
+        "name": "Chinese"
+      }
+    ]
+  },
   "minUploadSize": 4096,
   "maxRelatedJobs": 5,
   "maxUploadSize": 5242880,
@@ -58,16 +95,11 @@
       }
     ],
     "showCategory": true,
-    "keywordSearchFields": [
-      "publicDescription",
-      "title"
-    ]
+    "keywordSearchFields": ["publicDescription", "title"]
   },
   "additionalJobCriteria": {
     "field": "[ FILTER FIELD HERE ]",
-    "values": [
-      "[ FILTER VALUE HERE ]"
-    ],
+    "values": ["[ FILTER VALUE HERE ]"],
     "sort": "-dateLastPublished"
   },
   "integrations": {

@@ -2,22 +2,68 @@
   <div class="close-filter-container">
     <button theme="icon" (click)="hideSidebar()" icon="times"></button>
   </div>
-<novo-search placeholder="Keyword Search" alwaysOpen="true" [(ngModel)]="keyword" (ngModelChange)="searchOnDelay()"></novo-search>
+  <novo-search
+    placeholder="Keyword Search"
+    alwaysOpen="true"
+    [(ngModel)]="keyword"
+    (ngModelChange)="searchOnDelay()"
+  ></novo-search>
 </div>
 <novo-loading *ngIf="loading"></novo-loading>
 <ng-container *ngIf="!loading">
   <div class="filters">
-    <app-sidebar-filter field="publishedCategory(id,name)" title="{{ 'CATEGORY'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('publishedCategory', $event)" data-automation-id="category"></app-sidebar-filter>
-    <app-sidebar-filter field="address(state)" title="{{ 'STATE'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(state)', $event)" data-automation-id="state"></app-sidebar-filter>
-    <app-sidebar-filter field="address(city)" title="{{ 'CITY'   | translate }}" [filter]="filter" (checkboxFilter)="updateFilter('address(city)', $event)" data-automation-id="city"></app-sidebar-filter>
+    <app-sidebar-filter
+      field="publishedCategory(id,name)"
+      title="{{ 'CATEGORY' | translate }}"
+      [filter]="filter"
+      (checkboxFilter)="updateFilter('publishedCategory', $event)"
+      data-automation-id="category"
+    ></app-sidebar-filter>
+    <app-sidebar-filter
+      field="address(state)"
+      title="{{ 'STATE' | translate }}"
+      [filter]="filter"
+      (checkboxFilter)="updateFilter('address(state)', $event)"
+      data-automation-id="state"
+    ></app-sidebar-filter>
+    <app-sidebar-filter
+      field="address(city)"
+      title="{{ 'CITY' | translate }}"
+      [filter]="filter"
+      (checkboxFilter)="updateFilter('address(city)', $event)"
+      data-automation-id="city"
+    ></app-sidebar-filter>
   </div>
 </ng-container>
-
-<a *ngIf="showPrivacyPolicy" (click)="viewPrivacyPolicy()" class="privacy-policy-link">{{ 'PRIVACY_POLICY'   | translate }}</a>
+<ng-container *ngIf="languageDropdownEnabled">
+  <novo-dropdown
+    side="left"
+    class="preferredLanguageDropdown"
+    side="above-below"
+  >
+    <button type="button" theme="dialogue" icon="collapse" inverse>
+      {{ "PREFERRED_LANGUAGE" | translate }}
+    </button>
+    <list>
+      <item
+        *ngFor="let language of availableLocales"
+        (click)="setPreferredLanguage(language.localeCode)"
+      >
+        {{ language.name }}
+      </item>
+    </list>
+  </novo-dropdown>
+</ng-container>
+<a
+  *ngIf="showPrivacyPolicy"
+  (click)="viewPrivacyPolicy()"
+  class="privacy-policy-link"
+  >{{ "PRIVACY_POLICY" | translate }}</a
+>
 
 <section class="credits">
-    <span class="powered-by">Powered By</span>
-    <a target="_blank" href="http://www.bullhorn.com/">
-        <img class="bullhorn" src="assets/logo.svg">
-    </a>
+  <span class="powered-by">Powered By</span>
+  <a target="_blank" href="http://www.bullhorn.com/">
+    <img class="bullhorn" src="assets/logo.svg" />
+  </a>
 </section>

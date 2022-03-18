@@ -28,7 +28,8 @@
   "CITY": "Plaats",
   "STATE": "Provincie",
   "CATEGORY": "Categorie",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "Voorkeurstaal",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Vrijwillig zelfidentificatieformulier voor ras, geslacht en etniciteit",
     "GENDER_LABEL": "Geslacht",
     "GENDER_MALE": "Man",

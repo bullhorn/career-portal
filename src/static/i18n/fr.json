@@ -28,6 +28,7 @@
   "CITY": "Ville",
   "STATE": "État / Région",
   "CATEGORY": "Catégorie",
+  "PREFERRED_LANGUAGE": "langue préférée",
   "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Formulaire volontaire d'auto-identification pour la race, le sexe et l'origine ethnique",
     "GENDER_LABEL": "Le genre",

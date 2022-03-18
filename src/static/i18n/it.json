@@ -28,7 +28,8 @@
   "CITY": "Città",
   "STATE": "Stato",
   "CATEGORY": "Categoria",
-  "EEOC" : {
+  "PREFERRED_LANGUAGE": "Lingua preferita",
+  "EEOC": {
     "EEOC_FORM_DESCRIPTION": "Dichiarazione volontaria di razza, sesso ed etnia",
     "GENDER_LABEL": "Sesso",
     "GENDER_MALE": "Uomo",
