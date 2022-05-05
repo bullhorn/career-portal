@@ -92,7 +92,7 @@ novo-list {
     div.job-card{
       margin: 12px 15px;
       novo-list-item {
-        flex-direction: column;
+        flex-direction: inherit;
         item-header-end {
           display: flex;
           .mid-card {
