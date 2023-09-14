@@ -45,7 +45,6 @@ export class SidebarFilterComponent implements OnChanges {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    res = res.slice(0, 500);
     let resultIds: number[] = res.map((result: any) => { return result.id; });
     this.service.getAvailableFilterOptions(resultIds, this.field).subscribe(this.setFieldOptionsOnSuccess.bind(this));
 
