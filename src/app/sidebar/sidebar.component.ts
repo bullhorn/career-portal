@@ -74,11 +74,16 @@ export class SidebarComponent {
     httpFormatedFilter: string | string[],
   ): void {
     delete this.filter['keyword'];
-    this.filter[field] = httpFormatedFilter;
-    let filter: object = {};
-    Object.assign(filter, this.filter);
-    this.filter = filter; // triggering angular change detection
-    this.newFilter.emit(this.filter);
+    if (Array.isArray(httpFormatedFilter) && httpFormatedFilter.length === 500) {
+      this.filter = {};
+      this.newFilter.emit(this.filter);
+    } else {
+      this.filter[field] = httpFormatedFilter;
+      let filter: object = {};
+      Object.assign(filter, this.filter);
+      this.filter = filter; // triggering angular change detection
+      this.newFilter.emit(this.filter);
+    }
   }
 
   public hideSidebar(): void {
@@ -100,6 +105,7 @@ export class SidebarComponent {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
+    res = res.slice(0, 500)
     let resultIds: string[] = res.map((result: any) => {
       return `id{?^^equals}${result.id}`;
     });
