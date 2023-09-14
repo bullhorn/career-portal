@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
-import { Observable, concatMap, map, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IServiceSettings } from '../../typings/settings';
+import { concatMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class SearchService {
@@ -39,26 +40,36 @@ export class SearchService {
 
   public getJobIds(filter: any, ignoreFields: string[]): Observable<any[]> {
     const queryString: string = this.getQueryString(filter, ignoreFields);
+
     return this.getJobRecords(queryString).pipe(
       concatMap((response: any) => {
         const total: number = response.total;
         const records: any[] = response.data;
         let currentCount = response.count;
 
-        if (currentCount < total) {
-          // Recursively fetch more records starting from the current count
-          return this.getJobRecords(queryString, currentCount + response.count).pipe(
-            map((additionalResponse: any) => {
-              // Accumulate the records from the additional response
+        // Define a recursive function to fetch more records
+        const fetchMoreRecords = (start: number): Observable<any> => {
+          return this.getJobRecords(queryString, start).pipe(
+            concatMap((additionalResponse: any) => {
+              // Concatenate records from the additional response
               records.push(...additionalResponse.data);
               currentCount += additionalResponse.count;
-              return additionalResponse;
+
+              if (currentCount < total) {
+                // Continue fetching more records if needed
+                return fetchMoreRecords(currentCount);
+              } else {
+                // Return the accumulated records when done
+                return of(records);
+              }
             })
-          )
-        } else {
-          // No more records to fetch, return the accumulated records
-          return of(records);
+          );
         }
+
+        // Start fetching more records recursively
+        return fetchMoreRecords(currentCount).pipe(
+          map(() => records)
+        );
       })
     );
   }
@@ -67,6 +78,7 @@ export class SearchService {
     let queryArray: string[] = [];
     let params: any = {};
 
+    // Construct the query string based on filter and parameters
     params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true, ignoreFields)}`;
     params.count = `500`;
     params.fields = 'id';
@@ -75,14 +87,18 @@ export class SearchService {
     for (let key in params) {
       queryArray.push(`${key}=${params[key]}`);
     }
+
+    // Join the query parameters with '&' to form the complete query string
     let queryString: string = queryArray.join('&');
 
     return queryString;
   }
 
   private getJobRecords(queryString: string, start: number = 0): Observable<any> {
+    // Fetch job records from the API with the specified query and start offset
     return this.http.get(`${this.baseUrl}/search/JobOrder?start=${start}&${queryString}`);
   }
+
 
 
   public getCurrentJobIds(filter: any, ignoreFields: string[], start: number = 0): Observable<any> {
