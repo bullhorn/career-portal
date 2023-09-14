@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
-import { Observable, of } from 'rxjs';
+import { Observable, concatMap, map, of } from 'rxjs';
 import { IServiceSettings } from '../../typings/settings';
 
 @Injectable()
 export class SearchService {
 
-  public constructor(private http: HttpClient, public settings: SettingsService) {  }
+  public constructor(private http: HttpClient, public settings: SettingsService) { }
 
   get baseUrl(): string {
     let service: IServiceSettings = SettingsService.settings?.service;
     let port: number = service?.port ? service.port : 443;
-    let scheme: string = `http${ port === 443  ? 's' : '' }`;
+    let scheme: string = `http${port === 443 ? 's' : ''}`;
 
     return `${scheme}://public-rest${service?.swimlane}.bullhornstaffing.com:${port}/rest-services/${service?.corpToken}`;
   }
@@ -37,7 +37,33 @@ export class SearchService {
     return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${id})&fields=${SettingsService.settings?.service?.fields}`);
   }
 
-  public getCurrentJobIds(filter: any, ignoreFields: string[]): Observable<any> {
+  public getJobIds(filter: any, ignoreFields: string[]): Observable<any[]> {
+    const queryString: string = this.getQueryString(filter, ignoreFields);
+    return this.getJobRecords(queryString).pipe(
+      concatMap((response: any) => {
+        const total: number = response.total;
+        const records: any[] = response.data;
+        let currentCount = response.count;
+
+        if (currentCount < total) {
+          // Recursively fetch more records starting from the current count
+          return this.getJobRecords(queryString, currentCount + response.count).pipe(
+            map((additionalResponse: any) => {
+              // Accumulate the records from the additional response
+              records.push(...additionalResponse.data);
+              currentCount += additionalResponse.count;
+              return additionalResponse;
+            })
+          )
+        } else {
+          // No more records to fetch, return the accumulated records
+          return of(records);
+        }
+      })
+    );
+  }
+
+  private getQueryString(filter: any, ignoreFields: string[]): string {
     let queryArray: string[] = [];
     let params: any = {};
 
@@ -51,6 +77,29 @@ export class SearchService {
     }
     let queryString: string = queryArray.join('&');
 
+    return queryString;
+  }
+
+  private getJobRecords(queryString: string, start: number = 0): Observable<any> {
+    return this.http.get(`${this.baseUrl}/search/JobOrder?start=${start}&${queryString}`);
+  }
+
+
+  public getCurrentJobIds(filter: any, ignoreFields: string[], start: number = 0): Observable<any> {
+    let queryArray: string[] = [];
+    let params: any = {};
+
+    params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true, ignoreFields)}`;
+    params.count = `500`;
+    params.fields = 'id';
+    params.sort = 'id';
+    params.start = start;
+
+    for (let key in params) {
+      queryArray.push(`${key}=${params[key]}`);
+    }
+    let queryString: string = queryArray.join('&');
+
     return this.http.get(`${this.baseUrl}/search/JobOrder?${queryString}`);
   }
 
@@ -58,52 +107,52 @@ export class SearchService {
     let params: any = {};
     let queryArray: string[] = [];
     if (ids.length > 0) {
-    params.where = `id IN (${ids.toString()})`;
-    params.count = `500`;
-    params.fields = `${field},count(id)`;
-    params.groupBy = field;
-    switch (field) {
-      case 'publishedCategory(id,name)':
-        params.orderBy = 'publishedCategory.name';
-        break;
-      case 'address(state)':
-        params.orderBy = 'address.state';
-        break;
-      case 'address(city)':
-        params.orderBy = 'address.city';
-        break;
-      default:
-        params.orderBy = '-count.id';
-        break;
-    }
-    for (let key in params) {
-      queryArray.push(`${key}=${params[key]}`);
-    }
-    let queryString: string = queryArray.join('&');
+      params.where = `id IN (${ids.toString()})`;
+      params.count = `500`;
+      params.fields = `${field},count(id)`;
+      params.groupBy = field;
+      switch (field) {
+        case 'publishedCategory(id,name)':
+          params.orderBy = 'publishedCategory.name';
+          break;
+        case 'address(state)':
+          params.orderBy = 'address.state';
+          break;
+        case 'address(city)':
+          params.orderBy = 'address.city';
+          break;
+        default:
+          params.orderBy = '-count.id';
+          break;
+      }
+      for (let key in params) {
+        queryArray.push(`${key}=${params[key]}`);
+      }
+      let queryString: string = queryArray.join('&');
 
       return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`); // tslint:disable-line
     } else {
-      return of({count: 0, start: 0, data: []});
+      return of({ count: 0, start: 0, data: [] });
     }
   }
 
   private formatAdditionalCriteria(isSearch: boolean): string {
-    let field: string =  SettingsService.settings.additionalJobCriteria.field;
+    let field: string = SettingsService.settings.additionalJobCriteria.field;
     let values: string[] = SettingsService.settings.additionalJobCriteria.values;
     let query: string = '';
     let delimiter: '"' | '\'' = isSearch ? '"' : '\'';
     let equals: ':' | '=' = isSearch ? ':' : '=';
 
     if (field && values.length > 0 && field !== '[ FILTER FIELD HERE ]' && values[0] !== '[ FILTER VALUE HERE ]') {
-        for (let i: number = 0; i < values.length; i++) {
-            if (i > 0) {
-                query += ` OR `;
-            } else {
-                query += ' AND (';
-            }
-            query += `${field}${equals}${delimiter}${values[i]}${delimiter}`;
+      for (let i: number = 0; i < values.length; i++) {
+        if (i > 0) {
+          query += ` OR `;
+        } else {
+          query += ' AND (';
         }
-        query += ')';
+        query += `${field}${equals}${delimiter}${values[i]}${delimiter}`;
+      }
+      query += ')';
     }
     return query;
   }

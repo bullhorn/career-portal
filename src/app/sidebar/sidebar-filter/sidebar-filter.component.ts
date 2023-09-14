@@ -41,11 +41,12 @@ export class SidebarFilterComponent implements OnChanges {
 
   private getFilterOptions(): void {
     this.loading = true;
-    this.service.getCurrentJobIds(this.filter, [this.fieldName]).subscribe(this.handleJobIdsOnSuccess.bind(this));
+    this.service.getJobIds(this.filter, [this.fieldName]).subscribe(this.handleJobIdsOnSuccess.bind(this));
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    let resultIds: number[] = res.data.map((result: any) => { return result.id; });
+    res = res.slice(0, 500);
+    let resultIds: number[] = res.map((result: any) => { return result.id; });
     this.service.getAvailableFilterOptions(resultIds, this.field).subscribe(this.setFieldOptionsOnSuccess.bind(this));
 
   }
@@ -66,7 +67,7 @@ export class SidebarFilterComponent implements OnChanges {
           let values: string[] = [];
           this.lastSetValue = API.getActiveValue();
           if (API.getActiveValue()) {
-            values = API.getActiveValue().map((value: string ) => {
+            values = API.getActiveValue().map((value: string) => {
               return `address.city{?^^equals}{?^^delimiter}${value}{?^^delimiter}`;
             });
           }
@@ -86,7 +87,7 @@ export class SidebarFilterComponent implements OnChanges {
           let values: string[] = [];
           this.lastSetValue = API.getActiveValue();
           if (API.getActiveValue()) {
-            values = API.getActiveValue().map((value: string ) => {
+            values = API.getActiveValue().map((value: string) => {
               return `address.state{?^^equals}{?^^delimiter}${value}{?^^delimiter}`;
             });
           }
@@ -95,22 +96,22 @@ export class SidebarFilterComponent implements OnChanges {
         break;
       case 'publishedCategory(id,name)':
         this.options = res.data
-        .filter((unfilteredResult: ICategoryListResponse) => {
-          return !!unfilteredResult.publishedCategory;
-        })
-        .map((result: ICategoryListResponse) => {
-          return {
-            value: result.publishedCategory.id,
-            label: `${result.publishedCategory.name} (${result.idCount})`,
-          };
-        });
+          .filter((unfilteredResult: ICategoryListResponse) => {
+            return !!unfilteredResult.publishedCategory;
+          })
+          .map((result: ICategoryListResponse) => {
+            return {
+              value: result.publishedCategory.id,
+              label: `${result.publishedCategory.name} (${result.idCount})`,
+            };
+          });
         interaction = (API: FieldInteractionApi) => {
           let values: string[] = [];
           this.lastSetValue = API.getActiveValue();
           if (API.getActiveValue()) {
-          values = API.getActiveValue().map((value: number) => {
-            return `publishedCategory.id{?^^equals}${value}`;
-          });
+            values = API.getActiveValue().map((value: number) => {
+              return `publishedCategory.id{?^^equals}${value}`;
+            });
           }
           this.checkboxFilter.emit(values);
         };
@@ -122,9 +123,9 @@ export class SidebarFilterComponent implements OnChanges {
     this.control = new CheckListControl({
       key: 'checklist',
       options: this.options,
-      interactions: [{event: 'change', script: interaction.bind(this), invokeOnInit: false}],
+      interactions: [{ event: 'change', script: interaction.bind(this), invokeOnInit: false }],
     });
-    this.formUtils.setInitialValues([this.control], {'checklist': this.lastSetValue});
+    this.formUtils.setInitialValues([this.control], { 'checklist': this.lastSetValue });
     this.form = this.formUtils.toFormGroup([this.control]);
     this.loading = false;
   }

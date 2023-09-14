@@ -37,7 +37,7 @@ export class SidebarComponent {
     !SettingsService.isServer;
   public availableLocales: IAdditionalLanguageOption[] =
     SettingsService.settings?.languageDropdownOptions?.choices || [];
-  constructor(private searchService: SearchService, private router: Router) {}
+  constructor(private searchService: SearchService, private router: Router) { }
 
   public searchOnDelay(): void {
     const keywordSearchFields: string[] =
@@ -53,9 +53,8 @@ export class SidebarComponent {
           if (index > 0) {
             searchString += ' OR ';
           }
-          searchString += `${field}{?^^equals}${
-            this.keyword.trim() ? this.keyword.trim() + '*' : ''
-          }`;
+          searchString += `${field}{?^^equals}${this.keyword.trim() ? this.keyword.trim() + '*' : ''
+            }`;
         });
       }
       delete this.filter['ids'];
@@ -65,7 +64,7 @@ export class SidebarComponent {
         delete this.filter['keyword'];
       }
       this.searchService
-        .getCurrentJobIds(this.filter, [])
+        .getJobIds(this.filter, [])
         .subscribe(this.handleJobIdsOnSuccess.bind(this));
     }, 250);
   }
@@ -101,7 +100,7 @@ export class SidebarComponent {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    let resultIds: string[] = res.data.map((result: any) => {
+    let resultIds: string[] = res.map((result: any) => {
       return `id{?^^equals}${result.id}`;
     });
     if (resultIds.length === 0) {
