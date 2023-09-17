@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
 import { Observable, of } from 'rxjs';
 import { IServiceSettings } from '../../typings/settings';
-import { concatMap, map } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 
 @Injectable()
 export class SearchService {
-  
+
   public constructor(private http: HttpClient, public settings: SettingsService) {  }
 
   get baseUrl(): string {
@@ -67,7 +67,7 @@ export class SearchService {
         };
 
         // Start fetching more records recursively
-        return fetchMoreRecords(currentCount).pipe(map(() => records));
+        return fetchMoreRecords(currentCount);
       }),
     );
   }
