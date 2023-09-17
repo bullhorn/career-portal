@@ -21,7 +21,7 @@ export class SidebarFilterComponent implements OnChanges {
   public options: any[];
   public fieldName: string;
 
-  constructor(private service: SearchService, private formUtils: FormUtils) { }
+  constructor(private service: SearchService, private formUtils: FormUtils) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     switch (this.field) {
@@ -41,27 +41,30 @@ export class SidebarFilterComponent implements OnChanges {
 
   private getFilterOptions(): void {
     this.loading = true;
-    this.service.getJobIds(this.filter, [this.fieldName]).subscribe(this.handleJobIdsOnSuccess.bind(this));
+    this.service.getCurrentJobIds(this.filter, [this.fieldName]).subscribe(this.handleJobIdsOnSuccess.bind(this));
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    let resultIds: number[] = res.map((result: any) => { return result.id; });
+    let resultIds: number[] = res.map((result: any) => {
+      return result.id;
+    });
     this.service.getAvailableFilterOptions(resultIds, this.field).subscribe(this.setFieldOptionsOnSuccess.bind(this));
-
   }
 
   private setFieldOptionsOnSuccess(res: any): void {
     let interaction: Function;
     switch (this.field) {
       case 'address(city)':
-        this.options = res.data.map((result: IAddressListResponse) => {
-          return {
-            value: result.address.city,
-            label: `${result.address.city} (${result.idCount})`,
-          };
-        }).filter((item: any) => {
-          return item.value;
-        });
+        this.options = res.data
+          .map((result: IAddressListResponse) => {
+            return {
+              value: result.address.city,
+              label: `${result.address.city} (${result.idCount})`,
+            };
+          })
+          .filter((item: any) => {
+            return item.value;
+          });
         interaction = (API: FieldInteractionApi) => {
           let values: string[] = [];
           this.lastSetValue = API.getActiveValue();
@@ -74,14 +77,16 @@ export class SidebarFilterComponent implements OnChanges {
         };
         break;
       case 'address(state)':
-        this.options = res.data.map((result: IAddressListResponse) => {
-          return {
-            value: result.address.state,
-            label: `${result.address.state} (${result.idCount})`,
-          };
-        }).filter((item: any) => {
-          return item.value;
-        });
+        this.options = res.data
+          .map((result: IAddressListResponse) => {
+            return {
+              value: result.address.state,
+              label: `${result.address.state} (${result.idCount})`,
+            };
+          })
+          .filter((item: any) => {
+            return item.value;
+          });
         interaction = (API: FieldInteractionApi) => {
           let values: string[] = [];
           this.lastSetValue = API.getActiveValue();
@@ -124,9 +129,8 @@ export class SidebarFilterComponent implements OnChanges {
       options: this.options,
       interactions: [{ event: 'change', script: interaction.bind(this), invokeOnInit: false }],
     });
-    this.formUtils.setInitialValues([this.control], { 'checklist': this.lastSetValue });
+    this.formUtils.setInitialValues([this.control], { checklist: this.lastSetValue });
     this.form = this.formUtils.toFormGroup([this.control]);
     this.loading = false;
   }
-
 }
