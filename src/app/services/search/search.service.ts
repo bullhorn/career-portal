@@ -7,8 +7,7 @@ import { concatMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class SearchService {
-
-  public constructor(private http: HttpClient, public settings: SettingsService) { }
+  public constructor(private http: HttpClient, public settings: SettingsService) {}
 
   get baseUrl(): string {
     let service: IServiceSettings = SettingsService.settings?.service;
@@ -38,7 +37,7 @@ export class SearchService {
     return this.http.get(`${this.baseUrl}/query/JobBoardPost?where=(id=${id})&fields=${SettingsService.settings?.service?.fields}`);
   }
 
-  public getJobIds(filter: any, ignoreFields: string[]): Observable<any[]> {
+  public getCurrentJobIds(filter: any, ignoreFields: string[]): Observable<any[]> {
     const queryString: string = this.getQueryString(filter, ignoreFields);
 
     return this.getJobRecords(queryString).pipe(
@@ -62,15 +61,13 @@ export class SearchService {
                 // Return the accumulated records when done
                 return of(records);
               }
-            })
+            }),
           );
-        }
+        };
 
         // Start fetching more records recursively
-        return fetchMoreRecords(currentCount).pipe(
-          map(() => records)
-        );
-      })
+        return fetchMoreRecords(currentCount).pipe(map(() => records));
+      }),
     );
   }
 
@@ -97,26 +94,6 @@ export class SearchService {
   private getJobRecords(queryString: string, start: number = 0): Observable<any> {
     // Fetch job records from the API with the specified query and start offset
     return this.http.get(`${this.baseUrl}/search/JobOrder?start=${start}&${queryString}`);
-  }
-
-
-
-  public getCurrentJobIds(filter: any, ignoreFields: string[], start: number = 0): Observable<any> {
-    let queryArray: string[] = [];
-    let params: any = {};
-
-    params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true, ignoreFields)}`;
-    params.count = `500`;
-    params.fields = 'id';
-    params.sort = 'id';
-    params.start = start;
-
-    for (let key in params) {
-      queryArray.push(`${key}=${params[key]}`);
-    }
-    let queryString: string = queryArray.join('&');
-
-    return this.http.get(`${this.baseUrl}/search/JobOrder?${queryString}`);
   }
 
   public getAvailableFilterOptions(ids: number[], field: string): Observable<any> {
@@ -156,7 +133,7 @@ export class SearchService {
     let field: string = SettingsService.settings.additionalJobCriteria.field;
     let values: string[] = SettingsService.settings.additionalJobCriteria.values;
     let query: string = '';
-    let delimiter: '"' | '\'' = isSearch ? '"' : '\'';
+    let delimiter: '"' | "'" = isSearch ? '"' : "'";
     let equals: ':' | '=' = isSearch ? ':' : '=';
 
     if (field && values.length > 0 && field !== '[ FILTER FIELD HERE ]' && values[0] !== '[ FILTER VALUE HERE ]') {
@@ -186,7 +163,6 @@ export class SearchService {
       }
     }
 
-    return additionalFilter.replace(/{\?\^\^equals}/g, isSearch ? ':' : '=').replace(/{\?\^\^delimiter}/g, isSearch ? '"' : '\'');
+    return additionalFilter.replace(/{\?\^\^equals}/g, isSearch ? ':' : '=').replace(/{\?\^\^delimiter}/g, isSearch ? '"' : "'");
   }
-
 }
