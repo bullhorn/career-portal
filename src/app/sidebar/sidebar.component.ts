@@ -1,10 +1,4 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  HostBinding,
-  Input,
-} from '@angular/core';
+import { Component, Output, EventEmitter, HostBinding, Input } from '@angular/core';
 import { SettingsService } from '../services/settings/settings.service';
 import { NovoFormGroup } from 'novo-elements';
 import { SearchService } from '../services/search/search.service';
@@ -30,18 +24,13 @@ export class SidebarComponent {
   public timeout: any;
   public loading: boolean = false;
   public filter: object = {};
-  public showPrivacyPolicy: boolean =
-    SettingsService.settings.privacyConsent.sidebarLink;
-  public languageDropdownEnabled =
-    SettingsService.settings.languageDropdownOptions?.enabled &&
-    !SettingsService.isServer;
-  public availableLocales: IAdditionalLanguageOption[] =
-    SettingsService.settings?.languageDropdownOptions?.choices || [];
-  constructor(private searchService: SearchService, private router: Router) { }
+  public showPrivacyPolicy: boolean = SettingsService.settings.privacyConsent.sidebarLink;
+  public languageDropdownEnabled = SettingsService.settings.languageDropdownOptions?.enabled && !SettingsService.isServer;
+  public availableLocales: IAdditionalLanguageOption[] = SettingsService.settings?.languageDropdownOptions?.choices || [];
+  constructor(private searchService: SearchService, private router: Router) {}
 
   public searchOnDelay(): void {
-    const keywordSearchFields: string[] =
-      SettingsService.settings.service.keywordSearchFields;
+    const keywordSearchFields: string[] = SettingsService.settings.service.keywordSearchFields;
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
@@ -53,8 +42,7 @@ export class SidebarComponent {
           if (index > 0) {
             searchString += ' OR ';
           }
-          searchString += `${field}{?^^equals}${this.keyword.trim() ? this.keyword.trim() + '*' : ''
-            }`;
+          searchString += `${field}{?^^equals}${this.keyword.trim() ? this.keyword.trim() + '*' : ''}`;
         });
       }
       delete this.filter['ids'];
@@ -63,16 +51,11 @@ export class SidebarComponent {
       } else {
         delete this.filter['keyword'];
       }
-      this.searchService
-        .getJobIds(this.filter, [])
-        .subscribe(this.handleJobIdsOnSuccess.bind(this));
+      this.searchService.getCurrentJobIds(this.filter, []).subscribe(this.handleJobIdsOnSuccess.bind(this));
     }, 250);
   }
 
-  public updateFilter(
-    field: string,
-    httpFormatedFilter: string | string[],
-  ): void {
+  public updateFilter(field: string, httpFormatedFilter: string | string[]): void {
     delete this.filter['keyword'];
     if (Array.isArray(httpFormatedFilter) && httpFormatedFilter.length === 500) {
       this.filter = {};
@@ -91,8 +74,7 @@ export class SidebarComponent {
   }
 
   public viewPrivacyPolicy(): void {
-    const url: string =
-      SettingsService.settings.privacyConsent.privacyPolicyUrl;
+    const url: string = SettingsService.settings.privacyConsent.privacyPolicyUrl;
     if (url === '/privacy') {
       this.router.navigate([url]);
     } else {
@@ -105,7 +87,7 @@ export class SidebarComponent {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
-    res = res.slice(0, 500)
+    res = res.slice(0, 500);
     let resultIds: string[] = res.map((result: any) => {
       return `id{?^^equals}${result.id}`;
     });
