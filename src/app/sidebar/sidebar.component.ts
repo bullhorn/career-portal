@@ -103,6 +103,7 @@ export class SidebarComponent {
   }
 
   private handleJobIdsOnSuccess(res: any): void {
+    // only show results if filter is less than 500. If more than 500, show all results until the filter is refined by user
     res = res.slice(0, 500);
     let resultIds: string[] = res.map((result: any) => {
       return `id{?^^equals}${result.id}`;
