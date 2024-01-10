@@ -72,6 +72,7 @@ export class SidebarComponent {
 
   public updateFilter(field: string, httpFormatedFilter: string | string[]): void {
     delete this.filter['keyword'];
+    // max length of calling function changed to 500 to not break search. If more than 500, show all results until the filter is refined by user
     if (Array.isArray(httpFormatedFilter) && httpFormatedFilter.length === 500) {
       this.filter = {};
       this.newFilter.emit(this.filter);
