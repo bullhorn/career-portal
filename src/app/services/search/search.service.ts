@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../settings/settings.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { IServiceSettings } from '../../typings/settings';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class SearchService {
@@ -18,7 +18,7 @@ export class SearchService {
     return `${scheme}://public-rest${service?.swimlane}.bullhornstaffing.com:${port}/rest-services/${service?.corpToken}`;
   }
 
-  public getjobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
+  public getJobs(filter?: any, params: any = {}, count: number = 30): Observable<any> {
     let queryArray: string[] = [];
     params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true)}`;
     params.fields = SettingsService.settings.service.fields;
@@ -40,95 +40,134 @@ export class SearchService {
 
   public getCurrentJobIds(filter: any, ignoreFields: string[]): Observable<any[]> {
     const queryString: string = this.getQueryString(filter, ignoreFields);
-
-    return this.getJobRecords(queryString).pipe(
-      concatMap((response: any) => {
-        const total: number = response.total;
-        const records: any[] = response.data;
-        let currentCount = response.count;
-
-        // Define a recursive function to fetch more records
-        const fetchMoreRecords = (start: number): Observable<any> => {
-          return this.getJobRecords(queryString, start).pipe(
-            concatMap((additionalResponse: any) => {
-              // Concatenate records from the additional response
-              records.push(...additionalResponse.data);
-              currentCount += additionalResponse.count;
-
-              if (currentCount < total) {
-                // Continue fetching more records if needed
-                return fetchMoreRecords(currentCount);
-              } else {
-                // Return the accumulated records when done
-                return of(records);
-              }
-            }),
-          );
-        };
-
-        // Start fetching more records recursively
-        return fetchMoreRecords(currentCount);
-      }),
-    );
+  
+    // Recursive function to fetch all records
+    const fetchAllRecords = (start: number = 0, records: any[] = []): Observable<any> => {
+      return this.getJobRecords(queryString, start).pipe(
+        concatMap((response: any) => {
+          // Concatenate records from the response
+          const updatedRecords = [...records, ...response.data];
+  
+          if (updatedRecords.length < response.total) {
+            // Continue fetching more records if needed
+            return fetchAllRecords(updatedRecords.length, updatedRecords);
+          } else {
+            // Return the accumulated records when done
+            return of(updatedRecords);
+          }
+        }),
+      );
+    };
+  
+    // Start fetching all records
+    return fetchAllRecords();
   }
-
+  
   private getQueryString(filter: any, ignoreFields: string[]): string {
-    let queryArray: string[] = [];
-    let params: any = {};
-
     // Construct the query string based on filter and parameters
-    params.query = `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true, ignoreFields)}`;
-    params.count = `500`;
-    params.fields = 'id';
-    params.sort = 'id';
-
-    for (let key in params) {
-      queryArray.push(`${key}=${params[key]}`);
-    }
-
+    const params = {
+      query: `(isOpen:1) AND (isDeleted:0)${this.formatAdditionalCriteria(true)}${this.formatFilter(filter, true, ignoreFields)}`,
+      count: `500`,
+      fields: 'id',
+      sort: 'id'
+    };
+  
     // Join the query parameters with '&' to form the complete query string
-    let queryString: string = queryArray.join('&');
-
-    return queryString;
+    return Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&');
   }
-
+  
   private getJobRecords(queryString: string, start: number = 0): Observable<any> {
     // Fetch job records from the API with the specified query and start offset
     return this.http.get(`${this.baseUrl}/search/JobOrder?start=${start}&${queryString}`);
   }
 
-  public getAvailableFilterOptions(ids: number[], field: string): Observable<any> {
-    let params: any = {};
-    let queryArray: string[] = [];
-    if (ids.length > 0) {
-    params.where = `id IN (${ids.toString()})`;
-    params.count = `500`;
-    params.fields = `${field},count(id)`;
-    params.groupBy = field;
-    switch (field) {
-      case 'publishedCategory(id,name)':
-        params.orderBy = 'publishedCategory.name';
-        break;
-      case 'address(state)':
-        params.orderBy = 'address.state';
-        break;
-      case 'address(city)':
-        params.orderBy = 'address.city';
-        break;
-      default:
-        params.orderBy = '-count.id';
-        break;
-    }
-    for (let key in params) {
-      queryArray.push(`${key}=${params[key]}`);
-    }
-    let queryString: string = queryArray.join('&');
-
-      return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`); // tslint:disable-line
-    } else {
-      return of({count: 0, start: 0, data: []});
-    }
+// Function to get available filter options
+public getAvailableFilterOptions(ids: number[], field: string): Observable<any> {
+  // If there are no ids, return an empty response
+  if(ids.length === 0) {
+    return of({count:0, start:0, data:[]});
   }
+
+  // Define the batch size
+  const batchSize = 500;
+
+  // Create an array of observables for each batch of ids
+  const observables = Array(Math.ceil(ids.length / batchSize)).fill(null).map((_, index) => {
+    // Get the ids for the current batch
+    const batchIds = ids.slice(index * batchSize, (index + 1) * batchSize);
+
+    // Define the parameters for the HTTP request
+    const params: any = {
+      count: 500,
+      fields: `${field},count(id)`,
+      groupBy: field,
+      where: `id IN (${batchIds.toString()})`,
+      orderBy: this.getOrderByField(field) // Get the order by field based on the field parameter
+    }
+
+    // Create the query string from the parameters
+    const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
+
+    // Return the observable for the HTTP request
+    return this.http.get(`${this.baseUrl}/query/JobBoardPost?${queryString}`);
+  });
+
+  // Use forkJoin to wait for all observables to complete and then process the responses
+  return forkJoin(observables).pipe(
+    map((responses: any[]) => {
+      // Reduce the responses to a single response by merging the data
+      const mergedResponse = responses.reduce((acc, response) => {
+        // For each item in the response data
+        response.data.forEach(item => {
+          // Find the index of the existing item in the accumulator data
+          const existingItemIndex = acc.data.findIndex(x => this.isSameItem(x, item, field));
+
+          // If the item exists, increment its count
+          if(existingItemIndex !== -1) {
+            acc.data[existingItemIndex].idCount += item.idCount;
+          } else {
+            // If the item does not exist, add it to the accumulator data
+            acc.data.push(item);
+          }
+        })
+
+        // Return the accumulator
+        return acc;
+      }, {count: 0, start: 0, data: []});
+
+      // Return the merged response
+      return mergedResponse;
+    }),
+  )
+}
+
+// Function to get the order by field based on the field parameter
+private getOrderByField(field: string): string {
+  switch (field) {
+    case 'publishedCategory(id,name)':
+      return 'publishedCategory.name';
+    case 'address(state)':
+      return 'address.state';
+    case 'address(city)':
+      return 'address.city';
+    default:
+      return '-count.id';
+  }
+}
+
+// Function to check if two items are the same based on the field parameter
+private isSameItem(item1: any, item2: any, field: string): boolean {
+  switch(field) {
+    case 'publishedCategory(id,name)':
+      return item1?.publishedCategory?.id === item2?.publishedCategory?.id;
+    case 'address(state)':
+      return item1?.address?.state === item2?.address?.state;
+    case 'address(city)':
+      return item1?.address?.city === item2?.address?.city;
+    default:
+      return false;
+  }
+}
 
   private formatAdditionalCriteria(isSearch: boolean): string {
     let field: string =  SettingsService.settings.additionalJobCriteria.field;
@@ -166,5 +205,4 @@ export class SearchService {
 
     return additionalFilter.replace(/{\?\^\^equals}/g, isSearch ? ':' : '=').replace(/{\?\^\^delimiter}/g, isSearch ? '"' : '\'');
   }
-
 }
