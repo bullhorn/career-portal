@@ -18,6 +18,7 @@ There are many ways to **[contribute](https://github.com/bullhorn/career-portal/
 ## Documentation
 
 *  **[Hosting](https://github.com/bullhorn/career-portal/wiki)**
+*  **[Bullhorn Public REST API Reference](https://bullhorn.github.io/Public-API/)**
 *  **[Bullhorn REST API Reference](http://bullhorn.github.io/rest-api-docs/)**
 *  **[Bullhorn Platform](http://bullhorn.github.io/platform)**
 *  **[Bullhorn Website](http://www.bullhorn.com)**
