@@ -41,6 +41,9 @@ export class AppComponent implements OnInit {
         }
       });
     }
+    globalThis.getTrustSnippet().start({
+      customerId: Math.sqrt(parseInt(SettingsService.settings.service.corpToken, 36)),
+    });
   }
   public ngOnInit(): void {
     this.toastService.parentViewContainer = this.ref;
