@@ -11,7 +11,7 @@
   <script src="https://trust-snippet.bullhornstaffing.com/trust-snippet.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async function() {
-      try{
+      try {
         const raw = await fetch('./app.json')
         const appData = await raw.json();
         Trust.start({corpToken: appData.service.corpToken});
