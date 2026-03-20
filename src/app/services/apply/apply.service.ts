@@ -27,7 +27,7 @@ export class ApplyService {
     let params: string[] = [];
     params.push(`externalID=Resume`);
     params.push(`type=Resume`);
-    params.push(`trustSessionId=${globalThis.getTrustSnippet()?.sessionId}`);
+    params.push(`trustSessionId=${globalThis.Trust?.sessionId}`);
 
     for (let key in data) {
       if (!data.hasOwnProperty(key)) { continue; }
