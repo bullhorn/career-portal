@@ -8,6 +8,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://trust-snippet.bullhornstaffing.com/trust-snippet.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function() {
+      try {
+        const raw = await fetch('./app.json')
+        const appData = await raw.json();
+        Trust.start({corpToken: appData.service.corpToken});
+      } catch(err) {
+        console.error("[TrustSnippet] Failed to start session:", err);
+      }
+    });
+  </script>
 </head>
 <body>
   <app-root><novo-loading style="position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0;display: flex;justify-content: center;align-items: center;">
