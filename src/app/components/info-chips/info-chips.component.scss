@@ -4,7 +4,10 @@
     margin: 5px;
     background-color: #f4f4f4;
     border-radius: 8px;
-    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    box-sizing: border-box;
     i {
       font-size: 1em;
     }
