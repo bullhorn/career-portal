@@ -2,6 +2,7 @@ services:
   - type: web
     name: career-portal
     runtime: docker
+    branch: feature/render-ssr-deployment
     plan: starter
     healthCheckPath: /
     envVars:
