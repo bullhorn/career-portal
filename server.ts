@@ -32,6 +32,20 @@ if (process.env.COMPANY_NAME) {
   });
 }
 
+// Allowed hostnames for SSRF mitigation (GHSA-x288-3778-4hhx).
+// Derived from careersUrl in app config; set ALLOWED_HOST env var for additional entries.
+const allowedHostnames = new Set<string>(['localhost', '127.0.0.1']);
+if (appConfig.careersUrl) {
+  try {
+    allowedHostnames.add(new URL(appConfig.careersUrl).hostname);
+  } catch {
+    // careersUrl is not a valid absolute URL; hostname cannot be derived automatically
+  }
+}
+if (process.env.ALLOWED_HOST) {
+  allowedHostnames.add(process.env.ALLOWED_HOST);
+}
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server: any = express();
@@ -42,6 +56,43 @@ export function app(): express.Express {
   (<any> global['window']) = win;
   global['document'] = win.document;
   global['navigator'] = win.navigator;
+
+  // Security response headers
+  server.use((_req: any, res: any, next: any) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    res.setHeader(
+      'Content-Security-Policy',
+      [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' https://trust-snippet.bullhornstaffing.com https://www.google-analytics.com",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: https:",
+        "font-src 'self' data:",
+        "connect-src 'self' https://*.bullhornstaffing.com https://www.google-analytics.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+      ].join('; '),
+    );
+    next();
+  });
+
+  // SSRF mitigation: validate Host / X-Forwarded-* headers (GHSA-x288-3778-4hhx)
+  server.use((req: any, res: any, next: any) => {
+    const rawHost = (req.headers['x-forwarded-host'] ?? req.headers['host'])?.toString() ?? '';
+    const hostname = rawHost.split(':')[0];
+    const portHeader = req.headers['x-forwarded-port']?.toString();
+
+    if (hostname && !allowedHostnames.has(hostname)) {
+      return res.status(400).send('Bad Request');
+    }
+    if (portHeader && !/^\d+$/.test(portHeader)) {
+      return res.status(400).send('Bad Request');
+    }
+    next();
+  });
+
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
