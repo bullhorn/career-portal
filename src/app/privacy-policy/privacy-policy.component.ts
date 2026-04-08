@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -19,7 +19,7 @@ export class PrivacyPolicyComponent implements OnInit {
   }
 
   private handlePolicyOnSuccess(data: any): void {
-    this.data = this.domSanitize.bypassSecurityTrustHtml(data);
+    this.data = this.domSanitize.sanitize(SecurityContext.HTML, data);
     this.loading = false;
   }
 
