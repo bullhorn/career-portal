@@ -9,6 +9,8 @@ jobs:
     strategy:
       matrix:
         node-version: [16.20.2]
+    env:
+      NODE_OPTIONS: "--openssl-legacy-provider"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
