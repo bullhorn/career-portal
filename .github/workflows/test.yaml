@@ -10,7 +10,7 @@ jobs:
       matrix:
         node-version: [16.20.2]
     env:
-      NODE_OPTIONS: "--openssl-legacy-provider"
+      DBUS_SESSION_BUS_ADDRESS: /dev/null
     steps:
       - name: Checkout
         uses: actions/checkout@v2
