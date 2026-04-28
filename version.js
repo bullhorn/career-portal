@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-const JenkinsBuildNumber = process.argv['GITHUB_RUN_NUMBER'] || 'UNKNOWN';
-const CommitHash = process.argv['GITHUB_SHA'] || 'UNKNOWN';
+const buildNumber = process.env.GITHUB_RUN_NUMBER || 'UNKNOWN';
+const commitHash = process.env.GITHUB_SHA || 'UNKNOWN';
 const now = new Date();
 
 let data = `
@@ -17,8 +17,8 @@ _________                                           __________                  
 Date: ${now.toUTCString()}
 Career Portal Version: ${require('./package.json').version}
 Build Information:
-  Build#: ${JenkinsBuildNumber}
-  Commit: ${CommitHash}
+  Build#: ${buildNumber}
+  Commit: ${commitHash}
 Dependency Information:
   NovoElements: ${require('./node_modules/novo-elements/package.json').version}
 `;

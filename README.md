@@ -39,6 +39,11 @@ Change to the Career Portal directory:
 cd career-portal
 ```
 
+The required Node version is declared in `engines.node` in `package.json`. To pick it up automatically:
+
+- **nvm**: `nvm use --engines` (install with `nvm install --engines` if the version is missing)
+- **fnm**: `fnm use`
+
 Install build tools and dev dependencies:
 
 ```
