@@ -1,6 +1,6 @@
 {
   "name": "career-portal",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -24,11 +24,10 @@
   "private": true,
   "overrides": {
     "qs": "^6.13.0",
-    "@types/express": "4.17.13",
     "@types/express-serve-static-core": "4.17.18"
   },
   "engines": {
-    "node": "16.13.1"
+    "node": "16.20.2"
   },
   "browser": {
     "fs": false,
@@ -52,7 +51,6 @@
     "@nguniversal/express-engine": "^10.0.1",
     "@ngx-translate/core": "^13.0.0",
     "@schematics/angular": "^10.2.3",
-    "@types/express": "^4.17.13",
     "angular2-text-mask": "^9.0.0",
     "body-parser": "^1.20.3",
     "bullhorn-icons": "^1.17.0",
@@ -79,14 +77,14 @@
     "@angular/cli": "^10.2.3",
     "@angular/compiler-cli": "^10.2.5",
     "@angular/language-service": "^10.2.5",
-    "@cypress/schematic": "^1.6.0",
+    "@cypress/schematic": "1.6.0",
     "@nguniversal/builders": "^10.1.0",
-    "@types/express": "^4.17.0",
+    "@types/express": "4.17.13",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^12.11.1",
-    "codelyzer": "^5.1.2",
-    "cypress": "latest",
+    "codelyzer": "^6.0.2",
+    "cypress": "9.1.1",
     "cypress-file-upload": "^5.0.8",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
