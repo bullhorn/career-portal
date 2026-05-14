@@ -66,7 +66,8 @@ export function app(): express.Express {
       'Content-Security-Policy',
       [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' https://trust-snippet.bullhornstaffing.com https://www.google-analytics.com",
+        "script-src 'self' 'unsafe-inline' https://trust-snippet.bullhornstaffing.com https://trust-fp.bullhornstaffing.com https://www.google-analytics.com",
+        "worker-src 'self' blob:",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: https:",
         "font-src 'self' data:",
