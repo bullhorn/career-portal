@@ -35,12 +35,13 @@ describe('Job List', () => {
         cy.get(`[data-automation-id="${CSS.escape(automationId)}"]`).first().click();
         cy.wait('@getCategories', {timeout: 30000});
         cy.wait('@getJobs', {timeout: 30000});
-        cy.get('novo-list>div.job-card').each(($jobEl, jobIndex, $jobList) => {
-          const categoryCountRegex = /\(([^)]+)\)/;
-          const count = parseInt(categoryCountRegex.exec(automationId)[1]);
-          expect($jobList.length, 'The correct number of results for the specified category is not showing').equals(count);
-          cy.get('span.category').should('include.text', automationId.replace(` (${count})`, ''));
-        });
+        const categoryCountRegex = /\(([^)]+)\)/;
+        const count = parseInt(categoryCountRegex.exec(automationId)[1]);
+        cy.get('novo-list>div.job-card', {timeout: 30000})
+          .should('have.length', count)
+          .each(($jobEl) => {
+            cy.wrap($jobEl).find('span.category').should('include.text', automationId.replace(` (${count})`, ''));
+          });
         cy.get('.bhi-checkbox-filled').click();
         cy.wait('@getCategories', {timeout: 30000});
         cy.wait(1000);
