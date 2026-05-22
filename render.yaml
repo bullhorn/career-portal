@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: career-portal
+    runtime: docker
+    branch: feature/render-ssr-deployment
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: BULLHORN_SWIMLANE
+        sync: false
+      - key: BULLHORN_CORP_TOKEN
+        sync: false
+      - key: COMPANY_NAME
+        sync: false
+      - key: COMPANY_WEBSITE
+        sync: false
+      - key: COMPANY_LOGO_URL
+        sync: false
+      - key: HOSTED_ENDPOINT
+        sync: false
+      - key: GOOGLE_ANALYTICS_TRACKING_ID
+        sync: false
+      - key: GOOGLE_VERIFICATION_CODE
+        sync: false
