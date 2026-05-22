@@ -40,7 +40,7 @@ export class JobListComponent implements OnChanges {
     this.meta.updateTag({ name: 'og:description', content: description });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.meta.updateTag({ name: 'description', content: description });
-    this.http.getjobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this), this.onFailure.bind(this));
+    this.http.getJobs(this.filter, { start: this.start }).subscribe(this.onSuccess.bind(this), this.onFailure.bind(this));
   }
 
   public loadMore(): void {

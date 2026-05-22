@@ -69,7 +69,7 @@ export class JobDetailsComponent implements OnInit {
 
   public getRelatedJobs(): any {
     if (this.job && this.job.publishedCategory) {
-      this.service.getjobs({ 'publishedCategory.id': [this.job.publishedCategory.id]}, {} , SettingsService.settings.service.batchSize).subscribe((res: any) => { this.relatedJobs = res.data; });
+      this.service.getJobs({ 'publishedCategory.id': [this.job.publishedCategory.id]}, {} , SettingsService.settings.service.batchSize).subscribe((res: any) => { this.relatedJobs = res.data; });
     }
   }
 
