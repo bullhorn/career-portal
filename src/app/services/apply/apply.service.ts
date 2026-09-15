@@ -11,10 +11,12 @@ export class ApplyService {
 
   }
   get baseUrl(): string {
+    if (!SettingsService.isServer) {
+      return '/api/apply';
+    }
     let service: IServiceSettings = SettingsService.settings.service;
     let port: number = service.port ? service.port : 443;
     let scheme: string = `http${ port === 443  ? 's' : '' }`;
-
     return `${scheme}://public-rest${service.swimlane}.bullhornstaffing.com:${port}/rest-services/${service.corpToken}/apply`;
   }
 
