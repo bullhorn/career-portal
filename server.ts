@@ -60,15 +60,30 @@ export function app(): express.Express {
     const targetPath = `/rest-services/${service.corpToken}${req.url}`;
     const transport = targetPort === 443 ? https : http;
 
+    // tslint:disable-next-line: no-console
+    console.log(`[proxy] ${req.method} https://${targetHost}${targetPath}`);
+
+    const chunks: Buffer[] = [];
     const proxyReq = transport.request(
       { hostname: targetHost, port: targetPort, path: targetPath, method: req.method,
         headers: { accept: 'application/json' } },
       (proxyRes) => {
-        res.writeHead(proxyRes.statusCode, proxyRes.headers);
-        proxyRes.pipe(res, { end: true });
+        // tslint:disable-next-line: no-console
+        console.log(`[proxy] status ${proxyRes.statusCode} from ${targetHost}`);
+        proxyRes.on('data', (chunk: Buffer) => chunks.push(chunk));
+        proxyRes.on('end', () => {
+          const body = Buffer.concat(chunks);
+          res.status(proxyRes.statusCode)
+             .set('content-type', proxyRes.headers['content-type'] || 'application/json')
+             .send(body);
+        });
       },
     );
-    proxyReq.on('error', () => res.status(502).json({ error: 'Proxy error' }));
+    proxyReq.on('error', (err: Error) => {
+      // tslint:disable-next-line: no-console
+      console.error('[proxy] error:', err.message);
+      res.status(502).json({ error: 'Proxy error' });
+    });
     req.pipe(proxyReq, { end: true });
   });
 
