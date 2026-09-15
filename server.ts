@@ -3,6 +3,8 @@ import 'zone.js/dist/zone-node';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join, resolve } from 'path';
+import * as https from 'https';
+import * as http from 'http';
 
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
@@ -50,8 +52,26 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
+  // Proxy /api/** to the Bullhorn public REST API to avoid CORS issues in the browser
+  server.use('/api', (req: any, res: any) => {
+    const service = appConfig.service;
+    const targetPort: number = service.port || 443;
+    const targetHost = `public-rest${service.swimlane}.bullhornstaffing.com`;
+    const targetPath = `/rest-services/${service.corpToken}${req.url}`;
+    const transport = targetPort === 443 ? https : http;
+
+    const proxyReq = transport.request(
+      { hostname: targetHost, port: targetPort, path: targetPath, method: req.method,
+        headers: { accept: 'application/json' } },
+      (proxyRes) => {
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        proxyRes.pipe(res, { end: true });
+      },
+    );
+    proxyReq.on('error', () => res.status(502).json({ error: 'Proxy error' }));
+    req.pipe(proxyReq, { end: true });
+  });
+
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y',
