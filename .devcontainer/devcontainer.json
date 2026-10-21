@@ -1,0 +1,28 @@
+{
+  // Pinned to the toolchain this repo actually builds with: Node 16.20.2 (package.json "engines"
+  // and the GitHub workflow's node-version-file), Angular CLI 10, TypeScript 3.9.
+  "name": "career-portal (Node 16 / Angular 10)",
+  "image": "node:16.20.2-bullseye",
+  "remoteUser": "node",
+  "containerEnv": {
+    // Cypress 9 has no linux/arm64 binary and the e2e suite needs a display; skip the download.
+    "CYPRESS_INSTALL_BINARY": "0",
+    "NG_CLI_ANALYTICS": "false"
+  },
+  // postinstall runs ngcc, so the first install takes a few minutes.
+  "postCreateCommand": "npm ci",
+  "forwardPorts": [4200],
+  // forwardPorts is VS Code-only; appPort also publishes it when started via the devcontainer CLI.
+  "appPort": [4200],
+  "portsAttributes": {
+    "4200": { "label": "ng serve" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "editorconfig.editorconfig",
+        "ms-vscode.vscode-typescript-tslint-plugin"
+      ]
+    }
+  }
+}
